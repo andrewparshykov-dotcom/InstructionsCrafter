@@ -22,7 +22,7 @@ Read it before making design decisions. Do not rewrite or duplicate the plan it 
 
 Work through the 9 phases in `ARCHITECTURE.md` **sequentially**. Do not start phase N+1 until phase N is verified working end-to-end per its listed verification step.
 
-**Current phase: Phase 0 (setup — git + config files only). Phase 1 has not started.**
+**Current phase: Phase 1 complete. Ready to begin Phase 2 (FFmpeg integration).**
 Update this line whenever the current phase changes.
 
 ## Tech stack (see ARCHITECTURE.md for full list)
