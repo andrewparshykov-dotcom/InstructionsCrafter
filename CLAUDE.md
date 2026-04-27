@@ -22,7 +22,7 @@ Read it before making design decisions. Do not rewrite or duplicate the plan it 
 
 Work through the 9 phases in `ARCHITECTURE.md` **sequentially**. Do not start phase N+1 until phase N is verified working end-to-end per its listed verification step.
 
-**Current phase: Phase 3 complete. Ready to begin Phase 4 (Segmentation logic).**
+**Current phase: Phase 4 complete. Ready to begin Phase 5 (Polishing + document rendering).**
 Update this line whenever the current phase changes.
 
 ## Tech stack (see ARCHITECTURE.md for full list)
