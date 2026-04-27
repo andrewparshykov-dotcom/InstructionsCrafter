@@ -1,12 +1,10 @@
 """Single-frame extraction from video files using FFmpeg."""
 
-import subprocess
 from pathlib import Path
 
 from fastapi import HTTPException
 
-# ARCHITECTURE.md: every FFmpeg call must have a timeout (60s for FFmpeg).
-FFMPEG_TIMEOUT_SECONDS = 60
+from app.ffmpeg_utils import run_ffmpeg
 
 
 def extract_frame(
@@ -32,27 +30,5 @@ def extract_frame(
         str(output_path),
     ]
 
-    try:
-        subprocess.run(
-            cmd,
-            timeout=FFMPEG_TIMEOUT_SECONDS,
-            capture_output=True,
-            check=True,
-        )
-    except FileNotFoundError:
-        # DECISION: Missing FFmpeg is a server config error, not a client error,
-        # so we return 500. ARCHITECTURE.md's "HTTP 400 on extraction failure"
-        # rule is about bad media, not a missing toolchain.
-        raise HTTPException(
-            status_code=500,
-            detail="FFmpeg is not installed on the server",
-        )
-    except subprocess.TimeoutExpired:
-        raise HTTPException(status_code=400, detail="Frame extraction timed out")
-    except subprocess.CalledProcessError:
-        raise HTTPException(status_code=400, detail="Failed to extract frame from video")
-
-    if not output_path.exists() or output_path.stat().st_size == 0:
-        raise HTTPException(status_code=400, detail="Frame extraction produced no output")
-
+    run_ffmpeg(cmd, output_path, failure_label="Frame extraction")
     return output_path
