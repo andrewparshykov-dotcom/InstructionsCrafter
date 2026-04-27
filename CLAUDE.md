@@ -22,7 +22,7 @@ Read it before making design decisions. Do not rewrite or duplicate the plan it 
 
 Work through the 9 phases in `ARCHITECTURE.md` **sequentially**. Do not start phase N+1 until phase N is verified working end-to-end per its listed verification step.
 
-**Current phase: Phase 1 complete. Ready to begin Phase 2 (FFmpeg integration).**
+**Current phase: Phase 2 complete. Ready to begin Phase 3 (Whisper integration).**
 Update this line whenever the current phase changes.
 
 ## Tech stack (see ARCHITECTURE.md for full list)
