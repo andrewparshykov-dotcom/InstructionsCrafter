@@ -84,3 +84,9 @@ Desktop.ini
 *.log
 tmp/
 temp/
+
+# ==========================================
+# Pasted terminal output for one-off review
+# ==========================================
+
+Results in terminal.txt
