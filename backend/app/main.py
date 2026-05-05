@@ -1,22 +1,35 @@
 """FastAPI application for the InstructionsCrafter backend."""
 
-import io
 import os
 import re
 import secrets
 from datetime import date
+from pathlib import Path
 
-from docx import Document
 from dotenv import load_dotenv
-from fastapi import FastAPI, File, Form, HTTPException, Request, UploadFile
-from fastapi.responses import JSONResponse, StreamingResponse
+from fastapi import (
+    BackgroundTasks,
+    FastAPI,
+    File,
+    Form,
+    HTTPException,
+    Request,
+    UploadFile,
+)
+from fastapi.responses import FileResponse, JSONResponse
 from starlette.exceptions import HTTPException as StarletteHTTPException
+
+from app.pipeline import cleanup_workdir, create_temp_workdir, process_video
 
 load_dotenv()
 
 SHARED_PASSWORD = os.getenv("SHARED_PASSWORD", "")
 MAX_VIDEO_SIZE_MB = int(os.getenv("MAX_VIDEO_SIZE_MB", "500"))
 MAX_VIDEO_SIZE_BYTES = MAX_VIDEO_SIZE_MB * 1024 * 1024
+
+# 1 MB chunks when streaming the upload to disk; keeps a 500 MB upload
+# from being held entirely in process memory.
+UPLOAD_CHUNK_BYTES = 1024 * 1024
 
 DOCX_MEDIA_TYPE = (
     "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
@@ -41,6 +54,7 @@ async def health():
 
 @app.post("/api/generate")
 async def generate(
+    background_tasks: BackgroundTasks,
     video: UploadFile = File(...),
     title: str = Form(...),
     password: str = Form(...),
@@ -56,24 +70,30 @@ async def generate(
     if video.size == 0:
         raise HTTPException(status_code=400, detail="Empty video file")
 
-    # Phase 1 placeholder — real pipeline arrives in later phases.
-    doc = Document()
-    doc.add_heading(title, level=0)
-    doc.add_paragraph(f"Generated on {date.today().strftime('%B %d, %Y')}")
-    doc.add_paragraph(
-        "This is a placeholder document produced by Phase 1 of the backend. "
-        "Later phases replace this with real transcribed steps and screenshots."
-    )
+    workdir = create_temp_workdir()
+    try:
+        # Stream the upload to disk in chunks so a 500 MB request does not
+        # have to be held entirely in memory.
+        upload_ext = Path(video.filename or "upload.mp4").suffix or ".mp4"
+        upload_path = workdir / f"upload{upload_ext}"
+        with upload_path.open("wb") as out:
+            while chunk := await video.read(UPLOAD_CHUNK_BYTES):
+                out.write(chunk)
 
-    buffer = io.BytesIO()
-    doc.save(buffer)
-    buffer.seek(0)
+        output_path = await process_video(upload_path, title, workdir)
+    except Exception:
+        # Failure path: clean up immediately, before the exception propagates.
+        cleanup_workdir(workdir)
+        raise
+
+    # Success path: cleanup runs AFTER FileResponse has finished streaming.
+    background_tasks.add_task(cleanup_workdir, workdir)
 
     filename = f"{_sanitize_title(title)}_{date.today().isoformat()}.docx"
-    return StreamingResponse(
-        buffer,
+    return FileResponse(
+        path=str(output_path),
         media_type=DOCX_MEDIA_TYPE,
-        headers={"Content-Disposition": f'attachment; filename="{filename}"'},
+        filename=filename,
     )
 
 

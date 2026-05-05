@@ -1,10 +1,18 @@
-"""Single-frame extraction from video files using FFmpeg."""
+"""Single-frame extraction and resizing for screenshots."""
 
 from pathlib import Path
 
 from fastapi import HTTPException
+from PIL import Image
 
 from app.ffmpeg_utils import run_ffmpeg
+
+# ARCHITECTURE.md: max 1600px wide to keep final docx file size reasonable.
+MAX_SCREENSHOT_WIDTH = 1600
+
+# JPEG quality for resized output (Pillow default is 75; 85 is a common
+# sweet spot for technical screenshots).
+RESIZED_JPEG_QUALITY = 85
 
 
 def extract_frame(
@@ -32,3 +40,30 @@ def extract_frame(
 
     run_ffmpeg(cmd, output_path, failure_label="Frame extraction")
     return output_path
+
+
+def resize_screenshot(
+    path: Path,
+    max_width: int = MAX_SCREENSHOT_WIDTH,
+) -> None:
+    """Resize the JPEG at `path` in-place if it exceeds `max_width`.
+
+    Preserves aspect ratio. No-op when the image is already <= max_width.
+    Raises HTTPException(500) on Pillow failure (corrupt or unreadable).
+    """
+    try:
+        with Image.open(path) as img:
+            if img.width <= max_width:
+                return
+            new_height = round(img.height * (max_width / img.width))
+            resized = img.resize(
+                (max_width, new_height),
+                Image.Resampling.LANCZOS,
+            )
+        # Image is closed here; safe to overwrite the source file.
+        resized.save(path, "JPEG", quality=RESIZED_JPEG_QUALITY, optimize=True)
+    except OSError:
+        raise HTTPException(
+            status_code=500,
+            detail="Failed to resize screenshot",
+        )
