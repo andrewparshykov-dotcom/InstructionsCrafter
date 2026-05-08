@@ -95,7 +95,7 @@ async def process_video(
             transcript = transcribe(audio_path)
 
         with _step(request_id, "segment_transcript"):
-            steps = segment_transcript(transcript)
+            steps = await segment_transcript(transcript)
 
         if not steps:
             print(

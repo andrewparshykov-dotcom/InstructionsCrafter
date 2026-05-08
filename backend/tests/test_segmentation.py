@@ -1,8 +1,12 @@
-"""Unit tests for app.segmentation.segment_transcript().
+"""Unit tests for app.segmentation.segment_transcript_rule_based().
 
 Run from the project root with:
 
     python backend/tests/test_segmentation.py
+
+Note: these tests cover the deterministic rule-based fallback path. The
+primary AI-driven `segment_transcript()` is async and exercised end-to-end
+via the live pipeline, not by unit tests.
 """
 
 import sys
@@ -11,7 +15,9 @@ from pathlib import Path
 # Allow `from app.segmentation import ...` when this script is run directly.
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
-from app.segmentation import segment_transcript  # noqa: E402
+from app.segmentation import (  # noqa: E402
+    segment_transcript_rule_based as segment_transcript,
+)
 
 
 def _seg(start: float, end: float, text: str) -> dict:

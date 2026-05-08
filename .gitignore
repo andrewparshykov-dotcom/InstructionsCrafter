@@ -90,3 +90,9 @@ temp/
 # ==========================================
 
 Results in terminal.txt
+
+# ==========================================
+# Local development helpers (per-developer, may contain passwords)
+# ==========================================
+
+test_local.sh
