@@ -7,8 +7,11 @@ from PIL import Image
 
 from app.ffmpeg_utils import run_ffmpeg
 
-# ARCHITECTURE.md: max 1600px wide to keep final docx file size reasonable.
-MAX_SCREENSHOT_WIDTH = 1600
+# Max pixel width for embedded screenshots. 1920 px matches the most common
+# native screen-recording resolution (1080p), so most frames are not
+# downscaled at all -- yielding the sharpest possible rendering on retina
+# displays while keeping file size modest.
+MAX_SCREENSHOT_WIDTH = 1920
 
 # JPEG quality for resized output (Pillow default is 75; 85 is a common
 # sweet spot for technical screenshots).

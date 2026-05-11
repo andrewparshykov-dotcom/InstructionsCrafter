@@ -282,7 +282,7 @@ ffmpeg -ss <midpoint_seconds> -i <input_video> -frames:v 1 -q:v 2 <output.jpg>
 - `-ss` before `-i`: fast seek
 - `-q:v 2`: high-quality JPEG
 
-Resize extracted screenshots to a maximum width of 1600px using Pillow to keep the final Word doc file size reasonable. Preserve aspect ratio.
+Resize extracted screenshots to a maximum width of 1920px using Pillow to keep the final Word doc file size reasonable. Preserve aspect ratio. 1920px matches the most common native screen-recording resolution (1080p), so the most common case avoids any downscaling.
 
 #### Text polishing (polishing.py)
 
@@ -317,7 +317,7 @@ Use python-docx-template with a pre-designed Word template at `templates/instruc
 - Subtitle: `Generated on {{ date }}`
 - Loop: `{% for step in steps %}`
   - Heading: `Step {{ loop.index }}`
-  - Image: `{{ step.image }}` (InlineImage with width=150mm)
+  - Image: `{{ step.image }}` (InlineImage; width chosen dynamically per-step — see "Dynamic screenshot sizing" below)
   - Paragraph: `{{ step.instruction }}`
 - `{% endfor %}`
 
@@ -332,7 +332,7 @@ context = {
     "date": date.today().strftime("%B %d, %Y"),
     "steps": [
         {
-            "image": InlineImage(doc, step.screenshot_path, width=Mm(150)),
+            "image": InlineImage(doc, step.screenshot_path, width=Mm(picked_width_mm)),
             "instruction": step.polished_text,
         }
         for step in polished_steps
@@ -385,15 +385,30 @@ Additional requests beyond 2 will queue automatically via the semaphore — this
 The template is designed once in Microsoft Word and committed to the repo at `templates/instruction_template.docx`.
 
 ### Design specifications
-- Page: A4, 2.5 cm margins
+- Page: A4 landscape, 0.25 in (≈0.635 cm) margins on all sides — digital-only document, no print constraints
 - Title: 24pt bold, centered
 - Subtitle: 11pt italic, centered, gray
 - Step heading: 14pt bold, "Step {number}" format
-- Step image: centered, max 150mm wide (docxtpl handles sizing via `width=Mm(150)`)
+- Step image: centered, width chosen dynamically per-step in the range [100mm, 220mm], snapped down to multiples of 10mm — see "Dynamic screenshot sizing"
 - Step instruction: 11pt regular, justified, spacing after 12pt
-- Page break between steps is **not** forced — let Word flow naturally
+- Page break between steps is **not** forced — let Word flow naturally. Step heading, instruction, and image paragraphs are marked "keep with next" so a screenshot is never orphaned from its step.
 
 The team can edit this template (fonts, colors, logo, etc.) without touching code, as long as Jinja tags like `{{ title }}`, `{% for step in steps %}`, `{{ step.instruction }}`, and `{{ step.image }}` are preserved.
+
+### Dynamic screenshot sizing
+
+Each step's screenshot is sized at render time so the heading + instruction + image + caption all fit on a single landscape A4 page. Per-step (Flavor A) sizing — independent per step — preserves visual rhythm by snapping the computed width down to the nearest 10 mm.
+
+Algorithm in `app/document.py:_pick_image_width_mm()`:
+
+1. Estimate the rendered height of the instruction text. `lines = ceil(len(text) / 150)`, `height_in = lines * 0.20`. (150 chars/line and 0.20 in line height are calibrated for 11pt Body Text on landscape A4 content width 11.19 in.)
+2. Subtract overhead and a safety margin: `available_height_in = 7.77 - 1.0 - text_height_in - 0.3`. If non-positive, fall back to the minimum width (the step will overflow).
+3. Read the screenshot's actual aspect ratio (height/width) via Pillow. Use 9/16 as fallback on read error.
+4. Compute `width_in = available_height_in / aspect`; convert to mm.
+5. Clamp to `[100mm, 220mm]`.
+6. Snap down to the nearest 10 mm.
+
+Result: short instructions get max-width screenshots (220 mm); progressively longer instructions get progressively smaller screenshots. The template's `keep_with_next` properties act as a safety net for residual estimation errors.
 
 ### Starter template content
 

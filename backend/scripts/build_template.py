@@ -27,6 +27,7 @@ Run from the project root:
 from pathlib import Path
 
 from docx import Document
+from docx.enum.section import WD_ORIENT
 from docx.enum.text import WD_ALIGN_PARAGRAPH
 from docx.shared import Cm, Pt
 
@@ -41,14 +42,18 @@ def main() -> None:
     OUTPUT.parent.mkdir(parents=True, exist_ok=True)
     doc = Document()
 
-    # Page setup: A4 with 2.5 cm uniform margins (ARCHITECTURE.md spec).
+    # Page setup: A4 landscape with 0.635 cm (0.25 in) uniform margins.
+    # Landscape orientation gives screenshots more horizontal room; the very
+    # tight margins maximize content area for screen-only viewing (this
+    # document is digital, not printed).
     section = doc.sections[0]
-    section.page_width = Cm(21.0)
-    section.page_height = Cm(29.7)
-    section.top_margin = Cm(2.5)
-    section.bottom_margin = Cm(2.5)
-    section.left_margin = Cm(2.5)
-    section.right_margin = Cm(2.5)
+    section.orientation = WD_ORIENT.LANDSCAPE
+    section.page_width = Cm(29.7)
+    section.page_height = Cm(21.0)
+    section.top_margin = Cm(0.635)
+    section.bottom_margin = Cm(0.635)
+    section.left_margin = Cm(0.635)
+    section.right_margin = Cm(0.635)
 
     # Title -- 24pt bold, centered (Title style).
     title_p = doc.add_paragraph(style=doc.styles["Title"])
@@ -65,19 +70,26 @@ def main() -> None:
     doc.add_paragraph("{%p for step in steps %}")
 
     # Step heading -- "Step N" (Heading 2 style).
+    # `keep_with_next` glues the heading to the instruction so they cannot
+    # be split across pages.
     heading_p = doc.add_paragraph(style=doc.styles["Heading 2"])
+    heading_p.paragraph_format.keep_with_next = True
     heading_p.add_run("Step {{ loop.index }}")
 
     # Instruction body -- justified, 12pt space-after (Body Text style).
+    # `keep_with_next` glues the instruction to the image below.
     instruction_p = doc.add_paragraph(style=doc.styles["Body Text"])
     instruction_p.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
     instruction_p.paragraph_format.space_after = Pt(12)
+    instruction_p.paragraph_format.keep_with_next = True
     instruction_p.add_run("{{ step.instruction }}")
 
     # Image placeholder -- centered. docxtpl replaces {{ step.image }} with
     # the InlineImage object passed in the rendering context.
+    # `keep_with_next` glues the image to its caption.
     image_p = doc.add_paragraph()
     image_p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    image_p.paragraph_format.keep_with_next = True
     image_p.add_run("{{ step.image }}")
 
     # Caption -- italic, centered (Caption style is italic by default).
