@@ -18,6 +18,13 @@ WHISPER_MAX_FILE_SIZE_BYTES = 25 * 1024 * 1024
 # ARCHITECTURE.md: 120s timeout for Whisper API calls.
 WHISPER_TIMEOUT_SECONDS = 120
 
+# Domain glossary that biases Whisper toward correct recognition of
+# product-specific terms. Including phrases with BOTH "quote" and "code"
+# helps Whisper disambiguate between them by audio rather than biasing
+# toward one (which would over-correct legitimate uses of the other).
+# Add new terms here as real recordings reveal mistranscriptions.
+WHISPER_PROMPT = "Insurance quote, Bond quote, Verification code, Class code"
+
 
 def extract_audio(video_path: Path, output_dir: Path) -> Path:
     """Extract a 16 kHz mono WAV audio track from `video_path`.
@@ -75,6 +82,7 @@ def transcribe(audio_path: Path) -> dict:
             transcript = client.audio.transcriptions.create(
                 model="whisper-1",
                 file=f,
+                prompt=WHISPER_PROMPT,
                 response_format="verbose_json",
                 timestamp_granularities=["segment", "word"],
             )
