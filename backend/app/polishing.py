@@ -49,6 +49,12 @@ Prefer frames that:
 areas where content should be).
 - Show the UI element or page state the narration refers to.
 
+When multiple candidate frames meet both of the criteria above, \
+additionally prefer the one where a cursor or focus indicator (the \
+mouse pointer, a text caret in an input field, or a visible focus \
+ring) sits at or near the UI element the narration is about. This \
+makes the screenshot more informative as an instruction illustration.
+
 Avoid frames that:
 - Show loading spinners, progress bars, or skeleton placeholders.
 - Have a mostly empty content area beneath a populated browser chrome \
