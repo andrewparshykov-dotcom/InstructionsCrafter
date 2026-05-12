@@ -65,6 +65,24 @@ def main() -> None:
     subtitle_p.alignment = WD_ALIGN_PARAGRAPH.CENTER
     subtitle_p.add_run("Generated on {{ date }}")
 
+    # Optional Overview block -- wrapped in {%p if introduction %} so it
+    # only renders when the AI-generated introduction is non-empty. On
+    # rule-based-fallback runs the introduction is "" and the entire
+    # block (heading + paragraph) disappears.
+    doc.add_paragraph("{%p if introduction %}")
+
+    overview_heading_p = doc.add_paragraph(style=doc.styles["Heading 2"])
+    overview_heading_p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    overview_heading_p.paragraph_format.keep_with_next = True
+    overview_heading_p.add_run("Overview")
+
+    intro_p = doc.add_paragraph(style=doc.styles["Body Text"])
+    intro_p.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
+    intro_p.paragraph_format.space_after = Pt(12)
+    intro_p.add_run("{{ introduction }}")
+
+    doc.add_paragraph("{%p endif %}")
+
     # For-loop opener -- {%p ... %} tells docxtpl to delete the entire
     # paragraph after processing, so no blank line appears in output.
     doc.add_paragraph("{%p for step in steps %}")

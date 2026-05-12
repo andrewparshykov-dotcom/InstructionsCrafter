@@ -31,6 +31,60 @@ PIPELINE_SEMAPHORE = asyncio.Semaphore(2)
 
 DEFAULT_TEMP_DIR = "/tmp/instruction-generator"
 
+# Adaptive candidate-frame counts per step. Short steps usually contain a
+# fast action + page transition (where loading-screen captures happen), so
+# they get more frames; long steps are usually narrator explanation over a
+# stable page, so a smaller sample is sufficient. The polishing model
+# selects the best frame from these candidates per step.
+SHORT_STEP_THRESHOLD_SECONDS = 4.0
+LONG_STEP_THRESHOLD_SECONDS = 15.0
+CANDIDATES_SHORT = 5   # steps shorter than SHORT_STEP_THRESHOLD_SECONDS
+CANDIDATES_NORMAL = 3  # steps within the thresholds
+CANDIDATES_LONG = 2    # steps longer than LONG_STEP_THRESHOLD_SECONDS
+
+# How far past the final step's narration end the screenshot window may
+# extend (clamped to the video's duration). Lets us catch the page
+# settling during the silence after the narrator finishes.
+LAST_STEP_TAIL_SECONDS = 1.5
+
+
+def _compute_candidate_timestamps(
+    step: dict,
+    next_step_start: float | None,
+    video_duration: float,
+) -> tuple[list[float], float, float]:
+    """Compute evenly-spaced candidate frame timestamps for one step.
+
+    Returns (timestamps, window_start, window_end). The window starts at
+    the step's narration start and extends to the next step's start (or
+    LAST_STEP_TAIL_SECONDS past end_time, clamped to video_duration, for
+    the final step). N candidates are chosen by step duration.
+    """
+    duration = step["end_time"] - step["start_time"]
+    if duration < SHORT_STEP_THRESHOLD_SECONDS:
+        n = CANDIDATES_SHORT
+    elif duration > LONG_STEP_THRESHOLD_SECONDS:
+        n = CANDIDATES_LONG
+    else:
+        n = CANDIDATES_NORMAL
+
+    window_start = float(step["start_time"])
+    if next_step_start is not None:
+        window_end = float(next_step_start)
+    else:
+        max_end = float(step["end_time"]) + LAST_STEP_TAIL_SECONDS
+        window_end = min(max_end, video_duration) if video_duration > 0 else max_end
+
+    # Defensive: collapsed window (next step adjacent or rounding glitch).
+    if window_end <= window_start:
+        window_end = window_start + 0.1
+
+    width = window_end - window_start
+    timestamps = [
+        window_start + width * (k + 1) / (n + 1) for k in range(n)
+    ]
+    return timestamps, window_start, window_end
+
 
 def create_temp_workdir() -> Path:
     """Create a unique workdir under TEMP_DIR for one request."""
@@ -95,7 +149,9 @@ async def process_video(
             transcript = transcribe(audio_path)
 
         with _step(request_id, "segment_transcript"):
-            steps = await segment_transcript(transcript)
+            segmentation_result = await segment_transcript(transcript)
+            introduction = segmentation_result["introduction"]
+            steps = segmentation_result["steps"]
 
         if not steps:
             print(
@@ -107,20 +163,47 @@ async def process_video(
                 detail="Recording contains no usable narration",
             )
 
+        video_duration = float(transcript.get("duration") or 0)
+
         with _step(request_id, "extract_screenshots"):
             for i, step in enumerate(steps):
-                midpoint = (step["start_time"] + step["end_time"]) / 2
-                frame_path = workdir / f"frame_{i:03d}.jpg"
-                extract_frame(video_path, midpoint, frame_path)
-                resize_screenshot(frame_path)
-                step["screenshot_path"] = frame_path
+                next_start = (
+                    steps[i + 1]["start_time"] if i + 1 < len(steps) else None
+                )
+                timestamps, window_start, window_end = (
+                    _compute_candidate_timestamps(
+                        step, next_start, video_duration
+                    )
+                )
+
+                candidate_paths = []
+                for j, ts in enumerate(timestamps):
+                    frame_path = workdir / f"frame_{i:03d}_cand_{j}.jpg"
+                    extract_frame(video_path, ts, frame_path)
+                    resize_screenshot(frame_path)
+                    candidate_paths.append(frame_path)
+
+                step["candidate_frame_paths"] = candidate_paths
+
+                print(
+                    f"[{request_id}] step={i} "
+                    f"narration=[{step['start_time']:.2f}s, "
+                    f"{step['end_time']:.2f}s] "
+                    f"window=[{window_start:.2f}s, {window_end:.2f}s] "
+                    f"candidates={len(timestamps)}"
+                )
 
         with _step(request_id, "polish_steps"):
-            polished_steps = await polish_steps(steps)
+            polished_steps = await polish_steps(steps, request_id)
 
         output_path = workdir / "output.docx"
         with _step(request_id, "render_document"):
-            render_document(title, polished_steps, output_path)
+            render_document(
+                title,
+                polished_steps,
+                output_path,
+                introduction=introduction,
+            )
 
     elapsed = time.perf_counter() - started
     print(

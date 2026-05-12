@@ -215,9 +215,13 @@ async def process_video(video_path: Path, title: str) -> Path:
         transcript = transcribe(audio_path)
         # Returns: {segments: [{start, end, text}, ...], words: [...]}
 
-        # Step 3: Segment into logical steps using transcript structure
-        steps = segment_transcript(transcript)
-        # Returns: [{start_time, end_time, narration_text}, ...]
+        # Step 3: Segment into logical steps and generate document
+        # introduction via Stage 1 GPT-5.4 (rule-based fallback returns
+        # introduction="" so the template hides the Overview block).
+        segmentation = await segment_transcript(transcript)
+        introduction = segmentation["introduction"]
+        steps = segmentation["steps"]
+        # Each step: {start_time, end_time, narration_text, step_intent}
 
         # Step 4: Extract one screenshot per step
         for step in steps:
@@ -228,7 +232,9 @@ async def process_video(video_path: Path, title: str) -> Path:
         polished_steps = await polish_steps(steps)
 
         # Step 6: Render the Word document
-        output_path = render_document(title, polished_steps, workdir)
+        output_path = render_document(
+            title, polished_steps, workdir, introduction=introduction
+        )
 
         return output_path
     finally:
@@ -315,6 +321,7 @@ Use python-docx-template with a pre-designed Word template at `templates/instruc
 **Template design (done in Microsoft Word by hand):**
 - Title: `{{ title }}`
 - Subtitle: `Generated on {{ date }}`
+- Optional Overview block: `{%p if introduction %}` Heading 2 "Overview" + `{{ introduction }}` paragraph `{%p endif %}` — hidden entirely when the AI-generated introduction is empty (e.g., after rule-based fallback).
 - Loop: `{% for step in steps %}`
   - Heading: `Step {{ loop.index }}`
   - Image: `{{ step.image }}` (InlineImage; width chosen dynamically per-step — see "Dynamic screenshot sizing" below)
@@ -330,6 +337,7 @@ doc = DocxTemplate("templates/instruction_template.docx")
 context = {
     "title": title,
     "date": date.today().strftime("%B %d, %Y"),
+    "introduction": introduction,  # 3-4 sentence overview, "" hides the block
     "steps": [
         {
             "image": InlineImage(doc, step.screenshot_path, width=Mm(picked_width_mm)),

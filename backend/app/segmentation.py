@@ -41,8 +41,17 @@ You analyze a transcript from a screen recording with voice narration and \
 identify the logical steps of a tutorial. The user will provide the full \
 transcript with sentence-level timestamps.
 
-Return a JSON object with one key, "steps", whose value is a list of step \
-objects. Each step object must have:
+Return a JSON object with two top-level keys: "introduction" and "steps".
+
+The "introduction" field is a 3-4 sentence overview in task-oriented voice \
+("This guide walks through...", NOT "I will show you..." or "You will \
+learn..."). It should describe the document's overall subject and the \
+main actions a reader will follow, grounded strictly in the transcript. \
+Do not invent facts not present in the narration. If you cannot confidently \
+determine the subject from the transcript, return an empty string for \
+"introduction".
+
+The "steps" field is a list of step objects. Each step object must have:
 - start_time (number, seconds): the start of the first transcript sentence \
 belonging to this step
 - end_time (number, seconds): the end of the last transcript sentence \
@@ -68,30 +77,37 @@ Return ONLY the JSON object. No prose before or after.\
 
 async def segment_transcript(
     transcript: dict[str, Any],
-) -> list[dict[str, Any]]:
+) -> dict[str, Any]:
     """Segment a Whisper transcript into logical tutorial steps.
 
-    Primary path: GPT-5.4 semantic segmentation. Falls back to the
-    rule-based algorithm if AI segmentation fails or is unavailable.
+    Primary path: GPT-5.4 semantic segmentation (also generates a
+    task-oriented document introduction). Falls back to the rule-based
+    algorithm if AI segmentation fails or is unavailable; the fallback
+    returns an empty introduction.
 
     Args:
         transcript: dict from Whisper API verbose_json (or transcribe()'s
             return). Reads the 'segments' key.
 
     Returns:
-        A list of step dicts, each with keys 'start_time', 'end_time',
-        'narration_text', and 'step_intent'. The 'step_intent' field is
-        empty when the rule-based fallback is used. Empty list if the
-        transcript has no segments.
+        A dict with two keys:
+            - 'introduction' (str): 3-4 sentence document overview, or ""
+              if AI segmentation failed or the model could not determine
+              a subject.
+            - 'steps' (list[dict]): step dicts each with 'start_time',
+              'end_time', 'narration_text', and 'step_intent'. The
+              'step_intent' is empty when the rule-based fallback is used.
+        Returns {'introduction': '', 'steps': []} when the transcript has
+        no segments.
     """
     raw = transcript.get("segments") or []
     if not raw:
-        return []
+        return {"introduction": "", "steps": []}
 
     try:
-        ai_steps = await _segment_with_ai(transcript)
-        if ai_steps:
-            return ai_steps
+        ai_result = await _segment_with_ai(transcript)
+        if ai_result and ai_result["steps"]:
+            return ai_result
         print(
             "AI segmentation returned no usable steps, "
             "falling back to rule-based.",
@@ -108,17 +124,22 @@ async def segment_transcript(
         )
 
     rule_steps = segment_transcript_rule_based(transcript)
-    return [{**s, "step_intent": ""} for s in rule_steps]
+    return {
+        "introduction": "",
+        "steps": [{**s, "step_intent": ""} for s in rule_steps],
+    }
 
 
 async def _segment_with_ai(
     transcript: dict[str, Any],
-) -> list[dict[str, Any]] | None:
-    """Call GPT-5.4 to segment the transcript semantically.
+) -> dict[str, Any] | None:
+    """Call GPT-5.4 to segment the transcript semantically and generate
+    a document introduction.
 
-    Returns a validated list of step dicts on success, or None if the API
-    key is missing or the response fails validation. Raises on network/API
-    errors so the caller can log and fall back.
+    Returns a validated dict {'introduction': str, 'steps': list[dict]}
+    on success, or None if the API key is missing or the response fails
+    validation. Raises on network/API errors so the caller can log and
+    fall back.
     """
     api_key = os.getenv("OPENAI_API_KEY")
     if not api_key:
@@ -151,21 +172,33 @@ async def _segment_with_ai(
 
     content = response.choices[0].message.content or ""
     parsed = json.loads(content)
-    return _validate_ai_steps(parsed, transcript_duration)
+    return _validate_ai_response(parsed, transcript_duration)
 
 
-def _validate_ai_steps(
+def _validate_ai_response(
     parsed: Any,
     transcript_duration: float,
-) -> list[dict[str, Any]] | None:
-    """Validate the model's JSON output. Returns None if any step is bad."""
+) -> dict[str, Any] | None:
+    """Validate the model's JSON output.
+
+    Returns a dict with 'introduction' and 'steps' keys on success, or
+    None if any required field is bad. Introduction is allowed to be an
+    empty string (the model returns "" when it can't determine a subject).
+    """
     if not isinstance(parsed, dict):
         return None
+
+    # Introduction: must be a string (empty allowed).
+    introduction = parsed.get("introduction", "")
+    if not isinstance(introduction, str):
+        return None
+
+    # Steps: must be a non-empty list of well-formed step dicts.
     steps = parsed.get("steps")
     if not isinstance(steps, list) or not steps:
         return None
 
-    validated: list[dict[str, Any]] = []
+    validated_steps: list[dict[str, Any]] = []
     for step in steps:
         if not isinstance(step, dict):
             return None
@@ -187,7 +220,7 @@ def _validate_ai_steps(
             and end_time > transcript_duration + _END_TIME_OVERSHOOT_TOLERANCE
         ):
             return None
-        validated.append(
+        validated_steps.append(
             {
                 "start_time": start_time,
                 "end_time": min(end_time, transcript_duration)
@@ -197,7 +230,11 @@ def _validate_ai_steps(
                 "step_intent": step_intent.strip(),
             }
         )
-    return validated
+
+    return {
+        "introduction": introduction.strip(),
+        "steps": validated_steps,
+    }
 
 
 def segment_transcript_rule_based(
