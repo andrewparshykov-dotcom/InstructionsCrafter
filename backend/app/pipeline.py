@@ -160,7 +160,11 @@ async def process_video(
             )
             raise HTTPException(
                 status_code=400,
-                detail="Recording contains no usable narration",
+                detail=(
+                    "This recording contains no narration. Please re-record "
+                    "while speaking through each step. The tool needs your "
+                    "voice to generate the instructions."
+                ),
             )
 
         video_duration = float(transcript.get("duration") or 0)
