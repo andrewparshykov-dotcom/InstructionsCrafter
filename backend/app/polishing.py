@@ -21,7 +21,7 @@ from fastapi import HTTPException
 from openai import AsyncOpenAI
 
 GPT_MODEL = "gpt-5.4"
-GPT_TIMEOUT_SECONDS = 60
+GPT_TIMEOUT_SECONDS = 90
 GPT_MAX_COMPLETION_TOKENS = 16000
 # Reasoning models (gpt-5.4) do not accept custom `temperature`; only the
 # default value is supported. Consistency is controlled by reasoning_effort

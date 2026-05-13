@@ -17,7 +17,7 @@ from openai import AsyncOpenAI
 
 # AI segmentation parameters
 GPT_MODEL = "gpt-5.4"
-GPT_TIMEOUT_SECONDS = 60
+GPT_TIMEOUT_SECONDS = 90
 GPT_MAX_COMPLETION_TOKENS = 16000
 GPT_REASONING_EFFORT = "medium"
 
