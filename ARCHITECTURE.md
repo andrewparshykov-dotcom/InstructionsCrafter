@@ -538,6 +538,8 @@ Work through these phases sequentially. Do not start phase N+1 until phase N is 
 - Remove listed features
 - Add the "Generate Document" button and modal
 - Wire up the upload to the deployed backend
+- Add a pre-recording notice (modal on first record-button click, or persistent hint near the button) clearly stating that voice narration is required for instruction generation. Without this, a user can record silently and only discover the requirement when the backend returns a 400 after upload -- preventing the bad recording is better than catching it. Backend already returns a clear actionable message (see pipeline.py "no narration" branch); the extension's job is to make the requirement visible before recording starts.
+- Add a post-recording audio-level sanity check before the upload step. Detect when the captured audio is essentially silent (e.g., >95% of samples below approximately -50 dB; threshold needs calibration against typical room noise) and warn the user with an option to re-record before uploading. Safety net for cases where the pre-recording notice didn't help -- user ignored it, microphone permission was denied, or there was a hardware fault.
 - Test end-to-end: record → upload → download document
 - **Verification:** The extension successfully generates a document from a real screen recording
 
