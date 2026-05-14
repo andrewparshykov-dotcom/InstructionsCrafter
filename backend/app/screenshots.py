@@ -49,22 +49,32 @@ def resize_screenshot(
     path: Path,
     max_width: int = MAX_SCREENSHOT_WIDTH,
 ) -> None:
-    """Resize the JPEG at `path` in-place if it exceeds `max_width`.
+    """Resize the JPEG at `path` in-place if it exceeds `max_width`, and
+    re-encode through Pillow either way.
 
-    Preserves aspect ratio. No-op when the image is already <= max_width.
-    Raises HTTPException(500) on Pillow failure (corrupt or unreadable).
+    The re-encode is important even when no resize is needed: python-docx's
+    image parser requires a JFIF or Exif marker right after a JPEG's SOI
+    bytes, and FFmpeg's raw JPEG output sometimes omits these markers,
+    causing UnrecognizedImageError at document rendering. Pillow always
+    writes a JFIF marker, so re-saving through it normalizes the file.
+
+    Preserves aspect ratio. Raises HTTPException(500) on Pillow failure
+    (corrupt or unreadable source).
     """
     try:
         with Image.open(path) as img:
-            if img.width <= max_width:
-                return
-            new_height = round(img.height * (max_width / img.width))
-            resized = img.resize(
-                (max_width, new_height),
-                Image.Resampling.LANCZOS,
-            )
+            if img.width > max_width:
+                new_height = round(img.height * (max_width / img.width))
+                output = img.resize(
+                    (max_width, new_height),
+                    Image.Resampling.LANCZOS,
+                )
+            else:
+                # No resize needed; copy() detaches from the file so we
+                # can save back to the same path after the with block.
+                output = img.copy()
         # Image is closed here; safe to overwrite the source file.
-        resized.save(path, "JPEG", quality=RESIZED_JPEG_QUALITY, optimize=True)
+        output.save(path, "JPEG", quality=RESIZED_JPEG_QUALITY, optimize=True)
     except OSError:
         raise HTTPException(
             status_code=500,

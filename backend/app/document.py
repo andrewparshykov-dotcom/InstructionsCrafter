@@ -227,8 +227,13 @@ def render_document(
         doc.render(context)
         doc.save(str(output_path))
     except Exception as e:
-        # Re-raise as a sanitized HTTPException; the original `e` is preserved
-        # in the chain so server logs (uvicorn/journald) capture the cause.
+        # Log the underlying error to stderr -- FastAPI does not surface
+        # chained `from e` causes for HTTPException, so without this the
+        # real failure stays invisible.
+        import sys
+        import traceback
+        print(f"render_document: underlying error: {e!r}", file=sys.stderr)
+        traceback.print_exc(file=sys.stderr)
         raise HTTPException(
             status_code=500,
             detail="Document rendering failed",
