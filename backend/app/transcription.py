@@ -44,7 +44,12 @@ def extract_audio(video_path: Path, output_dir: Path) -> Path:
 
 
 def transcribe(audio_path: Path) -> dict:
-    """Transcribe `audio_path` via OpenAI Whisper.
+    """Transcribe `audio_path` via Groq's whisper-large-v3-turbo.
+
+    Uses Groq's OpenAI-compatible audio endpoint instead of OpenAI's
+    own Whisper API. Free tier on Groq covers our usage comfortably,
+    and Whisper Large V3 Turbo is more accurate than whisper-1
+    (especially for non-English speech).
 
     Returns a dict (the SDK's `Transcription.model_dump()`) with keys
     including `text`, `language`, `duration`, `segments`, and `words`.
@@ -61,19 +66,26 @@ def transcribe(audio_path: Path) -> dict:
         # 'Recording too long' to the user."
         raise HTTPException(status_code=400, detail="Recording too long")
 
-    api_key = os.getenv("OPENAI_API_KEY")
+    api_key = os.getenv("GROQ_API_KEY")
     if not api_key:
         raise HTTPException(
             status_code=500,
-            detail="OpenAI API key is not configured on the server",
+            detail="Groq API key is not configured on the server",
         )
 
-    client = OpenAI(api_key=api_key, timeout=WHISPER_TIMEOUT_SECONDS)
+    # Groq exposes an OpenAI-compatible endpoint, so we keep using the
+    # `openai` SDK but redirect it at Groq's base URL. Segmentation and
+    # polishing still hit OpenAI directly with OPENAI_API_KEY.
+    client = OpenAI(
+        api_key=api_key,
+        base_url="https://api.groq.com/openai/v1",
+        timeout=WHISPER_TIMEOUT_SECONDS,
+    )
 
     try:
         with audio_path.open("rb") as f:
             transcript = client.audio.transcriptions.create(
-                model="whisper-1",
+                model="whisper-large-v3-turbo",
                 file=f,
                 response_format="verbose_json",
                 timestamp_granularities=["segment", "word"],
@@ -81,12 +93,12 @@ def transcribe(audio_path: Path) -> dict:
     except openai.APITimeoutError:
         raise HTTPException(status_code=504, detail="Transcription timed out")
     except openai.AuthenticationError:
-        # DECISION: Bad OpenAI credentials are a server config error, not a
+        # DECISION: Bad Groq credentials are a server config error, not a
         # client auth error. /api/generate already authenticates the *client*
         # via SHARED_PASSWORD; this 500 is about the server's own credential.
         raise HTTPException(
             status_code=500,
-            detail="Server failed to authenticate to OpenAI",
+            detail="Server failed to authenticate to Groq",
         )
     except openai.APIError:
         raise HTTPException(status_code=500, detail="Transcription failed")

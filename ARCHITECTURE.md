@@ -56,12 +56,12 @@ These rules apply to the entire project. Violating them will cause over-engineer
 │  1. Validate shared password (reject if wrong)                 │
 │  2. Save uploaded video to /tmp                                │
 │  3. FFmpeg: extract audio track (16kHz mono WAV)               │
-│  4. OpenAI Whisper API: transcribe audio with timestamps       │
+│  4. Groq Whisper Large V3 Turbo: transcribe audio w/ timestamps│
 │  5. Segment transcript into logical steps                      │
 │     (use sentence boundaries + pause detection)                │
 │  6. FFmpeg: extract one screenshot per step                    │
 │     (frame at the midpoint timestamp of each step)             │
-│  7. OpenAI GPT-4o mini API: rewrite each step's narration      │
+│  7. OpenAI GPT-5.4 API: rewrite each step's narration          │
 │     into clean instruction text                                │
 │  8. python-docx-template: render Word doc with                 │
 │     title + {step_number, instruction, screenshot} list        │
@@ -152,7 +152,7 @@ backend/
 │   ├── transcription.py     # Whisper API wrapper
 │   ├── segmentation.py      # Transcript → step segmentation logic
 │   ├── screenshots.py       # FFmpeg frame extraction
-│   ├── polishing.py         # GPT-4o mini text rewriting
+│   ├── polishing.py         # GPT-5.4 vision: pick screenshot + rewrite text
 │   └── document.py          # docxtpl rendering
 ├── templates/
 │   └── instruction_template.docx   # Word template with Jinja tags
@@ -163,7 +163,8 @@ backend/
 
 ### Environment variables (.env)
 ```
-OPENAI_API_KEY=sk-...
+OPENAI_API_KEY=sk-...           # used by segmentation.py and polishing.py (GPT-5.4)
+GROQ_API_KEY=gsk-...            # used by transcription.py (whisper-large-v3-turbo)
 SHARED_PASSWORD=<team-chosen-string>
 MAX_VIDEO_SIZE_MB=500
 TEMP_DIR=/tmp/instruction-generator
@@ -257,14 +258,18 @@ ffmpeg -i <input_video> -vn -ac 1 -ar 16000 -c:a pcm_s16le <output.wav>
 Reject files where extraction fails with HTTP 400.
 
 #### Transcription (transcription.py)
-Use OpenAI's `audio.transcriptions.create` with:
-- `model="whisper-1"`
+Use Groq's OpenAI-compatible `audio.transcriptions.create` with:
+- `model="whisper-large-v3-turbo"`
 - `response_format="verbose_json"` (provides segment-level timestamps)
 - `timestamp_granularities=["segment", "word"]`
+- `base_url="https://api.groq.com/openai/v1"` on the `OpenAI` client
+- API key from `GROQ_API_KEY` (separate from `OPENAI_API_KEY`, which is used only by segmentation and polishing)
 
-**Note on cost:** Whisper API bills per minute of audio duration (including silence). Budget $0.006/min.
+**Why Groq instead of OpenAI's whisper-1:** whisper-large-v3-turbo is more accurate than whisper-1 (especially for non-English speech, including Ukrainian), and Groq's free tier covers our expected usage at $0 instead of $0.006/min on OpenAI. The `openai` Python SDK is OpenAI-compatible with Groq, so no code-shape change is required beyond pointing at the new base URL.
 
-**Note on file size:** Whisper API has a 25 MB audio file size limit. If the extracted audio exceeds this (rare for <30 min recordings at 16kHz mono), chunk the audio into 24 MB segments, transcribe each, and reassemble. Do not implement this chunking in v1 unless testing shows it's needed — handle the error gracefully and display "Recording too long" to the user.
+**Note on cost and limits:** Free tier allows up to 7,200 audio seconds per hour and 28,800 audio seconds per day (~8 hours/day) with 2,000 requests per day. For ≤5 internal users this is enormously generous. If usage ever exceeds the free tier, requests start returning 429 errors -- at that point either upgrade to Groq's developer tier or fall back to OpenAI's whisper-1.
+
+**Note on file size:** Groq's free tier accepts up to 25 MB audio files (same as OpenAI's whisper-1, so no regression). If the extracted audio exceeds this (rare for <30 min recordings at 16kHz mono), chunk the audio into 24 MB segments, transcribe each, and reassemble. Do not implement this chunking in v1 unless testing shows it's needed — handle the error gracefully and display "Recording too long" to the user.
 
 #### Transcript segmentation (segmentation.py)
 
@@ -292,7 +297,7 @@ Resize extracted screenshots to a maximum width of 1920px using Pillow to keep t
 
 #### Text polishing (polishing.py)
 
-For each step, call GPT-4o mini with a prompt roughly like this:
+For each step, call GPT-5.4 (with vision input on the candidate screenshots) with a prompt roughly like this:
 
 ```
 System: You rewrite informal spoken narration into clean, concise
@@ -306,9 +311,9 @@ User: <raw narration text for this step>
 ```
 
 Use:
-- `model="gpt-4o-mini"`
-- `temperature=0.2` (we want consistency, not creativity)
-- `max_tokens=200`
+- `model="gpt-5.4"`
+- `reasoning_effort="low"` (writing task, not deep reasoning; GPT-5.4 reasoning models do not accept a custom `temperature`)
+- `max_completion_tokens=16000`
 
 Send these calls concurrently using `asyncio.gather()` to minimize total latency. With 10–20 steps per video, serial calls would add 20–40 seconds unnecessarily.
 
@@ -381,7 +386,7 @@ Additional requests beyond 2 will queue automatically via the semaphore — this
 
 ### Error handling
 
-- Every external call (FFmpeg, OpenAI) must have a timeout (60s for FFmpeg calls, 120s for Whisper, 30s for GPT-4o mini).
+- Every external call (FFmpeg, OpenAI, Groq) must have a timeout (60s for FFmpeg calls, 120s for Whisper, 90s for GPT-5.4).
 - Wrap each pipeline step in its own try/except that logs the error (with request ID) and raises an HTTPException with a user-friendly message.
 - Never expose raw exception messages or stack traces to the client.
 - Log to stdout (systemd will capture it to journald). Do not set up a separate logging infrastructure.
@@ -517,7 +522,7 @@ Work through these phases sequentially. Do not start phase N+1 until phase N is 
 
 ### Phase 5: Polishing + document rendering (4–6 hours)
 - Design the Word template by hand in Microsoft Word
-- Implement `polish_step(narration_text)` via GPT-4o mini with asyncio.gather
+- Implement `polish_step(narration_text)` via GPT-5.4 with asyncio.gather
 - Implement `render_document(title, steps)` using docxtpl
 - **Verification:** Given segmented steps, produce a readable, well-formatted .docx
 
@@ -594,8 +599,8 @@ If Claude Code encounters a decision during implementation that isn't covered by
 | FastAPI | github.com/tiangolo/fastapi | MIT | Backend web framework |
 | Uvicorn | github.com/encode/uvicorn | BSD | ASGI server |
 | FFmpeg | ffmpeg.org | LGPL/GPL | Audio extraction and frame grabbing |
-| OpenAI Whisper API | platform.openai.com | Commercial API | Speech-to-text |
-| OpenAI GPT-4o mini API | platform.openai.com | Commercial API | Text polishing |
+| Groq Whisper Large V3 Turbo API | console.groq.com | Commercial API (free tier) | Speech-to-text (OpenAI-compatible endpoint) |
+| OpenAI GPT-5.4 API | platform.openai.com | Commercial API | Semantic segmentation + screenshot selection + text polishing (vision-aware) |
 | python-docx-template | github.com/elapouya/python-docx-template | LGPL | Word document rendering |
 | Pillow | python-pillow.org | HPND | Image resizing |
 
