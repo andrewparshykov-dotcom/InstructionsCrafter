@@ -248,12 +248,12 @@ async def process_video(video_path: Path, title: str) -> Path:
 #### Audio extraction (transcription.py)
 Invoke FFmpeg with:
 ```
-ffmpeg -i <input_video> -vn -ac 1 -ar 16000 -c:a pcm_s16le <output.wav>
+ffmpeg -i <input_video> -vn -ac 1 -ar 16000 -c:a libmp3lame -b:a 64k <output.mp3>
 ```
 - `-vn`: drop video stream
 - `-ac 1`: mono
 - `-ar 16000`: 16 kHz sample rate (Whisper's native rate)
-- `-c:a pcm_s16le`: uncompressed PCM
+- `-c:a libmp3lame -b:a 64k`: MP3 at 64 kbps (transparent for voice; ~4× more capacity within Whisper's 25 MB file size cap than uncompressed PCM, lifting the effective duration limit from ~13 min to ~54 min)
 
 Reject files where extraction fails with HTTP 400.
 
@@ -269,7 +269,7 @@ Use Groq's OpenAI-compatible `audio.transcriptions.create` with:
 
 **Note on cost and limits:** Free tier allows up to 7,200 audio seconds per hour and 28,800 audio seconds per day (~8 hours/day) with 2,000 requests per day. For ≤5 internal users this is enormously generous. If usage ever exceeds the free tier, requests start returning 429 errors -- at that point either upgrade to Groq's developer tier or fall back to OpenAI's whisper-1.
 
-**Note on file size:** Groq's free tier accepts up to 25 MB audio files (same as OpenAI's whisper-1, so no regression). If the extracted audio exceeds this (rare for <30 min recordings at 16kHz mono), chunk the audio into 24 MB segments, transcribe each, and reassemble. Do not implement this chunking in v1 unless testing shows it's needed — handle the error gracefully and display "Recording too long" to the user.
+**Note on file size:** Groq's free tier accepts up to 25 MB audio files (same as OpenAI's whisper-1, so no regression). At our extraction settings (16 kHz mono MP3 at 64 kbps), the 25 MB cap holds about 54 minutes of audio -- comfortably above any realistic how-to recording length. If the extracted audio still exceeds this, chunk it into 24 MB segments, transcribe each, and reassemble. Do not implement this chunking in v1 unless testing shows it's needed — handle the error gracefully and display "Recording too long" to the user.
 
 #### Transcript segmentation (segmentation.py)
 

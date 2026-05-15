@@ -1,6 +1,7 @@
 """Audio extraction and Whisper transcription."""
 
 import os
+import sys
 from pathlib import Path
 
 import openai
@@ -12,6 +13,13 @@ from app.ffmpeg_utils import run_ffmpeg
 # Whisper's native sample rate. Using it now avoids server-side resampling later.
 WHISPER_SAMPLE_RATE = 16000
 
+# MP3 bitrate for the extracted audio. 64 kbps mono is transparent for
+# clean voice narration (verified by a listening test against uncompressed
+# PCM and FLAC -- no perceptible difference) and gives ~4x more capacity
+# within Whisper's 25 MB file size cap than uncompressed PCM would,
+# lifting the effective recording-duration limit from ~13 min to ~54 min.
+WHISPER_AUDIO_BITRATE = "64k"
+
 # Whisper API rejects audio files larger than 25 MiB.
 WHISPER_MAX_FILE_SIZE_BYTES = 25 * 1024 * 1024
 
@@ -20,13 +28,13 @@ WHISPER_TIMEOUT_SECONDS = 120
 
 
 def extract_audio(video_path: Path, output_dir: Path) -> Path:
-    """Extract a 16 kHz mono WAV audio track from `video_path`.
+    """Extract a 16 kHz mono MP3 (64 kbps) audio track from `video_path`.
 
-    Writes the WAV to `<output_dir>/audio.wav` and returns its path.
+    Writes the MP3 to `<output_dir>/audio.mp3` and returns its path.
     Raises HTTPException(400) if FFmpeg cannot extract audio.
     """
     output_dir.mkdir(parents=True, exist_ok=True)
-    output_path = output_dir / "audio.wav"
+    output_path = output_dir / "audio.mp3"
 
     cmd = [
         "ffmpeg",
@@ -35,7 +43,8 @@ def extract_audio(video_path: Path, output_dir: Path) -> Path:
         "-vn",                             # drop video stream
         "-ac", "1",                        # downmix to mono
         "-ar", str(WHISPER_SAMPLE_RATE),   # resample to 16 kHz
-        "-c:a", "pcm_s16le",               # uncompressed 16-bit PCM
+        "-c:a", "libmp3lame",              # MP3 encoder
+        "-b:a", WHISPER_AUDIO_BITRATE,     # transparent for voice; see constant comment
         str(output_path),
     ]
 
@@ -100,7 +109,11 @@ def transcribe(audio_path: Path) -> dict:
             status_code=500,
             detail="Server failed to authenticate to Groq",
         )
-    except openai.APIError:
+    except openai.APIError as exc:
+        # Log the underlying API error so it's visible in server logs even
+        # though the client only sees the generic "Transcription failed".
+        # Mirrors the pattern in polishing.py.
+        print(f"transcribe: Groq APIError: {exc!r}", file=sys.stderr)
         raise HTTPException(status_code=500, detail="Transcription failed")
 
     return transcript.model_dump()
