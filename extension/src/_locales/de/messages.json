@@ -23,14 +23,6 @@
     "message": "Tab-Bereich",
     "description": "Label für die Aufnahmeart 'Tab-Bereich' in der Popup-Ansicht"
   },
-  "cameraType": {
-    "message": "Kamera",
-    "description": "Label für die Aufnahmeart 'Kamera' in der Popup-Ansicht"
-  },
-  "mockupType": {
-    "message": "Mockup",
-    "description": "Label für die Aufnahmeart 'Mockup' in der Popup-Ansicht"
-  },
   "customAreaRecordingDisabledTitle": {
     "message": "Benutzerdefinierte Bereichsaufnahme deaktiviert",
     "description": "Warnung 'Benutzerdefinierte Bereichsaufnahme deaktiviert' in der Popup-Ansicht für Chrome-Versionen älter als 104"
@@ -63,10 +55,6 @@
     "message": "Die Sicherheitseinstellungen dieser Website verhindern, dass Browser-Erweiterungen auf dieser Seite deine Kamera oder dein Mikrofon verwenden. Um mit ihnen aufzunehmen, starte die Aufnahme in einem anderen Tab und wechsle zurück hierher, sobald sie begonnen hat.",
     "description": "Modal description shown when the current page's Permissions-Policy header blocks browser extensions from using camera or microphone"
   },
-  "opfsLoadErrorTitle": {
-    "message": "Aufnahme kann nicht geladen werden",
-    "description": "Modal title shown when the editor cannot read the recording file from the device's storage"
-  },
   "opfsLoadErrorDescription": {
     "message": "Screenity konnte die Aufnahme aus dem Speicher deines Geräts nicht laden. Sie wurde möglicherweise gelöscht oder verschoben. Falls dies weiterhin geschieht, kontaktiere uns unter support@screenity.io.",
     "description": "Modal description shown when the editor cannot read the recording file from the device's storage"
@@ -82,10 +70,6 @@
   "allowMicrophoneAccessButton": {
     "message": "Mikrofonzugriff zulassen",
     "description": "Schaltfläche 'Mikrofonzugriff zulassen'"
-  },
-  "pushToTalkLabel": {
-    "message": "Push-to-Talk",
-    "description": "Label für den Schalter 'Push-to-Talk'"
   },
   "customAreaLabel": {
     "message": "Bereich zum Aufnehmen festlegen",
@@ -123,10 +107,6 @@
     "message": "Symbolleiste ausblenden",
     "description": "Beschreibung für das Ausblenden der Symbolleiste"
   },
-  "countdownLabel": {
-    "message": "Countdown",
-    "description": "Beschreibung für das Countdown-Label"
-  },
   "alarmLabel": {
     "message": "Zeitlimit setzen",
     "description": "Beschreibung für das Alarm-Label"
@@ -134,10 +114,6 @@
   "blurTypeLabel": {
     "message": "Unschärfe",
     "description": "Beschreibung für das Unschärfe-Hintergrund-Label"
-  },
-  "noneDropdownLabel": {
-    "message": "Kein",
-    "description": "Beschreibung für die Auswahl 'Kein Gerät ausgewählt'"
   },
   "noCameraDropdownLabel": {
     "message": "Keine Kamera",
@@ -198,18 +174,6 @@
   "toggleCursorOptionsTooltip": {
     "message": "Cursor-Optionen ein-/ausschalten",
     "description": "Tooltip für das Ein- und Ausschalten der Cursor-Optionen"
-  },
-  "disableCameraTooltip": {
-    "message": "Kamera deaktivieren",
-    "description": "Tooltip für das Deaktivieren der Kamera"
-  },
-  "enableCameraTooltip": {
-    "message": "Kamera aktivieren",
-    "description": "Tooltip für das Aktivieren der Kamera"
-  },
-  "noCameraPermissionsTooltip": {
-    "message": "Keine Kameraberechtigungen",
-    "description": "Tooltip für fehlende Kameraberechtigungen"
   },
   "disableMicrophoneTooltip": {
     "message": "Mikrofon deaktivieren",
@@ -282,10 +246,6 @@
   "thinStrokeTooltip": {
     "message": "Dünne Linie",
     "description": "Tooltip für dünne Linien"
-  },
-  "togglePictureinPictureModeTooltip": {
-    "message": "Bild-in-Bild-Modus umschalten",
-    "description": "Tooltip für das Umschalten des Bild-in-Bild-Modus"
   },
   "toggleFillTooltip": {
     "message": "Füllung umschalten",
@@ -363,277 +323,17 @@
     "message": "Halten Sie diesen Tab geöffnet. Er wird sich schließen, sobald Ihre Aufnahme gespeichert wurde.",
     "description": "Beschreibung auf der Aufnahmeseite"
   },
-  "sandboxProgressTitle": {
-    "message": "Vorbereitung der Aufnahme...",
-    "description": "Titel auf der Sandbox-Seite während der Aufnahme / Speicherung"
-  },
-  "sandboxProgressDescription": {
-    "message": "Halten Sie diesen Tab geöffnet. Er wird sich aktualisieren, wenn Ihre Aufnahme fertig ist.",
-    "description": "Beschreibung auf der Sandbox-Seite während der Aufnahme / Speicherung"
-  },
-  "sandboxFinalizingRecording": {
-    "message": "Aufnahme wird abgeschlossen...",
-    "description": "Shown over the player when the editor is waiting for the recorder to finish flushing the recording to disk"
-  },
-  "sandboxToastReverted": {
-    "message": "Auf Original zurückgesetzt",
-    "description": "Toast confirmation shown when the user reverts edits to the original recording"
-  },
-  "sandboxToastSaved": {
-    "message": "Änderungen gespeichert",
-    "description": "Toast confirmation shown when the user saves an edit operation"
-  },
-  "sandboxEditorMainTitle": {
-    "message": "Editor",
-    "description": "Titel in der Navigation der Sandbox-Editor-Seite"
-  },
   "sandboxEditorCancelButton": {
     "message": "Abbrechen",
     "description": "Abbrechen-Schaltfläche auf der Sandbox-Editor-Seite"
-  },
-  "sandboxEditorRevertButton": {
-    "message": "Auf Original zurücksetzen",
-    "description": "Schaltfläche zum Zurücksetzen auf das Original auf der Sandbox-Editor-Seite"
-  },
-  "sandboxEditorResetButton": {
-    "message": "Zurücksetzen",
-    "description": "Schaltfläche zum Zurücksetzen auf der Sandbox-Editor-Seite"
-  },
-  "sandboxEditorSaveButton": {
-    "message": "Änderungen speichern",
-    "description": "Schaltfläche zum Speichern auf der Sandbox-Editor-Seite"
-  },
-  "sandboxEditorSaveProgressButton": {
-    "message": "Speichern...",
-    "description": "Schaltfläche zum Speichern auf der Sandbox-Editor-Seite während des Speicherns"
-  },
-  "sandboxAudioDragAndDrop": {
-    "message": "Ziehen Sie Ihre Audio-Datei hierhin",
-    "description": "Audio-Datei per Drag & Drop auf der Sandbox-Editor-Seite"
-  },
-  "sandboxAudioOrBrowse": {
-    "message": "Oder klicken Sie hier, um zu durchsuchen",
-    "description": "Oder klicken Sie hier, um die Audio-Datei auf der Sandbox-Editor-Seite zu durchsuchen"
-  },
-  "sandboxAudioSettingsTitle": {
-    "message": "Einstellungen",
-    "description": "Titel der Audio-Einstellungen auf der Sandbox-Editor-Seite"
-  },
-  "sandboxAudioVolumeLabel": {
-    "message": "Lautstärke",
-    "description": "Beschriftung für die Lautstärke-Einstellungen auf der Sandbox-Editor-Seite"
-  },
-  "sandboxAudioUpdateButton": {
-    "message": "Aktualisieren",
-    "description": "Schaltfläche zum Aktualisieren der Audio-Einstellungen auf der Sandbox-Editor-Seite"
-  },
-  "sandboxCropTitle": {
-    "message": "Zuschneiden",
-    "description": "Titel auf der Sandbox-Editor-Seite zum Zuschneiden"
-  },
-  "widthLabel": {
-    "message": "Breite",
-    "description": "Beschriftung für die Breiten-Einstellung"
-  },
-  "heightLabel": {
-    "message": "Höhe",
-    "description": "Beschriftung für die Höhen-Einstellung"
-  },
-  "leftLabel": {
-    "message": "Links",
-    "description": "Beschriftung für die Links-Einstellung"
-  },
-  "topLabel": {
-    "message": "Oben",
-    "description": "Beschriftung für die Oben-Einstellung"
-  },
-  "sandboxEditorTrimInfo": {
-    "message": "Ziehen Sie die Griffe und verwenden Sie die Schaltflächen auf der linken Seite, um den ausgewählten Abschnitt zu bearbeiten.",
-    "description": "Informationen zum Zuschneiden im Sandbox-Editor"
-  },
-  "sandboxEditorTrimButton": {
-    "message": "Video zuschneiden",
-    "description": "Zuschneide-Schaltfläche im Sandbox-Editor"
-  },
-  "sandboxEditorTrimProgressButton": {
-    "message": "Zuschneiden...",
-    "description": "Zuschneide-Schaltfläche im Sandbox-Editor während des Zuschneidens"
-  },
-  "sandboxEditorCutButton": {
-    "message": "Abschnitt schneiden",
-    "description": "Schneide-Schaltfläche im Sandbox-Editor"
-  },
-  "sandboxEditorCutProgressButton": {
-    "message": "Schneiden...",
-    "description": "Schneide-Schaltfläche im Sandbox-Editor während des Schneidens"
-  },
-  "sandboxEditorMuteButton": {
-    "message": "Audio stummschalten",
-    "description": "Stummschaltungs-Schaltfläche im Sandbox-Editor"
-  },
-  "sandboxEditorMuteProgressButton": {
-    "message": "Stummschalten...",
-    "description": "Stummschaltungs-Schaltfläche im Sandbox-Editor während des Stummschaltens"
   },
   "learnMoreDot": {
     "message": "Erfahren Sie mehr.",
     "description": "Weitere Informationen mit einem Punkt"
   },
-  "undoLabel": {
-    "message": "Rückgängig",
-    "description": "Rückgängig-Schriftzug"
-  },
-  "redoLabel": {
-    "message": "Wiederholen",
-    "description": "Wiederholen-Schriftzug"
-  },
-  "leaveReview": {
-    "message": "Bewertung hinterlassen",
-    "description": "Schaltfläche 'Bewertung abgeben'"
-  },
-  "followForUpdates": {
-    "message": "Folgen Sie für Aktualisierungen",
-    "description": "Schaltfläche 'Folgen für Aktualisierungen'"
-  },
-  "offlineLabelTitle": {
-    "message": "Sie sind derzeit offline",
-    "description": "Offline-Schriftzug"
-  },
-  "offlineLabelDescription": {
-    "message": "Einige Funktionen sind nicht verfügbar, bis eine Verbindung wiederhergestellt ist",
-    "description": "Beschreibung des Offline-Schriftzugs"
-  },
-  "offlineLabelTryAgain": {
-    "message": "Erneut versuchen",
-    "description": "Schaltfläche 'Erneut versuchen' des Offline-Schriftzugs"
-  },
-  "updateChromeLabelTitle": {
-    "message": "Chrome muss aktualisiert werden",
-    "description": "Aktualisieren Sie den Chrome-Schriftzug"
-  },
-  "updateChromeLabelDescription": {
-    "message": "Aktualisieren Sie, um auf mehr Funktionen zugreifen zu können",
-    "description": "Beschreibung des Aktualisieren Sie den Chrome-Schriftzugs"
-  },
-  "learnMoreLabel": {
-    "message": "Erfahren Sie mehr",
-    "description": "Schaltfläche 'Erfahren Sie mehr'"
-  },
-  "overLimitLabelTitle": {
-    "message": "Video zu lang für lokale Verarbeitung",
-    "description": "Kennzeichnung für über 5 Minuten in der Bearbeitung"
-  },
-  "overLimitLabelDescription": {
-    "message": "Bearbeitung und MP4-Export nicht verfügbar",
-    "description": "Beschreibung für über 5 Minuten in der Bearbeitung"
-  },
-  "overLimitLabelDescriptionFastPath": {
-    "message": "Bearbeitungsfunktionen nicht verfügbar",
-    "description": "Over limit description when the recording is a native MP4 (fast recorder / WebCodecs) so MP4 export still works"
-  },
-  "videoProcessingLabelTitle": {
-    "message": "Das Video wird verarbeitet...",
-    "description": "Schriftzug 'Videoverarbeitung' im Editor"
-  },
-  "videoProcessingLabelDescription": {
-    "message": "Aktualisieren Sie für schnellere Bearbeitung",
-    "description": "Beschreibung der Videoverarbeitung im Editor"
-  },
-  "sandboxEditTitle": {
-    "message": "Bearbeiten",
-    "description": "Bearbeitungstitel auf der Sandbox-Editor-Seite"
-  },
-  "noConnectionLabel": {
-    "message": "Keine Verbindung",
-    "description": "Schriftzug 'Keine Verbindung'"
-  },
-  "notAvailableLabel": {
-    "message": "Nicht verfügbar",
-    "description": "Schriftzug 'Nicht verfügbar'"
-  },
-  "editButtonTitle": {
-    "message": "Video bearbeiten",
-    "description": "Schriftzug 'Zuschneiden'-Schaltfläche"
-  },
-  "editButtonDescription": {
-    "message": "Video zuschneiden, schneiden oder stummschalten",
-    "description": "Beschriftung 'Zuschneiden'"
-  },
   "preparingLabel": {
     "message": "Vorbereitung...",
     "description": "Beschriftung 'Vorbereitung'"
-  },
-  "cropButtonTitle": {
-    "message": "Zuschneiden",
-    "description": "Beschriftung 'Zuschneiden'-Schaltfläche"
-  },
-  "cropButtonDescription": {
-    "message": "Video zuschneiden und neu dimensionieren",
-    "description": "Beschriftung 'Zuschneiden'"
-  },
-  "addAudioButtonTitle": {
-    "message": "Audio hinzufügen",
-    "description": "Beschriftung 'Audio hinzufügen'-Schaltfläche"
-  },
-  "addAudioButtonDescription": {
-    "message": "Laden Sie Ihr eigenes Audio hoch, um es zum Video hinzuzufügen",
-    "description": "Beschriftung 'Audio hinzufügen'"
-  },
-  "sandboxSaveTitle": {
-    "message": "Speichern",
-    "description": "Titel 'Speichern' auf der Sandbox-Editor-Seite"
-  },
-  "signOutDriveLabel": {
-    "message": "Aus Drive abmelden",
-    "description": "Beschriftung 'Aus Google Drive abmelden'"
-  },
-  "savingDriveLabel": {
-    "message": "Wird gespeichert...",
-    "description": "Beschriftung 'Speichern in Google Drive'"
-  },
-  "saveDriveButtonTitle": {
-    "message": "In Drive speichern",
-    "description": "Beschriftung 'In Google Drive speichern'-Schaltfläche"
-  },
-  "saveDriveButtonDescription": {
-    "message": "Speichern Sie die aktuelle Version in Google Drive",
-    "description": "Beschriftung 'In Google Drive speichern'"
-  },
-  "signInDriveLabel": {
-    "message": "Anmelden und in Drive speichern",
-    "description": "Beschriftung 'In Google Drive anmelden'"
-  },
-  "sandboxExportTitle": {
-    "message": "Exportieren",
-    "description": "Titel 'Exportieren' auf der Sandbox-Editor-Seite"
-  },
-  "downloadingLabel": {
-    "message": "Wird heruntergeladen...",
-    "description": "Beschriftung 'Herunterladen'"
-  },
-  "downloadWEBMButtonTitle": {
-    "message": "Als .webm herunterladen",
-    "description": "Beschriftung 'WEBM herunterladen'-Schaltfläche"
-  },
-  "downloadWEBMButtonDescription": {
-    "message": ".webm-Video exportieren",
-    "description": "Beschriftung 'WEBM herunterladen'"
-  },
-  "downloadMP4ButtonTitle": {
-    "message": "Als .mp4 herunterladen",
-    "description": "Beschriftung 'MP4 herunterladen'-Schaltfläche"
-  },
-  "downloadMP4ButtonDescription": {
-    "message": ".mp4-Video exportieren (empfohlen)",
-    "description": "Beschriftung 'MP4 herunterladen'"
-  },
-  "downloadGIFButtonTitle": {
-    "message": "Als .gif herunterladen",
-    "description": "Beschriftung 'GIF herunterladen'-Schaltfläche"
-  },
-  "downloadGIFButtonDescription": {
-    "message": "GIF exportieren (max. 30 Sekunden)",
-    "description": "Beschriftung 'GIF herunterladen'"
   },
   "shareModalSandboxTitle": {
     "message": "Bereit, deine Aufnahmen zu verbessern?",
@@ -651,21 +351,9 @@
     "message": "Schon ein Konto? Jetzt einloggen",
     "description": "Share modal login link in sandbox editor page"
   },
-  "shareSandboxButton": {
-    "message": "Video teilen",
-    "description": "Schaltfläche 'Video teilen' auf der Sandbox-Editor-Seite"
-  },
-  "replaceAudioEditor": {
-    "message": "Bestehendes Audio ersetzen",
-    "description": "Beschriftung 'Audio ersetzen'-Schaltfläche im Editor"
-  },
   "zoomToPointPopup": {
     "message": "Zum Cursor zoomen",
     "description": "Pop-up 'Zum Punkt zoomen'"
-  },
-  "stayInPagePopup": {
-    "message": "In der Seite bleiben während der Aufnahme",
-    "description": "Pop-up 'In Seite bleiben'"
   },
   "micReminderPopup": {
     "message": "Warnung: Mikrofon ist ausgeschaltet",
@@ -711,42 +399,6 @@
     "message": "Abbrechen",
     "description": "Abbrechen der Mikrofon-Stummschaltungsmodalität"
   },
-  "setupTitle": {
-    "message": "So starten Sie mit Screenity in drei einfachen Schritten:",
-    "description": "Titel der Einrichtungsschritte"
-  },
-  "setupStep1Before": {
-    "message": "1- Klicken Sie auf das ",
-    "description": "Einrichtungsschritt 1, vor dem Symbol. Es benötigt ein Leerzeichen am Ende."
-  },
-  "setupStep1After": {
-    "message": " Symbol der Erweiterungen",
-    "description": "Einrichtungsschritt 1, nach dem Symbol. Es benötigt ein Leerzeichen am Anfang."
-  },
-  "setupStep2Before": {
-    "message": "2- Drücken Sie das ",
-    "description": "Einrichtungsschritt 2, vor dem Symbol. Es benötigt ein Leerzeichen am Ende."
-  },
-  "setupStep2After": {
-    "message": " Symbol für das Anheften",
-    "description": "Einrichtungsschritt 2, nach dem Symbol. Es benötigt ein Leerzeichen am Anfang."
-  },
-  "setupStep3Before": {
-    "message": "3- Klicken Sie auf das ",
-    "description": "Einrichtungsschritt 3, vor dem Symbol. Es benötigt ein Leerzeichen am Ende."
-  },
-  "setupStep3After": {
-    "message": " Screenity-Symbol, um zu starten",
-    "description": "Einrichtungsschritt 3, nach dem Symbol. Es benötigt ein Leerzeichen am Anfang."
-  },
-  "setupCompleteTitle": {
-    "message": "Fantastisch! Sie sind bereit",
-    "description": "Titel der Einrichtung abgeschlossen"
-  },
-  "setupCompleteDescription": {
-    "message": "Sie können jetzt hier oder in einem anderen Tab mit der Aufnahme beginnen.",
-    "description": "Beschreibung der Einrichtung abgeschlossen"
-  },
   "clickHereDrawOnboarding": {
     "message": "Hier klicken, um zu zeichnen",
     "description": "Onboarding 'Hier klicken'"
@@ -754,22 +406,6 @@
   "countdownMessage": {
     "message": "Entspannen Sie sich. Klicken Sie überall hin, um den Countdown zu stoppen.",
     "description": "Meldung 'Countdown'"
-  },
-  "sandboxEditorTooSmallInfo": {
-    "message": "Bearbeitungen können aufgrund der Intervalle zwischen den Frames für kurze Zeiträume ungenau sein.",
-    "description": "Informationen darüber, dass der Editor zu klein ist"
-  },
-  "processingBannerEditor": {
-    "message": "Das Video wird verarbeitet, die Wiedergabe kann ungenau oder unterbrochen sein.",
-    "description": "Verarbeitungsbanner im Editor"
-  },
-  "croppingInfoTitle": {
-    "message": "Das Zuschneiden kann eine Weile dauern",
-    "description": "Titel der Informationen zum Zuschneiden"
-  },
-  "croppingInfoDescription": {
-    "message": "Upgrade für eine schnellere Verarbeitung",
-    "description": "Beschreibung der Informationen zum Zuschneiden"
   },
   "micOnToast": {
     "message": "Mikrofon aktiviert",
@@ -790,10 +426,6 @@
   "toolbarHoverOnly": {
     "message": "Symbolleiste nur bei Bedarf anzeigen",
     "description": "Schaltfläche 'Symbolleiste nur bei Bedarf anzeigen'"
-  },
-  "stopRecording": {
-    "message": "Aufnahme beenden",
-    "description": "Schaltfläche 'Aufnahme beenden' im Aufnahmescreen"
   },
   "updateAnnouncementTitle": {
     "message": "Willkommen beim neuen Screenity!",
@@ -819,38 +451,6 @@
     "message": "Es sieht so aus, als ob beim Starten der Aufnahme ein Fehler aufgetreten ist. Starten Sie Ihren Browser neu und versuchen Sie es erneut. Wenn das Problem weiterhin besteht, kontaktieren Sie uns bitte unter support@screenity.io.",
     "description": "Beschreibung des Stream-Fehlermodals"
   },
-  "highestQuality": {
-    "message": "Höchste Qualität",
-    "description": "Beschriftung für den Wechsel zur höchsten Qualität im Popup-Fenster"
-  },
-  "restoreRecording": {
-    "message": "Letzte Aufnahme wiederherstellen",
-    "description": "Schaltfläche zum Wiederherstellen der letzten Aufnahme im Popup-Fenster"
-  },
-  "havingIssuesButton": {
-    "message": "Haben Sie Probleme?",
-    "description": "Schaltfläche 'Probleme' im Editor"
-  },
-  "havingIssuesModalTitle": {
-    "message": "Können Sie Ihre Aufnahme nicht sehen?",
-    "description": "Titel des Modalfensters 'Probleme' im Editor"
-  },
-  "havingIssuesModalDescription": {
-    "message": "Wenn Sie Ihre Aufnahme abgeschlossen haben und sich auf dieser Seite befinden, ohne Ihr Video zu sehen, können Sie versuchen, die Rohvideodaten herunterzuladen, sofern verfügbar. Sie können auch Kontakt aufnehmen und einen Fehlerbericht senden.",
-    "description": "Beschreibung des Modalfensters 'Probleme' im Editor"
-  },
-  "havingIssuesModalButton": {
-    "message": "Rohvideodaten herunterladen",
-    "description": "Schaltfläche im Modalfenster 'Probleme' im Editor"
-  },
-  "havingIssuesModalButton2": {
-    "message": "Fehler melden",
-    "description": "Zweite Schaltfläche im Modalfenster 'Probleme' im Editor"
-  },
-  "noRecordingFound": {
-    "message": "Keine Aufzeichnung gefunden, tut uns leid :(",
-    "description": "Meldung 'Keine Aufzeichnung gefunden' im Editor"
-  },
   "memoryLimitTitle": {
     "message": "Speichergrenze erreicht",
     "description": "Titel für erreichte Speichergrenze"
@@ -875,38 +475,6 @@
     "message": "Vorherige Aufnahmen löschen",
     "description": "Button zum Löschen vorheriger Aufnahmen"
   },
-  "sandboxAdvancedTitle": {
-    "message": "Erweitert",
-    "description": "Erweiterte Sektion auf der Sandbox-Editor-Seite"
-  },
-  "rawRecordingButtonTitle": {
-    "message": "Rohvideo herunterladen",
-    "description": "Schaltfläche zum Herunterladen des Rohvideos"
-  },
-  "rawRecordingButtonDescription": {
-    "message": "Exportieren Sie die originalen Aufnahmedaten",
-    "description": "Beschriftung der Schaltfläche zum Herunterladen des Rohvideos"
-  },
-  "troubleshootButtonTitle": {
-    "message": "Hilfe bei Ihrer Aufnahme erhalten",
-    "description": "Schaltfläche zur Problembehandlung"
-  },
-  "troubleShootButtonDescription": {
-    "message": "Stellen Sie Ihr Video wieder her und lösen Sie andere Probleme",
-    "description": "Beschriftung zur Problembehandlung"
-  },
-  "rawRecordingModalTitle": {
-    "message": "Rohvideo herunterladen",
-    "description": "Titel des Modals für das Rohvideo"
-  },
-  "rawRecordingModalDescription": {
-    "message": "Das Rohvideo ist das Originalvideo, das von Screenity aufgenommen wurde. Dieses Video wurde nicht bearbeitet oder verändert und kann daher sehr groß sein und auf allen Geräten möglicherweise nicht abspielbar sein. Wenn Sie Probleme mit dem bearbeiteten Video haben, können Sie diese Datei verwenden, um Ihr Video wiederherzustellen.",
-    "description": "Beschreibung des Modals für das Rohvideo"
-  },
-  "rawRecordingModalButton": {
-    "message": "Herunterladen",
-    "description": "Schaltfläche des Modals für das Rohvideo"
-  },
   "troubleshootModalTitle": {
     "message": "Systeminformationen und Videodaten herunterladen und zur Fehlerbehebung senden",
     "description": "Titel des Modals zur Problembehandlung"
@@ -919,37 +487,9 @@
     "message": "Herunterladen",
     "description": "Schaltfläche des Modals zur Problembehandlung"
   },
-  "overLimitModalTitle": {
-    "message": "Das Video ist zu lang, um auf Ihrem Gerät verarbeitet zu werden",
-    "description": "Titel des Modals für die 5-Minuten-Limitierung"
-  },
-  "overLimitModalDescription": {
-    "message": "Da Screenity komplett privat ist und lokal ausgeführt wird, ist es von der Hardware Ihres Geräts begrenzt. Die Verarbeitung eines Videos dieser Länge würde zu lange dauern und sehr ressourcenintensiv sein. Keine Sorge, Sie können immer noch die WEBM-Datei oder die Rohaufnahme herunterladen, aber Bearbeitung und MP4-Export sind nicht verfügbar. Sie können das Video dennoch versuchen zu verarbeiten, wenn Sie die Risiken verstehen.",
-    "description": "Beschreibung des Modals für die 5-Minuten-Limitierung"
-  },
-  "overLimitModalDescriptionFastPath": {
-    "message": "Da Screenity komplett privat ist und lokal ausgeführt wird, ist es von der Hardware Ihres Geräts begrenzt. Die Verarbeitung eines Videos dieser Länge würde zu lange dauern und sehr ressourcenintensiv sein. Ihr MP4 ist bereit zum Herunterladen, aber die Bearbeitung im Browser ist für Clips dieser Länge nicht verfügbar. Sie können das Video dennoch versuchen zu verarbeiten, wenn Sie die Risiken verstehen.",
-    "description": "Over 5 minutes limit modal description when the recording is a native MP4 (fast recorder / WebCodecs)"
-  },
-  "overLimitModalButton": {
-    "message": "Ich verstehe das Risiko, trotzdem versuchen",
-    "description": "Schaltfläche des Modals für die 5-Minuten-Limitierung"
-  },
-  "overLimitModalLearnMore": {
-    "message": "Mehr über die Verarbeitung langer Videos erfahren.",
-    "description": "Link 'Erfahren Sie mehr' im Modal für die 5-Minuten-Limitierung mit einem Punkt"
-  },
-  "recoveryModeTitle": {
-    "message": "Wiederherstellungsmodus",
-    "description": "Titel des Wiederherstellungsmodus"
-  },
   "downloadForTroubleshootingOption": {
     "message": "Daten zum Beheben von Problemen herunterladen",
     "description": "Option zum Herunterladen zur Fehlerbehebung"
-  },
-  "getHelpNav": {
-    "message": "Hilfe-Center",
-    "description": "Hilfe-Navigationspunkt"
   },
   "audioWarningTitle": {
     "message": "Computer-Audio aufzeichnen",
@@ -1021,10 +561,6 @@
     "message": "Erlauben Sie Screenity, Aufnahmen weiterhin zu sichern",
     "description": "Schaltfläche „Erlauben“ in der Backup-Bestätigung"
   },
-  "backupsToggle": {
-    "message": "Aufnahmen sichern",
-    "description": "Beschriftung für die Backup-Option"
-  },
   "backupPermissionFailTitle": {
     "message": "Berechtigung zur Sicherung der Aufnahme nicht erteilt",
     "description": "Titel des Backup-Berechtigungsfehlers"
@@ -1057,10 +593,6 @@
     "message": "Maximale FPS",
     "description": "Beschriftung für maximale FPS im Einstellungsmenü"
   },
-  "notEnoughRAM": {
-    "message": "Nicht genügend RAM",
-    "description": "Beschriftung 'Nicht genügend RAM' im Einstellungsmenü"
-  },
   "resizeWindowLabel": {
     "message": "Fenstergröße ändern",
     "description": "Beschriftung für die Änderung der Fenstergröße im Einstellungsmenü"
@@ -1080,14 +612,6 @@
   "recordButtonMultiLabel": {
     "message": "Weitere Aufnahme hinzufügen",
     "description": "Record button label (multi mode)"
-  },
-  "recorderSetupTitle": {
-    "message": "Bereite alles vor...",
-    "description": "Title in recording page while setting up project before countdown starts"
-  },
-  "recorderSetupDescription": {
-    "message": "Einen Moment Geduld, deine Aufnahme wird vorbereitet.",
-    "description": "Description in recording page before countdown starts"
   },
   "reopenToolbarToast": {
     "message": "Symbolleiste ausgeblendet. Aktiviere sie in den Pop-up-Optionen.",
@@ -1233,10 +757,6 @@
     "message": "Eigene Hintergründe und Mockups",
     "description": "Feature 5 for the cloud storage in the welcome popup"
   },
-  "welcomePopupCloudCTA": {
-    "message": "🔓 Zusätzliche Funktionen freischalten",
-    "description": "Call to action button for the cloud storage feature in the welcome popup"
-  },
   "welcomePopupSupport": {
     "message": "+ Unterstütze die Entwicklung durch eine Indie-Macherin!",
     "description": "Message for supporting the indie maker in the welcome popup"
@@ -1349,30 +869,6 @@
     "message": "Unterstütze die Entwicklung durch eine Indie-Macherin",
     "description": "Message for supporting the indie maker in the welcome Pro popup"
   },
-  "unlockMoreFeatures": {
-    "message": "Mehr Funktionen freischalten",
-    "description": "Button to unlock more features in the editor"
-  },
-  "shareUnlockButton": {
-    "message": "Anmelden zum Teilen (Pro)",
-    "description": "Button to sign in to share in the editor"
-  },
-  "proBannerTitle": {
-    "message": "Cloud-Sharing, Multi-Szenen-Bearbeitung, Auto-Zooms, Untertitel & mehr freischalten",
-    "description": "Pro banner title in the editor"
-  },
-  "proBannerDescription": {
-    "message": "Screenity bleibt immer kostenlos, quelloffen und werbefrei. Pro deckt Cloud- und Infrastrukturkosten und unterstützt die Entwicklung durch eine Indie-Entwicklerin! ❤️",
-    "description": "Pro banner description in the editor"
-  },
-  "proBannerAltButton": {
-    "message": "Nicht mehr anzeigen",
-    "description": "Pro banner don't show again button in the editor"
-  },
-  "proBannerButton": {
-    "message": "Ausprobieren",
-    "description": "Pro banner button in the editor"
-  },
   "multiRecordingModeTitle": {
     "message": "Multi-Modus",
     "description": "Title for the multi-recording mode modal"
@@ -1393,14 +889,6 @@
     "message": "Pro abonnieren",
     "description": "Button to upgrade to Pro"
   },
-  "hostBannerTitle": {
-    "message": "Du nutzt Screenity lokal? Hilf mit, die Weiterentwicklung zu unterstützen!",
-    "description": "Titel des Banners für Self-Hosting im Editor"
-  },
-  "hostBannerDescription": {
-    "message": "Screenity wird von einer Indie-Entwicklerin gebaut. Self-Hosting ist kostenlos – wenn es dir hilft, unterstütze sie gerne mit Pro ❤️",
-    "description": "Beschreibung des Banners für Self-Hosting im Editor"
-  },
   "welcomeBackPopupTitle": {
     "message": "Willkommen zurück bei Screenity",
     "description": "Titel für das Begrüßungs-Popup für zurückkehrende Nutzer"
@@ -1417,18 +905,6 @@
     "message": "Mehr über Screenity Pro erfahren",
     "description": "Call-to-Action-Button für die Cloud-Funktion im Begrüßungs-Popup"
   },
-  "welcomeToProTitleModal": {
-    "message": "Willkommen bei Screenity Pro",
-    "description": "Titel des Willkommensmodals für Pro"
-  },
-  "welcomeToProDescriptionModal": {
-    "message": "Du bist bereit für deine erste Aufnahme! Hier ein paar Dinge, die du beachten solltest:\n\n- Die Kamerablase kann während der Aufnahme verschwinden – das ist normal. Sie wird im Hintergrund separat aufgenommen, sodass du sie später beliebig positionieren kannst.\n- Zooms werden nur automatisch bei Klicks in Chrome-Tabs erstellt – das ist eine Einschränkung des Browsers. Du kannst später jederzeit manuell weitere Zooms hinzufügen.\n- Für schnelle Aufnahmen mit sofortigem Download probiere den Sofortmodus. Beachte jedoch, dass die Bearbeitungsoptionen eingeschränkt sind: keine Hintergründe, Layouts oder erweiterten Anpassungen.",
-    "description": "Beschreibung des Willkommensmodals für Pro"
-  },
-  "welcomeToProActionModal": {
-    "message": "Verstanden",
-    "description": "Bestätigungsbutton im Willkommensmodal für Pro"
-  },
   "webcodecsToggleLabel": {
     "message": "Fast MP4",
     "description": "WebCodecs recorder toggle label"
@@ -1436,54 +912,6 @@
   "webcodecsFailedOffToast": {
     "message": "Fast MP4 Fehler — aus",
     "description": "WebCodecs failure auto-disable toast"
-  },
-  "proOnboardingWelcomeTitle": {
-    "message": "Willkommen bei der Screenity Pro-Erweiterung",
-    "description": "Pro onboarding welcome step title"
-  },
-  "proOnboardingWelcomeDescription": {
-    "message": "Ein paar kurze Tipps vor der Aufnahme.<br/>Auto-Zooms funktionieren nur bei Klicks in <strong>Chrome-Tabs</strong>. Zusätzliche Zooms kannst du später manuell hinzufügen.",
-    "description": "Pro onboarding welcome step description"
-  },
-  "proOnboardingToolbarTitle": {
-    "message": "Aufnahmeleiste & Effekte",
-    "description": "Pro onboarding toolbar step title"
-  },
-  "proOnboardingToolbarDescription": {
-    "message": "Nutze diese Leiste zum Zeichnen, für Cursor-Effekte, Unschärfe und Aufnahme-Steuerung.<br/><br/><strong>Diese Leiste wird mit aufgezeichnet</strong>, wenn du sie nicht ausblendest.",
-    "description": "Pro onboarding toolbar step description"
-  },
-  "proOnboardingCameraTitle": {
-    "message": "Kamera wird separat aufgenommen",
-    "description": "Pro onboarding camera step title"
-  },
-  "proOnboardingCameraDescription": {
-    "message": "Deine Kamera kann während der Aufnahme <strong>ausgeblendet werden oder in PiP wechseln</strong> - das ist normal.<br/><br/>Sie wird separat erfasst, damit du sie später frei platzieren kannst.",
-    "description": "Pro onboarding camera step description"
-  },
-  "proOnboardingInstantTitle": {
-    "message": "Sofortmodus",
-    "description": "Pro onboarding instant mode step title"
-  },
-  "proOnboardingInstantDescription": {
-    "message": "Ideal zum schnellen Teilen mit <strong>unbegrenzten Downloads</strong>.<br/><br/>Erweiterte Layout- und Editor-Funktionen sind in diesem Modus nicht verfügbar.",
-    "description": "Pro onboarding instant mode step description"
-  },
-  "proOnboardingDone": {
-    "message": "Verstanden",
-    "description": "Pro onboarding done button text"
-  },
-  "proOnboardingNext": {
-    "message": "Weiter",
-    "description": "Pro onboarding next button text"
-  },
-  "proOnboardingBack": {
-    "message": "Zurück",
-    "description": "Pro onboarding back button text"
-  },
-  "proOnboardingToolbarLearnMore": {
-    "message": "Mehr erfahren",
-    "description": "Pro onboarding toolbar learn more link label"
   },
   "resetOnboardingOption": {
     "message": "Onboarding zurücksetzen",
@@ -1493,10 +921,6 @@
     "message": "Recover last recording",
     "description": "Settings menu item to manually trigger cloud recording recovery"
   },
-  "toastRecoveredSession": {
-    "message": "Recovered unsaved recording from the previous session.",
-    "description": "Toast shown when a crashed recording session is auto-recovered on startup"
-  },
   "toastStorageCritical": {
     "message": "Wenig Speicherplatz. Aufnahme wird jetzt gespeichert. Alles Aufgenommene ist sicher.",
     "description": "Toast shown when available storage drops below the critical threshold during recording; reassures that captured data is preserved"
@@ -1505,65 +929,9 @@
     "message": "Storage is running low. Upload reliability may degrade for long recordings.",
     "description": "Toast shown when available storage drops below the warning threshold during recording"
   },
-  "toastAudioCaptureDegraded": {
-    "message": "Transcription capture paused due to memory pressure. Video upload continues.",
-    "description": "Toast shown when the audio recorder is stopped early because the audio buffer limit was reached"
-  },
-  "toastNetworkOffline": {
-    "message": "Network offline. Upload paused. Screen chunks are saved locally.",
-    "description": "Toast shown when the browser goes offline during a cloud recording upload"
-  },
-  "longRecordingTitle": {
-    "message": "Lange Aufnahme",
-    "description": "Banner title shown when a recording exceeds the local processing limit but is otherwise successful"
-  },
-  "longRecordingDescription": {
-    "message": "Deine Aufnahme ist vollständig und sicher. Als WebM herunterladen.",
-    "description": "Banner description for long recordings that can be downloaded but not edited locally"
-  },
-  "notAvailableLongRecording": {
-    "message": "Für lange Aufnahmen nicht verfügbar",
-    "description": "Disabled button label for features not available due to recording length"
-  },
-  "notAvailableRecoveryMode": {
-    "message": "Im Wiederherstellungsmodus nicht verfügbar",
-    "description": "Disabled button label for features not available in recovery/fallback mode"
-  },
-  "editTooLongTitle": {
-    "message": "Audiobearbeitung zu lang",
-    "description": "Alert title when an audio mute/mix edit is rejected because the clip exceeds 15 minutes"
-  },
-  "editTooLongDescription": {
-    "message": "Diese Audiobearbeitung wird für Clips über 15 Minuten nicht unterstützt. Dein Original ist unverändert. Versuche, den Clip zuerst zu kürzen.",
-    "description": "Alert body explaining the 15-minute limit and suggesting trimming first"
-  },
-  "editTimeoutTitle": {
-    "message": "Bearbeitung abgelaufen",
-    "description": "Alert title when an edit operation does not complete within the 5-minute watchdog period"
-  },
-  "editTimeoutDescription": {
-    "message": "Die Bearbeitung konnte nicht rechtzeitig abgeschlossen werden. Deine Originalaufnahme ist unverändert. Versuche es erneut oder kürze den Clip zuerst.",
-    "description": "Alert body for the timeout case, prompting retry or shorter clip"
-  },
   "streamEndedWarningToast": {
     "message": "Bildschirmfreigabe beendet. Die bisherige Aufnahme ist gespeichert. Beende die Aufnahme, wenn du bereit bist.",
     "description": "Toast shown when screen share track ends mid-recording. Recording continues; removes false urgency about data loss."
-  },
-  "recoveryModeDescription": {
-    "message": "Es gab ein Verarbeitungsproblem, aber deine Aufnahme ist sicher. Du kannst sie unten herunterladen.",
-    "description": "Recovery mode banner description — reassures user their recording is accessible despite the processing failure"
-  },
-  "editProcessingSafeDescription": {
-    "message": "Bearbeitung wird verarbeitet. Deine Originalaufnahme bleibt unverändert.",
-    "description": "Shown in the editor processing alert when a user-initiated edit is running, to reassure the original is safe"
-  },
-  "editFailedTitle": {
-    "message": "Bearbeitung konnte nicht angewandt werden",
-    "description": "Alert title when an edit operation fails due to an encoding or processing error"
-  },
-  "editFailedDescription": {
-    "message": "Bei der Verarbeitung ist etwas schiefgelaufen. Deine Originalaufnahme ist sicher. Du kannst es erneut versuchen oder sie so herunterladen.",
-    "description": "Alert body for edit failure; explicitly confirms the original recording is untouched"
   },
   "videoTrackEndedToast": {
     "message": "Bildschirmfreigabe beendet. Aufnahme wird jetzt gespeichert. Alles Aufgenommene ist sicher.",
@@ -1580,14 +948,6 @@
   "stopAckTimeoutToast": {
     "message": "Das Speichern dauert länger als erwartet. Deine Daten sind sicher. Der Editor wird gleich geöffnet.",
     "description": "Toast shown when the recorder does not acknowledge the stop request within a few seconds"
-  },
-  "copyDebugInfoButton": {
-    "message": "Debug-Info kopieren",
-    "description": "Button to copy technical debug info to clipboard for support"
-  },
-  "debugInfoCopiedToast": {
-    "message": "Debug-Info kopiert",
-    "description": "Toast shown after debug info is copied"
   },
   "getHelpButton": {
     "message": "Hilfe erhalten",
@@ -1613,27 +973,6 @@
     "message": "Abbrechen",
     "description": "Generic cancel button label"
   },
-  "editorStuckTitle": {
-    "message": "Ihre Aufnahme wird noch vorbereitet…"
-  },
-  "editorStuckDescription": {
-    "message": "Screenity benötigt länger als gewöhnlich, um Ihre Aufnahme zu laden. Ihre Daten befinden sich möglicherweise noch auf diesem Gerät. Versuchen Sie, sie wiederherzustellen, oder melden Sie sich, falls sie nicht zurückkommt."
-  },
-  "editorStuckTryRecover": {
-    "message": "Wiederherstellen"
-  },
-  "editorStuckGetHelp": {
-    "message": "Hilfe erhalten"
-  },
-  "editorRecoveryFailedTitle": {
-    "message": "Aufnahme konnte nicht geöffnet werden"
-  },
-  "editorRecoveryFailedDescription": {
-    "message": "Beim Laden Ihrer Aufnahme in den Editor ist ein Fehler aufgetreten. Ihre Aufnahme ist möglicherweise noch auf Ihrem Gerät gespeichert. Sie können jetzt versuchen, sie wiederherzustellen."
-  },
-  "downloadGIFTooLongToast": {
-    "message": "Der GIF-Export ist auf 30 Sekunden begrenzt. Kürzen Sie Ihren Clip und versuchen Sie es erneut."
-  },
   "audioSilentToast": {
     "message": "Kein Audio erkannt. Überprüfen Sie Ihr Mikrofon, den Stummschalter oder Ihr Audiogerät."
   },
@@ -1646,25 +985,7 @@
   "recordingFailedModalDescription": {
     "message": "Etwas hat den Start der Aufnahme verhindert. Bitte versuchen Sie es erneut. Wenn das Problem weiterhin besteht, kontaktieren Sie uns unter support@screenity.io."
   },
-  "editAudioTooLargeTitle": {
-    "message": "Audiodatei ist zu groß"
-  },
-  "editAudioTooLargeDescription": {
-    "message": "Versuchen Sie es mit einem kürzeren Audioclip. Große Dateien können nicht im Browser verarbeitet werden. Ihre Originalaufnahme bleibt erhalten."
-  },
-  "restoreEmptyToast": {
-    "message": "Keine wiederherstellbare Aufnahme gefunden. Die Daten wurden möglicherweise gelöscht."
-  },
-  "restoreTimeoutToast": {
-    "message": "Die Wiederherstellung dauert zu lange. Ihre Aufnahme ist sicher. Klicken Sie in einem Moment erneut auf Wiederherstellen."
-  },
   "cameraUnavailableToast": {
     "message": "Kamera getrennt. Bildschirmaufnahme läuft weiter."
-  },
-  "downloadInterruptedLargeToast": {
-    "message": "Download unterbrochen. Die Aufnahme ist zu groß, um automatisch erneut zu starten. Versuchen Sie, sie erneut über den Editor zu speichern."
-  },
-  "recordingCorruptToast": {
-    "message": "Diese Aufnahme kann nicht abgespielt werden. Die Datei ist möglicherweise unvollständig oder beschädigt. Versuchen Sie, die Rohdatei über das Speichern-Menü herunterzuladen."
   }
 }

@@ -23,14 +23,6 @@
     "message": "Tab area",
     "description": "Tab area recording type label on popup"
   },
-  "cameraType": {
-    "message": "Camera",
-    "description": "Camera recording type label on popup"
-  },
-  "mockupType": {
-    "message": "Mockup",
-    "description": "Mockup recording type label on popup"
-  },
   "customAreaRecordingDisabledTitle": {
     "message": "Custom area recording disabled",
     "description": "Custom area recording disabled warning on popup for Chrome version older than 104"
@@ -63,37 +55,9 @@
     "message": "Looks like this website's security settings prevent browser extensions from using your camera or microphone on this page. To record with them, start a recording from another tab and switch back here once it begins.",
     "description": "Modal description shown when the current page's Permissions-Policy header blocks browser extensions from using camera or microphone"
   },
-  "opfsLoadErrorTitle": {
-    "message": "Can't load your recording",
-    "description": "Modal title shown when the editor cannot read the recording file from the device's storage"
-  },
   "opfsLoadErrorDescription": {
     "message": "Looks like Screenity couldn't load the recording from your device's storage. It may have been cleared or moved. If this keeps happening, please contact us at support@screenity.io.",
     "description": "Modal description shown when the editor cannot read the recording file from the device's storage"
-  },
-  "editorStuckTitle": {
-    "message": "Still preparing your recording…",
-    "description": "Modal title shown when the editor has been waiting on the post-stop pipeline for too long"
-  },
-  "editorStuckDescription": {
-    "message": "Screenity is taking longer than usual to load your recording. Your data may still be on this device. Try recovering it, or get in touch if it doesn't come back.",
-    "description": "Modal description for the editor-stuck modal, offering recovery and help"
-  },
-  "editorStuckTryRecover": {
-    "message": "Try to recover",
-    "description": "Primary button on the editor-stuck modal — runs the restore-recording flow"
-  },
-  "editorStuckGetHelp": {
-    "message": "Get help",
-    "description": "Secondary button on the editor-stuck modal — opens the support form"
-  },
-  "editorRecoveryFailedTitle": {
-    "message": "Couldn't open your recording",
-    "description": "Modal title shown when the post-stop editor pipeline failed (tab load timeout, message delivery failure)"
-  },
-  "editorRecoveryFailedDescription": {
-    "message": "Something went wrong while loading your recording into the editor. Your recording may still be saved on your device. You can try to recover it now.",
-    "description": "Modal description shown when the post-stop editor pipeline failed; offers recovery"
   },
   "recordingWriterFailedToast": {
     "message": "Recording stopped due to a storage issue. Your partial recording was saved.",
@@ -106,10 +70,6 @@
   "allowMicrophoneAccessButton": {
     "message": "Allow microphone access",
     "description": "Allow microphone access button"
-  },
-  "pushToTalkLabel": {
-    "message": "Push to talk",
-    "description": "Push to talk switch label"
   },
   "customAreaLabel": {
     "message": "Set an area to record in",
@@ -147,10 +107,6 @@
     "message": "Hide toolbar",
     "description": "Hide toolbar label"
   },
-  "countdownLabel": {
-    "message": "Countdown",
-    "description": "Countdown label"
-  },
   "alarmLabel": {
     "message": "Set a time limit",
     "description": "Alarm label"
@@ -158,10 +114,6 @@
   "blurTypeLabel": {
     "message": "Blur",
     "description": "Blur background label"
-  },
-  "noneDropdownLabel": {
-    "message": "None",
-    "description": "No device selected"
   },
   "noCameraDropdownLabel": {
     "message": "No camera",
@@ -222,18 +174,6 @@
   "toggleCursorOptionsTooltip": {
     "message": "Toggle cursor options",
     "description": "Toggle cursor options tooltip"
-  },
-  "disableCameraTooltip": {
-    "message": "Disable camera",
-    "description": "Disable camera tooltip"
-  },
-  "enableCameraTooltip": {
-    "message": "Enable camera",
-    "description": "Enable camera tooltip"
-  },
-  "noCameraPermissionsTooltip": {
-    "message": "No camera permissions",
-    "description": "No camera permissions tooltip"
   },
   "disableMicrophoneTooltip": {
     "message": "Disable microphone",
@@ -306,10 +246,6 @@
   "thinStrokeTooltip": {
     "message": "Thin stroke",
     "description": "Thin stroke tooltip"
-  },
-  "togglePictureinPictureModeTooltip": {
-    "message": "Toggle picture-in-picture mode",
-    "description": "Toggle picture-in-picture mode tooltip"
   },
   "toggleFillTooltip": {
     "message": "Toggle fill",
@@ -387,281 +323,17 @@
     "message": "Keep this tab open. It will close once your recording has been saved.",
     "description": "Description in recording page"
   },
-  "sandboxProgressTitle": {
-    "message": "Preparing recording...",
-    "description": "Title in sandbox page while recording / saving"
-  },
-  "sandboxProgressDescription": {
-    "message": "Keep this tab open. It will update with your recording when it's ready.",
-    "description": "Description in sandbox page while recording / saving"
-  },
-  "sandboxFinalizingRecording": {
-    "message": "Finalizing recording...",
-    "description": "Shown over the player when the editor is waiting for the recorder to finish flushing the recording to disk"
-  },
-  "sandboxToastReverted": {
-    "message": "Reverted to original",
-    "description": "Toast confirmation shown when the user reverts edits to the original recording"
-  },
-  "sandboxToastSaved": {
-    "message": "Changes saved",
-    "description": "Toast confirmation shown when the user saves an edit operation"
-  },
-  "sandboxEditorMainTitle": {
-    "message": "Editor",
-    "description": "Title in navigation of the sandbox editor page"
-  },
   "sandboxEditorCancelButton": {
     "message": "Cancel",
     "description": "Cancel button in sandbox editor page"
-  },
-  "sandboxEditorRevertButton": {
-    "message": "Revert to original",
-    "description": "Revert button in sandbox editor page"
-  },
-  "sandboxEditorResetButton": {
-    "message": "Reset",
-    "description": "Reset button in sandbox editor page"
-  },
-  "sandboxEditorSaveButton": {
-    "message": "Save changes",
-    "description": "Save button in sandbox editor page"
-  },
-  "sandboxEditorSaveProgressButton": {
-    "message": "Saving...",
-    "description": "Save button in sandbox editor page while saving"
-  },
-  "sandboxAudioDragAndDrop": {
-    "message": "Drag and drop your audio file",
-    "description": "Drag and drop audio file in sandbox editor page"
-  },
-  "sandboxAudioOrBrowse": {
-    "message": "Or click to browse",
-    "description": "Or click to browse audio file in sandbox editor page"
-  },
-  "sandboxAudioSettingsTitle": {
-    "message": "Settings",
-    "description": "Audio settings title in sandbox editor page"
-  },
-  "sandboxAudioVolumeLabel": {
-    "message": "Volume",
-    "description": "Audio volume label in sandbox editor page"
-  },
-  "sandboxAudioUpdateButton": {
-    "message": "Update",
-    "description": "Update audio button in sandbox editor page"
-  },
-  "sandboxCropTitle": {
-    "message": "Crop",
-    "description": "Crop title in sandbox editor page"
-  },
-  "widthLabel": {
-    "message": "Width",
-    "description": "Width label for properties"
-  },
-  "heightLabel": {
-    "message": "Height",
-    "description": "Height label for properties"
-  },
-  "leftLabel": {
-    "message": "Left",
-    "description": "Left label for properties"
-  },
-  "topLabel": {
-    "message": "Top",
-    "description": "Top label for properties"
-  },
-  "sandboxEditorTrimInfo": {
-    "message": "Drag the handles and use the buttons on the left to edit the selected section.",
-    "description": "Info about trimming in sandbox editor"
-  },
-  "sandboxEditorTrimButton": {
-    "message": "Trim video",
-    "description": "Trim button in sandbox editor"
-  },
-  "sandboxEditorTrimProgressButton": {
-    "message": "Trimming...",
-    "description": "Trim button in sandbox editor while trimming"
-  },
-  "sandboxEditorCutButton": {
-    "message": "Cut section",
-    "description": "Cut button in sandbox editor"
-  },
-  "sandboxEditorCutProgressButton": {
-    "message": "Cutting...",
-    "description": "Cut button in sandbox editor while cutting"
-  },
-  "sandboxEditorMuteButton": {
-    "message": "Mute audio",
-    "description": "Mute button in sandbox editor"
-  },
-  "sandboxEditorMuteProgressButton": {
-    "message": "Muting...",
-    "description": "Mute button in sandbox editor while muting"
   },
   "learnMoreDot": {
     "message": "Learn more.",
     "description": "Learn more with a dot"
   },
-  "undoLabel": {
-    "message": "Undo",
-    "description": "Undo label"
-  },
-  "redoLabel": {
-    "message": "Redo",
-    "description": "Redo label"
-  },
-  "leaveReview": {
-    "message": "Leave a review, it helps!",
-    "description": "Leave a review button"
-  },
-  "followForUpdates": {
-    "message": "Follow for updates",
-    "description": "Follow for updates button"
-  },
-  "offlineLabelTitle": {
-    "message": "You are currently offline",
-    "description": "Offline label"
-  },
-  "offlineLabelDescription": {
-    "message": "Some features are unavailable until reconnected",
-    "description": "Offline label description"
-  },
-  "offlineLabelTryAgain": {
-    "message": "Try again",
-    "description": "Offline label try again button"
-  },
-  "updateChromeLabelTitle": {
-    "message": "Chrome needs to be updated",
-    "description": "Update Chrome label"
-  },
-  "updateChromeLabelDescription": {
-    "message": "Update to access more features",
-    "description": "Update Chrome label description"
-  },
-  "learnMoreLabel": {
-    "message": "Learn more",
-    "description": "Learn more button"
-  },
-  "overLimitLabelTitle": {
-    "message": "Video too long to process in device",
-    "description": "Over 5 minutes limit label in editor"
-  },
-  "overLimitLabelDescription": {
-    "message": "Editing and MP4 export are unavailable",
-    "description": "Over 5 minutes limit description in editor"
-  },
-  "overLimitLabelDescriptionFastPath": {
-    "message": "Editing features are unavailable",
-    "description": "Over limit description when the recording is a native MP4 (fast recorder / WebCodecs) so MP4 export still works"
-  },
-  "videoProcessingLabelTitle": {
-    "message": "The video is processing locally...",
-    "description": "Video processing label in editor"
-  },
-  "videoProcessingLabelDescription": {
-    "message": "Learn about the faster cloud version",
-    "description": "Video processing description in editor"
-  },
-  "sandboxEditTitle": {
-    "message": "Edit",
-    "description": "Edit title in sandbox editor page"
-  },
-  "noConnectionLabel": {
-    "message": "No connection",
-    "description": "No connection label"
-  },
-  "notAvailableLabel": {
-    "message": "Not available",
-    "description": "Not available label"
-  },
-  "editButtonTitle": {
-    "message": "Edit video",
-    "description": "Trim label button"
-  },
-  "editButtonDescription": {
-    "message": "Trim, cut, or mute the video",
-    "description": "Trim label"
-  },
   "preparingLabel": {
     "message": "Preparing...",
     "description": "Preparing label"
-  },
-  "cropButtonTitle": {
-    "message": "Crop",
-    "description": "Crop label button"
-  },
-  "cropButtonDescription": {
-    "message": "Crop and resize the video",
-    "description": "Crop label"
-  },
-  "addAudioButtonTitle": {
-    "message": "Add audio",
-    "description": "Add audio label button"
-  },
-  "addAudioButtonDescription": {
-    "message": "Upload your own audio to add to the video",
-    "description": "Add audio label"
-  },
-  "sandboxSaveTitle": {
-    "message": "Save",
-    "description": "Save title in sandbox editor page"
-  },
-  "signOutDriveLabel": {
-    "message": "Sign out of Drive",
-    "description": "Sign out of Google Drive label"
-  },
-  "savingDriveLabel": {
-    "message": "Saving...",
-    "description": "Saving to Google Drive label"
-  },
-  "saveDriveButtonTitle": {
-    "message": "Save to Drive",
-    "description": "Save to Google Drive button"
-  },
-  "saveDriveButtonDescription": {
-    "message": "Save the current version to Google Drive",
-    "description": "Save to Google Drive label"
-  },
-  "signInDriveLabel": {
-    "message": "Sign in and save to Drive",
-    "description": "Sign in to Google Drive label"
-  },
-  "sandboxExportTitle": {
-    "message": "Export",
-    "description": "Export title in sandbox editor page"
-  },
-  "downloadingLabel": {
-    "message": "Downloading...",
-    "description": "Downloading label"
-  },
-  "downloadWEBMButtonTitle": {
-    "message": "Download as .webm",
-    "description": "Download WEBM button"
-  },
-  "downloadWEBMButtonDescription": {
-    "message": "Export a .webm video",
-    "description": "Download WEBM label"
-  },
-  "downloadMP4ButtonTitle": {
-    "message": "Download as .mp4",
-    "description": "Download MP4 button"
-  },
-  "downloadMP4ButtonDescription": {
-    "message": "Export an .mp4 video (recommended)",
-    "description": "Download MP4 label"
-  },
-  "downloadGIFButtonTitle": {
-    "message": "Download as .gif",
-    "description": "Download GIF button"
-  },
-  "downloadGIFButtonDescription": {
-    "message": "Export a GIF (max 30 seconds)",
-    "description": "Download GIF label"
-  },
-  "downloadGIFTooLongToast": {
-    "message": "GIF export is capped at 30 seconds. Trim your clip and try again.",
-    "description": "Toast shown when the user clicks Download as GIF on a clip longer than 30s — explains the silent gate that previously did nothing"
   },
   "audioSilentToast": {
     "message": "No audio detected. Check your mic, mute switch, or audio device.",
@@ -687,21 +359,9 @@
     "message": "Already have an account? Log in",
     "description": "Share modal login link in sandbox editor page"
   },
-  "shareSandboxButton": {
-    "message": "Share video",
-    "description": "Share button in sandbox editor page"
-  },
-  "replaceAudioEditor": {
-    "message": "Replace existing audio",
-    "description": "Replace audio button in editor"
-  },
   "zoomToPointPopup": {
     "message": "Zoom to cursor",
     "description": "Zoom to point popup"
-  },
-  "stayInPagePopup": {
-    "message": "Stay in the page when recording",
-    "description": "Stay in page popup"
   },
   "micReminderPopup": {
     "message": "Microphone off warning",
@@ -747,42 +407,6 @@
     "message": "Cancel",
     "description": "Microphone muted modal cancel"
   },
-  "setupTitle": {
-    "message": "Get started with Screenity in three simple steps:",
-    "description": "Set up steps title"
-  },
-  "setupStep1Before": {
-    "message": "1- Click the ",
-    "description": "Set up step 1, before the icon. It needs a space at the end."
-  },
-  "setupStep1After": {
-    "message": " extensions icon",
-    "description": "Set up step 1, after the icon. It needs a space at the beginning."
-  },
-  "setupStep2Before": {
-    "message": "2- Press the ",
-    "description": "Set up step 2, before the icon. It needs a space at the end."
-  },
-  "setupStep2After": {
-    "message": " pin icon",
-    "description": "Set up step 2, after the icon. It needs a space at the beginning."
-  },
-  "setupStep3Before": {
-    "message": "3- Click on the ",
-    "description": "Set up step 3, before the icon. It needs a space at the end."
-  },
-  "setupStep3After": {
-    "message": " Screenity icon to start",
-    "description": "Set up step 3, after the icon. It needs a space at the beginning."
-  },
-  "setupCompleteTitle": {
-    "message": "Awesome! You’re all set",
-    "description": "Set up complete title"
-  },
-  "setupCompleteDescription": {
-    "message": "You can now start recording here, or in any other tab.",
-    "description": "Set up complete description"
-  },
   "clickHereDrawOnboarding": {
     "message": "Click here to draw",
     "description": "Click here onboarding"
@@ -790,22 +414,6 @@
   "countdownMessage": {
     "message": "Relax. Click anywhere to stop the countdown.",
     "description": "Countdown message"
-  },
-  "sandboxEditorTooSmallInfo": {
-    "message": "Edits may be inaccurate for short time ranges due to the intervals between frames.",
-    "description": "Info about the editor being too small"
-  },
-  "processingBannerEditor": {
-    "message": "Video is processing, playback might be inaccurate or interrupted.",
-    "description": "Processing banner in editor"
-  },
-  "croppingInfoTitle": {
-    "message": "Cropping might take a while",
-    "description": "Cropping info title"
-  },
-  "croppingInfoDescription": {
-    "message": "Upgrade for faster processing",
-    "description": "Cropping info description"
   },
   "micOnToast": {
     "message": "Microphone enabled",
@@ -826,10 +434,6 @@
   "toolbarHoverOnly": {
     "message": "Hide toolbar when not in use",
     "description": "Only show toolbar on hover button"
-  },
-  "stopRecording": {
-    "message": "Stop recording",
-    "description": "Stop recording button in recording scren"
   },
   "updateAnnouncementTitle": {
     "message": "Welcome to the new Screenity!",
@@ -855,14 +459,6 @@
     "message": "Looks like something went wrong with the recording. Restart your browser and try again. If the issue persists, please contact us at support@screenity.io.",
     "description": "Stream error modal description"
   },
-  "copyDebugInfoButton": {
-    "message": "Copy debug info",
-    "description": "Button to copy technical debug info to clipboard for support"
-  },
-  "debugInfoCopiedToast": {
-    "message": "Debug info copied to clipboard",
-    "description": "Toast shown after debug info is copied"
-  },
   "getHelpButton": {
     "message": "Get help",
     "description": "Side button on error modals that opens a prefilled support form"
@@ -886,38 +482,6 @@
   "cancelButton": {
     "message": "Cancel",
     "description": "Generic cancel button label"
-  },
-  "highestQuality": {
-    "message": "Highest quality",
-    "description": "Highest quality toggle label in popup"
-  },
-  "restoreRecording": {
-    "message": "Restore last recording",
-    "description": "Restore last recording button in popup"
-  },
-  "havingIssuesButton": {
-    "message": "Having issues?",
-    "description": "Having issues button in editor"
-  },
-  "havingIssuesModalTitle": {
-    "message": "Can't see your recording?",
-    "description": "Having issues modal title in editor"
-  },
-  "havingIssuesModalDescription": {
-    "message": "If you've completed your recording and find yourself on this page without seeing your video, you can attempt to download the raw video data if it's available. You can also reach out and submit a bug report.",
-    "description": "Having issues modal description in editor"
-  },
-  "havingIssuesModalButton": {
-    "message": "Download raw video data",
-    "description": "Having issues modal button in editor"
-  },
-  "havingIssuesModalButton2": {
-    "message": "Report bug",
-    "description": "Having issues modal button 2 in editor"
-  },
-  "noRecordingFound": {
-    "message": "No recording found, sorry :(",
-    "description": "No recording found alert in editor"
   },
   "memoryLimitTitle": {
     "message": "Memory limit reached",
@@ -943,38 +507,6 @@
     "message": "Clear previous recordings",
     "description": "Clear previous recordings button"
   },
-  "sandboxAdvancedTitle": {
-    "message": "Advanced",
-    "description": "Advanced section in sandbox editor page"
-  },
-  "rawRecordingButtonTitle": {
-    "message": "Download raw video file",
-    "description": "Download raw recording button"
-  },
-  "rawRecordingButtonDescription": {
-    "message": "Export the original recording data",
-    "description": "Download raw recording label"
-  },
-  "troubleshootButtonTitle": {
-    "message": "Get help with your recording",
-    "description": "Troubleshoot button"
-  },
-  "troubleShootButtonDescription": {
-    "message": "Recover your video and solve other issues",
-    "description": "Troubleshoot label"
-  },
-  "rawRecordingModalTitle": {
-    "message": "Download raw video file",
-    "description": "Raw recording modal title"
-  },
-  "rawRecordingModalDescription": {
-    "message": "The raw video file is the original video file that was recorded by Screenity. This video is not processed or edited, so it may be very large and may not be playable on all devices. If you are having issues with the processed video, you can use this file to recover your video.",
-    "description": "Raw recording modal description"
-  },
-  "rawRecordingModalButton": {
-    "message": "Download",
-    "description": "Raw recording modal button"
-  },
   "troubleshootModalTitle": {
     "message": "Download diagnostic report for troubleshooting",
     "description": "Troubleshoot modal title"
@@ -987,53 +519,9 @@
     "message": "Download",
     "description": "Troubleshoot modal button"
   },
-  "overLimitModalTitle": {
-    "message": "The video is too long to process in your device",
-    "description": "Over 5 minutes limit modal title"
-  },
-  "overLimitModalDescription": {
-    "message": "Since Screenity is completely private and runs locally, it's limited by your device's hardware. Processing a video of this length would take too long, and be very resource intensive. Don't worry, you can still download the WEBM file or the raw recording, but editing and MP4 export are not available. That said, you can still try to process the video anyway, if you understand the risks.",
-    "description": "Over 5 minutes limit modal description"
-  },
-  "overLimitModalDescriptionFastPath": {
-    "message": "Since Screenity is completely private and runs locally, it's limited by your device's hardware. Processing a video of this length would take too long, and be very resource intensive. Your MP4 is ready to download as-is, but in-browser editing isn't available for clips this long. You can still try to process the video anyway, if you understand the risks.",
-    "description": "Over 5 minutes limit modal description when the recording is a native MP4 (fast recorder / WebCodecs)"
-  },
-  "overLimitModalButton": {
-    "message": "I understand the risk, try anyway",
-    "description": "Over 5 minutes limit modal button"
-  },
-  "overLimitModalLearnMore": {
-    "message": "Learn more about processing long videos.",
-    "description": "Over 5 minutes limit modal learn more link with a dot"
-  },
-  "recoveryModeTitle": {
-    "message": "Recovery mode",
-    "description": "Recovery mode title"
-  },
-  "longRecordingTitle": {
-    "message": "Long recording",
-    "description": "Banner title shown when a recording exceeds the local processing limit but is otherwise successful"
-  },
-  "longRecordingDescription": {
-    "message": "Your recording is complete and safe. Download as WebM below.",
-    "description": "Banner description for long recordings that can be downloaded but not edited locally"
-  },
-  "notAvailableLongRecording": {
-    "message": "Unavailable for long recordings",
-    "description": "Disabled button label for features not available due to recording length"
-  },
-  "notAvailableRecoveryMode": {
-    "message": "Unavailable in recovery mode",
-    "description": "Disabled button label for features not available in recovery/fallback mode"
-  },
   "downloadForTroubleshootingOption": {
     "message": "Download data for troubleshooting",
     "description": "Download for troubleshooting option"
-  },
-  "getHelpNav": {
-    "message": "Help center",
-    "description": "Get help nav item"
   },
   "audioWarningTitle": {
     "message": "Record computer audio",
@@ -1105,10 +593,6 @@
     "message": "Allow Screenity to keep backing up recordings",
     "description": "Backups confirm allow button"
   },
-  "backupsToggle": {
-    "message": "Back up recordings",
-    "description": "Backups toggle label"
-  },
   "backupPermissionFailTitle": {
     "message": "Permission not granted to back up the recording",
     "description": "Backup permission fail title"
@@ -1141,10 +625,6 @@
     "message": "Max FPS",
     "description": "Max FPS label in settings menu"
   },
-  "notEnoughRAM": {
-    "message": "Not enough RAM",
-    "description": "Not enough RAM label in settings menu"
-  },
   "resizeWindowLabel": {
     "message": "Resize window",
     "description": "Resize window label in settings menu"
@@ -1164,14 +644,6 @@
   "recordButtonMultiLabel": {
     "message": "Add another recording",
     "description": "Record button label (multi mode)"
-  },
-  "recorderSetupTitle": {
-    "message": "Getting things ready...",
-    "description": "Title in recording page while setting up project before countdown starts"
-  },
-  "recorderSetupDescription": {
-    "message": "Hang tight! Your recording is being prepared.",
-    "description": "Description in recording page before countdown starts"
   },
   "reopenToolbarToast": {
     "message": "Toolbar hidden. Re-enable it in the popup options.",
@@ -1317,10 +789,6 @@
     "message": "Custom backgrounds and mockups",
     "description": "Feature 5 for the cloud storage in the welcome popup"
   },
-  "welcomePopupCloudCTA": {
-    "message": "🔓 Unlock extra features",
-    "description": "Call to action button for the cloud storage feature in the welcome popup"
-  },
   "welcomePopupSupport": {
     "message": "+ Support development by a solo indie maker!",
     "description": "Message for supporting the indie maker in the welcome popup"
@@ -1433,30 +901,6 @@
     "message": "Support development by a solo indie maker",
     "description": "Message for supporting the indie maker in the welcome Pro popup"
   },
-  "unlockMoreFeatures": {
-    "message": "Unlock more features",
-    "description": "Button to unlock more features in the editor"
-  },
-  "shareUnlockButton": {
-    "message": "Sign in to share (pro)",
-    "description": "Button to sign in to share in the editor"
-  },
-  "proBannerTitle": {
-    "message": "Unlock cloud sharing, multi-scene editing, auto zooms, captions & more",
-    "description": "Pro banner title in the editor"
-  },
-  "proBannerDescription": {
-    "message": "Screenity will always be free, open-source, and ad-free. Pro helps cover cloud & infra costs, & supports development by a solo indie dev! ❤️",
-    "description": "Pro banner description in the editor"
-  },
-  "proBannerAltButton": {
-    "message": "Don't show again",
-    "description": "Pro banner don't show again button in the editor"
-  },
-  "proBannerButton": {
-    "message": "Try it",
-    "description": "Pro banner button in the editor"
-  },
   "multiRecordingModeTitle": {
     "message": "Multi-recording mode",
     "description": "Title for the multi-recording mode modal"
@@ -1477,14 +921,6 @@
     "message": "Upgrade to Pro",
     "description": "Button to upgrade to Pro"
   },
-  "hostBannerTitle": {
-    "message": "Enjoying Screenity locally? Help support future development!",
-    "description": "Self-host banner title in the editor"
-  },
-  "hostBannerDescription": {
-    "message": "Screenity is built by a solo indie dev. Self-hosting is free, but if you find it useful, consider supporting with Pro ❤️",
-    "description": "Self-host banner description in the editor"
-  },
   "welcomeBackPopupTitle": {
     "message": "Welcome back to Screenity",
     "description": "Title for the welcome back popup shown to returning users"
@@ -1501,18 +937,6 @@
     "message": "Learn more about Screenity Pro",
     "description": "Call to action button for the cloud storage feature in the welcome back popup"
   },
-  "welcomeToProTitleModal": {
-    "message": "Welcome to Screenity Pro",
-    "description": "Welcome to Pro modal title"
-  },
-  "welcomeToProDescriptionModal": {
-    "message": "You're all set to start recording! A couple things to keep in mind:\n\n- The camera bubble may disappear while recording, this is normal. It's captured separately in the background so you can position it however you like later.\n- Zooms are only auto-created on clicks within Chrome tabs, it's a browser limitation. You can always add more zooms manually after recording.\n- For quick recordings with instant downloads, try Instant Mode. Just note that editing options are limited: no backgrounds, layouts, or advanced tweaks.",
-    "description": "Welcome to Pro modal description"
-  },
-  "welcomeToProActionModal": {
-    "message": "Got it",
-    "description": "Welcome to Pro modal action button"
-  },
   "webcodecsToggleLabel": {
     "message": "Fast MP4",
     "description": "WebCodecs recorder toggle label"
@@ -1521,54 +945,6 @@
     "message": "Fast MP4 failed — off",
     "description": "WebCodecs failure auto-disable toast"
   },
-  "proOnboardingWelcomeTitle": {
-    "message": "Welcome to the Screenity Pro extension",
-    "description": "Pro onboarding welcome step title"
-  },
-  "proOnboardingWelcomeDescription": {
-    "message": "A few quick tips before you record.<br/>Auto-zooms only work for clicks inside <strong>Chrome tabs</strong>. You can still add zooms manually later.",
-    "description": "Pro onboarding welcome step description"
-  },
-  "proOnboardingToolbarTitle": {
-    "message": "Recording toolbar & effects",
-    "description": "Pro onboarding toolbar step title"
-  },
-  "proOnboardingToolbarDescription": {
-    "message": "Use this toolbar for drawing, cursor effects, blur, and recording controls.<br/><br/><strong>This toolbar is included in the video</strong> unless you hide it.",
-    "description": "Pro onboarding toolbar step description"
-  },
-  "proOnboardingCameraTitle": {
-    "message": "Camera is captured separately",
-    "description": "Pro onboarding camera step title"
-  },
-  "proOnboardingCameraDescription": {
-    "message": "Your camera may <strong>hide or move to PiP</strong> while recording, that's normal.<br/><br/>It's captured separately so you can position it later.",
-    "description": "Pro onboarding camera step description"
-  },
-  "proOnboardingInstantTitle": {
-    "message": "Instant mode",
-    "description": "Pro onboarding instant mode step title"
-  },
-  "proOnboardingInstantDescription": {
-    "message": "Best for quick sharing with <strong>unlimited downloads</strong>.<br/><br/>Advanced layouts/editor options aren't available in this mode.",
-    "description": "Pro onboarding instant mode step description"
-  },
-  "proOnboardingDone": {
-    "message": "Got it",
-    "description": "Pro onboarding done button text"
-  },
-  "proOnboardingNext": {
-    "message": "Next",
-    "description": "Pro onboarding next button text"
-  },
-  "proOnboardingBack": {
-    "message": "Back",
-    "description": "Pro onboarding back button text"
-  },
-  "proOnboardingToolbarLearnMore": {
-    "message": "Learn more",
-    "description": "Pro onboarding toolbar learn more link label"
-  },
   "resetOnboardingOption": {
     "message": "Reset onboarding",
     "description": "Reset pro onboarding option label in popup settings menu"
@@ -1576,10 +952,6 @@
   "recoverLastRecordingOption": {
     "message": "Recover last recording",
     "description": "Settings menu item to manually trigger cloud recording recovery"
-  },
-  "toastRecoveredSession": {
-    "message": "Recovered unsaved recording from the previous session.",
-    "description": "Toast shown when a crashed recording session is auto-recovered on startup"
   },
   "toastStorageCritical": {
     "message": "Low disk space. Saving your recording now. Everything captured so far is safe.",
@@ -1597,57 +969,9 @@
     "message": "Storage is running low. Upload reliability may degrade for long recordings.",
     "description": "Toast shown when available storage drops below the warning threshold during recording"
   },
-  "toastAudioCaptureDegraded": {
-    "message": "Transcription capture paused due to memory pressure. Video upload continues.",
-    "description": "Toast shown when the audio recorder is stopped early because the audio buffer limit was reached"
-  },
-  "toastNetworkOffline": {
-    "message": "Network offline. Upload paused. Screen chunks are saved locally.",
-    "description": "Toast shown when the browser goes offline during a cloud recording upload"
-  },
-  "editTooLongTitle": {
-    "message": "Audio edit too long",
-    "description": "Alert title when an audio mute/mix edit is rejected because the clip exceeds 15 minutes"
-  },
-  "editTooLongDescription": {
-    "message": "This audio edit isn't supported for clips over 15 minutes. Your original is unchanged. Try trimming first, then re-apply the edit.",
-    "description": "Alert body explaining the 15-minute limit for in-browser edits"
-  },
-  "editTimeoutTitle": {
-    "message": "Edit timed out",
-    "description": "Alert title when an edit operation does not complete within the 5-minute watchdog period"
-  },
-  "editTimeoutDescription": {
-    "message": "The edit did not complete in time. Your original recording is unchanged. Try again, or trim the clip first.",
-    "description": "Alert body for edit timeout"
-  },
   "streamEndedWarningToast": {
     "message": "Screen sharing stopped. Your recording so far is saved. Stop when you're ready.",
     "description": "Toast shown when screen share track ends mid-recording. Recording continues; removes false urgency about data loss."
-  },
-  "recoveryModeDescription": {
-    "message": "There was a processing issue, but your recording is safe. You can download it below.",
-    "description": "Recovery mode banner description"
-  },
-  "editProcessingSafeDescription": {
-    "message": "Processing your edit. Your original recording is untouched.",
-    "description": "Shown in the editor processing alert when a user-initiated edit is running, to reassure the original is safe"
-  },
-  "editFailedTitle": {
-    "message": "Edit couldn't be applied",
-    "description": "Alert title when an edit operation fails due to an encoding or processing error"
-  },
-  "editFailedDescription": {
-    "message": "Something went wrong during processing. Your original recording is safe. You can try again or download as-is.",
-    "description": "Alert body for edit failure"
-  },
-  "editAudioTooLargeTitle": {
-    "message": "Audio file is too large",
-    "description": "Alert title when the audio file uploaded for Add Audio is too large to process in-browser"
-  },
-  "editAudioTooLargeDescription": {
-    "message": "Try a shorter audio clip. Large files can't be processed in-browser. Your original recording is safe.",
-    "description": "Alert body for audio-too-large error during Add Audio"
   },
   "videoTrackEndedToast": {
     "message": "Screen sharing stopped. Saving your recording now. Everything captured so far is safe.",
@@ -1665,24 +989,8 @@
     "message": "Saving is taking longer than expected. Your captured data is safe. The editor will open shortly.",
     "description": "Toast shown when the recorder does not acknowledge the stop request within a few seconds"
   },
-  "restoreEmptyToast": {
-    "message": "No recoverable recording found. The data may have been cleared.",
-    "description": "Toast shown when restoreRecording finds no OPFS file and no IDB chunks"
-  },
-  "restoreTimeoutToast": {
-    "message": "Recovery is taking too long. Your recording is safe. Try clicking Recover again in a moment.",
-    "description": "Toast shown when the recovery editor tab fails to load within 30 seconds"
-  },
   "cameraUnavailableToast": {
     "message": "Camera disconnected. Still recording your screen.",
     "description": "Toast shown when the camera bubble fails during an active recording but the screen recording continues"
-  },
-  "downloadInterruptedLargeToast": {
-    "message": "Download interrupted. The recording is too large to retry automatically. Try saving again from the editor.",
-    "description": "Toast shown when a download is interrupted and the file is too large for the in-process base64 retry path"
-  },
-  "recordingCorruptToast": {
-    "message": "This recording can't be played back. The file may be incomplete or corrupted. Try downloading the raw file from the Save menu.",
-    "description": "Toast shown when the editor's video element fails to decode the recording (corrupt or zero-byte file)"
   }
 }
