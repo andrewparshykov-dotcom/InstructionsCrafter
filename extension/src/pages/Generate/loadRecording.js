@@ -43,9 +43,17 @@ async function loadFromOpfs(fileName) {
   const handle = await dir.getFileHandle(parts[parts.length - 1]);
   const file = await handle.getFile();
 
+  // Materialize OPFS bytes into memory. Wrapping the File in a Blob via
+  // `new Blob([file], ...)` keeps the Blob backed by the OPFS handle; by the
+  // time we try to read it later (FileReader, chrome.downloads, XHR), Chrome
+  // may have released the underlying reference, producing
+  // `NotReadableError: ... permission problems ... after a reference to a
+  // file was acquired`. Reading once into an ArrayBuffer detaches us from
+  // OPFS — the resulting Blob is purely in-memory.
+  const arrayBuffer = await file.arrayBuffer();
   const isMp4 = fileName.toLowerCase().endsWith(".mp4");
   const mimeType = isMp4 ? "video/mp4" : "video/webm";
-  const blob = new Blob([file], { type: mimeType });
+  const blob = new Blob([arrayBuffer], { type: mimeType });
 
   return {
     blob,

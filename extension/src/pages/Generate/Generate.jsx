@@ -108,17 +108,21 @@ const Generate = () => {
   const handleDownloadRecording = () => {
     if (!recording) return;
     const date = new Date().toISOString().slice(0, 10);
-    // Use a synthetic <a download> click rather than chrome.downloads.download:
-    // the latter occasionally rejects blob: URLs from extension pages with a
-    // misleading "check your internet connection" error even though the URL is
-    // local. Anchor-based download via the browser's native mechanism is more
-    // reliable for blob: URLs.
-    const a = document.createElement("a");
-    a.href = recording.blobUrl;
-    a.download = `recording_${date}.${recording.extension}`;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
+    const filename = `recording_${date}.${recording.extension}`;
+    // recording.blob is materialized in-memory at load time (see
+    // loadRecording.js), so the blob: URL Chrome reads here is stable —
+    // no stale OPFS reference. saveAs: true gives the user the Save dialog.
+    chrome.downloads.download(
+      { url: recording.blobUrl, filename, saveAs: true },
+      () => {
+        if (chrome.runtime.lastError) {
+          console.error(
+            "chrome.downloads.download error:",
+            chrome.runtime.lastError
+          );
+        }
+      }
+    );
   };
 
   const handleSubmit = async (e) => {
