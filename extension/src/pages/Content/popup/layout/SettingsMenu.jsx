@@ -27,7 +27,6 @@ const DEV_MODE = process.env.SCREENITY_DEV_MODE === "true";
 
 const SettingsMenu = (props) => {
   const [contentState, setContentState] = useContext(contentStateContext);
-  const [restore, setRestore] = useState(false);
   const [cloudRestore, setCloudRestore] = useState(false);
   const [openQuality, setOpenQuality] = useState(false);
   const [openResize, setOpenResize] = useState(false);
@@ -265,12 +264,6 @@ const SettingsMenu = (props) => {
       open={props.open}
       onOpenChange={(open) => {
         props.setOpen(open);
-
-        chrome.runtime
-          .sendMessage({ type: "check-restore" })
-          .then((response) => {
-            setRestore(response.restore);
-          });
 
         if (CLOUD_FEATURES_ENABLED && contentState.isSubscribed) {
           chrome.runtime
@@ -735,18 +728,6 @@ const SettingsMenu = (props) => {
                 </DropdownMenu.ItemIndicator>
               </DropdownMenu.CheckboxItem>
             )}
-          {!contentState.isSubscribed && !contentState.isLoggedIn && (
-            <DropdownMenu.Item
-              className="DropdownMenuItem"
-              onSelect={(e) => {
-                e.preventDefault();
-                chrome.runtime.sendMessage({ type: "restore-recording" });
-              }}
-              disabled={!restore}
-            >
-              {chrome.i18n.getMessage("restoreRecording")}
-            </DropdownMenu.Item>
-          )}
           <DropdownMenu.Item
             className="DropdownMenuItem"
             onSelect={(e) => {

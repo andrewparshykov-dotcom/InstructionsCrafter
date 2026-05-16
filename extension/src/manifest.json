@@ -34,7 +34,6 @@
       "resources": [
         "content.styles.css",
         "blank.mp4",
-        "editor.html",
         "assets/*",
         "setup.html",
         "worker.js",
@@ -42,15 +41,12 @@
         "cloudrecorder.html",
         "recorder.html",
         "offscreenrecorder.html",
-        "sandbox.html",
         "wrapper.html",
         "camera.html",
         "permissions.html",
         "region.html",
         "waveform.html",
         "playground.html",
-        "editorwebcodecs.html",
-        "editorviewer.html",
         "download.html",
         "generate.html",
         "welcome.html",
@@ -78,13 +74,7 @@
     "value": "same-origin"
   },
   "content_security_policy": {
-    "sandbox": "sandbox allow-scripts allow-modals allow-popups; script-src 'self' 'unsafe-inline' 'unsafe-eval' blob:; object-src 'self'; worker-src 'self' blob: ;",
     "extension_pages": "script-src 'self' 'wasm-unsafe-eval'; object-src 'self'; media-src 'self' data: blob: *; img-src 'self' https: data: blob:"
-  },
-  "sandbox": {
-    "pages": [
-      "editor.html"
-    ]
   },
   "commands": {
     "start-recording": {
@@ -107,12 +97,6 @@
     },
     "stop-recording": {
       "description": "Stop recording"
-    },
-    "toggle-drawing-mode": {
-      "description": "Toggle drawing mode"
-    },
-    "toggle-blur-mode": {
-      "description": "Toggle blur mode"
     },
     "toggle-hide-ui": {
       "description": "Toggle hide UI"

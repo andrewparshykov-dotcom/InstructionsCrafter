@@ -12,7 +12,6 @@ const isDev = env.NODE_ENV === "development";
 // drops post-recording UI + WASM. recording + camera paths preserved.
 const isBsBuild = process.env.SCREENITY_BS_BUILD === "1";
 const BS_DROPPED_ENTRIES = new Set([
-  "editorviewer",
   "cloudrecorder",
   "backup",
   "download",
@@ -66,30 +65,14 @@ const entryPoints = {
   ),
   camera: path.join(__dirname, "src", "pages", "Camera", "index.jsx"),
   waveform: path.join(__dirname, "src", "pages", "Waveform", "index.jsx"),
-  sandbox: path.join(__dirname, "src", "pages", "Sandbox", "index.jsx"),
   permissions: path.join(__dirname, "src", "pages", "Permissions", "index.jsx"),
   setup: path.join(__dirname, "src", "pages", "Setup", "index.jsx"),
   welcome: path.join(__dirname, "src", "pages", "Welcome", "index.jsx"),
   options: path.join(__dirname, "src", "pages", "Options", "index.js"),
   generate: path.join(__dirname, "src", "pages", "Generate", "index.jsx"),
   playground: path.join(__dirname, "src", "pages", "Playground", "index.jsx"),
-  editor: path.join(__dirname, "src", "pages", "Editor", "index.jsx"),
   region: path.join(__dirname, "src", "pages", "Region", "index.jsx"),
   download: path.join(__dirname, "src", "pages", "Download", "index.jsx"),
-  editorwebcodecs: path.join(
-    __dirname,
-    "src",
-    "pages",
-    "EditorWebCodecs",
-    "index.jsx"
-  ),
-  editorviewer: path.join(
-    __dirname,
-    "src",
-    "pages",
-    "EditorViewer",
-    "index.jsx"
-  ),
   backup: path.join(__dirname, "src", "pages", "Backup", "index.jsx"),
   remuxoffscreen: path.join(
     __dirname,
@@ -143,8 +126,6 @@ const htmlPlugins = Object.keys(entryPoints)
       cloudrecorder: "CloudRecorder",
       offscreenrecorder: "OffscreenRecorder",
       audiooffscreen: "AudioOffscreen",
-      editorwebcodecs: "EditorWebCodecs",
-      editorviewer: "EditorViewer",
       remuxoffscreen: "RemuxOffscreen",
     };
 

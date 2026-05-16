@@ -27,7 +27,6 @@ import { startRecorderSession } from "../recording/openRecorderTab";
 import { acquireStreamForOffscreen } from "../offscreen/acquireStream";
 import { registerProxyStorageHandlers } from "../offscreen/proxyStorageHandlers";
 import { ensureRemuxOffscreen } from "../offscreen/ensureRemuxOffscreen";
-import { forceProcessing } from "../recording/forceProcessing";
 import {
   restartActiveTab,
   getCurrentTab,
@@ -48,7 +47,7 @@ import {
   checkAvailableMemory,
 } from "../utils/browserHelpers";
 import { requestDownload, downloadIndexedDB } from "../utils/downloadHelpers";
-import { restoreRecording, checkRestore } from "../recording/restoreRecording";
+import { checkRestore } from "../recording/restoreRecording";
 import {
   checkCloudRestore,
   restoreCloudRecording,
@@ -1510,7 +1509,6 @@ export const setupHandlers = () => {
     }
   });
   registerMessage("clear-recordings", () => clearAllRecordings());
-  registerMessage("force-processing", (message) => forceProcessing(message));
   registerMessage("focus-this-tab", (message, sender) =>
     focusTab(sender.tab.id),
   );
@@ -1587,7 +1585,6 @@ export const setupHandlers = () => {
     } catch {
     }
   });
-  registerMessage("restore-recording", (message) => restoreRecording(message));
   registerMessage("check-restore", async (message, sender, sendResponse) => {
     const response = await checkRestore();
     sendResponse(response);
