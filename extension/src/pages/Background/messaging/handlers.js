@@ -18,7 +18,6 @@ import { sendChunks } from "../recording/sendChunks";
 import { chunksStore } from "../recording/chunkHandler";
 import { openExistingChunksStore } from "../../CloudRecorder/recorderStorage/chooseChunksStore";
 import { destroySessionDir } from "../../CloudRecorder/recorderStorage/opfsKvStore";
-import { handleSaveToDrive } from "../drive/handleSaveToDrive";
 import { addAlarmListener } from "../alarms/addAlarmListener";
 import { cancelRecording, handleDismiss } from "../recording/cancelRecording";
 import { handleDismissRecordingTab } from "../recording/discardRecording";
@@ -71,7 +70,6 @@ import {
 } from "../recording/recordingHelpers";
 import { newChunk, clearAllRecordings } from "../recording/chunkHandler";
 import { setMicActiveTab } from "../tabManagement/tabHelpers";
-import { handleSignOutDrive } from "../drive/handleSignOutDrive";
 import { loginWithWebsite } from "../auth/loginWithWebsite";
 import {
   getDiagnosticLog,
@@ -1454,7 +1452,6 @@ export const setupHandlers = () => {
   registerMessage("set-surface", (message) => setSurface(message));
   registerMessage("pip-ended", () => handlePip(false));
   registerMessage("pip-started", () => handlePip(true));
-  registerMessage("sign-out-drive", (message) => handleSignOutDrive(message));
   registerMessage("open-help", () =>
     createTab("https://help.screenity.io/", true, true),
   );
@@ -1620,14 +1617,6 @@ export const setupHandlers = () => {
     setTabAutoDiscardableSafe(message, sender),
   );
 
-  registerMessage(
-    "save-to-drive",
-    async (message) => await handleSaveToDrive(message, false),
-  );
-  registerMessage(
-    "save-to-drive-fallback",
-    async (message) => await handleSaveToDrive(message, true),
-  );
   registerMessage("request-download", (message) =>
     requestDownload(message.base64, message.title),
   );
