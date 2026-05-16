@@ -608,4 +608,13 @@ No other runtime dependencies should be added without strong justification.
 
 ---
 
+## Known issues (deferred)
+
+These behaviors were observed during Phase 8 testing and accepted as-is rather than fixed, on the rationale that they either originate in Screenity's own code or land in low-priority surface area. Listed here so a future maintainer who hits them does not start a goose chase.
+
+- **Screenity "Recording stopped" dialog when microphone is muted.** If the user clicks the microphone toggle off in Screenity's recorder panel (or has no mic available at the OS level), starting a recording shows Screenity's "Your microphone is muted" prompt; clicking "Yes, continue" leads to a generic "Recording stopped — Looks like something went wrong with the recording" error and aborts. Pre-existing Screenity bug — the mic-off path in `mediaRecorderUtils` does not gracefully fall back to a video-only stream. Workaround: keep the mic enabled in Screenity; if you genuinely need silent recording, mute at the OS level (the audio track will then be silent and the post-recording audio-level check catches it).
+- **Whisper hallucinations on near-silent input.** On audio with a real-but-trivial signal level (e.g. quiet room tone around -55 dB), Whisper occasionally invents plausible filler ("Thanks for watching", "Please subscribe", etc.) drawn from its training data. The backend RMS gate at -50 dB rejects these before they reach Whisper. Tune the threshold if real-world quiet narration starts getting false-rejected.
+
+---
+
 ## End of architecture document
