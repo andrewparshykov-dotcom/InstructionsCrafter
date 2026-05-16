@@ -576,8 +576,7 @@ export const handleStopRecordingTab = async (request) => {
         },
       );
     } else {
-      const editorUrl =
-        duration > maxDuration ? "generate.html" : "generate.html";
+      const editorUrl = "generate.html";
       diagEvent("editor-open", { type: editorUrl.replace(".html", ""), via: "stop-tab", duration });
       perfMark("BG.stopRecording editor-tab-create.start", { editorUrl });
       const endTabLoad = perfSpan("BG.stopRecording editor-tab-load");
@@ -621,26 +620,11 @@ export const handleStopRecordingTab = async (request) => {
               postStopRecordingId: null,
             });
             releasePostStopEditorLock({ postStopRecordingId: null });
-            if (editorUrl === "editorviewer.html") {
-              sendMessageTab(tab.id, { type: "viewer-recording" }).catch(
-                (err) => {
-                  console.error(
-                    "❌ Failed to send message:",
-                    err?.message || err,
-                  );
-                  markEditorStartFailed(
-                    tab.id,
-                    "EDITOR_MESSAGE_DELIVERY_FAILED",
-                    String(err?.message || err).slice(0, 200),
-                  );
-                },
-              );
-            } else {
-              (async () => {
-                // OPFS: sandbox reads the file directly; skip chunk relay
-                const storage = await chrome.storage.local.get([
-                  "lastRecordingBackendRef",
-                ]);
+            (async () => {
+              // OPFS: sandbox reads the file directly; skip chunk relay
+              const storage = await chrome.storage.local.get([
+                "lastRecordingBackendRef",
+              ]);
                 if (storage.lastRecordingBackendRef?.backend === "opfs") {
                   perfMark("BG.stopRecording opfs-direct-make-video-tab");
                   sendMessageTab(tab.id, { type: "make-video-tab" }).catch(
@@ -718,11 +702,10 @@ export const handleStopRecordingTab = async (request) => {
                 }
               })();
             }
-          }
+          });
         });
-      });
+      }
     }
-  }
 
   (async () => {
     const STOP_ACK_TIMEOUT_MS = 3000;

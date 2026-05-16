@@ -547,7 +547,6 @@ const ToolbarWrap = () => {
                 content={chrome.i18n.getMessage("toggleDrawingToolsTooltip")}
                 value="draw"
                 shortcut={contentState.toggleDrawingModeShortcut}
-                disabled={contentState.recordingType === "camera"}
               >
                 {mode === "draw" && <CloseButtonToolbar />}
                 {mode !== "draw" && <DrawIcon />}
@@ -560,7 +559,6 @@ const ToolbarWrap = () => {
                 content={chrome.i18n.getMessage("toggleBlurToolTooltip")}
                 value="blur"
                 shortcut={contentState.toggleBlurModeShortcut}
-                disabled={contentState.recordingType === "camera"}
               >
                 {mode === "blur" && <CloseButtonToolbar />}
                 {mode !== "blur" && <BlurIcon />}
@@ -574,7 +572,6 @@ const ToolbarWrap = () => {
                 content={chrome.i18n.getMessage("toggleCursorOptionsTooltip")}
                 value="cursor"
                 shortcut={contentState.toggleCursorModeShortcut}
-                disabled={contentState.recordingType === "camera"}
               >
                 {contentState.cursorMode === "target" && <TargetCursorIcon />}
                 {contentState.cursorMode === "highlight" && (

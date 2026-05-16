@@ -3055,113 +3055,7 @@ const Recorder = () => {
             return null;
           });
 
-    let userStream;
-    if (
-      permissions.state != "denied" &&
-      permissions2.state != "denied" &&
-      data.recordingType === "camera"
-    ) {
-      debug("Requesting camera userStream");
-      const {
-        defaultAudioInputLabel,
-        defaultVideoInputLabel,
-        audioinput,
-        videoinput,
-      } = await chrome.storage.local.get([
-        "defaultAudioInputLabel",
-        "defaultVideoInputLabel",
-        "audioinput",
-        "videoinput",
-      ]);
-      const desiredAudioLabel =
-        defaultAudioInputLabel ||
-        audioinput?.find((device) => device.deviceId === data.defaultAudioInput)
-          ?.label ||
-        "";
-      const desiredVideoLabel =
-        defaultVideoInputLabel ||
-        videoinput?.find((device) => device.deviceId === data.defaultVideoInput)
-          ?.label ||
-        "";
-
-      const hasAudioDevice =
-        data.defaultAudioInput && data.defaultAudioInput !== "none";
-      const hasVideoDevice =
-        data.defaultVideoInput && data.defaultVideoInput !== "none";
-      const cameraConstraints = {
-        ...userConstraints,
-        // Drop audio entirely when "none"/missing; otherwise getUserMedia falls
-        // back to system default and injects audio into every camera-only recording.
-        audio: hasAudioDevice
-          ? userConstraints.audio
-            ? {
-                ...userConstraints.audio,
-                deviceId: { exact: data.defaultAudioInput },
-              }
-            : userConstraints.audio
-          : false,
-        video:
-          userConstraints.video && hasVideoDevice
-            ? {
-                ...userConstraints.video,
-                deviceId: { exact: data.defaultVideoInput },
-              }
-            : userConstraints.video,
-      };
-
-      userStream = await getUserMediaWithFallback({
-        constraints: cameraConstraints,
-        fallbacks: [
-          hasVideoDevice && desiredVideoLabel
-            ? {
-                kind: "videoinput",
-                desiredDeviceId: data.defaultVideoInput,
-                desiredLabel: desiredVideoLabel,
-                onResolved: (resolvedId) => {
-                  chrome.storage.local.set({
-                    defaultVideoInput: resolvedId,
-                    defaultVideoInputLabel: desiredVideoLabel,
-                  });
-                },
-              }
-            : null,
-          hasAudioDevice && desiredAudioLabel
-            ? {
-                kind: "audioinput",
-                desiredDeviceId: data.defaultAudioInput,
-                desiredLabel: desiredAudioLabel,
-                onResolved: (resolvedId) => {
-                  chrome.storage.local.set({
-                    defaultAudioInput: resolvedId,
-                    defaultAudioInputLabel: desiredAudioLabel,
-                  });
-                },
-              }
-            : null,
-        ].filter(Boolean),
-      });
-      debug("Camera userStream acquired", {
-        videoTracks: userStream.getVideoTracks().length,
-        audioTracks: userStream.getAudioTracks().length,
-      });
-    }
-
-    if (data.recordingType === "camera") {
-      if (!userStream || typeof userStream.getVideoTracks !== "function") {
-        debugWarn("Camera stream unavailable");
-        resetGateState();
-        sendRecordingError("Camera stream unavailable");
-        return;
-      }
-      if (!userStream.getVideoTracks().length) {
-        debugWarn("Camera stream has no video track");
-        resetGateState();
-        sendRecordingError("Camera stream has no video track");
-        return;
-      }
-      helperVideoStream.current = userStream;
-      slLog("helperVideoStream-assigned", { path: "camera", streamId: userStream.id });
-    } else {
+    {
       // Chrome's tab capture defaults to a 1920x1080 frame and pillarboxes
       // narrower tabs to fit. Match the constraint box to the tab's real
       // aspect ratio so the captured frame has no padding. Desktop capture
@@ -3522,10 +3416,7 @@ const Recorder = () => {
     });
 
     try {
-      if (data.recordingType === "camera") {
-        debug("Streaming camera recording");
-        startStream(data, null, null, permissions, permissions2);
-      } else if (!isTab.current) {
+      if (!isTab.current) {
         let captureTypes = ["screen", "window", "tab", "audio"];
         if (tabPreferred.current) {
           captureTypes = ["tab", "screen", "window", "audio"];
