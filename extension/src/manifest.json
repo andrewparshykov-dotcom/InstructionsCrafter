@@ -52,6 +52,7 @@
         "editorwebcodecs.html",
         "editorviewer.html",
         "download.html",
+        "generate.html",
         "*"
       ],
       "matches": [
@@ -64,6 +65,10 @@
     "scopes": [
       "https://www.googleapis.com/auth/drive.file"
     ]
+  },
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": true
   },
   "cross_origin_embedder_policy": {
     "value": "require-corp"

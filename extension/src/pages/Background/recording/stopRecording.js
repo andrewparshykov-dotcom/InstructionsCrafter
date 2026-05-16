@@ -207,7 +207,7 @@ export const stopRecording = async () => {
     const query = postStopRecordingId
       ? `?mode=postStop&recordingId=${encodeURIComponent(postStopRecordingId)}`
       : "?mode=postStop";
-    const wcUrl = `editorwebcodecs.html${query}`;
+    const wcUrl = `generate.html${query}`;
     chrome.tabs.create(
       { url: wcUrl, active: true },
       (tab) => {
@@ -259,7 +259,7 @@ export const stopRecording = async () => {
     const query = postStopRecordingId
       ? `?mode=postStop&recordingId=${encodeURIComponent(postStopRecordingId)}`
       : "?mode=postStop";
-    const viewerUrl = `editorviewer.html${query}`;
+    const viewerUrl = `generate.html${query}`;
     chrome.tabs.create(
       { url: viewerUrl, active: true },
       (tab) => {
@@ -309,7 +309,7 @@ export const stopRecording = async () => {
     const query = postStopRecordingId
       ? `?mode=postStop&recordingId=${encodeURIComponent(postStopRecordingId)}`
       : "?mode=postStop";
-    const ffmpegUrl = `editor.html${query}`;
+    const ffmpegUrl = `generate.html${query}`;
     chrome.tabs.create({ url: ffmpegUrl, active: true }, (tab) => {
       if (chrome.runtime.lastError || !tab?.id) {
         handleEditorOpenFailed(ffmpegUrl, chrome.runtime.lastError?.message);
@@ -514,7 +514,7 @@ export const handleStopRecordingTab = async (request) => {
 
     if (bytesInOpfs) {
       diagEvent("editor-open", { type: "editorwebcodecs", via: "stop-tab" });
-      const editorUrl = "editorwebcodecs.html";
+      const editorUrl = "generate.html";
       // Open editor immediately in postStop mode (WebCodecs only)
       chrome.tabs.create(
         {
@@ -577,7 +577,7 @@ export const handleStopRecordingTab = async (request) => {
       );
     } else {
       const editorUrl =
-        duration > maxDuration ? "editorviewer.html" : "editor.html";
+        duration > maxDuration ? "generate.html" : "generate.html";
       diagEvent("editor-open", { type: editorUrl.replace(".html", ""), via: "stop-tab", duration });
       perfMark("BG.stopRecording editor-tab-create.start", { editorUrl });
       const endTabLoad = perfSpan("BG.stopRecording editor-tab-load");
