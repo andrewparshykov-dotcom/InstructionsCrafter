@@ -22,7 +22,7 @@ Read it before making design decisions. Do not rewrite or duplicate the plan it 
 
 Work through the 9 phases in `ARCHITECTURE.md` **sequentially**. Do not start phase N+1 until phase N is verified working end-to-end per its listed verification step.
 
-**Current phase: Phase 6 complete. Beginning Phase 8 (Screenity fork) before Phase 7 (Deploy backend). Extension is built against the local backend at `http://127.0.0.1:8000` during development; Phase 7 follows after, and the extension's configured backend URL switches to the deployed domain at that point.**
+**Current phase: Phase 8 in progress — Stages A and B complete (extension fork, options page, post-recording Generate page, modal, upload, end-to-end verified against local backend). Next: Stage C (pre-recording narration notice + audio-level sanity check), then Stage D (strip Screenity features we don't need), then Phase 7 (deploy backend). Extension currently targets `http://127.0.0.1:8000`; this switches to the deployed domain after Phase 7.**
 Update this line whenever the current phase changes.
 
 ## Tech stack (see ARCHITECTURE.md for full list)

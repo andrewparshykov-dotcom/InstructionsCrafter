@@ -16,6 +16,7 @@ from fastapi import (
     Request,
     UploadFile,
 )
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse, JSONResponse
 from starlette.exceptions import HTTPException as StarletteHTTPException
 
@@ -36,6 +37,34 @@ DOCX_MEDIA_TYPE = (
 )
 
 app = FastAPI(title="InstructionsCrafter API")
+
+# CORS — the Chrome extension's origin is `chrome-extension://<id>`. ALLOWED_ORIGINS
+# in .env can be a comma-separated list of explicit origins. If it is empty or only
+# contains the placeholder from .env.example, fall back to a regex that accepts any
+# chrome-extension origin so local development works without looking up the ID.
+# DECISION: dev-mode fallback is intentionally permissive for ≤5-user internal use.
+# For Phase 7 production, set ALLOWED_ORIGINS to the exact deployed extension origin.
+_allowed_origins_raw = os.getenv("ALLOWED_ORIGINS", "")
+_dev_placeholder = "replace-with-extension-id"
+_explicit_origins = [
+    o.strip()
+    for o in _allowed_origins_raw.split(",")
+    if o.strip() and _dev_placeholder not in o
+]
+if _explicit_origins:
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=_explicit_origins,
+        allow_methods=["GET", "POST"],
+        allow_headers=["*"],
+    )
+else:
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origin_regex=r"^chrome-extension://[a-z0-9_-]+$",
+        allow_methods=["GET", "POST"],
+        allow_headers=["*"],
+    )
 
 
 @app.exception_handler(StarletteHTTPException)
