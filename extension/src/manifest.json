@@ -53,6 +53,7 @@
         "editorviewer.html",
         "download.html",
         "generate.html",
+        "welcome.html",
         "*"
       ],
       "matches": [

@@ -11,6 +11,12 @@ export const onInstalledListener = () => {
     const version = chrome.runtime.getManifest().version;
     const locale = chrome.i18n.getMessage("@@ui_locale");
 
+    // Permanent toolbar tooltip reminder of the narration requirement.
+    chrome.action.setTitle({
+      title:
+        "InstructionsCrafter — voice narration is required while recording",
+    });
+
     if (details.reason === "install") {
       chrome.storage.local.clear();
 
@@ -32,7 +38,7 @@ export const onInstalledListener = () => {
       chrome.storage.managed.get("skipSetup", (managedConfig) => {
         const skipSetup = managedConfig.skipSetup ?? false;
         if (!skipSetup) {
-          chrome.tabs.create({ url: "setup.html" });
+          chrome.tabs.create({ url: "welcome.html" });
         }
       });
     } else if (details.reason === "update") {

@@ -69,6 +69,7 @@ const entryPoints = {
   sandbox: path.join(__dirname, "src", "pages", "Sandbox", "index.jsx"),
   permissions: path.join(__dirname, "src", "pages", "Permissions", "index.jsx"),
   setup: path.join(__dirname, "src", "pages", "Setup", "index.jsx"),
+  welcome: path.join(__dirname, "src", "pages", "Welcome", "index.jsx"),
   options: path.join(__dirname, "src", "pages", "Options", "index.js"),
   generate: path.join(__dirname, "src", "pages", "Generate", "index.jsx"),
   playground: path.join(__dirname, "src", "pages", "Playground", "index.jsx"),
