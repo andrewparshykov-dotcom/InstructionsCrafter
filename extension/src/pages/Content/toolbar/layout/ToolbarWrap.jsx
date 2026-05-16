@@ -32,7 +32,6 @@ import {
   SpotlightCursorIcon,
   RestartIcon,
   DiscardIcon,
-  CameraIcon,
   BlurIcon,
   OnboardingArrow,
   CloseButtonToolbar,
@@ -358,20 +357,6 @@ const ToolbarWrap = () => {
     }
   }, [mode]);
 
-  const enableCamera = () => {
-    setContentState((prevContentState) => ({
-      ...prevContentState,
-      cameraActive: true,
-    }));
-    chrome.storage.local.set({
-      cameraActive: true,
-    });
-    setContentState((prevContentState) => ({
-      ...prevContentState,
-      pipEnded: true,
-    }));
-  };
-
   return (
     <div>
       <Toast />
@@ -608,30 +593,6 @@ const ToolbarWrap = () => {
             </div>
             <Toolbar.Separator className="ToolbarSeparator" />
             <MicToggle />
-            {(!contentState.cameraActive ||
-              contentState.defaultVideoInput === "none") &&
-              (!contentState.isSubscribed || !contentState.recording) &&
-              contentState.recordingType != "camera-only" && (
-                <ToolTrigger
-                  type="button"
-                  content={
-                    contentState.cameraActive && contentState.cameraPermission
-                      ? chrome.i18n.getMessage("disableCameraTooltip")
-                      : !contentState.cameraActive &&
-                        contentState.cameraPermission
-                      ? chrome.i18n.getMessage("enableCameraTooltip")
-                      : chrome.i18n.getMessage("noCameraPermissionsTooltip")
-                  }
-                  value="camera"
-                  onClick={enableCamera}
-                  disabled={
-                    !contentState.cameraPermission ||
-                    contentState.defaultVideoInput === "none"
-                  }
-                >
-                  <CameraIcon />
-                </ToolTrigger>
-              )}
           </Toolbar.ToggleGroup>
         </Toolbar.Root>
       </Rnd>

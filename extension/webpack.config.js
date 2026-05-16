@@ -63,7 +63,6 @@ const entryPoints = {
     "AudioOffscreen",
     "index.js"
   ),
-  camera: path.join(__dirname, "src", "pages", "Camera", "index.jsx"),
   waveform: path.join(__dirname, "src", "pages", "Waveform", "index.jsx"),
   permissions: path.join(__dirname, "src", "pages", "Permissions", "index.jsx"),
   setup: path.join(__dirname, "src", "pages", "Setup", "index.jsx"),

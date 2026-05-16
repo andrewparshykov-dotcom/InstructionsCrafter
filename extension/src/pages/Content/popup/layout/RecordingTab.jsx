@@ -9,8 +9,6 @@ import {
   RegionTabOff,
   MockupTabOn,
   MockupTabOff,
-  CameraTabIconOn,
-  CameraTabIconOff,
   CheckWhiteIcon,
   CloseWhiteIcon,
 } from "../../images/popup/images";
@@ -69,11 +67,7 @@ const RecordingTab = (props) => {
     }));
     chrome.storage.local.set({ recordingType: tab });
 
-    if (tab === "camera") {
-      chrome.runtime.sendMessage({ type: "camera-only-update" });
-    } else {
-      chrome.runtime.sendMessage({ type: "screen-update" });
-    }
+    chrome.runtime.sendMessage({ type: "screen-update" });
   };
 
   useEffect(() => {
@@ -199,20 +193,6 @@ const RecordingTab = (props) => {
               </div>
             </Tabs.Trigger>
           </TooltipWrap>
-          <Tabs.Trigger className="TabsTrigger" value="camera" tabIndex={0}>
-            <div className="TabsTriggerLabel">
-              <div className="TabsTriggerIcon">
-                <img
-                  src={
-                    contentState.recordingType === "camera"
-                      ? CameraTabIconOn
-                      : CameraTabIconOff
-                  }
-                />
-              </div>
-              <span>{chrome.i18n.getMessage("cameraType")}</span>
-            </div>
-          </Tabs.Trigger>
           <div className="TabsTriggerSpacer"></div>
           <div className="TabsTrigger">
             <TooltipWrap
@@ -468,9 +448,6 @@ const RecordingTab = (props) => {
           <RecordingType shadowRef={props.shadowRef} />
         </Tabs.Content>
         <Tabs.Content className="TabsContent" value="region">
-          <RecordingType shadowRef={props.shadowRef} />
-        </Tabs.Content>
-        <Tabs.Content className="TabsContent" value="camera">
           <RecordingType shadowRef={props.shadowRef} />
         </Tabs.Content>
       </Tabs.Root>
