@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { loadRecording } from "./loadRecording";
+import { checkAudioSilence } from "./audioCheck";
 
 // DECISION (2026-05-15): Post-recording flows all route here (not Screenity's editor)
 // because the editor is sandboxed, which complicates chrome.* API usage. This page is
@@ -21,6 +22,8 @@ const Generate = () => {
   const [uploadPhase, setUploadPhase] = useState("idle");
   const [uploadProgress, setUploadProgress] = useState(0);
   const [uploadError, setUploadError] = useState("");
+
+  const [audioCheck, setAudioCheck] = useState({ status: "idle", silentFraction: 0 });
 
   const isUploading =
     uploadPhase === "uploading" || uploadPhase === "processing";
@@ -57,6 +60,27 @@ const Generate = () => {
   }, [recording]);
 
   useEffect(() => {
+    if (!recording) return;
+    setAudioCheck({ status: "checking", silentFraction: 0 });
+    checkAudioSilence(recording.blob)
+      .then((result) => {
+        const pct = Math.round(result.silentFraction * 100);
+        if (result.silent) {
+          console.warn(`Audio appears silent: ${pct}% of samples below -50 dB`);
+          setAudioCheck({ status: "silent", silentFraction: result.silentFraction });
+        } else {
+          console.log(`Audio check OK: ${pct}% silent samples`);
+          setAudioCheck({ status: "ok", silentFraction: result.silentFraction });
+        }
+      })
+      .catch((err) => {
+        // Decoder failures shouldn't block the user — treat as "couldn't check".
+        console.warn("Audio level check failed:", err);
+        setAudioCheck({ status: "failed", silentFraction: 0 });
+      });
+  }, [recording]);
+
+  useEffect(() => {
     if (!modalOpen) return;
     const onKey = (e) => {
       if (e.key === "Escape" && !isUploading) setModalOpen(false);
@@ -84,11 +108,17 @@ const Generate = () => {
   const handleDownloadRecording = () => {
     if (!recording) return;
     const date = new Date().toISOString().slice(0, 10);
-    chrome.downloads.download({
-      url: recording.blobUrl,
-      filename: `recording_${date}.${recording.extension}`,
-      saveAs: true,
-    });
+    // Use a synthetic <a download> click rather than chrome.downloads.download:
+    // the latter occasionally rejects blob: URLs from extension pages with a
+    // misleading "check your internet connection" error even though the URL is
+    // local. Anchor-based download via the browser's native mechanism is more
+    // reliable for blob: URLs.
+    const a = document.createElement("a");
+    a.href = recording.blobUrl;
+    a.download = `recording_${date}.${recording.extension}`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
   };
 
   const handleSubmit = async (e) => {
@@ -155,15 +185,49 @@ const Generate = () => {
         )}
       </div>
 
+      {audioCheck.status === "silent" && (
+        <div style={styles.silenceWarning}>
+          <h3 style={styles.silenceWarningHeading}>
+            This recording appears silent
+          </h3>
+          <p style={styles.silenceWarningBody}>
+            {Math.round(audioCheck.silentFraction * 100)}% of audio samples are
+            at or below -50 dB. Common causes: microphone was off, denied at
+            the OS level, or muted in the recorder.
+          </p>
+          <p style={styles.silenceWarningBody}>
+            Without voice narration this recording cannot be used. Re-record
+            while speaking through each step.
+          </p>
+          <div style={styles.silenceWarningActions}>
+            <button
+              style={{ ...styles.button, ...styles.primary }}
+              onClick={handleDiscard}
+            >
+              Discard and re-record
+            </button>
+          </div>
+        </div>
+      )}
+
       <div style={styles.actions}>
         <button
           style={{
             ...styles.button,
             ...styles.primary,
-            ...(recording ? {} : styles.disabledButton),
+            ...(recording && audioCheck.status !== "silent"
+              ? {}
+              : styles.disabledButton),
           }}
           onClick={handleOpenModal}
-          disabled={!recording}
+          disabled={!recording || audioCheck.status === "silent"}
+          title={
+            !recording
+              ? "Recording not loaded yet"
+              : audioCheck.status === "silent"
+              ? "Recording is silent — re-record before generating"
+              : ""
+          }
         >
           Generate Instruction Document
         </button>
@@ -456,6 +520,29 @@ const styles = {
     justifyContent: "flex-end",
     gap: 8,
     marginTop: 20,
+  },
+  silenceWarning: {
+    background: "#fff4e0",
+    border: "2px solid #e89800",
+    borderRadius: 8,
+    padding: 16,
+    marginBottom: 24,
+  },
+  silenceWarningHeading: {
+    fontSize: 16,
+    margin: "0 0 8px",
+    color: "#8a4a00",
+  },
+  silenceWarningBody: {
+    fontSize: 13,
+    margin: "0 0 8px",
+    color: "#444",
+    lineHeight: 1.5,
+  },
+  silenceWarningActions: {
+    display: "flex",
+    gap: 8,
+    marginTop: 12,
   },
 };
 

@@ -4,6 +4,7 @@ Used by `screenshots.py` and `transcription.py` so that timeout, exception
 mapping, and output-file verification stay in one place.
 """
 
+import re
 import subprocess
 from pathlib import Path
 
@@ -51,3 +52,49 @@ def run_ffmpeg(
 
     if not output_path.exists() or output_path.stat().st_size == 0:
         raise HTTPException(status_code=400, detail=f"{failure_label} produced no output")
+
+
+def measure_audio_levels(audio_path: Path) -> tuple[float | None, float | None]:
+    """Return ``(mean_dB, max_dB)`` for the audio file via ffmpeg's ``volumedetect``.
+
+    The pipeline uses this to reject silent recordings before Whisper sees
+    them. On pure silence Whisper hallucinates plausible filler text, which
+    then passes the zero-steps check and yields a meaningless document; an
+    RMS-based gate is the reliable fix.
+
+    Returns ``(None, None)`` if ffmpeg fails or its output cannot be parsed,
+    in which case the caller should fall through to the downstream zero-steps
+    safety net rather than block the request.
+    """
+    try:
+        result = subprocess.run(
+            [
+                "ffmpeg",
+                "-i", str(audio_path),
+                "-af", "volumedetect",
+                "-f", "null",
+                "-",
+                "-hide_banner",
+            ],
+            capture_output=True,
+            text=True,
+            timeout=FFMPEG_TIMEOUT_SECONDS,
+            check=False,
+        )
+    except (FileNotFoundError, subprocess.TimeoutExpired):
+        return None, None
+
+    # volumedetect writes its summary to stderr regardless of -f null.
+    output = result.stderr
+    mean = _parse_db(re.search(r"mean_volume:\s*(-?[\d.]+|-?inf)\s*dB", output))
+    peak = _parse_db(re.search(r"max_volume:\s*(-?[\d.]+|-?inf)\s*dB", output))
+    return mean, peak
+
+
+def _parse_db(match: re.Match | None) -> float | None:
+    if not match:
+        return None
+    val = match.group(1)
+    if "inf" in val:
+        return float("-inf")
+    return float(val)

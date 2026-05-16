@@ -20,6 +20,7 @@ from pathlib import Path
 from fastapi import HTTPException
 
 from app.document import render_document
+from app.ffmpeg_utils import measure_audio_levels
 from app.polishing import polish_steps
 from app.screenshots import extract_frame, resize_screenshot
 from app.segmentation import segment_transcript
@@ -46,6 +47,13 @@ CANDIDATES_LONG = 2    # steps longer than LONG_STEP_THRESHOLD_SECONDS
 # extend (clamped to the video's duration). Lets us catch the page
 # settling during the silence after the narrator finishes.
 LAST_STEP_TAIL_SECONDS = 1.5
+
+# Reject recordings whose mean audio level is at or below this threshold.
+# On pure silence Whisper hallucinates plausible filler text, which would
+# otherwise pass the downstream zero-steps check and produce a meaningless
+# document. Matches the extension's pre-upload warning threshold so the
+# rejection is consistent with what users were warned about.
+SILENT_MEAN_THRESHOLD_DB = -50.0
 
 
 def _compute_candidate_timestamps(
@@ -144,6 +152,23 @@ async def process_video(
     async with PIPELINE_SEMAPHORE:
         with _step(request_id, "extract_audio"):
             audio_path = extract_audio(video_path, workdir)
+
+        with _step(request_id, "check_audio_level"):
+            mean_db, max_db = measure_audio_levels(audio_path)
+            print(
+                f"[{request_id}] audio levels: mean={mean_db} dB, max={max_db} dB"
+            )
+            if mean_db is not None and mean_db <= SILENT_MEAN_THRESHOLD_DB:
+                level_str = "-inf" if mean_db == float("-inf") else f"{mean_db:.1f}"
+                raise HTTPException(
+                    status_code=400,
+                    detail=(
+                        f"This recording is silent or near-silent (mean audio "
+                        f"level {level_str} dB). Re-record while speaking through "
+                        f"each step. The tool needs your voice to generate the "
+                        f"instructions."
+                    ),
+                )
 
         with _step(request_id, "transcribe"):
             transcript = transcribe(audio_path)
