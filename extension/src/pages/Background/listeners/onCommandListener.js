@@ -26,8 +26,7 @@ export const onCommandListener = () => {
         !(
           tabUrl.startsWith("chrome://") ||
           (tabUrl.startsWith("chrome-extension://") &&
-            !tabUrl.includes("/playground.html") &&
-            !tabUrl.includes("/setup.html"))
+            !tabUrl.includes("/playground.html"))
         ) &&
         !tabUrl.includes("stackoverflow.com/") &&
         !tabUrl.includes("chrome.google.com/webstore") &&

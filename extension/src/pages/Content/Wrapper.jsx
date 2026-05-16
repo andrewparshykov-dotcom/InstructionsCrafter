@@ -248,9 +248,6 @@ const Wrapper = () => {
                   position: "fixed",
                   background:
                     window.location.href.indexOf(
-                      chrome.runtime.getURL("setup.html")
-                    ) === -1 &&
-                    window.location.href.indexOf(
                       chrome.runtime.getURL("playground.html")
                     ) === -1 &&
                     !contentState.pendingRecording &&
@@ -268,9 +265,6 @@ const Wrapper = () => {
                   if (onboardingActive) return;
 
                   if (
-                    window.location.href.indexOf(
-                      chrome.runtime.getURL("setup.html")
-                    ) === -1 &&
                     window.location.href.indexOf(
                       chrome.runtime.getURL("playground.html")
                     ) === -1 &&

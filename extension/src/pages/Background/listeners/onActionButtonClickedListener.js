@@ -118,11 +118,10 @@ const openPlaygroundOrPopup = async (tab) => {
 
   const tabUrl = String(tab?.url || "");
   const isForbidden = forbiddenURLs.some((url) => tabUrl.startsWith(url));
-  const isPlaygroundOrSetup =
-    tabUrl.includes("/playground.html") || tabUrl.includes("/setup.html");
+  const isPlayground = tabUrl.includes("/playground.html");
 
   // never gate on navigator.onLine; that caused duplicate playground tabs
-  if (!isForbidden || isPlaygroundOrSetup) {
+  if (!isForbidden || isPlayground) {
     sendMessageTab(tab.id, { type: "toggle-popup" })
       .then(() => console.log("[Screenity][ActionClick] toggle-popup delivered to tab", tab.id))
       .catch((err) => console.error("[Screenity][ActionClick] toggle-popup FAILED to tab", tab.id, String(err).slice(0, 120)));
@@ -261,13 +260,6 @@ export const onActionButtonClickedListener = () => {
           activeSceneId: null,
         });
         await openPlaygroundOrPopup(tab);
-      }
-
-      const { firstTime } = await chrome.storage.local.get(["firstTime"]);
-      if (firstTime && tab.url.includes(chrome.runtime.getURL("setup.html"))) {
-        chrome.storage.local.set({ firstTime: false });
-        const activeTab = await getCurrentTab();
-        sendMessageTab(activeTab.id, { type: "setup-complete" });
       }
     } catch (error) {
       console.error("Error handling action click:", error);

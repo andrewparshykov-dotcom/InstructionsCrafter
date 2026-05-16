@@ -35,7 +35,6 @@
         "content.styles.css",
         "blank.mp4",
         "assets/*",
-        "setup.html",
         "worker.js",
         "vendor/*",
         "recorder.html",

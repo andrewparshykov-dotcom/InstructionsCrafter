@@ -74,25 +74,6 @@ const openRecorderTab = async (
 
   const finalUrl = isRegion ? `${recorderUrl}?tab=true` : recorderUrl;
 
-  // Close leftover setup.html tabs to prevent them stealing focus from
-  // the editor after recording stops. Skip the active source tab: a
-  // freshly-installed user can click Record directly from setup.html,
-  // and closing the source tab mid-acquisition fires REC_START_SOURCE_TAB_GONE.
-  try {
-    const setupUrl = chrome.runtime.getURL("setup.html");
-    const allTabs = await chrome.tabs.query({});
-    const stale = allTabs.filter(
-      (t) =>
-        t.id != null &&
-        t.id !== activeTab?.id &&
-        t.url &&
-        t.url.startsWith(setupUrl),
-    );
-    if (stale.length > 0) {
-      await chrome.tabs.remove(stale.map((t) => t.id));
-    }
-  } catch {}
-
   const endTabCreate = perfSpan("BG.openRecorderTab tabs.create");
   const tab = await chrome.tabs.create({
     url: finalUrl,

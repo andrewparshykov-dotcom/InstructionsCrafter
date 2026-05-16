@@ -3,7 +3,7 @@
   "properties": {
     "skipSetup": {
       "type": "boolean",
-      "description": "If true, prevents setup.html from opening on install."
+      "description": "If true, prevents welcome.html from opening on install."
     }
   }
 }
