@@ -25,23 +25,6 @@ window.addEventListener("unhandledrejection", (e) => {
   });
 });
 
-chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
-  if (msg?.type === "resume-pending-uploads" && Array.isArray(msg.journals)) {
-    (async () => {
-      try {
-        const { resumeAllJournals } = await import("./resumeJournal");
-        const results = await resumeAllJournals(msg.journals);
-        sendResponse({ ok: true, results });
-      } catch (err) {
-        console.error("[OffscreenRecorder] resume failed:", err);
-        sendResponse({ ok: false, error: err?.message || String(err) });
-      }
-    })();
-    return true;
-  }
-  return false;
-});
-
 import React from "react";
 import { createRoot } from "react-dom/client";
 import OffscreenRecorder from "./OffscreenRecorder";

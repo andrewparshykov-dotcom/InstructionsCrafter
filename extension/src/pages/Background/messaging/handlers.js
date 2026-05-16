@@ -16,8 +16,8 @@ import {
 } from "../recording/stopRecording";
 import { sendChunks } from "../recording/sendChunks";
 import { chunksStore } from "../recording/chunkHandler";
-import { openExistingChunksStore } from "../../CloudRecorder/recorderStorage/chooseChunksStore";
-import { destroySessionDir } from "../../CloudRecorder/recorderStorage/opfsKvStore";
+import { openExistingChunksStore } from "../chunkStorage/chooseChunksStore";
+import { destroySessionDir } from "../chunkStorage/opfsKvStore";
 import { addAlarmListener } from "../alarms/addAlarmListener";
 import { cancelRecording, handleDismiss } from "../recording/cancelRecording";
 import { handleDismissRecordingTab } from "../recording/discardRecording";

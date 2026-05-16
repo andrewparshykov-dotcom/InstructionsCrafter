@@ -10,7 +10,7 @@ import { initLifecycleObserver } from "./lifecycleObserver";
 import {
   listSessionDirs,
   destroySessionDir,
-} from "../CloudRecorder/recorderStorage/opfsKvStore";
+} from "./chunkStorage/opfsKvStore";
 import { handleGetStreamingData } from "./recording/recordingHelpers";
 
 // Must run before any message/alarm handler can bail on a stale lock.

@@ -12,7 +12,6 @@ const isDev = env.NODE_ENV === "development";
 // drops post-recording UI + WASM. recording + camera paths preserved.
 const isBsBuild = process.env.SCREENITY_BS_BUILD === "1";
 const BS_DROPPED_ENTRIES = new Set([
-  "cloudrecorder",
   "backup",
   "download",
   "waveform",
@@ -41,13 +40,6 @@ const entryPoints = {
     "pages",
     "Recorder",
     "recorderKeepalive.js"
-  ),
-  cloudrecorder: path.join(
-    __dirname,
-    "src",
-    "pages",
-    "CloudRecorder",
-    "index.jsx"
   ),
   offscreenrecorder: path.join(
     __dirname,
@@ -122,7 +114,6 @@ const htmlPlugins = Object.keys(entryPoints)
 
     // Map entry names to folder names (for multi-word entries)
     const folderNameMap = {
-      cloudrecorder: "CloudRecorder",
       offscreenrecorder: "OffscreenRecorder",
       audiooffscreen: "AudioOffscreen",
       remuxoffscreen: "RemuxOffscreen",

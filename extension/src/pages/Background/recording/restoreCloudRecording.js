@@ -1,6 +1,6 @@
 import { createTab, sendMessageTab } from "../tabManagement";
 import { resetWatchdogState } from "./resetWatchdogState";
-import { openExistingChunksStore } from "../../CloudRecorder/recorderStorage/chooseChunksStore";
+import { openExistingChunksStore } from "../chunkStorage/chooseChunksStore";
 
 const RECOVERABLE_CLOUD_STATUSES = new Set([
   "recording",
