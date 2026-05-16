@@ -47,7 +47,6 @@ export const updateFromStorage = (check = true, id = null) => {
       "askForPermissions",
       "cursorMode",
       "cursorEffects",
-      "pushToTalk",
       "askMicrophone",
       "offscreenRecording",
       "zoomEnabled",
@@ -218,10 +217,6 @@ export const updateFromStorage = (check = true, id = null) => {
           cursorEffects.length > 0 || hasStoredEffects
             ? cursorEffects
             : prevContentState.cursorEffects,
-        pushToTalk:
-          result.pushToTalk !== undefined && result.pushToTalk !== null
-            ? result.pushToTalk
-            : prevContentState.pushToTalk,
         zoomEnabled:
           result.zoomEnabled !== undefined && result.zoomEnabled !== null
             ? result.zoomEnabled

@@ -245,11 +245,10 @@ const RecordingType = (props) => {
       {contentState.microphonePermission && (
         <Dropdown type="mic" shadowRef={props.shadowRef} />
       )}
-      {((!contentState.isLoggedIn &&
+      {!contentState.isLoggedIn &&
         contentState.microphonePermission &&
         contentState.defaultAudioInput != "none" &&
-        contentState.micActive) ||
-        (contentState.microphonePermission && contentState.pushToTalk)) && (
+        contentState.micActive && (
         <div>
           <iframe
             className="screenity-iframe"
@@ -262,15 +261,6 @@ const RecordingType = (props) => {
             allow="camera; microphone"
             src={chrome.runtime.getURL("waveform.html")}
           ></iframe>
-          <Switch
-            label={
-              isMac
-                ? chrome.i18n.getMessage("pushToTalkLabel") + " (⌥⇧U)"
-                : chrome.i18n.getMessage("pushToTalkLabel") + " (Alt⇧U)"
-            }
-            name="pushToTalk"
-            value="pushToTalk"
-          />
         </div>
       )}
       {contentState.recordingType === "region" && cropActive && (

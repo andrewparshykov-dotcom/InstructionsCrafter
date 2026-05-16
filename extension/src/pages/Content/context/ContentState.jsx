@@ -1031,7 +1031,6 @@ const ContentState = (props) => {
     cursorEffects: [],
     shape: "rectangle",
     shapeFill: false,
-    pushToTalk: false,
     zoomEnabled: false,
     offscreenRecording: false,
     isAddingImage: false,
@@ -1677,25 +1676,6 @@ const ContentState = (props) => {
       chrome.storage.local.set({ qualityValue: suggested });
     }
   }, []);
-
-  useEffect(() => {
-    if (contentState.pushToTalk) {
-      setContentState((prevContentState) => ({
-        ...prevContentState,
-        micActive: false,
-      }));
-
-      chrome.storage.local.set({
-        micActive: false,
-      });
-
-      chrome.runtime.sendMessage({
-        type: "set-mic-active-tab",
-        active: false,
-        defaultAudioInput: contentState.defaultAudioInput,
-      });
-    }
-  }, [contentState.pushToTalk]);
 
   useEffect(() => {
     if (contentState.backgroundEffectsActive) {

@@ -238,13 +238,6 @@ const Switch = (props) => {
                     toolbarHover: true,
                   });
                 }
-              } else if (props.name === "pushToTalk") {
-                if (!checked) {
-                  setContentState((prevContentState) => ({
-                    ...prevContentState,
-                    micActive: true,
-                  }));
-                }
               }
 
               if (typeof props.onChange === "function") {

@@ -46,7 +46,7 @@ const Dropdown = (props) => {
     } else {
       if (
         contentState.defaultAudioInput === "none" ||
-        (!contentState.micActive && !contentState.pushToTalk)
+        !contentState.micActive
       ) {
         setLabel(chrome.i18n.getMessage("noMicrophoneDropdownLabel"));
       } else {
@@ -152,8 +152,7 @@ const Dropdown = (props) => {
           ? contentState.defaultVideoInput
           : props.type === "camera" && !contentState.cameraActive
           ? "none"
-          : props.type === "mic" &&
-            (contentState.micActive || contentState.pushToTalk)
+          : props.type === "mic" && contentState.micActive
           ? contentState.defaultAudioInput
           : props.type === "mic" && !contentState.micActive
           ? "none"
@@ -308,7 +307,7 @@ const Dropdown = (props) => {
           )}
         {props.type == "mic" &&
           (contentState.defaultAudioInput == "none" ||
-            (!contentState.micActive && !contentState.pushToTalk)) && (
+            !contentState.micActive) && (
             <div className="SelectOff">
               {chrome.i18n.getMessage("offLabel")}
             </div>
