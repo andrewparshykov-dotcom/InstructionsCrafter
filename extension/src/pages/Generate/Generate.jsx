@@ -251,12 +251,6 @@ const Generate = () => {
         >
           Download recording
         </button>
-        <button
-          style={{ ...styles.button, ...styles.secondary }}
-          onClick={handleDiscard}
-        >
-          Discard
-        </button>
       </div>
 
       {modalOpen && (
