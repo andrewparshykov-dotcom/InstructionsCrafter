@@ -12,7 +12,6 @@ import {
 } from "../../images/popup/images";
 
 import { BaseSwitch } from "../components/Switch";
-import TooltipWrap from "../components/TooltipWrap";
 
 // Context
 import { contentStateContext } from "../../context/ContentState";
@@ -20,43 +19,7 @@ import { contentStateContext } from "../../context/ContentState";
 const RecordingTab = (props) => {
   const [contentState, setContentState] = useContext(contentStateContext);
 
-  const [tabRecordingDisabled, setTabRecordingDisabled] = useState(false);
-  const [showModalSoon, setShowModalSoon] = useState(false); // 👈 NEW
-
-  useEffect(() => {
-    if (tabRecordingDisabled && contentState.recordingType === "region") {
-      setContentState((prev) => ({
-        ...prev,
-        recordingType: "screen",
-      }));
-      chrome.storage.local.set({ recordingType: "screen" });
-
-      contentState.openToast?.(
-        chrome.i18n.getMessage("tabRecordingDisabledToast"),
-        4000
-      );
-    }
-  }, [tabRecordingDisabled]);
-
-  useEffect(() => {
-    const currentUrl = window.location.href;
-    const isBlocked = currentUrl.includes(process.env.SCREENITY_APP_BASE);
-
-    setTabRecordingDisabled(isBlocked);
-
-    if (isBlocked && contentState.recordingType === "region") {
-      setContentState((prev) => ({
-        ...prev,
-        recordingType: "screen",
-      }));
-      chrome.storage.local.set({ recordingType: "screen" });
-
-      contentState.openToast?.(
-        chrome.i18n.getMessage("tabRecordingDisabledToast"),
-        4000
-      );
-    }
-  }, [contentState.recordingType]);
+  const [showModalSoon, setShowModalSoon] = useState(false);
 
   const onValueChange = (tab) => {
     setContentState((prevContentState) => ({
@@ -151,46 +114,20 @@ const RecordingTab = (props) => {
               <span>{chrome.i18n.getMessage("screenType")}</span>
             </div>
           </Tabs.Trigger>
-          <TooltipWrap
-            content={
-              tabRecordingDisabled
-                ? chrome.i18n.getMessage("tabRecordingDisabledTooltip") ||
-                  "Tab recording is disabled on this page."
-                : ""
-            }
-            side={"bottom"}
-          >
-            <Tabs.Trigger
-              className="TabsTrigger"
-              value="region"
-              tabIndex={0}
-              disabled={tabRecordingDisabled}
-              onClick={(e) => {
-                if (tabRecordingDisabled) {
-                  e.preventDefault();
-                  e.stopPropagation();
-                }
-              }}
-              style={
-                tabRecordingDisabled
-                  ? { cursor: "not-allowed", opacity: 0.5 }
-                  : {}
-              }
-            >
-              <div className="TabsTriggerLabel">
-                <div className="TabsTriggerIcon">
-                  <img
-                    src={
-                      contentState.recordingType === "region"
-                        ? RegionTabOn
-                        : RegionTabOff
-                    }
-                  />
-                </div>
-                <span>{chrome.i18n.getMessage("tabType")}</span>
+          <Tabs.Trigger className="TabsTrigger" value="region" tabIndex={0}>
+            <div className="TabsTriggerLabel">
+              <div className="TabsTriggerIcon">
+                <img
+                  src={
+                    contentState.recordingType === "region"
+                      ? RegionTabOn
+                      : RegionTabOff
+                  }
+                />
               </div>
-            </Tabs.Trigger>
-          </TooltipWrap>
+              <span>{chrome.i18n.getMessage("tabType")}</span>
+            </div>
+          </Tabs.Trigger>
         </Tabs.List>
 
         {showModalSoon && (
