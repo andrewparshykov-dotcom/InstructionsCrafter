@@ -36,7 +36,6 @@ import {
   OnboardingArrow,
   CloseButtonToolbar,
 } from "../components/SVG";
-import MicToggle from "../components/MicToggle";
 
 const ToolbarWrap = () => {
   const [contentState, setContentState, t, setT] =
@@ -588,8 +587,6 @@ const ToolbarWrap = () => {
                 setMode={setMode}
               />
             </div>
-            <Toolbar.Separator className="ToolbarSeparator" />
-            <MicToggle />
           </Toolbar.ToggleGroup>
         </Toolbar.Root>
       </Rnd>
