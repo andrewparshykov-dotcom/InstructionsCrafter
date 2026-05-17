@@ -1043,7 +1043,6 @@ const ContentState = (props) => {
     permissionsLoaded: false,
     parentRef: null,
     shadowRef: null,
-    settingsOpen: false,
     hideUIAlerts: false,
     toolbarHover: false,
     hideUI: false,
