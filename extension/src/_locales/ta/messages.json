@@ -139,10 +139,6 @@
     "message": "உயரம்",
     "description": "பிரிவு உயர செய்தி"
   },
-  "addImageToastTitle": {
-    "message": "படம் வைக்க கிளிக் செய்யவும்",
-    "description": "புதிய படம் சேர்க்கும் போப்அப் தலைப்பு"
-  },
   "finishRecordingTooltip": {
     "message": "பதிவு முடிக்க",
     "description": "பதிவு முடிக்க குழப்பு"
@@ -206,10 +202,6 @@
   "arrowToolTooltip": {
     "message": "அம்பு கருவி",
     "description": "அம்பு கருவி உத்திபத்தி"
-  },
-  "imageToolTooltip": {
-    "message": "படம் கருவி",
-    "description": "படம் கருவி உத்திபத்தி"
   },
   "undoTooltip": {
     "message": "மீட்டமை",

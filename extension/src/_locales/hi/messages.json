@@ -139,10 +139,6 @@
     "message": "ऊंचाई",
     "description": "क्षेत्र ऊंचाई लेबल"
   },
-  "addImageToastTitle": {
-    "message": "छवि डालने के लिए क्लिक करें",
-    "description": "नई छवि जोड़ते समय टोस्ट"
-  },
   "finishRecordingTooltip": {
     "message": "रिकॉर्डिंग समाप्त करें",
     "description": "रिकॉर्डिंग समाप्त करने की टूलटिप"
@@ -206,10 +202,6 @@
   "arrowToolTooltip": {
     "message": "तीर टूल",
     "description": "तीर टूलटिप"
-  },
-  "imageToolTooltip": {
-    "message": "छवि टूल",
-    "description": "छवि टूलटिप"
   },
   "undoTooltip": {
     "message": "पूर्ववत करें",

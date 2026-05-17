@@ -139,10 +139,6 @@
     "message": "높이",
     "description": "Region height label"
   },
-  "addImageToastTitle": {
-    "message": "이미지 추가하려면 클릭",
-    "description": "Toast that shows when adding a new image"
-  },
   "finishRecordingTooltip": {
     "message": "녹화 종료",
     "description": "Finish recording tooltip"
@@ -206,10 +202,6 @@
   "arrowToolTooltip": {
     "message": "화살표 도구",
     "description": "Arrow tool tooltip"
-  },
-  "imageToolTooltip": {
-    "message": "이미지 도구",
-    "description": "Image tool tooltip"
   },
   "undoTooltip": {
     "message": "되돌리기",

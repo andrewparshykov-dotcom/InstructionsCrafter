@@ -139,10 +139,6 @@
     "message": "高度",
     "description": "Region height label"
   },
-  "addImageToastTitle": {
-    "message": "點擊以放置圖片",
-    "description": "Toast that shows when adding a new image"
-  },
   "finishRecordingTooltip": {
     "message": "完成錄製",
     "description": "Finish recording tooltip"
@@ -206,10 +202,6 @@
   "arrowToolTooltip": {
     "message": "箭頭工具",
     "description": "Arrow tool tooltip"
-  },
-  "imageToolTooltip": {
-    "message": "圖片工具",
-    "description": "Image tool tooltip"
   },
   "undoTooltip": {
     "message": "復原",

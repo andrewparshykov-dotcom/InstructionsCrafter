@@ -139,10 +139,6 @@
     "message": "Yükseklik",
     "description": "Bölge yüksekliği etiketi"
   },
-  "addImageToastTitle": {
-    "message": "Resim eklemek için tıklayın",
-    "description": "Yeni bir resim eklenirken gösterilen bilgilendirme penceresi"
-  },
   "finishRecordingTooltip": {
     "message": "Kaydı Bitir",
     "description": "Kaydı Bitir araç ipucu"
@@ -206,10 +202,6 @@
   "arrowToolTooltip": {
     "message": "Ok Aracı",
     "description": "Ok Aracı araç ipucu"
-  },
-  "imageToolTooltip": {
-    "message": "Resim Aracı",
-    "description": "Resim Aracı araç ipucu"
   },
   "undoTooltip": {
     "message": "Geri Al",

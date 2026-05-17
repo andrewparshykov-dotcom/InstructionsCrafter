@@ -1031,7 +1031,6 @@ const ContentState = (props) => {
     cursorEffects: [],
     zoomEnabled: false,
     offscreenRecording: false,
-    isAddingImage: false,
     pipEnded: false,
     tabCaptureFrame: false,
     showOnboardingArrow: false,

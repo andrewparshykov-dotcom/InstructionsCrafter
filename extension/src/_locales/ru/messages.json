@@ -139,10 +139,6 @@
     "message": "Высота",
     "description": "Метка для высоты области"
   },
-  "addImageToastTitle": {
-    "message": "Щелкните, чтобы разместить изображение",
-    "description": "Всплывающее уведомление при добавлении нового изображения"
-  },
   "finishRecordingTooltip": {
     "message": "Завершить запись",
     "description": "Подсказка для завершения записи"
@@ -206,10 +202,6 @@
   "arrowToolTooltip": {
     "message": "Инструмент Стрелка",
     "description": "Подсказка для инструмента Стрелка"
-  },
-  "imageToolTooltip": {
-    "message": "Инструмент Изображение",
-    "description": "Подсказка для инструмента Изображение"
   },
   "undoTooltip": {
     "message": "Отменить",

@@ -139,10 +139,6 @@
     "message": "Hauteur",
     "description": "Étiquette de hauteur de la région"
   },
-  "addImageToastTitle": {
-    "message": "Cliquez pour placer l'image",
-    "description": "Message d'alerte lors de l'ajout d'une nouvelle image"
-  },
   "finishRecordingTooltip": {
     "message": "Terminer l'enregistrement",
     "description": "Conseil pour terminer l'enregistrement"
@@ -206,10 +202,6 @@
   "arrowToolTooltip": {
     "message": "Flèche",
     "description": "Conseil pour l'outil de flèche"
-  },
-  "imageToolTooltip": {
-    "message": "Images",
-    "description": "Conseil pour l'outil d'image"
   },
   "undoTooltip": {
     "message": "Annuler",

@@ -273,16 +273,6 @@ const RedoIcon = (props) => {
   );
 };
 
-const ImageIcon = (props) => {
-  return (
-    <ReactSVG
-      src={URL + "tool-icons/image-icon.svg"}
-      width={props.width}
-      height={props.height}
-    />
-  );
-};
-
 const TransformIcon = (props) => {
   return (
     <ReactSVG
@@ -527,7 +517,6 @@ export {
   SelectIcon,
   UndoIcon,
   RedoIcon,
-  ImageIcon,
   TransformIcon,
   HighlighterIcon,
   TrashIcon,

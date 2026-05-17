@@ -139,10 +139,6 @@
     "message": "Wysokość",
     "description": "Etykieta wysokości regionu"
   },
-  "addImageToastTitle": {
-    "message": "Kliknij, aby umieścić obraz",
-    "description": "Powiadomienie toast, które pojawia się podczas dodawania nowego obrazu"
-  },
   "finishRecordingTooltip": {
     "message": "Zakończ nagrywanie",
     "description": "Podpowiedź Zakończ nagrywanie"
@@ -206,10 +202,6 @@
   "arrowToolTooltip": {
     "message": "Narzędzie strzałki",
     "description": "Podpowiedź narzędzia strzałki"
-  },
-  "imageToolTooltip": {
-    "message": "Narzędzie obrazu",
-    "description": "Podpowiedź narzędzia obrazu"
   },
   "undoTooltip": {
     "message": "Cofnij",

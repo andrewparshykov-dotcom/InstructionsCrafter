@@ -139,10 +139,6 @@
     "message": "Alçada",
     "description": "Etiqueta de l'alçada de la regió"
   },
-  "addImageToastTitle": {
-    "message": "Fes clic per col·locar una imatge",
-    "description": "Missatge emergent que apareix en afegir una nova imatge"
-  },
   "finishRecordingTooltip": {
     "message": "Finalitza la gravació",
     "description": "Missatge emergent 'Finalitza la gravació'"
@@ -206,10 +202,6 @@
   "arrowToolTooltip": {
     "message": "Fletxa",
     "description": "Missatge emergent 'Eina de fletxa'"
-  },
-  "imageToolTooltip": {
-    "message": "Imatges",
-    "description": "Missatge emergent 'Eina d'imatge'"
   },
   "undoTooltip": {
     "message": "Desfés",

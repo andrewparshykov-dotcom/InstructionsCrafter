@@ -139,10 +139,6 @@
     "message": "Tinggi",
     "description": "Label tinggi daerah"
   },
-  "addImageToastTitle": {
-    "message": "Klik untuk menempatkan gambar",
-    "description": "Pemberitahuan ketika menambahkan gambar baru"
-  },
   "finishRecordingTooltip": {
     "message": "Selesaikan perekaman",
     "description": "Petunjuk untuk menyelesaikan perekaman"
@@ -206,10 +202,6 @@
   "arrowToolTooltip": {
     "message": "Alat panah",
     "description": "Petunjuk untuk alat panah"
-  },
-  "imageToolTooltip": {
-    "message": "Alat gambar",
-    "description": "Petunjuk untuk alat gambar"
   },
   "undoTooltip": {
     "message": "Batalkan",

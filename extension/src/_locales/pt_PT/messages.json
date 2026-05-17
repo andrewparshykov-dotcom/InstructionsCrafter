@@ -139,10 +139,6 @@
     "message": "Altura",
     "description": "Etiqueta de altura de região"
   },
-  "addImageToastTitle": {
-    "message": "Clica para colocar a imagem",
-    "description": "Brinde que aparece ao adicionar uma nova imagem"
-  },
   "finishRecordingTooltip": {
     "message": "Terminar gravação",
     "description": "Dica de terminar gravação"
@@ -206,10 +202,6 @@
   "arrowToolTooltip": {
     "message": "Ferramenta de seta",
     "description": "Dica de ferramenta de seta"
-  },
-  "imageToolTooltip": {
-    "message": "Ferramenta de imagem",
-    "description": "Dica de ferramenta de imagem"
   },
   "undoTooltip": {
     "message": "Desfazer",

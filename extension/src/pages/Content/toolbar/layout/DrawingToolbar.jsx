@@ -1,10 +1,4 @@
-import React, {
-  useRef,
-  useEffect,
-  useCallback,
-  useContext,
-  useState,
-} from "react";
+import React, { useEffect, useContext, useState } from "react";
 import * as Toolbar from "@radix-ui/react-toolbar";
 
 // Components
@@ -23,7 +17,6 @@ import {
   DrawIcon,
   EraserIcon,
   ArrowIcon,
-  ImageIcon,
   UndoIcon,
   RedoIcon,
   TransformIcon,
@@ -34,7 +27,6 @@ import {
 // Rewrite imports above with the chrome-extension URL inline
 
 import TooltipWrap from "../components/TooltipWrap";
-import ImageTool from "../../canvas/modules/ImageTool";
 
 // Context
 import { contentStateContext } from "../../context/ContentState";
@@ -42,55 +34,10 @@ import { contentStateContext } from "../../context/ContentState";
 const DrawingToolbar = (props) => {
   const [contentState, setContentState] = useContext(contentStateContext);
   const [tool, setTool] = useState("");
-  const contentStateRef = useRef(contentState);
-  useEffect(() => {
-    contentStateRef.current = contentState;
-  }, [contentState]);
-
-  const imageFileInput = useRef(null);
 
   useEffect(() => {
     setTool(contentState.tool);
   }, [contentState.tool]);
-
-  const handleImageChange = useCallback(
-    (e) => {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        setContentState((prevContentState) => ({
-          ...prevContentState,
-          isAddingImage: true,
-        }));
-
-        // De-select all objects
-        contentState.canvas.discardActiveObject();
-        contentState.canvas.requestRenderAll();
-
-        // Make all objects unselectable
-        contentState.canvas.forEachObject((obj) => {
-          obj.selectable = false;
-        });
-
-        const imgTool = ImageTool(
-          contentState.canvas,
-          e.target.result,
-          contentState,
-          setContentState,
-          saveCanvas,
-          contentStateRef.current
-        );
-
-        imageFileInput.current.value = "";
-
-        return () => {
-          imgTool.removeEventListeners();
-        };
-      };
-
-      reader.readAsDataURL(e.target.files[0]);
-    },
-    [contentState, setContentState, saveCanvas]
-  );
 
   return (
     <Toolbar.Root
@@ -149,24 +96,6 @@ const DrawingToolbar = (props) => {
           shortcut="6"
         >
           <ArrowIcon />
-        </ToolTrigger>
-        <ToolTrigger
-          type="button"
-          value="image"
-          content={chrome.i18n.getMessage("imageToolTooltip")}
-          shortcut="7"
-          onClick={(e) => imageFileInput.current.click()}
-        >
-          <ImageIcon />
-          <input
-            type="file"
-            id="file"
-            accept="image/*"
-            style={{ display: "none" }}
-            ref={imageFileInput}
-            data-image-upload="true"
-            onChange={handleImageChange}
-          />
         </ToolTrigger>
       </Toolbar.ToggleGroup>
       <Toolbar.Separator className="ToolbarSeparator" />

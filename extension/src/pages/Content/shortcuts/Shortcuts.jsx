@@ -88,16 +88,6 @@ const Shortcuts = ({ shortcuts }) => {
       }
     };
 
-    const openImagePicker = () => {
-      const shadowRoot = getShadowRoot();
-      const fileInput = shadowRoot
-        ? shadowRoot.querySelector('[data-image-upload="true"]')
-        : document.querySelector('[data-image-upload="true"]');
-      if (fileInput) {
-        fileInput.click();
-      }
-    };
-
     const deriveCursorMode = (effects, fallback) => {
       if (effects.length === 0) return "none";
       if (effects.length === 1) return effects[0];
@@ -181,9 +171,6 @@ const Shortcuts = ({ shortcuts }) => {
             break;
           case "6":
             setTool("arrow");
-            break;
-          case "7":
-            openImagePicker();
             break;
           case "0":
             clearDrawings();

@@ -8,7 +8,6 @@ const SelectTool = (canvas, contentStateRef, setContentState) => {
     const state = getState();
     if (!state) return;
     if (state.tool !== "select") return;
-    if (state.isAddingImage) return;
     if (!o.target) return;
 
     if (o.target !== canvas.getActiveObject()) {
@@ -60,7 +59,6 @@ const SelectTool = (canvas, contentStateRef, setContentState) => {
   const onMouseDown = (o) => {
     const state = getState();
     if (!state) return;
-    if (state.isAddingImage) return;
     if (state.tool !== "select") return;
     if (!o.target?.canvas?.contextTop) return;
 

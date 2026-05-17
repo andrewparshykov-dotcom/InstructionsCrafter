@@ -139,10 +139,6 @@
     "message": "Висота",
     "description": "Region height label"
   },
-  "addImageToastTitle": {
-    "message": "Клацніть, щоб вставити зображення",
-    "description": "Toast that shows when adding a new image"
-  },
   "finishRecordingTooltip": {
     "message": "Завершити запис",
     "description": "Finish recording tooltip"
@@ -206,10 +202,6 @@
   "arrowToolTooltip": {
     "message": "Інструмент стрілки",
     "description": "Arrow tool tooltip"
-  },
-  "imageToolTooltip": {
-    "message": "Інструмент зображення",
-    "description": "Image tool tooltip"
   },
   "undoTooltip": {
     "message": "Скасувати",

@@ -139,10 +139,6 @@
     "message": "Height",
     "description": "Region height label"
   },
-  "addImageToastTitle": {
-    "message": "Click to place image",
-    "description": "Toast that shows when adding a new image"
-  },
   "finishRecordingTooltip": {
     "message": "Finish recording",
     "description": "Finish recording tooltip"
@@ -206,10 +202,6 @@
   "arrowToolTooltip": {
     "message": "Arrow tool",
     "description": "Arrow tool tooltip"
-  },
-  "imageToolTooltip": {
-    "message": "Image tool",
-    "description": "Image tool tooltip"
   },
   "undoTooltip": {
     "message": "Undo",

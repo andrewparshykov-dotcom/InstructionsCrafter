@@ -139,10 +139,6 @@
     "message": "Höhe",
     "description": "Beschreibung für das Höhen-Label"
   },
-  "addImageToastTitle": {
-    "message": "Klicken Sie, um ein Bild einzufügen",
-    "description": "Toast-Nachricht, die angezeigt wird, wenn ein neues Bild hinzugefügt wird"
-  },
   "finishRecordingTooltip": {
     "message": "Aufnahme beenden",
     "description": "Tooltip für das Beenden der Aufnahme"
@@ -206,10 +202,6 @@
   "arrowToolTooltip": {
     "message": "Pfeil-Werkzeug",
     "description": "Tooltip für das Pfeil-Werkzeug"
-  },
-  "imageToolTooltip": {
-    "message": "Bild-Werkzeug",
-    "description": "Tooltip für das Bild-Werkzeug"
   },
   "undoTooltip": {
     "message": "Rückgängig machen",

@@ -139,10 +139,6 @@
     "message": "Altezza",
     "description": "Etichetta per l'altezza della regione"
   },
-  "addImageToastTitle": {
-    "message": "Clicca per inserire l'immagine",
-    "description": "Messaggio a comparsa al momento dell'inserimento di una nuova immagine"
-  },
   "finishRecordingTooltip": {
     "message": "Termina la registrazione",
     "description": "Suggerimento per terminare la registrazione"
@@ -206,10 +202,6 @@
   "arrowToolTooltip": {
     "message": "Freccia",
     "description": "Suggerimento per lo strumento freccia"
-  },
-  "imageToolTooltip": {
-    "message": "Immagini",
-    "description": "Suggerimento per lo strumento immagini"
   },
   "undoTooltip": {
     "message": "Annulla",

@@ -139,10 +139,6 @@
     "message": "Alto",
     "description": "Etiqueta de alto de región"
   },
-  "addImageToastTitle": {
-    "message": "Haz clic para colocar la imagen",
-    "description": "Mensaje emergente al agregar una nueva imagen"
-  },
   "finishRecordingTooltip": {
     "message": "Finalizar grabación",
     "description": "Consejo para finalizar la grabación"
@@ -206,10 +202,6 @@
   "arrowToolTooltip": {
     "message": "Flecha",
     "description": "Consejo para herramienta de flecha"
-  },
-  "imageToolTooltip": {
-    "message": "Imágenes",
-    "description": "Consejo para herramienta de imagen"
   },
   "undoTooltip": {
     "message": "Deshacer",
