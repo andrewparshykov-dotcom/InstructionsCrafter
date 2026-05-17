@@ -27,13 +27,6 @@ const Shortcuts = ({ shortcuts }) => {
       return tag === "input" || tag === "textarea" || tag === "select";
     };
 
-    const isTextEditingActive = () => {
-      const state = contentStateRef.current;
-      if (state?.tool !== "text") return false;
-      const activeObj = state?.canvas?.getActiveObject?.();
-      return Boolean(activeObj && activeObj.isEditing);
-    };
-
     const shouldHandleShortcut = (event) => {
       const state = contentStateRef.current;
       if (!state?.drawingMode && !state?.blurMode) return false;
@@ -41,7 +34,6 @@ const Shortcuts = ({ shortcuts }) => {
 
       const active = getDeepActiveElement();
       if (isEditableElement(active)) return false;
-      if (isTextEditingActive()) return false;
 
       return true;
     };
@@ -188,15 +180,12 @@ const Shortcuts = ({ shortcuts }) => {
             toggleColorPicker();
             break;
           case "6":
-            setTool("text");
-            break;
-          case "7":
             setTool("shape", { shape: "rectangle", shapeFill: false });
             break;
-          case "8":
+          case "7":
             setTool("arrow");
             break;
-          case "9":
+          case "8":
             openImagePicker();
             break;
           case "0":

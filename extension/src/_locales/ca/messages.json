@@ -203,10 +203,6 @@
     "message": "Goma",
     "description": "Missatge emergent 'Eina d'esborrar'"
   },
-  "textToolTooltip": {
-    "message": "Text",
-    "description": "Missatge emergent 'Eina de text'"
-  },
   "shapeToolTooltip": {
     "message": "Formes",
     "description": "Missatge emergent 'Eina de formes'"

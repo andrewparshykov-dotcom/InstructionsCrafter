@@ -203,10 +203,6 @@
     "message": "Інструмент гумки",
     "description": "Eraser tool tooltip"
   },
-  "textToolTooltip": {
-    "message": "Текстовий інструмент",
-    "description": "Text tool tooltip"
-  },
   "shapeToolTooltip": {
     "message": "Фігурний інструмент",
     "description": "Shape tool tooltip"

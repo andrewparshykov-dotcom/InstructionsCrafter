@@ -203,10 +203,6 @@
     "message": "Alat penghapus",
     "description": "Petunjuk untuk alat penghapus"
   },
-  "textToolTooltip": {
-    "message": "Alat teks",
-    "description": "Petunjuk untuk alat teks"
-  },
   "shapeToolTooltip": {
     "message": "Alat bentuk",
     "description": "Petunjuk untuk alat bentuk"

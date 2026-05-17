@@ -203,10 +203,6 @@
     "message": "Ferramenta de borracha",
     "description": "Dica de ferramenta de borracha"
   },
-  "textToolTooltip": {
-    "message": "Ferramenta de texto",
-    "description": "Dica de ferramenta de texto"
-  },
   "shapeToolTooltip": {
     "message": "Ferramenta de formas",
     "description": "Dica de ferramenta de formas"

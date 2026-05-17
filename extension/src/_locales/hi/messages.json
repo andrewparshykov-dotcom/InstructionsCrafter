@@ -203,10 +203,6 @@
     "message": "मिटाने वाला टूल",
     "description": "मिटाने वाला टूलटिप"
   },
-  "textToolTooltip": {
-    "message": "टेक्स्ट टूल",
-    "description": "टेक्स्ट टूलटिप"
-  },
   "shapeToolTooltip": {
     "message": "आकार टूल",
     "description": "आकार टूलटिप"

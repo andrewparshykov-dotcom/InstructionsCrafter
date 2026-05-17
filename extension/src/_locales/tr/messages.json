@@ -203,10 +203,6 @@
     "message": "Silgi Aracı",
     "description": "Silgi Aracı araç ipucu"
   },
-  "textToolTooltip": {
-    "message": "Metin Aracı",
-    "description": "Metin Aracı araç ipucu"
-  },
   "shapeToolTooltip": {
     "message": "Şekil Aracı",
     "description": "Şekil Aracı araç ipucu"

@@ -203,10 +203,6 @@
     "message": "Radiergummi-Werkzeug",
     "description": "Tooltip für das Radiergummi-Werkzeug"
   },
-  "textToolTooltip": {
-    "message": "Text-Werkzeug",
-    "description": "Tooltip für das Text-Werkzeug"
-  },
   "shapeToolTooltip": {
     "message": "Form-Werkzeug",
     "description": "Tooltip für das Form-Werkzeug"

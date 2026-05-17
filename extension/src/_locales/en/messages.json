@@ -203,10 +203,6 @@
     "message": "Eraser tool",
     "description": "Eraser tool tooltip"
   },
-  "textToolTooltip": {
-    "message": "Text tool",
-    "description": "Text tool tooltip"
-  },
   "shapeToolTooltip": {
     "message": "Shape tool",
     "description": "Shape tool tooltip"

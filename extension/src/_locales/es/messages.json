@@ -203,10 +203,6 @@
     "message": "Borrador",
     "description": "Consejo para herramienta de borrador"
   },
-  "textToolTooltip": {
-    "message": "Texto",
-    "description": "Consejo para herramienta de texto"
-  },
   "shapeToolTooltip": {
     "message": "Formas",
     "description": "Consejo para herramienta de formas"

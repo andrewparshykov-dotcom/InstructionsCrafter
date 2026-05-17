@@ -203,10 +203,6 @@
     "message": "Effaceur",
     "description": "Conseil pour l'outil d'effaceur"
   },
-  "textToolTooltip": {
-    "message": "Texte",
-    "description": "Conseil pour l'outil de texte"
-  },
   "shapeToolTooltip": {
     "message": "Formes",
     "description": "Conseil pour l'outil de formes"

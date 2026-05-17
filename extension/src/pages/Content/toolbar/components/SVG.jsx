@@ -213,16 +213,6 @@ const HideCursorIcon = (props) => {
   );
 };
 
-const TextIcon = (props) => {
-  return (
-    <ReactSVG
-      src={URL + "tool-icons/text-icon.svg"}
-      width={props.width}
-      height={props.height}
-    />
-  );
-};
-
 const ArrowIcon = (props) => {
   return (
     <ReactSVG
@@ -601,7 +591,6 @@ export {
   TargetCursorIcon,
   HighlightCursorIcon,
   HideCursorIcon,
-  TextIcon,
   ArrowIcon,
   EraserIcon,
   PenIcon,

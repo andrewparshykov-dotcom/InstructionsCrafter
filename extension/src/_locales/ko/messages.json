@@ -203,10 +203,6 @@
     "message": "지우개 도구",
     "description": "Eraser tool tooltip"
   },
-  "textToolTooltip": {
-    "message": "텍스트 도구",
-    "description": "Text tool tooltip"
-  },
   "shapeToolTooltip": {
     "message": "도형 도구",
     "description": "Shape tool tooltip"

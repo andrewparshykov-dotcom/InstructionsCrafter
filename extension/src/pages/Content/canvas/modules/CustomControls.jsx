@@ -20,16 +20,6 @@ const CustomControls = (canvas) => {
     borderOpacityWhenMoving: 1,
   });
 
-  fabric.Textbox.prototype.set({
-    transparentCorners: false,
-    borderColor: "#0D99FF",
-    cornerColor: "#FFF",
-    borderScaleFactor: 2,
-    cornerStyle: "circle",
-    cornerStrokeColor: "#0D99FF",
-    borderOpacityWhenMoving: 1,
-  });
-
   canvas.selectionColor = "rgba(46, 115, 252, 0.11)";
   canvas.selectionBorderColor = "rgba(98, 155, 255, 0.81)";
   canvas.selectionLineWidth = 1.5;
@@ -168,101 +158,6 @@ const CustomControls = (canvas) => {
   });
 
   fabric.Object.prototype.controls.mtr = new fabric.Control({
-    x: 0,
-    y: 0.5,
-    cursorStyleHandler: fabric.controlsUtils.rotationStyleHandler,
-    actionHandler: fabric.controlsUtils.rotationWithSnapping,
-    offsetY: 26,
-    withConnecton: false,
-    actionName: "rotate",
-    render: renderIconRotate,
-  });
-
-  // Also use same controls for Textbox
-  fabric.Textbox.prototype.controls.tl = new fabric.Control({
-    x: -0.5,
-    y: -0.5,
-    offsetX: -1,
-    offsetY: -1,
-    cursorStyleHandler: fabric.controlsUtils.scaleCursorStyleHandler,
-    actionHandler: fabric.controlsUtils.scalingEqually,
-    render: renderIcon,
-  });
-
-  fabric.Textbox.prototype.controls.tr = new fabric.Control({
-    x: 0.5,
-    y: -0.5,
-    offsetX: 1,
-    offsetY: -1,
-    cursorStyleHandler: fabric.controlsUtils.scaleCursorStyleHandler,
-    actionHandler: fabric.controlsUtils.scalingEqually,
-    render: renderIcon,
-  });
-
-  fabric.Textbox.prototype.controls.bl = new fabric.Control({
-    x: -0.5,
-    y: 0.5,
-    offsetX: -1,
-    offsetY: 1,
-    cursorStyleHandler: fabric.controlsUtils.scaleCursorStyleHandler,
-    actionHandler: fabric.controlsUtils.scalingEqually,
-    render: renderIcon,
-  });
-
-  fabric.Textbox.prototype.controls.br = new fabric.Control({
-    x: 0.5,
-    y: 0.5,
-    offsetX: 1,
-    offsetY: 1,
-    cursorStyleHandler: fabric.controlsUtils.scaleCursorStyleHandler,
-    actionHandler: fabric.controlsUtils.scalingEqually,
-    render: renderIcon,
-  });
-
-  // Ml and mr controls for Textbox. The actionhandler should be for resizing the textbox horizontally, not skewing it
-  fabric.Textbox.prototype.controls.ml = new fabric.Control({
-    x: -0.5,
-    y: 0,
-    offsetX: -1,
-    offsetY: 0,
-    cursorStyleHandler: fabric.controlsUtils.scaleCursorStyleHandler,
-    actionHandler: fabric.controlsUtils.changeWidth,
-    render: renderIconMiddleV,
-  });
-
-  fabric.Textbox.prototype.controls.mr = new fabric.Control({
-    x: 0.5,
-    y: 0,
-    offsetX: 1,
-    offsetY: 0,
-    cursorStyleHandler: fabric.controlsUtils.scaleCursorStyleHandler,
-    actionHandler: fabric.controlsUtils.changeWidth,
-    render: renderIconMiddleV,
-  });
-
-  fabric.Textbox.prototype.controls.mb = new fabric.Control({
-    x: 0,
-    y: 0.5,
-    offsetX: 0,
-    visible: false,
-    offsetY: 1,
-    cursorStyleHandler: fabric.controlsUtils.scaleCursorStyleHandler,
-    actionHandler: fabric.controlsUtils.changeHeight,
-    render: renderIconMiddle,
-  });
-
-  fabric.Textbox.prototype.controls.mt = new fabric.Control({
-    x: 0,
-    y: -0.5,
-    offsetX: 0,
-    offsetY: -1,
-    visible: false,
-    cursorStyleHandler: fabric.controlsUtils.scaleCursorStyleHandler,
-    actionHandler: fabric.controlsUtils.changeHeight,
-    render: renderIconMiddle,
-  });
-
-  fabric.Textbox.prototype.controls.mtr = new fabric.Control({
     x: 0,
     y: 0.5,
     cursorStyleHandler: fabric.controlsUtils.rotationStyleHandler,

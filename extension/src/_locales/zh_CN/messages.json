@@ -203,10 +203,6 @@
     "message": "橡皮擦",
     "description": "Eraser tool tooltip"
   },
-  "textToolTooltip": {
-    "message": "文本",
-    "description": "Text tool tooltip"
-  },
   "shapeToolTooltip": {
     "message": "形状工具",
     "description": "Shape tool tooltip"

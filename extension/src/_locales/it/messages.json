@@ -203,10 +203,6 @@
     "message": "Cancella",
     "description": "Suggerimento per lo strumento cancella"
   },
-  "textToolTooltip": {
-    "message": "Testo",
-    "description": "Suggerimento per lo strumento testo"
-  },
   "shapeToolTooltip": {
     "message": "Forme",
     "description": "Suggerimento per lo strumento forme"

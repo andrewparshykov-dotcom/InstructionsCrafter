@@ -203,10 +203,6 @@
     "message": "Narzędzie gumki",
     "description": "Podpowiedź Narzędzie gumki"
   },
-  "textToolTooltip": {
-    "message": "Narzędzie tekstowe",
-    "description": "Podpowiedź narzędzia tekstowego"
-  },
   "shapeToolTooltip": {
     "message": "Narzędzie kształtów",
     "description": "Podpowiedź narzędzia kształtów"

@@ -29,7 +29,6 @@ import {
   RedoIcon,
   TransformIcon,
   HighlighterIcon,
-  TextIcon,
   RectangleIcon,
   TriangleIcon,
   CircleIcon,
@@ -150,20 +149,12 @@ const DrawingToolbar = (props) => {
           <EraserIcon />
         </ToolTrigger>
         <RadialMenu shortcut="5" />
-        <ToolTrigger
-          type="toggle"
-          value="text"
-          content={chrome.i18n.getMessage("textToolTooltip")}
-          shortcut="6"
-        >
-          <TextIcon />
-        </ToolTrigger>
         <ShapeToolbar visible={tool === "shape" ? "show-toolbar" : ""} />
         <ToolTrigger
           type="toggle"
           value="shape"
           content={chrome.i18n.getMessage("shapeToolTooltip")}
-          shortcut="7"
+          shortcut="6"
         >
           {contentState.shape === "rectangle" && contentState.shapeFill ? (
             <RectangleFilledIcon />
@@ -183,7 +174,7 @@ const DrawingToolbar = (props) => {
           type="toggle"
           value="arrow"
           content={chrome.i18n.getMessage("arrowToolTooltip")}
-          shortcut="8"
+          shortcut="7"
         >
           <ArrowIcon />
         </ToolTrigger>
@@ -191,7 +182,7 @@ const DrawingToolbar = (props) => {
           type="button"
           value="image"
           content={chrome.i18n.getMessage("imageToolTooltip")}
-          shortcut="9"
+          shortcut="8"
           onClick={(e) => imageFileInput.current.click()}
         >
           <ImageIcon />
