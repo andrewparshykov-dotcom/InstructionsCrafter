@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { loadRecording } from "./loadRecording";
+import { loadRecording, discardRecording } from "./loadRecording";
 import { checkAudioSilence } from "./audioCheck";
 
 // DECISION (2026-05-15): Post-recording flows all route here (not Screenity's editor)
@@ -24,6 +24,9 @@ const Generate = () => {
   const [uploadError, setUploadError] = useState("");
 
   const [audioCheck, setAudioCheck] = useState({ status: "idle", silentFraction: 0 });
+
+  const [discardConfirmOpen, setDiscardConfirmOpen] = useState(false);
+  const [isDiscarding, setIsDiscarding] = useState(false);
 
   const isUploading =
     uploadPhase === "uploading" || uploadPhase === "processing";
@@ -89,6 +92,15 @@ const Generate = () => {
     return () => document.removeEventListener("keydown", onKey);
   }, [modalOpen, isUploading]);
 
+  useEffect(() => {
+    if (!discardConfirmOpen) return;
+    const onKey = (e) => {
+      if (e.key === "Escape" && !isDiscarding) setDiscardConfirmOpen(false);
+    };
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [discardConfirmOpen, isDiscarding]);
+
   const handleOpenModal = () => {
     setUploadError("");
     setUploadPhase("idle");
@@ -101,8 +113,37 @@ const Generate = () => {
     if (!isUploading) setModalOpen(false);
   };
 
-  const handleDiscard = () => {
+  const performDiscard = async () => {
+    if (isDiscarding) return;
+    setIsDiscarding(true);
+    if (recording?.blobUrl) {
+      URL.revokeObjectURL(recording.blobUrl);
+    }
+    try {
+      await discardRecording();
+    } catch (err) {
+      console.warn("Discard failed:", err);
+    }
     window.close();
+  };
+
+  // Used by the silent-recording warning. The warning panel already explains
+  // why discarding is the right move, so this path skips the extra confirm
+  // modal that the toolbar Discard button uses.
+  const handleDiscard = () => {
+    performDiscard();
+  };
+
+  const handleDiscardClick = () => {
+    setDiscardConfirmOpen(true);
+  };
+
+  const handleCancelDiscard = () => {
+    if (!isDiscarding) setDiscardConfirmOpen(false);
+  };
+
+  const handleConfirmDiscard = () => {
+    performDiscard();
   };
 
   const handleDownloadRecording = () => {
@@ -251,7 +292,57 @@ const Generate = () => {
         >
           Download recording
         </button>
+        <button
+          style={{
+            ...styles.button,
+            ...styles.secondary,
+            ...(recording && !isDiscarding ? {} : styles.disabledButton),
+          }}
+          onClick={handleDiscardClick}
+          disabled={!recording || isDiscarding}
+          title={
+            recording
+              ? "Permanently delete this recording"
+              : "Recording not loaded yet"
+          }
+        >
+          Discard
+        </button>
       </div>
+
+      {discardConfirmOpen && (
+        <div style={styles.backdrop} onClick={handleCancelDiscard}>
+          <div style={styles.modal} onClick={(e) => e.stopPropagation()}>
+            <h2 style={styles.modalHeading}>Discard recording?</h2>
+            <p style={styles.confirmBody}>
+              This will permanently delete the recording. This cannot be undone.
+            </p>
+            <div style={styles.modalActions}>
+              <button
+                type="button"
+                style={{ ...styles.button, ...styles.secondary }}
+                onClick={handleCancelDiscard}
+                disabled={isDiscarding}
+              >
+                Cancel
+              </button>
+              <button
+                type="button"
+                style={{
+                  ...styles.button,
+                  ...styles.primary,
+                  ...(isDiscarding ? styles.disabledButton : {}),
+                }}
+                onClick={handleConfirmDiscard}
+                disabled={isDiscarding}
+                autoFocus
+              >
+                {isDiscarding ? "Discarding…" : "Discard"}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {modalOpen && (
         <div style={styles.backdrop} onClick={handleCloseModal}>
@@ -474,6 +565,12 @@ const styles = {
     boxShadow: "0 8px 32px rgba(0, 0, 0, 0.2)",
   },
   modalHeading: { fontSize: 18, margin: "0 0 16px" },
+  confirmBody: {
+    fontSize: 14,
+    color: "#444",
+    margin: "0 0 8px",
+    lineHeight: 1.5,
+  },
   label: {
     display: "block",
     fontWeight: 600,

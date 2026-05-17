@@ -84,3 +84,60 @@ async function loadFromIndexedDB() {
     source: "indexeddb",
   };
 }
+
+// Permanently delete the just-finished recording from both possible stores
+// (OPFS file + its session dir, IndexedDB chunks store) and clear the pointer
+// in chrome.storage.local so subsequent loads can't find a stale reference.
+// Each step is best-effort: a failure in one store should not block the others.
+export async function discardRecording() {
+  const { lastRecordingBackendRef } = await chrome.storage.local.get([
+    "lastRecordingBackendRef",
+  ]);
+
+  if (
+    lastRecordingBackendRef?.backend === "opfs" &&
+    lastRecordingBackendRef?.fileName
+  ) {
+    try {
+      await removeOpfsRecording(lastRecordingBackendRef.fileName);
+    } catch (err) {
+      console.warn("OPFS discard failed:", err);
+    }
+  }
+
+  try {
+    await chunksStore.clear();
+  } catch (err) {
+    console.warn("IndexedDB discard failed:", err);
+  }
+
+  try {
+    await chrome.storage.local.set({ lastRecordingBackendRef: null });
+  } catch (err) {
+    console.warn("Clearing lastRecordingBackendRef failed:", err);
+  }
+}
+
+async function removeOpfsRecording(fileName) {
+  const parts = fileName.split("/").filter(Boolean);
+  if (parts.length === 0) return;
+  const root = await navigator.storage.getDirectory();
+
+  // For nested paths like "cloud-chunks/<sessionId>/file.mp4" we drop the
+  // whole <sessionId> directory rather than just the file, so we don't leave
+  // an orphan session dir under cloud-chunks/ for cleanupOrphanOpfsSessions
+  // to reap later.
+  if (parts.length >= 3 && parts[0] === "cloud-chunks") {
+    const cloud = await root.getDirectoryHandle(parts[0]).catch(() => null);
+    if (!cloud) return;
+    await cloud.removeEntry(parts[1], { recursive: true }).catch(() => {});
+    return;
+  }
+
+  let dir = root;
+  for (let i = 0; i < parts.length - 1; i++) {
+    dir = await dir.getDirectoryHandle(parts[i]).catch(() => null);
+    if (!dir) return;
+  }
+  await dir.removeEntry(parts[parts.length - 1]).catch(() => {});
+}
