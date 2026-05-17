@@ -395,17 +395,9 @@
     "message": "Mikrofon wyłączony",
     "description": "Tytuł modalnego komunikatu o wyłączonym mikrofonie"
   },
-  "hideUIAlerts": {
-    "message": "Ukryj powiadomienia interfejsu",
-    "description": "Przycisk ukrywania alertów interfejsu"
-  },
   "noShowAgain": {
     "message": "Nie pokazuj ponownie",
     "description": "Przycisk nie pokazuj ponownie"
-  },
-  "toolbarHoverOnly": {
-    "message": "Ukryj pasek narzędzi, gdy nie jest używany",
-    "description": "Pokaż pasek narzędzi tylko po najechaniu myszką"
   },
   "updateAnnouncementTitle": {
     "message": "Witaj w nowym Screenity!",

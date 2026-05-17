@@ -395,17 +395,9 @@
     "message": "Microfon desactivat",
     "description": "Títol del missatge emergent amb el microfon deshabilitat"
   },
-  "hideUIAlerts": {
-    "message": "Amaga les notificacions d'eines",
-    "description": "Botó per amagar les alertes de la interfície"
-  },
   "noShowAgain": {
     "message": "No tornis a mostrar",
     "description": "Botó de no tornis a mostrar"
-  },
-  "toolbarHoverOnly": {
-    "message": "Amaga els controls quan no els utilitzis",
-    "description": "Només mostra el botó de la barra d'eines en passar el ratolí"
   },
   "updateAnnouncementTitle": {
     "message": "Benvingut al nou Screenity!",

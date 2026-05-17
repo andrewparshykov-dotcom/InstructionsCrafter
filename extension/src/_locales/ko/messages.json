@@ -395,17 +395,9 @@
     "message": "마이크 비활성화됨",
     "description": "Microphone disabled toast title"
   },
-  "hideUIAlerts": {
-    "message": "UI 알림 숨기기",
-    "description": "Hide UI alerts button"
-  },
   "noShowAgain": {
     "message": "다시 표시하지 않음",
     "description": "Don't show again button"
-  },
-  "toolbarHoverOnly": {
-    "message": "사용하지 않을 때 툴바 숨기기",
-    "description": "Only show toolbar on hover button"
   },
   "updateAnnouncementTitle": {
     "message": "새로운 Screenity에 오신 것을 환영합니다!",

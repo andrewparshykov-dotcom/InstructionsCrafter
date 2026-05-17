@@ -395,17 +395,9 @@
     "message": "Mikrofon dimatikan",
     "description": "Judul toast Mikrofon dimatikan"
   },
-  "hideUIAlerts": {
-    "message": "Sembunyikan notifikasi UI",
-    "description": "Tombol Sembunyikan notifikasi UI"
-  },
   "noShowAgain": {
     "message": "Jangan tampilkan lagi",
     "description": "Tombol Jangan tampilkan lagi"
-  },
-  "toolbarHoverOnly": {
-    "message": "Sembunyikan toolbar saat tidak digunakan",
-    "description": "Tombol Hanya tampilkan toolbar saat dihover"
   },
   "updateAnnouncementTitle": {
     "message": "Selamat datang di Screenity yang baru!",

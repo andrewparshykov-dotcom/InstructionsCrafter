@@ -175,25 +175,6 @@ iframe.screenity-iframe {
   }
 }
 
-.ToolbarTransparent {
-  opacity: 0;
-
-  &:hover {
-    opacity: 1;
-  }
-}
-.ToolbarHoverZone {
-  display: inline-block;
-  position: relative;
-
-  // optional: give it a bit of invisible hover padding
-  padding: 4px;
-
-  // if you want to *visually* match the toolbar area only:
-  width: fit-content;
-  height: fit-content;
-}
-
 .ToolbarRoot {
   display: flex;
   align-items: center;

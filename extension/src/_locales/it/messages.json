@@ -395,17 +395,9 @@
     "message": "Microfono disattivato",
     "description": "Titolo del messaggio del microfono disattivato"
   },
-  "hideUIAlerts": {
-    "message": "Nascondi le notifiche dell'interfaccia",
-    "description": "Pulsante per nascondere gli avvisi dell'interfaccia"
-  },
   "noShowAgain": {
     "message": "Non mostrare più",
     "description": "Pulsante di non mostrare più"
-  },
-  "toolbarHoverOnly": {
-    "message": "Nascondi i controlli quando non li usi",
-    "description": "Pulsante per mostrare la barra degli strumenti solo passando il cursore"
   },
   "updateAnnouncementTitle": {
     "message": "Benvenuto nella nuova versione di Screenity!",

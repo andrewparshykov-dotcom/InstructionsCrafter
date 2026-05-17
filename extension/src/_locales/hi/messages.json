@@ -395,17 +395,9 @@
     "message": "माइक्रोफ़ोन बंद है",
     "description": "माइक्रोफ़ोन बंद टोस्ट शीर्षक"
   },
-  "hideUIAlerts": {
-    "message": "UI सूचनाओं को छुपाएं",
-    "description": "UI सूचनाओं को छुपाएं बटन"
-  },
   "noShowAgain": {
     "message": "फिर से दिखाना नहीं",
     "description": "फिर से दिखाना नहीं बटन"
-  },
-  "toolbarHoverOnly": {
-    "message": "उपयोग न करने पर टूलबार छुपाएं",
-    "description": "केवल हवाकारी पर टूलबार दिखाएं बटन"
   },
   "updateAnnouncementTitle": {
     "message": "नए Screenity में आपका स्वागत है!",

@@ -395,17 +395,9 @@
     "message": "麦克风已禁用",
     "description": "Microphone disabled toast title"
   },
-  "hideUIAlerts": {
-    "message": "隐藏UI通知",
-    "description": "Hide UI alerts button"
-  },
   "noShowAgain": {
     "message": "不再显示",
     "description": "Don't show again button"
-  },
-  "toolbarHoverOnly": {
-    "message": "在不使用时隐藏工具栏",
-    "description": "Only show toolbar on hover button"
   },
   "updateAnnouncementTitle": {
     "message": "欢迎使用新版 Screenity！",

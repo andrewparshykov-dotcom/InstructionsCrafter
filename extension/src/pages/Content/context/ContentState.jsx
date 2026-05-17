@@ -1040,8 +1040,6 @@ const ContentState = (props) => {
     permissionsLoaded: false,
     parentRef: null,
     shadowRef: null,
-    hideUIAlerts: false,
-    toolbarHover: false,
     hideUI: false,
     bigTab: "record",
     askDismiss: true,
@@ -1783,9 +1781,7 @@ const ContentState = (props) => {
     if (!contentState.hideUI) {
       setContentState((prevContentState) => ({
         ...prevContentState,
-        hideUIAlerts: false,
         hideToolbar: false,
-        toolbarHover: false,
       }));
     }
   }, [contentState.hideUI]);

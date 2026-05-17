@@ -403,17 +403,9 @@
     "message": "Microphone disabled",
     "description": "Microphone disabled toast title"
   },
-  "hideUIAlerts": {
-    "message": "Hide UI notifications",
-    "description": "Hide UI alerts button"
-  },
   "noShowAgain": {
     "message": "Don't show again",
     "description": "Don't show again button"
-  },
-  "toolbarHoverOnly": {
-    "message": "Hide toolbar when not in use",
-    "description": "Only show toolbar on hover button"
   },
   "updateAnnouncementTitle": {
     "message": "Welcome to the new Screenity!",

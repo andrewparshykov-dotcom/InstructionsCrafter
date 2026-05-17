@@ -395,17 +395,9 @@
     "message": "Mikrofon devre dışı",
     "description": "Mikrofon devre dışı bırakıldı bildirimi başlığı"
   },
-  "hideUIAlerts": {
-    "message": "UI bildirimlerini gizle",
-    "description": "UI uyarılarını gizle düğmesi"
-  },
   "noShowAgain": {
     "message": "Tekrar gösterme",
     "description": "Tekrar gösterme düğmesi"
-  },
-  "toolbarHoverOnly": {
-    "message": "Kullanılmadığında araç çubuğunu gizle",
-    "description": "Yalnızca üzerine gelindiğinde araç çubuğunu göster düğmesi"
   },
   "updateAnnouncementTitle": {
     "message": "Yeni Screenity'ye Hoş Geldiniz!",

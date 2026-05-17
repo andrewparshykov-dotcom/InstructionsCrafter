@@ -395,17 +395,9 @@
     "message": "Microfone desativado",
     "description": "Título do aviso de microfone desativado"
   },
-  "hideUIAlerts": {
-    "message": "Ocultar notificações da interface",
-    "description": "Botão para ocultar alertas da interface"
-  },
   "noShowAgain": {
     "message": "Não mostrar novamente",
     "description": "Botão de não mostrar novamente"
-  },
-  "toolbarHoverOnly": {
-    "message": "Ocultar os controles quando não estiverem em uso",
-    "description": "Botão para mostrar a barra de ferramentas apenas ao passar o cursor"
   },
   "updateAnnouncementTitle": {
     "message": "Bem-vindo ao novo Screenity!",

@@ -51,8 +51,6 @@ const ToolbarWrap = () => {
   const [dragging, setDragging] = React.useState("");
   const [timer, setTimer] = React.useState(0);
   const [timestamp, setTimestamp] = React.useState("00:00");
-  const [transparent, setTransparent] = React.useState(false);
-  const [forceTransparent, setForceTransparent] = React.useState("");
   const [visuallyHidden, setVisuallyHidden] = useState(false);
   const timeRef = React.useRef("");
 
@@ -67,47 +65,6 @@ const ToolbarWrap = () => {
       toolbarMode: mode,
     }));
   }, [mode, setContentState]);
-
-  useEffect(() => {
-    if (contentState.toolbarHover && contentState.hideUI) {
-      setTransparent("ToolbarTransparent");
-    } else {
-      setTransparent(false);
-      setForceTransparent("");
-    }
-  }, [contentState.toolbarHover, contentState.hideUI]);
-
-  useEffect(() => {
-    if (!contentState.toolbarHover) return;
-    if (!contentState.shadowRef) return;
-    if (!contentState.hideUI) return;
-    const handleMouseDown = (e) => {
-      if (contentState.toolbarHover && contentState.hideUI) {
-        if (ToolbarRef.current && ToolbarRef.current.contains(e.target)) return;
-        if (
-          contentState.shadowRef &&
-          (contentState.shadowRef.contains(e.target) ||
-            contentState.shadowRef === e.target ||
-            contentState.shadowRef === e.target.parentNode)
-        )
-          return;
-
-        setForceTransparent("ForceTransparent");
-      }
-    };
-
-    const handleMouseUp = (e) => {
-      setForceTransparent("");
-    };
-
-    document.addEventListener("mousedown", handleMouseDown);
-    document.addEventListener("mouseup", handleMouseUp);
-
-    return () => {
-      document.removeEventListener("mousedown", handleMouseDown);
-      document.removeEventListener("mouseup", handleMouseUp);
-    };
-  }, [contentState.toolbarHover, contentState.shadowRef, contentState.hideUI]);
 
   useEffect(() => {
     if (!isNaN(t)) {
@@ -389,10 +346,6 @@ const ToolbarWrap = () => {
             "ToolbarRoot" +
             " " +
             side +
-            " " +
-            transparent +
-            " " +
-            forceTransparent +
             (visuallyHidden ? " visually-hidden-toolbar" : "")
           }
           ref={ToolbarRef}
@@ -434,15 +387,11 @@ const ToolbarWrap = () => {
                     hideToolbar: true,
                     drawingMode: false,
                     blurMode: false,
-                    hideUIAlerts: false,
-                    toolbarHover: false,
                     hideUI: true,
                   }));
 
                   chrome.storage.local.set({
                     hideToolbar: true,
-                    hideUIAlerts: false,
-                    toolbarHover: false,
                     hideUI: true,
                   });
                 }, 3000);

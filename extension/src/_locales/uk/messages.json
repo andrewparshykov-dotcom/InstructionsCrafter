@@ -395,17 +395,9 @@
     "message": "Мікрофон вимкнено",
     "description": "Microphone disabled toast title"
   },
-  "hideUIAlerts": {
-    "message": "Приховати сповіщення інтерфейсу",
-    "description": "Hide UI alerts button"
-  },
   "noShowAgain": {
     "message": "Не показувати знову",
     "description": "Don't show again button"
-  },
-  "toolbarHoverOnly": {
-    "message": "Приховати панель інструментів при неактивності",
-    "description": "Only show toolbar on hover button"
   },
   "updateAnnouncementTitle": {
     "message": "Ласкаво просимо до нового Screenity!",

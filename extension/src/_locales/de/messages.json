@@ -395,17 +395,9 @@
     "message": "Mikrofon deaktiviert",
     "description": "Toast-Titel 'Mikrofon deaktiviert'"
   },
-  "hideUIAlerts": {
-    "message": "UI-Benachrichtigungen ausblenden",
-    "description": "Schaltfläche 'UI-Benachrichtigungen ausblenden'"
-  },
   "noShowAgain": {
     "message": "Nicht erneut anzeigen",
     "description": "Schaltfläche 'Nicht erneut anzeigen'"
-  },
-  "toolbarHoverOnly": {
-    "message": "Symbolleiste nur bei Bedarf anzeigen",
-    "description": "Schaltfläche 'Symbolleiste nur bei Bedarf anzeigen'"
   },
   "updateAnnouncementTitle": {
     "message": "Willkommen beim neuen Screenity!",

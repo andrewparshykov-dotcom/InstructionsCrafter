@@ -545,11 +545,10 @@ export const setupHandlers = () => {
       ...prev,
       hideUI: nextHideUI,
       hideToolbar: nextHideUI ? true : prev.hideToolbar,
-      hideUIAlerts: nextHideUI ? true : prev.hideUIAlerts,
     }));
     chrome.storage.local.set({
       hideUI: nextHideUI,
-      ...(nextHideUI ? { hideToolbar: true, hideUIAlerts: true } : {}),
+      ...(nextHideUI ? { hideToolbar: true } : {}),
     });
   });
 

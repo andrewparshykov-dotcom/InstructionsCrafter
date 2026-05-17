@@ -53,10 +53,8 @@ export const updateFromStorage = (check = true, id = null) => {
       "setDevices",
       "popupPosition",
       "surface",
-      "hideUIAlerts",
       "hideUI",
       "bigTab",
-      "toolbarHover",
       "askDismiss",
       "swatch",
       "color",
@@ -242,10 +240,6 @@ export const updateFromStorage = (check = true, id = null) => {
           result.surface !== undefined && result.surface !== null
             ? result.surface
             : prevContentState.surface,
-        hideUIAlerts:
-          result.hideUIAlerts !== undefined && result.hideUIAlerts !== null
-            ? result.hideUIAlerts
-            : prevContentState.hideUIAlerts,
         hideUI:
           result.hideUI !== undefined && result.hideUI !== null
             ? result.hideUI
@@ -254,10 +248,6 @@ export const updateFromStorage = (check = true, id = null) => {
           result.bigTab !== undefined && result.bigTab !== null
             ? result.bigTab
             : prevContentState.bigTab,
-        toolbarHover:
-          result.toolbarHover !== undefined && result.toolbarHover !== null
-            ? result.toolbarHover
-            : prevContentState.toolbarHover,
         askDismiss:
           result.askDismiss !== undefined && result.askDismiss !== null
             ? result.askDismiss
