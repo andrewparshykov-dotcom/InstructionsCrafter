@@ -242,10 +242,12 @@ iframe.screenity-iframe {
 }
 .ToolbarRecordingTime {
   margin-right: 4px;
-  width: 42px;
+  min-width: 42px;
   color: $color-text-primary;
   font-size: 13px;
   line-height: 1;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
   user-select: none;
   -webkit-user-select: none;
   -moz-user-select: none;
