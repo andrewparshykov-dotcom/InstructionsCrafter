@@ -1651,7 +1651,7 @@ body.driver-active .OnboardingArrow {
   width: 100%;
   height: 100%;
   border-radius: 30px;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .waveform {
@@ -2684,6 +2684,8 @@ input {
   display: flex;
   flex-direction: column;
   height: 100%;
+  padding: 16px 20px;
+  box-sizing: border-box;
 }
 .recording-ui .TabsRoot {
   margin-top: 8px;
