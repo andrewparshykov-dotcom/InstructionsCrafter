@@ -677,19 +677,6 @@ const PopupContainer = (props) => {
               </Tabs.Root>
             )}
           </div>
-          {contentState.settingsOpen && (
-            <div
-              className="HelpSection"
-              onClick={() => {
-                window.open(URL, "_blank");
-              }}
-            >
-              <span className="HelpIcon">
-                <HelpIconPopup />
-              </span>
-              {chrome.i18n.getMessage("helpPopup")}
-            </div>
-          )}
         </div>
       </Rnd>
     </div>

@@ -4,7 +4,6 @@ import { DropdownIcon } from "../../images/popup/images";
 
 // Components
 import Switch from "../components/Switch";
-import TimeSetter from "../components/TimeSetter";
 
 // Context
 import { contentStateContext } from "../../context/ContentState";
@@ -13,10 +12,6 @@ const Settings = () => {
   const [open, setOpen] = useState(false);
   const [contentState, setContentState] = useContext(contentStateContext);
   const [chromeVersion, setChromeVersion] = useState(null);
-  // Check if Mac
-  const isMac = navigator.platform.toUpperCase().indexOf("MAC") >= 0;
-  // Set shortcut to Option+Shift+E on Mac and Alt+Shift+E on Windows, using character codes
-  const shortcut = isMac ? "⌥⇧E" : "Alt⇧E";
 
   // Get Chrome version
   const getChromeVersion = () => {
@@ -54,31 +49,6 @@ const Settings = () => {
           value="hideUI"
           anchorId="pro-onboarding-toolbar-toggle"
         />
-        <Switch
-          label={chrome.i18n.getMessage("alarmLabel")}
-          name="alarm"
-          value="alarm"
-        />
-        {contentState.alarm && <TimeSetter />}
-        <Switch
-          label={chrome.i18n.getMessage("micReminderPopup")}
-          name="askMicrophone"
-          value="askMicrophone"
-        />
-        {contentState.recordingType != "camera" &&
-          !contentState.isSubscribed && (
-            <Switch
-              label={
-                chrome.i18n.getMessage("zoomToPointPopup") +
-                " (" +
-                shortcut +
-                ")"
-              }
-              name="zoomEnabled"
-              value="zoomEnabled"
-              experimental={true}
-            />
-          )}
       </Collapsible.Content>
     </Collapsible.Root>
   );

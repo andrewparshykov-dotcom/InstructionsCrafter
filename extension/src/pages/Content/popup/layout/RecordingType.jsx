@@ -5,10 +5,8 @@ import Switch from "../components/Switch";
 import RegionDimensions from "../components/RegionDimensions";
 import Settings from "./Settings";
 import { contentStateContext } from "../../context/ContentState";
-import { CameraOffBlue, MicOffBlue } from "../../images/popup/images";
+import { MicOffBlue } from "../../images/popup/images";
 import TooltipWrap from "../components/TooltipWrap";
-
-import BackgroundEffects from "../components/BackgroundEffects";
 
 import { AlertIcon, TimeIcon, NoInternet } from "../../toolbar/components/SVG";
 
@@ -195,44 +193,6 @@ const RecordingType = (props) => {
             </div>
           </div>
         )}
-      {!contentState.cameraPermission && (
-        <button
-          className="permission-button"
-          onClick={openPermissionsModal}
-        >
-          <img src={CameraOffBlue} />
-          <span>{chrome.i18n.getMessage("allowCameraAccessButton")}</span>
-        </button>
-      )}
-      {contentState.cameraPermission && (
-        <Dropdown type="camera" shadowRef={props.shadowRef} />
-      )}
-      {contentState.cameraPermission &&
-        contentState.defaultVideoInput != "none" &&
-        contentState.cameraActive && (
-          <div>
-            <Switch
-              label={chrome.i18n.getMessage("flipCameraLabel")}
-              name="flip-camera"
-              value="cameraFlipped"
-            />
-            {(!contentState.isLoggedIn || contentState.instantMode) && (
-              <div style={{ pointerEvents: "auto" }}>
-                <Switch
-                  label={chrome.i18n.getMessage("backgroundEffectsLabel")}
-                  name="background-effects-active"
-                  value="backgroundEffectsActive"
-                />
-              </div>
-            )}
-
-            {contentState.backgroundEffectsActive &&
-              (!contentState.isLoggedIn || contentState.instantMode) && (
-                <BackgroundEffects />
-              )}
-          </div>
-        )}
-
       {!contentState.microphonePermission && (
         <button
           className="permission-button"
