@@ -203,10 +203,6 @@
     "message": "Инструмент стирания",
     "description": "Подсказка для инструмента стирания"
   },
-  "shapeToolTooltip": {
-    "message": "Инструмент фигур",
-    "description": "Подсказка для инструмента фигур"
-  },
   "arrowToolTooltip": {
     "message": "Инструмент Стрелка",
     "description": "Подсказка для инструмента Стрелка"
@@ -242,10 +238,6 @@
   "thinStrokeTooltip": {
     "message": "Тонкая линия",
     "description": "Подсказка для тонкой линии"
-  },
-  "toggleFillTooltip": {
-    "message": "Включить заливку",
-    "description": "Подсказка для включения заливки"
   },
   "drawingModeToast": {
     "message": "Режим рисования",

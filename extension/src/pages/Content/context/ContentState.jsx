@@ -1029,8 +1029,6 @@ const ContentState = (props) => {
     toggleCursorModeShortcut: "",
     cursorMode: "none",
     cursorEffects: [],
-    shape: "rectangle",
-    shapeFill: false,
     zoomEnabled: false,
     offscreenRecording: false,
     isAddingImage: false,

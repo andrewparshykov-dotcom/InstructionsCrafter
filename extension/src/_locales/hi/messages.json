@@ -203,10 +203,6 @@
     "message": "मिटाने वाला टूल",
     "description": "मिटाने वाला टूलटिप"
   },
-  "shapeToolTooltip": {
-    "message": "आकार टूल",
-    "description": "आकार टूलटिप"
-  },
   "arrowToolTooltip": {
     "message": "तीर टूल",
     "description": "तीर टूलटिप"
@@ -242,10 +238,6 @@
   "thinStrokeTooltip": {
     "message": "पतला स्ट्रोक",
     "description": "पतला स्ट्रोक टूलटिप"
-  },
-  "toggleFillTooltip": {
-    "message": "भराई टॉगल करें",
-    "description": "भराई टूलटिप"
   },
   "drawingModeToast": {
     "message": "ड्रॉइंग मोड",

@@ -203,10 +203,6 @@
     "message": "Cancella",
     "description": "Suggerimento per lo strumento cancella"
   },
-  "shapeToolTooltip": {
-    "message": "Forme",
-    "description": "Suggerimento per lo strumento forme"
-  },
   "arrowToolTooltip": {
     "message": "Freccia",
     "description": "Suggerimento per lo strumento freccia"
@@ -242,10 +238,6 @@
   "thinStrokeTooltip": {
     "message": "Pennello sottile",
     "description": "Suggerimento per pennello sottile"
-  },
-  "toggleFillTooltip": {
-    "message": "Attiva riempimento",
-    "description": "Suggerimento per attivare il riempimento"
   },
   "drawingModeToast": {
     "message": "Modalità disegno",

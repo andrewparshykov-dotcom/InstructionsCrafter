@@ -203,10 +203,6 @@
     "message": "Silgi Aracı",
     "description": "Silgi Aracı araç ipucu"
   },
-  "shapeToolTooltip": {
-    "message": "Şekil Aracı",
-    "description": "Şekil Aracı araç ipucu"
-  },
   "arrowToolTooltip": {
     "message": "Ok Aracı",
     "description": "Ok Aracı araç ipucu"
@@ -242,10 +238,6 @@
   "thinStrokeTooltip": {
     "message": "İnce Hat",
     "description": "İnce Hat araç ipucu"
-  },
-  "toggleFillTooltip": {
-    "message": "Dolgu Seçeneğini Aç/Kapat",
-    "description": "Dolgu Seçeneğini Aç/Kapat araç ipucu"
   },
   "drawingModeToast": {
     "message": "Çizim Modu",

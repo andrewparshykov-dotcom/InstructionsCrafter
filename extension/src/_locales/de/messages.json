@@ -203,10 +203,6 @@
     "message": "Radiergummi-Werkzeug",
     "description": "Tooltip für das Radiergummi-Werkzeug"
   },
-  "shapeToolTooltip": {
-    "message": "Form-Werkzeug",
-    "description": "Tooltip für das Form-Werkzeug"
-  },
   "arrowToolTooltip": {
     "message": "Pfeil-Werkzeug",
     "description": "Tooltip für das Pfeil-Werkzeug"
@@ -242,10 +238,6 @@
   "thinStrokeTooltip": {
     "message": "Dünne Linie",
     "description": "Tooltip für dünne Linien"
-  },
-  "toggleFillTooltip": {
-    "message": "Füllung umschalten",
-    "description": "Tooltip für das Umschalten der Füllung"
   },
   "drawingModeToast": {
     "message": "Zeichenmodus",

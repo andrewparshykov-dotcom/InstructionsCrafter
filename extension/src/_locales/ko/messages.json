@@ -203,10 +203,6 @@
     "message": "지우개 도구",
     "description": "Eraser tool tooltip"
   },
-  "shapeToolTooltip": {
-    "message": "도형 도구",
-    "description": "Shape tool tooltip"
-  },
   "arrowToolTooltip": {
     "message": "화살표 도구",
     "description": "Arrow tool tooltip"
@@ -242,10 +238,6 @@
   "thinStrokeTooltip": {
     "message": "얇은 선",
     "description": "Thin stroke tooltip"
-  },
-  "toggleFillTooltip": {
-    "message": "채우기 전환",
-    "description": "Toggle fill tooltip"
   },
   "drawingModeToast": {
     "message": "그리기 모드",

@@ -203,10 +203,6 @@
     "message": "Borrador",
     "description": "Consejo para herramienta de borrador"
   },
-  "shapeToolTooltip": {
-    "message": "Formas",
-    "description": "Consejo para herramienta de formas"
-  },
   "arrowToolTooltip": {
     "message": "Flecha",
     "description": "Consejo para herramienta de flecha"
@@ -242,10 +238,6 @@
   "thinStrokeTooltip": {
     "message": "Trazo fino",
     "description": "Consejo para trazo fino"
-  },
-  "toggleFillTooltip": {
-    "message": "Alternar relleno",
-    "description": "Consejo para alternar relleno"
   },
   "drawingModeToast": {
     "message": "Modo de dibujo",

@@ -203,10 +203,6 @@
     "message": "Goma",
     "description": "Missatge emergent 'Eina d'esborrar'"
   },
-  "shapeToolTooltip": {
-    "message": "Formes",
-    "description": "Missatge emergent 'Eina de formes'"
-  },
   "arrowToolTooltip": {
     "message": "Fletxa",
     "description": "Missatge emergent 'Eina de fletxa'"
@@ -242,10 +238,6 @@
   "thinStrokeTooltip": {
     "message": "Traç prim",
     "description": "Missatge emergent 'Traç prim'"
-  },
-  "toggleFillTooltip": {
-    "message": "Activa/desactiva els contorns",
-    "description": "Missatge emergent 'Activa/desactiva el farciment'"
   },
   "drawingModeToast": {
     "message": "Mode de dibuix",

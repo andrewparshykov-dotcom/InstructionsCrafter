@@ -180,12 +180,9 @@ const Shortcuts = ({ shortcuts }) => {
             toggleColorPicker();
             break;
           case "6":
-            setTool("shape", { shape: "rectangle", shapeFill: false });
-            break;
-          case "7":
             setTool("arrow");
             break;
-          case "8":
+          case "7":
             openImagePicker();
             break;
           case "0":

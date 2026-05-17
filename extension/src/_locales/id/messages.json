@@ -203,10 +203,6 @@
     "message": "Alat penghapus",
     "description": "Petunjuk untuk alat penghapus"
   },
-  "shapeToolTooltip": {
-    "message": "Alat bentuk",
-    "description": "Petunjuk untuk alat bentuk"
-  },
   "arrowToolTooltip": {
     "message": "Alat panah",
     "description": "Petunjuk untuk alat panah"
@@ -242,10 +238,6 @@
   "thinStrokeTooltip": {
     "message": "Goresan tipis",
     "description": "Petunjuk untuk goresan tipis"
-  },
-  "toggleFillTooltip": {
-    "message": "Hidupkan/Matikan isian",
-    "description": "Petunjuk untuk mengaktifkan/menonaktifkan isian"
   },
   "drawingModeToast": {
     "message": "Mode menggambar",

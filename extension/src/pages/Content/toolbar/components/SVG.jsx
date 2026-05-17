@@ -243,16 +243,6 @@ const PenIcon = (props) => {
   );
 };
 
-const ShapeIcon = (props) => {
-  return (
-    <ReactSVG
-      src={URL + "tool-icons/shape-icon.svg"}
-      width={props.width}
-      height={props.height}
-    />
-  );
-};
-
 const SelectIcon = (props) => {
   return (
     <ReactSVG
@@ -307,66 +297,6 @@ const HighlighterIcon = (props) => {
   return (
     <ReactSVG
       src={URL + "tool-icons/highlighter-icon.svg"}
-      width={props.width}
-      height={props.height}
-    />
-  );
-};
-
-const RectangleIcon = (props) => {
-  return (
-    <ReactSVG
-      src={URL + "tool-icons/rectangle-icon.svg"}
-      width={props.width}
-      height={props.height}
-    />
-  );
-};
-
-const CircleIcon = (props) => {
-  return (
-    <ReactSVG
-      src={URL + "tool-icons/circle-icon.svg"}
-      width={props.width}
-      height={props.height}
-    />
-  );
-};
-
-const TriangleIcon = (props) => {
-  return (
-    <ReactSVG
-      src={URL + "tool-icons/triangle-icon.svg"}
-      width={props.width}
-      height={props.height}
-    />
-  );
-};
-
-const RectangleFilledIcon = (props) => {
-  return (
-    <ReactSVG
-      src={URL + "tool-icons/rectangle-filled-icon.svg"}
-      width={props.width}
-      height={props.height}
-    />
-  );
-};
-
-const CircleFilledIcon = (props) => {
-  return (
-    <ReactSVG
-      src={URL + "tool-icons/circle-filled-icon.svg"}
-      width={props.width}
-      height={props.height}
-    />
-  );
-};
-
-const TriangleFilledIcon = (props) => {
-  return (
-    <ReactSVG
-      src={URL + "tool-icons/triangle-filled-icon.svg"}
       width={props.width}
       height={props.height}
     />
@@ -594,19 +524,12 @@ export {
   ArrowIcon,
   EraserIcon,
   PenIcon,
-  ShapeIcon,
   SelectIcon,
   UndoIcon,
   RedoIcon,
   ImageIcon,
   TransformIcon,
   HighlighterIcon,
-  RectangleIcon,
-  CircleIcon,
-  TriangleIcon,
-  RectangleFilledIcon,
-  CircleFilledIcon,
-  TriangleFilledIcon,
   TrashIcon,
   VideoOffIcon,
   CameraCloseIcon,

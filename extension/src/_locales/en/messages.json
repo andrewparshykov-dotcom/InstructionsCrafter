@@ -203,10 +203,6 @@
     "message": "Eraser tool",
     "description": "Eraser tool tooltip"
   },
-  "shapeToolTooltip": {
-    "message": "Shape tool",
-    "description": "Shape tool tooltip"
-  },
   "arrowToolTooltip": {
     "message": "Arrow tool",
     "description": "Arrow tool tooltip"
@@ -242,10 +238,6 @@
   "thinStrokeTooltip": {
     "message": "Thin stroke",
     "description": "Thin stroke tooltip"
-  },
-  "toggleFillTooltip": {
-    "message": "Toggle fill",
-    "description": "Toggle fill tooltip"
   },
   "drawingModeToast": {
     "message": "Drawing mode",

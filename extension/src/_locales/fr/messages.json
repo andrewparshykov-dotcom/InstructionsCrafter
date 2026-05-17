@@ -203,10 +203,6 @@
     "message": "Effaceur",
     "description": "Conseil pour l'outil d'effaceur"
   },
-  "shapeToolTooltip": {
-    "message": "Formes",
-    "description": "Conseil pour l'outil de formes"
-  },
   "arrowToolTooltip": {
     "message": "Flèche",
     "description": "Conseil pour l'outil de flèche"
@@ -242,10 +238,6 @@
   "thinStrokeTooltip": {
     "message": "Trait fin",
     "description": "Conseil pour un trait fin"
-  },
-  "toggleFillTooltip": {
-    "message": "Activer le remplissage",
-    "description": "Conseil pour basculer le remplissage"
   },
   "drawingModeToast": {
     "message": "Mode de dessin",

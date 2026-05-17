@@ -10,7 +10,6 @@ import * as Toolbar from "@radix-ui/react-toolbar";
 // Components
 import ToolTrigger from "../components/ToolTrigger";
 import RadialMenu from "../components/RadialMenu";
-import ShapeToolbar from "./ShapeToolbar";
 
 // Canvas utils
 import {
@@ -29,12 +28,6 @@ import {
   RedoIcon,
   TransformIcon,
   HighlighterIcon,
-  RectangleIcon,
-  TriangleIcon,
-  CircleIcon,
-  RectangleFilledIcon,
-  CircleFilledIcon,
-  TriangleFilledIcon,
   TrashIcon,
 } from "../components/SVG";
 
@@ -149,32 +142,11 @@ const DrawingToolbar = (props) => {
           <EraserIcon />
         </ToolTrigger>
         <RadialMenu shortcut="5" />
-        <ShapeToolbar visible={tool === "shape" ? "show-toolbar" : ""} />
-        <ToolTrigger
-          type="toggle"
-          value="shape"
-          content={chrome.i18n.getMessage("shapeToolTooltip")}
-          shortcut="6"
-        >
-          {contentState.shape === "rectangle" && contentState.shapeFill ? (
-            <RectangleFilledIcon />
-          ) : contentState.shape === "circle" && contentState.shapeFill ? (
-            <CircleFilledIcon />
-          ) : contentState.shape === "triangle" && contentState.shapeFill ? (
-            <TriangleFilledIcon />
-          ) : contentState.shape === "rectangle" && !contentState.shapeFill ? (
-            <RectangleIcon />
-          ) : contentState.shape === "circle" && !contentState.shapeFill ? (
-            <CircleIcon />
-          ) : contentState.shape === "triangle" && !contentState.shapeFill ? (
-            <TriangleIcon />
-          ) : null}
-        </ToolTrigger>
         <ToolTrigger
           type="toggle"
           value="arrow"
           content={chrome.i18n.getMessage("arrowToolTooltip")}
-          shortcut="7"
+          shortcut="6"
         >
           <ArrowIcon />
         </ToolTrigger>
@@ -182,7 +154,7 @@ const DrawingToolbar = (props) => {
           type="button"
           value="image"
           content={chrome.i18n.getMessage("imageToolTooltip")}
-          shortcut="8"
+          shortcut="7"
           onClick={(e) => imageFileInput.current.click()}
         >
           <ImageIcon />

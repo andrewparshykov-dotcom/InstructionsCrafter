@@ -203,10 +203,6 @@
     "message": "Narzędzie gumki",
     "description": "Podpowiedź Narzędzie gumki"
   },
-  "shapeToolTooltip": {
-    "message": "Narzędzie kształtów",
-    "description": "Podpowiedź narzędzia kształtów"
-  },
   "arrowToolTooltip": {
     "message": "Narzędzie strzałki",
     "description": "Podpowiedź narzędzia strzałki"
@@ -242,10 +238,6 @@
   "thinStrokeTooltip": {
     "message": "Cienka kreska",
     "description": "Podpowiedź cienkiej kreski"
-  },
-  "toggleFillTooltip": {
-    "message": "Włącz/wyłącz wypełnienie",
-    "description": "Podpowiedź włączania/wyłączania wypełnienia"
   },
   "drawingModeToast": {
     "message": "Tryb rysowania",

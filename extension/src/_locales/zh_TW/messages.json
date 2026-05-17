@@ -203,10 +203,6 @@
     "message": "橡皮擦工具",
     "description": "Eraser tool tooltip"
   },
-  "shapeToolTooltip": {
-    "message": "形狀工具",
-    "description": "Shape tool tooltip"
-  },
   "arrowToolTooltip": {
     "message": "箭頭工具",
     "description": "Arrow tool tooltip"
@@ -242,10 +238,6 @@
   "thinStrokeTooltip": {
     "message": "細畫筆",
     "description": "Thin stroke tooltip"
-  },
-  "toggleFillTooltip": {
-    "message": "切換填充",
-    "description": "Toggle fill tooltip"
   },
   "drawingModeToast": {
     "message": "繪圖模式",

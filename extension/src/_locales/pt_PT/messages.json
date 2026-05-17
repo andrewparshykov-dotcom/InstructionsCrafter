@@ -203,10 +203,6 @@
     "message": "Ferramenta de borracha",
     "description": "Dica de ferramenta de borracha"
   },
-  "shapeToolTooltip": {
-    "message": "Ferramenta de formas",
-    "description": "Dica de ferramenta de formas"
-  },
   "arrowToolTooltip": {
     "message": "Ferramenta de seta",
     "description": "Dica de ferramenta de seta"
@@ -242,10 +238,6 @@
   "thinStrokeTooltip": {
     "message": "Traço fino",
     "description": "Dica de traço fino"
-  },
-  "toggleFillTooltip": {
-    "message": "Alternar preenchimento",
-    "description": "Dica de alternar preenchimento"
   },
   "drawingModeToast": {
     "message": "Modo de desenho",

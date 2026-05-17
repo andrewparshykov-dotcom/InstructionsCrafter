@@ -203,10 +203,6 @@
     "message": "மொழி கருவி",
     "description": "மொழி கருவி உத்திபத்தி"
   },
-  "shapeToolTooltip": {
-    "message": "வடிவ கருவி",
-    "description": "வடிவ கருவி உத்திபத்தி"
-  },
   "arrowToolTooltip": {
     "message": "அம்பு கருவி",
     "description": "அம்பு கருவி உத்திபத்தி"
@@ -242,10 +238,6 @@
   "thinStrokeTooltip": {
     "message": "இலேமெண்ட் அச்சு",
     "description": "இலேமெண்ட் அச்சு டூல்டிப்"
-  },
-  "toggleFillTooltip": {
-    "message": "நிரப்பு செய்",
-    "description": "நிரப்பு செய் டூல்டிப்"
   },
   "drawingModeToast": {
     "message": "வரைபட முடிந்தது",

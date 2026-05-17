@@ -7,7 +7,6 @@ import CustomControls from "../modules/CustomControls";
 
 import ArrowTool from "../modules/ArrowTool";
 import EraserTool from "../modules/EraserTool";
-import ShapeTool from "../modules/ShapeTool";
 import PenTool from "../modules/PenTool";
 import SelectTool from "../modules/SelectTool";
 
@@ -170,12 +169,6 @@ const CanvasWrap = (props) => {
       saveCanvas,
     );
     const eraserDrawing = EraserTool(canvas, contentStateRef, setContentState);
-    const shapeDrawing = ShapeTool(
-      canvas,
-      contentStateRef,
-      setContentState,
-      saveCanvas,
-    );
     const penDrawing = PenTool(
       canvas,
       contentStateRef,
@@ -186,7 +179,6 @@ const CanvasWrap = (props) => {
     return () => {
       arrowDrawing.removeEventListeners();
       eraserDrawing.removeEventListeners();
-      shapeDrawing.removeEventListeners();
       penDrawing.removeEventListeners();
     };
   }, []);
