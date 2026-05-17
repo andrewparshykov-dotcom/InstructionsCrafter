@@ -5,13 +5,7 @@ import React, {
   useLayoutEffect,
   useRef,
 } from "react";
-import * as Tabs from "@radix-ui/react-tabs";
-
 import {
-  RecordTabActive,
-  RecordTabInactive,
-  VideoTabActive,
-  VideoTabInactive,
   TempLogo,
   ProfilePic,
 } from "../images/popup/images";
@@ -25,7 +19,6 @@ import {
 } from "../toolbar/components/SVG";
 
 import RecordingTab from "./layout/RecordingTab";
-import VideosTab from "./layout/VideosTab";
 
 import SettingsMenu from "./layout/SettingsMenu";
 import InactiveSubscription from "./layout/InactiveSubscription";
@@ -623,58 +616,7 @@ const PopupContainer = (props) => {
                 }}
               />
             ) : (
-              <Tabs.Root
-                className="TabsRoot tl"
-                value={tab}
-                onValueChange={onValueChange}
-              >
-                <Tabs.List
-                  className="TabsList tl"
-                  data-value={tab}
-                  aria-label="Manage your account"
-                  tabIndex={0}
-                >
-                  <div className="pill-anim" ref={pillRef}></div>
-                  <Tabs.Trigger
-                    className="TabsTrigger tl"
-                    value="record"
-                    ref={recordTabRef}
-                    tabIndex={0}
-                  >
-                    <div className="TabsTriggerIcon">
-                      <img
-                        src={
-                          tab === "record" ? RecordTabActive : RecordTabInactive
-                        }
-                      />
-                    </div>
-                    {chrome.i18n.getMessage("recordTab")}
-                  </Tabs.Trigger>
-                  <Tabs.Trigger
-                    className="TabsTrigger tl"
-                    value="dashboard"
-                    ref={videoTabRef}
-                    tabIndex={0}
-                  >
-                    <div className="TabsTriggerIcon">
-                      <img
-                        src={
-                          tab === "dashboard"
-                            ? VideoTabActive
-                            : VideoTabInactive
-                        }
-                      />
-                    </div>
-                    {chrome.i18n.getMessage("videosTab")}
-                  </Tabs.Trigger>
-                </Tabs.List>
-                <Tabs.Content className="TabsContent tl" value="record">
-                  <RecordingTab shadowRef={props.shadowRef} />
-                </Tabs.Content>
-                <Tabs.Content className="TabsContent tl" value="dashboard">
-                  <VideosTab shadowRef={props.shadowRef} />
-                </Tabs.Content>
-              </Tabs.Root>
+              <RecordingTab shadowRef={props.shadowRef} />
             )}
           </div>
         </div>
