@@ -490,7 +490,7 @@
     "description": "Titre de l'extension non prise en charge sur l'onglet"
   },
   "extensionNotSupportedDescription": {
-    "message": "Screenity n'était pas pris en charge dans votre onglet précédent. Vous pouvez toujours commencer votre enregistrement ici et basculer vers l'onglet, mais votre caméra et votre barre d'outils ne seront pas visibles.",
+    "message": "InstructionsCrafter n'était pas pris en charge dans votre onglet précédent. Vous pouvez toujours commencer votre enregistrement ici et basculer vers l'onglet, mais votre barre d'outils ne sera pas visible.",
     "description": "Description de l'extension non prise en charge sur l'onglet"
   },
   "backupsTitle": {

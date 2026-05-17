@@ -490,7 +490,7 @@
     "description": "탭에서 지원되지 않는 확장 프로그램 제목"
   },
   "extensionNotSupportedDescription": {
-    "message": "Screenity는 이전 탭에서 지원되지 않았습니다. 그럼에도 불구하고 여기에서 녹음을 시작한 다음 다른 탭으로 전환할 수 있지만 카메라와 도구 모음은 표시되지 않습니다.",
+    "message": "InstructionsCrafter는 이전 탭에서 지원되지 않았습니다. 그럼에도 불구하고 여기에서 녹음을 시작한 다음 다른 탭으로 전환할 수 있지만 도구 모음은 표시되지 않습니다.",
     "description": "탭에서 지원되지 않는 확장 프로그램 설명"
   },
   "backupsTitle": {

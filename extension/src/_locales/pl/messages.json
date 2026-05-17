@@ -490,7 +490,7 @@
     "description": "Tytuł ostrzeżenia o nieobsługiwanym rozszerzeniu na karcie"
   },
   "extensionNotSupportedDescription": {
-    "message": "Screenity nie był obsługiwany na twojej poprzedniej karcie. Mimo to, możesz rozpocząć nagrywanie tutaj, a następnie przejść na inną kartę, ale kamera i pasek narzędzi nie będą widoczne.",
+    "message": "InstructionsCrafter nie był obsługiwany na twojej poprzedniej karcie. Mimo to, możesz rozpocząć nagrywanie tutaj, a następnie przejść na inną kartę, ale pasek narzędzi nie będzie widoczny.",
     "description": "Opis ostrzeżenia o nieobsługiwanym rozszerzeniu na karcie"
   },
   "backupsTitle": {

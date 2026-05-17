@@ -490,7 +490,7 @@
     "description": "Titolo dell'estensione non supportata sulla scheda"
   },
   "extensionNotSupportedDescription": {
-    "message": "Screenity non è stato supportato nella tua scheda precedente. Puoi comunque iniziare la registrazione qui e passare alla scheda, ma la tua fotocamera e la barra degli strumenti non saranno visibili.",
+    "message": "InstructionsCrafter non è stato supportato nella tua scheda precedente. Puoi comunque iniziare la registrazione qui e passare alla scheda, ma la barra degli strumenti non sarà visibile.",
     "description": "Descrizione dell'estensione non supportata sulla scheda"
   },
   "backupsTitle": {

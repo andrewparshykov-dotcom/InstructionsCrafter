@@ -490,7 +490,7 @@
     "description": "Sekme Üzerinde Desteklenmeyen Uzantı Başlığı"
   },
   "extensionNotSupportedDescription": {
-    "message": "Screenity önceki sekmenizde desteklenmiyordu. Yine de burada kaydı başlatabilir ve ardından sekmeye geçebilirsiniz, ancak kamera ve araç çubuğunuz görünür olmayacaktır.",
+    "message": "InstructionsCrafter önceki sekmenizde desteklenmiyordu. Yine de burada kaydı başlatabilir ve ardından sekmeye geçebilirsiniz, ancak araç çubuğunuz görünür olmayacaktır.",
     "description": "Sekme Üzerinde Desteklenmeyen Uzantı Açıklaması"
   },
   "backupsTitle": {

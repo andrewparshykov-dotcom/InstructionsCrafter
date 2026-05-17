@@ -522,7 +522,7 @@
     "description": "Extension not supported on tab"
   },
   "extensionNotSupportedDescription": {
-    "message": "Screenity wasn't supported in your previous tab. You can still start your recording here and switch back to the tab, but your camera and toolbar won't be visible.",
+    "message": "InstructionsCrafter wasn't supported in your previous tab. You can still start your recording here and switch back to the tab, but your toolbar won't be visible.",
     "description": "Extension not supported on tab description"
   },
   "backupsTitle": {

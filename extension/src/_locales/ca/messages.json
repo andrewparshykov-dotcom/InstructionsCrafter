@@ -490,7 +490,7 @@
     "description": "Títol d'extensió no compatible a la pestanya"
   },
   "extensionNotSupportedDescription": {
-    "message": "Screenity no era compatible a la teva pestanya anterior. No obstant això, pots començar la gravació aquí i després canviar a la pestanya, però la teva càmera i la barra de ferramentes no seran visibles.",
+    "message": "InstructionsCrafter no era compatible a la teva pestanya anterior. No obstant això, pots començar la gravació aquí i després canviar a la pestanya, però la barra de ferramentes no serà visible.",
     "description": "Descripció d'extensió no compatible a la pestanya"
   },
   "backupsTitle": {

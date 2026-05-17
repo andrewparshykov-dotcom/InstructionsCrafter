@@ -490,7 +490,7 @@
     "description": "Judul Ekstensi Tidak Didukung di Tab"
   },
   "extensionNotSupportedDescription": {
-    "message": "Screenity tidak mendukung di tab sebelumnya Anda. Meskipun begitu, Anda masih bisa memulai perekaman di sini dan kemudian beralih ke tab lain, tetapi kamera dan toolbar Anda tidak akan terlihat.",
+    "message": "InstructionsCrafter tidak mendukung di tab sebelumnya Anda. Meskipun begitu, Anda masih bisa memulai perekaman di sini dan kemudian beralih ke tab lain, tetapi toolbar Anda tidak akan terlihat.",
     "description": "Deskripsi Ekstensi Tidak Didukung di Tab"
   },
   "backupsTitle": {

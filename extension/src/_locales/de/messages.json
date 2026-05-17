@@ -490,7 +490,7 @@
     "description": "Titel der Erweiterung nicht auf Tab unterstützt"
   },
   "extensionNotSupportedDescription": {
-    "message": "Screenity wurde in Ihrem vorherigen Tab nicht unterstützt. Sie können Ihre Aufnahme hier dennoch starten und dann zum Tab wechseln, aber Ihre Kamera und Symbolleiste werden nicht sichtbar sein.",
+    "message": "InstructionsCrafter wurde in Ihrem vorherigen Tab nicht unterstützt. Sie können Ihre Aufnahme hier dennoch starten und dann zum Tab wechseln, aber Ihre Symbolleiste wird nicht sichtbar sein.",
     "description": "Beschreibung der Erweiterung nicht auf Tab unterstützt"
   },
   "backupsTitle": {

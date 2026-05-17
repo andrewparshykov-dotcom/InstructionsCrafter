@@ -490,7 +490,7 @@
     "description": "Título de Extensão não Suportada na Guia"
   },
   "extensionNotSupportedDescription": {
-    "message": "O Screenity não foi suportado na sua guia anterior. Ainda pode iniciar a sua gravação aqui e alternar para a guia, mas a sua câmara e barra de ferramentas não serão visíveis.",
+    "message": "O InstructionsCrafter não foi suportado na sua guia anterior. Ainda pode iniciar a sua gravação aqui e alternar para a guia, mas a sua barra de ferramentas não será visível.",
     "description": "Descrição de Extensão não Suportada na Guia"
   },
   "backupsTitle": {

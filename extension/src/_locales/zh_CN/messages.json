@@ -490,7 +490,7 @@
     "description": "选项卡上不支持的扩展标题"
   },
   "extensionNotSupportedDescription": {
-    "message": "Screenity在您之前的选项卡上不受支持。尽管如此，您可以在此开始录制，然后切换到选项卡，但您的摄像头和工具栏将不可见。",
+    "message": "InstructionsCrafter在您之前的选项卡上不受支持。尽管如此，您可以在此开始录制，然后切换到选项卡，但您的工具栏将不可见。",
     "description": "选项卡上不支持扩展的说明"
   },
   "backupsTitle": {

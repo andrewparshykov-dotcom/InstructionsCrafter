@@ -490,7 +490,7 @@
     "description": "Título de extensión no compatible en la pestaña"
   },
   "extensionNotSupportedDescription": {
-    "message": "Screenity no fue compatible en tu pestaña anterior. Aún así, puedes comenzar tu grabación aquí y luego cambiar a la pestaña, pero tu cámara y barra de herramientas no serán visibles.",
+    "message": "InstructionsCrafter no fue compatible en tu pestaña anterior. Aún así, puedes comenzar tu grabación aquí y luego cambiar a la pestaña, pero tu barra de herramientas no será visible.",
     "description": "Descripción de extensión no compatible en la pestaña"
   },
   "backupsTitle": {

@@ -490,7 +490,7 @@
     "description": "Extension not supported on tab"
   },
   "extensionNotSupportedDescription": {
-    "message": "Screenity 不支援您先前的分頁。您還是可以從這裡開始錄製然後再切換回該分頁，但是攝影機和工具列會沒辦法顯示。",
+    "message": "InstructionsCrafter 不支援您先前的分頁。您還是可以從這裡開始錄製然後再切換回該分頁，但是工具列會沒辦法顯示。",
     "description": "Extension not supported on tab description"
   },
   "backupsTitle": {
