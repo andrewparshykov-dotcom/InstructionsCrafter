@@ -442,16 +442,6 @@ const OnboardingArrow = (props) => {
   );
 };
 
-const NoInternet = (props) => {
-  return (
-    <ReactSVG
-      src={URL + "/editor/icons/no-internet.svg"}
-      width={props.width}
-      height={props.height}
-    />
-  );
-};
-
 const CloseButtonToolbar = (props) => {
   return (
     <ReactSVG
@@ -533,7 +523,6 @@ export {
   CloseIconPopup,
   GrabIconPopup,
   OnboardingArrow,
-  NoInternet,
   CloseButtonToolbar,
   HelpIconPopup,
   MoreIconPopup,
