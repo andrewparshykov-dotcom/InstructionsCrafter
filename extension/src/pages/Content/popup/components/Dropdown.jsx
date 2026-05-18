@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext, useRef } from "react";
+import React, { useEffect, useState, useContext } from "react";
 
 import * as Select from "@radix-ui/react-select";
 import {
@@ -28,20 +28,14 @@ const Dropdown = (props) => {
       ) {
         setLabel(chrome.i18n.getMessage("noCameraDropdownLabel"));
       } else {
-        // Check if defaultVideoInput is in camdevices, if not set to none
-        if (
-          contentState.videoInput.find(
-            (device) => device.deviceId === contentState.defaultVideoInput
-          )
-        ) {
-          setLabel(
-            contentState.videoInput.find(
-              (device) => device.deviceId === contentState.defaultVideoInput
-            ).label
-          );
-        } else {
-          setLabel(chrome.i18n.getMessage("noCameraDropdownLabel"));
-        }
+        const device = contentState.videoInput.find(
+          (d) => d.deviceId === contentState.defaultVideoInput
+        );
+        setLabel(
+          device
+            ? device.label
+            : chrome.i18n.getMessage("noCameraDropdownLabel")
+        );
       }
     } else {
       if (
@@ -50,20 +44,14 @@ const Dropdown = (props) => {
       ) {
         setLabel(chrome.i18n.getMessage("noMicrophoneDropdownLabel"));
       } else {
-        // Check if defaultAudioInput is in micdevices, if not set to none
-        if (
-          contentState.audioInput.find(
-            (device) => device.deviceId === contentState.defaultAudioInput
-          )
-        ) {
-          setLabel(
-            contentState.audioInput.find(
-              (device) => device.deviceId === contentState.defaultAudioInput
-            ).label
-          );
-        } else {
-          setLabel(chrome.i18n.getMessage("noMicrophoneDropdownLabel"));
-        }
+        const device = contentState.audioInput.find(
+          (d) => d.deviceId === contentState.defaultAudioInput
+        );
+        setLabel(
+          device
+            ? device.label
+            : chrome.i18n.getMessage("noMicrophoneDropdownLabel")
+        );
       }
     }
   };
@@ -83,142 +71,54 @@ const Dropdown = (props) => {
     updateItems();
   }, []);
 
-  const toggleActive = (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    setOpen(false);
-    if (props.type === "camera") {
-      if (contentState.cameraActive) {
-        setContentState((prevContentState) => ({
-          ...prevContentState,
-          cameraActive: false,
-        }));
-        chrome.storage.local.set({
-          cameraActive: false,
-        });
-        setLabel(chrome.i18n.getMessage("noCameraDropdownLabel"));
-      } else {
-        setContentState((prevContentState) => ({
-          ...prevContentState,
-          cameraActive: true,
-        }));
-        chrome.storage.local.set({
-          cameraActive: true,
-        });
-        setLabel(
-          contentState.videoInput.find(
-            (device) => device.deviceId === contentState.defaultVideoInput
-          ).label
-        );
-      }
-    } else {
-      if (contentState.micActive) {
-        setContentState((prevContentState) => ({
-          ...prevContentState,
-          micActive: false,
-        }));
-        chrome.storage.local.set({
-          micActive: false,
-        });
-        setLabel(chrome.i18n.getMessage("noMicrophoneDropdownLabel"));
-      } else {
-        setContentState((prevContentState) => ({
-          ...prevContentState,
-          micActive: true,
-        }));
-        chrome.storage.local.set({
-          micActive: true,
-        });
-        setLabel(
-          contentState.audioInput.find(
-            (device) => device.deviceId === contentState.defaultAudioInput
-          ).label
-        );
-      }
-    }
-  };
-
-  const clickedIcon = useRef(false);
-
   return (
     <Select.Root
       open={open}
-      onOpenChange={(open) => {
-        if (clickedIcon.current) return;
-        setOpen(open);
-      }}
+      onOpenChange={setOpen}
       value={
-        props.type === "camera" && contentState.cameraActive
+        props.type === "camera"
           ? contentState.defaultVideoInput
-          : props.type === "camera" && !contentState.cameraActive
-          ? "none"
-          : props.type === "mic" && contentState.micActive
-          ? contentState.defaultAudioInput
-          : props.type === "mic" && !contentState.micActive
-          ? "none"
-          : "none"
+          : contentState.defaultAudioInput
       }
       onValueChange={(newValue) => {
         if (props.type === "camera") {
-          if (newValue === "none") {
-            setContentState((prevContentState) => ({
-              ...prevContentState,
-              cameraActive: false,
-            }));
-            chrome.storage.local.set({
-              cameraActive: false,
-            });
-            setLabel(chrome.i18n.getMessage("noCameraDropdownLabel"));
-          } else {
-            const selectedLabel =
-              contentState.videoInput.find(
-                (device) => device.deviceId === newValue
-              )?.label || "";
-            setContentState((prevContentState) => ({
-              ...prevContentState,
-              defaultVideoInput: newValue,
-              defaultVideoInputLabel: selectedLabel,
-              cameraActive: true,
-            }));
-            chrome.storage.local.set({
-              defaultVideoInput: newValue,
-              defaultVideoInputLabel: selectedLabel,
-              cameraActive: true,
-            });
-            chrome.runtime.sendMessage({
-              type: "switch-camera",
-              id: newValue,
-            });
-            setLabel(selectedLabel);
-          }
+          const selectedLabel =
+            contentState.videoInput.find(
+              (device) => device.deviceId === newValue
+            )?.label || "";
+          setContentState((prevContentState) => ({
+            ...prevContentState,
+            defaultVideoInput: newValue,
+            defaultVideoInputLabel: selectedLabel,
+            cameraActive: true,
+          }));
+          chrome.storage.local.set({
+            defaultVideoInput: newValue,
+            defaultVideoInputLabel: selectedLabel,
+            cameraActive: true,
+          });
+          chrome.runtime.sendMessage({
+            type: "switch-camera",
+            id: newValue,
+          });
+          setLabel(selectedLabel);
         } else {
-          if (newValue === "none") {
-            setContentState((prevContentState) => ({
-              ...prevContentState,
-              micActive: false,
-            }));
-            chrome.storage.local.set({
-              micActive: false,
-            });
-            setLabel(chrome.i18n.getMessage("noMicrophoneDropdownLabel"));
-          } else {
-            const selectedLabel =
-              contentState.audioInput.find(
-                (device) => device.deviceId === newValue
-              )?.label || "";
-            setContentState((prevContentState) => ({
-              ...prevContentState,
-              defaultAudioInput: newValue,
-              defaultAudioInputLabel: selectedLabel,
-              micActive: true,
-            }));
-            chrome.storage.local.set({
-              defaultAudioInput: newValue,
-              defaultAudioInputLabel: selectedLabel,
-              micActive: true,
-            });
-            setLabel(selectedLabel);
-          }
+          const selectedLabel =
+            contentState.audioInput.find(
+              (device) => device.deviceId === newValue
+            )?.label || "";
+          setContentState((prevContentState) => ({
+            ...prevContentState,
+            defaultAudioInput: newValue,
+            defaultAudioInputLabel: selectedLabel,
+            micActive: true,
+          }));
+          chrome.storage.local.set({
+            defaultAudioInput: newValue,
+            defaultAudioInputLabel: selectedLabel,
+            micActive: true,
+          });
+          setLabel(selectedLabel);
         }
       }}
     >
@@ -227,46 +127,8 @@ const Dropdown = (props) => {
         aria-label="Food"
         id={cameraAnchorId}
       >
-        <Select.Icon
-          className="SelectIconType"
-          onClick={(e) => {
-            e.stopPropagation();
-            e.preventDefault();
-            setOpen(false);
-            clickedIcon.current = true;
-          }}
-          onMouseDown={(e) => {
-            e.stopPropagation();
-            e.preventDefault();
-            setOpen(false);
-            clickedIcon.current = true;
-          }}
-          onMouseUp={(e) => {
-            clickedIcon.current = false;
-          }}
-        >
-          <div
-            className="SelectIconButton"
-            onClick={(e) => {
-              e.stopPropagation();
-              setOpen(false);
-              toggleActive(e);
-              clickedIcon.current = true;
-            }}
-            onMouseDown={(e) => {
-              e.stopPropagation();
-              e.preventDefault();
-              setOpen(false);
-              clickedIcon.current = true;
-            }}
-            onContextMenu={(e) => {
-              e.preventDefault();
-              e.stopPropagation();
-            }}
-            onMouseUp={(e) => {
-              clickedIcon.current = false;
-            }}
-          >
+        <Select.Icon className="SelectIconType">
+          <div className="SelectIconButton">
             {props.type == "camera" && (
               <img
                 src={
