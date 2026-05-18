@@ -13,6 +13,13 @@ export const onInstalledListener = () => {
         "InstructionsCrafter — voice narration is required while recording",
     });
 
+    // Clear any stale uninstall URL left over from earlier Screenity-branded
+    // installs (the old code set chrome.runtime.setUninstallURL to a tally.so
+    // survey). Chrome retains that value across reloads until something
+    // explicitly overwrites it, so installs that predate the rebrand still
+    // open the Screenity survey on uninstall. Setting to "" unsets it.
+    chrome.runtime.setUninstallURL("");
+
     if (details.reason === "install") {
       chrome.storage.local.clear();
 
