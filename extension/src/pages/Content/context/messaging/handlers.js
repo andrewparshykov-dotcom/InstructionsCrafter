@@ -8,8 +8,6 @@ import { updateFromStorage } from "../utils/updateFromStorage";
 import { checkAuthStatus } from "../utils/checkAuthStatus";
 import { traceStep, setStartFlowOutcome } from "../../../utils/startFlowTrace";
 import { perfMark } from "../../../utils/perfMarks";
-import { triggerSupportDownload } from "../../../utils/triggerSupportDownload";
-import JSZip from "jszip";
 
 const CLOUD_FEATURES_ENABLED =
   process.env.SCREENITY_ENABLE_CLOUD_FEATURES === "true";
@@ -626,16 +624,6 @@ export const setupHandlers = () => {
         null,
         null,
         false,
-        chrome.i18n.getMessage("getHelpButton"),
-        () => {
-          triggerSupportDownload({ source: "recording-failed" });
-          chrome.runtime.sendMessage({
-            type: "report-error",
-            source: "recording-failed",
-            errorCode: "REC_START_FAILED",
-            zipBundled: true,
-          });
-        },
       );
     }
   });
@@ -756,10 +744,8 @@ export const setupHandlers = () => {
     }));
   });
 
-  registerMessage("stream-error", (message) => {
+  registerMessage("stream-error", () => {
     const state = getState();
-    const errorCode = message?.errorCode || null;
-    const errorWhy = message?.why || message?.error || null;
 
     state.openModal(
       chrome.i18n.getMessage("streamErrorModalTitle"),
@@ -776,17 +762,6 @@ export const setupHandlers = () => {
       null,
       null,
       false,
-      chrome.i18n.getMessage("getHelpButton"),
-      () => {
-        triggerSupportDownload({ source: "stream-error" });
-        chrome.runtime.sendMessage({
-          type: "report-error",
-          errorCode,
-          errorWhy,
-          source: "stream-error",
-          zipBundled: true,
-        });
-      },
     );
   });
 
@@ -825,92 +800,12 @@ export const setupHandlers = () => {
       null,
       null,
       false,
-      chrome.i18n.getMessage("getHelpButton"),
-      () => {
-        triggerSupportDownload({ source: "backup-error" });
-        chrome.runtime.sendMessage({
-          type: "report-error",
-          source: "backup-error",
-          errorCode: "BACKUP_PERMISSION_FAILED",
-          zipBundled: true,
-        });
-      },
     );
   });
 
-  registerMessage("fast-recorder-hard-fail", async () => {
+  registerMessage("fast-recorder-hard-fail", () => {
     const state = getState();
     if (typeof state.openModal !== "function") return;
-
-    const downloadBundle = async () => {
-      const userAgent = navigator.userAgent;
-      let platformInfo = {};
-      try {
-        platformInfo = await chrome.runtime.sendMessage({
-          type: "get-platform-info",
-        });
-      } catch {}
-
-      const manifestInfo = chrome.runtime.getManifest().version;
-      const fastRecorderData = await chrome.storage.local.get([
-        "fastRecorderBeta",
-        "fastRecorderDecision",
-        "fastRecorderDisabledForDevice",
-        "fastRecorderDisabledReason",
-        "fastRecorderDisabledDetails",
-        "fastRecorderDisabledAt",
-        "fastRecorderProbe",
-        "fastRecorderValidation",
-        "fastRecorderValidationFailed",
-        "fastRecorderInUse",
-        "fastRecorderActiveRecordingId",
-      ]);
-
-      const data = {
-        userAgent: userAgent,
-        platformInfo: platformInfo,
-        manifestInfo: manifestInfo,
-        defaultAudioInput: state.defaultAudioInput,
-        defaultAudioOutput: state.defaultAudioOutput,
-        defaultVideoInput: state.defaultVideoInput,
-        quality: state.quality,
-        systemAudio: state.systemAudio,
-        audioInput: state.audioInput,
-        audioOutput: state.audioOutput,
-        backgroundEffectsActive: state.backgroundEffectsActive,
-        recording: state.recording,
-        recordingType: state.recordingType,
-        askForPermissions: state.askForPermissions,
-        cameraPermission: state.cameraPermission,
-        microphonePermission: state.microphonePermission,
-        askMicrophone: state.askMicrophone,
-        cursorMode: state.cursorMode,
-        zoomEnabled: state.zoomEnabled,
-        offscreenRecording: state.offscreenRecording,
-        updateChrome: state.updateChrome,
-        permissionsChecked: state.permissionsChecked,
-        permissionsLoaded: state.permissionsLoaded,
-        hideUI: state.hideUI,
-        alarm: state.alarm,
-        alarmTime: state.alarmTime,
-        surface: state.surface,
-        blurMode: state.blurMode,
-        fastRecorder: fastRecorderData,
-      };
-
-      const zip = new JSZip();
-      zip.file("troubleshooting.json", JSON.stringify(data));
-      const blob = await zip.generateAsync({ type: "blob" });
-      const url = window.URL.createObjectURL(blob);
-
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = "screenity-troubleshooting.zip";
-      a.click();
-      window.URL.revokeObjectURL(url);
-
-      chrome.runtime.sendMessage({ type: "indexed-db-download" });
-    };
 
     state.openModal(
       chrome.i18n.getMessage("fastRecorderFailedTitle"),
@@ -925,16 +820,6 @@ export const setupHandlers = () => {
       null,
       null,
       true,
-      chrome.i18n.getMessage("getHelpButton"),
-      () => {
-        triggerSupportDownload({ source: "fast-recorder-hard-fail" });
-        chrome.runtime.sendMessage({
-          type: "report-error",
-          source: "fast-recorder-hard-fail",
-          errorCode: "FAST_RECORDER_HARD_FAIL",
-          zipBundled: true,
-        });
-      },
     );
   });
 
