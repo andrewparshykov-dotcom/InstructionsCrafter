@@ -325,19 +325,6 @@ const Dropdown = (props) => {
           <Select.ScrollUpButton className="SelectScrollButton"></Select.ScrollUpButton>
           <Select.Viewport className="SelectViewport">
             <Select.Group>
-              <SelectItem value="none">
-                {props.type == "camera"
-                  ? chrome.i18n.getMessage("noCameraDropdownLabel")
-                  : chrome.i18n.getMessage("noMicrophoneDropdownLabel")}
-              </SelectItem>
-            </Select.Group>
-            {props.type == "camera" && contentState.videoInput.length > 0 && (
-              <Select.Separator className="SelectSeparator" />
-            )}
-            {props.type == "mic" && contentState.audioInput.length > 0 && (
-              <Select.Separator className="SelectSeparator" />
-            )}
-            <Select.Group>
               {props.type == "camera" &&
                 contentState.videoInput.map((device) => (
                   <SelectItem value={device.deviceId} key={device.deviceId}>
