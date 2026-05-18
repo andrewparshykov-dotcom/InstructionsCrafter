@@ -12,11 +12,7 @@ import {
 
 import { Rnd } from "react-rnd";
 
-import {
-  CloseIconPopup,
-  GrabIconPopup,
-  HelpIconPopup,
-} from "../toolbar/components/SVG";
+import { CloseIconPopup, GrabIconPopup } from "../toolbar/components/SVG";
 
 import RecordingTab from "./layout/RecordingTab";
 
@@ -30,7 +26,6 @@ import {
 } from "./onboarding/proOnboarding";
 
 import { contentStateContext } from "../context/ContentState";
-import { supportContextQuery } from "../../utils/buildSupportContext";
 
 const PopupContainer = (props) => {
   const [contentState, setContentState] = useContext(contentStateContext);
@@ -48,7 +43,6 @@ const PopupContainer = (props) => {
   const recordTabRef = useRef(null);
   const videoTabRef = useRef(null);
   const pillRef = useRef(null);
-  const [URL, setURL] = useState("https://help.screenity.io/");
   const isCloudBuild = process.env.SCREENITY_ENABLE_CLOUD_FEATURES === "true";
   const wasCameraActiveRef = useRef(null);
 
@@ -79,35 +73,6 @@ const PopupContainer = (props) => {
     contentState.onboarding,
     contentState.showProSplash,
   ]);
-
-  useEffect(() => {
-    const buildURL = async () => {
-      const locale = chrome.i18n.getMessage("@@ui_locale");
-
-      let baseURL = "https://help.screenity.io/";
-
-      if (contentState?.isLoggedIn && contentState?.screenityUser) {
-        const { name, email } = contentState.screenityUser;
-        const qs = await supportContextQuery({
-          includeRecordingState: true,
-          source: "popup",
-          user: { name, email },
-        });
-        baseURL = `https://tally.so/r/310MNg?extension=true&${qs}`;
-      }
-
-      if (!locale.includes("en")) {
-        setURL(
-          `https://translate.google.com/translate?sl=en&tl=${locale}&u=${encodeURIComponent(
-            baseURL
-          )}`
-        );
-      } else {
-        setURL(baseURL);
-      }
-    };
-    buildURL();
-  }, [contentState]);
 
   const onValueChange = (tab) => {
     setTab(tab);
@@ -471,14 +436,6 @@ const PopupContainer = (props) => {
               open={open}
               setOpen={setOpen}
             />
-            <div
-              style={{ marginBottom: "-4px", cursor: "pointer" }}
-              onClick={() => {
-                window.open(URL, "_blank");
-              }}
-            >
-              <HelpIconPopup />
-            </div>
             <div
               className="popup-control popup-close"
               onClick={() => {

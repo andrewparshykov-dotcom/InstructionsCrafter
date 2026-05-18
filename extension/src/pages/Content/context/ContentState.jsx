@@ -22,7 +22,6 @@ import {
   traceStep,
   setStartFlowOutcome,
 } from "../../utils/startFlowTrace";
-import { triggerSupportDownload } from "../../utils/triggerSupportDownload";
 
 export const contentStateContext = createContext();
 export const contentStateRef = { current: null };
@@ -48,12 +47,6 @@ const ContentState = (props) => {
   const CLOUD_FEATURES_ENABLED =
     process.env.SCREENITY_ENABLE_CLOUD_FEATURES === "true";
   setTimer = setTimerInternal;
-  const [URL, setURL] = useState(
-    "https://help.screenity.io/getting-started/77KizPC8MHVGfpKpqdux9D/why-does-screenity-ask-for-permissions/9AAE8zJ6iiUtCAtjn4SUT1",
-  );
-  const [URL2, setURL2] = useState(
-    "https://help.screenity.io/troubleshooting/9Jy5RGjNrBB42hqUdREQ7W/how-to-grant-screenity-permission-to-record-your-camera-and-microphone/x6U69TnrbMjy5CQ96Er2E9",
-  );
   const startBeepRef = useRef(null);
   const stopBeepRef = useRef(null);
   const prevRecordingRef = useRef(null);
@@ -161,22 +154,6 @@ const ContentState = (props) => {
         }));
       }
     } catch {}
-  }, []);
-
-  useEffect(() => {
-    const locale = chrome.i18n.getMessage("@@ui_locale");
-    if (!locale.includes("en")) {
-      setURL(
-        "https://translate.google.com/translate?sl=en&tl=" +
-          locale +
-          "&u=https://help.screenity.io/getting-started/77KizPC8MHVGfpKpqdux9D/why-does-screenity-ask-for-permissions/9AAE8zJ6iiUtCAtjn4SUT1",
-      );
-      setURL2(
-        "https://translate.google.com/translate?sl=en&tl=" +
-          locale +
-          "&u=https://help.screenity.io/troubleshooting/9Jy5RGjNrBB42hqUdREQ7W/how-to-grant-screenity-permission-to-record-your-camera-and-microphone/x6U69TnrbMjy5CQ96Er2E9",
-      );
-    }
   }, []);
 
   const startRecording = useCallback(() => {
@@ -571,8 +548,8 @@ const ContentState = (props) => {
         },
         () => {},
         null,
-        chrome.i18n.getMessage("learnMoreDot"),
-        URL,
+        null,
+        null,
         true,
       );
       setStartFlowOutcome("cancelled", { error: "permission-denied" });
@@ -594,16 +571,6 @@ const ContentState = (props) => {
       if (typeof contentStateRef.current.openModal === "function") {
         let clear = null;
         let clearAction = () => {};
-        const locale = chrome.i18n.getMessage("@@ui_locale");
-        let helpURL =
-          "https://help.screenity.io/troubleshooting/9Jy5RGjNrBB42hqUdREQ7W/what-does-%E2%80%9Cmemory-limit-reached%E2%80%9D-mean-when-recording/8WkwHbt3puuXunYqQnyPcb";
-
-        if (!locale.includes("en")) {
-          helpURL =
-            "https://translate.google.com/translate?sl=en&tl=" +
-            locale +
-            "&u=https://help.screenity.io/troubleshooting/9Jy5RGjNrBB42hqUdREQ7W/what-does-%E2%80%9Cmemory-limit-reached%E2%80%9D-mean-when-recording/8WkwHbt3puuXunYqQnyPcb";
-        }
 
         const response = await chrome.runtime.sendMessage({
           type: "check-restore",
@@ -623,19 +590,9 @@ const ContentState = (props) => {
           clearAction,
           () => {},
           null,
-          chrome.i18n.getMessage("learnMoreDot"),
-          helpURL,
+          null,
+          null,
           false,
-          chrome.i18n.getMessage("getHelpButton"),
-          () => {
-            triggerSupportDownload({ source: "not-enough-space" });
-            chrome.runtime.sendMessage({
-              type: "report-error",
-              errorCode: "REC_RUN_MEMORY",
-              source: "not-enough-space",
-              zipBundled: true,
-            });
-          },
         );
       }
       setStartFlowOutcome("error", { error: "insufficient-memory" });
@@ -900,8 +857,8 @@ const ContentState = (props) => {
               noMorePermissions();
             },
             chrome.runtime.getURL("assets/helper/permissions.webp"),
-            chrome.i18n.getMessage("learnMoreDot"),
-            URL2,
+            null,
+            null,
             true,
             false,
           );

@@ -6,8 +6,6 @@ const CORE_KEY = "proPopupCore";
 const CAMERA_KEY = "proCameraInfo";
 const POPOVER_CLASS = "ScreenityOnboardingPopover onboarding-popover";
 const DRIVER_STYLE_ID = "screenity-driver-onboarding-style";
-const TOOLBAR_HELP_URL =
-  "https://help.screenity.io/recording/how-to-hide-the-toolbar";
 const IDLE_START_DELAY_MS = 420;
 
 const STEP_IDS = {
@@ -606,21 +604,6 @@ const startDriver = ({ steps, root, getState, onFinish, copy }) => {
           popover.title.parentElement.insertBefore(emoji, popover.title);
         }
       }
-      if (
-        step.id === STEP_IDS.TOOLBAR &&
-        popover?.description &&
-        !popover.description.querySelector("a")
-      ) {
-        const desc = popover.description;
-        desc.appendChild(document.createTextNode(" "));
-        const link = document.createElement("a");
-        link.href = TOOLBAR_HELP_URL;
-        link.target = "_blank";
-        link.rel = "noopener noreferrer";
-        link.textContent = copy.learnMoreLabel;
-        desc.appendChild(link);
-      }
-
       logStepState("popover_render", options?.state?.activeStep, options);
     },
     onDestroyed: async (element, step, options) => {

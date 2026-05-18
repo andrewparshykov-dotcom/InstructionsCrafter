@@ -50,32 +50,6 @@ const DevHUD = ({ contentStateRef, setContentState }) => {
 
   const actions = [
     {
-      label: "Stream error modal",
-      fn: () => {
-        const s = contentStateRef.current;
-        s?.openModal?.(
-          chrome.i18n.getMessage("streamErrorModalTitle"),
-          chrome.i18n.getMessage("streamErrorModalDescription"),
-          chrome.i18n.getMessage("permissionsModalDismiss"),
-          null,
-          () => {},
-          () => {},
-          null,
-          null,
-          null,
-          false,
-          chrome.i18n.getMessage("getHelpButton"),
-          () => {
-            chrome.runtime.sendMessage({
-              type: "report-error",
-              errorCode: "DEBUG_TEST",
-              source: "stream-error",
-            });
-          },
-        );
-      },
-    },
-    {
       label: "Low storage warning",
       fn: () => toast(chrome.i18n.getMessage("toastStorageLow")),
     },

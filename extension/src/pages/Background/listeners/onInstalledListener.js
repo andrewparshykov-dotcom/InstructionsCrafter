@@ -1,6 +1,5 @@
 import { removeTab } from "../tabManagement";
 import { executeScripts } from "../utils/executeScripts";
-import { supportContextQuery } from "../../utils/buildSupportContext";
 import { tryResumePendingUploads } from "../recording/resumePendingUploads";
 
 const cloudFeaturesEnabled =
@@ -8,9 +7,6 @@ const cloudFeaturesEnabled =
 
 export const onInstalledListener = () => {
   chrome.runtime.onInstalled.addListener(async (details) => {
-    const version = chrome.runtime.getManifest().version;
-    const locale = chrome.i18n.getMessage("@@ui_locale");
-
     // Permanent toolbar tooltip reminder of the narration requirement.
     chrome.action.setTitle({
       title:
@@ -19,14 +15,6 @@ export const onInstalledListener = () => {
 
     if (details.reason === "install") {
       chrome.storage.local.clear();
-
-      const installQs = await supportContextQuery({ source: "uninstall" });
-      const installUrl = `https://tally.so/r/w8Zro5?${installQs}`;
-      chrome.runtime.setUninstallURL(
-        locale.includes("en")
-          ? installUrl
-          : `http://translate.google.com/translate?js=n&sl=auto&tl=${locale}&u=${encodeURIComponent(installUrl)}`
-      );
 
       chrome.storage.local.set({
         firstTime: true,
@@ -55,14 +43,6 @@ export const onInstalledListener = () => {
           });
         }
       }
-
-      const updateQs = await supportContextQuery({ source: "uninstall" });
-      const updateUrl = `https://tally.so/r/3Ex6kX?${updateQs}`;
-      chrome.runtime.setUninstallURL(
-        locale.includes("en")
-          ? updateUrl
-          : `http://translate.google.com/translate?js=n&sl=auto&tl=${locale}&u=${encodeURIComponent(updateUrl)}`
-      );
     }
 
     // Backup mode is deprecated: hidden from the settings dropdown and

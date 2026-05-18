@@ -93,7 +93,7 @@ const Backup = () => {
       localSaving(prompt);
     } else {
       alert(
-        "Failed to set up local backup. Reach out to us at support@screenity.io for more help. You can still record your screen.",
+        "Failed to set up local backup. Reach out to us at Andrewp@safeshieldins.com for more help. You can still record your screen.",
       );
       chrome.storage.local.set({ backup: false });
       chrome.runtime.sendMessage({
@@ -171,7 +171,7 @@ const Backup = () => {
       });
     } else {
       alert(
-        "Your browser doesn't support local backups. Reach out to us at support@screenity.io for more help. You can still record your screen.",
+        "Your browser doesn't support local backups. Reach out to us at Andrewp@safeshieldins.com for more help. You can still record your screen.",
       );
       chrome.storage.local.set({ backup: false });
       chrome.runtime.sendMessage({
@@ -341,13 +341,7 @@ const Backup = () => {
             <div className="setupDescription">
               {chrome.i18n.getMessage("backupsDescription1")}
               <br />
-              {chrome.i18n.getMessage("backupsDescription2")}{" "}
-              <a
-                href="https://help.screenity.io/getting-started/77KizPC8MHVGfpKpqdux9D/what-are-backups-how-can-i-set-them-up/waYArvSwybZkJKKDdMXw1o"
-                target="_blank"
-              >
-                {chrome.i18n.getMessage("learnMoreDot")}
-              </a>
+              {chrome.i18n.getMessage("backupsDescription2")}
             </div>
             <div className="setupActions">
               <button
@@ -408,13 +402,7 @@ const Backup = () => {
               {chrome.i18n.getMessage("backupsConfirmTitle")}
             </div>
             <div className="subtitle">
-              {chrome.i18n.getMessage("backupsConfirmDescription")}{" "}
-              <a
-                href="https://help.screenity.io/getting-started/77KizPC8MHVGfpKpqdux9D/what-are-backups-how-can-i-set-them-up/waYArvSwybZkJKKDdMXw1o"
-                target="_blank"
-              >
-                {chrome.i18n.getMessage("learnMoreDot")}
-              </a>
+              {chrome.i18n.getMessage("backupsConfirmDescription")}
             </div>
 
             <div
