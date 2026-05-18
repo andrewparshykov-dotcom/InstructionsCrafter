@@ -7,11 +7,6 @@ const isTabFromUrl = new URLSearchParams(window.location.search).has("tab");
 const RecorderUI = ({ started, isTab }) => {
   return (
     <div className="wrap">
-      <img
-        className="logo"
-        src={chrome.runtime.getURL("assets/logo-text.svg")}
-        alt="Screenity logo"
-      />
       <div className="middle-area">
         <img
           src={chrome.runtime.getURL("assets/record-tab-active.svg")}
@@ -72,14 +67,6 @@ const RecorderUI = ({ started, isTab }) => {
             100% {
               background-position: 100% 0;
             }
-          }
-          .logo {
-            position: absolute;
-            bottom: 30px;
-            left: 0px;
-            right: 0px;
-            margin: auto;
-            width: 120px;
           }
           .wrap {
             position: absolute;

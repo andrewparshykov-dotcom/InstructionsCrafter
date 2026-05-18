@@ -24,10 +24,6 @@ const Setup = () => {
 
   return (
     <div className="setupBackground">
-      <img
-        src={chrome.runtime.getURL("assets/logo-text.svg")}
-        className="setupLogo"
-      />
       <div className="setupBackgroundSVG"></div>
       <style>
         {`
@@ -64,16 +60,6 @@ const Setup = () => {
 					100% {
 						background-position: 100% 0;
 					}
-				}
-
-
-				.setupLogo {
-					position: absolute;
-					bottom: 30px;
-					left: 0px;
-					right: 0px;
-					margin: auto;
-					width: 120px;
 				}
 
 

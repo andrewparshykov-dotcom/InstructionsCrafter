@@ -424,10 +424,6 @@ const Backup = () => {
           </div>
         </div>
       )}
-      <img
-        className="setupLogo"
-        src={chrome.runtime.getURL("assets/logo-text.svg")}
-      />
       <style>
         {`
 				body {
@@ -586,15 +582,6 @@ const Backup = () => {
 					background: #F4F2F2!important;
 				}
 
-
-				.setupLogo {
-					position: absolute;
-					bottom: 30px;
-					left: 0px;
-					right: 0px;
-					margin: auto;
-					width: 120px;
-				}
 
 
 				.setupBackground {
