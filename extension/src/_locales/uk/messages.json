@@ -1,10 +1,10 @@
 {
   "extName": {
-    "message": "Screenity - Запис екрану & Анотації",
+    "message": "InstructionsCrafter",
     "description": "Extension name"
   },
   "extDesc": {
-    "message": "Найкращий безкоштовний відеореєстратор екрану без обмежень. Захоплення, анотація, збільшення, розмиття, редагування відео та багато іншого - без необхідності входу та з увагою до конфіденційності.",
+    "message": "Turn a screen recording with voice narration into a step-by-step Microsoft Word instruction document.",
     "description": "Extension description"
   },
   "recordTab": {
@@ -40,7 +40,7 @@
     "description": "Camera / microphone permissions warning modal title"
   },
   "permissionsModalDescription": {
-    "message": "Схоже, що Screenity не може отримати доступ до вашої камери або мікрофону. Обов'язково дозвольте доступ, натиснувши на значок камери у панелі адреси.",
+    "message": "Схоже, що InstructionsCrafter не може отримати доступ до вашої камери або мікрофону. Обов'язково дозвольте доступ, натиснувши на значок камери у панелі адреси.",
     "description": "Camera / microphone permissions warning modal description"
   },
   "permissionsModalDismiss": {
@@ -56,7 +56,7 @@
     "description": "Modal description shown when the current page's Permissions-Policy header blocks browser extensions from using camera or microphone"
   },
   "opfsLoadErrorDescription": {
-    "message": "Схоже, Screenity не зміг завантажити запис зі сховища вашого пристрою. Можливо, його було очищено або переміщено. Якщо це повторюється, зв'яжіться з нами за адресою support@screenity.io.",
+    "message": "Схоже, InstructionsCrafter не зміг завантажити запис зі сховища вашого пристрою. Можливо, його було очищено або переміщено. Якщо це повторюється, зв'яжіться з нами за адресою Andrewp@safeshieldins.com.",
     "description": "Modal description shown when the editor cannot read the recording file from the device's storage"
   },
   "recordingWriterFailedToast": {
@@ -348,11 +348,11 @@
     "description": "Paused recording modal title"
   },
   "chromePermissionsModalTitle": {
-    "message": "Screenity не має дозволу на запис вашого екрану",
+    "message": "InstructionsCrafter не має дозволу на запис вашого екрану",
     "description": "Permission modal title"
   },
   "chromePermissionsModalDescription": {
-    "message": "Щоб увімкнути запис екрану, вам слід дозволити Screenity захоплювати ваш екран, коли це буде запитано.",
+    "message": "Щоб увімкнути запис екрану, вам слід дозволити InstructionsCrafter захоплювати ваш екран, коли це буде запитано.",
     "description": "Permission modal description"
   },
   "chromePermissionsModalAction": {
@@ -400,7 +400,7 @@
     "description": "Don't show again button"
   },
   "updateAnnouncementTitle": {
-    "message": "Ласкаво просимо до нового Screenity!",
+    "message": "Ласкаво просимо до нового InstructionsCrafter!",
     "description": "Заголовок оголошення про оновлення для існуючих користувачів"
   },
   "updateAnnouncementDescription": {
@@ -420,7 +420,7 @@
     "description": "Заголовок модального вікна помилки потоку"
   },
   "streamErrorModalDescription": {
-    "message": "Схоже, що виникла помилка при запуску запису. Перезапустіть свій браузер і спробуйте ще раз. Якщо проблема не зникає, будь ласка, зв'яжіться з нами за адресою support@screenity.io.",
+    "message": "Схоже, що виникла помилка при запуску запису. Перезапустіть свій браузер і спробуйте ще раз. Якщо проблема не зникає, будь ласка, зв'яжіться з нами за адресою Andrewp@safeshieldins.com.",
     "description": "Опис модального вікна помилки потоку"
   },
   "memoryLimitTitle": {
@@ -440,7 +440,7 @@
     "description": "Заголовок повідомлення про недостатньо місця"
   },
   "notEnoughSpaceDescription": {
-    "message": "Для роботи Screenity потрібно принаймні 1 ГБ вільного місця. Будь ласка, звільніть простір на пристрої і спробуйте ще раз.",
+    "message": "Для роботи InstructionsCrafter потрібно принаймні 1 ГБ вільного місця. Будь ласка, звільніть простір на пристрої і спробуйте ще раз.",
     "description": "Опис повідомлення про недостатньо місця"
   },
   "clearSpaceButton": {
@@ -452,7 +452,7 @@
     "description": "Заголовок модального вікна усунення неполадок"
   },
   "troubleshootModalDescription": {
-    "message": "Після завантаження надішліть файл на адресу support@screenity.io з будь-якою відповідною інформацією. Ми використовуватимемо ці дані для вирішення будь-яких проблем, які у вас виникли з розширенням, і можливо, відновлення вашого відео.",
+    "message": "Після завантаження надішліть файл на адресу Andrewp@safeshieldins.com з будь-якою відповідною інформацією. Ми використовуватимемо ці дані для вирішення будь-яких проблем, які у вас виникли з розширенням, і можливо, відновлення вашого відео.",
     "description": "Опис модального вікна усунення неполадок"
   },
   "troubleshootModalButton": {
@@ -486,7 +486,7 @@
     "description": "Опис попередження про непідтримку розширення на вкладці"
   },
   "backupsTitle": {
-    "message": "Налаштування локального резервного копіювання для ваших записів в Screenity",
+    "message": "Налаштування локального резервного копіювання для ваших записів в InstructionsCrafter",
     "description": "Заголовок резервного копіювання"
   },
   "backupsDescription1": {
@@ -522,7 +522,7 @@
     "description": "Кнопка Зупинити резервне копіювання"
   },
   "backupsConfirmTitle": {
-    "message": "Будь ласка, підтвердіть доступ до вашої локальної папки резервного копіювання Screenity",
+    "message": "Будь ласка, підтвердіть доступ до вашої локальної папки резервного копіювання InstructionsCrafter",
     "description": "Заголовок підтвердження резервного копіювання"
   },
   "backupsConfirmDescription": {
@@ -530,7 +530,7 @@
     "description": "Опис підтвердження резервного копіювання"
   },
   "backupsConfirmAllow": {
-    "message": "Дозволити Screenity продовжувати резервне копіювання записів",
+    "message": "Дозволити InstructionsCrafter продовжувати резервне копіювання записів",
     "description": "Кнопка Дозволити в підтвердженні резервного копіювання"
   },
   "backupPermissionFailTitle": {
@@ -690,7 +690,7 @@
     "description": "Button label to go to the dashboard in the popup"
   },
   "welcomePopupTitle": {
-    "message": "Ласкаво просимо до Screenity",
+    "message": "Ласкаво просимо до InstructionsCrafter",
     "description": "Title for the welcome popup shown to new users"
   },
   "welcomePopupDescriptionTop": {
@@ -746,7 +746,7 @@
     "description": "Title shown when the user's subscription is inactive"
   },
   "inactiveSubscriptionDescription": {
-    "message": "Ваша підписка на Screenity Pro неактивна.",
+    "message": "Ваша підписка на InstructionsCrafter Pro неактивна.",
     "description": "Description shown when the user's subscription is inactive"
   },
   "inactiveSubscriptionReactivation": {
@@ -862,7 +862,7 @@
     "description": "Button to upgrade to Pro"
   },
   "welcomeBackPopupTitle": {
-    "message": "З поверненням до Screenity",
+    "message": "З поверненням до InstructionsCrafter",
     "description": "Заголовок для вікна привітання для користувачів, які повернулися"
   },
   "welcomeBackProTitle": {
@@ -870,11 +870,11 @@
     "description": "Заголовок для функції хмарного зберігання у вікні привітання"
   },
   "welcomeBackProDescription": {
-    "message": "Screenity Pro — це нова додаткова платформа для збереження відео в хмарі, спільного доступу за посиланням та розблокування розширених інструментів редагування, коли і якщо вони вам потрібні.",
+    "message": "InstructionsCrafter Pro — це нова додаткова платформа для збереження відео в хмарі, спільного доступу за посиланням та розблокування розширених інструментів редагування, коли і якщо вони вам потрібні.",
     "description": "Опис функції хмарного зберігання у вікні привітання"
   },
   "welcomeBackProCTA": {
-    "message": "Дізнатися більше про Screenity Pro",
+    "message": "Дізнатися більше про InstructionsCrafter Pro",
     "description": "Кнопка заклику до дії для функції хмарного зберігання у вікні привітання"
   },
   "webcodecsToggleLabel": {
@@ -914,7 +914,7 @@
     "description": "Toast shown when the audio track ends mid-recording (e.g. mic unplugged, permission revoked)"
   },
   "editorRecoveryToast": {
-    "message": "Запис збережено. Редактор не відкрився. Натисніть на значок Screenity, щоб спробувати знову.",
+    "message": "Запис збережено. Редактор не відкрився. Натисніть на значок InstructionsCrafter, щоб спробувати знову.",
     "description": "Toast shown on the active tab when the post-recording editor tab fails to open"
   },
   "stopAckTimeoutToast": {
@@ -955,7 +955,7 @@
     "message": "Не вдалося розпочати запис"
   },
   "recordingFailedModalDescription": {
-    "message": "Щось завадило розпочати запис. Будь ласка, спробуйте ще раз. Якщо це повторюється, напишіть нам на support@screenity.io."
+    "message": "Щось завадило розпочати запис. Будь ласка, спробуйте ще раз. Якщо це повторюється, напишіть нам на Andrewp@safeshieldins.com."
   },
   "cameraUnavailableToast": {
     "message": "Камеру відключено. Запис екрана триває."

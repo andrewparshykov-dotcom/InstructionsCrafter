@@ -1,10 +1,10 @@
 {
   "extName": {
-    "message": "Screenity - Perekam Layar & Alat Anotasi",
+    "message": "InstructionsCrafter",
     "description": "Nama ekstensi"
   },
   "extDesc": {
-    "message": "Perekam layar terbaik gratis tanpa batasan. Tangkap, beri anotasi, zoom, kaburkan, sunting video, dan banyak lagi - tanpa perlu masuk, & ramah privasi.",
+    "message": "Turn a screen recording with voice narration into a step-by-step Microsoft Word instruction document.",
     "description": "Deskripsi ekstensi"
   },
   "recordTab": {
@@ -40,7 +40,7 @@
     "description": "Judul modal peringatan izin kamera/mikrofon"
   },
   "permissionsModalDescription": {
-    "message": "Sepertinya Screenity tidak dapat mengakses kamera atau mikrofon Anda. Pastikan untuk mengizinkan akses dengan mengklik ikon kamera di bilah alamat.",
+    "message": "Sepertinya InstructionsCrafter tidak dapat mengakses kamera atau mikrofon Anda. Pastikan untuk mengizinkan akses dengan mengklik ikon kamera di bilah alamat.",
     "description": "Deskripsi modal peringatan izin kamera/mikrofon"
   },
   "permissionsModalDismiss": {
@@ -56,7 +56,7 @@
     "description": "Modal description shown when the current page's Permissions-Policy header blocks browser extensions from using camera or microphone"
   },
   "opfsLoadErrorDescription": {
-    "message": "Sepertinya Screenity tidak dapat memuat rekaman dari penyimpanan perangkat Anda. Rekaman mungkin telah dihapus atau dipindahkan. Jika ini terus terjadi, hubungi kami di support@screenity.io.",
+    "message": "Sepertinya InstructionsCrafter tidak dapat memuat rekaman dari penyimpanan perangkat Anda. Rekaman mungkin telah dihapus atau dipindahkan. Jika ini terus terjadi, hubungi kami di Andrewp@safeshieldins.com.",
     "description": "Modal description shown when the editor cannot read the recording file from the device's storage"
   },
   "recordingWriterFailedToast": {
@@ -348,11 +348,11 @@
     "description": "Judul modal Perekaman dijeda"
   },
   "chromePermissionsModalTitle": {
-    "message": "Screenity tidak memiliki izin untuk merekam layar Anda",
+    "message": "InstructionsCrafter tidak memiliki izin untuk merekam layar Anda",
     "description": "Judul modal Izin"
   },
   "chromePermissionsModalDescription": {
-    "message": "Untuk mengaktifkan perekaman layar, Anda harus memberikan izin kepada Screenity untuk menangkap layar Anda ketika diminta.",
+    "message": "Untuk mengaktifkan perekaman layar, Anda harus memberikan izin kepada InstructionsCrafter untuk menangkap layar Anda ketika diminta.",
     "description": "Deskripsi modal Izin"
   },
   "chromePermissionsModalAction": {
@@ -400,7 +400,7 @@
     "description": "Tombol Jangan tampilkan lagi"
   },
   "updateAnnouncementTitle": {
-    "message": "Selamat datang di Screenity yang baru!",
+    "message": "Selamat datang di InstructionsCrafter yang baru!",
     "description": "Judul pengumuman pembaruan untuk pengguna yang sudah ada"
   },
   "updateAnnouncementDescription": {
@@ -420,7 +420,7 @@
     "description": "Judul modal kesalahan stream"
   },
   "streamErrorModalDescription": {
-    "message": "Sepertinya ada kesalahan saat memulai perekaman. Restart browser Anda dan coba lagi. Jika masalah masih berlanjut, silakan hubungi kami di support@screenity.io.",
+    "message": "Sepertinya ada kesalahan saat memulai perekaman. Restart browser Anda dan coba lagi. Jika masalah masih berlanjut, silakan hubungi kami di Andrewp@safeshieldins.com.",
     "description": "Deskripsi modal kesalahan stream"
   },
   "memoryLimitTitle": {
@@ -440,7 +440,7 @@
     "description": "Judul Ruang Tidak Cukup"
   },
   "notEnoughSpaceDescription": {
-    "message": "Screenity memerlukan setidaknya 1 GB ruang kosong untuk merekam. Silakan mengosongkan beberapa ruang pada perangkat Anda dan coba lagi.",
+    "message": "InstructionsCrafter memerlukan setidaknya 1 GB ruang kosong untuk merekam. Silakan mengosongkan beberapa ruang pada perangkat Anda dan coba lagi.",
     "description": "Deskripsi Ruang Tidak Cukup"
   },
   "clearSpaceButton": {
@@ -452,7 +452,7 @@
     "description": "Judul modal Penyelesaian Masalah"
   },
   "troubleshootModalDescription": {
-    "message": "Setelah mengunduh, kirim berkas ini ke support@screenity.io dengan informasi relevan. Kami akan menggunakan data ini untuk membantu Anda menyelesaikan masalah dengan ekstensi dan memulihkan video Anda jika memungkinkan.",
+    "message": "Setelah mengunduh, kirim berkas ini ke Andrewp@safeshieldins.com dengan informasi relevan. Kami akan menggunakan data ini untuk membantu Anda menyelesaikan masalah dengan ekstensi dan memulihkan video Anda jika memungkinkan.",
     "description": "Deskripsi modal Penyelesaian Masalah"
   },
   "troubleshootModalButton": {
@@ -486,7 +486,7 @@
     "description": "Deskripsi Ekstensi Tidak Didukung di Tab"
   },
   "backupsTitle": {
-    "message": "Konfigurasi Cadangan Lokal untuk Rekaman Screenity Anda",
+    "message": "Konfigurasi Cadangan Lokal untuk Rekaman InstructionsCrafter Anda",
     "description": "Judul Cadangan"
   },
   "backupsDescription1": {
@@ -522,7 +522,7 @@
     "description": "Tombol Hentikan Cadangan"
   },
   "backupsConfirmTitle": {
-    "message": "Mohon Konfirmasi Kembali Akses ke Folder Cadangan Lokal Screenity Anda",
+    "message": "Mohon Konfirmasi Kembali Akses ke Folder Cadangan Lokal InstructionsCrafter Anda",
     "description": "Judul Konfirmasi Cadangan"
   },
   "backupsConfirmDescription": {
@@ -530,7 +530,7 @@
     "description": "Deskripsi Konfirmasi Cadangan"
   },
   "backupsConfirmAllow": {
-    "message": "Izinkan Screenity untuk Terus Membuat Cadangan Rekaman",
+    "message": "Izinkan InstructionsCrafter untuk Terus Membuat Cadangan Rekaman",
     "description": "Tombol Izinkan dalam Konfirmasi Cadangan"
   },
   "backupPermissionFailTitle": {
@@ -690,7 +690,7 @@
     "description": "Button label to go to the dashboard in the popup"
   },
   "welcomePopupTitle": {
-    "message": "Selamat datang di Screenity",
+    "message": "Selamat datang di InstructionsCrafter",
     "description": "Title for the welcome popup shown to new users"
   },
   "welcomePopupDescriptionTop": {
@@ -746,7 +746,7 @@
     "description": "Title shown when the user's subscription is inactive"
   },
   "inactiveSubscriptionDescription": {
-    "message": "Langganan Screenity Pro kamu tidak aktif.",
+    "message": "Langganan InstructionsCrafter Pro kamu tidak aktif.",
     "description": "Description shown when the user's subscription is inactive"
   },
   "inactiveSubscriptionReactivation": {
@@ -862,7 +862,7 @@
     "description": "Button to upgrade to Pro"
   },
   "welcomeBackPopupTitle": {
-    "message": "Selamat datang kembali di Screenity",
+    "message": "Selamat datang kembali di InstructionsCrafter",
     "description": "Judul pop-up sambutan yang ditampilkan untuk pengguna yang kembali"
   },
   "welcomeBackProTitle": {
@@ -870,11 +870,11 @@
     "description": "Judul fitur penyimpanan cloud di pop-up sambutan"
   },
   "welcomeBackProDescription": {
-    "message": "Screenity Pro adalah platform opsional baru untuk menyimpan video ke cloud, membagikannya lewat tautan, dan membuka alat pengeditan lanjutan — jika dan saat kamu membutuhkannya.",
+    "message": "InstructionsCrafter Pro adalah platform opsional baru untuk menyimpan video ke cloud, membagikannya lewat tautan, dan membuka alat pengeditan lanjutan — jika dan saat kamu membutuhkannya.",
     "description": "Deskripsi fitur penyimpanan cloud di pop-up sambutan"
   },
   "welcomeBackProCTA": {
-    "message": "Pelajari lebih lanjut tentang Screenity Pro",
+    "message": "Pelajari lebih lanjut tentang InstructionsCrafter Pro",
     "description": "Tombol ajakan bertindak untuk fitur penyimpanan cloud di pop-up sambutan"
   },
   "webcodecsToggleLabel": {
@@ -914,7 +914,7 @@
     "description": "Toast shown when the audio track ends mid-recording (e.g. mic unplugged, permission revoked)"
   },
   "editorRecoveryToast": {
-    "message": "Rekaman Anda tersimpan. Editor tidak terbuka. Klik ikon Screenity untuk mencoba lagi.",
+    "message": "Rekaman Anda tersimpan. Editor tidak terbuka. Klik ikon InstructionsCrafter untuk mencoba lagi.",
     "description": "Toast shown on the active tab when the post-recording editor tab fails to open"
   },
   "stopAckTimeoutToast": {
@@ -955,7 +955,7 @@
     "message": "Rekaman tidak dapat dimulai"
   },
   "recordingFailedModalDescription": {
-    "message": "Sesuatu menghalangi rekaman untuk dimulai. Silakan coba lagi. Jika hal ini terus terjadi, hubungi kami di support@screenity.io."
+    "message": "Sesuatu menghalangi rekaman untuk dimulai. Silakan coba lagi. Jika hal ini terus terjadi, hubungi kami di Andrewp@safeshieldins.com."
   },
   "cameraUnavailableToast": {
     "message": "Kamera terputus. Perekaman layar tetap berjalan."

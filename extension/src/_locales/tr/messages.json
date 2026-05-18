@@ -1,10 +1,10 @@
 {
   "extName": {
-    "message": "Screenity - Ekran Kayıt & Not Aracı",
+    "message": "InstructionsCrafter",
     "description": "Uzantı adı"
   },
   "extDesc": {
-    "message": "Sınırsız en iyi ücretsiz ekran kaydedici. Kayıt, açıklama, yakınlaştırma, bulanıklık, video düzenleme ve daha fazlasını yapın - giriş yapmanıza gerek yok, gizlilik dostu.",
+    "message": "Turn a screen recording with voice narration into a step-by-step Microsoft Word instruction document.",
     "description": "Uzantı açıklaması"
   },
   "recordTab": {
@@ -40,7 +40,7 @@
     "description": "Kamera / mikrofon izinleri uyarı modalı başlığı"
   },
   "permissionsModalDescription": {
-    "message": "Screenity'nin kamera veya mikrofonunuza erişemiyor gibi görünüyor. Kameranın simgesine tıklayarak erişime izin verdiğinizden emin olun.",
+    "message": "InstructionsCrafter'nin kamera veya mikrofonunuza erişemiyor gibi görünüyor. Kameranın simgesine tıklayarak erişime izin verdiğinizden emin olun.",
     "description": "Kamera / mikrofon izinleri uyarı modalı açıklaması"
   },
   "permissionsModalDismiss": {
@@ -56,7 +56,7 @@
     "description": "Modal description shown when the current page's Permissions-Policy header blocks browser extensions from using camera or microphone"
   },
   "opfsLoadErrorDescription": {
-    "message": "Görünüşe göre Screenity kaydı cihazınızın deposundan yükleyemedi. Silinmiş veya taşınmış olabilir. Bu sorun devam ederse, lütfen support@screenity.io adresinden bizimle iletişime geçin.",
+    "message": "Görünüşe göre InstructionsCrafter kaydı cihazınızın deposundan yükleyemedi. Silinmiş veya taşınmış olabilir. Bu sorun devam ederse, lütfen Andrewp@safeshieldins.com adresinden bizimle iletişime geçin.",
     "description": "Modal description shown when the editor cannot read the recording file from the device's storage"
   },
   "recordingWriterFailedToast": {
@@ -348,11 +348,11 @@
     "description": "Durdurulan kayıt modal başlığı"
   },
   "chromePermissionsModalTitle": {
-    "message": "Screenity ekranınızı kaydetme iznine sahip değil",
+    "message": "InstructionsCrafter ekranınızı kaydetme iznine sahip değil",
     "description": "İzin modal başlığı"
   },
   "chromePermissionsModalDescription": {
-    "message": "Ekran kaydını etkinleştirmek için, Screenity'nin ekranınızı yakalamasına izin vermelisiniz.",
+    "message": "Ekran kaydını etkinleştirmek için, InstructionsCrafter'nin ekranınızı yakalamasına izin vermelisiniz.",
     "description": "İzin modal açıklaması"
   },
   "chromePermissionsModalAction": {
@@ -400,7 +400,7 @@
     "description": "Tekrar gösterme düğmesi"
   },
   "updateAnnouncementTitle": {
-    "message": "Yeni Screenity'ye Hoş Geldiniz!",
+    "message": "Yeni InstructionsCrafter'ye Hoş Geldiniz!",
     "description": "Mevcut kullanıcılar için güncelleme duyurusu başlığı"
   },
   "updateAnnouncementDescription": {
@@ -420,7 +420,7 @@
     "description": "Akış hatası modal başlığı"
   },
   "streamErrorModalDescription": {
-    "message": "Kaydın başlatılmasında bir hata oluştu gibi görünüyor. Tarayıcınızı yeniden başlatın ve tekrar deneyin. Sorun devam ederse, lütfen support@screenity.io adresinden bize ulaşın.",
+    "message": "Kaydın başlatılmasında bir hata oluştu gibi görünüyor. Tarayıcınızı yeniden başlatın ve tekrar deneyin. Sorun devam ederse, lütfen Andrewp@safeshieldins.com adresinden bize ulaşın.",
     "description": "Akış hatası modal açıklaması"
   },
   "memoryLimitTitle": {
@@ -440,7 +440,7 @@
     "description": "Yetersiz Alan Başlık"
   },
   "notEnoughSpaceDescription": {
-    "message": "Screenity, kayıt için en az 1 GB boş alan gerektirir. Lütfen cihazınızda alan açın ve yeniden deneyin.",
+    "message": "InstructionsCrafter, kayıt için en az 1 GB boş alan gerektirir. Lütfen cihazınızda alan açın ve yeniden deneyin.",
     "description": "Yetersiz Alan Açıklama"
   },
   "clearSpaceButton": {
@@ -452,7 +452,7 @@
     "description": "Sorun giderme modal başlığı"
   },
   "troubleshootModalDescription": {
-    "message": "İndirdikten sonra dosyayı support@screenity.io adresine gönderin ve ilgili bilgileri ekleyin. Bu verileri, uzantı ile ilgili yaşadığınız sorunları çözmek ve mümkünse videonuzu kurtarmak için kullanacağız.",
+    "message": "İndirdikten sonra dosyayı Andrewp@safeshieldins.com adresine gönderin ve ilgili bilgileri ekleyin. Bu verileri, uzantı ile ilgili yaşadığınız sorunları çözmek ve mümkünse videonuzu kurtarmak için kullanacağız.",
     "description": "Sorun giderme modal açıklaması"
   },
   "troubleshootModalButton": {
@@ -486,7 +486,7 @@
     "description": "Sekme Üzerinde Desteklenmeyen Uzantı Açıklaması"
   },
   "backupsTitle": {
-    "message": "Screenity Kayıtlarınız için Yerel Yedekleme Ayarları",
+    "message": "InstructionsCrafter Kayıtlarınız için Yerel Yedekleme Ayarları",
     "description": "Yedeklemeler Başlığı"
   },
   "backupsDescription1": {
@@ -522,7 +522,7 @@
     "description": "Yedeklemeleri Durdur Düğmesi"
   },
   "backupsConfirmTitle": {
-    "message": "Lütfen Screenity'in Yerel Yedekleme Klasörüne Erişimini Tekrar Onaylayın",
+    "message": "Lütfen InstructionsCrafter'in Yerel Yedekleme Klasörüne Erişimini Tekrar Onaylayın",
     "description": "Yedeklemeler Onay Başlığı"
   },
   "backupsConfirmDescription": {
@@ -530,7 +530,7 @@
     "description": "Yedeklemeler Onay Açıklaması"
   },
   "backupsConfirmAllow": {
-    "message": "Screenity'e Kayıtların Yedeklemesine Devam Etme İzni Ver",
+    "message": "InstructionsCrafter'e Kayıtların Yedeklemesine Devam Etme İzni Ver",
     "description": "Yedeklemeler Onayında İzin Ver Düğmesi"
   },
   "backupPermissionFailTitle": {
@@ -690,7 +690,7 @@
     "description": "Button label to go to the dashboard in the popup"
   },
   "welcomePopupTitle": {
-    "message": "Screenity'e hoş geldin",
+    "message": "InstructionsCrafter'e hoş geldin",
     "description": "Title for the welcome popup shown to new users"
   },
   "welcomePopupDescriptionTop": {
@@ -746,7 +746,7 @@
     "description": "Title shown when the user's subscription is inactive"
   },
   "inactiveSubscriptionDescription": {
-    "message": "Screenity Pro aboneliğiniz aktif değil.",
+    "message": "InstructionsCrafter Pro aboneliğiniz aktif değil.",
     "description": "Description shown when the user's subscription is inactive"
   },
   "inactiveSubscriptionReactivation": {
@@ -862,7 +862,7 @@
     "description": "Button to upgrade to Pro"
   },
   "welcomeBackPopupTitle": {
-    "message": "Screenity’e tekrar hoş geldiniz",
+    "message": "InstructionsCrafter’e tekrar hoş geldiniz",
     "description": "Geri dönen kullanıcılar için karşılama açılır penceresi başlığı"
   },
   "welcomeBackProTitle": {
@@ -870,11 +870,11 @@
     "description": "Karşılama açılır penceresinde bulut depolama özelliği başlığı"
   },
   "welcomeBackProDescription": {
-    "message": "Screenity Pro, videolarınızı bulutta saklamak, bağlantıyla paylaşmak ve gelişmiş düzenleme araçlarının kilidini açmak için isteğe bağlı yeni bir platformdur – ihtiyacınız olduğunda kullanabilirsiniz.",
+    "message": "InstructionsCrafter Pro, videolarınızı bulutta saklamak, bağlantıyla paylaşmak ve gelişmiş düzenleme araçlarının kilidini açmak için isteğe bağlı yeni bir platformdur – ihtiyacınız olduğunda kullanabilirsiniz.",
     "description": "Karşılama açılır penceresinde bulut depolama özelliğinin açıklaması"
   },
   "welcomeBackProCTA": {
-    "message": "Screenity Pro hakkında daha fazla bilgi edinin",
+    "message": "InstructionsCrafter Pro hakkında daha fazla bilgi edinin",
     "description": "Karşılama açılır penceresinde bulut depolama özelliği için harekete geçirici buton"
   },
   "webcodecsToggleLabel": {
@@ -914,7 +914,7 @@
     "description": "Toast shown when the audio track ends mid-recording (e.g. mic unplugged, permission revoked)"
   },
   "editorRecoveryToast": {
-    "message": "Kaydınız kaydedildi. Düzenleyici açılmadı. Tekrar denemek için Screenity simgesine tıklayın.",
+    "message": "Kaydınız kaydedildi. Düzenleyici açılmadı. Tekrar denemek için InstructionsCrafter simgesine tıklayın.",
     "description": "Toast shown on the active tab when the post-recording editor tab fails to open"
   },
   "stopAckTimeoutToast": {
@@ -955,7 +955,7 @@
     "message": "Kayıt başlatılamadı"
   },
   "recordingFailedModalDescription": {
-    "message": "Bir şey kaydın başlamasını engelledi. Lütfen tekrar deneyin. Sorun devam ederse support@screenity.io adresinden bize ulaşın."
+    "message": "Bir şey kaydın başlamasını engelledi. Lütfen tekrar deneyin. Sorun devam ederse Andrewp@safeshieldins.com adresinden bize ulaşın."
   },
   "cameraUnavailableToast": {
     "message": "Kamera bağlantısı kesildi. Ekran kaydı devam ediyor."

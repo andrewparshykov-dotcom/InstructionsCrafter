@@ -1,10 +1,10 @@
 {
   "extName": {
-    "message": "Screenity - 螢幕錄製與標註工具",
+    "message": "InstructionsCrafter",
     "description": "Extension name"
   },
   "extDesc": {
-    "message": "免費且保護隱私的螢幕錄製工具，沒有任何限制。錄製、標註、編輯影片等等 - 全部無需註冊。",
+    "message": "Turn a screen recording with voice narration into a step-by-step Microsoft Word instruction document.",
     "description": "Extension description"
   },
   "recordTab": {
@@ -40,7 +40,7 @@
     "description": "Camera / microphone permissions warning modal title"
   },
   "permissionsModalDescription": {
-    "message": "Screenity 似乎無法存取您的攝影機或麥克風。請確保您點擊位址列當中的相機圖示來允許存取。",
+    "message": "InstructionsCrafter 似乎無法存取您的攝影機或麥克風。請確保您點擊位址列當中的相機圖示來允許存取。",
     "description": "Camera / microphone permissions warning modal description"
   },
   "permissionsModalDismiss": {
@@ -56,7 +56,7 @@
     "description": "Modal description shown when the current page's Permissions-Policy header blocks browser extensions from using camera or microphone"
   },
   "opfsLoadErrorDescription": {
-    "message": "Screenity 無法從您的裝置儲存空間載入錄製內容。它可能已被清除或移動。如果此情況持續發生，請透過 support@screenity.io 聯絡我們。",
+    "message": "InstructionsCrafter 無法從您的裝置儲存空間載入錄製內容。它可能已被清除或移動。如果此情況持續發生，請透過 Andrewp@safeshieldins.com 聯絡我們。",
     "description": "Modal description shown when the editor cannot read the recording file from the device's storage"
   },
   "recordingWriterFailedToast": {
@@ -348,11 +348,11 @@
     "description": "Paused recording modal title"
   },
   "chromePermissionsModalTitle": {
-    "message": "Screenity 沒有權限錄製您的螢幕",
+    "message": "InstructionsCrafter 沒有權限錄製您的螢幕",
     "description": "Permission modal title"
   },
   "chromePermissionsModalDescription": {
-    "message": "要啟用螢幕錄製，您必須在向您詢問時提供 Screenity 擷取您的螢幕內容的權限。",
+    "message": "要啟用螢幕錄製，您必須在向您詢問時提供 InstructionsCrafter 擷取您的螢幕內容的權限。",
     "description": "Permission modal description"
   },
   "chromePermissionsModalAction": {
@@ -400,11 +400,11 @@
     "description": "Don't show again button"
   },
   "updateAnnouncementTitle": {
-    "message": "歡迎來到新版 Screenity！",
+    "message": "歡迎來到新版 InstructionsCrafter！",
     "description": "Update announcement title for existing users"
   },
   "updateAnnouncementDescription": {
-    "message": "我們為您帶來新的外觀與許多有趣的新功能，但請放心，Screenity 仍然是您所熟悉且喜愛的免費、保護隱私且開源的擴充元件。",
+    "message": "我們為您帶來新的外觀與許多有趣的新功能，但請放心，InstructionsCrafter 仍然是您所熟悉且喜愛的免費、保護隱私且開源的擴充元件。",
     "description": "Update announcement description for existing users"
   },
   "updateAnnouncementLearnMore": {
@@ -420,7 +420,7 @@
     "description": "Stream error modal title"
   },
   "streamErrorModalDescription": {
-    "message": "開始錄製時似乎發生了錯誤。請重新開啟您的瀏覽器後再試一次。如果問題還是存在，請寄信到 support@screenity.io 與我們聯繫。",
+    "message": "開始錄製時似乎發生了錯誤。請重新開啟您的瀏覽器後再試一次。如果問題還是存在，請寄信到 Andrewp@safeshieldins.com 與我們聯繫。",
     "description": "Stream error modal description"
   },
   "memoryLimitTitle": {
@@ -440,7 +440,7 @@
     "description": "Not enough space title"
   },
   "notEnoughSpaceDescription": {
-    "message": "Screenity 需要至少 1GB 的空間才能錄製。請清出一些空間之後再試一次。",
+    "message": "InstructionsCrafter 需要至少 1GB 的空間才能錄製。請清出一些空間之後再試一次。",
     "description": "Not enough space description"
   },
   "clearSpaceButton": {
@@ -452,7 +452,7 @@
     "description": "Troubleshoot modal title"
   },
   "troubleshootModalDescription": {
-    "message": "下載之後請將檔案寄到 support@screenity.io，如果有相關的資訊也請包含在信件中。我們會使用該資料幫助您排解使用這個擴充元件的問題，並試著復原您的影片。",
+    "message": "下載之後請將檔案寄到 Andrewp@safeshieldins.com，如果有相關的資訊也請包含在信件中。我們會使用該資料幫助您排解使用這個擴充元件的問題，並試著復原您的影片。",
     "description": "Troubleshoot modal description"
   },
   "troubleshootModalButton": {
@@ -486,7 +486,7 @@
     "description": "Extension not supported on tab description"
   },
   "backupsTitle": {
-    "message": "為您的 Screenity 錄影建立本機備份",
+    "message": "為您的 InstructionsCrafter 錄影建立本機備份",
     "description": "Backups title"
   },
   "backupsDescription1": {
@@ -522,7 +522,7 @@
     "description": "Stop backups button"
   },
   "backupsConfirmTitle": {
-    "message": "請重新確認對於您的 Screenity 本機備份資料夾的存取權",
+    "message": "請重新確認對於您的 InstructionsCrafter 本機備份資料夾的存取權",
     "description": "Backups confirm title"
   },
   "backupsConfirmDescription": {
@@ -530,7 +530,7 @@
     "description": "Backups confirm description"
   },
   "backupsConfirmAllow": {
-    "message": "允許 Screenity 繼續備份錄影",
+    "message": "允許 InstructionsCrafter 繼續備份錄影",
     "description": "Backups confirm allow button"
   },
   "backupPermissionFailTitle": {
@@ -690,7 +690,7 @@
     "description": "Button label to go to the dashboard in the popup"
   },
   "welcomePopupTitle": {
-    "message": "歡迎使用 Screenity",
+    "message": "歡迎使用 InstructionsCrafter",
     "description": "Title for the welcome popup shown to new users"
   },
   "welcomePopupDescriptionTop": {
@@ -746,7 +746,7 @@
     "description": "Title shown when the user's subscription is inactive"
   },
   "inactiveSubscriptionDescription": {
-    "message": "您的 Screenity Pro 訂閱目前已失效。",
+    "message": "您的 InstructionsCrafter Pro 訂閱目前已失效。",
     "description": "Description shown when the user's subscription is inactive"
   },
   "inactiveSubscriptionReactivation": {
@@ -862,7 +862,7 @@
     "description": "Button to upgrade to Pro"
   },
   "welcomeBackPopupTitle": {
-    "message": "歡迎回到 Screenity",
+    "message": "歡迎回到 InstructionsCrafter",
     "description": "回訪使用者的歡迎彈窗標題"
   },
   "welcomeBackProTitle": {
@@ -870,11 +870,11 @@
     "description": "歡迎彈窗中雲端儲存功能的標題"
   },
   "welcomeBackProDescription": {
-    "message": "Screenity Pro 是一個全新可選平台，可將影片儲存到雲端、透過連結分享，並在需要時解鎖進階編輯工具。",
+    "message": "InstructionsCrafter Pro 是一個全新可選平台，可將影片儲存到雲端、透過連結分享，並在需要時解鎖進階編輯工具。",
     "description": "歡迎彈窗中雲端儲存功能的描述"
   },
   "welcomeBackProCTA": {
-    "message": "了解更多 Screenity Pro",
+    "message": "了解更多 InstructionsCrafter Pro",
     "description": "歡迎彈窗中雲端儲存功能的號召性按鈕"
   },
   "webcodecsToggleLabel": {
@@ -914,7 +914,7 @@
     "description": "Toast shown when the audio track ends mid-recording (e.g. mic unplugged, permission revoked)"
   },
   "editorRecoveryToast": {
-    "message": "錄製內容已儲存。編輯器未開啟，請點擊 Screenity 圖示重試。",
+    "message": "錄製內容已儲存。編輯器未開啟，請點擊 InstructionsCrafter 圖示重試。",
     "description": "Toast shown on the active tab when the post-recording editor tab fails to open"
   },
   "stopAckTimeoutToast": {
@@ -955,7 +955,7 @@
     "message": "無法開始錄影"
   },
   "recordingFailedModalDescription": {
-    "message": "錄影未能開始。請再試一次。若問題持續發生，請透過 support@screenity.io 與我們聯絡。"
+    "message": "錄影未能開始。請再試一次。若問題持續發生，請透過 Andrewp@safeshieldins.com 與我們聯絡。"
   },
   "cameraUnavailableToast": {
     "message": "攝影機已中斷連線。螢幕錄影繼續。"

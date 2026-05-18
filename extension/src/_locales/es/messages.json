@@ -1,10 +1,10 @@
 {
   "extName": {
-    "message": "Screenity - Graba y anota tu pantalla",
+    "message": "InstructionsCrafter",
     "description": "Nombre de la extensión"
   },
   "extDesc": {
-    "message": "La mejor grabadora de pantalla gratis para Chrome sin límites. Captura, dibuja, amplía, desenfoca, edita vídeos y mucho más, sin necesidad de registro y totalmente privada.",
+    "message": "Turn a screen recording with voice narration into a step-by-step Microsoft Word instruction document.",
     "description": "Descripción de la extensión"
   },
   "recordTab": {
@@ -40,7 +40,7 @@
     "description": "Título del modal de advertencia de permisos de cámara/micrófono"
   },
   "permissionsModalDescription": {
-    "message": "Parece que Screenity no puede acceder a tu cámara o micrófono. Permite el acceso haciendo clic en el icono de la cámara en la barra de direcciones.",
+    "message": "Parece que InstructionsCrafter no puede acceder a tu cámara o micrófono. Permite el acceso haciendo clic en el icono de la cámara en la barra de direcciones.",
     "description": "Descripción del modal de advertencia de permisos de cámara/micrófono"
   },
   "permissionsModalDismiss": {
@@ -56,7 +56,7 @@
     "description": "Modal description shown when the current page's Permissions-Policy header blocks browser extensions from using camera or microphone"
   },
   "opfsLoadErrorDescription": {
-    "message": "Parece que Screenity no pudo cargar la grabación desde el almacenamiento de tu dispositivo. Puede haber sido eliminada o movida. Si esto sigue ocurriendo, contáctanos en support@screenity.io.",
+    "message": "Parece que InstructionsCrafter no pudo cargar la grabación desde el almacenamiento de tu dispositivo. Puede haber sido eliminada o movida. Si esto sigue ocurriendo, contáctanos en Andrewp@safeshieldins.com.",
     "description": "Modal description shown when the editor cannot read the recording file from the device's storage"
   },
   "recordingWriterFailedToast": {
@@ -348,11 +348,11 @@
     "description": "Título del modal de grabación en pausa"
   },
   "chromePermissionsModalTitle": {
-    "message": "Screenity no tiene permiso para grabar tu pantalla",
+    "message": "InstructionsCrafter no tiene permiso para grabar tu pantalla",
     "description": "Título del modal de permisos"
   },
   "chromePermissionsModalDescription": {
-    "message": "Para habilitar la grabación de pantalla, debes conceder permisos a Screenity.",
+    "message": "Para habilitar la grabación de pantalla, debes conceder permisos a InstructionsCrafter.",
     "description": "Descripción del modal de permisos"
   },
   "chromePermissionsModalAction": {
@@ -400,7 +400,7 @@
     "description": "Botón de no mostrar de nuevo"
   },
   "updateAnnouncementTitle": {
-    "message": "¡Bienvenido al nuevo Screenity!",
+    "message": "¡Bienvenido al nuevo InstructionsCrafter!",
     "description": "Título del anuncio de actualización para usuarios existentes"
   },
   "updateAnnouncementDescription": {
@@ -420,7 +420,7 @@
     "description": "Título del modal de error de transmisión"
   },
   "streamErrorModalDescription": {
-    "message": "Hubo un error al iniciar la grabación. Reinicia tu navegador e inténtalo de nuevo. Si el problema persiste, por favor, contáctanos en support@screenity.io.",
+    "message": "Hubo un error al iniciar la grabación. Reinicia tu navegador e inténtalo de nuevo. Si el problema persiste, por favor, contáctanos en Andrewp@safeshieldins.com.",
     "description": "Descripción del modal de error de transmisión"
   },
   "memoryLimitTitle": {
@@ -440,7 +440,7 @@
     "description": "Título de espacio insuficiente"
   },
   "notEnoughSpaceDescription": {
-    "message": "Screenity necesita al menos 1 GB de espacio libre para grabar. Por favor, libera espacio y vuelve a intentarlo.",
+    "message": "InstructionsCrafter necesita al menos 1 GB de espacio libre para grabar. Por favor, libera espacio y vuelve a intentarlo.",
     "description": "Descripción de espacio insuficiente"
   },
   "clearSpaceButton": {
@@ -452,7 +452,7 @@
     "description": "Título del modal de solución de problemas"
   },
   "troubleshootModalDescription": {
-    "message": "Después de descargar, envía el archivo a support@screenity.io con cualquier información relevante. Utilizaremos estos datos para ayudarte a solucionar cualquier problema que tengas con la extensión y, si es posible, recuperar tu video.",
+    "message": "Después de descargar, envía el archivo a Andrewp@safeshieldins.com con cualquier información relevante. Utilizaremos estos datos para ayudarte a solucionar cualquier problema que tengas con la extensión y, si es posible, recuperar tu video.",
     "description": "Descripción del modal de solución de problemas"
   },
   "troubleshootModalButton": {
@@ -486,7 +486,7 @@
     "description": "Descripción de extensión no compatible en la pestaña"
   },
   "backupsTitle": {
-    "message": "Configurar una copia de seguridad local para tus grabaciones de Screenity",
+    "message": "Configurar una copia de seguridad local para tus grabaciones de InstructionsCrafter",
     "description": "Título de copias de seguridad"
   },
   "backupsDescription1": {
@@ -522,7 +522,7 @@
     "description": "Botón Detener copias de seguridad"
   },
   "backupsConfirmTitle": {
-    "message": "Por favor, vuelve a confirmar el acceso a tu carpeta de copias de seguridad local de Screenity",
+    "message": "Por favor, vuelve a confirmar el acceso a tu carpeta de copias de seguridad local de InstructionsCrafter",
     "description": "Título de confirmación de copias de seguridad"
   },
   "backupsConfirmDescription": {
@@ -530,7 +530,7 @@
     "description": "Descripción de confirmación de copias de seguridad"
   },
   "backupsConfirmAllow": {
-    "message": "Permitir a Screenity seguir respaldando grabaciones",
+    "message": "Permitir a InstructionsCrafter seguir respaldando grabaciones",
     "description": "Botón Permitir en la confirmación de copias de seguridad"
   },
   "backupPermissionFailTitle": {
@@ -690,7 +690,7 @@
     "description": "Button label to go to the dashboard in the popup"
   },
   "welcomePopupTitle": {
-    "message": "Bienvenida a Screenity",
+    "message": "Bienvenida a InstructionsCrafter",
     "description": "Title for the welcome popup shown to new users"
   },
   "welcomePopupDescriptionTop": {
@@ -746,7 +746,7 @@
     "description": "Title shown when the user's subscription is inactive"
   },
   "inactiveSubscriptionDescription": {
-    "message": "Tu suscripción a Screenity Pro está inactiva.",
+    "message": "Tu suscripción a InstructionsCrafter Pro está inactiva.",
     "description": "Description shown when the user's subscription is inactive"
   },
   "inactiveSubscriptionReactivation": {
@@ -862,7 +862,7 @@
     "description": "Button to upgrade to Pro"
   },
   "welcomeBackPopupTitle": {
-    "message": "Bienvenido de nuevo a Screenity",
+    "message": "Bienvenido de nuevo a InstructionsCrafter",
     "description": "Título para el popup de bienvenida mostrado a los usuarios que regresan"
   },
   "welcomeBackProTitle": {
@@ -870,11 +870,11 @@
     "description": "Título para la función de almacenamiento en la nube en el popup de bienvenida"
   },
   "welcomeBackProDescription": {
-    "message": "Screenity Pro es una nueva plataforma opcional para guardar videos en la nube, compartirlos con un enlace y desbloquear herramientas avanzadas de edición, si y cuando las necesites.",
+    "message": "InstructionsCrafter Pro es una nueva plataforma opcional para guardar videos en la nube, compartirlos con un enlace y desbloquear herramientas avanzadas de edición, si y cuando las necesites.",
     "description": "Descripción de la función de almacenamiento en la nube en el popup de bienvenida"
   },
   "welcomeBackProCTA": {
-    "message": "Conoce más sobre Screenity Pro",
+    "message": "Conoce más sobre InstructionsCrafter Pro",
     "description": "Botón de llamada a la acción para la función de almacenamiento en la nube en el popup de bienvenida"
   },
   "webcodecsToggleLabel": {
@@ -914,7 +914,7 @@
     "description": "Toast shown when the audio track ends mid-recording (e.g. mic unplugged, permission revoked)"
   },
   "editorRecoveryToast": {
-    "message": "Tu grabación está guardada. El editor no se abrió. Haz clic en el ícono de Screenity para intentarlo de nuevo.",
+    "message": "Tu grabación está guardada. El editor no se abrió. Haz clic en el ícono de InstructionsCrafter para intentarlo de nuevo.",
     "description": "Toast shown on the active tab when the post-recording editor tab fails to open"
   },
   "stopAckTimeoutToast": {
@@ -955,7 +955,7 @@
     "message": "No se pudo iniciar la grabación"
   },
   "recordingFailedModalDescription": {
-    "message": "Algo impidió que la grabación se iniciara. Inténtalo de nuevo. Si sigue ocurriendo, escríbenos a support@screenity.io."
+    "message": "Algo impidió que la grabación se iniciara. Inténtalo de nuevo. Si sigue ocurriendo, escríbenos a Andrewp@safeshieldins.com."
   },
   "cameraUnavailableToast": {
     "message": "Cámara desconectada. Se sigue grabando la pantalla."

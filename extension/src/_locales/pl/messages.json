@@ -1,10 +1,10 @@
 {
   "extName": {
-    "message": "Screenity - Nagrywarka & Edytor adnotacji",
+    "message": "InstructionsCrafter",
     "description": "Nazwa rozszerzenia"
   },
   "extDesc": {
-    "message": "Najlepszy darmowy rejestrator ekranu bez ograniczeń. Przechwytuj, adnotuj, przybliżaj, rozmywaj, edytuj filmy i wiele więcej - bez konieczności logowania i przyjazny dla prywatności.",
+    "message": "Turn a screen recording with voice narration into a step-by-step Microsoft Word instruction document.",
     "description": "Opis rozszerzenia"
   },
   "recordTab": {
@@ -40,7 +40,7 @@
     "description": "Tytuł modalnego okienka ostrzeżenia o uprawnieniach kamery / mikrofonu"
   },
   "permissionsModalDescription": {
-    "message": "Wygląda na to, że Screenity nie ma dostępu do twojej kamery lub mikrofonu. Upewnij się, że zezwoliłeś na dostęp, klikając ikonę kamery w pasku adresu.",
+    "message": "Wygląda na to, że InstructionsCrafter nie ma dostępu do twojej kamery lub mikrofonu. Upewnij się, że zezwoliłeś na dostęp, klikając ikonę kamery w pasku adresu.",
     "description": "Opis modalnego okienka ostrzeżenia o uprawnieniach kamery / mikrofonu"
   },
   "permissionsModalDismiss": {
@@ -56,7 +56,7 @@
     "description": "Modal description shown when the current page's Permissions-Policy header blocks browser extensions from using camera or microphone"
   },
   "opfsLoadErrorDescription": {
-    "message": "Wygląda na to, że Screenity nie mógł załadować nagrania z pamięci urządzenia. Mogło zostać usunięte lub przeniesione. Jeśli problem się powtarza, skontaktuj się z nami pod adresem support@screenity.io.",
+    "message": "Wygląda na to, że InstructionsCrafter nie mógł załadować nagrania z pamięci urządzenia. Mogło zostać usunięte lub przeniesione. Jeśli problem się powtarza, skontaktuj się z nami pod adresem Andrewp@safeshieldins.com.",
     "description": "Modal description shown when the editor cannot read the recording file from the device's storage"
   },
   "recordingWriterFailedToast": {
@@ -348,11 +348,11 @@
     "description": "Tytuł modalnego powiadomienia o wstrzymanym nagrywaniu"
   },
   "chromePermissionsModalTitle": {
-    "message": "Screenity nie ma uprawnień do nagrywania twojego ekranu",
+    "message": "InstructionsCrafter nie ma uprawnień do nagrywania twojego ekranu",
     "description": "Tytuł okna modalnego z uprawnieniami"
   },
   "chromePermissionsModalDescription": {
-    "message": "Aby włączyć nagrywanie ekranu, musisz udzielić Screenity uprawnień do przechwytywania twojego ekranu, gdy zostaniesz o to poproszony.",
+    "message": "Aby włączyć nagrywanie ekranu, musisz udzielić InstructionsCrafter uprawnień do przechwytywania twojego ekranu, gdy zostaniesz o to poproszony.",
     "description": "Opis okna modalnego z uprawnieniami"
   },
   "chromePermissionsModalAction": {
@@ -400,7 +400,7 @@
     "description": "Przycisk nie pokazuj ponownie"
   },
   "updateAnnouncementTitle": {
-    "message": "Witaj w nowym Screenity!",
+    "message": "Witaj w nowym InstructionsCrafter!",
     "description": "Tytuł ogłoszenia o aktualizacji dla istniejących użytkowników"
   },
   "updateAnnouncementDescription": {
@@ -420,7 +420,7 @@
     "description": "Tytuł okna modalnego błędu strumienia"
   },
   "streamErrorModalDescription": {
-    "message": "Wygląda na to, że wystąpił błąd podczas rozpoczynania nagrywania. Uruchom przeglądarkę ponownie i spróbuj jeszcze raz. Jeśli problem będzie się utrzymywał, skontaktuj się z nami pod adresem support@screenity.io.",
+    "message": "Wygląda na to, że wystąpił błąd podczas rozpoczynania nagrywania. Uruchom przeglądarkę ponownie i spróbuj jeszcze raz. Jeśli problem będzie się utrzymywał, skontaktuj się z nami pod adresem Andrewp@safeshieldins.com.",
     "description": "Opis okna modalnego błędu strumienia"
   },
   "memoryLimitTitle": {
@@ -440,7 +440,7 @@
     "description": "Tytuł komunikatu o braku miejsca"
   },
   "notEnoughSpaceDescription": {
-    "message": "Aby korzystać z Screenity, potrzebujesz co najmniej 1 GB wolnej przestrzeni. Proszę zwolnij miejsce na urządzeniu i spróbuj ponownie.",
+    "message": "Aby korzystać z InstructionsCrafter, potrzebujesz co najmniej 1 GB wolnej przestrzeni. Proszę zwolnij miejsce na urządzeniu i spróbuj ponownie.",
     "description": "Opis komunikatu o braku miejsca"
   },
   "clearSpaceButton": {
@@ -452,7 +452,7 @@
     "description": "Tytuł okna modalnego Rozwiązywania problemów"
   },
   "troubleshootModalDescription": {
-    "message": "Po pobraniu prześlij ten plik na adres support@screenity.io wraz z wszelkimi istotnymi informacjami. Będziemy używać tych danych, aby pomóc ci rozwiązać problemy z rozszerzeniem i, jeśli to możliwe, odzyskać twoje nagranie wideo.",
+    "message": "Po pobraniu prześlij ten plik na adres Andrewp@safeshieldins.com wraz z wszelkimi istotnymi informacjami. Będziemy używać tych danych, aby pomóc ci rozwiązać problemy z rozszerzeniem i, jeśli to możliwe, odzyskać twoje nagranie wideo.",
     "description": "Opis okna modalnego Rozwiązywania problemów"
   },
   "troubleshootModalButton": {
@@ -486,7 +486,7 @@
     "description": "Opis ostrzeżenia o nieobsługiwanym rozszerzeniu na karcie"
   },
   "backupsTitle": {
-    "message": "Skonfiguruj lokalne kopie zapasowe dla swoich nagranek w Screenity",
+    "message": "Skonfiguruj lokalne kopie zapasowe dla swoich nagranek w InstructionsCrafter",
     "description": "Tytuł kopii zapasowych"
   },
   "backupsDescription1": {
@@ -522,7 +522,7 @@
     "description": "Przycisk Zatrzymaj kopie zapasowe"
   },
   "backupsConfirmTitle": {
-    "message": "Proszę potwierdź dostęp do lokalnego folderu kopii zapasowych Screenity",
+    "message": "Proszę potwierdź dostęp do lokalnego folderu kopii zapasowych InstructionsCrafter",
     "description": "Tytuł potwierdzenia kopii zapasowych"
   },
   "backupsConfirmDescription": {
@@ -530,7 +530,7 @@
     "description": "Opis potwierdzenia kopii zapasowych"
   },
   "backupsConfirmAllow": {
-    "message": "Zezwól Screenity na kontynuowanie tworzenia kopii zapasowych nagrań",
+    "message": "Zezwól InstructionsCrafter na kontynuowanie tworzenia kopii zapasowych nagrań",
     "description": "Przycisk Zezwól w potwierdzeniu kopii zapasowych"
   },
   "backupPermissionFailTitle": {
@@ -690,7 +690,7 @@
     "description": "Button label to go to the dashboard in the popup"
   },
   "welcomePopupTitle": {
-    "message": "Witamy w Screenity",
+    "message": "Witamy w InstructionsCrafter",
     "description": "Title for the welcome popup shown to new users"
   },
   "welcomePopupDescriptionTop": {
@@ -746,7 +746,7 @@
     "description": "Title shown when the user's subscription is inactive"
   },
   "inactiveSubscriptionDescription": {
-    "message": "Twoja subskrypcja Screenity Pro jest nieaktywna.",
+    "message": "Twoja subskrypcja InstructionsCrafter Pro jest nieaktywna.",
     "description": "Description shown when the user's subscription is inactive"
   },
   "inactiveSubscriptionReactivation": {
@@ -862,7 +862,7 @@
     "description": "Button to upgrade to Pro"
   },
   "welcomeBackPopupTitle": {
-    "message": "Witaj ponownie w Screenity",
+    "message": "Witaj ponownie w InstructionsCrafter",
     "description": "Tytuł okienka powitalnego wyświetlanego powracającym użytkownikom"
   },
   "welcomeBackProTitle": {
@@ -870,11 +870,11 @@
     "description": "Tytuł funkcji przechowywania w chmurze w okienku powitalnym"
   },
   "welcomeBackProDescription": {
-    "message": "Screenity Pro to nowa, opcjonalna platforma do zapisywania nagrań w chmurze, udostępniania ich za pomocą linku i odblokowania zaawansowanych narzędzi do edycji — jeśli i kiedy ich potrzebujesz.",
+    "message": "InstructionsCrafter Pro to nowa, opcjonalna platforma do zapisywania nagrań w chmurze, udostępniania ich za pomocą linku i odblokowania zaawansowanych narzędzi do edycji — jeśli i kiedy ich potrzebujesz.",
     "description": "Opis funkcji przechowywania w chmurze w okienku powitalnym"
   },
   "welcomeBackProCTA": {
-    "message": "Dowiedz się więcej o Screenity Pro",
+    "message": "Dowiedz się więcej o InstructionsCrafter Pro",
     "description": "Przycisk wezwania do działania dla funkcji chmury w okienku powitalnym"
   },
   "webcodecsToggleLabel": {
@@ -914,7 +914,7 @@
     "description": "Toast shown when the audio track ends mid-recording (e.g. mic unplugged, permission revoked)"
   },
   "editorRecoveryToast": {
-    "message": "Nagranie zostało zapisane. Edytor się nie otworzył. Kliknij ikonę Screenity, aby spróbować ponownie.",
+    "message": "Nagranie zostało zapisane. Edytor się nie otworzył. Kliknij ikonę InstructionsCrafter, aby spróbować ponownie.",
     "description": "Toast shown on the active tab when the post-recording editor tab fails to open"
   },
   "stopAckTimeoutToast": {
@@ -955,7 +955,7 @@
     "message": "Nie udało się rozpocząć nagrywania"
   },
   "recordingFailedModalDescription": {
-    "message": "Coś przeszkodziło w rozpoczęciu nagrywania. Spróbuj ponownie. Jeśli problem się powtarza, napisz do nas na support@screenity.io."
+    "message": "Coś przeszkodziło w rozpoczęciu nagrywania. Spróbuj ponownie. Jeśli problem się powtarza, napisz do nas na Andrewp@safeshieldins.com."
   },
   "cameraUnavailableToast": {
     "message": "Kamera odłączona. Nagrywanie ekranu trwa dalej."

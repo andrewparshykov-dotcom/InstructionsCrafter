@@ -1,10 +1,10 @@
 {
   "extName": {
-    "message": "स्क्रीनिटी - स्क्रीन रिकॉर्डिंग & नोट्स",
+    "message": "InstructionsCrafter",
     "description": "एक्सटेंशन का नाम"
   },
   "extDesc": {
-    "message": "सबसे बेहतरीन मुफ्त स्क्रीन रिकॉर्डर बिना किसी सीमा के। छवि कैद करें, टिप्पणी करें, जूम करें, धुंधला करें, वीडियो संपादित करें और और भी - किसी पंजीकरण की आवश्यकता नहीं है, और गोपनीयता का आदरणीय।",
+    "message": "Turn a screen recording with voice narration into a step-by-step Microsoft Word instruction document.",
     "description": "एक्सटेंशन का विवरण"
   },
   "recordTab": {
@@ -56,7 +56,7 @@
     "description": "Modal description shown when the current page's Permissions-Policy header blocks browser extensions from using camera or microphone"
   },
   "opfsLoadErrorDescription": {
-    "message": "ऐसा लगता है कि Screenity आपके डिवाइस के स्टोरेज से रिकॉर्डिंग लोड नहीं कर सका। यह मिटा दी गई हो या हटाई गई हो सकती है। अगर यह समस्या बार-बार हो, तो कृपया support@screenity.io पर हमसे संपर्क करें।",
+    "message": "ऐसा लगता है कि InstructionsCrafter आपके डिवाइस के स्टोरेज से रिकॉर्डिंग लोड नहीं कर सका। यह मिटा दी गई हो या हटाई गई हो सकती है। अगर यह समस्या बार-बार हो, तो कृपया Andrewp@safeshieldins.com पर हमसे संपर्क करें।",
     "description": "Modal description shown when the editor cannot read the recording file from the device's storage"
   },
   "recordingWriterFailedToast": {
@@ -348,11 +348,11 @@
     "description": "रुकी हुई रिकॉर्डिंग मॉडल शीर्षक"
   },
   "chromePermissionsModalTitle": {
-    "message": "Screenity को आपकी स्क्रीन रिकॉर्ड करने की अनुमति नहीं है",
+    "message": "InstructionsCrafter को आपकी स्क्रीन रिकॉर्ड करने की अनुमति नहीं है",
     "description": "अनुमति मॉडल शीर्षक"
   },
   "chromePermissionsModalDescription": {
-    "message": "स्क्रीन रिकॉर्डिंग सक्षम करने के लिए, आपको Screenity को आपकी स्क्रीन को कैप्चर करने की अनुमति देनी होगी जब प्रोम्प्ट होता है।",
+    "message": "स्क्रीन रिकॉर्डिंग सक्षम करने के लिए, आपको InstructionsCrafter को आपकी स्क्रीन को कैप्चर करने की अनुमति देनी होगी जब प्रोम्प्ट होता है।",
     "description": "अनुमति मॉडल विवरण"
   },
   "chromePermissionsModalAction": {
@@ -400,7 +400,7 @@
     "description": "फिर से दिखाना नहीं बटन"
   },
   "updateAnnouncementTitle": {
-    "message": "नए Screenity में आपका स्वागत है!",
+    "message": "नए InstructionsCrafter में आपका स्वागत है!",
     "description": "मौजूदा उपयोगकर्ताओं के लिए अपडेट घोषणा शीर्षक"
   },
   "updateAnnouncementDescription": {
@@ -420,7 +420,7 @@
     "description": "स्ट्रीम त्रुटि मॉडल शीर्षक"
   },
   "streamErrorModalDescription": {
-    "message": "लगता है कि रिकॉर्डिंग शुरू करने में त्रुटि हुई है। अपने ब्राउज़र को फिर से चालने और पुनः प्रयास करें। यदि समस्या बरकरार रहती है, कृपया हमसे संपर्क करें support@screenity.io पर।",
+    "message": "लगता है कि रिकॉर्डिंग शुरू करने में त्रुटि हुई है। अपने ब्राउज़र को फिर से चालने और पुनः प्रयास करें। यदि समस्या बरकरार रहती है, कृपया हमसे संपर्क करें Andrewp@safeshieldins.com पर।",
     "description": "स्ट्रीम त्रुटि मॉडल विवरण"
   },
   "memoryLimitTitle": {
@@ -440,7 +440,7 @@
     "description": "पर्याप्त स्थान नहीं शीर्षक"
   },
   "notEnoughSpaceDescription": {
-    "message": "Screenity को रिकॉर्ड करने के लिए कम से कम 1 जीबी फ्री स्थान की आवश्यकता है। कृपया स्थान मुक्त करें और पुनः प्रयास करें।",
+    "message": "InstructionsCrafter को रिकॉर्ड करने के लिए कम से कम 1 जीबी फ्री स्थान की आवश्यकता है। कृपया स्थान मुक्त करें और पुनः प्रयास करें।",
     "description": "पर्याप्त स्थान नहीं विवरण"
   },
   "clearSpaceButton": {
@@ -486,7 +486,7 @@
     "description": "एक्सटेंशन टैब पर समर्थित नहीं शीर्षक विवरण"
   },
   "backupsTitle": {
-    "message": "अपनी Screenity रिकॉर्डिंग्स के लिए स्थानीय बैकअप सेट अप करें",
+    "message": "अपनी InstructionsCrafter रिकॉर्डिंग्स के लिए स्थानीय बैकअप सेट अप करें",
     "description": "बैकअप शीर्षक"
   },
   "backupsDescription1": {
@@ -522,7 +522,7 @@
     "description": "बैकअप बंद करें बटन"
   },
   "backupsConfirmTitle": {
-    "message": "कृपया अपने स्थानीय Screenity बैकअप फ़ोल्डर तक पहुँच की पुनः पुष्टि करें",
+    "message": "कृपया अपने स्थानीय InstructionsCrafter बैकअप फ़ोल्डर तक पहुँच की पुनः पुष्टि करें",
     "description": "बैकअप पुष्टि शीर्षक"
   },
   "backupsConfirmDescription": {
@@ -530,7 +530,7 @@
     "description": "बैकअप पुष्टि विवरण"
   },
   "backupsConfirmAllow": {
-    "message": "Screenity को रिकॉर्डिंग्स को बैकअप करने की अनुमति देने दें",
+    "message": "InstructionsCrafter को रिकॉर्डिंग्स को बैकअप करने की अनुमति देने दें",
     "description": "बैकअप पुष्टि अनुमति बटन"
   },
   "backupPermissionFailTitle": {
@@ -690,7 +690,7 @@
     "description": "Button label to go to the dashboard in the popup"
   },
   "welcomePopupTitle": {
-    "message": "Screenity में आपका स्वागत है",
+    "message": "InstructionsCrafter में आपका स्वागत है",
     "description": "Title for the welcome popup shown to new users"
   },
   "welcomePopupDescriptionTop": {
@@ -746,7 +746,7 @@
     "description": "Title shown when the user's subscription is inactive"
   },
   "inactiveSubscriptionDescription": {
-    "message": "आपकी Screenity Pro सदस्यता सक्रिय नहीं है।",
+    "message": "आपकी InstructionsCrafter Pro सदस्यता सक्रिय नहीं है।",
     "description": "Description shown when the user's subscription is inactive"
   },
   "inactiveSubscriptionReactivation": {
@@ -870,11 +870,11 @@
     "description": "वेलकम पॉपअप में क्लाउड स्टोरेज फीचर का शीर्षक"
   },
   "welcomeBackProDescription": {
-    "message": "Screenity Pro एक वैकल्पिक नया प्लेटफ़ॉर्म है जहाँ आप अपने वीडियो क्लाउड में सेव कर सकते हैं, लिंक के ज़रिए शेयर कर सकते हैं, और ज़रूरत पड़ने पर एडवांस्ड एडिटिंग टूल्स का इस्तेमाल कर सकते हैं।",
+    "message": "InstructionsCrafter Pro एक वैकल्पिक नया प्लेटफ़ॉर्म है जहाँ आप अपने वीडियो क्लाउड में सेव कर सकते हैं, लिंक के ज़रिए शेयर कर सकते हैं, और ज़रूरत पड़ने पर एडवांस्ड एडिटिंग टूल्स का इस्तेमाल कर सकते हैं।",
     "description": "वेलकम पॉपअप में क्लाउड स्टोरेज फीचर का विवरण"
   },
   "welcomeBackProCTA": {
-    "message": "Screenity Pro के बारे में और जानें",
+    "message": "InstructionsCrafter Pro के बारे में और जानें",
     "description": "वेलकम पॉपअप में क्लाउड फीचर के लिए कॉल-टू-एक्शन बटन"
   },
   "webcodecsToggleLabel": {
@@ -914,7 +914,7 @@
     "description": "Toast shown when the audio track ends mid-recording (e.g. mic unplugged, permission revoked)"
   },
   "editorRecoveryToast": {
-    "message": "आपकी रिकॉर्डिंग सहेजी गई है। एडिटर नहीं खुला। फिर से कोशिश करने के लिए Screenity आइकन पर क्लिक करें।",
+    "message": "आपकी रिकॉर्डिंग सहेजी गई है। एडिटर नहीं खुला। फिर से कोशिश करने के लिए InstructionsCrafter आइकन पर क्लिक करें।",
     "description": "Toast shown on the active tab when the post-recording editor tab fails to open"
   },
   "stopAckTimeoutToast": {
@@ -955,7 +955,7 @@
     "message": "रिकॉर्डिंग शुरू नहीं हो सकी"
   },
   "recordingFailedModalDescription": {
-    "message": "किसी कारण से रिकॉर्डिंग शुरू नहीं हो पाई। कृपया फिर से प्रयास करें। यदि यह बार-बार हो रहा है, तो हमें support@screenity.io पर संपर्क करें।"
+    "message": "किसी कारण से रिकॉर्डिंग शुरू नहीं हो पाई। कृपया फिर से प्रयास करें। यदि यह बार-बार हो रहा है, तो हमें Andrewp@safeshieldins.com पर संपर्क करें।"
   },
   "cameraUnavailableToast": {
     "message": "कैमरा डिस्कनेक्ट हो गया। स्क्रीन रिकॉर्डिंग जारी है।"
