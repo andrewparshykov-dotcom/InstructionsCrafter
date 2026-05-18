@@ -424,9 +424,6 @@ const PopupContainer = (props) => {
           ref={PopupRef}
         >
           <div
-            className={open ? "popup-drag-head" : "popup-drag-head drag-area"}
-          ></div>
-          <div
             className={
               open ? "popup-controls open" : "popup-controls drag-area"
             }
