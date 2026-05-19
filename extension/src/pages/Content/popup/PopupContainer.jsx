@@ -16,7 +16,6 @@ import { CloseIconPopup, GrabIconPopup } from "../toolbar/components/SVG";
 
 import RecordingTab from "./layout/RecordingTab";
 
-import SettingsMenu from "./layout/SettingsMenu";
 import InactiveSubscription from "./layout/InactiveSubscription";
 import LoggedOut from "./layout/LoggedOut";
 import Welcome from "./layout/Welcome";
@@ -39,7 +38,6 @@ const PopupContainer = (props) => {
   const [dragging, setDragging] = React.useState("");
   const [onboarding, setOnboarding] = useState(false);
   const [showProSplash, setShowProSplash] = useState(false);
-  const [open, setOpen] = useState(false);
   const recordTabRef = useRef(null);
   const videoTabRef = useRef(null);
   const pillRef = useRef(null);
@@ -480,16 +478,7 @@ const PopupContainer = (props) => {
           }
         >
           <div className="popup-label drag-area">RECORDER</div>
-          <div
-            className={
-              open ? "popup-controls open" : "popup-controls drag-area"
-            }
-          >
-            <SettingsMenu
-              shadowRef={props.shadowRef}
-              open={open}
-              setOpen={setOpen}
-            />
+          <div className="popup-controls drag-area">
             <div
               className="popup-control popup-close"
               onClick={() => {

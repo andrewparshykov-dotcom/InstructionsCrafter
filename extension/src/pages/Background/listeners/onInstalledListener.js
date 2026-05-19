@@ -57,9 +57,11 @@ export const onInstalledListener = () => {
     // covers the same crash-resilience without the picker UX.
     chrome.storage.local.set({ backup: false, backupSetup: false });
 
-    if (details.reason === "install") {
-      chrome.storage.local.set({ systemAudio: true });
-    }
+    // F31: force-write on install AND update. The cog menu that let users
+    // override systemAudio was removed; it bleeds into the Whisper transcript
+    // (background music, browser notifications, etc.) so we keep it off for
+    // everyone, including users who had the Screenity-era `true` in storage.
+    chrome.storage.local.set({ systemAudio: false });
     chrome.storage.local.set({ offscreenRecording: false });
 
     const { backupTab } = await chrome.storage.local.get(["backupTab"]);

@@ -42,7 +42,6 @@ import { checkRecording } from "../recording/checkRecording";
 import {
   isPinned,
   getPlatformInfo,
-  resizeWindow,
   checkAvailableMemory,
 } from "../utils/browserHelpers";
 import { requestDownload, downloadIndexedDB } from "../utils/downloadHelpers";
@@ -1522,9 +1521,6 @@ export const setupHandlers = () => {
 
   registerMessage("request-download", (message) =>
     requestDownload(message.base64, message.title),
-  );
-  registerMessage("resize-window", (message) =>
-    resizeWindow(message.width, message.height),
   );
   registerMessage("available-memory", async () => {
     return await checkAvailableMemory();

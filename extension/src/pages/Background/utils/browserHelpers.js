@@ -17,19 +17,6 @@ export const getPlatformInfo = async () => {
   }
 };
 
-export const resizeWindow = async (width, height) => {
-  if (width === 0 || height === 0) {
-    return;
-  }
-
-  chrome.windows.getCurrent((window) => {
-    chrome.windows.update(window.id, {
-      width: width,
-      height: height,
-    });
-  });
-};
-
 export const checkAvailableMemory = async () => {
   try {
     const data = await navigator.storage.estimate();

@@ -1001,7 +1001,9 @@ const ContentState = (props) => {
     bigTab: "record",
     askDismiss: true,
     quality: "max",
-    systemAudio: true,
+    // F31: narration-only recordings; system audio would bleed into the
+    // Whisper transcript (background music, browser notifications, etc.).
+    systemAudio: false,
     backup: false,
     backupSetup: false,
     openWarning: false,
