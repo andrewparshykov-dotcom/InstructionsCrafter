@@ -10,8 +10,6 @@ const DEBUG_START_FLOW =
 const Countdown = () => {
   const [contentState, setContentState] = useContext(contentStateContext);
   const [count, setCount] = useState(COUNTDOWN_TIME);
-  const [isTransforming, setIsTransforming] = useState(false);
-  const [isRotating, setIsRotating] = useState(false);
 
   const END_HOLD_MS = 1000;
   const POST_HIDE_START_DELAY_MS = 150;
@@ -86,8 +84,6 @@ const Countdown = () => {
     if (contentState.countdownActive || contentState.isCountdownVisible) {
       cleanupTimers();
       setCount(COUNTDOWN_TIME);
-      setIsTransforming(false);
-      setIsRotating(false);
       completedRef.current = false;
       logStartFlow("countdown_cancel", { visible: false });
       contentState.cancelCountdown();
@@ -243,29 +239,6 @@ const Countdown = () => {
       resetRef.current?.();
       completedRef.current = false;
       setCount(COUNTDOWN_TIME);
-      setIsTransforming(true);
-
-      const rotateId = setTimeout(() => {
-        if (!cancelledRef.current) {
-          setIsRotating(true);
-        }
-      }, 10);
-
-      const transformId = setTimeout(() => {
-        if (!cancelledRef.current) {
-          setIsTransforming(false);
-        }
-      }, (COUNTDOWN_TIME * 1000) / 2);
-
-      return () => {
-        clearTimeout(rotateId);
-        clearTimeout(transformId);
-      };
-    }
-
-    if (!contentState.isCountdownVisible) {
-      setIsRotating(false);
-      setIsTransforming(false);
     }
   }, [contentState.isCountdownVisible]);
 
@@ -285,47 +258,14 @@ const Countdown = () => {
       onClick={handleCancel}
     >
       {contentState.isCountdownVisible && (
-        <div>
-          <svg xmlns="http://www.w3.org/2000/svg" version="1.1">
-            <defs>
-              <filter id="goo">
-                <feGaussianBlur in="SourceGraphic" stdDeviation="10" />
-                <feColorMatrix
-                  in="blur"
-                  mode="matrix"
-                  values="1 0 0 0 0
-                          0 1 0 0 0
-                          0 0 1 0 0
-                          0 0 0 20 -10"
-                  result="goo"
-                />
-              </filter>
-            </defs>
-          </svg>
-
-          <div className="countdown-circle">
-            <div className="countdown-number">{count}</div>
-            <div
-              className="background"
-              style={{
-                transform: isRotating ? "rotate(90deg)" : "rotate(0deg)",
-              }}
-            >
-              <div
-                className="circle"
-                style={{
-                  transform: isTransforming ? "scale(1)" : "scale(0.8)",
-                }}
-              ></div>
-              <div className="c c2"></div>
-              <div className="c c3"></div>
-            </div>
-          </div>
-
-          <div className="countdown-info">
-            {chrome.i18n.getMessage("countdownMessage")}
-          </div>
+        <div className="countdown-stage">
           <div className="countdown-overlay"></div>
+          {/* key={count} forces React to remount the numeral on each tick,
+              so the CSS entrance animation re-runs for every digit. */}
+          <div className="countdown-numeral" key={count}>
+            {count}
+          </div>
+          <div className="countdown-info">Tap anywhere to cancel</div>
         </div>
       )}
     </div>

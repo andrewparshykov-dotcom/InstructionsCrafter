@@ -40,7 +40,6 @@ const CONFLICT_SELECTORS = [
   ".AlertDialogContent",
   ".AlertDialogOverlay",
   ".countdown-overlay",
-  ".countdown-circle",
   ".recording-countdown",
 ];
 const START_CANCEL_EVENTS = ["mousedown", "click", "keydown"];
