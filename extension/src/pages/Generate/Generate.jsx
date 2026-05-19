@@ -1,13 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { loadRecording, discardRecording } from "./loadRecording";
 import { checkAudioSilence } from "./audioCheck";
+import { colors, fonts, sizes, space, radius } from "../../design/tokens";
 
 // DECISION (2026-05-15): Post-recording flows all route here (not Screenity's editor)
 // because the editor is sandboxed, which complicates chrome.* API usage. This page is
 // non-sandboxed and is the permanent destination after Stage D strips the editor.
-// Phase 8 status: B1 page skeleton + B2 modal UI + B3 blob loading and upload.
+// Phase 8 visual rebrand: Editorial Manual aesthetic shared with Welcome + Playground.
 
 const DEFAULT_BACKEND_URL = "http://127.0.0.1:8000";
+
+// Arrival animation: page scales in + fades in, mirroring Welcome's close
+// transition for design-system coherence. Honors prefers-reduced-motion.
+const PAGE_ARRIVAL_MS = 1000;
 
 const Generate = () => {
   const [params, setParams] = useState({});
@@ -27,6 +32,8 @@ const Generate = () => {
 
   const [discardConfirmOpen, setDiscardConfirmOpen] = useState(false);
   const [isDiscarding, setIsDiscarding] = useState(false);
+
+  const [arrived, setArrived] = useState(false);
 
   const isUploading =
     uploadPhase === "uploading" || uploadPhase === "processing";
@@ -54,6 +61,21 @@ const Generate = () => {
         setLoadingError(err.message || "Failed to load the recording.");
       }
     })();
+  }, []);
+
+  // Trigger the arrival animation after first paint. Two rAFs guarantee the
+  // initial frame (arrived=false → opacity 0, scale 0.85) lands on screen
+  // before we switch to arrived=true, so the browser animates the transition
+  // rather than skipping straight to the end state.
+  useEffect(() => {
+    let rafB;
+    const rafA = requestAnimationFrame(() => {
+      rafB = requestAnimationFrame(() => setArrived(true));
+    });
+    return () => {
+      cancelAnimationFrame(rafA);
+      if (rafB) cancelAnimationFrame(rafB);
+    };
   }, []);
 
   useEffect(() => {
@@ -127,9 +149,9 @@ const Generate = () => {
     window.close();
   };
 
-  // Used by the silent-recording warning. The warning panel already explains
-  // why discarding is the right move, so this path skips the extra confirm
-  // modal that the toolbar Discard button uses.
+  // Silence warning skips the extra confirm modal that the utility-row
+  // Discard button uses — the warning panel itself already explains why
+  // discarding is the right move.
   const handleDiscard = () => {
     performDiscard();
   };
@@ -210,117 +232,152 @@ const Generate = () => {
     password.length > 0 &&
     !isUploading;
 
+  const generateDisabled = !recording || audioCheck.status === "silent";
+
   return (
-    <div style={styles.page}>
-      <h1 style={styles.heading}>Recording ready</h1>
-      <p style={styles.subheading}>
-        Review the preview, then generate your step-by-step instruction document.
-      </p>
+    <div
+      className={
+        "ic-generate-page" + (arrived ? " ic-generate-page-arrived" : "")
+      }
+      style={styles.page}
+    >
+      <style>{cssRules}</style>
 
-      <div style={styles.previewArea}>
-        {recording ? (
-          <video src={recording.blobUrl} controls style={styles.video} />
-        ) : loadingError ? (
-          <div style={styles.previewError}>
-            <strong>Could not load the recording.</strong>
-            <p style={{ margin: "8px 0 0", fontSize: 13 }}>{loadingError}</p>
+      <main style={styles.container}>
+        <header style={styles.versionMark}>
+          <span>INSTRUCTIONSCRAFTER</span>
+          <span style={styles.versionDot}>·</span>
+          <span>RECORDING READY</span>
+        </header>
+
+        <h1 style={styles.headline}>
+          One recording,
+          <br />
+          <em style={styles.headlineItalic}>one document.</em>
+        </h1>
+
+        <p style={styles.dek}>
+          Review the preview, then generate your step-by-step instruction
+          document.
+        </p>
+
+        <hr style={styles.rule} />
+
+        <section style={styles.previewSection}>
+          <div style={styles.previewCaption}>
+            <span>PREVIEW</span>
           </div>
-        ) : (
-          <div style={styles.previewLoading}>Loading recording…</div>
-        )}
-      </div>
+          <div style={styles.previewFrame}>
+            {recording ? (
+              <video src={recording.blobUrl} controls style={styles.video} />
+            ) : loadingError ? (
+              <div style={styles.previewError}>
+                <em style={styles.previewErrorHeading}>
+                  Could not load the recording.
+                </em>
+                <p style={styles.previewErrorBody}>{loadingError}</p>
+              </div>
+            ) : (
+              <em style={styles.previewLoading}>Loading recording…</em>
+            )}
+          </div>
+        </section>
 
-      {audioCheck.status === "silent" && (
-        <div style={styles.silenceWarning}>
-          <h3 style={styles.silenceWarningHeading}>
-            This recording appears silent
-          </h3>
-          <p style={styles.silenceWarningBody}>
-            {Math.round(audioCheck.silentFraction * 100)}% of audio samples are
-            at or below -50 dB. Common causes: microphone was off, denied at
-            the OS level, or muted in the recorder.
-          </p>
-          <p style={styles.silenceWarningBody}>
-            Without voice narration this recording cannot be used. Re-record
-            while speaking through each step.
-          </p>
-          <div style={styles.silenceWarningActions}>
+        <hr style={styles.rule} />
+
+        {audioCheck.status === "silent" && (
+          <div style={styles.silenceWarning}>
+            <h3 style={styles.silenceHeading}>
+              This recording appears silent.
+            </h3>
+            <p style={styles.silenceBody}>
+              {Math.round(audioCheck.silentFraction * 100)}% of audio samples
+              are at or below -50 dB. Common causes: the microphone was off,
+              denied at the OS level, or muted in the recorder.
+            </p>
+            <p style={styles.silenceBody}>
+              Without voice narration this recording cannot be used. Re-record
+              while speaking through each step.
+            </p>
             <button
-              style={{ ...styles.button, ...styles.primary }}
+              type="button"
+              className="ic-generate-danger"
+              style={styles.silenceButton}
               onClick={handleDiscard}
             >
-              Discard and re-record
+              Discard and re-record <span style={styles.buttonArrow}>→</span>
+            </button>
+          </div>
+        )}
+
+        <div style={styles.actions}>
+          <button
+            type="button"
+            className="ic-generate-button"
+            style={{
+              ...styles.button,
+              ...(generateDisabled ? styles.disabledButton : {}),
+            }}
+            onClick={handleOpenModal}
+            disabled={generateDisabled}
+            title={
+              !recording
+                ? "Recording not loaded yet"
+                : audioCheck.status === "silent"
+                ? "Recording is silent — re-record before generating"
+                : ""
+            }
+          >
+            Generate document <span style={styles.buttonArrow}>→</span>
+          </button>
+
+          <div style={styles.utilityRow}>
+            <button
+              type="button"
+              className="ic-generate-util"
+              style={styles.utilityLink}
+              onClick={handleDownloadRecording}
+              disabled={!recording}
+              title={
+                recording
+                  ? `Save as .${recording.extension}`
+                  : "Recording not loaded yet"
+              }
+            >
+              Download recording
+            </button>
+            <span style={styles.utilityDot}>·</span>
+            <button
+              type="button"
+              className="ic-generate-util"
+              style={styles.utilityLinkMuted}
+              onClick={handleDiscardClick}
+              disabled={!recording || isDiscarding}
+              title={
+                recording
+                  ? "Permanently delete this recording"
+                  : "Recording not loaded yet"
+              }
+            >
+              Discard
             </button>
           </div>
         </div>
-      )}
-
-      <div style={styles.actions}>
-        <button
-          style={{
-            ...styles.button,
-            ...styles.primary,
-            ...(recording && audioCheck.status !== "silent"
-              ? {}
-              : styles.disabledButton),
-          }}
-          onClick={handleOpenModal}
-          disabled={!recording || audioCheck.status === "silent"}
-          title={
-            !recording
-              ? "Recording not loaded yet"
-              : audioCheck.status === "silent"
-              ? "Recording is silent — re-record before generating"
-              : ""
-          }
-        >
-          Generate Instruction Document
-        </button>
-        <button
-          style={{
-            ...styles.button,
-            ...styles.secondary,
-            ...(recording ? {} : styles.disabledButton),
-          }}
-          onClick={handleDownloadRecording}
-          disabled={!recording}
-          title={
-            recording
-              ? `Save as .${recording.extension}`
-              : "Recording not loaded yet"
-          }
-        >
-          Download recording
-        </button>
-        <button
-          style={{
-            ...styles.button,
-            ...styles.secondary,
-            ...(recording && !isDiscarding ? {} : styles.disabledButton),
-          }}
-          onClick={handleDiscardClick}
-          disabled={!recording || isDiscarding}
-          title={
-            recording
-              ? "Permanently delete this recording"
-              : "Recording not loaded yet"
-          }
-        >
-          Discard
-        </button>
-      </div>
+      </main>
 
       {discardConfirmOpen && (
         <div style={styles.backdrop} onClick={handleCancelDiscard}>
           <div style={styles.modal} onClick={(e) => e.stopPropagation()}>
             <h2 style={styles.modalHeading}>Discard recording?</h2>
-            <p style={styles.confirmBody}>
-              This will permanently delete the recording. This cannot be undone.
+            <p style={styles.modalBody}>
+              This will permanently delete the recording. This cannot be
+              undone.
             </p>
             <div style={styles.modalActions}>
               <button
                 type="button"
-                style={{ ...styles.button, ...styles.secondary }}
+                className="ic-generate-ghost"
+                style={styles.ghostButton}
                 onClick={handleCancelDiscard}
                 disabled={isDiscarding}
               >
@@ -328,10 +385,10 @@ const Generate = () => {
               </button>
               <button
                 type="button"
+                className="ic-generate-danger"
                 style={{
-                  ...styles.button,
-                  ...styles.primary,
-                  ...(isDiscarding ? styles.disabledButton : {}),
+                  ...styles.dangerButton,
+                  ...(isDiscarding ? styles.dangerButtonDisabled : {}),
                 }}
                 onClick={handleConfirmDiscard}
                 disabled={isDiscarding}
@@ -347,13 +404,14 @@ const Generate = () => {
       {modalOpen && (
         <div style={styles.backdrop} onClick={handleCloseModal}>
           <div style={styles.modal} onClick={(e) => e.stopPropagation()}>
-            <h2 style={styles.modalHeading}>Generate Instruction Document</h2>
+            <h2 style={styles.modalHeading}>Generate document</h2>
             <form onSubmit={handleSubmit}>
-              <label style={styles.label} htmlFor="doc-title">
-                Document title
+              <label style={styles.fieldLabel} htmlFor="doc-title">
+                DOCUMENT TITLE
               </label>
               <input
                 id="doc-title"
+                className="ic-generate-input"
                 type="text"
                 style={styles.input}
                 value={title}
@@ -364,11 +422,12 @@ const Generate = () => {
                 required
               />
 
-              <label style={styles.label} htmlFor="doc-password">
-                Shared password
+              <label style={styles.fieldLabel} htmlFor="doc-password">
+                SHARED PASSWORD
               </label>
               <input
                 id="doc-password"
+                className="ic-generate-input"
                 type="password"
                 style={styles.input}
                 value={password}
@@ -377,15 +436,18 @@ const Generate = () => {
                 required
               />
 
-              {uploadError && <div style={styles.error}>{uploadError}</div>}
+              {uploadError && <div style={styles.errorBox}>{uploadError}</div>}
 
               {uploadPhase === "uploading" && (
                 <div style={styles.progress}>
-                  <div>Uploading… {uploadProgress}%</div>
-                  <div style={styles.progressBarTrack}>
+                  <div style={styles.progressLabel}>
+                    <span>UPLOADING</span>
+                    <span style={styles.progressPct}>{uploadProgress}%</span>
+                  </div>
+                  <div style={styles.progressTrack}>
                     <div
                       style={{
-                        ...styles.progressBarFill,
+                        ...styles.progressFill,
                         width: `${uploadProgress}%`,
                       }}
                     />
@@ -395,8 +457,10 @@ const Generate = () => {
 
               {uploadPhase === "processing" && (
                 <div style={styles.progress}>
-                  <div>Upload complete. Generating document…</div>
-                  <div style={styles.progressHint}>
+                  <div style={styles.processingLabel}>
+                    <em style={styles.processingEm}>Generating document…</em>
+                  </div>
+                  <div style={styles.processingHint}>
                     Usually 30–60 seconds for a 5-minute recording.
                   </div>
                 </div>
@@ -405,7 +469,8 @@ const Generate = () => {
               <div style={styles.modalActions}>
                 <button
                   type="button"
-                  style={{ ...styles.button, ...styles.secondary }}
+                  className="ic-generate-ghost"
+                  style={styles.ghostButton}
                   onClick={handleCloseModal}
                   disabled={isUploading}
                 >
@@ -413,14 +478,20 @@ const Generate = () => {
                 </button>
                 <button
                   type="submit"
+                  className="ic-generate-modal-primary"
                   style={{
-                    ...styles.button,
-                    ...styles.primary,
-                    ...(canSubmit ? {} : styles.disabledButton),
+                    ...styles.modalPrimary,
+                    ...(canSubmit ? {} : styles.modalPrimaryDisabled),
                   }}
                   disabled={!canSubmit}
                 >
-                  {isUploading ? "Working…" : "Generate"}
+                  {isUploading ? (
+                    "Working…"
+                  ) : (
+                    <>
+                      Generate <span style={styles.buttonArrow}>→</span>
+                    </>
+                  )}
                 </button>
               </div>
             </form>
@@ -501,143 +572,517 @@ function getDocxFilename(title) {
   return `${sanitizeFilename(title)}_${date}.docx`;
 }
 
+const cssRules = `
+  body {
+    background: ${colors.surface};
+    margin: 0;
+  }
+  /* Subtle paper grain on the surface, same recipe as Welcome/Playground */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.04 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+    opacity: 0.5;
+    mix-blend-mode: multiply;
+    z-index: 0;
+  }
+  main { position: relative; z-index: 1; }
+
+  /* Arrival animation: mirrors Welcome's close transition in reverse.
+     Page starts at scale(0.85) translateY(20px) opacity(0) and animates in. */
+  .ic-generate-page {
+    opacity: 0;
+    transform: scale(0.85) translateY(20px);
+    transform-origin: center top;
+    transition: opacity ${PAGE_ARRIVAL_MS}ms ease,
+      transform ${PAGE_ARRIVAL_MS}ms cubic-bezier(0.4, 0, 0.2, 1);
+    min-height: 100vh;
+  }
+  .ic-generate-page-arrived {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .ic-generate-page {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+  }
+
+  /* Primary button: breathing pulse, same as Welcome's "Begin recording".
+     animation-delay matches the page arrival duration so the breath doesn't
+     compound with the wrapper's scale animation during arrival. */
+  @keyframes ic-generate-breath {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.025); }
+  }
+  .ic-generate-page-arrived .ic-generate-button:not(:disabled) {
+    animation: ic-generate-breath 3.5s ease-in-out infinite;
+    animation-delay: ${PAGE_ARRIVAL_MS}ms;
+  }
+  .ic-generate-button:hover:not(:disabled) {
+    background: ${colors.accentHover};
+  }
+  .ic-generate-button:focus-visible {
+    outline: 2px solid ${colors.accent};
+    outline-offset: 3px;
+  }
+  .ic-generate-button:active:not(:disabled) {
+    transform: translateY(1px);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .ic-generate-page-arrived .ic-generate-button:not(:disabled) {
+      animation: none;
+    }
+  }
+
+  /* Input focus ring: accent blue with a soft halo */
+  .ic-generate-input:focus {
+    border-color: ${colors.accent};
+    box-shadow: 0 0 0 3px ${colors.accentSoft};
+    outline: none;
+  }
+
+  /* Ghost button (Cancel in modals) */
+  .ic-generate-ghost:hover:not(:disabled) {
+    background: ${colors.surface};
+    border-color: ${colors.mid};
+  }
+  .ic-generate-ghost:focus-visible {
+    outline: 2px solid ${colors.accent};
+    outline-offset: 2px;
+  }
+
+  /* Danger button (silence-warning + confirm-discard) */
+  .ic-generate-danger:hover:not(:disabled) {
+    background: #A22424;
+  }
+  .ic-generate-danger:focus-visible {
+    outline: 2px solid ${colors.danger};
+    outline-offset: 2px;
+  }
+
+  /* Modal-sized primary button */
+  .ic-generate-modal-primary:hover:not(:disabled) {
+    background: ${colors.accentHover};
+  }
+  .ic-generate-modal-primary:focus-visible {
+    outline: 2px solid ${colors.accent};
+    outline-offset: 2px;
+  }
+
+  /* Utility links (Download recording / Discard) */
+  .ic-generate-util:hover:not(:disabled) {
+    color: ${colors.accent};
+    text-decoration-color: ${colors.accent};
+  }
+  .ic-generate-util:focus-visible {
+    outline: 2px solid ${colors.accent};
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+  .ic-generate-util:disabled {
+    color: ${colors.hairlineStrong};
+    cursor: not-allowed;
+    text-decoration-color: ${colors.hairline};
+  }
+`;
+
 const styles = {
   page: {
-    fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
+    minHeight: "100vh",
+    background: colors.surface,
+    fontFamily: fonts.body,
+    color: colors.ink,
+    padding: `${space.xxl}px ${space.l}px ${space.xl}px`,
+    boxSizing: "border-box",
+    WebkitFontSmoothing: "antialiased",
+    MozOsxFontSmoothing: "grayscale",
+  },
+  container: {
     maxWidth: 720,
     margin: "0 auto",
-    padding: 32,
-    color: "#222",
   },
-  heading: { fontSize: 22, margin: "0 0 8px" },
-  subheading: { color: "#666", margin: "0 0 24px" },
-  previewArea: {
-    background: "#f0f0f0",
-    border: "1px dashed #bbb",
-    borderRadius: 8,
+
+  versionMark: {
+    fontFamily: fonts.mono,
+    fontSize: sizes.mono,
+    fontWeight: 500,
+    letterSpacing: "0.14em",
+    color: colors.mid,
+    display: "flex",
+    gap: space.xs,
+    marginBottom: space.xl,
+  },
+  versionDot: { color: colors.hairlineStrong },
+
+  headline: {
+    fontFamily: fonts.display,
+    fontSize: sizes.display,
+    fontWeight: 400,
+    lineHeight: 0.98,
+    color: colors.ink,
+    margin: `0 0 ${space.l}px`,
+    letterSpacing: "-0.02em",
+  },
+  headlineItalic: {
+    fontStyle: "italic",
+    color: colors.accent,
+  },
+
+  dek: {
+    fontFamily: fonts.body,
+    fontSize: 18,
+    lineHeight: 1.55,
+    color: colors.ink,
+    maxWidth: 540,
+    margin: `0 0 ${space.xl}px`,
+    fontWeight: 400,
+  },
+
+  rule: {
+    border: "none",
+    borderTop: `1px solid ${colors.hairline}`,
+    margin: `${space.xl}px 0`,
+  },
+
+  previewSection: {},
+  previewCaption: {
+    fontFamily: fonts.mono,
+    fontSize: sizes.mono,
+    fontWeight: 500,
+    letterSpacing: "0.14em",
+    color: colors.mid,
+    display: "flex",
+    gap: space.xs,
+    marginBottom: space.s,
+  },
+  previewFrame: {
+    background: colors.surfaceRaised,
+    border: `1px solid ${colors.hairline}`,
+    borderRadius: radius.m,
     aspectRatio: "16 / 9",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    marginBottom: 24,
     overflow: "hidden",
   },
-  previewLoading: { color: "#888", fontSize: 14 },
-  previewError: { padding: 24, textAlign: "center", color: "#a33" },
   video: {
     width: "100%",
     height: "100%",
     objectFit: "contain",
     background: "#000",
   },
-  actions: { display: "flex", gap: 12, alignItems: "center" },
-  button: {
-    padding: "10px 16px",
-    fontSize: 14,
+  previewLoading: {
+    fontFamily: fonts.display,
+    fontStyle: "italic",
+    fontSize: 20,
+    color: colors.mid,
+  },
+  previewError: {
+    padding: space.l,
+    textAlign: "center",
+    maxWidth: 440,
+  },
+  previewErrorHeading: {
+    fontFamily: fonts.display,
+    fontStyle: "italic",
+    fontSize: 22,
+    color: colors.danger,
+    fontWeight: 400,
+    display: "block",
+    marginBottom: space.xs,
+  },
+  previewErrorBody: {
+    fontFamily: fonts.body,
+    fontSize: sizes.body,
+    color: colors.ink,
+    lineHeight: 1.55,
+    margin: 0,
+  },
+
+  silenceWarning: {
+    borderLeft: `2px solid ${colors.danger}`,
+    paddingLeft: space.m,
+    marginBottom: space.xl,
+  },
+  silenceHeading: {
+    fontFamily: fonts.display,
+    fontStyle: "italic",
+    fontSize: sizes.h2,
+    fontWeight: 400,
+    margin: `0 0 ${space.s}px`,
+    color: colors.danger,
+    letterSpacing: "-0.012em",
+  },
+  silenceBody: {
+    fontFamily: fonts.body,
+    fontSize: sizes.body,
+    lineHeight: 1.65,
+    color: colors.ink,
+    margin: `0 0 ${space.s}px`,
+  },
+  silenceButton: {
+    fontFamily: fonts.body,
+    fontSize: 15,
     fontWeight: 600,
+    background: colors.danger,
+    color: "#fff",
+    border: "none",
+    borderRadius: radius.s,
+    padding: "12px 22px",
     cursor: "pointer",
-    border: "1px solid #888",
-    borderRadius: 6,
+    marginTop: space.s,
+    display: "inline-flex",
+    alignItems: "center",
+    gap: space.xxs,
+    transition: "background 0.15s ease",
   },
-  primary: { background: "#2a7", color: "#fff", borderColor: "#2a7" },
-  secondary: { background: "#f6f6f6", color: "#222" },
+
+  actions: {},
+  button: {
+    fontFamily: fonts.body,
+    fontSize: 18,
+    fontWeight: 600,
+    background: colors.accent,
+    color: "#fff",
+    border: "none",
+    borderRadius: radius.s,
+    padding: "18px 36px",
+    cursor: "pointer",
+    letterSpacing: "0.005em",
+    transition: "background 0.15s ease, box-shadow 0.2s ease",
+    display: "inline-flex",
+    alignItems: "center",
+    gap: space.xs,
+    boxShadow: "0 6px 20px rgba(48, 128, 248, 0.28)",
+  },
+  buttonArrow: {
+    fontFamily: fonts.body,
+    fontSize: 20,
+    lineHeight: 1,
+    transform: "translateY(-1px)",
+  },
   disabledButton: {
-    background: "#e5e5e5",
-    color: "#999",
-    borderColor: "#d0d0d0",
+    background: colors.hairlineStrong,
+    color: colors.mid,
     cursor: "not-allowed",
+    boxShadow: "none",
   },
+
+  utilityRow: {
+    display: "flex",
+    alignItems: "center",
+    gap: space.s,
+    marginTop: space.m,
+  },
+  utilityLink: {
+    background: "none",
+    border: "none",
+    padding: 0,
+    fontFamily: fonts.body,
+    fontSize: sizes.body,
+    color: colors.ink,
+    cursor: "pointer",
+    textDecoration: "underline",
+    textDecorationColor: colors.hairlineStrong,
+    textUnderlineOffset: "3px",
+    fontWeight: 500,
+    transition: "color 0.15s ease, text-decoration-color 0.15s ease",
+  },
+  utilityLinkMuted: {
+    background: "none",
+    border: "none",
+    padding: 0,
+    fontFamily: fonts.body,
+    fontSize: sizes.body,
+    color: colors.mid,
+    cursor: "pointer",
+    textDecoration: "underline",
+    textDecorationColor: colors.hairlineStrong,
+    textUnderlineOffset: "3px",
+    fontWeight: 500,
+    transition: "color 0.15s ease, text-decoration-color 0.15s ease",
+  },
+  utilityDot: {
+    fontFamily: fonts.mono,
+    color: colors.hairlineStrong,
+    userSelect: "none",
+  },
+
   backdrop: {
     position: "fixed",
     inset: 0,
-    background: "rgba(0, 0, 0, 0.4)",
+    background: "rgba(15, 17, 28, 0.42)",
+    backdropFilter: "blur(2px)",
+    WebkitBackdropFilter: "blur(2px)",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
     zIndex: 1000,
   },
   modal: {
-    background: "#fff",
-    borderRadius: 8,
-    padding: 24,
+    background: colors.surfaceRaised,
+    border: `1px solid ${colors.hairline}`,
+    borderRadius: radius.m,
+    padding: space.l,
     width: "100%",
-    maxWidth: 440,
-    boxShadow: "0 8px 32px rgba(0, 0, 0, 0.2)",
+    maxWidth: 480,
+    boxShadow: "0 20px 60px rgba(15, 17, 28, 0.18)",
+    fontFamily: fonts.body,
+    boxSizing: "border-box",
   },
-  modalHeading: { fontSize: 18, margin: "0 0 16px" },
-  confirmBody: {
-    fontSize: 14,
-    color: "#444",
-    margin: "0 0 8px",
-    lineHeight: 1.5,
+  modalHeading: {
+    fontFamily: fonts.display,
+    fontSize: sizes.h2,
+    fontWeight: 400,
+    margin: `0 0 ${space.m}px`,
+    color: colors.ink,
+    letterSpacing: "-0.012em",
   },
-  label: {
+  modalBody: {
+    fontFamily: fonts.body,
+    fontSize: sizes.body,
+    lineHeight: 1.6,
+    color: colors.ink,
+    margin: `0 0 ${space.m}px`,
+  },
+  fieldLabel: {
     display: "block",
-    fontWeight: 600,
-    fontSize: 13,
-    marginTop: 12,
-    marginBottom: 4,
+    fontFamily: fonts.mono,
+    fontSize: sizes.mono,
+    fontWeight: 500,
+    letterSpacing: "0.14em",
+    color: colors.mid,
+    marginTop: space.m,
+    marginBottom: space.xs,
   },
   input: {
     width: "100%",
-    padding: 8,
-    fontSize: 14,
-    border: "1px solid #ccc",
-    borderRadius: 4,
+    padding: "10px 12px",
+    fontFamily: fonts.body,
+    fontSize: sizes.body,
+    background: "#fff",
+    border: `1px solid ${colors.hairlineStrong}`,
+    borderRadius: radius.s,
+    color: colors.ink,
     boxSizing: "border-box",
+    transition: "border-color 0.15s ease, box-shadow 0.15s ease",
+    outline: "none",
   },
-  error: {
-    background: "#fde7e7",
-    border: "1px solid #f5b3b3",
-    color: "#a33",
-    padding: 10,
-    borderRadius: 4,
-    fontSize: 13,
-    marginTop: 16,
+  errorBox: {
+    background: colors.dangerSoft,
+    borderLeft: `2px solid ${colors.danger}`,
+    color: colors.danger,
+    padding: `${space.s}px ${space.m}px`,
+    fontFamily: fonts.body,
+    fontSize: sizes.caption,
+    marginTop: space.m,
+    lineHeight: 1.5,
   },
-  progress: { color: "#555", fontSize: 13, marginTop: 16 },
-  progressHint: { fontSize: 12, color: "#888", marginTop: 4 },
-  progressBarTrack: {
+
+  progress: {
+    marginTop: space.m,
+  },
+  progressLabel: {
+    display: "flex",
+    justifyContent: "space-between",
+    fontFamily: fonts.mono,
+    fontSize: sizes.mono,
+    fontWeight: 500,
+    letterSpacing: "0.14em",
+    color: colors.mid,
+    marginBottom: space.xs,
+  },
+  progressPct: {
+    fontFamily: fonts.mono,
+    color: colors.ink,
+  },
+  progressTrack: {
     width: "100%",
-    height: 6,
-    background: "#e5e5e5",
-    borderRadius: 3,
-    marginTop: 8,
+    height: 4,
+    background: colors.hairline,
+    borderRadius: 2,
     overflow: "hidden",
   },
-  progressBarFill: {
+  progressFill: {
     height: "100%",
-    background: "#2a7",
+    background: colors.accent,
     transition: "width 200ms ease-out",
   },
+  processingLabel: {
+    marginBottom: space.xxs,
+  },
+  processingEm: {
+    fontFamily: fonts.display,
+    fontStyle: "italic",
+    fontSize: 18,
+    color: colors.ink,
+    fontWeight: 400,
+  },
+  processingHint: {
+    fontFamily: fonts.body,
+    fontSize: sizes.caption,
+    color: colors.mid,
+  },
+
   modalActions: {
     display: "flex",
     justifyContent: "flex-end",
-    gap: 8,
-    marginTop: 20,
+    gap: space.s,
+    marginTop: space.l,
   },
-  silenceWarning: {
-    background: "#fff4e0",
-    border: "2px solid #e89800",
-    borderRadius: 8,
-    padding: 16,
-    marginBottom: 24,
+  ghostButton: {
+    fontFamily: fonts.body,
+    fontSize: 15,
+    fontWeight: 500,
+    background: "transparent",
+    color: colors.ink,
+    border: `1px solid ${colors.hairlineStrong}`,
+    borderRadius: radius.s,
+    padding: "10px 20px",
+    cursor: "pointer",
+    transition: "background 0.15s ease, border-color 0.15s ease",
   },
-  silenceWarningHeading: {
-    fontSize: 16,
-    margin: "0 0 8px",
-    color: "#8a4a00",
+  modalPrimary: {
+    fontFamily: fonts.body,
+    fontSize: 15,
+    fontWeight: 600,
+    background: colors.accent,
+    color: "#fff",
+    border: "none",
+    borderRadius: radius.s,
+    padding: "10px 20px",
+    cursor: "pointer",
+    display: "inline-flex",
+    alignItems: "center",
+    gap: space.xxs,
+    transition: "background 0.15s ease",
   },
-  silenceWarningBody: {
-    fontSize: 13,
-    margin: "0 0 8px",
-    color: "#444",
-    lineHeight: 1.5,
+  modalPrimaryDisabled: {
+    background: colors.hairlineStrong,
+    color: colors.mid,
+    cursor: "not-allowed",
   },
-  silenceWarningActions: {
-    display: "flex",
-    gap: 8,
-    marginTop: 12,
+  dangerButton: {
+    fontFamily: fonts.body,
+    fontSize: 15,
+    fontWeight: 600,
+    background: colors.danger,
+    color: "#fff",
+    border: "none",
+    borderRadius: radius.s,
+    padding: "10px 20px",
+    cursor: "pointer",
+    transition: "background 0.15s ease",
+  },
+  dangerButtonDisabled: {
+    background: colors.hairlineStrong,
+    color: colors.mid,
+    cursor: "not-allowed",
   },
 };
 
