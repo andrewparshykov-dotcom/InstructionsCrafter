@@ -90,7 +90,7 @@ const Welcome = () => {
               />
               <Step
                 n="05"
-                body="Wait thirty to sixty seconds. A Microsoft Word document downloads automatically."
+                body="Wait for generation. A Microsoft Word document downloads automatically."
               />
             </ol>
           </div>
