@@ -66,12 +66,17 @@ iframe.screenity-iframe {
   transition: opacity 0.3s ease, visibility 0s linear 0.3s;
 }
 
-.toolbar-controls {
+/* F32: compound selector bumps specificity above the bare .popup-controls
+   rule (which the toolbar's close button also has in its className).
+   Without this, the popup's `top: 12px; right: 12px` from the F30 redesign
+   wins by cascade order and the toolbar's X lands inside the toolbar
+   overlapping the cursor icon. */
+.popup-controls.toolbar-controls {
   opacity: 0;
   cursor: pointer;
   position: absolute;
-  top: -10px;
-  right: -10px;
+  top: -14px;
+  right: -20px;
   box-sizing: border-box;
   border-radius: 30px;
   border: 1px solid #e8e8e8;
@@ -89,11 +94,11 @@ iframe.screenity-iframe {
   transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   pointer-events: none;
 }
-.toolbar-controls.open {
+.popup-controls.toolbar-controls.open {
   opacity: 1 !important;
   pointer-events: auto;
 }
-.toolbar-controls .popup-control svg {
+.popup-controls.toolbar-controls .popup-control svg {
   color: #9797a4;
   margin-bottom: -2px;
 }

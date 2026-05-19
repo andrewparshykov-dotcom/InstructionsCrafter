@@ -27,12 +27,17 @@ iframe.screenity-iframe {
   pointer-events: none !important;
   transition: opacity 0.3s ease, visibility 0s linear 0.3s;
 }
-.toolbar-controls {
+// F32: compound selector bumps specificity above the bare .popup-controls
+// rule in _PopupContainer.scss (which the toolbar's close button also has
+// in its className). Without this, the popup's `top: 12px; right: 12px`
+// from the F30 redesign wins by cascade order and the toolbar's X lands
+// inside the toolbar overlapping the cursor icon.
+.popup-controls.toolbar-controls {
   opacity: 0;
   cursor: pointer;
   position: absolute;
-  top: -10px;
-  right: -10px;
+  top: -14px;
+  right: -20px;
   box-sizing: border-box;
   border-radius: $container-border-radius;
   border: 1px solid $color-border;
