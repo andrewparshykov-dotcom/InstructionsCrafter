@@ -479,6 +479,7 @@ const PopupContainer = (props) => {
             isPlayground ? { top: 0, right: "auto", left: 0 } : undefined
           }
         >
+          <div className="popup-label drag-area">RECORDER</div>
           <div
             className={
               open ? "popup-controls open" : "popup-controls drag-area"
@@ -501,41 +502,6 @@ const PopupContainer = (props) => {
               <CloseIconPopup />
             </div>
           </div>
-          <div className="popup-cutout drag-area">
-            {contentState.isLoggedIn && contentState.isSubscribed === false ? (
-              <div
-                style={{
-                  fontSize: "34px",
-                }}
-              >
-                ⚠️
-              </div>
-            ) : (
-              <img
-                src={badge}
-                crossOrigin="anonymous"
-                style={{
-                  width:
-                    tab === "record" && !contentState.isLoggedIn
-                      ? "90%"
-                      : "100%",
-                  height:
-                    tab === "record" && !contentState.isLoggedIn
-                      ? "90%"
-                      : "100%",
-                  filter:
-                    tab === "record" && !contentState.isLoggedIn
-                      ? "drop-shadow(rgba(86, 123, 218, 0.35) 0px 4px 11px) drop-shadow(rgba(53, 87, 98, 0.2) 0px 4px 10px)"
-                      : "none",
-                  userSelect: "none",
-                  pointerEvents: "none",
-                }}
-                draggable={false}
-                referrerPolicy="no-referrer"
-              />
-            )}
-          </div>
-          <div className="popup-nav"></div>
           <div className="popup-content">
             {showWelcomeSplash ? (
               <Welcome

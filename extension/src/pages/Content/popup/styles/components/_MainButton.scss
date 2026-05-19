@@ -1,17 +1,19 @@
 @use '../../../styles/_variables' as *;
 
 
+// Editorial Manual primary button: flat solid accent blue, no gradient
+// background or shadow filter. Phase 8 F30.
 .main-button {
 	width: 100%;
 	height: 45px;
-	border-radius: $container-border-radius;
+	border-radius: 10px;
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
 	align-items: center;
 	position: relative;
 	box-sizing: border-box;
-
+	border: none;
 
 	.main-button-label {
 		color: $color-text-contrast;
@@ -35,100 +37,18 @@
 	}
 }
 .main-button:focus {
-	box-shadow: $focus-border!important;
-}
-
-@property --x {
-  syntax: '<percentage>';
-  inherits: false;
-  initial-value: 35.44%;
-}
-@property --y {
-  syntax: '<percentage>';
-  inherits: false;
-  initial-value: 0%;
+	box-shadow: $focus-border !important;
 }
 
 .recording-button {
 	margin-top: $spacing-03;
-	filter: $gradient-shadow-primary;
-	background:radial-gradient(127.41% 127.78% at 35.44% 0%, #2BAEF8 23.13%, #3582F6 46.35%, #486DEF 74.48%, #7B9AEA 100%);
-	animation: 0;
-	animation: background-size 6s ease-in-out infinite;
-	animation-play-state: paused;
+	background: $color-primary;
+	transition: background-color 0.15s ease;
 	position: relative;
 	z-index: 2;
 }
-@keyframes background-size {
-	/* Animate scale and position in and out looping */
-	0% {
-		background-size: 100% 100%;
-		background-position: 0% 0%;
-	}
-	50% {
-		background-size: 150% 150%;
-		background-position: 100% 0%;
-
-	}
-	100% {
-		background-size: 100% 100%;
-		background-position: 0% 0%;
-	}
-}
-
-.recording-button:hover {
-	animation-play-state: running!important;
-}
-.recording-button:before {
-	content: "";
-	position: absolute;
-	display: block;
-	top: 0px;
-	left: 0px;
-	width: 100%;
-	height: 100%;
-	box-sizing: border-box;
-	border-radius: $container-border-radius;
-	transition: all .25s ease-in-out;
-}
-.recording-button:hover:before {
-	box-shadow: 0px 0px 0px 4px rgba(52, 138, 247, 0.25);
-}
-@keyframes pulse-animation {
-	0% {
-		box-shadow: 0px 0px 0px 2px rgba(52, 138, 247, 0.25);
-	}
-	25% {
-		box-shadow: 0px 0px 0px 6px rgba(52, 138, 247, 0.25);
-	}
-	50% {
-		box-shadow: 0px 0px 0px 2px rgba(52, 138, 247, 0.25);
-	}
-	100% {
-		box-shadow: 0px 0px 0px 2px rgba(52, 138, 247, 0.25);
-	}
-}
-@keyframes gradient-animation {
-	0% {
-		--x: 35.44%;
-		--y: 0%;
-	}
-	25% {
-		--x: 100%;
-		--y: 30%;
-	}
-	50% {
-		--x: 70%;
-		--y: 100%;
-	}
-	75% {
-		--x: 30%;
-		--y: 90%;
-	}
-	100% {
-		--x: 35.44%;
-		--y: 0%;
-	}
+.recording-button:hover:not(:disabled) {
+	background: #1f6cdc; // accentHover from design tokens
 }
 
 .dashboard-button {
