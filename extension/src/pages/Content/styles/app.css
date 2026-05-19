@@ -771,17 +771,19 @@ body.driver-active .OnboardingArrow {
 }
 
 .TooltipContent {
-  border-radius: 30px;
-  background-color: #29292f;
-  padding: 10px 15px;
+  border-radius: 6px;
+  background-color: #15171C;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 6px 10px;
   font-size: 12px;
   margin-bottom: 10px;
   bottom: 100px;
   line-height: 1;
-  font-family: "Satoshi-Medium", sans-serif;
+  font-family: "Geist", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  letter-spacing: 0.01em;
   z-index: 99999999 !important;
   color: #fff;
-  box-shadow: hsla(206, 22%, 7%, 0.35) 0px 10px 38px -10px, hsla(206, 22%, 7%, 0.2) 0px 10px 20px -15px;
+  box-shadow: 0 4px 12px rgba(15, 17, 28, 0.18);
   user-select: none;
   transition: opacity 0.3 ease-in-out !important;
   will-change: transform, opacity;
@@ -1396,14 +1398,16 @@ body.driver-active .OnboardingArrow {
 }
 
 .ToastRoot {
-  background-color: #29292f;
+  background-color: #15171C;
   color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.06);
   border-radius: 30px;
-  box-shadow: hsla(206, 22%, 7%, 0.35) 0px 10px 38px -10px, hsla(206, 22%, 7%, 0.2) 0px 10px 20px -15px;
+  box-shadow: 0 8px 32px rgba(15, 17, 28, 0.28);
   padding: 10px 14px;
   display: flex;
   flex-direction: row;
   gap: 8px;
+  font-family: "Geist", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   font-size: 15px;
   line-height: 1.5;
   max-width: 100%;
@@ -1459,22 +1463,34 @@ body.driver-active .OnboardingArrow {
 }
 .ToastTitle {
   color: #fff;
-  font-family: "Satoshi-Medium", sans-serif;
+  font-family: "Geist", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-weight: 500;
 }
 
 .ToastDescription {
   color: var(--slate-11);
-  font-family: "Satoshi-Medium", sans-serif;
+  font-family: "Geist", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
 .ToastAction {
-  color: #fff;
-  font-family: "Satoshi-Medium", sans-serif;
+  color: rgba(255, 255, 255, 0.92);
+  font-family: "Geist Mono", "JetBrains Mono", ui-monospace, monospace;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
   text-align: right;
-  background-color: #51515F;
-  padding: 0px 12px !important;
+  background-color: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 4px;
+  padding: 4px 10px !important;
   height: 24px !important;
   cursor: pointer;
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+.ToastAction:hover {
+  border-color: rgba(255, 255, 255, 0.4);
+  color: #fff;
 }
 
 .toolbar-page {

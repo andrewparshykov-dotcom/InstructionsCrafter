@@ -21,14 +21,16 @@
 }
 
 .ToastRoot {
-  background-color: $color-text-primary;
+  background-color: #15171C;
 	color: $color-text-contrast;
+  border: 1px solid rgba(255, 255, 255, 0.06);
   border-radius: $container-border-radius;
-  box-shadow: hsl(206 22% 7% / 35%) 0px 10px 38px -10px, hsl(206 22% 7% / 20%) 0px 10px 20px -15px;
+  box-shadow: 0 8px 32px rgba(15, 17, 28, 0.28);
   padding: 10px 14px;
   display: flex;
 	flex-direction: row;
 	gap: 8px;
+	font-family: "Geist", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 	font-size: 15px;
 	line-height: 1.5;
 	max-width: min(480px, calc(100vw - 50px));
@@ -84,20 +86,33 @@
 
 .ToastTitle {
   color: $color-text-contrast;
-	font-family: $font-medium;
+	font-family: "Geist", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+	font-weight: 500;
 }
 
 .ToastDescription {
   color: var(--slate-11);
-	font-family: $font-medium;
+	font-family: "Geist", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
 .ToastAction {
-	color: $color-text-contrast;
-  font-family: $font-medium;
+	color: rgba(255, 255, 255, 0.92);
+  font-family: "Geist Mono", "JetBrains Mono", ui-monospace, monospace;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
 	text-align: right;
-	background-color: #51515F;
-	padding: 0px 12px!important;
+	background-color: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 4px;
+	padding: 4px 10px!important;
 	height: 24px!important;
 	cursor: pointer;
+  transition: border-color 0.15s ease, color 0.15s ease;
+
+  &:hover {
+    border-color: rgba(255, 255, 255, 0.4);
+    color: #fff;
+  }
 }
