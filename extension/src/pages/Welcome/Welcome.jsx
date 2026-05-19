@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { colors, fonts, sizes, space, radius } from "../../design/tokens";
 
 // First-run welcome page, "Editorial Manual" aesthetic.
@@ -6,11 +6,43 @@ import { colors, fonts, sizes, space, radius } from "../../design/tokens";
 // driven by a display serif, mono numerals running in the left rail, hairlines
 // between sections, vivid blue as a sparingly used accent — not as fill.
 
+// Close transition: the page composition scales down + fades when the user
+// clicks "Begin recording" — like a document zooming away. Tab closes when
+// the animation finishes. See F36.
+const PAGE_RECEDE_MS = 1000;
+
 const Welcome = () => {
-  const handleClose = () => window.close();
+  const [closing, setClosing] = useState(false);
+
+  const handleClose = () => {
+    if (
+      typeof window !== "undefined" &&
+      window.matchMedia &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    ) {
+      window.close();
+      return;
+    }
+
+    // Lock body scroll only for the duration of the recede animation so the
+    // scrollbar doesn't visually shimmy as the page scales down. Outside of
+    // the closing state the page must scroll normally — at 100% zoom on a
+    // tall viewport the CTA button is below the fold.
+    document.body.style.overflow = "hidden";
+
+    setClosing(true);
+    setTimeout(() => {
+      window.close();
+    }, PAGE_RECEDE_MS);
+  };
 
   return (
-    <div style={styles.page}>
+    <div
+      style={styles.page}
+      className={
+        "ic-welcome-page" + (closing ? " ic-welcome-page-receding" : "")
+      }
+    >
       <style>{cssRules}</style>
 
       <main style={styles.container}>
@@ -107,9 +139,6 @@ const Welcome = () => {
           >
             Begin recording <span style={styles.buttonArrow}>→</span>
           </button>
-          <p style={styles.colophon}>
-            Close this tab when you're ready to return to your previous window.
-          </p>
         </footer>
       </main>
     </div>
@@ -146,6 +175,44 @@ const cssRules = `
     z-index: 0;
   }
   main { position: relative; z-index: 1; }
+
+  /* Close transition: the page composition scales down + fades on click,
+     revealing the paper surface beneath. See F36. */
+  body {
+    background: ${colors.surface};
+    margin: 0;
+  }
+  .ic-welcome-page {
+    transform-origin: center center;
+    transition: transform ${PAGE_RECEDE_MS}ms cubic-bezier(0.4, 0, 0.2, 1),
+      opacity ${PAGE_RECEDE_MS}ms ease;
+    min-height: 100vh;
+  }
+  .ic-welcome-page-receding {
+    transform: scale(0.85) translateY(20px);
+    opacity: 0;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .ic-welcome-page { transition: none; }
+  }
+
+  /* Slow breathing pulse on the Begin-recording button so it visually
+     "asks" for attention — the user shouldn't accidentally close the tab
+     via the browser X and miss the close animation entirely. Stops once
+     the page starts receding so the two transforms don't compound. */
+  @keyframes ic-welcome-breath {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.025); }
+  }
+  .ic-welcome-button {
+    animation: ic-welcome-breath 3.5s ease-in-out infinite;
+  }
+  .ic-welcome-page-receding .ic-welcome-button {
+    animation: none;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .ic-welcome-button { animation: none; }
+  }
 `;
 
 const styles = {
@@ -294,34 +361,26 @@ const styles = {
   },
   button: {
     fontFamily: fonts.body,
-    fontSize: 16,
+    fontSize: 18,
     fontWeight: 600,
     background: colors.accent,
     color: "#fff",
     border: "none",
     borderRadius: radius.s,
-    padding: "14px 28px",
+    padding: "18px 40px",
     cursor: "pointer",
     letterSpacing: "0.005em",
-    transition: "background 0.15s ease, transform 0.05s ease",
+    transition: "background 0.15s ease, box-shadow 0.2s ease",
     display: "inline-flex",
     alignItems: "center",
     gap: space.xs,
+    boxShadow: "0 6px 20px rgba(48, 128, 248, 0.28)",
   },
   buttonArrow: {
     fontFamily: fonts.body,
-    fontSize: 18,
+    fontSize: 20,
     lineHeight: 1,
     transform: "translateY(-1px)",
-  },
-  colophon: {
-    fontFamily: fonts.mono,
-    fontSize: sizes.mono,
-    color: colors.mid,
-    letterSpacing: "0.14em",
-    marginTop: space.m,
-    textTransform: "uppercase",
-    fontWeight: 500,
   },
 };
 
