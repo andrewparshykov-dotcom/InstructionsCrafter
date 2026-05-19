@@ -75,13 +75,6 @@ export const handleTabUpdate = async (tabId, changeInfo, tab) => {
         }
       }
 
-      const commands = await chrome.commands.getAll();
-
-      sendMessageTab(tabId, {
-        type: "commands",
-        commands: commands,
-      });
-
       // Check if tab is playground.html
       if (
         tab.url.includes(chrome.runtime.getURL("playground.html")) &&

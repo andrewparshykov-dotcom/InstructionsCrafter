@@ -658,35 +658,6 @@ export const setupHandlers = () => {
     }
   });
 
-  registerMessage("commands", (message) => {
-    if (!message) return;
-
-    const startRecordingCommand = message.commands.find(
-      (command) => command.name === "start-recording",
-    );
-    const cancelRecordingCommand = message.commands.find(
-      (command) => command.name === "cancel-recording",
-    );
-    const toggleDrawingModeCommand = message.commands.find(
-      (command) => command.name === "toggle-drawing-mode",
-    );
-    const toggleBlurModeCommand = message.commands.find(
-      (command) => command.name === "toggle-blur-mode",
-    );
-    const toggleCursorModeCommand = message.commands.find(
-      (command) => command.name === "toggle-cursor-mode",
-    );
-
-    setContentState((prev) => ({
-      ...prev,
-      recordingShortcut: startRecordingCommand.shortcut,
-      dismissRecordingShortcut: cancelRecordingCommand.shortcut,
-      toggleDrawingModeShortcut: toggleDrawingModeCommand?.shortcut || "",
-      toggleBlurModeShortcut: toggleBlurModeCommand?.shortcut || "",
-      toggleCursorModeShortcut: toggleCursorModeCommand?.shortcut || "",
-    }));
-  });
-
   registerMessage("cancel-recording", () => {
     const state = getState();
     state.dismissRecording();

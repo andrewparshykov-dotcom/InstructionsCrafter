@@ -286,9 +286,6 @@ const RecordingType = (props) => {
             ? chrome.i18n.getMessage("recordButtonMultiLabel")
             : chrome.i18n.getMessage("recordButtonLabel")}
         </span>
-        <span className="main-button-shortcut">
-          {contentState.recordingShortcut}
-        </span>
       </button>
       <Settings />
     </div>

@@ -67,35 +67,6 @@
   "content_security_policy": {
     "extension_pages": "script-src 'self' 'wasm-unsafe-eval'; object-src 'self'; media-src 'self' data: blob: *; img-src 'self' https: data: blob:"
   },
-  "commands": {
-    "start-recording": {
-      "suggested_key": {
-        "default": "Alt+Shift+G"
-      },
-      "description": "Start recording"
-    },
-    "cancel-recording": {
-      "suggested_key": {
-        "default": "Alt+Shift+X"
-      },
-      "description": "Cancel recording"
-    },
-    "pause-recording": {
-      "suggested_key": {
-        "default": "Alt+Shift+M"
-      },
-      "description": "Pause/Resume recording"
-    },
-    "stop-recording": {
-      "description": "Stop recording"
-    },
-    "toggle-hide-ui": {
-      "description": "Toggle hide UI"
-    },
-    "toggle-cursor-mode": {
-      "description": "Toggle cursor options"
-    }
-  },
   "permissions": [
     "activeTab",
     "storage",

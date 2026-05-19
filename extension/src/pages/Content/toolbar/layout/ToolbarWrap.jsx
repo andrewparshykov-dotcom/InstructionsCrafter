@@ -537,7 +537,6 @@ const ToolbarWrap = () => {
                 type="mode"
                 content={chrome.i18n.getMessage("toggleDrawingToolsTooltip")}
                 value="draw"
-                shortcut={contentState.toggleDrawingModeShortcut}
               >
                 {mode === "draw" && <CloseButtonToolbar />}
                 {mode !== "draw" && <DrawIcon />}
@@ -549,7 +548,6 @@ const ToolbarWrap = () => {
                 type="mode"
                 content={chrome.i18n.getMessage("toggleBlurToolTooltip")}
                 value="blur"
-                shortcut={contentState.toggleBlurModeShortcut}
               >
                 {mode === "blur" && <CloseButtonToolbar />}
                 {mode !== "blur" && <BlurIcon />}
@@ -562,7 +560,6 @@ const ToolbarWrap = () => {
                 type="mode"
                 content={chrome.i18n.getMessage("toggleCursorOptionsTooltip")}
                 value="cursor"
-                shortcut={contentState.toggleCursorModeShortcut}
               >
                 {contentState.cursorMode === "target" && <TargetCursorIcon />}
                 {contentState.cursorMode === "highlight" && (

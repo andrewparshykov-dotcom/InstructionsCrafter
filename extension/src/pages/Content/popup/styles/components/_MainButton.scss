@@ -21,13 +21,6 @@
 		vertical-align: middle;
 		align-items: center;
 	}
-	.main-button-shortcut {
-		position: absolute;
-		font-size: $font-size-small;
-		right: $spacing-05;
-		color: $color-text-contrast;
-		opacity: .7;
-	}
 	&:hover {
 		cursor: pointer;
 	}

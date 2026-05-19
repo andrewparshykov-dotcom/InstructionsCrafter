@@ -1,4 +1,3 @@
-import { onCommandListener } from "./onCommandListener";
 import { onInstalledListener } from "./onInstalledListener";
 import { onUpdateAvailableListener } from "./onUpdateAvailableListener";
 import { onTabRemovedListener } from "./onTabRemovedListener";
@@ -10,7 +9,6 @@ import { onStartupListener } from "./onStartupListener";
 import { onMessageExternalListener } from "./onMessageExternalListener";
 
 export const initializeListeners = () => {
-  onCommandListener();
   onInstalledListener();
   onUpdateAvailableListener();
   onTabRemovedListener();
