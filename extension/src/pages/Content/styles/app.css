@@ -4057,32 +4057,50 @@ button {
   pointer-events: all !important;
 }
 
+/* Editorial Manual notice toast: paper-surface card with a vertical
+   accent-blue rule on the left and a mono-caps section label. Phase 8 F29. */
 .warning-root {
-  background-color: #29292f;
-  color: #fff;
-  border-radius: 30px;
-  box-shadow: hsla(206, 22%, 7%, 0.35) 0px 10px 38px -10px, hsla(206, 22%, 7%, 0.2) 0px 10px 20px -15px;
-  padding: 14px 20px;
+  position: relative;
+  background-color: #f6f7fb;
+  color: #29292f;
+  border: 1px solid #e8e8e8;
+  border-radius: 10px;
+  box-shadow: 0 1px 2px rgba(21, 23, 28, 0.04);
+  padding: 18px 20px 18px 26px;
   display: flex;
   flex-direction: row;
-  justify-content: center;
-  gap: 8px;
-  font-size: 15px;
-  line-height: 1.5;
-  max-width: 350px;
-  overflow: hidden;
-  align-items: center;
-  text-align: left;
   align-items: flex-start;
+  gap: 14px;
+  font-size: 14px;
+  line-height: 1.5;
+  max-width: 420px;
+  overflow: hidden;
+  text-align: left;
 }
-
+.warning-root::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 3px;
+  background-color: #3080f8;
+}
 .warning-content {
   display: flex;
   flex-direction: column;
-  justify-content: left;
   align-items: flex-start;
-  gap: 8px;
+  gap: 6px;
   width: 100%;
+}
+.warning-label {
+  font-family: ui-monospace, "SF Mono", "JetBrains Mono", monospace;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  color: #6e7684;
+  text-transform: uppercase;
+  margin-bottom: 2px;
 }
 
 .warning-root[data-state=open] {
@@ -4131,16 +4149,21 @@ button {
   }
 }
 .warning-title {
-  color: #fff;
+  color: #29292f;
   font-family: "Satoshi-Medium", sans-serif;
-  line-height: 1.4;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.35;
+  margin: 0;
 }
 
 .warning-description {
-  color: #fff;
-  opacity: 0.8;
+  color: #6e7684;
   font-family: "Satoshi-Medium", sans-serif;
-  line-height: 1.5;
+  font-size: 13px;
+  line-height: 1.55;
+  margin: 0;
+  opacity: 1;
 }
 
 .ToastAction {
@@ -4155,9 +4178,23 @@ button {
 
 .warning-close {
   z-index: 999999;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  margin-top: -2px;
+  padding: 0;
+  background: transparent;
+  border: none;
+  color: #6e7684;
+  flex-shrink: 0;
+  cursor: pointer;
+  transition: color 0.15s ease;
 }
 
 .warning-close:hover {
+  color: #29292f;
   cursor: pointer;
 }
 

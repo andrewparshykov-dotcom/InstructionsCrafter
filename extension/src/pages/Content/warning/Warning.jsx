@@ -3,33 +3,35 @@ import React, {
   useEffect,
   useContext,
   useCallback,
-  useRef,
 } from "react";
 
-import {
-  AudioIcon,
-  CameraCloseIcon,
-  NotSupportedIcon,
-  CameraIcon,
-} from "../toolbar/components/SVG";
+import { CameraCloseIcon } from "../toolbar/components/SVG";
 
 import * as ToastEl from "@radix-ui/react-toast";
 
-// Context
 import { contentStateContext } from "../context/ContentState";
 
+// "Editorial Manual" notice toast (Phase 8 F29). Paper-surface card with a
+// vertical accent-blue rule on the left edge — same visual signal magazines
+// use for marginalia and sidebars. The previous icon column was dropped in
+// favor of a mono-caps "NOTICE" label that ties into the version marks on
+// the Playground / Welcome pages.
 const Warning = () => {
   const [contentState, setContentState] = useContext(contentStateContext);
   const [open, setOpen] = useState(false);
-  const [title, setTitle] = useState("Record computer audio");
+  const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [icon, setIcon] = useState("AudioIcon");
+  // `kind` no longer drives icon rendering (icon column is gone) but it still
+  // gates the audio-toast auto-dismiss when the user switches to a region
+  // recording. Kept the original third-positional-arg signature so the call
+  // sites in ContentState.jsx don't have to change.
+  const [kind, setKind] = useState("");
   const [duration, setDuration] = useState(10000);
 
-  const openWarning = useCallback((title, description, icon, duration) => {
+  const openWarning = useCallback((title, description, kind, duration) => {
     setTitle(title);
     setDescription(description);
-    setIcon(icon);
+    setKind(kind);
     setDuration(duration);
     setOpen(true);
   }, []);
@@ -49,12 +51,12 @@ const Warning = () => {
   }, []);
 
   useEffect(() => {
-    if (icon === "AudioIcon") {
+    if (kind === "AudioIcon") {
       if (contentState.recordingType === "region") {
         setOpen(false);
       }
     }
-  }, [contentState.recordingType]);
+  }, [contentState.recordingType, kind]);
 
   useEffect(() => {
     if (contentState.recording) {
@@ -72,12 +74,8 @@ const Warning = () => {
           setOpen(false);
         }}
       >
-        <div className="warning-icon">
-          {icon === "AudioIcon" && <AudioIcon />}
-          {icon === "NotSupportedIcon" && <NotSupportedIcon />}
-          {icon === "CameraIcon" && <CameraIcon />}
-        </div>
         <div className="warning-content">
+          <div className="warning-label">NOTICE</div>
           <ToastEl.Title className="warning-title">{title}</ToastEl.Title>
           <ToastEl.Description className="warning-description">
             {description}
@@ -88,6 +86,7 @@ const Warning = () => {
           onClick={() => {
             setOpen(false);
           }}
+          aria-label="Dismiss notice"
         >
           <CameraCloseIcon />
         </ToastEl.Close>
