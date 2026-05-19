@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { colors, fonts } from "../../design/tokens";
+import IconHero from "./IconHero";
 
 // Playground page. The "blank canvas" tab the extension opens when there's
 // no real page to record. The popup overlay (mic dropdown, Start recording)
@@ -56,6 +57,19 @@ const Setup = () => {
           every step out loud — the document is built from what you{" "}
           <em style={styles.emphasis}>say</em>, not from what you click.
         </p>
+
+        {/* Anchors for the content-script overlays (toolbar + popup). These
+            live in the page's CSS layout, so their getBoundingClientRect()
+            scales with Chrome's page zoom — keeping the overlays visually
+            "glued" to the text instead of drifting at higher zoom levels.
+            Each anchor is positioned absolutely inside the wrapper so it can
+            carry its own X offset (the toolbar's CSS shifts it visually one
+            way; the popup's CSS shifts it the other way, so they can't
+            share a single wrapper-level offset). */}
+        <div style={styles.overlayAnchors}>
+          <div id="playground-toolbar-anchor" style={styles.toolbarAnchor} />
+          <div id="playground-popup-anchor" style={styles.popupAnchor} />
+        </div>
       </main>
 
       <footer style={styles.footer}>
@@ -63,6 +77,10 @@ const Setup = () => {
         <span style={styles.dot}>·</span>
         <span>SCRATCHPAD</span>
       </footer>
+
+      <div style={styles.heroWrap}>
+        <IconHero />
+      </div>
     </div>
   );
 };
@@ -94,12 +112,25 @@ const styles = {
     padding: "48px 56px",
     boxSizing: "border-box",
     display: "grid",
+    gridTemplateColumns: "440px 1fr",
     gridTemplateRows: "auto 1fr auto",
+    columnGap: 32,
     rowGap: 32,
     WebkitFontSmoothing: "antialiased",
     MozOsxFontSmoothing: "grayscale",
     position: "relative",
     zIndex: 1,
+  },
+  heroWrap: {
+    gridColumn: "2 / 3",
+    gridRow: "1 / -1",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    minWidth: 0,
+    minHeight: 0,
+    pointerEvents: "none",
+    zIndex: 0,
   },
   versionMark: {
     fontFamily: fonts.mono,
@@ -110,14 +141,18 @@ const styles = {
     display: "flex",
     gap: 8,
     alignSelf: "start",
+    gridColumn: "1 / 2",
+    gridRow: "1 / 2",
   },
   dot: { color: colors.hairlineStrong },
 
   main: {
     alignSelf: "start",
-    maxWidth: 460,
+    maxWidth: 400,
     paddingLeft: 0,
-    marginTop: "12vh",
+    marginTop: "8vh",
+    gridColumn: "1 / 2",
+    gridRow: "2 / 3",
   },
   headline: {
     fontFamily: fonts.display,
@@ -147,6 +182,39 @@ const styles = {
     color: colors.ink,
   },
 
+  overlayAnchors: {
+    // marginTop pushes the toolbar's anchor far enough below the paragraph
+    // that the toolbar's visible top clears the last line of text. Larger
+    // value than visual gap because .ToolbarRoot has `bottom: 20px` +
+    // height:48px in its CSS, which raises its visible top above the Rnd
+    // wrapper's transform-set y. See _Toolbar.scss lines 188-191.
+    marginTop: 88,
+    // Negative marginLeft compensates for .ToolbarRoot's `left: 20px` so
+    // the toolbar's visible left edge aligns close to the text's leftmost
+    // glyph. The popup uses absolute positioning to undo this compensation
+    // (see popupAnchor below).
+    marginLeft: -20,
+    position: "relative",
+    pointerEvents: "none",
+    height: 0,
+  },
+  toolbarAnchor: {
+    // Default flow position (top: 0, left: 0 inside the wrapper) — the
+    // wrapper's marginLeft: -20 already carries the toolbar's compensation.
+    height: 0,
+  },
+  popupAnchor: {
+    // Absolutely positioned so the popup gets a different X offset than
+    // the toolbar. The wrapper has marginLeft: -20 for the toolbar; the
+    // popup needs to undo that and shift slightly further right to align
+    // its visible left edge with the toolbar's visible left edge.
+    position: "absolute",
+    top: 0,
+    left: 22,
+    width: 0,
+    height: 0,
+  },
+
   footer: {
     fontFamily: fonts.mono,
     fontSize: 11,
@@ -156,6 +224,8 @@ const styles = {
     display: "flex",
     gap: 8,
     alignSelf: "end",
+    gridColumn: "1 / 2",
+    gridRow: "3 / 4",
   },
 };
 

@@ -46,6 +46,30 @@ const PopupContainer = (props) => {
   const isCloudBuild = process.env.SCREENITY_ENABLE_CLOUD_FEATURES === "true";
   const wasCameraActiveRef = useRef(null);
 
+  // Playground anchors the popup to a zero-height marker placed directly
+  // below the toolbar's anchor inside the page's CSS layout
+  // (#playground-popup-anchor in Setup.jsx). Same idea as the toolbar:
+  // because the anchor scales with the page, the popup stays glued under
+  // the toolbar across all Chrome zoom levels. See F28.
+  const isPlayground =
+    typeof window !== "undefined" &&
+    typeof chrome !== "undefined" &&
+    chrome.runtime?.id &&
+    window.location.href.includes("/playground.html");
+  const playgroundPopupPosition = () => {
+    const anchor =
+      typeof document !== "undefined"
+        ? document.getElementById("playground-popup-anchor")
+        : null;
+    if (anchor) {
+      const rect = anchor.getBoundingClientRect();
+      return { x: Math.round(rect.left), y: Math.round(rect.top) };
+    }
+    // Fallback if anchor isn't in the DOM yet — the resize listener / rAF
+    // re-pin in useLayoutEffect will overwrite this once it appears.
+    return { x: 80, y: 560 };
+  };
+
   useEffect(() => {
     chrome.storage.local.get(["onboarding", "showProSplash"], (result) => {
       const nextOnboarding = Boolean(result.onboarding);
@@ -143,6 +167,23 @@ const PopupContainer = (props) => {
   }, [contentState]);
 
   useLayoutEffect(() => {
+    if (isPlayground) {
+      const pin = () => {
+        if (DragRef.current) {
+          DragRef.current.updatePosition(playgroundPopupPosition());
+        }
+      };
+      pin();
+      // Re-pin once on the next frame in case the page anchor wasn't laid out
+      // yet when we first read it (the content script can mount slightly
+      // before the host page's React tree commits its anchors).
+      const raf = requestAnimationFrame(pin);
+      window.addEventListener("resize", pin);
+      return () => {
+        cancelAnimationFrame(raf);
+        window.removeEventListener("resize", pin);
+      };
+    }
     function setPopupPosition(e) {
       let xpos = DragRef.current.getDraggablePosition().x;
       let ypos = DragRef.current.getDraggablePosition().y;
@@ -285,6 +326,10 @@ const PopupContainer = (props) => {
   };
 
   useEffect(() => {
+    if (isPlayground) {
+      DragRef.current?.updatePosition(playgroundPopupPosition());
+      return;
+    }
     let x = contentState.popupPosition.offsetX;
     let y = contentState.popupPosition.offsetY;
 
@@ -404,14 +449,19 @@ const PopupContainer = (props) => {
     >
       <div className={"ToolbarBounds" + " " + shake}></div>
       <Rnd
-        default={{
-          x: contentState.popupPosition.offsetX,
-          y: contentState.popupPosition.offsetY,
-        }}
+        default={
+          isPlayground
+            ? playgroundPopupPosition()
+            : {
+                x: contentState.popupPosition.offsetX,
+                y: contentState.popupPosition.offsetY,
+              }
+        }
         className={
           "react-draggable" + " " + elastic + " " + shake + " " + dragging
         }
         enableResizing={false}
+        disableDragging={isPlayground}
         dragHandleClassName="drag-area"
         onDragStart={handleDragStart}
         onDrag={handleDrag}
@@ -422,6 +472,12 @@ const PopupContainer = (props) => {
           className="popup-container"
           id="pro-onboarding-popup-container"
           ref={PopupRef}
+          // On Playground we anchor the popup via Rnd's transform; the
+          // default CSS pins it to top-right of a width-0 wrapper (which
+          // throws it off-screen left). Override to follow Rnd directly.
+          style={
+            isPlayground ? { top: 0, right: "auto", left: 0 } : undefined
+          }
         >
           <div
             className={

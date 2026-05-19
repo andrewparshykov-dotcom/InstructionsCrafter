@@ -54,6 +54,30 @@ const ToolbarWrap = () => {
   const [visuallyHidden, setVisuallyHidden] = useState(false);
   const timeRef = React.useRef("");
 
+  // Playground anchors the toolbar to a zero-height marker that lives inside
+  // the page's CSS layout (#playground-toolbar-anchor in Setup.jsx). Because
+  // the anchor is part of the page flow, its getBoundingClientRect() scales
+  // in lockstep with the headline / paragraph when Chrome page-zooms — so the
+  // toolbar stays glued to the text instead of drifting. See F28.
+  const isPlayground =
+    typeof window !== "undefined" &&
+    typeof chrome !== "undefined" &&
+    chrome.runtime?.id &&
+    window.location.href.includes("/playground.html");
+  const playgroundToolbarPosition = () => {
+    const anchor =
+      typeof document !== "undefined"
+        ? document.getElementById("playground-toolbar-anchor")
+        : null;
+    if (anchor) {
+      const rect = anchor.getBoundingClientRect();
+      return { x: Math.round(rect.left), y: Math.round(rect.top) };
+    }
+    // Fallback if anchor isn't in the DOM yet — the resize listener / rAF
+    // re-pin in useLayoutEffect will overwrite this once it appears.
+    return { x: 80, y: 500 };
+  };
+
   useEffect(() => {
     modeRef.current = mode;
   }, [mode]);
@@ -94,6 +118,23 @@ const ToolbarWrap = () => {
   }, [t]);
 
   useLayoutEffect(() => {
+    if (isPlayground) {
+      const pin = () => {
+        if (DragRef.current) {
+          DragRef.current.updatePosition(playgroundToolbarPosition());
+        }
+      };
+      pin();
+      // Re-pin once on the next frame in case the page anchor wasn't laid out
+      // yet when we first read it (the content script can mount slightly
+      // before the host page's React tree commits its anchors).
+      const raf = requestAnimationFrame(pin);
+      window.addEventListener("resize", pin);
+      return () => {
+        cancelAnimationFrame(raf);
+        window.removeEventListener("resize", pin);
+      };
+    }
     function setToolbarPosition(e) {
       let xpos = DragRef.current.getDraggablePosition().x;
       let ypos = DragRef.current.getDraggablePosition().y;
@@ -239,6 +280,10 @@ const ToolbarWrap = () => {
   };
 
   useEffect(() => {
+    if (isPlayground) {
+      DragRef.current?.updatePosition(playgroundToolbarPosition());
+      return;
+    }
     let x = contentState.toolbarPosition.offsetX;
     let y = contentState.toolbarPosition.offsetY;
 
@@ -325,10 +370,8 @@ const ToolbarWrap = () => {
       ></div>
       <div className={"ToolbarBounds" + " " + shake}></div>
       <Rnd
-        default={{
-          x: 200,
-          y: 500,
-        }}
+        default={isPlayground ? playgroundToolbarPosition() : { x: 200, y: 500 }}
+        disableDragging={isPlayground}
         className={
           "react-draggable" + " " + elastic + " " + shake + " " + dragging
         }
