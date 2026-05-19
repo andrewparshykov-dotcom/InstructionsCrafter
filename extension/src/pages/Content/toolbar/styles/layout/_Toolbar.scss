@@ -46,7 +46,7 @@ iframe.screenity-iframe {
   justify-content: center;
   gap: 8px;
   z-index: 99999999999999;
-  background: rgba(240, 238, 238, 1);
+  background: #FBFBFE;
   backdrop-filter: blur(10px);
   padding-left: 8px;
   padding-right: 8px;
@@ -62,7 +62,7 @@ iframe.screenity-iframe {
 
   .popup-control {
     svg {
-      color: $color-icon;
+      color: #6E7684;
       margin-bottom: -2px;
     }
   }
@@ -99,13 +99,13 @@ iframe.screenity-iframe {
 .ToolbarShake .ToolbarRoot {
   animation: subtleshake 0.9s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
   animation-iteration-count: infinite !important;
-  background-color: white !important;
+  background-color: #FBFBFE !important;
 }
 .ToolbarDragging .ToolbarRoot {
   transform: scale(1.02);
 
   &::after {
-    filter: drop-shadow(0px 20px 50px rgba(0, 0, 0, 0.5));
+    filter: drop-shadow(0 16px 48px rgba(15, 17, 28, 0.22));
   }
 }
 
@@ -187,8 +187,10 @@ iframe.screenity-iframe {
   transition: opacity 0.25s cubic-bezier(0.61, 0.11, 0.08, 0.96),
     transform 0.2s cubic-bezier(0.61, 0.11, 0.08, 0.96);
   min-width: max-content;
-  background-color: white;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+  background-color: #FBFBFE;
+  border: 1px solid #E8E9EE;
+  box-shadow: 0 8px 32px rgba(15, 17, 28, 0.10);
+  font-family: "Geist", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   padding-right: 10px;
   height: 48px;
   position: absolute;
@@ -201,13 +203,13 @@ iframe.screenity-iframe {
     display: block;
     width: 100%;
     height: 100%;
-    background: #fff;
+    background: #FBFBFE;
     z-index: -9999999;
     position: absolute;
     left: 0px;
     top: 0px;
     border-radius: $container-border-radius;
-    filter: drop-shadow(0px 4px 50px rgba(0, 0, 0, 0.3));
+    filter: drop-shadow(0 8px 32px rgba(15, 17, 28, 0.10));
     transition: filter 0.2s ease-in-out;
   }
 }
@@ -221,7 +223,7 @@ iframe.screenity-iframe {
   align-items: center;
   background: #f6f7fb;
   border-radius: $container-border-radius;
-  font-family: $font-medium;
+  font-family: "Geist", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   height: calc(100% - 12px);
   padding-left: 2px;
   padding-right: 2px;
@@ -229,7 +231,8 @@ iframe.screenity-iframe {
 .ToolbarRecordingTime {
   margin-right: 4px;
   min-width: 42px;
-  color: $color-text-primary;
+  color: #15171C;
+  font-family: "Geist Mono", "JetBrains Mono", ui-monospace, monospace;
   font-size: 13px;
   line-height: 1;
   white-space: nowrap;
@@ -239,17 +242,8 @@ iframe.screenity-iframe {
   -moz-user-select: none;
 }
 .TimerWarning {
-  color: #ff4c4c; /* or add a pulsing effect */
-  font-weight: bold;
-  animation: pulse 1s infinite alternate;
-}
-@keyframes pulse {
-  from {
-    opacity: 1;
-  }
-  to {
-    opacity: 0.6;
-  }
+  color: #C53030;
+  font-weight: 500;
 }
 .ToolbarToggleGroup {
   display: flex;
@@ -276,7 +270,7 @@ iframe.screenity-iframe {
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #000;
+  color: #15171C;
   height: 32px;
   width: 32px;
   text-align: center;
@@ -287,7 +281,7 @@ iframe.screenity-iframe {
   background-color: rgba(124, 139, 165, 0);
 
   svg {
-    color: $color-icon;
+    color: #6E7684;
   }
 
   &:disabled {
@@ -298,7 +292,7 @@ iframe.screenity-iframe {
 
   &.resume {
     svg {
-      color: #f7387d !important;
+      color: #3080F8 !important;
     }
   }
 }
@@ -367,17 +361,17 @@ iframe.screenity-iframe {
     transition: transform 0.25s cubic-bezier(0.61, 0.11, 0.08, 0.96),
       opacity 0.25s ease-in-out;
     transform: translateY(5px) scale(0) !important;
-    border-right: 3px solid white;
-    border-top: 9px solid white;
-    border-left: 3px solid white;
+    border-right: 3px solid #FBFBFE;
+    border-top: 9px solid #FBFBFE;
+    border-left: 3px solid #FBFBFE;
     background-color: transparent;
     opacity: 0;
   }
   &[data-state="on"] {
-    background: rgba(56, 126, 247, 0.1);
+    background: #3080F8;
 
     svg {
-      color: $color-primary;
+      color: #fff;
     }
 
     &::before {
@@ -392,7 +386,7 @@ iframe.screenity-iframe {
     transform: translateY(-5px) scale(0.5) !important;
     bottom: -16px;
     top: unset !important;
-    border-bottom: 9px solid white !important;
+    border-bottom: 9px solid #FBFBFE !important;
     border-radius: 0% 0% 80px 80px !important;
     border-top: none !important;
   }
@@ -449,7 +443,7 @@ iframe.screenity-iframe {
   width: 100%;
   height: 100%;
   box-sizing: border-box;
-  border: 10px solid #f7387d;
+  border: 10px solid #3080F8;
   pointer-events: none;
   opacity: 0.5;
 
