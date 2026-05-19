@@ -1,6 +1,14 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { colors, fonts } from "../../design/tokens";
 import IconHero from "./IconHero";
+
+// Approximate popup height in CSS pixels (RECORDER label + mic dropdown +
+// waveform iframe + Start button + Hide toolbar row + padding). Used to
+// predict whether the popup will collide with the footer at the current
+// viewport size, so the footer can fade out gracefully on cramped screens.
+// See F34.
+const PREDICTED_POPUP_HEIGHT = 300;
+const POPUP_FOOTER_GAP = 16;
 
 // Playground page. The "blank canvas" tab the extension opens when there's
 // no real page to record. The popup overlay (mic dropdown, Start recording)
@@ -13,6 +21,29 @@ import IconHero from "./IconHero";
 // record, so it should set context without nagging.
 
 const Setup = () => {
+  // When the predicted bottom of the popup overlay (rendered by the content
+  // script in its own shadow DOM, but anchored to #playground-popup-anchor)
+  // would crowd the footer, fade the footer to invisible. We keep it in the
+  // grid slot (visibility/opacity, not display:none) so the rest of the
+  // layout doesn't reflow. See F34.
+  const [cramped, setCramped] = useState(false);
+
+  useEffect(() => {
+    const checkCramped = () => {
+      const anchor = document.getElementById("playground-popup-anchor");
+      const footer = document.getElementById("playground-footer");
+      if (!anchor || !footer) return;
+      const predictedBottom =
+        anchor.getBoundingClientRect().top + PREDICTED_POPUP_HEIGHT;
+      const footerTop = footer.getBoundingClientRect().top;
+      setCramped(predictedBottom + POPUP_FOOTER_GAP > footerTop);
+    };
+
+    checkCramped();
+    window.addEventListener("resize", checkCramped);
+    return () => window.removeEventListener("resize", checkCramped);
+  }, []);
+
   useEffect(() => {
     // Inject the extension content script -- this is what creates the
     // popup overlay on top of the page.
@@ -72,7 +103,15 @@ const Setup = () => {
         </div>
       </main>
 
-      <footer style={styles.footer}>
+      <footer
+        id="playground-footer"
+        style={{
+          ...styles.footer,
+          opacity: cramped ? 0 : 1,
+          transition: "opacity 0.2s ease",
+          pointerEvents: cramped ? "none" : "auto",
+        }}
+      >
         <span>INSTRUCTIONSCRAFTER</span>
         <span style={styles.dot}>·</span>
         <span>SCRATCHPAD</span>
