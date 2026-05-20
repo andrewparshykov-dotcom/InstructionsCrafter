@@ -35,17 +35,20 @@ const Content = () => {
 				transition: unset;
 			}
 			.screenity-shadow-dom .TooltipContent {
-  border-radius: 30px!important;
-	background-color: #29292F!important;
-  padding: 10px 15px!important;
+  border-radius: 6px!important;
+	background-color: #15171C!important;
+	border: 1px solid rgba(255, 255, 255, 0.06)!important;
+  padding: 6px 10px!important;
   font-size: 12px;
 	margin-bottom: 10px!important;
 	bottom: 100px;
   line-height: 1;
-	font-family: 'Satoshi-Medium', sans-serif;
+	font-family: "Geist", "Satoshi-Medium", -apple-system, BlinkMacSystemFont, sans-serif;
+	font-weight: 500;
+	letter-spacing: 0.01em;
 	z-index: 99999999!important;
   color: #FFF;
-  box-shadow: hsl(206 22% 7% / 35%) 0px 10px 38px -10px, hsl(206 22% 7% / 20%) 0px 10px 20px -15px!important;
+  box-shadow: 0 4px 12px rgba(15, 17, 28, 0.18)!important;
   user-select: none;
 	transition: opacity 0.3 ease-in-out;
   will-change: transform, opacity;
