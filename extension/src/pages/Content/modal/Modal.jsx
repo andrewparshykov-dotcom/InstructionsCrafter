@@ -81,6 +81,11 @@ const Modal = (props) => {
       >
         <div className="AlertDialogOverlay"></div>
         <AlertDialog.Content className="AlertDialogContent">
+          <div className="AlertDialogEyebrow">
+            INSTRUCTIONSCRAFTER
+            <span className="AlertDialogEyebrowDot">·</span>
+            {colorSafe ? "NOTICE" : "ERROR"}
+          </div>
           <AlertDialog.Title className="AlertDialogTitle">
             {title}
           </AlertDialog.Title>
@@ -100,18 +105,8 @@ const Modal = (props) => {
               </>
             )}
           </AlertDialog.Description>
-          {image && (
-            <img
-              src={image}
-              style={{
-                width: "100%",
-                marginBottom: 15,
-                marginTop: 5,
-                borderRadius: "15px",
-              }}
-            />
-          )}
-          <div style={{ display: "flex", gap: 12, justifyContent: "flex-end" }}>
+          {image && <img className="AlertDialogImage" src={image} />}
+          <div className="AlertDialogActions">
             {sideButton && (
               <button
                 className="SideButtonModal"

@@ -3627,7 +3627,9 @@ button {
 }
 
 .AlertDialogOverlay {
-  background-color: rgba(0, 0, 0, 0.5);
+  background: rgba(15, 17, 28, 0.42);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
   position: fixed;
   inset: 0;
   animation: overlayShow 150ms cubic-bezier(0.16, 1, 0.3, 1);
@@ -3636,98 +3638,153 @@ button {
 
 .AlertDialogContent {
   overflow: auto !important;
-  background-color: white;
-  border-radius: 30px;
-  box-shadow: hsla(206, 22%, 7%, 0.35) 0px 10px 38px -10px, hsla(206, 22%, 7%, 0.2) 0px 10px 20px -15px;
+  background: #FBFBFE;
+  border: 1px solid #E8E9EE;
+  border-radius: 8px;
+  box-shadow: 0 20px 60px rgba(15, 17, 28, 0.18);
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   width: 90vw;
-  max-width: 500px;
+  max-width: 480px;
   max-height: 85vh;
-  padding: 35px 25px;
+  padding: 32px;
+  font-family: "Geist", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   animation: contentShow 150ms cubic-bezier(0.16, 1, 0.3, 1);
   z-index: 99999999999;
+  box-sizing: border-box;
 }
 
 .AlertDialogContent:focus {
   outline: none;
 }
 
+.AlertDialogEyebrow {
+  font-family: "Geist Mono", "JetBrains Mono", ui-monospace, monospace;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #6E7684;
+  margin-bottom: 12px;
+}
+
+.AlertDialogEyebrowDot {
+  color: #C9CDD6;
+  margin: 0 6px;
+}
+
 .AlertDialogTitle {
-  margin: 0;
-  color: #29292f;
-  font-size: 14px;
-  line-height: 1.4;
-  font-family: "Satoshi-Bold", sans-serif;
-  font-weight: 700;
+  margin: 0 0 20px;
+  font-family: "Instrument Serif", "Times New Roman", serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 26px;
+  line-height: 1.2;
+  letter-spacing: -0.012em;
+  color: #15171C;
 }
 
 .AlertDialogDescription {
-  margin-bottom: 20px;
-  color: #6e7684;
-  font-size: 14px;
-  line-height: 1.5;
+  margin: 0 0 20px;
+  font-family: "Geist", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 15px;
+  line-height: 1.6;
+  color: #15171C;
 }
 .AlertDialogDescription a {
-  color: #3080f8 !important;
-  font-weight: 600 !important;
+  color: #3080F8 !important;
+  font-weight: 500 !important;
   text-decoration: none !important;
   display: inline-block;
   cursor: pointer;
+}
+.AlertDialogDescription a:hover {
+  text-decoration: underline !important;
+}
+
+.AlertDialogImage {
+  display: block;
+  width: 100%;
+  margin: 4px 0 20px;
+  border: 1px solid #E8E9EE;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.AlertDialogActions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: 32px;
 }
 
 .Button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border-radius: 30px;
-  padding: 0 15px;
-  font-size: 14px;
+  border-radius: 4px;
+  padding: 10px 20px;
+  font-family: "Geist", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 15px;
   line-height: 1;
   font-weight: 500;
-  height: 35px;
+  height: auto;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease;
+  box-sizing: border-box;
 }
 
+/* Ghost cancel / dismiss */
+.Button.grey {
+  background: transparent;
+  color: #15171C;
+  border: 1px solid #C9CDD6;
+}
+.Button.grey:hover {
+  background: rgba(110, 118, 132, 0.06);
+  border-color: #6E7684;
+  cursor: pointer;
+}
+.Button.grey:focus {
+  outline: 2px solid #3080F8;
+  outline-offset: 2px;
+}
+
+/* Accent primary (colorSafe = true) */
 .Button.blue {
-  background-color: rgba(48, 128, 248, 0.1);
-  color: #3080f8;
+  background: #3080F8;
+  color: #fff;
+  font-weight: 600;
+  border: 1px solid #3080F8;
 }
 .Button.blue:hover {
-  background-color: rgba(48, 128, 248, 0.15);
+  background: #1F6CDC;
+  border-color: #1F6CDC;
   cursor: pointer;
 }
 .Button.blue:focus {
-  box-shadow: 0px 0px 0px 2px rgba(48, 128, 248, 0.5);
+  outline: 2px solid #3080F8;
+  outline-offset: 2px;
 }
 
+/* Danger primary (colorSafe = false) */
 .Button.red {
-  background-color: rgba(247, 56, 90, 0.1);
-  color: rgb(247, 56, 90);
+  background: #C53030;
+  color: #fff;
+  font-weight: 600;
+  border: 1px solid #C53030;
 }
-
 .Button.red:hover {
-  background-color: rgba(247, 56, 90, 0.15);
+  background: #A92626;
+  border-color: #A92626;
   cursor: pointer;
 }
-
 .Button.red:focus {
-  box-shadow: 0px 0px 0px 2px rgba(48, 128, 248, 0.5);
-}
-
-.Button.grey {
-  background: rgba(110, 118, 132, 0.1);
-  color: #6e7684;
-}
-
-.Button.grey:hover {
-  background: rgba(110, 118, 132, 0.15);
-  cursor: pointer;
-}
-
-.Button.grey:focus {
-  box-shadow: 0px 0px 0px 2px rgba(48, 128, 248, 0.5);
+  outline: 2px solid #C53030;
+  outline-offset: 2px;
 }
 
 @keyframes overlayShow {
@@ -3748,22 +3805,27 @@ button {
     transform: translate(-50%, -50%) scale(1);
   }
 }
+
+/* Tertiary side button — pushed to the left of the actions row */
 .SideButtonModal {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border-radius: 30px;
-  padding: 0 15px;
-  font-size: 14px;
-  line-height: 1;
+  padding: 10px 0;
+  margin-right: auto;
+  font-family: "Geist Mono", "JetBrains Mono", ui-monospace, monospace;
+  font-size: 11px;
   font-weight: 500;
-  height: 35px;
-  color: #6e7684;
-  font-family: "Satoshi-Medium", sans-serif;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #6E7684;
+  background: transparent;
+  border: none;
+  cursor: pointer;
 }
 .SideButtonModal:hover {
-  cursor: pointer;
-  background: rgba(110, 118, 132, 0.05);
+  color: #15171C;
+  text-decoration: underline;
 }
 
 .box-hole {
