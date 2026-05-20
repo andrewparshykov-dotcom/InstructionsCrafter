@@ -18,7 +18,7 @@ saveButton.addEventListener("click", () => {
   const backendUrl = backendInput.value.trim() || DEFAULT_BACKEND_URL;
   const defaultTitle = titleInput.value.trim();
   chrome.storage.local.set({ backendUrl, defaultTitle }, () => {
-    status.textContent = "Saved";
-    setTimeout(() => { status.textContent = ""; }, 2000);
+    status.classList.add("visible");
+    setTimeout(() => { status.classList.remove("visible"); }, 2000);
   });
 });
