@@ -71,8 +71,10 @@ const RecorderUI = ({ started, isTab }) => {
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
+            justify-content: flex-start;
+            padding-top: 24px;
             height: 100%;
+            box-sizing: border-box;
             font-family: "Geist", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
             position: relative;
             z-index: 1;
@@ -84,31 +86,33 @@ const RecorderUI = ({ started, isTab }) => {
             letter-spacing: 0.14em;
             text-transform: uppercase;
             color: #6E7684;
-            margin-bottom: 32px;
+            margin-bottom: 14px;
           }
           .eyebrow-dot {
             color: #C9CDD6;
             margin: 0 6px;
           }
           .middle-area img {
-            width: 40px;
-            margin-bottom: 20px;
+            width: 24px;
+            margin-bottom: 10px;
           }
           .title {
-            font-size: 24px;
+            font-size: 18px;
             font-weight: 700;
             color: #15171C;
-            margin-bottom: 14px;
+            margin-bottom: 6px;
             font-family: "Geist", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
             text-align: center;
           }
           .subtitle {
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 500;
             color: #6E7684;
-            margin-bottom: 24px;
+            margin-bottom: 0;
             font-family: "Geist", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
             text-align: center;
+            max-width: 480px;
+            line-height: 1.5;
           }
         `}
       </style>
