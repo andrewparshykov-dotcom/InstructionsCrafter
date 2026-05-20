@@ -12,16 +12,16 @@ import {
 const CustomControls = (canvas) => {
   fabric.Object.prototype.set({
     transparentCorners: false,
-    borderColor: "#0D99FF",
+    borderColor: "#3080F8",
     cornerColor: "#FFF",
     borderScaleFactor: 2,
     cornerStyle: "circle",
-    cornerStrokeColor: "#0D99FF",
+    cornerStrokeColor: "#3080F8",
     borderOpacityWhenMoving: 1,
   });
 
-  canvas.selectionColor = "rgba(46, 115, 252, 0.11)";
-  canvas.selectionBorderColor = "rgba(98, 155, 255, 0.81)";
+  canvas.selectionColor = "rgba(48, 128, 248, 0.11)";
+  canvas.selectionBorderColor = "rgba(48, 128, 248, 0.81)";
   canvas.selectionLineWidth = 1.5;
 
   // Handle control

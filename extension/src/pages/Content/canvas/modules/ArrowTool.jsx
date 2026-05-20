@@ -34,7 +34,7 @@ const createArrowCircle = (x, y, id) => {
   return new fabric.Circle({
     radius: 5,
     fill: "white",
-    stroke: "#0D99FF",
+    stroke: "#3080F8",
     strokeWidth: 2,
     left: x,
     top: y,
@@ -49,7 +49,7 @@ const createArrowCircle = (x, y, id) => {
 const createArrowLineControl = (x, y) => {
   return new fabric.Line([x, y, x, y], {
     strokeWidth: 2,
-    stroke: "#0D99FF",
+    stroke: "#3080F8",
     originX: "center",
     originY: "center",
     selectable: false,

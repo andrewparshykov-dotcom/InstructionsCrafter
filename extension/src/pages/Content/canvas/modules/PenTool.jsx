@@ -77,7 +77,7 @@ const PenTool = (canvas, contentStateRef, setContentState, saveCanvas) => {
 
     const pathCopy = new fabric.Path(path.path, {
       id: "select-stroke",
-      stroke: "#0D99FF",
+      stroke: "#3080F8",
       strokeWidth: 2,
       fill: null,
       opacity: 0,
