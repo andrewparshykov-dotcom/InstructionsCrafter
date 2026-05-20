@@ -272,11 +272,11 @@ const ResizableBox = () => {
           style={{
             width: "100%",
             height: "100%",
-            outline: hideRegionUI ? "none" : "1px dashed #FBFBFE",
+            outline: hideRegionUI ? "none" : "2px dashed #D9D9D9",
             // Push outline inside the box so it isn't visible in recordings.
             outlineOffset: "2px",
-            boxShadow: "0 0 0 9999px rgba(15, 17, 28, 0.45)",
-            borderRadius: "4px",
+            boxShadow: "0 0 0 9999px rgba(0, 0, 0, 0.2)",
+            borderRadius: "5px",
             zIndex: 2,
             boxSizing: "border-box",
             pointerEvents:
