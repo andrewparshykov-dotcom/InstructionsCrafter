@@ -2365,9 +2365,10 @@ button {
   z-index: 99999999999;
   width: var(--radix-select-trigger-width);
   max-height: var(--radix-select-content-available-height);
-  font-family: "Satoshi-Medium", sans-serif;
+  font-family: "Geist", "Satoshi-Medium", -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 500;
   background-color: white;
-  border-radius: 15px;
+  border-radius: 8px;
   margin-top: 4px;
   box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
 }
@@ -4133,9 +4134,10 @@ button {
   margin-right: 8px;
   padding-top: 12px;
   padding-bottom: 12px;
-  border-radius: 15px;
+  border-radius: 8px;
   z-index: 99999;
-  font-family: "Satoshi-Medium", sans-serif;
+  font-family: "Geist", "Satoshi-Medium", -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 500;
   color: #15171C;
   box-shadow: 0px 10px 38px -10px rgba(22, 23, 24, 0.35), 0px 10px 20px -15px rgba(22, 23, 24, 0.2);
   animation-duration: 400ms;

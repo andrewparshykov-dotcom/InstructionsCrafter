@@ -73,9 +73,10 @@ button {
   z-index: $z-index-max;
   width: var(--radix-select-trigger-width);
   max-height: var(--radix-select-content-available-height);
-  font-family: $font-medium;
+  font-family: "Geist", "Satoshi-Medium", -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 500;
   background-color: white;
-  border-radius: 15px;
+  border-radius: 8px;
   margin-top: $spacing-02;
   box-shadow: $container-shadow-focus;
 }

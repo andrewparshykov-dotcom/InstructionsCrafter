@@ -128,9 +128,10 @@ const Content = () => {
   margin-right: 8px;
   padding-top: 12px;
   padding-bottom: 12px;
-  border-radius: 15px;
-  font-family: 'Satoshi-Medium', sans-serif;
-  color: #29292F;
+  border-radius: 8px;
+  font-family: "Geist", "Satoshi-Medium", -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 500;
+  color: #15171C;
   box-shadow: 0px 10px 38px -10px rgba(22, 23, 24, 0.35),
     0px 10px 20px -15px rgba(22, 23, 24, 0.2);
   animation-duration: 400ms;
