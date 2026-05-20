@@ -1551,7 +1551,8 @@ body.driver-active .OnboardingArrow {
   top: 0px;
   left: 0px;
   z-index: 999999999;
-  font-family: "Satoshi-Medium", sans-serif;
+  font-family: "Geist", "Satoshi-Medium", -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 500;
   font-size: 14px;
 }
 
@@ -1581,7 +1582,7 @@ body.driver-active .OnboardingArrow {
    "INSTRUCTIONSCRAFTER · STAGING" version mark on the Playground page and
    the "NOTICE" label on the warning toast. */
 .popup-label {
-  font-family: ui-monospace, "SF Mono", "JetBrains Mono", monospace;
+  font-family: "Geist Mono", ui-monospace, "SF Mono", "JetBrains Mono", monospace;
   font-size: 11px;
   font-weight: 500;
   letter-spacing: 0.14em;
@@ -1597,7 +1598,7 @@ body.driver-active .OnboardingArrow {
   position: relative;
   width: 100%;
   height: 100%;
-  border-radius: 30px;
+  border-radius: 8px;
   overflow: visible;
 }
 
@@ -1623,7 +1624,7 @@ body.driver-active .OnboardingArrow {
   align-items: center;
   position: relative;
   overflow: hidden;
-  background-color: rgba(56, 126, 247, 0.1);
+  background-color: rgba(48, 128, 248, 0.1);
   margin-left: -16px;
   margin-top: -16px;
   margin-bottom: 8px;
@@ -1656,18 +1657,20 @@ body.driver-active .OnboardingArrow {
   flex: 1;
 }
 .popup-warning-middle .popup-warning-title {
-  font-family: "Satoshi-Bold", sans-serif;
+  font-family: "Geist", "Satoshi-Bold", -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 700;
   color: #15171C;
 }
 .popup-warning-middle .popup-warning-description {
-  font-family: "Satoshi-Medium", sans-serif;
+  font-family: "Geist", "Satoshi-Medium", -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 500;
   color: #6e7684;
   margin-top: 4px;
 }
 
 .permission-button {
   background: rgba(48, 128, 248, 0.1);
-  border-radius: 30px;
+  border-radius: 8px;
   color: #3080f8;
   display: flex;
   align-items: center;

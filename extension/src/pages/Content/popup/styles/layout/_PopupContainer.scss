@@ -52,7 +52,8 @@
   top: 0px;
   left: 0px;
   z-index: 999999999;
-  font-family: $font-medium;
+  font-family: "Geist", "Satoshi-Medium", -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 500;
   font-size: $font-size-normal;
 }
 .ToolbarDragging .popup-container {
@@ -84,7 +85,7 @@
 // STAGING" version mark on the Playground page and the "NOTICE" label on the
 // warning toast — building one typographic system across surfaces.
 .popup-label {
-  font-family: ui-monospace, "SF Mono", "JetBrains Mono", monospace;
+  font-family: "Geist Mono", ui-monospace, "SF Mono", "JetBrains Mono", monospace;
   font-size: 11px;
   font-weight: 500;
   letter-spacing: 0.14em;
@@ -126,7 +127,7 @@
   align-items: center;
   position: relative;
   overflow: hidden;
-  background-color: rgba(56, 126, 247, 0.1);
+  background-color: rgba(48, 128, 248, 0.1);
   margin-left: -16px;
   margin-top: -16px;
   margin-bottom: 8px;
@@ -157,11 +158,13 @@
   flex: 1;
 
   .popup-warning-title {
-    font-family: $font-bold;
+    font-family: "Geist", "Satoshi-Bold", -apple-system, BlinkMacSystemFont, sans-serif;
+    font-weight: 700;
     color: $color-text-primary;
   }
   .popup-warning-description {
-    font-family: $font-medium;
+    font-family: "Geist", "Satoshi-Medium", -apple-system, BlinkMacSystemFont, sans-serif;
+    font-weight: 500;
     color: $color-text-secondary;
     margin-top: 4px;
   }
