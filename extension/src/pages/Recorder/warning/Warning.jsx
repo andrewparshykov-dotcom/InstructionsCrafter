@@ -107,11 +107,11 @@ const Warning = () => {
 }
 				
 				.warning-root {
-					background-color: #29292F;
+					background-color: #15171C;
+					border: 1px solid rgba(255, 255, 255, 0.06);
 					color: #FFF;
 					border-radius: 30px;
-					box-shadow: hsl(206 22% 7% / 35%) 0px 10px 38px -10px,
-						hsl(206 22% 7% / 20%) 0px 10px 20px -15px;
+					box-shadow: 0 8px 32px rgba(15, 17, 28, 0.28);
 					padding: 14px 20px;
 					display: flex;
 					flex-direction: row;
@@ -179,13 +179,15 @@ const Warning = () => {
 				
 				.warning-title {
 					color: #FFF;
-					font-family: "Satoshi-Medium", sans-serif;
+					font-family: "Geist", "Satoshi-Medium", -apple-system, BlinkMacSystemFont, sans-serif;
+					font-weight: 500;
 				}
-				
+
 				.warning-description {
 					color: #FFF;
 					opacity: 0.8;
-					font-family: "Satoshi-Medium", sans-serif;
+					font-family: "Geist", "Satoshi-Medium", -apple-system, BlinkMacSystemFont, sans-serif;
+					font-weight: 500;
 				}
 				
 				.ToastAction {

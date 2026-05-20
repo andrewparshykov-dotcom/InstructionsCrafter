@@ -8,6 +8,11 @@ const RecorderUI = ({ started, isTab }) => {
   return (
     <div className="wrap">
       <div className="middle-area">
+        <div className="eyebrow">
+          INSTRUCTIONSCRAFTER
+          <span className="eyebrow-dot">·</span>
+          PREPARING
+        </div>
         <img
           src={chrome.runtime.getURL("assets/record-tab-active.svg")}
           alt="Recording icon"
@@ -32,20 +37,6 @@ const RecorderUI = ({ started, isTab }) => {
         {`
           body {
             overflow: hidden;
-          }
-          .button-stop {
-            padding: 10px 20px;
-            background: #FFF;
-            border-radius: 30px;
-            color: #29292F;
-            font-size: 14px;
-            font-weight: 500;
-            cursor: pointer;
-            margin-top: 0px;
-            border: 1px solid #E8E8E8;
-            margin-left: auto;
-            margin-right: auto;
-            z-index: 999999;
           }
           .setupBackgroundSVG {
             position: absolute;
@@ -82,7 +73,22 @@ const RecorderUI = ({ started, isTab }) => {
             align-items: center;
             justify-content: center;
             height: 100%;
-            font-family: "Satoshi Medium", sans-serif;
+            font-family: "Geist", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            position: relative;
+            z-index: 1;
+          }
+          .eyebrow {
+            font-family: "Geist Mono", "JetBrains Mono", ui-monospace, monospace;
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: #6E7684;
+            margin-bottom: 32px;
+          }
+          .eyebrow-dot {
+            color: #C9CDD6;
+            margin: 0 6px;
           }
           .middle-area img {
             width: 40px;
@@ -91,17 +97,17 @@ const RecorderUI = ({ started, isTab }) => {
           .title {
             font-size: 24px;
             font-weight: 700;
-            color: #1A1A1A;
+            color: #15171C;
             margin-bottom: 14px;
-            font-family: Satoshi-Medium, sans-serif;
+            font-family: "Geist", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
             text-align: center;
           }
           .subtitle {
             font-size: 14px;
-            font-weight: 400;
+            font-weight: 500;
             color: #6E7684;
             margin-bottom: 24px;
-            font-family: Satoshi-Medium, sans-serif;
+            font-family: "Geist", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
             text-align: center;
           }
         `}
