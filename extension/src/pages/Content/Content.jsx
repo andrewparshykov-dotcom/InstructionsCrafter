@@ -43,7 +43,7 @@ const Content = () => {
 	margin-bottom: 10px!important;
 	bottom: 100px;
   line-height: 1;
-	font-family: "Geist", "Satoshi-Medium", -apple-system, BlinkMacSystemFont, sans-serif;
+	font-family: "Geist", -apple-system, BlinkMacSystemFont, sans-serif;
 	font-weight: 500;
 	letter-spacing: 0.01em;
 	z-index: 99999999!important;
@@ -132,7 +132,7 @@ const Content = () => {
   padding-top: 12px;
   padding-bottom: 12px;
   border-radius: 8px;
-  font-family: "Geist", "Satoshi-Medium", -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: "Geist", -apple-system, BlinkMacSystemFont, sans-serif;
   font-weight: 500;
   color: #15171C;
   box-shadow: 0px 10px 38px -10px rgba(22, 23, 24, 0.35),

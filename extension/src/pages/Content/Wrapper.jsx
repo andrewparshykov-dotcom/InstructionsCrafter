@@ -59,7 +59,7 @@ const RecordingLoader = () => {
           alignItems: "center",
           justifyContent: "center",
           fontFamily:
-            '"Geist", "Satoshi-Medium", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif',
+            '"Geist", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif',
           userSelect: "none",
           animation: "fadeIn 0.3s ease-out",
         }}
@@ -296,7 +296,7 @@ const Wrapper = () => {
               zIndex: 9999999999,
               // Isolation: prevent host-page inherited typography from
               // leaking through the shadow-DOM boundary.
-              fontFamily: "'Geist', 'Satoshi-Medium', -apple-system, BlinkMacSystemFont, sans-serif",
+              fontFamily: "'Geist', -apple-system, BlinkMacSystemFont, sans-serif",
               fontSize: "16px",
               lineHeight: "normal",
               letterSpacing: "normal",

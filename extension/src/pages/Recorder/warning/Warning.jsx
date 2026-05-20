@@ -179,14 +179,14 @@ const Warning = () => {
 				
 				.warning-title {
 					color: #FFF;
-					font-family: "Geist", "Satoshi-Medium", -apple-system, BlinkMacSystemFont, sans-serif;
+					font-family: "Geist", -apple-system, BlinkMacSystemFont, sans-serif;
 					font-weight: 500;
 				}
 
 				.warning-description {
 					color: #FFF;
 					opacity: 0.8;
-					font-family: "Geist", "Satoshi-Medium", -apple-system, BlinkMacSystemFont, sans-serif;
+					font-family: "Geist", -apple-system, BlinkMacSystemFont, sans-serif;
 					font-weight: 500;
 				}
 				

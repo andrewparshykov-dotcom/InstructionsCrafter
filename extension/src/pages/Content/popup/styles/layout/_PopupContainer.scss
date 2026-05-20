@@ -52,7 +52,7 @@
   top: 0px;
   left: 0px;
   z-index: 999999999;
-  font-family: "Geist", "Satoshi-Medium", -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: "Geist", -apple-system, BlinkMacSystemFont, sans-serif;
   font-weight: 500;
   font-size: $font-size-normal;
 }
@@ -158,12 +158,12 @@
   flex: 1;
 
   .popup-warning-title {
-    font-family: "Geist", "Satoshi-Bold", -apple-system, BlinkMacSystemFont, sans-serif;
+    font-family: "Geist", -apple-system, BlinkMacSystemFont, sans-serif;
     font-weight: 700;
     color: $color-text-primary;
   }
   .popup-warning-description {
-    font-family: "Geist", "Satoshi-Medium", -apple-system, BlinkMacSystemFont, sans-serif;
+    font-family: "Geist", -apple-system, BlinkMacSystemFont, sans-serif;
     font-weight: 500;
     color: $color-text-secondary;
     margin-top: 4px;
