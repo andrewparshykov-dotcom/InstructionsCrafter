@@ -8,21 +8,29 @@
   height: 100%;
   z-index: 9999999999;
 }
+
 .resize-handle {
   position: absolute;
-  width: 10px;
-  height: 10px;
+  width: 12px;
+  height: 12px;
   border-radius: 50%;
-  background-color: white;
-  border: 2px solid rgba(0, 0, 0, .5);
+  background-color: #FBFBFE;
+  border: 1px solid #15171C;
   box-sizing: border-box;
+  transition: background-color 0.12s ease, border-color 0.12s ease;
+
+  &:hover {
+    background-color: #3080F8;
+    border-color: #FBFBFE;
+  }
 }
+
 .resize-handle.top-left {
-	bottom: 0;
+  bottom: 0;
   left: 0;
-	top: 0;
-	right: 0;
-	margin: auto;
+  top: 0;
+  right: 0;
+  margin: auto;
   cursor: nwse-resize;
 }
 .resize-handle.top {
@@ -32,11 +40,11 @@
   cursor: ns-resize;
 }
 .resize-handle.top-right {
-	bottom: 0;
+  bottom: 0;
   left: 0;
-	top: 0;
-	right: 0;
-	margin: auto;
+  top: 0;
+  right: 0;
+  margin: auto;
   cursor: nesw-resize;
 }
 .resize-handle.right {
@@ -46,11 +54,11 @@
   cursor: ew-resize;
 }
 .resize-handle.bottom-right {
-	bottom: 0;
+  bottom: 0;
   left: 0;
-	top: 0;
-	right: 0;
-	margin: auto;
+  top: 0;
+  right: 0;
+  margin: auto;
   cursor: nwse-resize;
 }
 .resize-handle.bottom {
@@ -62,9 +70,9 @@
 .resize-handle.bottom-left {
   bottom: 0;
   left: 0;
-	top: 0;
-	right: 0;
-	margin: auto;
+  top: 0;
+  right: 0;
+  margin: auto;
   cursor: nesw-resize;
 }
 .resize-handle.left {
@@ -73,9 +81,10 @@
   transform: translateY(-50%);
   cursor: ew-resize;
 }
+
 .region-recording * {
-	pointer-events: none!important;
+  pointer-events: none !important;
 }
 .region-recording .resize-handle {
-	visibility: hidden!important;
+  visibility: hidden !important;
 }
