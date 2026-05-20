@@ -890,12 +890,12 @@ body.driver-active .OnboardingArrow {
   width: 100%;
   height: 100%;
   z-index: -1;
-  border: 28px solid #FFF;
+  border: 28px solid #FBFBFE;
   box-sizing: border-box;
   border-radius: 50%;
   backdrop-filter: blur(40px);
   opacity: 0;
-  filter: drop-shadow(0px 4px 50px rgba(0, 0, 0, 0.3));
+  filter: drop-shadow(0 8px 32px rgba(15, 17, 28, 0.18));
   transform: scale(0);
   transition: transform 0.25s cubic-bezier(0.18, -0.55, 0.265, 1.45), opacity 0.2s ease-in-out;
   transition-delay: 0.05s;
@@ -907,7 +907,7 @@ body.driver-active .OnboardingArrow {
 }
 .radial-menu[data-state=open]::after {
   transform: scale(1);
-  border: 28px solid #FFF;
+  border: 28px solid #FBFBFE;
   opacity: 1;
 }
 
@@ -926,7 +926,7 @@ body.driver-active .OnboardingArrow {
   height: 16px;
   padding: 8px;
   z-index: 999999999;
-  background-color: #FFF;
+  background-color: #FBFBFE;
   border-radius: 50%;
   opacity: 0;
   text-align: center;
@@ -936,15 +936,15 @@ body.driver-active .OnboardingArrow {
   transform-style: preserve-3d;
 }
 .eyedropper svg {
-  color: #9797a4;
+  color: #6E7684;
 }
 .eyedropper:focus-visible {
   outline: none;
-  background-color: #E6E7EA !important;
+  background-color: #F6F7FB !important;
 }
 .eyedropper:hover {
   cursor: pointer;
-  background-color: #E6E7EA;
+  background-color: #F6F7FB;
 }
 
 .eye-active {
@@ -1119,7 +1119,7 @@ body.driver-active .OnboardingArrow {
 
 .color-active {
   border: 1px solid #FFFFFF;
-  box-shadow: 0px 0px 0px 2px #0D99FF;
+  box-shadow: 0px 0px 0px 2px #3080F8;
 }
 
 .color-wheel .color-active {
@@ -1169,7 +1169,7 @@ body.driver-active .OnboardingArrow {
   height: 100px !important;
   transform: rotate(320deg) translate(0px) !important;
   z-index: 999999999999 !important;
-  filter: drop-shadow(0px 4px 50px rgba(0, 0, 0, 0.3));
+  filter: drop-shadow(0 8px 32px rgba(15, 17, 28, 0.18));
 }
 
 .color-wheel-handle {
@@ -1267,7 +1267,7 @@ body.driver-active .OnboardingArrow {
 }
 
 .color-wheel-input {
-  background: #000;
+  background: #15171C;
   border-radius: 30px;
   height: 29px;
   color: #FFF;
@@ -1277,7 +1277,7 @@ body.driver-active .OnboardingArrow {
   padding-right: 8px;
   position: absolute;
   margin-top: -35px;
-  font-family: "Satoshi-Medium", sans-serif;
+  font-family: "Geist Mono", "JetBrains Mono", ui-monospace, monospace;
   left: 50%;
   transform: translate(-50%, 0);
   opacity: 0;
@@ -1367,7 +1367,7 @@ body.driver-active .OnboardingArrow {
   fill: #FFF !important;
 }
 .stroke-width-item div[data-state=off] svg {
-  fill: #201F1D;
+  fill: #15171C;
 }
 
 .stroke-icon svg {

@@ -20,12 +20,12 @@
 		width: 100%;
 		height: 100%;
 		z-index: -1;
-		border: 28px solid #FFF;
+		border: 28px solid #FBFBFE;
 		box-sizing: border-box;
 		border-radius: 50%;
 		backdrop-filter: blur(40px);
 		opacity: 0;
-		filter: drop-shadow(0px 4px 50px rgba(0, 0, 0, 0.3));
+		filter: drop-shadow(0 8px 32px rgba(15, 17, 28, 0.18));
 		transform: scale(0);
 		transition: transform .25s cubic-bezier(0.18, -0.55, 0.265, 1.45), opacity .2s ease-in-out;
 		transition-delay: .05s;
@@ -37,7 +37,7 @@
 	}
 	&[data-state='open']::after {
 		transform: scale(1);
-		border: 28px solid #FFF;
+		border: 28px solid #FBFBFE;
 		opacity: 1;
 	}
 }
@@ -55,7 +55,7 @@
 	height: 16px;
 	padding: 8px;
 	z-index: 999999999;
-	background-color: #FFF;
+	background-color: #FBFBFE;
 	border-radius: 50%;
 	opacity: 0;
 	text-align: center;
@@ -65,15 +65,15 @@
 	transform-style: preserve-3d;
 
 	svg {
-		color: $color-icon;
+		color: #6E7684;
 	}
 	&:focus-visible {
 		outline: none;
-		background-color: #E6E7EA!important;
+		background-color: #F6F7FB!important;
 	}
 	&:hover {
 		cursor: pointer;
-		background-color: #E6E7EA;
+		background-color: #F6F7FB;
 	}
 }
 .eye-active {
@@ -178,7 +178,7 @@ $radius:0.9;
 
 .color-active {
 	border: 1px solid #FFFFFF;
-	box-shadow: 0px 0px 0px 2px #0D99FF;
+	box-shadow: 0px 0px 0px 2px #3080F8;
 }
 
 .color-wheel .color-active {

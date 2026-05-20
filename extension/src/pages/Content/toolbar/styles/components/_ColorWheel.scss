@@ -44,7 +44,7 @@
 	height: 100px!important;
 	transform: rotate(320deg) translate(0px)!important;
 	z-index: 999999999999!important;
-	filter: drop-shadow(0px 4px 50px rgba(0, 0, 0, 0.3));
+	filter: drop-shadow(0 8px 32px rgba(15, 17, 28, 0.18));
 }
 .color-wheel-handle {
 	width: 12px!important;
@@ -136,7 +136,7 @@
 }
 
 .color-wheel-input {
-	background: #000;
+	background: #15171C;
 	border-radius: 30px;
 	height: 29px;
 	color: #FFF;
@@ -146,7 +146,7 @@
 	padding-right: 8px;
 	position: absolute;
 	margin-top: -35px;
-	font-family: $font-medium;
+	font-family: "Geist Mono", "JetBrains Mono", ui-monospace, monospace;
 	left: 50%;
 	transform: translate(-50%, 0);
 	opacity: 0;
