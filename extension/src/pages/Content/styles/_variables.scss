@@ -24,18 +24,25 @@
   "chrome-extension://__MSG_@@extension_id__/assets/fonts/GloriaHallelujah-Regular"
 );
 
-/* Colors */
+/* Colors — Editorial Manual palette (F48). Live popup .scss files @use
+   these via the legacy names; values now match the page-level
+   tokens.js so the popup-internal surfaces (Dropdown, Tooltip, Switch,
+   PopupContainer body) stop reading as Screenity ink/icon-gray.
+   Dead .scss files (_Welcome, _Tabs, _SettingsMenu, _Announcement,
+   _VideoItem, _BackgroundEffects, _RegionDimensions, _Settings,
+   _TimeSetter) also inherit but never render — see CLAUDE.md
+   Phase 9 deferred-cleanup section. */
 $color-background: #fff;
 $color-light-grey: #f6f7fb;
 $color-primary: #3080f8;
-$color-border: #e8e8e8;
+$color-border: #E8E9EE;
 $color-text-contrast: #fff;
-$color-text-primary: #29292f;
+$color-text-primary: #15171C;
 $color-text-secondary: #6e7684;
-$color-red: #d2234d;
-$color-red-light: #faf0f4;
+$color-red: #C53030;
+$color-red-light: #FBEAEA;
 $color-primary-transparent: rgba(48, 128, 248, 0.1);
-$color-icon: #9797a4;
+$color-icon: #6E7684;
 
 /* Font */
 //$font-size-normal: 0.875rem;
@@ -66,7 +73,7 @@ $spacing-04: 12px;
 $spacing-05: 16px;
 
 /* Container */
-$container-border-radius: 30px;
+$container-border-radius: 8px;
 $container-border: 1px solid $color-border;
 $container-shadow: drop-shadow(0px 4px 100px rgba(0, 0, 0, 0.35));
 $container-shadow-focus: 2px 2px 10px rgba(0, 0, 0, 0.1);

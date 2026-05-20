@@ -304,7 +304,7 @@ const Wrapper = () => {
               textTransform: "none",
               textIndent: "0",
               textAlign: "left",
-              color: "#29292F",
+              color: "#15171C",
               direction: "ltr",
               whiteSpace: "normal",
               fontStyle: "normal",

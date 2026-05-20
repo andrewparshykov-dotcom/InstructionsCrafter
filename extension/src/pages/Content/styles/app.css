@@ -80,7 +80,7 @@ iframe.screenity-iframe {
   right: -20px;
   box-sizing: border-box;
   border-radius: 30px;
-  border: 1px solid #e8e8e8;
+  border: 1px solid #E8E9EE;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -455,7 +455,7 @@ iframe.screenity-iframe {
 .ToolbarSeparator {
   width: 1px;
   height: 19px;
-  background-color: #e8e8e8;
+  background-color: #E8E9EE;
   margin: 0 8px;
 }
 
@@ -507,7 +507,7 @@ body.driver-active .OnboardingArrow {
 
 .OnboardingText {
   font-size: 32px;
-  color: #9797a4;
+  color: #6E7684;
   font-family: "Gloria-Hallelujah", sans-serif !important;
 }
 
@@ -520,7 +520,7 @@ body.driver-active .OnboardingArrow {
 .onboarding-popover {
   border-radius: 30px !important;
   background: #fff !important;
-  color: #29292f !important;
+  color: #15171C !important;
   font-family: "Satoshi-Regular", sans-serif !important;
   box-shadow: 0 4px 20px rgba(38, 38, 52, 0.08) !important;
   padding: 20px !important;
@@ -534,7 +534,7 @@ body.driver-active .OnboardingArrow {
   font-size: 1rem !important;
   font-family: "Satoshi-Bold", sans-serif !important;
   margin-bottom: 12px !important;
-  color: #29292f !important;
+  color: #15171C !important;
 }
 .driver-popover.ScreenityOnboardingPopover .driver-popover-description,
 .ScreenityOnboardingPopover .driver-popover-description,
@@ -670,8 +670,8 @@ body.driver-active .OnboardingArrow {
 .ScreenityOnboardingPopover .driver-popover-footer .driver-popover-navigation-btns .driver-popover-prev-btn,
 .onboarding-popover .driver-popover-footer .driver-popover-navigation-btns .driver-popover-prev-btn {
   background-color: transparent !important;
-  color: #29292f !important;
-  border: 1px solid #e8e8e8 !important;
+  color: #15171C !important;
+  border: 1px solid #E8E9EE !important;
 }
 .driver-popover.ScreenityOnboardingPopover .driver-popover-footer .driver-popover-navigation-btns .driver-popover-prev-btn:hover,
 .ScreenityOnboardingPopover .driver-popover-footer .driver-popover-navigation-btns .driver-popover-prev-btn:hover,
@@ -1527,7 +1527,7 @@ body.driver-active .OnboardingArrow {
   transition: color 0.15s ease;
 }
 .popup-controls .popup-control:hover svg {
-  color: #29292f;
+  color: #15171C;
 }
 .popup-controls .popup-grab {
   cursor: grab;
@@ -1570,7 +1570,7 @@ body.driver-active .OnboardingArrow {
   right: 28px;
   z-index: 99999999999;
   background-color: #f6f7fb;
-  border: 1px solid #e8e8e8;
+  border: 1px solid #E8E9EE;
   border-radius: 12px;
   box-shadow: 0 4px 24px rgba(21, 23, 28, 0.08), 0 1px 2px rgba(21, 23, 28, 0.04);
   pointer-events: all;
@@ -1610,7 +1610,7 @@ body.driver-active .OnboardingArrow {
 .popup-content-divider {
   width: 100%;
   height: 1px;
-  background: #e8e8e8;
+  background: #E8E9EE;
   margin-top: 12px;
   margin-bottom: 12px;
 }
@@ -1657,7 +1657,7 @@ body.driver-active .OnboardingArrow {
 }
 .popup-warning-middle .popup-warning-title {
   font-family: "Satoshi-Bold", sans-serif;
-  color: #29292f;
+  color: #15171C;
 }
 .popup-warning-middle .popup-warning-description {
   font-family: "Satoshi-Medium", sans-serif;
@@ -1826,7 +1826,7 @@ body.driver-active .OnboardingArrow {
 
 .ModalSoonTitle {
   font-weight: 700;
-  color: #29292f;
+  color: #15171C;
   margin-bottom: 8px;
   text-align: center;
 }
@@ -1905,7 +1905,7 @@ body.driver-active .OnboardingArrow {
 .announcement-title {
   font-family: "Satoshi-Bold", sans-serif;
   font-size: 16px;
-  color: #29292f;
+  color: #15171C;
   letter-spacing: -0.8px;
   margin-bottom: 12px;
   text-align: center;
@@ -1966,7 +1966,7 @@ body.driver-active .OnboardingArrow {
 .welcome-title {
   font-family: "Satoshi-Bold", sans-serif;
   font-size: 18px;
-  color: #29292f;
+  color: #15171C;
   letter-spacing: -0.8px;
   margin-bottom: 12px;
   text-align: center;
@@ -1996,8 +1996,8 @@ body.driver-active .OnboardingArrow {
   height: 44px;
   border-radius: 30px;
   background: white;
-  border: 1px solid #e8e8e8;
-  color: #29292f;
+  border: 1px solid #E8E9EE;
+  color: #15171C;
   font-family: "Satoshi-Medium", sans-serif;
   font-size: 14px;
   cursor: pointer;
@@ -2013,7 +2013,7 @@ body.driver-active .OnboardingArrow {
   overflow-y: overlay;
   padding-top: 20px;
   padding-bottom: 20px;
-  border-top: 1px solid #e8e8e8;
+  border-top: 1px solid #E8E9EE;
 }
 
 .welcome-content-wrap {
@@ -2024,7 +2024,7 @@ body.driver-active .OnboardingArrow {
 .welcome-content-title {
   font-family: "Satoshi-Bold", sans-serif;
   font-size: 14px;
-  color: #29292f;
+  color: #15171C;
   margin-bottom: 8px;
   margin-top: 8px;
   text-align: center;
@@ -2096,7 +2096,7 @@ body.driver-active .OnboardingArrow {
   border-radius: 15px;
   z-index: 99999;
   font-family: "Satoshi-Medium", sans-serif;
-  color: #29292f;
+  color: #15171C;
   box-shadow: 0px 10px 38px -10px rgba(22, 23, 24, 0.35), 0px 10px 20px -15px rgba(22, 23, 24, 0.2);
   animation-duration: 400ms;
   animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
@@ -2222,7 +2222,7 @@ body.driver-active .OnboardingArrow {
   cursor: pointer;
 }
 .IconButton svg {
-  color: #9797a4;
+  color: #6E7684;
 }
 
 .IconButton:hover {
@@ -2297,7 +2297,7 @@ button {
   height: 44px;
   gap: 5px;
   background-color: #fff;
-  color: #29292f;
+  color: #15171C;
   width: 100%;
   box-sizing: border-box;
   margin-top: 4px;
@@ -2378,7 +2378,7 @@ button {
   height: 44px;
   padding-left: 16px;
   padding-right: 16px;
-  color: #29292f;
+  color: #15171C;
   position: relative;
   user-select: none;
 }
@@ -2400,7 +2400,7 @@ button {
 
 .SelectSeparator {
   height: 1px;
-  background-color: #e8e8e8;
+  background-color: #E8E9EE;
   width: calc(100% - 24px);
   margin: auto;
   border-radius: 30px;
@@ -2431,8 +2431,8 @@ button {
 }
 
 .SelectOff {
-  background: #faf0f4;
-  color: #d2234d;
+  background: #FBEAEA;
+  color: #C53030;
   padding-left: 12px;
   padding-right: 12px;
   padding-top: 8px;
@@ -2495,7 +2495,7 @@ input {
 }
 
 .TabsTrigger[data-state=active] {
-  color: #29292f;
+  color: #15171C;
 }
 
 .TabsTrigger:focus-visible {
@@ -2506,7 +2506,7 @@ input {
 .TabsTriggerSpacer {
   height: 50px;
   width: 1px;
-  background: #e8e8e8;
+  background: #E8E9EE;
   flex-shrink: 0;
   margin-left: 8px;
   margin-right: 8px;
@@ -2639,7 +2639,7 @@ input {
 }
 .recording-ui .TabsList {
   width: 100%;
-  border-bottom: 1px solid #e8e8e8;
+  border-bottom: 1px solid #E8E9EE;
   margin: auto;
   justify-content: center;
 }
@@ -2674,7 +2674,7 @@ input {
   background: #3080f8;
 }
 .recording-ui .TabsTrigger[data-state=active] > .TabsTriggerLabel {
-  color: #29292f !important;
+  color: #15171C !important;
 }
 .recording-ui .TabsTriggerLabel {
   text-align: center;
@@ -2714,7 +2714,7 @@ input {
 }
 .video-ui .TabsList {
   width: 100%;
-  border-bottom: 1px solid #e8e8e8;
+  border-bottom: 1px solid #E8E9EE;
   margin: auto;
   justify-content: space-between;
   padding-left: 12px;
@@ -2761,7 +2761,7 @@ input {
   background: #3080f8;
 }
 .video-ui .TabsTrigger[data-state=active] > .TabsTriggerLabel {
-  color: #29292f !important;
+  color: #15171C !important;
 }
 .video-ui .TabsTriggerLabel {
   text-align: center;
@@ -2807,7 +2807,7 @@ input {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: #29292f; /* dark background */
+  background-color: #15171C; /* dark background */
   color: white;
   border-radius: 100px; /* pill shape */
   padding: 10px 16px;
@@ -2890,7 +2890,7 @@ button {
 .SwitchRoot {
   width: 34px;
   height: 22px;
-  background-color: #e8e8e8;
+  background-color: #E8E9EE;
   border-radius: 9999px;
   position: relative;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
@@ -2987,7 +2987,7 @@ button {
   padding-right: 4px;
 }
 .video-item-root .video-item-info-title {
-  color: #29292f;
+  color: #15171C;
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
@@ -3099,7 +3099,7 @@ button {
   background: #1f6cdc;
 }
 .dashboard-button {
-  background: #29292f;
+  background: #15171C;
   box-shadow: 0px 0px 0px 0px rgba(41, 41, 47, 0.25);
   transition: all 0.25s ease-in-out;
 }
@@ -3209,7 +3209,7 @@ button {
   position: relative;
 }
 .region-input input {
-  color: #29292f !important;
+  color: #15171C !important;
   border-radius: 30px;
   height: 40px;
   box-sizing: border-box;
@@ -3274,7 +3274,7 @@ button {
 
 .TooltipContent {
   border-radius: 30px;
-  background-color: #29292f;
+  background-color: #15171C;
   padding: 10px 15px;
   font-size: 12px;
   line-height: 1;
@@ -3466,7 +3466,7 @@ button {
   background-color: rgba(124, 139, 165, 0);
 }
 .CameraToggleItem svg, .CameraToolbarButton svg {
-  color: #9797a4;
+  color: #6E7684;
 }
 .CameraToggleItem:hover, .CameraToolbarButton:hover {
   background-color: rgba(124, 139, 165, 0.2) !important;
@@ -3522,7 +3522,7 @@ button {
   opacity: 0;
 }
 .camera-resize svg {
-  color: #9797A4;
+  color: #6E7684;
   text-align: center;
   margin: auto;
   display: block;
@@ -3943,8 +3943,8 @@ button {
 .warning-root {
   position: relative;
   background-color: #f6f7fb;
-  color: #29292f;
-  border: 1px solid #e8e8e8;
+  color: #15171C;
+  border: 1px solid #E8E9EE;
   border-radius: 10px;
   box-shadow: 0 1px 2px rgba(21, 23, 28, 0.04);
   padding: 18px 20px 18px 26px;
@@ -4030,7 +4030,7 @@ button {
   }
 }
 .warning-title {
-  color: #29292f;
+  color: #15171C;
   font-family: "Satoshi-Medium", sans-serif;
   font-size: 15px;
   font-weight: 500;
@@ -4075,7 +4075,7 @@ button {
 }
 
 .warning-close:hover {
-  color: #29292f;
+  color: #15171C;
   cursor: pointer;
 }
 
@@ -4133,7 +4133,7 @@ button {
   border-radius: 15px;
   z-index: 99999;
   font-family: "Satoshi-Medium", sans-serif;
-  color: #29292f;
+  color: #15171C;
   box-shadow: 0px 10px 38px -10px rgba(22, 23, 24, 0.35), 0px 10px 20px -15px rgba(22, 23, 24, 0.2);
   animation-duration: 400ms;
   animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
@@ -4199,7 +4199,7 @@ button {
 .onboarding-popover {
   border-radius: 30px !important;
   background: #fff !important;
-  color: #29292f !important;
+  color: #15171C !important;
   font-family: "Satoshi-Regular", sans-serif !important;
   box-shadow: 0 4px 20px rgba(38, 38, 52, 0.08) !important;
   padding: 20px !important;
@@ -4213,7 +4213,7 @@ button {
   font-size: 1rem !important;
   font-family: "Satoshi-Medium", sans-serif !important;
   margin-bottom: 12px !important;
-  color: #29292f !important;
+  color: #15171C !important;
 }
 .driver-popover.ScreenityOnboardingPopover .driver-popover-description,
 .ScreenityOnboardingPopover .driver-popover-description,
@@ -4347,8 +4347,8 @@ button {
 .ScreenityOnboardingPopover .driver-popover-footer .driver-popover-navigation-btns .driver-popover-prev-btn,
 .onboarding-popover .driver-popover-footer .driver-popover-navigation-btns .driver-popover-prev-btn {
   background-color: transparent !important;
-  color: #29292f !important;
-  border: 1px solid #e8e8e8 !important;
+  color: #15171C !important;
+  border: 1px solid #E8E9EE !important;
 }
 .driver-popover.ScreenityOnboardingPopover .driver-popover-footer .driver-popover-navigation-btns .driver-popover-prev-btn:hover,
 .ScreenityOnboardingPopover .driver-popover-footer .driver-popover-navigation-btns .driver-popover-prev-btn:hover,
