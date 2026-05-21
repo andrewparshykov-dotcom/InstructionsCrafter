@@ -2872,6 +2872,13 @@ const Recorder = () => {
         deviceId: {
           exact: id,
         },
+        // Chrome defaults these three to true (tuned for video-chat).
+        // For screencast narration they introduce a "robotic" artifact —
+        // noiseSuppression in particular chops syllables and sibilants when
+        // any background noise is present. Disable to capture clean voice.
+        echoCancellation: false,
+        noiseSuppression: false,
+        autoGainControl: false,
       },
     };
 
@@ -2914,7 +2921,11 @@ const Recorder = () => {
         );
         const audioStreamOptions = {
           mimeType: "video/webm;codecs=vp8,opus",
-          audio: true,
+          audio: {
+            echoCancellation: false,
+            noiseSuppression: false,
+            autoGainControl: false,
+          },
         };
 
         return navigator.mediaDevices
