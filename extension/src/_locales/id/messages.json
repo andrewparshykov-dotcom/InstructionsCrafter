@@ -56,7 +56,7 @@
     "description": "Modal description shown when the current page's Permissions-Policy header blocks browser extensions from using camera or microphone"
   },
   "opfsLoadErrorDescription": {
-    "message": "Sepertinya InstructionsCrafter tidak dapat memuat rekaman dari penyimpanan perangkat Anda. Rekaman mungkin telah dihapus atau dipindahkan. Jika ini terus terjadi, hubungi kami di Andrewp@safeshieldins.com.",
+    "message": "Sepertinya InstructionsCrafter tidak dapat memuat rekaman dari penyimpanan perangkat Anda. Rekaman mungkin telah dihapus atau dipindahkan. Jika ini terus terjadi, hubungi Andrew.",
     "description": "Modal description shown when the editor cannot read the recording file from the device's storage"
   },
   "recordingWriterFailedToast": {
@@ -420,7 +420,7 @@
     "description": "Judul modal kesalahan stream"
   },
   "streamErrorModalDescription": {
-    "message": "Sepertinya ada kesalahan saat memulai perekaman. Restart browser Anda dan coba lagi. Jika masalah masih berlanjut, silakan hubungi kami di Andrewp@safeshieldins.com.",
+    "message": "Sepertinya ada kesalahan saat memulai perekaman. Restart browser Anda dan coba lagi. Jika masalah masih berlanjut, silakan hubungi Andrew.",
     "description": "Deskripsi modal kesalahan stream"
   },
   "memoryLimitTitle": {
@@ -452,7 +452,7 @@
     "description": "Judul modal Penyelesaian Masalah"
   },
   "troubleshootModalDescription": {
-    "message": "Setelah mengunduh, kirim berkas ini ke Andrewp@safeshieldins.com dengan informasi relevan. Kami akan menggunakan data ini untuk membantu Anda menyelesaikan masalah dengan ekstensi dan memulihkan video Anda jika memungkinkan.",
+    "message": "Setelah mengunduh, kirim berkas ini ke Andrew dengan informasi relevan. Kami akan menggunakan data ini untuk membantu Anda menyelesaikan masalah dengan ekstensi dan memulihkan video Anda jika memungkinkan.",
     "description": "Deskripsi modal Penyelesaian Masalah"
   },
   "troubleshootModalButton": {
@@ -955,7 +955,7 @@
     "message": "Rekaman tidak dapat dimulai"
   },
   "recordingFailedModalDescription": {
-    "message": "Sesuatu menghalangi rekaman untuk dimulai. Silakan coba lagi. Jika hal ini terus terjadi, hubungi kami di Andrewp@safeshieldins.com."
+    "message": "Sesuatu menghalangi rekaman untuk dimulai. Silakan coba lagi. Jika hal ini terus terjadi, hubungi Andrew."
   },
   "cameraUnavailableToast": {
     "message": "Kamera terputus. Perekaman layar tetap berjalan."

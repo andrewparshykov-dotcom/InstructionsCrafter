@@ -56,7 +56,7 @@
     "description": "Modal description shown when the current page's Permissions-Policy header blocks browser extensions from using camera or microphone"
   },
   "opfsLoadErrorDescription": {
-    "message": "ऐसा लगता है कि InstructionsCrafter आपके डिवाइस के स्टोरेज से रिकॉर्डिंग लोड नहीं कर सका। यह मिटा दी गई हो या हटाई गई हो सकती है। अगर यह समस्या बार-बार हो, तो कृपया Andrewp@safeshieldins.com पर हमसे संपर्क करें।",
+    "message": "ऐसा लगता है कि InstructionsCrafter आपके डिवाइस के स्टोरेज से रिकॉर्डिंग लोड नहीं कर सका। यह मिटा दी गई हो या हटाई गई हो सकती है। अगर यह समस्या बार-बार हो, तो कृपया Andrew से संपर्क करें।",
     "description": "Modal description shown when the editor cannot read the recording file from the device's storage"
   },
   "recordingWriterFailedToast": {
@@ -420,7 +420,7 @@
     "description": "स्ट्रीम त्रुटि मॉडल शीर्षक"
   },
   "streamErrorModalDescription": {
-    "message": "लगता है कि रिकॉर्डिंग शुरू करने में त्रुटि हुई है। अपने ब्राउज़र को फिर से चालने और पुनः प्रयास करें। यदि समस्या बरकरार रहती है, कृपया हमसे संपर्क करें Andrewp@safeshieldins.com पर।",
+    "message": "लगता है कि रिकॉर्डिंग शुरू करने में त्रुटि हुई है। अपने ब्राउज़र को फिर से चालने और पुनः प्रयास करें। यदि समस्या बरकरार रहती है, कृपया Andrew से संपर्क करें।",
     "description": "स्ट्रीम त्रुटि मॉडल विवरण"
   },
   "memoryLimitTitle": {
@@ -452,7 +452,7 @@
     "description": "समस्या समाधान मॉडल शीर्षक"
   },
   "troubleshootModalDescription": {
-    "message": "डाउनलोड करने के बाद, सहायता@screenity.io पर फ़ाइल भेजें और संबंधित जानकारी के साथ। हम इन डेटा का उपयोग आपकी एक्सटेंशन के साथ किसी भी समस्या को समाधान करने और आपके वीडियो को यदि संभव हो तो पुनः प्राप्त करने के लिए करेंगे।",
+    "message": "डाउनलोड करने के बाद, Andrew को फ़ाइल भेजें और संबंधित जानकारी के साथ। हम इन डेटा का उपयोग आपकी एक्सटेंशन के साथ किसी भी समस्या को समाधान करने और आपके वीडियो को यदि संभव हो तो पुनः प्राप्त करने के लिए करेंगे।",
     "description": "समस्या समाधान मॉडल विवरण"
   },
   "troubleshootModalButton": {
@@ -955,7 +955,7 @@
     "message": "रिकॉर्डिंग शुरू नहीं हो सकी"
   },
   "recordingFailedModalDescription": {
-    "message": "किसी कारण से रिकॉर्डिंग शुरू नहीं हो पाई। कृपया फिर से प्रयास करें। यदि यह बार-बार हो रहा है, तो हमें Andrewp@safeshieldins.com पर संपर्क करें।"
+    "message": "किसी कारण से रिकॉर्डिंग शुरू नहीं हो पाई। कृपया फिर से प्रयास करें। यदि यह बार-बार हो रहा है, तो Andrew से संपर्क करें।"
   },
   "cameraUnavailableToast": {
     "message": "कैमरा डिस्कनेक्ट हो गया। स्क्रीन रिकॉर्डिंग जारी है।"

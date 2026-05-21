@@ -56,7 +56,7 @@
     "description": "Modal description shown when the current page's Permissions-Policy header blocks browser extensions from using camera or microphone"
   },
   "opfsLoadErrorDescription": {
-    "message": "Sembra che InstructionsCrafter non sia riuscito a caricare la registrazione dall'archiviazione del dispositivo. Potrebbe essere stata cancellata o spostata. Se il problema persiste, contattaci a Andrewp@safeshieldins.com.",
+    "message": "Sembra che InstructionsCrafter non sia riuscito a caricare la registrazione dall'archiviazione del dispositivo. Potrebbe essere stata cancellata o spostata. Se il problema persiste, contatta Andrew.",
     "description": "Modal description shown when the editor cannot read the recording file from the device's storage"
   },
   "recordingWriterFailedToast": {
@@ -420,7 +420,7 @@
     "description": "Titolo del modalità di errore di streaming"
   },
   "streamErrorModalDescription": {
-    "message": "Si è verificato un errore durante l'avvio della registrazione. Riavvia il tuo browser e riprova. Se il problema persiste, contattaci all'indirizzo Andrewp@safeshieldins.com.",
+    "message": "Si è verificato un errore durante l'avvio della registrazione. Riavvia il tuo browser e riprova. Se il problema persiste, contatta Andrew.",
     "description": "Descrizione del modalità di errore di streaming"
   },
   "memoryLimitTitle": {
@@ -452,7 +452,7 @@
     "description": "Titolo del modulo di risoluzione dei problemi"
   },
   "troubleshootModalDescription": {
-    "message": "Dopo il download, invia il file a Andrewp@safeshieldins.com con qualsiasi informazione pertinente. Utilizzeremo questi dati per aiutarti a risolvere eventuali problemi che riscontri con l'estensione e, se possibile, recuperare il tuo video.",
+    "message": "Dopo il download, invia il file a Andrew con qualsiasi informazione pertinente. Utilizzeremo questi dati per aiutarti a risolvere eventuali problemi che riscontri con l'estensione e, se possibile, recuperare il tuo video.",
     "description": "Descrizione del modulo di risoluzione dei problemi"
   },
   "troubleshootModalButton": {
@@ -955,7 +955,7 @@
     "message": "Impossibile avviare la registrazione"
   },
   "recordingFailedModalDescription": {
-    "message": "Qualcosa ha impedito l'avvio della registrazione. Riprova. Se continua a succedere, scrivici a Andrewp@safeshieldins.com."
+    "message": "Qualcosa ha impedito l'avvio della registrazione. Riprova. Se continua a succedere, scrivi a Andrew."
   },
   "cameraUnavailableToast": {
     "message": "Fotocamera disconnessa. La registrazione dello schermo continua."

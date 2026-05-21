@@ -56,7 +56,7 @@
     "description": "Modal description shown when the current page's Permissions-Policy header blocks browser extensions from using camera or microphone"
   },
   "opfsLoadErrorDescription": {
-    "message": "Il semble que InstructionsCrafter n'ait pas pu charger l'enregistrement depuis le stockage de votre appareil. Il a peut-être été effacé ou déplacé. Si cela se reproduit, contactez-nous à Andrewp@safeshieldins.com.",
+    "message": "Il semble que InstructionsCrafter n'ait pas pu charger l'enregistrement depuis le stockage de votre appareil. Il a peut-être été effacé ou déplacé. Si cela se reproduit, contactez Andrew.",
     "description": "Modal description shown when the editor cannot read the recording file from the device's storage"
   },
   "recordingWriterFailedToast": {
@@ -420,7 +420,7 @@
     "description": "Titre du modal d'erreur de flux"
   },
   "streamErrorModalDescription": {
-    "message": "Il semble y avoir une erreur lors du démarrage de l'enregistrement. Redémarrez votre navigateur et réessayez. Si le problème persiste, veuillez nous contacter à l'adresse Andrewp@safeshieldins.com.",
+    "message": "Il semble y avoir une erreur lors du démarrage de l'enregistrement. Redémarrez votre navigateur et réessayez. Si le problème persiste, veuillez contacter Andrew.",
     "description": "Description du modal d'erreur de flux"
   },
   "memoryLimitTitle": {
@@ -452,7 +452,7 @@
     "description": "Titre de la fenêtre modale de dépannage"
   },
   "troubleshootModalDescription": {
-    "message": "Après le téléchargement, envoyez le fichier à Andrewp@safeshieldins.com avec toutes les informations pertinentes. Nous utiliserons ces données pour vous aider à résoudre tout problème que vous pourriez rencontrer avec l'extension, et si possible, récupérer votre vidéo.",
+    "message": "Après le téléchargement, envoyez le fichier à Andrew avec toutes les informations pertinentes. Nous utiliserons ces données pour vous aider à résoudre tout problème que vous pourriez rencontrer avec l'extension, et si possible, récupérer votre vidéo.",
     "description": "Description de la fenêtre modale de dépannage"
   },
   "troubleshootModalButton": {
@@ -955,7 +955,7 @@
     "message": "Impossible de démarrer l'enregistrement"
   },
   "recordingFailedModalDescription": {
-    "message": "Quelque chose a empêché le démarrage de l'enregistrement. Réessayez. Si le problème persiste, écrivez-nous à Andrewp@safeshieldins.com."
+    "message": "Quelque chose a empêché le démarrage de l'enregistrement. Réessayez. Si le problème persiste, écrivez à Andrew."
   },
   "cameraUnavailableToast": {
     "message": "Caméra déconnectée. L'enregistrement de l'écran continue."

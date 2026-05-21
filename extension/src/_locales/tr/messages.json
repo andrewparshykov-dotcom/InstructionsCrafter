@@ -56,7 +56,7 @@
     "description": "Modal description shown when the current page's Permissions-Policy header blocks browser extensions from using camera or microphone"
   },
   "opfsLoadErrorDescription": {
-    "message": "Görünüşe göre InstructionsCrafter kaydı cihazınızın deposundan yükleyemedi. Silinmiş veya taşınmış olabilir. Bu sorun devam ederse, lütfen Andrewp@safeshieldins.com adresinden bizimle iletişime geçin.",
+    "message": "Görünüşe göre InstructionsCrafter kaydı cihazınızın deposundan yükleyemedi. Silinmiş veya taşınmış olabilir. Bu sorun devam ederse, lütfen Andrew ile iletişime geçin.",
     "description": "Modal description shown when the editor cannot read the recording file from the device's storage"
   },
   "recordingWriterFailedToast": {
@@ -420,7 +420,7 @@
     "description": "Akış hatası modal başlığı"
   },
   "streamErrorModalDescription": {
-    "message": "Kaydın başlatılmasında bir hata oluştu gibi görünüyor. Tarayıcınızı yeniden başlatın ve tekrar deneyin. Sorun devam ederse, lütfen Andrewp@safeshieldins.com adresinden bize ulaşın.",
+    "message": "Kaydın başlatılmasında bir hata oluştu gibi görünüyor. Tarayıcınızı yeniden başlatın ve tekrar deneyin. Sorun devam ederse, lütfen Andrew'a ulaşın.",
     "description": "Akış hatası modal açıklaması"
   },
   "memoryLimitTitle": {
@@ -452,7 +452,7 @@
     "description": "Sorun giderme modal başlığı"
   },
   "troubleshootModalDescription": {
-    "message": "İndirdikten sonra dosyayı Andrewp@safeshieldins.com adresine gönderin ve ilgili bilgileri ekleyin. Bu verileri, uzantı ile ilgili yaşadığınız sorunları çözmek ve mümkünse videonuzu kurtarmak için kullanacağız.",
+    "message": "İndirdikten sonra dosyayı Andrew'a gönderin ve ilgili bilgileri ekleyin. Bu verileri, uzantı ile ilgili yaşadığınız sorunları çözmek ve mümkünse videonuzu kurtarmak için kullanacağız.",
     "description": "Sorun giderme modal açıklaması"
   },
   "troubleshootModalButton": {
@@ -955,7 +955,7 @@
     "message": "Kayıt başlatılamadı"
   },
   "recordingFailedModalDescription": {
-    "message": "Bir şey kaydın başlamasını engelledi. Lütfen tekrar deneyin. Sorun devam ederse Andrewp@safeshieldins.com adresinden bize ulaşın."
+    "message": "Bir şey kaydın başlamasını engelledi. Lütfen tekrar deneyin. Sorun devam ederse Andrew'a ulaşın."
   },
   "cameraUnavailableToast": {
     "message": "Kamera bağlantısı kesildi. Ekran kaydı devam ediyor."

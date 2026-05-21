@@ -56,7 +56,7 @@
     "description": "Modal description shown when the current page's Permissions-Policy header blocks browser extensions from using camera or microphone"
   },
   "opfsLoadErrorDescription": {
-    "message": "InstructionsCrafter 无法从您设备的存储中加载录制内容。它可能已被清除或移动。如果此问题持续存在，请通过 Andrewp@safeshieldins.com 联系我们。",
+    "message": "InstructionsCrafter 无法从您设备的存储中加载录制内容。它可能已被清除或移动。如果此问题持续存在，请联系 Andrew。",
     "description": "Modal description shown when the editor cannot read the recording file from the device's storage"
   },
   "recordingWriterFailedToast": {
@@ -420,7 +420,7 @@
     "description": "流错误模态框标题"
   },
   "streamErrorModalDescription": {
-    "message": "看起来启动录制时出现了错误。请重新启动您的浏览器并重试。如果问题仍然存在，请通过 Andrewp@safeshieldins.com 与我们联系。",
+    "message": "看起来启动录制时出现了错误。请重新启动您的浏览器并重试。如果问题仍然存在，请联系 Andrew。",
     "description": "流错误模态框描述"
   },
   "memoryLimitTitle": {
@@ -452,7 +452,7 @@
     "description": "故障排除模态框标题"
   },
   "troubleshootModalDescription": {
-    "message": "下载后，请将文件发送至Andrewp@safeshieldins.com，附上任何相关信息。我们将使用此数据帮助您解决扩展程序的任何问题，并在可能的情况下恢复您的视频。",
+    "message": "下载后，请将文件发送至 Andrew，附上任何相关信息。我们将使用此数据帮助您解决扩展程序的任何问题，并在可能的情况下恢复您的视频。",
     "description": "故障排除模态框描述"
   },
   "troubleshootModalButton": {
@@ -955,7 +955,7 @@
     "message": "无法开始录制"
   },
   "recordingFailedModalDescription": {
-    "message": "录制未能开始。请重试。如果问题持续出现，请通过 Andrewp@safeshieldins.com 与我们联系。"
+    "message": "录制未能开始。请重试。如果问题持续出现，请联系 Andrew。"
   },
   "cameraUnavailableToast": {
     "message": "摄像头已断开。屏幕录制继续。"

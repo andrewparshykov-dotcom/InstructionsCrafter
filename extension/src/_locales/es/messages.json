@@ -56,7 +56,7 @@
     "description": "Modal description shown when the current page's Permissions-Policy header blocks browser extensions from using camera or microphone"
   },
   "opfsLoadErrorDescription": {
-    "message": "Parece que InstructionsCrafter no pudo cargar la grabación desde el almacenamiento de tu dispositivo. Puede haber sido eliminada o movida. Si esto sigue ocurriendo, contáctanos en Andrewp@safeshieldins.com.",
+    "message": "Parece que InstructionsCrafter no pudo cargar la grabación desde el almacenamiento de tu dispositivo. Puede haber sido eliminada o movida. Si esto sigue ocurriendo, contacta a Andrew.",
     "description": "Modal description shown when the editor cannot read the recording file from the device's storage"
   },
   "recordingWriterFailedToast": {
@@ -420,7 +420,7 @@
     "description": "Título del modal de error de transmisión"
   },
   "streamErrorModalDescription": {
-    "message": "Hubo un error al iniciar la grabación. Reinicia tu navegador e inténtalo de nuevo. Si el problema persiste, por favor, contáctanos en Andrewp@safeshieldins.com.",
+    "message": "Hubo un error al iniciar la grabación. Reinicia tu navegador e inténtalo de nuevo. Si el problema persiste, por favor, contacta a Andrew.",
     "description": "Descripción del modal de error de transmisión"
   },
   "memoryLimitTitle": {
@@ -452,7 +452,7 @@
     "description": "Título del modal de solución de problemas"
   },
   "troubleshootModalDescription": {
-    "message": "Después de descargar, envía el archivo a Andrewp@safeshieldins.com con cualquier información relevante. Utilizaremos estos datos para ayudarte a solucionar cualquier problema que tengas con la extensión y, si es posible, recuperar tu video.",
+    "message": "Después de descargar, envía el archivo a Andrew con cualquier información relevante. Utilizaremos estos datos para ayudarte a solucionar cualquier problema que tengas con la extensión y, si es posible, recuperar tu video.",
     "description": "Descripción del modal de solución de problemas"
   },
   "troubleshootModalButton": {
@@ -955,7 +955,7 @@
     "message": "No se pudo iniciar la grabación"
   },
   "recordingFailedModalDescription": {
-    "message": "Algo impidió que la grabación se iniciara. Inténtalo de nuevo. Si sigue ocurriendo, escríbenos a Andrewp@safeshieldins.com."
+    "message": "Algo impidió que la grabación se iniciara. Inténtalo de nuevo. Si sigue ocurriendo, escribe a Andrew."
   },
   "cameraUnavailableToast": {
     "message": "Cámara desconectada. Se sigue grabando la pantalla."

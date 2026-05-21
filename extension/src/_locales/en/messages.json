@@ -56,7 +56,7 @@
     "description": "Modal description shown when the current page's Permissions-Policy header blocks browser extensions from using camera or microphone"
   },
   "opfsLoadErrorDescription": {
-    "message": "Looks like InstructionsCrafter couldn't load the recording from your device's storage. It may have been cleared or moved. If this keeps happening, please contact me at Andrewp@safeshieldins.com.",
+    "message": "Looks like InstructionsCrafter couldn't load the recording from your device's storage. It may have been cleared or moved. If this keeps happening, please contact Andrew.",
     "description": "Modal description shown when the editor cannot read the recording file from the device's storage"
   },
   "recordingWriterFailedToast": {
@@ -428,7 +428,7 @@
     "description": "Stream error modal title"
   },
   "streamErrorModalDescription": {
-    "message": "Looks like something went wrong with the recording. Restart your browser and try again. If the issue persists, please contact me at Andrewp@safeshieldins.com.",
+    "message": "Looks like something went wrong with the recording. Restart your browser and try again. If the issue persists, please contact Andrew.",
     "description": "Stream error modal description"
   },
   "getHelpButton": {
@@ -484,7 +484,7 @@
     "description": "Troubleshoot modal title"
   },
   "troubleshootModalDescription": {
-    "message": "This will download a diagnostic report with system info and recent recording session data. Send it to Andrewp@safeshieldins.com to help me troubleshoot your issue. No video or audio data is included.",
+    "message": "This will download a diagnostic report with system info and recent recording session data. Send it to Andrew to help troubleshoot your issue. No video or audio data is included.",
     "description": "Troubleshoot modal description"
   },
   "troubleshootModalButton": {
@@ -934,7 +934,7 @@
     "description": "Title of the modal shown when recording fails to start"
   },
   "recordingFailedModalDescription": {
-    "message": "Something prevented the recording from starting. Please try again. If this keeps happening, contact me at Andrewp@safeshieldins.com.",
+    "message": "Something prevented the recording from starting. Please try again. If this keeps happening, contact Andrew.",
     "description": "Description of the modal shown when recording fails to start"
   },
   "toastStorageLow": {

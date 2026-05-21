@@ -56,7 +56,7 @@
     "description": "Modal description shown when the current page's Permissions-Policy header blocks browser extensions from using camera or microphone"
   },
   "opfsLoadErrorDescription": {
-    "message": "Wygląda na to, że InstructionsCrafter nie mógł załadować nagrania z pamięci urządzenia. Mogło zostać usunięte lub przeniesione. Jeśli problem się powtarza, skontaktuj się z nami pod adresem Andrewp@safeshieldins.com.",
+    "message": "Wygląda na to, że InstructionsCrafter nie mógł załadować nagrania z pamięci urządzenia. Mogło zostać usunięte lub przeniesione. Jeśli problem się powtarza, skontaktuj się z Andrew.",
     "description": "Modal description shown when the editor cannot read the recording file from the device's storage"
   },
   "recordingWriterFailedToast": {
@@ -420,7 +420,7 @@
     "description": "Tytuł okna modalnego błędu strumienia"
   },
   "streamErrorModalDescription": {
-    "message": "Wygląda na to, że wystąpił błąd podczas rozpoczynania nagrywania. Uruchom przeglądarkę ponownie i spróbuj jeszcze raz. Jeśli problem będzie się utrzymywał, skontaktuj się z nami pod adresem Andrewp@safeshieldins.com.",
+    "message": "Wygląda na to, że wystąpił błąd podczas rozpoczynania nagrywania. Uruchom przeglądarkę ponownie i spróbuj jeszcze raz. Jeśli problem będzie się utrzymywał, skontaktuj się z Andrew.",
     "description": "Opis okna modalnego błędu strumienia"
   },
   "memoryLimitTitle": {
@@ -452,7 +452,7 @@
     "description": "Tytuł okna modalnego Rozwiązywania problemów"
   },
   "troubleshootModalDescription": {
-    "message": "Po pobraniu prześlij ten plik na adres Andrewp@safeshieldins.com wraz z wszelkimi istotnymi informacjami. Będziemy używać tych danych, aby pomóc ci rozwiązać problemy z rozszerzeniem i, jeśli to możliwe, odzyskać twoje nagranie wideo.",
+    "message": "Po pobraniu prześlij ten plik do Andrew wraz z wszelkimi istotnymi informacjami. Będziemy używać tych danych, aby pomóc ci rozwiązać problemy z rozszerzeniem i, jeśli to możliwe, odzyskać twoje nagranie wideo.",
     "description": "Opis okna modalnego Rozwiązywania problemów"
   },
   "troubleshootModalButton": {
@@ -955,7 +955,7 @@
     "message": "Nie udało się rozpocząć nagrywania"
   },
   "recordingFailedModalDescription": {
-    "message": "Coś przeszkodziło w rozpoczęciu nagrywania. Spróbuj ponownie. Jeśli problem się powtarza, napisz do nas na Andrewp@safeshieldins.com."
+    "message": "Coś przeszkodziło w rozpoczęciu nagrywania. Spróbuj ponownie. Jeśli problem się powtarza, napisz do Andrew."
   },
   "cameraUnavailableToast": {
     "message": "Kamera odłączona. Nagrywanie ekranu trwa dalej."

@@ -56,7 +56,7 @@
     "description": "Modal description shown when the current page's Permissions-Policy header blocks browser extensions from using camera or microphone"
   },
   "opfsLoadErrorDescription": {
-    "message": "Схоже, InstructionsCrafter не зміг завантажити запис зі сховища вашого пристрою. Можливо, його було очищено або переміщено. Якщо це повторюється, зв'яжіться з нами за адресою Andrewp@safeshieldins.com.",
+    "message": "Схоже, InstructionsCrafter не зміг завантажити запис зі сховища вашого пристрою. Можливо, його було очищено або переміщено. Якщо це повторюється, зв'яжіться з Andrew.",
     "description": "Modal description shown when the editor cannot read the recording file from the device's storage"
   },
   "recordingWriterFailedToast": {
@@ -420,7 +420,7 @@
     "description": "Заголовок модального вікна помилки потоку"
   },
   "streamErrorModalDescription": {
-    "message": "Схоже, що виникла помилка при запуску запису. Перезапустіть свій браузер і спробуйте ще раз. Якщо проблема не зникає, будь ласка, зв'яжіться з нами за адресою Andrewp@safeshieldins.com.",
+    "message": "Схоже, що виникла помилка при запуску запису. Перезапустіть свій браузер і спробуйте ще раз. Якщо проблема не зникає, будь ласка, зв'яжіться з Andrew.",
     "description": "Опис модального вікна помилки потоку"
   },
   "memoryLimitTitle": {
@@ -452,7 +452,7 @@
     "description": "Заголовок модального вікна усунення неполадок"
   },
   "troubleshootModalDescription": {
-    "message": "Після завантаження надішліть файл на адресу Andrewp@safeshieldins.com з будь-якою відповідною інформацією. Ми використовуватимемо ці дані для вирішення будь-яких проблем, які у вас виникли з розширенням, і можливо, відновлення вашого відео.",
+    "message": "Після завантаження надішліть файл до Andrew з будь-якою відповідною інформацією. Ми використовуватимемо ці дані для вирішення будь-яких проблем, які у вас виникли з розширенням, і можливо, відновлення вашого відео.",
     "description": "Опис модального вікна усунення неполадок"
   },
   "troubleshootModalButton": {
@@ -955,7 +955,7 @@
     "message": "Не вдалося розпочати запис"
   },
   "recordingFailedModalDescription": {
-    "message": "Щось завадило розпочати запис. Будь ласка, спробуйте ще раз. Якщо це повторюється, напишіть нам на Andrewp@safeshieldins.com."
+    "message": "Щось завадило розпочати запис. Будь ласка, спробуйте ще раз. Якщо це повторюється, напишіть Andrew."
   },
   "cameraUnavailableToast": {
     "message": "Камеру відключено. Запис екрана триває."
