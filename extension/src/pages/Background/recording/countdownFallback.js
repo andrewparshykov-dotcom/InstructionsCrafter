@@ -36,18 +36,18 @@ const scheduleFallback = (delayMs = FALLBACK_AFTER_COUNTDOWN_STARTED_MS) => {
       // Skip during restart - that flow has its own start sequencing.
       if (!pendingRecording || recording || restarting) return;
       console.info(
-        "[Screenity][BG] countdown-finished missing after delay, auto-dispatching start",
+        "[InstructionsCrafter][BG] countdown-finished missing after delay, auto-dispatching start",
       );
       try {
         startAfterCountdown("countdownFallback");
       } catch (err) {
         console.error(
-          "[Screenity][BG] countdownFallback startAfterCountdown failed",
+          "[InstructionsCrafter][BG] countdownFallback startAfterCountdown failed",
           err,
         );
       }
     } catch (err) {
-      console.error("[Screenity][BG] countdownFallback storage read failed", err);
+      console.error("[InstructionsCrafter][BG] countdownFallback storage read failed", err);
     }
   }, delayMs);
 };

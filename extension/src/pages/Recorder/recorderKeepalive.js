@@ -55,8 +55,8 @@
       if (navigator.mediaSession && !KA.mediaSession) {
         if (typeof window.MediaMetadata === "function") {
           navigator.mediaSession.metadata = new window.MediaMetadata({
-            title: "Screenity recording",
-            artist: "Screenity",
+            title: "InstructionsCrafter recording",
+            artist: "InstructionsCrafter",
           });
         }
         navigator.mediaSession.playbackState = "playing";

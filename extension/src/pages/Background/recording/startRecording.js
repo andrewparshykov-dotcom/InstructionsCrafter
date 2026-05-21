@@ -333,7 +333,7 @@ export const startAfterCountdown = (caller = "startAfterCountdown") => {
     // sendMessageRecord routes via recorderSession/offscreen fallback if needed
     if (recordingTab === null && !offscreen) {
       console.warn(
-        "[Screenity] startAfterCountdown: no recordingTab/offscreen available, starting with fallback routing"
+        "[InstructionsCrafter] startAfterCountdown: no recordingTab/offscreen available, starting with fallback routing"
       );
     }
     startRecording(caller);

@@ -77,7 +77,7 @@ export const cancelRecording = async () => {
             const msg = String(removeErr?.message || removeErr);
             if (!/No tab with id/i.test(msg)) {
               console.warn(
-                "[Screenity][BG] cancelRecording: removeTab failed",
+                "[InstructionsCrafter][BG] cancelRecording: removeTab failed",
                 { tabId: recordingTab, err: msg },
               );
             }

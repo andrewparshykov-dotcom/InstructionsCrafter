@@ -5,10 +5,10 @@
 
 import localforage from "localforage";
 
-// Mirror Screenity's database name so we open the same store it wrote to.
+// Mirror the recorder's database name so we open the same store it wrote to.
 localforage.config({
   driver: localforage.INDEXEDDB,
-  name: "screenity",
+  name: "instructionscrafter",
   version: 1,
 });
 

@@ -110,13 +110,13 @@ export const handleRecordingComplete = async () => {
   }
   chrome.storage.local.set(updates);
   console.log(
-    "[Screenity][BG] handleRecordingComplete fired",
+    "[InstructionsCrafter][BG] handleRecordingComplete fired",
     { target, liveRecordingTab: recordingTab, cleared: target === recordingTab },
   );
 };
 
 export const handleRecordingError = async (request) => {
-  console.warn("[Screenity][handleRecordingError]", request);
+  console.warn("[InstructionsCrafter][handleRecordingError]", request);
 
   const errorCode =
     request?.errorCode ||

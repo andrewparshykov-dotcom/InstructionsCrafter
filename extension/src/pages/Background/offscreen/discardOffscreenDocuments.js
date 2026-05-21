@@ -5,7 +5,7 @@ export const discardOffscreenDocuments = async ({
   reason = "discard",
   flush = true,
 } = {}) => {
-  console.warn("[Screenity][discardOffscreenDocuments]", { reason, flush, stack: new Error().stack });
+  console.warn("[InstructionsCrafter][discardOffscreenDocuments]", { reason, flush, stack: new Error().stack });
   const endFlush = perfSpan("BG.offscreen discardOffscreenDocuments", { reason, flush });
   try {
     if (flush) {

@@ -190,7 +190,7 @@ export const handleAlarm = async (alarm) => {
           errorCode: "recording-stall-unrecoverable",
         });
       } catch (err) {
-        console.warn("[Screenity][BG] stall-unrecoverable handler failed", err);
+        console.warn("[InstructionsCrafter][BG] stall-unrecoverable handler failed", err);
       }
       return;
     }
@@ -249,7 +249,7 @@ export const handleAlarm = async (alarm) => {
           errorCode: "no-first-chunk",
         });
       } catch (err) {
-        console.warn("[Screenity][BG] first-chunk watchdog handler failed", err);
+        console.warn("[InstructionsCrafter][BG] first-chunk watchdog handler failed", err);
       }
     }
     await chrome.alarms.clear(FIRST_CHUNK_WATCHDOG_ALARM);
@@ -296,7 +296,7 @@ export const handleAlarm = async (alarm) => {
 
     await chunksStore.clear().catch((err) => {
       console.warn(
-        "[Screenity][BG] Failed to clear chunksStore for local playback expiry",
+        "[InstructionsCrafter][BG] Failed to clear chunksStore for local playback expiry",
         err,
       );
     });

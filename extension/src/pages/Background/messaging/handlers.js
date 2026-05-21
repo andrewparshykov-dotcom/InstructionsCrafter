@@ -205,7 +205,7 @@ const scheduleLocalPlaybackAlarm = async (offer) => {
       when: Number(offer.expiresAt),
     });
   } catch (err) {
-    console.warn("[Screenity][BG] Failed to schedule local playback alarm", err);
+    console.warn("[InstructionsCrafter][BG] Failed to schedule local playback alarm", err);
   }
 };
 
@@ -233,7 +233,7 @@ const clearStoredLocalPlaybackOffer = async ({
     const targetStore = offerScreenStore(existing);
     await targetStore.clear().catch((err) => {
       console.warn(
-        "[Screenity][BG] Failed to clear screen chunks while clearing local playback offer",
+        "[InstructionsCrafter][BG] Failed to clear screen chunks while clearing local playback offer",
         err,
       );
     });
@@ -256,7 +256,7 @@ const clearStoredLocalPlaybackOffer = async ({
   });
 
   if (existing?.offerId) {
-    console.info("[Screenity][BG] Cleared local screen playback offer", {
+    console.info("[InstructionsCrafter][BG] Cleared local screen playback offer", {
       reason,
       offerId: existing.offerId,
       clearChunks: Boolean(clearChunks),
@@ -319,7 +319,7 @@ const logStopRecordingTabEvent = (message, sender) => {
     const senderTabId = message?.tabId || sender?.tab?.id || null;
     const senderUrl = sender?.url || null;
     const stack = new Error().stack;
-    console.warn("[Screenity][BG] stop-recording-tab received", {
+    console.warn("[InstructionsCrafter][BG] stop-recording-tab received", {
       reason,
       senderTabId,
       senderUrl,
@@ -334,7 +334,7 @@ const logStopRecordingTabEvent = (message, sender) => {
       },
     });
   } catch (err) {
-    console.warn("[Screenity][BG] stop-recording-tab logging failed", err);
+    console.warn("[InstructionsCrafter][BG] stop-recording-tab logging failed", err);
   }
 };
 
@@ -542,13 +542,13 @@ export const handleFinishMultiRecording = async () => {
           projectId: projectId || null,
         }).catch((err) =>
           console.warn(
-            "[Screenity][BG] Failed to send update-project-ready (finish-multi-recording)",
+            "[InstructionsCrafter][BG] Failed to send update-project-ready (finish-multi-recording)",
             err,
           ),
         );
       } else {
         console.warn(
-          "[Screenity][BG] No tab available for update-project-ready (finish-multi-recording)",
+          "[InstructionsCrafter][BG] No tab available for update-project-ready (finish-multi-recording)",
           { projectId, instantMode: Boolean(instantMode) },
         );
       }
@@ -637,7 +637,7 @@ const registerRecordingTabListener = (ownerTabId) => {
         }),
       ).catch((err) => {
         console.error(
-          "[Screenity][BG] handleStopRecordingTab failed in tab-removed",
+          "[InstructionsCrafter][BG] handleStopRecordingTab failed in tab-removed",
           err,
         );
       });
@@ -723,7 +723,7 @@ const resolveActiveSessionConflict = async (incomingSession) => {
 
   const alive = await isActiveSessionAlive(activeRecordingSession);
   if (alive) {
-    console.warn("[Screenity][BG] session_conflict_rejected", {
+    console.warn("[InstructionsCrafter][BG] session_conflict_rejected", {
       activeId: activeRecordingSession.id,
       incomingId: incomingSession.id,
       activeRecorderTabId:
@@ -735,7 +735,7 @@ const resolveActiveSessionConflict = async (incomingSession) => {
   await clearRecordingSessionSafe("stale-conflict-recovered", {
     incomingId: incomingSession.id,
   });
-  console.warn("[Screenity][BG] session_conflict_stale_recovered", {
+  console.warn("[InstructionsCrafter][BG] session_conflict_stale_recovered", {
     incomingId: incomingSession.id,
   });
   return { allow: true, staleRecovered: true };
@@ -935,7 +935,7 @@ export const setupHandlers = () => {
   });
 
   registerMessage("offscreen-diag", async (message) => {
-    console.warn("[Screenity][OffscreenDiag]", message.source, message.payload);
+    console.warn("[InstructionsCrafter][OffscreenDiag]", message.source, message.payload);
     return { ok: true };
   });
   registerMessage("offscreen-ready", async () => {
@@ -1176,7 +1176,7 @@ export const setupHandlers = () => {
       senderTab: sender?.tab?.id || null,
     });
     if (DEBUG_POSTSTOP)
-      console.debug("[Screenity][BG] sendChunksToSandbox invoked", {
+      console.debug("[InstructionsCrafter][BG] sendChunksToSandbox invoked", {
         senderTab: sender?.tab?.id,
       });
 
@@ -1184,7 +1184,7 @@ export const setupHandlers = () => {
     const targetTab = sandboxTab || sender?.tab?.id || null;
     if (!targetTab) {
       if (DEBUG_POSTSTOP)
-        console.warn("[Screenity][BG] no targetTab for sendChunksToSandbox");
+        console.warn("[InstructionsCrafter][BG] no targetTab for sendChunksToSandbox");
       throw new Error("no-sandbox-tab");
     }
 
@@ -1200,7 +1200,7 @@ export const setupHandlers = () => {
         chunkCount += 1;
       });
       if (DEBUG_POSTSTOP)
-        console.debug("[Screenity][BG] checking chunks in IndexedDB", {
+        console.debug("[InstructionsCrafter][BG] checking chunks in IndexedDB", {
           attempt,
           chunkCount,
         });
@@ -1216,7 +1216,7 @@ export const setupHandlers = () => {
       deliveryAttempt += 1
     ) {
       if (DEBUG_POSTSTOP)
-        console.debug("[Screenity][BG] calling sendChunks() to deliver", {
+        console.debug("[InstructionsCrafter][BG] calling sendChunks() to deliver", {
           targetTab,
           chunkCount,
           deliveryAttempt,
@@ -1228,7 +1228,7 @@ export const setupHandlers = () => {
       });
       if (result?.status === "ok") {
         if (DEBUG_POSTSTOP)
-          console.debug("[Screenity][BG] sendChunks() completed", result);
+          console.debug("[InstructionsCrafter][BG] sendChunks() completed", result);
         return { status: "ok", chunkCount: result.chunkCount };
       }
       // eslint-disable-next-line no-await-in-loop
@@ -1236,7 +1236,7 @@ export const setupHandlers = () => {
     }
 
     if (DEBUG_POSTSTOP)
-      console.warn("[Screenity][BG] sendChunks() did not find chunks", {
+      console.warn("[InstructionsCrafter][BG] sendChunks() did not find chunks", {
         targetTab,
         result,
       });
@@ -1270,7 +1270,7 @@ export const setupHandlers = () => {
     ) {
       if (DEBUG_POSTSTOP) {
         console.warn(
-          "[Screenity][BG] Suppressed duplicate stop-recording-tab message",
+          "[InstructionsCrafter][BG] Suppressed duplicate stop-recording-tab message",
           {
             inFlight: stopRecordingTabInFlight,
             deltaMs: now - stopRecordingTabLastAt,
@@ -1894,7 +1894,7 @@ export const setupHandlers = () => {
       },
     });
 
-    console.info("[Screenity][BG] prepare-open-editor", {
+    console.info("[InstructionsCrafter][BG] prepare-open-editor", {
       projectId: expectedProjectId,
       targetUrl,
       instantMode: Boolean(message.instantMode),
@@ -1908,7 +1908,7 @@ export const setupHandlers = () => {
       expectedKind,
       reason: "prepare-open-editor",
     });
-    console.info("[Screenity][BG] prepare-open-editor resolved", {
+    console.info("[InstructionsCrafter][BG] prepare-open-editor resolved", {
       tabId: resolved.tabId || null,
       reused: Boolean(resolved.reused),
       opened: Boolean(resolved.opened),
@@ -1948,7 +1948,7 @@ export const setupHandlers = () => {
         multiMode: message.multiMode,
       }).catch((err) =>
         console.warn(
-          "[Screenity][BG] Failed to send update-project-loading",
+          "[InstructionsCrafter][BG] Failed to send update-project-loading",
           err,
         ),
       );
@@ -1998,7 +1998,7 @@ export const setupHandlers = () => {
       })) ||
       null;
 
-    console.info("[Screenity][BG] editor-ready received", {
+    console.info("[InstructionsCrafter][BG] editor-ready received", {
       newProject: Boolean(message.newProject),
       multiMode: Boolean(message.multiMode),
       projectId,
@@ -2071,7 +2071,7 @@ export const setupHandlers = () => {
               trackType: "screen",
             },
       }).catch((err) =>
-        console.warn("[Screenity][BG] Failed to send update-project-ready", err),
+        console.warn("[InstructionsCrafter][BG] Failed to send update-project-ready", err),
       );
     } else {
       console.warn("❗ No valid messageTab found in editor-ready");
@@ -2112,7 +2112,7 @@ export const setupHandlers = () => {
     });
     await scheduleLocalPlaybackAlarm(normalizedOffer);
 
-    console.info("[Screenity][BG] Registered local screen playback offer", {
+    console.info("[InstructionsCrafter][BG] Registered local screen playback offer", {
       offerId: normalizedOffer.offerId,
       projectId: normalizedOffer.projectId,
       sceneId: normalizedOffer.sceneId,
@@ -2219,7 +2219,7 @@ export const setupHandlers = () => {
         sceneId: updated.sceneId,
       },
     });
-    console.info("[Screenity][BG] Local screen playback offer marked used", {
+    console.info("[InstructionsCrafter][BG] Local screen playback offer marked used", {
       offerId: updated.offerId,
       projectId: updated.projectId,
       sceneId: updated.sceneId,
@@ -2251,7 +2251,7 @@ export const setupHandlers = () => {
         reason: updated.fallbackReason,
       },
     });
-    console.info("[Screenity][BG] Local screen playback offer fallback", {
+    console.info("[InstructionsCrafter][BG] Local screen playback offer fallback", {
       offerId: updated.offerId,
       reason: updated.fallbackReason,
     });
@@ -2455,7 +2455,7 @@ export const setupHandlers = () => {
       try {
         await chrome.tabs.update(tabId, { active: true });
       } catch (err) {
-        console.warn("[Screenity] activate-recorder-tab failed:", String(err));
+        console.warn("[InstructionsCrafter] activate-recorder-tab failed:", String(err));
       }
     }
   });

@@ -41,15 +41,15 @@ const clearStaleLocks = async () => {
     const stale = {};
     if (sendingChunks) {
       stale.sendingChunks = false;
-      console.warn("[Screenity][BG] Stale lock found on startup: sendingChunks, clearing");
+      console.warn("[InstructionsCrafter][BG] Stale lock found on startup: sendingChunks, clearing");
     }
     if (postStopEditorOpening) {
       stale.postStopEditorOpening = false;
-      console.warn("[Screenity][BG] Stale lock found on startup: postStopEditorOpening, clearing");
+      console.warn("[InstructionsCrafter][BG] Stale lock found on startup: postStopEditorOpening, clearing");
     }
     if (postStopEditorOpened) {
       stale.postStopEditorOpened = false;
-      console.warn("[Screenity][BG] Stale lock found on startup: postStopEditorOpened, clearing");
+      console.warn("[InstructionsCrafter][BG] Stale lock found on startup: postStopEditorOpened, clearing");
     }
 
     // SW died mid-dispatch or tab closed
@@ -90,7 +90,7 @@ const clearStaleLocks = async () => {
         stale.tabRecordedID = null;
         stale.recordingUiTabId = null;
         console.warn(
-          "[Screenity][BG] Stale recording state on startup (no live recorderTab) - clearing",
+          "[InstructionsCrafter][BG] Stale recording state on startup (no live recorderTab) - clearing",
           { recording, pendingRecording, restarting, recordingTab },
         );
       }
@@ -101,18 +101,18 @@ const clearStaleLocks = async () => {
       stale.multiSceneCount = 0;
       stale.multiProjectId = null;
       stale.multiLastSceneId = null;
-      console.warn("[Screenity][BG] Stale multi-mode state found on startup, clearing");
+      console.warn("[InstructionsCrafter][BG] Stale multi-mode state found on startup, clearing");
     }
 
     if (region && !recording) {
       stale.region = false;
-      console.warn("[Screenity][BG] Stale region state found on startup, clearing");
+      console.warn("[InstructionsCrafter][BG] Stale region state found on startup, clearing");
     }
 
     if (Object.keys(stale).length > 0) {
       await chrome.storage.local.set(stale);
       console.info(
-        "[Screenity][BG] Startup stale locks cleared:",
+        "[InstructionsCrafter][BG] Startup stale locks cleared:",
         Object.keys(stale).join(", "),
       );
     }
@@ -141,7 +141,7 @@ const clearStaleLocks = async () => {
             "logoutPendingTokenClear",
           ]);
           console.info(
-            "[Screenity][BG] Drained deferred logout token-clear on startup",
+            "[InstructionsCrafter][BG] Drained deferred logout token-clear on startup",
           );
         } else {
           // re-login during SW death; just clear the marker
@@ -161,10 +161,10 @@ const clearStaleLocks = async () => {
           : "assets/icon-34.png",
       });
     } catch (err) {
-      console.warn("[Screenity][BG] icon reconciliation failed:", err);
+      console.warn("[InstructionsCrafter][BG] icon reconciliation failed:", err);
     }
   } catch (err) {
-    console.error("[Screenity][BG] Failed to clear stale startup locks:", err);
+    console.error("[InstructionsCrafter][BG] Failed to clear stale startup locks:", err);
   }
 };
 
@@ -226,15 +226,15 @@ const recoverInFlightRecording = async () => {
           : {}),
       });
     } catch (err) {
-      console.warn("[Screenity][BG] redeliver loaded failed:", err);
+      console.warn("[InstructionsCrafter][BG] redeliver loaded failed:", err);
     }
     // Both recorder pages dedup streaming-data via streamingDataReceivedAt,
     // so a duplicate push is safe.
     handleGetStreamingData().catch((err) => {
-      console.warn("[Screenity][BG] redeliver streaming-data failed:", err);
+      console.warn("[InstructionsCrafter][BG] redeliver streaming-data failed:", err);
     });
   } catch (err) {
-    console.warn("[Screenity][BG] recoverInFlightRecording threw:", err);
+    console.warn("[InstructionsCrafter][BG] recoverInFlightRecording threw:", err);
   }
 };
 
@@ -277,12 +277,12 @@ const cleanupOrphanOpfsSessions = async () => {
 
     await Promise.allSettled(orphans.map((id) => destroySessionDir(id)));
     console.info(
-      "[Screenity][BG] Reaped orphan OPFS cloud-chunks sessions:",
+      "[InstructionsCrafter][BG] Reaped orphan OPFS cloud-chunks sessions:",
       orphans.length,
     );
   } catch (err) {
     console.warn(
-      "[Screenity][BG] cleanupOrphanOpfsSessions failed:",
+      "[InstructionsCrafter][BG] cleanupOrphanOpfsSessions failed:",
       err,
     );
   }
@@ -330,10 +330,10 @@ const runUpgradeMigrations = async () => {
       screenityMigratedForVersion: CURRENT_MIGRATION_VERSION,
     });
     console.info(
-      "[Screenity][BG] Cleared stale 4.3.7 sticky-disable flags on upgrade",
+      "[InstructionsCrafter][BG] Cleared stale 4.3.7 sticky-disable flags on upgrade",
     );
   } catch (err) {
-    console.error("[Screenity][BG] Upgrade migration failed:", err);
+    console.error("[InstructionsCrafter][BG] Upgrade migration failed:", err);
   }
 };
 runUpgradeMigrations();

@@ -85,7 +85,7 @@ const openRecorderTab = async (
   // tabs.create can fulfill with no id in rare MV3 states (window-closed, profile-locked)
   if (!tab || typeof tab.id !== "number") {
     console.error(
-      "[Screenity][BG] openRecorderTab: tabs.create returned no usable tab",
+      "[InstructionsCrafter][BG] openRecorderTab: tabs.create returned no usable tab",
       tab,
     );
     chrome.runtime
@@ -130,7 +130,7 @@ const openRecorderTab = async (
     } catch (err) {
       if (attempt === backoffsMs.length - 1) {
         console.warn(
-          "[Screenity] autoDiscardable failed for recorder tab",
+          "[InstructionsCrafter] autoDiscardable failed for recorder tab",
           tab.id,
           String(err),
         );
@@ -189,7 +189,7 @@ export const startRecorderSession = async (request, tabId = null) => {
     region: Boolean(request?.region),
     camera: Boolean(request?.camera),
   });
-  console.log("[Screenity][startRecorderSession] entered", { request, tabId });
+  console.log("[InstructionsCrafter][startRecorderSession] entered", { request, tabId });
   const endStorage = perfSpan("BG.startRecorderSession storage.read");
   const { backup } = await chrome.storage.local.get(["backup"]);
   endStorage();

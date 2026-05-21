@@ -64,7 +64,7 @@ export const clearEditorTabReference = async (reason = "unknown", extra = {}) =>
     editorTab: null,
     [EDITOR_TAB_META_KEY]: null,
   });
-  console.info("[Screenity][BG] Cleared editorTab reference", {
+  console.info("[InstructionsCrafter][BG] Cleared editorTab reference", {
     reason,
     ...extra,
   });
@@ -119,7 +119,7 @@ export const setEditorTabReference = async ({
     [EDITOR_TAB_META_KEY]: meta,
   });
 
-  console.info("[Screenity][BG] Stored editorTab reference", {
+  console.info("[InstructionsCrafter][BG] Stored editorTab reference", {
     tabId,
     ...meta,
   });
@@ -237,7 +237,7 @@ export const resolveEditorTabForTarget = async ({
       kind,
     });
     if (focused) {
-      console.info("[Screenity][BG] Reusing validated editor tab", {
+      console.info("[InstructionsCrafter][BG] Reusing validated editor tab", {
         reason,
         tabId: existing.tab.id,
         projectId,
@@ -245,14 +245,14 @@ export const resolveEditorTabForTarget = async ({
       });
       return { tabId: existing.tab.id, reused: true, opened: false };
     }
-    console.warn("[Screenity][BG] Failed to focus validated editor tab", {
+    console.warn("[InstructionsCrafter][BG] Failed to focus validated editor tab", {
       reason,
       tabId: existing.tab.id,
       projectId,
       kind,
     });
   } else {
-    console.info("[Screenity][BG] Stored editor tab not reusable", {
+    console.info("[InstructionsCrafter][BG] Stored editor tab not reusable", {
       reason,
       projectId,
       kind,
@@ -261,7 +261,7 @@ export const resolveEditorTabForTarget = async ({
   }
 
   if (!targetUrl) {
-    console.warn("[Screenity][BG] Cannot open fallback editor tab: missing URL", {
+    console.warn("[InstructionsCrafter][BG] Cannot open fallback editor tab: missing URL", {
       reason,
       projectId,
       kind,
@@ -271,7 +271,7 @@ export const resolveEditorTabForTarget = async ({
 
   const createdTab = await createTab(targetUrl, true, true);
   if (!createdTab?.id) {
-    console.warn("[Screenity][BG] Failed to open fallback editor tab", {
+    console.warn("[InstructionsCrafter][BG] Failed to open fallback editor tab", {
       reason,
       targetUrl,
       projectId,
@@ -292,7 +292,7 @@ export const resolveEditorTabForTarget = async ({
     kind,
   });
 
-  console.info("[Screenity][BG] Opened fallback editor tab", {
+  console.info("[InstructionsCrafter][BG] Opened fallback editor tab", {
     reason,
     tabId: createdTab.id,
     targetUrl,
