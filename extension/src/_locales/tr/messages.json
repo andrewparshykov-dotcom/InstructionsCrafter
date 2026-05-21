@@ -835,7 +835,7 @@
   },
   "welcomeProButton": {
     "message": "Ücretli özelliklerin kilidini açmak için giriş yap",
-    "description": "Button to sign in to Screenity Pro"
+    "description": "Button to sign in"
   },
   "welcomeProSupport": {
     "message": "Bağımsız bir geliştiriciyi destekle",

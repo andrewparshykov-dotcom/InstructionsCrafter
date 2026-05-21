@@ -835,7 +835,7 @@
   },
   "welcomeProButton": {
     "message": "पेड फीचर्स अनलॉक करने के लिए साइन इन करें",
-    "description": "Button to sign in to Screenity Pro"
+    "description": "Button to sign in"
   },
   "welcomeProSupport": {
     "message": "एक सोलो इंडी मेकर के विकास को सपोर्ट करें",

@@ -835,7 +835,7 @@
   },
   "welcomeProButton": {
     "message": "유료 기능 잠금 해제를 위해 로그인",
-    "description": "Button to sign in to Screenity Pro"
+    "description": "Button to sign in"
   },
   "welcomeProSupport": {
     "message": "1인 인디 개발자를 응원해 주세요",

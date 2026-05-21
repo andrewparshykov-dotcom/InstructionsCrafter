@@ -835,7 +835,7 @@
   },
   "welcomeProButton": {
     "message": "登入以解鎖付費功能",
-    "description": "Button to sign in to Screenity Pro"
+    "description": "Button to sign in"
   },
   "welcomeProSupport": {
     "message": "支持獨立創作者的開發工作",

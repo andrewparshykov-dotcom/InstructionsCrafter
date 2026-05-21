@@ -835,7 +835,7 @@
   },
   "welcomeProButton": {
     "message": "Увійти, щоб відкрити платні функції",
-    "description": "Button to sign in to Screenity Pro"
+    "description": "Button to sign in"
   },
   "welcomeProSupport": {
     "message": "Підтримайте розробку від інді-розробниці",

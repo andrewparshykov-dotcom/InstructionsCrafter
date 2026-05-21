@@ -835,7 +835,7 @@
   },
   "welcomeProButton": {
     "message": "შედით ფასიანი ფუნქციების გასახსნელად",
-    "description": "Button to sign in to Screenity Pro"
+    "description": "Button to sign in"
   },
   "welcomeProSupport": {
     "message": "მხარი დაუჭირე დამოუკიდებელ შემქმნელს",

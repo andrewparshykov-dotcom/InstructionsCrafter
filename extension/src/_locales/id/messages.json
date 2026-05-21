@@ -835,7 +835,7 @@
   },
   "welcomeProButton": {
     "message": "Masuk untuk membuka fitur berbayar",
-    "description": "Button to sign in to Screenity Pro"
+    "description": "Button to sign in"
   },
   "welcomeProSupport": {
     "message": "Dukung pengembangan oleh pembuat indie tunggal",

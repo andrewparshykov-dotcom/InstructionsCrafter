@@ -835,7 +835,7 @@
   },
   "welcomeProButton": {
     "message": "Inicia sessão para desbloquear funcionalidades Pro",
-    "description": "Button to sign in to Screenity Pro"
+    "description": "Button to sign in"
   },
   "welcomeProSupport": {
     "message": "Apoia a criadora independente!",
