@@ -90,7 +90,7 @@ const ZoomContainer = () => {
   const getCanvasWrapper = () => {
     const cached = canvasWrapperCache.current;
     if (cached && cached.isConnected) return cached;
-    const node = document.querySelector("#canvas-wrapper-screenity");
+    const node = document.querySelector("#canvas-wrapper-instructionscrafter");
     canvasWrapperCache.current = node;
     return node;
   };
@@ -157,32 +157,32 @@ const ZoomContainer = () => {
     if (!contentState.showPopup) return;
 
     setTimeout(() => {
-      if (document.querySelector("#screenity-zoom-wrap")) return;
+      if (document.querySelector("#instructionscrafter-zoom-wrap")) return;
       const div = document.createElement("div");
-      div.id = "screenity-zoom-wrap";
+      div.id = "instructionscrafter-zoom-wrap";
       div.style.width = "100vw";
       div.style.height = "100vh";
 
       while (
         document.body.firstChild &&
-        document.body.firstChild.id !== "screenity-ui"
+        document.body.firstChild.id !== "instructionscrafter-ui"
       ) {
-        if (document.body.firstChild.id !== "screenity-ui") {
+        if (document.body.firstChild.id !== "instructionscrafter-ui") {
           div.appendChild(document.body.firstChild);
         }
       }
 
       document.body.prepend(div);
 
-      document.body.appendChild(document.getElementById("screenity-ui"));
-      zoomSelector.current = document.querySelector("#screenity-zoom-wrap");
+      document.body.appendChild(document.getElementById("instructionscrafter-ui"));
+      zoomSelector.current = document.querySelector("#instructionscrafter-zoom-wrap");
 
       observer.current = new MutationObserver((mutations) => {
         if (!contentState.showExtension) {
           mutations.forEach((mutation) => {
             if (mutation.addedNodes.length > 0) {
-              const screenityUi = document.querySelector("#screenity-ui");
-              if (screenityUi) {
+              const instructionsCrafterUi = document.querySelector("#instructionscrafter-ui");
+              if (instructionsCrafterUi) {
                 observer.current.disconnect();
               }
             }
@@ -201,7 +201,7 @@ const ZoomContainer = () => {
         if (observer.current && typeof observer.current === "object") {
           observer.current.disconnect();
         }
-        const zoomWrap = document.querySelector("#screenity-zoom-wrap");
+        const zoomWrap = document.querySelector("#instructionscrafter-zoom-wrap");
         if (zoomWrap) {
           while (zoomWrap.firstChild) {
             document.body.prepend(zoomWrap.firstChild);
@@ -222,7 +222,7 @@ const ZoomContainer = () => {
   useEffect(() => {
     setTimeout(() => {
       if (!contentState.zoomEnabled || !contentState.showExtension) {
-        const zoomWrap = document.querySelector("#screenity-zoom-wrap");
+        const zoomWrap = document.querySelector("#instructionscrafter-zoom-wrap");
         if (zoomWrap) {
           while (zoomWrap.firstChild) {
             document.body.prepend(zoomWrap.firstChild);

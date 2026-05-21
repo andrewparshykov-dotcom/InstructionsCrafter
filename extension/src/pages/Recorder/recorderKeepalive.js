@@ -11,7 +11,7 @@
       window.__SCREENITY_KEEPALIVE || {});
     KA.startedAt = Date.now();
     try {
-      performance.mark("screenity-keepalive-start");
+      performance.mark("instructionscrafter-keepalive-start");
     } catch (e) {}
 
     // Silent ultrasonic sine wave; counts as "playing audio" to Chrome's
@@ -40,7 +40,7 @@
         KA.lockAbort = ac;
         navigator.locks
           .request(
-            "screenity-recorder-keepalive",
+            "instructionscrafter-recorder-keepalive",
             { mode: "exclusive", signal: ac.signal },
             function () {
               return new Promise(function () {});
@@ -69,7 +69,7 @@
 
     KA.completedAt = Date.now();
     try {
-      performance.mark("screenity-keepalive-end");
+      performance.mark("instructionscrafter-keepalive-end");
     } catch (e) {}
   } catch (e) {}
 })();

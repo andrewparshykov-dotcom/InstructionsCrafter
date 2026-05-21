@@ -41,12 +41,12 @@ export function startClickTracking(
       e.target.closest(".ToolbarToggleWrap") ||
       e.target.closest(".ToolbarPaused") ||
       e.target.closest(".Toast") ||
-      e.target.closest("#screenity-root-container")
+      e.target.closest("#instructionscrafter-root-container")
     ) {
       return;
     }
 
-    const canvasWrapper = document.getElementById("canvas-wrapper-screenity");
+    const canvasWrapper = document.getElementById("canvas-wrapper-instructionscrafter");
     if (canvasWrapper && canvasWrapper.contains(e.target)) {
       return;
     }

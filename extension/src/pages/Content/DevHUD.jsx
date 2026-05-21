@@ -23,7 +23,7 @@ const DevHUD = ({ contentStateRef, setContentState }) => {
 
   useEffect(() => {
     const el = document.createElement("div");
-    el.id = "screenity-dev-hud-portal";
+    el.id = "instructionscrafter-dev-hud-portal";
     // Container invisible but children (position:fixed) must not be
     // clipped by host-page CSS.
     el.style.cssText = [

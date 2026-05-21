@@ -24,9 +24,9 @@ const BlurTool = () => {
     if (!contentState.showExtension) {
       setShowOutline(false);
       // Remove blur from all elements
-      const elements = document.querySelectorAll(".screenity-blur");
+      const elements = document.querySelectorAll(".instructionscrafter-blur");
       elements.forEach((element) => {
-        element.classList.remove("screenity-blur");
+        element.classList.remove("instructionscrafter-blur");
       });
     }
   }, [contentState.showExtension]);
@@ -53,8 +53,8 @@ const BlurTool = () => {
       }
       const target = event.target;
       if (
-        !target.classList.contains("screenity-outline") &&
-        !target.closest("#screenity-ui #screenity-ui *")
+        !target.classList.contains("instructionscrafter-outline") &&
+        !target.closest("#instructionscrafter-ui #instructionscrafter-ui *")
       ) {
         updateOutline(target);
         document.body.style.cursor = "pointer";
@@ -77,7 +77,7 @@ const BlurTool = () => {
       }
 
       const target = event.target;
-      if (target.closest("#screenity-ui, #screenity-ui *")) {
+      if (target.closest("#instructionscrafter-ui, #instructionscrafter-ui *")) {
         return;
       }
 
@@ -92,13 +92,13 @@ const BlurTool = () => {
       }
 
       const target = event.target;
-      if (target.closest("#screenity-ui, #screenity-ui *")) {
+      if (target.closest("#instructionscrafter-ui, #instructionscrafter-ui *")) {
         return;
       }
 
       event.preventDefault();
       event.stopPropagation();
-      target.classList.toggle("screenity-blur");
+      target.classList.toggle("instructionscrafter-blur");
     };
 
     const handleMouseUp = (event) => {
@@ -109,7 +109,7 @@ const BlurTool = () => {
       }
 
       const target = event.target;
-      if (target.closest("#screenity-ui, #screenity-ui *")) {
+      if (target.closest("#instructionscrafter-ui, #instructionscrafter-ui *")) {
         return;
       }
       event.preventDefault();
@@ -142,7 +142,7 @@ const BlurTool = () => {
     <div>
       {showOutline && outlineRect && (
         <div
-          className="screenity-outline"
+          className="instructionscrafter-outline"
           style={{
             top: outlineRect.top + "px",
             left: outlineRect.left + "px",

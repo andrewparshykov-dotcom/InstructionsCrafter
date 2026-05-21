@@ -33,7 +33,7 @@ const CanvasWrap = (props) => {
     if (!canvasRef.current) return;
     if (fabricRef.current) return;
 
-    const canvas = new fabric.Canvas("canvas-screenity", {
+    const canvas = new fabric.Canvas("canvas-instructionscrafter", {
       perPixelTargetFind: true,
     });
     fabricRef.current = canvas;
@@ -267,7 +267,7 @@ const CanvasWrap = (props) => {
       <div
         className="canvas-container"
         ref={canvasContainer}
-        id="canvas-wrapper-screenity"
+        id="canvas-wrapper-instructionscrafter"
         style={{
           height: "100vh",
           width: "100vw",
@@ -277,7 +277,7 @@ const CanvasWrap = (props) => {
               : 99999999,
         }}
       >
-        <canvas id="canvas-screenity" ref={canvasRef} className="canvas" />
+        <canvas id="canvas-instructionscrafter" ref={canvasRef} className="canvas" />
       </div>
     </div>
   );

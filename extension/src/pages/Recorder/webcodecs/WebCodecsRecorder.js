@@ -370,7 +370,7 @@ export class WebCodecsRecorder {
           // lands so tests can exercise the in-session swap to
           // MediaRecorder. Resolves start() with success first so the
           // caller treats this as a normal post-start error.
-          if (globalThis.__screenityForceWebCodecsError) {
+          if (globalThis.__instructionsCrafterForceWebCodecsError) {
             if (this._startResolve) {
               this._startResolve(true);
               this._startResolve = null;

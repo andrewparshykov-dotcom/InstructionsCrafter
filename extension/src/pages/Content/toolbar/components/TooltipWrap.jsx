@@ -64,7 +64,7 @@ const TooltipWrap = (props) => {
             </Tooltip.Trigger>
             <Tooltip.Portal
               container={
-                document.getElementsByClassName("screenity-shadow-dom")[0]
+                document.getElementsByClassName("instructionscrafter-shadow-dom")[0]
               }
             >
               <Tooltip.Content

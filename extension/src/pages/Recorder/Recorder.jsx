@@ -488,7 +488,7 @@ const Recorder = () => {
           keepAliveLockAbort.current = ac;
           navigator.locks
             .request(
-              "screenity-recorder-keepalive",
+              "instructionscrafter-recorder-keepalive",
               { mode: "exclusive", signal: ac.signal },
               () => new Promise(() => {}),
             )

@@ -152,7 +152,7 @@ const Wrapper = () => {
 
     permissionsRef.current.contentWindow.postMessage(
       {
-        type: "screenity-get-permissions",
+        type: "instructionscrafter-get-permissions",
       },
       "*"
     );
@@ -198,7 +198,7 @@ const Wrapper = () => {
     <div ref={parentRef}>
       {contentState.showExtension && (
         <iframe
-          className="screenity-iframe"
+          className="instructionscrafter-iframe"
           style={{
             // all: "unset",
             display: "none",
@@ -211,7 +211,7 @@ const Wrapper = () => {
       )}
       {contentState.hasOpenedBefore && (
         <iframe
-          className="screenity-iframe"
+          className="instructionscrafter-iframe"
           style={{
             // all: "unset",
             display: "none",
@@ -260,7 +260,7 @@ const Wrapper = () => {
                 onClick={() => {
                   const onboardingActive =
                     document.documentElement.classList.contains(
-                      "screenity-driver-active"
+                      "instructionscrafter-driver-active"
                     ) || Boolean(document.querySelector(".driver-overlay"));
                   if (onboardingActive) return;
 
@@ -284,7 +284,7 @@ const Wrapper = () => {
           <CursorModes />
           <root.div
             className="root-container"
-            id="screenity-root-container"
+            id="instructionscrafter-root-container"
             style={{
               display: "block",
               width: "100%",

@@ -6,17 +6,17 @@ import Content from "./Content";
 // by executeScripts() from onInstalled (every MV3 session start). Without
 // this, both mounts orphan listeners and double-fire side effects (e.g.
 // double start beeps).
-if (window.__screenityContentBootstrapped) {
+if (window.__instructionsCrafterContentBootstrapped) {
 } else {
-  window.__screenityContentBootstrapped = true;
+  window.__instructionsCrafterContentBootstrapped = true;
 
-  const existingRoot = document.getElementById("screenity-ui");
+  const existingRoot = document.getElementById("instructionscrafter-ui");
   if (existingRoot) {
     document.body.removeChild(existingRoot);
   }
 
   const root = document.createElement("div");
-  root.id = "screenity-ui";
+  root.id = "instructionscrafter-ui";
   document.body.appendChild(root);
 
   const appRoot = createRoot(root);

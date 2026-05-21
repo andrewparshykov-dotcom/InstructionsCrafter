@@ -69,9 +69,9 @@ const Shortcuts = ({ shortcuts }) => {
     };
 
     const clearBlurMasks = () => {
-      const blurredElements = document.querySelectorAll(".screenity-blur");
+      const blurredElements = document.querySelectorAll(".instructionscrafter-blur");
       blurredElements.forEach((element) => {
-        element.classList.remove("screenity-blur");
+        element.classList.remove("instructionscrafter-blur");
       });
     };
 

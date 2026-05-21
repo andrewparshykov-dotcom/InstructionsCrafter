@@ -15,8 +15,8 @@ const CLOUD_FEATURES_ENABLED =
 const getState = () => contentStateRef.current;
 
 export const setupHandlers = () => {
-  if (window.__screenitySetupHandlersRan) return;
-  window.__screenitySetupHandlersRan = true;
+  if (window.__instructionsCrafterSetupHandlersRan) return;
+  window.__instructionsCrafterSetupHandlersRan = true;
   let lastToggleDrawingAt = 0;
   const TOGGLE_DRAWING_COOLDOWN_MS = 400;
   let projectReadySeq = 0;
@@ -275,7 +275,7 @@ export const setupHandlers = () => {
       return;
     }
 
-    if (data?.type !== "screenity-local-playback-request") return;
+    if (data?.type !== "instructionscrafter-local-playback-request") return;
 
     const requestedProjectId = data?.projectId || null;
     const requestedSceneId = data?.sceneId || null;
@@ -292,7 +292,7 @@ export const setupHandlers = () => {
         requestedSceneId !== latestLocalPlaybackSceneId)
     ) {
       postProjectHandoff({
-        source: "screenity-local-playback-response",
+        source: "instructionscrafter-local-playback-response",
         requestId,
         projectId: requestedProjectId,
         sceneId: requestedSceneId,
@@ -318,7 +318,7 @@ export const setupHandlers = () => {
           bytes: readySource?.size || 0,
         });
         postProjectHandoff({
-          source: "screenity-local-playback-response",
+          source: "instructionscrafter-local-playback-response",
           requestId,
           projectId: requestedProjectId,
           sceneId: requestedSceneId || latestLocalPlaybackSceneId || null,
@@ -356,7 +356,7 @@ export const setupHandlers = () => {
           reason,
         });
         postProjectHandoff({
-          source: "screenity-local-playback-response",
+          source: "instructionscrafter-local-playback-response",
           requestId,
           projectId: requestedProjectId,
           sceneId: requestedSceneId || latestLocalPlaybackSceneId || null,
@@ -377,9 +377,9 @@ export const setupHandlers = () => {
     revokeActiveLocalPlaybackSource("content-beforeunload");
   });
 
-  if (!window.__screenityHandlersInitialized) {
+  if (!window.__instructionsCrafterHandlersInitialized) {
     messageRouter();
-    window.__screenityHandlersInitialized = true;
+    window.__instructionsCrafterHandlersInitialized = true;
   }
 
   // Bridge from BG to the editor page: BG forwards a scene-create payload
@@ -1045,7 +1045,7 @@ export const setupHandlers = () => {
     });
 
     if (posted) {
-      window.__screenityLastProjectReady = {
+      window.__instructionsCrafterLastProjectReady = {
         projectId,
         sceneId: message.sceneId || null,
         handoffAt,

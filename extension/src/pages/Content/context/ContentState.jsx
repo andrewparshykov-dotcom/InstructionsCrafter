@@ -270,9 +270,9 @@ const ContentState = (props) => {
       cursorMode: "none",
       cursorEffects: [],
     }));
-    const elements = document.querySelectorAll(".screenity-blur");
+    const elements = document.querySelectorAll(".instructionscrafter-blur");
     elements.forEach((element) => {
-      element.classList.remove("screenity-blur");
+      element.classList.remove("instructionscrafter-blur");
     });
     setTimer(0);
     perfMark("Content stop-click", { reason: "content-toolbar-stop" });
@@ -353,9 +353,9 @@ const ContentState = (props) => {
       cursorMode: "none",
       cursorEffects: [],
     }));
-    const elements = document.querySelectorAll(".screenity-blur");
+    const elements = document.querySelectorAll(".instructionscrafter-blur");
     elements.forEach((element) => {
-      element.classList.remove("screenity-blur");
+      element.classList.remove("instructionscrafter-blur");
     });
     setTimer(0);
   });
@@ -881,9 +881,9 @@ const ContentState = (props) => {
 
   useEffect(() => {
     const handleMessage = (event) => {
-      if (event.data.type === "screenity-permissions") {
+      if (event.data.type === "instructionscrafter-permissions") {
         handleDevicePermissions(event.data);
-      } else if (event.data.type === "screenity-permissions-loaded") {
+      } else if (event.data.type === "instructionscrafter-permissions-loaded") {
         setContentState((prevContentState) => ({
           ...prevContentState,
           permissionsLoaded: true,
@@ -1610,8 +1610,8 @@ const ContentState = (props) => {
   }, [contentState.hideToolbar, contentState.hideUI]);
 
   useEffect(() => {
-    if (window.__screenitySetupHandlersInitialized) return;
-    window.__screenitySetupHandlersInitialized = true;
+    if (window.__instructionsCrafterSetupHandlersInitialized) return;
+    window.__instructionsCrafterSetupHandlersInitialized = true;
     setupHandlers();
   }, []);
 
@@ -1656,7 +1656,7 @@ const ContentState = (props) => {
 
     const elements = parentDiv.querySelectorAll("*");
     elements.forEach((element) => {
-      element.classList.add("screenity-scrollbar");
+      element.classList.add("instructionscrafter-scrollbar");
     });
 
     const observer = new MutationObserver((mutationsList) => {
@@ -1667,13 +1667,13 @@ const ContentState = (props) => {
 
           addedNodes.forEach((node) => {
             if (node.nodeType === Node.ELEMENT_NODE) {
-              node.classList.add("screenity-scrollbar");
+              node.classList.add("instructionscrafter-scrollbar");
             }
           });
 
           removedNodes.forEach((node) => {
             if (node.nodeType === Node.ELEMENT_NODE) {
-              node.classList.remove("screenity-scrollbar");
+              node.classList.remove("instructionscrafter-scrollbar");
             }
           });
         }
@@ -1699,7 +1699,7 @@ const ContentState = (props) => {
 
     const elements = shadowRoot.querySelectorAll("*");
     elements.forEach((element) => {
-      element.classList.add("screenity-scrollbar");
+      element.classList.add("instructionscrafter-scrollbar");
     });
 
     const observer = new MutationObserver((mutationsList) => {
@@ -1710,13 +1710,13 @@ const ContentState = (props) => {
 
           addedNodes.forEach((node) => {
             if (node.nodeType === Node.ELEMENT_NODE) {
-              node.classList.add("screenity-scrollbar");
+              node.classList.add("instructionscrafter-scrollbar");
             }
           });
 
           removedNodes.forEach((node) => {
             if (node.nodeType === Node.ELEMENT_NODE) {
-              node.classList.remove("screenity-scrollbar");
+              node.classList.remove("instructionscrafter-scrollbar");
             }
           });
         }
