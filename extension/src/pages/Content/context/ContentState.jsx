@@ -729,6 +729,10 @@ const ContentState = (props) => {
         () => {
           contentStateRef.current.resumeRecording();
         },
+        null,
+        null,
+        null,
+        "confirm",
       );
     } else {
       contentStateRef.current.dismissRecording();

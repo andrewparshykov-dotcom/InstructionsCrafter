@@ -84,7 +84,11 @@ const Modal = (props) => {
           <div className="AlertDialogEyebrow">
             INSTRUCTIONSCRAFTER
             <span className="AlertDialogEyebrowDot">·</span>
-            {colorSafe ? "NOTICE" : "ERROR"}
+            {colorSafe === "confirm"
+              ? "CONFIRM"
+              : colorSafe
+              ? "NOTICE"
+              : "ERROR"}
           </div>
           <AlertDialog.Title className="AlertDialogTitle">
             {title}
@@ -128,7 +132,9 @@ const Modal = (props) => {
             {button1 && (
               <AlertDialog.Action asChild>
                 <button
-                  className={!colorSafe ? "Button red" : "Button blue"}
+                  className={
+                    colorSafe === true ? "Button blue" : "Button red"
+                  }
                   onClick={() => trigger()}
                 >
                   {button1}
