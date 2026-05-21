@@ -215,6 +215,12 @@ const Generate = () => {
         filename,
         saveAs: false,
       });
+      // Intentionally do NOT call discardRecording() here. The recording is
+      // kept in IndexedDB / OPFS so the user can retry from the Generate
+      // page if the download is lost, the tab is closed prematurely, or the
+      // browser crashes between upload-success and download-complete. The
+      // recording is bounded to one at a time -- the next recording's
+      // preflight clears it (Recorder.jsx chunksStore.clear() calls).
       setTimeout(() => {
         URL.revokeObjectURL(docxUrl);
         window.close();
