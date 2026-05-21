@@ -3417,9 +3417,9 @@ const Recorder = () => {
 
     try {
       if (!isTab.current) {
-        let captureTypes = ["screen", "window", "tab", "audio"];
+        let captureTypes = ["screen", "window", "tab"];
         if (tabPreferred.current) {
-          captureTypes = ["tab", "screen", "window", "audio"];
+          captureTypes = ["tab", "screen", "window"];
         }
         debug("desktopCapture.chooseDesktopMedia", {
           captureTypes,
@@ -4000,7 +4000,7 @@ const Recorder = () => {
 
   return (
     <>
-      <RecorderUI started={started} isTab={isTab.current} />
+      <RecorderUI />
       {process.env.SCREENITY_DEV_MODE === "true" && (
         <div
           style={{

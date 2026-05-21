@@ -2,7 +2,7 @@
 // can't call getDisplayMedia / tabCapture; SW acquires a streamId and hands
 // it over. Picker anchors to initiatingTabId so it appears on the user's tab.
 
-const DEFAULT_SCREEN_SOURCES = ["screen", "window", "tab", "audio"];
+const DEFAULT_SCREEN_SOURCES = ["screen", "window", "tab"];
 
 const getInitiatingTab = async (tabId) => {
   if (!tabId) return null;

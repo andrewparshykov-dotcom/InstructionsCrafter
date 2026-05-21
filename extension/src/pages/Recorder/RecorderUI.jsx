@@ -1,12 +1,9 @@
 // RecorderUI.jsx
 import React from "react";
-import Warning from "./warning/Warning";
 
-const RecorderUI = ({ started, isTab }) => {
+const RecorderUI = () => {
   return (
     <div className="wrap">
-      {!isTab && !started && <Warning />}
-
       <div className="setupBackgroundSVG"></div>
 
       <style>
