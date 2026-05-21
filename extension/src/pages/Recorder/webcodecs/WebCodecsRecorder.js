@@ -5,6 +5,8 @@
  * Licensed under the GNU GPLv3.
  * See the LICENSE file for full details.
  *
+ * Modified by Andrew Parshykov from the original Screenity WebCodecs Recorder, 2026.
+ *
  * MP4 recording using WebCodecs + MediaBunny.
  * Handles H.264 video, AAC audio, timestamp safety,
  * canvas resizing, pause/resume, and chunked output.

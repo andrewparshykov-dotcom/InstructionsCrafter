@@ -1,6 +1,8 @@
 /*!
  * Screenity WebCodecs Recorder - WebM/Matroska Muxer Wrapper
  * Licensed under the GNU GPLv3.
+ *
+ * Modified by Andrew Parshykov from the original Screenity WebCodecs Recorder, 2026.
  */
 // @ts-nocheck
 
