@@ -47,10 +47,6 @@ import {
 import { requestDownload, downloadIndexedDB } from "../utils/downloadHelpers";
 import { checkRestore } from "../recording/restoreRecording";
 import {
-  checkCloudRestore,
-  restoreCloudRecording,
-} from "../recording/restoreCloudRecording";
-import {
   CLOUD_LOCAL_PLAYBACK_KEY,
   CLOUD_LOCAL_PLAYBACK_EVENT_KEY,
   CLOUD_LOCAL_PLAYBACK_ALARM,
@@ -1489,15 +1485,6 @@ export const setupHandlers = () => {
     sendResponse(response);
     return true;
   });
-  registerMessage(
-    "check-cloud-restore",
-    async (_message, _sender, sendResponse) => {
-      const response = await checkCloudRestore();
-      sendResponse(response);
-      return true;
-    },
-  );
-  registerMessage("restore-cloud-recording", () => restoreCloudRecording());
   registerMessage(
     "check-capture-permissions",
     async (message, sender, sendResponse) => {

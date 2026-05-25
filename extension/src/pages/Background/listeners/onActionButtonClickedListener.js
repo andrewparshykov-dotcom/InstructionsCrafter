@@ -6,7 +6,6 @@ import {
 } from "../tabManagement";
 import { sendMessageRecord } from "../recording/sendMessageRecord.js";
 import { loginWithWebsite } from "../auth/loginWithWebsite.js";
-import { tryResumePendingUploads } from "../recording/resumePendingUploads";
 
 const CLOUD_FEATURES_ENABLED =
   process.env.SCREENITY_ENABLE_CLOUD_FEATURES === "true";
@@ -166,7 +165,6 @@ const isOffscreenAlive = async () => {
 
 export const onActionButtonClickedListener = () => {
   chrome.action.onClicked.addListener(async (tab) => {
-    tryResumePendingUploads({ trigger: "actionClick" }).catch(() => {});
     try {
       const snap = await chrome.storage.local.get([
         "recording", "pendingRecording", "restarting", "recorderSession",

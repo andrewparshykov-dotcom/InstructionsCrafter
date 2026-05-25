@@ -125,8 +125,7 @@ async function removeOpfsRecording(fileName) {
 
   // For nested paths like "cloud-chunks/<sessionId>/file.mp4" we drop the
   // whole <sessionId> directory rather than just the file, so we don't leave
-  // an orphan session dir under cloud-chunks/ for cleanupOrphanOpfsSessions
-  // to reap later.
+  // an orphan session dir under cloud-chunks/.
   if (parts.length >= 3 && parts[0] === "cloud-chunks") {
     const cloud = await root.getDirectoryHandle(parts[0]).catch(() => null);
     if (!cloud) return;

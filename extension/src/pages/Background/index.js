@@ -7,10 +7,6 @@ import {
 import { hydrateDiagnosticLog, diagEvent } from "../utils/diagnosticLog";
 import { initCountdownFallback } from "./recording/countdownFallback";
 import { initLifecycleObserver } from "./lifecycleObserver";
-import {
-  listSessionDirs,
-  destroySessionDir,
-} from "./chunkStorage/opfsKvStore";
 import { handleGetStreamingData } from "./recording/recordingHelpers";
 
 // Must run before any message/alarm handler can bail on a stale lock.
@@ -238,56 +234,6 @@ const recoverInFlightRecording = async () => {
   }
 };
 
-// reaps cloud-chunks/ session dirs not referenced by any
-// cloudRecorderSession:* snapshot or the latest recorderSession.
-// without this, an SW kill mid-recording leaks chunks forever.
-const cleanupOrphanOpfsSessions = async () => {
-  try {
-    const dirs = await listSessionDirs();
-    if (!dirs.length) return;
-
-    const all = await new Promise((resolve) => {
-      try {
-        chrome.storage.local.get(null, (snap) => resolve(snap || {}));
-      } catch {
-        resolve({});
-      }
-    });
-
-    const liveIds = new Set();
-    if (all.recorderSession?.id) liveIds.add(all.recorderSession.id);
-    if (all.recorderSession?.opfsSessionId) {
-      liveIds.add(all.recorderSession.opfsSessionId);
-    }
-    for (const key of Object.keys(all)) {
-      if (!key.startsWith("cloudRecorderSession:")) continue;
-      const session = all[key];
-      if (session?.id) liveIds.add(session.id);
-      if (session?.opfsSessionId) liveIds.add(session.opfsSessionId);
-    }
-    // Upload journals can also reference a sessionId whose chunks may still
-    // be needed for resume, keep their dirs around.
-    for (const [key, value] of Object.entries(all)) {
-      if (!key.startsWith("uploadJournal-")) continue;
-      if (value?.sessionId) liveIds.add(value.sessionId);
-    }
-
-    const orphans = dirs.filter((id) => !liveIds.has(id));
-    if (!orphans.length) return;
-
-    await Promise.allSettled(orphans.map((id) => destroySessionDir(id)));
-    console.info(
-      "[InstructionsCrafter][BG] Reaped orphan OPFS cloud-chunks sessions:",
-      orphans.length,
-    );
-  } catch (err) {
-    console.warn(
-      "[InstructionsCrafter][BG] cleanupOrphanOpfsSessions failed:",
-      err,
-    );
-  }
-};
-
 // listeners must register synchronously at module eval so Chrome counts them for SW keep-alive
 messageRouter();
 initializeListeners();
@@ -302,7 +248,6 @@ initLifecycleObserver();
   await clearStaleLocks();
   await recoverInFlightRecording();
 })();
-cleanupOrphanOpfsSessions();
 
 // 4.3.7 finalize-hang bug sticky-disabled WebCodecs for many users; clear once.
 // User's explicit opt-out (useWebCodecsRecorder === false) is preserved by overwrite anyway.

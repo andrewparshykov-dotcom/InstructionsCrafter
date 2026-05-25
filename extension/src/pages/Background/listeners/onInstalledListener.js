@@ -1,6 +1,5 @@
 import { removeTab } from "../tabManagement";
 import { executeScripts } from "../utils/executeScripts";
-import { tryResumePendingUploads } from "../recording/resumePendingUploads";
 
 const cloudFeaturesEnabled =
   process.env.SCREENITY_ENABLE_CLOUD_FEATURES === "true";
@@ -74,10 +73,5 @@ export const onInstalledListener = () => {
       executeScripts();
     }
 
-    setTimeout(() => {
-      tryResumePendingUploads({ trigger: `onInstalled:${details.reason}` }).catch(
-        () => {},
-      );
-    }, 5000);
   });
 };
