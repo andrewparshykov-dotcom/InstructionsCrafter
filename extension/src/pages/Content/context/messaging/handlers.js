@@ -20,13 +20,6 @@ export const setupHandlers = () => {
   let lastToggleDrawingAt = 0;
   const TOGGLE_DRAWING_COOLDOWN_MS = 400;
   let projectReadySeq = 0;
-  const LOCAL_PLAYBACK_MAX_BYTES = 250 * 1024 * 1024;
-  let latestLocalPlaybackOffer = null;
-  let latestLocalPlaybackProjectId = null;
-  let latestLocalPlaybackSceneId = null;
-  let localPlaybackBuildPromise = null;
-  let localPlaybackBuildOfferId = null;
-  let activeLocalPlaybackSource = null;
   const TRUSTED_APP_ORIGIN = (() => {
     try {
       const appBase = process.env.SCREENITY_APP_BASE;
@@ -73,184 +66,6 @@ export const setupHandlers = () => {
     return true;
   };
 
-  const revokeActiveLocalPlaybackSource = (reason = "unknown") => {
-    if (activeLocalPlaybackSource?.url) {
-      URL.revokeObjectURL(activeLocalPlaybackSource.url);
-      console.info("[InstructionsCrafter][Content] Revoked local screen playback URL", {
-        reason,
-        offerId: activeLocalPlaybackSource.offerId || null,
-      });
-    }
-    activeLocalPlaybackSource = null;
-  };
-
-  const markLocalPlaybackFallback = async ({
-    offerId,
-    projectId,
-    sceneId,
-    reason,
-  }) => {
-    if (!offerId) return;
-    try {
-      await chrome.runtime.sendMessage({
-        type: "cloud-local-playback-mark-fallback",
-        offerId,
-        projectId: projectId || null,
-        sceneId: sceneId || null,
-        reason: reason || "unknown",
-      });
-    } catch {}
-  };
-
-  const fetchLocalPlaybackSourceFromExtension = async ({
-    offerId,
-    projectId,
-    sceneId,
-  }) => {
-    const offerRes = await chrome.runtime.sendMessage({
-      type: "cloud-local-playback-get-offer",
-      offerId,
-      projectId,
-      sceneId,
-    });
-    if (!offerRes?.ok || !offerRes.offer) {
-      throw new Error("local-playback-offer-unavailable");
-    }
-    const offer = offerRes.offer;
-    if (
-      !offer.chunkCount ||
-      !offer.estimatedBytes ||
-      offer.estimatedBytes > LOCAL_PLAYBACK_MAX_BYTES
-    ) {
-      throw new Error("local-playback-offer-too-large-or-empty");
-    }
-
-    const parts = [];
-    for (let i = 0; i < offer.chunkCount; i += 1) {
-      // eslint-disable-next-line no-await-in-loop
-      const chunkRes = await chrome.runtime.sendMessage({
-        type: "cloud-local-playback-read-chunk",
-        offerId: offer.offerId,
-        projectId: offer.projectId,
-        sceneId: offer.sceneId,
-        index: i,
-      });
-      if (!chunkRes?.ok || !chunkRes.chunk?.base64) {
-        throw new Error(`local-playback-chunk-read-failed:${i}`);
-      }
-      const binary = atob(chunkRes.chunk.base64);
-      const bytes = new Uint8Array(binary.length);
-      for (let j = 0; j < binary.length; j += 1) {
-        bytes[j] = binary.charCodeAt(j);
-      }
-      const mimeType = chunkRes.chunk.mimeType || "video/webm";
-      parts.push(new Blob([bytes], { type: mimeType }));
-    }
-
-    const blob = new Blob(parts, {
-      type: parts[0]?.type || "video/webm",
-    });
-    const url = URL.createObjectURL(blob);
-    return {
-      offer,
-      url,
-      size: blob.size || 0,
-      mimeType: blob.type || "video/webm",
-      chunkCount: parts.length,
-    };
-  };
-
-  const ensureLocalPlaybackReady = async ({ projectId, sceneId, offer }) => {
-    if (!offer?.offerId) {
-      throw new Error("local-playback-offer-missing");
-    }
-
-    if (
-      activeLocalPlaybackSource?.offerId === offer.offerId &&
-      activeLocalPlaybackSource?.url
-    ) {
-      return activeLocalPlaybackSource;
-    }
-
-    if (
-      localPlaybackBuildPromise &&
-      localPlaybackBuildOfferId === offer.offerId
-    ) {
-      return localPlaybackBuildPromise;
-    }
-
-    localPlaybackBuildOfferId = offer.offerId;
-    localPlaybackBuildPromise = (async () => {
-      const source = await fetchLocalPlaybackSourceFromExtension({
-        offerId: offer.offerId,
-        projectId,
-        sceneId,
-      });
-
-      revokeActiveLocalPlaybackSource("new-offer");
-      activeLocalPlaybackSource = {
-        offerId: source.offer.offerId,
-        projectId: source.offer.projectId || projectId || null,
-        sceneId: source.offer.sceneId || sceneId || null,
-        url: source.url,
-        mimeType: source.mimeType,
-        size: source.size,
-        chunkCount: source.chunkCount,
-        expiresAt: source.offer.expiresAt || null,
-      };
-
-      try {
-        await chrome.runtime.sendMessage({
-          type: "cloud-local-playback-mark-used",
-          offerId: source.offer.offerId,
-          projectId: source.offer.projectId || null,
-          sceneId: source.offer.sceneId || null,
-          usedBy: "app-editor",
-        });
-      } catch {}
-
-      return activeLocalPlaybackSource;
-    })();
-
-    try {
-      const ready = await localPlaybackBuildPromise;
-      return ready;
-    } finally {
-      localPlaybackBuildPromise = null;
-      localPlaybackBuildOfferId = null;
-    }
-  };
-
-  const postLocalPlaybackHandoff = ({
-    projectId,
-    sceneId,
-    offer,
-    readySource = null,
-    fallbackReason = null,
-    forceRefresh = true,
-  }) =>
-    postProjectHandoff({
-      source: "update-project-ready-local-playback",
-      projectId: projectId || null,
-      sceneId: sceneId || null,
-      forceRefresh,
-      handoffAt: Date.now(),
-      localPlayback: {
-        available: Boolean(offer?.offerId),
-        trackType: "screen",
-        offerId: offer?.offerId || null,
-        chunkCount: offer?.chunkCount || 0,
-        estimatedBytes: offer?.estimatedBytes || 0,
-        expiresAt: offer?.expiresAt || null,
-        source: offer?.source || "indexeddb-screen-chunks",
-        ready: Boolean(readySource?.url),
-        url: readySource?.url || null,
-        mimeType: readySource?.mimeType || null,
-        localBytes: readySource?.size || null,
-        fallbackReason: fallbackReason || null,
-      },
-    });
-
   // Pending scene-create handoffs awaiting reply from the editor page.
   // Keyed by requestId so concurrent multi-scene flows don't collide.
   const pendingSceneCreates = new Map();
@@ -275,107 +90,9 @@ export const setupHandlers = () => {
       return;
     }
 
-    if (data?.type !== "instructionscrafter-local-playback-request") return;
-
-    const requestedProjectId = data?.projectId || null;
-    const requestedSceneId = data?.sceneId || null;
-    const requestId = data?.requestId || null;
-    const offer = latestLocalPlaybackOffer;
-
-    if (
-      !offer?.offerId ||
-      !offer.available ||
-      !requestedProjectId ||
-      requestedProjectId !== latestLocalPlaybackProjectId ||
-      (requestedSceneId &&
-        latestLocalPlaybackSceneId &&
-        requestedSceneId !== latestLocalPlaybackSceneId)
-    ) {
-      postProjectHandoff({
-        source: "instructionscrafter-local-playback-response",
-        requestId,
-        projectId: requestedProjectId,
-        sceneId: requestedSceneId,
-        localPlayback: {
-          available: false,
-          trackType: "screen",
-          fallbackReason: "offer-unavailable",
-        },
-      });
-      return;
-    }
-
-    void ensureLocalPlaybackReady({
-      projectId: requestedProjectId,
-      sceneId: requestedSceneId || latestLocalPlaybackSceneId,
-      offer,
-    })
-      .then((readySource) => {
-        console.info("[InstructionsCrafter][Content] Local screen playback used", {
-          projectId: requestedProjectId,
-          sceneId: requestedSceneId || latestLocalPlaybackSceneId || null,
-          offerId: offer.offerId,
-          bytes: readySource?.size || 0,
-        });
-        postProjectHandoff({
-          source: "instructionscrafter-local-playback-response",
-          requestId,
-          projectId: requestedProjectId,
-          sceneId: requestedSceneId || latestLocalPlaybackSceneId || null,
-          forceRefresh: true,
-          localPlayback: {
-            available: true,
-            ready: true,
-            trackType: "screen",
-            offerId: offer.offerId,
-            url: readySource?.url || null,
-            mimeType: readySource?.mimeType || null,
-            localBytes: readySource?.size || null,
-            chunkCount: offer.chunkCount || 0,
-            estimatedBytes: offer.estimatedBytes || 0,
-            expiresAt: offer.expiresAt || null,
-            source: offer.source || "indexeddb-screen-chunks",
-          },
-        });
-      })
-      .catch((err) => {
-        const reason = err?.message || "local-playback-build-failed";
-        console.warn(
-          "[InstructionsCrafter][Content] Local screen playback fallback",
-          {
-            projectId: requestedProjectId,
-            sceneId: requestedSceneId || latestLocalPlaybackSceneId || null,
-            offerId: offer.offerId,
-            reason,
-          },
-        );
-        void markLocalPlaybackFallback({
-          offerId: offer.offerId,
-          projectId: requestedProjectId,
-          sceneId: requestedSceneId || latestLocalPlaybackSceneId || null,
-          reason,
-        });
-        postProjectHandoff({
-          source: "instructionscrafter-local-playback-response",
-          requestId,
-          projectId: requestedProjectId,
-          sceneId: requestedSceneId || latestLocalPlaybackSceneId || null,
-          forceRefresh: true,
-          localPlayback: {
-            available: true,
-            ready: false,
-            trackType: "screen",
-            offerId: offer.offerId,
-            fallbackReason: reason,
-          },
-        });
-      });
   };
 
   window.addEventListener("message", onWindowProjectMessage);
-  window.addEventListener("beforeunload", () => {
-    revokeActiveLocalPlaybackSource("content-beforeunload");
-  });
 
   if (!window.__instructionsCrafterHandlersInitialized) {
     messageRouter();
@@ -907,20 +624,6 @@ export const setupHandlers = () => {
       source: "get-project-info",
       requestedAt: Date.now(),
     };
-    if (activeLocalPlaybackSource?.url && latestLocalPlaybackOffer?.offerId) {
-      payload.localPlayback = {
-        available: true,
-        ready: true,
-        trackType: "screen",
-        offerId: latestLocalPlaybackOffer.offerId,
-        url: activeLocalPlaybackSource.url,
-        mimeType: activeLocalPlaybackSource.mimeType || "video/webm",
-        localBytes: activeLocalPlaybackSource.size || null,
-        chunkCount: latestLocalPlaybackOffer.chunkCount || 0,
-        estimatedBytes: latestLocalPlaybackOffer.estimatedBytes || 0,
-        expiresAt: latestLocalPlaybackOffer.expiresAt || null,
-      };
-    }
     postProjectHandoff(payload);
   });
   registerMessage("check-auth", async (message) => {
@@ -998,15 +701,6 @@ export const setupHandlers = () => {
     projectReadySeq += 1;
     const handoffAt = Date.now();
     const handoffId = `${projectId}:${handoffAt}:${projectReadySeq}`;
-    const localPlayback = message?.localPlayback || null;
-    latestLocalPlaybackOffer =
-      localPlayback?.available && localPlayback?.trackType === "screen"
-        ? localPlayback
-        : null;
-    latestLocalPlaybackProjectId = latestLocalPlaybackOffer ? projectId : null;
-    latestLocalPlaybackSceneId = latestLocalPlaybackOffer
-      ? message.sceneId || null
-      : null;
 
     const posted = postProjectHandoff({
       source: "update-project-ready",
@@ -1014,30 +708,6 @@ export const setupHandlers = () => {
       newProject: message.newProject,
       sceneId: message.sceneId,
       projectId,
-      localPlayback:
-        localPlayback?.available && localPlayback?.trackType === "screen"
-          ? {
-              ...localPlayback,
-              ready:
-                activeLocalPlaybackSource?.offerId === localPlayback.offerId &&
-                Boolean(activeLocalPlaybackSource?.url),
-              url:
-                activeLocalPlaybackSource?.offerId === localPlayback.offerId
-                  ? activeLocalPlaybackSource.url
-                  : null,
-              mimeType:
-                activeLocalPlaybackSource?.offerId === localPlayback.offerId
-                  ? activeLocalPlaybackSource.mimeType || "video/webm"
-                  : null,
-              localBytes:
-                activeLocalPlaybackSource?.offerId === localPlayback.offerId
-                  ? activeLocalPlaybackSource.size || null
-                  : null,
-            }
-          : {
-              available: false,
-              trackType: "screen",
-            },
       handoffAt,
       handoffId,
       handoffSeq: projectReadySeq,
@@ -1050,61 +720,8 @@ export const setupHandlers = () => {
         sceneId: message.sceneId || null,
         handoffAt,
         handoffId,
-        localPlaybackOfferId: localPlayback?.offerId || null,
       };
       updateFromStorage(false, sender?.id);
-    }
-
-    const capturedOffer = latestLocalPlaybackOffer;
-    if (posted && capturedOffer?.offerId) {
-      const capturedSceneId = message.sceneId || null;
-      console.info("[InstructionsCrafter][Content] Local screen playback offered", {
-        projectId,
-        sceneId: capturedSceneId,
-        offerId: capturedOffer.offerId,
-        chunkCount: capturedOffer.chunkCount || 0,
-        estimatedBytes: capturedOffer.estimatedBytes || 0,
-      });
-      void ensureLocalPlaybackReady({
-        projectId,
-        sceneId: capturedSceneId,
-        offer: capturedOffer,
-      })
-        .then((readySource) => {
-          console.info("[InstructionsCrafter][Content] Local screen playback ready", {
-            projectId,
-            sceneId: capturedSceneId,
-            offerId: capturedOffer.offerId,
-            bytes: readySource?.size || 0,
-          });
-          postLocalPlaybackHandoff({
-            projectId,
-            sceneId: capturedSceneId,
-            offer: capturedOffer,
-            readySource,
-          });
-        })
-        .catch((err) => {
-          const reason = err?.message || "local-playback-build-failed";
-          console.warn("[InstructionsCrafter][Content] Local screen playback fallback", {
-            projectId,
-            sceneId: capturedSceneId,
-            offerId: capturedOffer.offerId,
-            reason,
-          });
-          void markLocalPlaybackFallback({
-            offerId: capturedOffer.offerId,
-            projectId,
-            sceneId: capturedSceneId,
-            reason,
-          });
-          postLocalPlaybackHandoff({
-            projectId,
-            sceneId: capturedSceneId,
-            offer: capturedOffer,
-            fallbackReason: reason,
-          });
-        });
     }
   });
   registerMessage("clear-project-recording", (message) => {

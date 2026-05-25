@@ -16,8 +16,6 @@ import {
 } from "../recording/stopRecording";
 import { sendChunks } from "../recording/sendChunks";
 import { chunksStore } from "../recording/chunkHandler";
-import { openExistingChunksStore } from "../chunkStorage/chooseChunksStore";
-import { destroySessionDir } from "../chunkStorage/opfsKvStore";
 import { addAlarmListener } from "../alarms/addAlarmListener";
 import { cancelRecording, handleDismiss } from "../recording/cancelRecording";
 import { handleDismissRecordingTab } from "../recording/discardRecording";
@@ -46,11 +44,6 @@ import {
 } from "../utils/browserHelpers";
 import { requestDownload, downloadIndexedDB } from "../utils/downloadHelpers";
 import { checkRestore } from "../recording/restoreRecording";
-import {
-  CLOUD_LOCAL_PLAYBACK_KEY,
-  CLOUD_LOCAL_PLAYBACK_EVENT_KEY,
-  CLOUD_LOCAL_PLAYBACK_ALARM,
-} from "../recording/cloudLocalPlaybackConstants";
 import { FIRST_CHUNK_WATCHDOG_ALARM, RECORDER_KEEPALIVE_ALARM } from "../alarms/alarmConstants";
 import { desktopCapture } from "../recording/desktopCapture";
 import {
@@ -102,10 +95,6 @@ const CLOUD_FEATURES_ENABLED =
   process.env.SCREENITY_ENABLE_CLOUD_FEATURES === "true";
 const DEBUG_POSTSTOP = false;
 const STOP_RECORDING_TAB_DEBOUNCE_MS = 1200;
-const CLOUD_LOCAL_PLAYBACK_MAX_BYTES = 250 * 1024 * 1024;
-const CLOUD_LOCAL_PLAYBACK_MAX_CHUNKS = 4000;
-const CLOUD_LOCAL_PLAYBACK_MIN_TTL_MS = 60 * 1000;
-const CLOUD_LOCAL_PLAYBACK_MAX_TTL_MS = 24 * 60 * 60 * 1000;
 let stopRecordingTabInFlight = false;
 let stopRecordingTabLastAt = 0;
 
@@ -115,177 +104,6 @@ const getEditorTargetUrl = ({ projectId, instantMode = false } = {}) => {
     return `${APP_BASE}/view/${projectId}?load=true`;
   }
   return `${APP_BASE}/editor/${projectId}/edit?load=true`;
-};
-
-const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
-
-const normalizeLocalPlaybackOffer = (offer = {}) => {
-  const now = Date.now();
-  const expiresAtRaw = Number(offer.expiresAt) || 0;
-  const ttl =
-    expiresAtRaw > now
-      ? clamp(
-          expiresAtRaw - now,
-          CLOUD_LOCAL_PLAYBACK_MIN_TTL_MS,
-          CLOUD_LOCAL_PLAYBACK_MAX_TTL_MS,
-        )
-      : CLOUD_LOCAL_PLAYBACK_MIN_TTL_MS;
-  const expiresAt = now + ttl;
-  const chunkCount = Math.max(
-    0,
-    Math.min(CLOUD_LOCAL_PLAYBACK_MAX_CHUNKS, Number(offer.chunkCount) || 0),
-  );
-  const estimatedBytes = Math.max(0, Number(offer.estimatedBytes) || 0);
-  const createdAt = Number(offer.createdAt) || now;
-
-  // storageBackend / opfsSessionId let the read-chunk + clear handlers route
-  // to the same backend the writer used. Older offers without these fields
-  // default to IDB to match pre-OPFS behaviour.
-  const storageBackend =
-    offer.storageBackend === "opfs" ? "opfs" : "idb";
-  const opfsSessionId =
-    storageBackend === "opfs" && offer.opfsSessionId
-      ? String(offer.opfsSessionId)
-      : null;
-  // Container is the mimeType the editor's <video> should use. Defaults
-  // to webm for back-compat; WebCodecs sessions overwrite to video/mp4.
-  const container =
-    offer.container === "video/mp4" ? "video/mp4" : "video/webm";
-  const encoderKind =
-    offer.encoderKind === "webcodecs" ? "webcodecs" : "mediarecorder";
-
-  return {
-    offerId: offer.offerId || crypto.randomUUID(),
-    projectId: offer.projectId || null,
-    sceneId: offer.sceneId || null,
-    recordingSessionId: offer.recordingSessionId || null,
-    trackType: "screen",
-    source: offer.source || "indexeddb-screen-chunks",
-    status: offer.status || "available",
-    chunkCount,
-    estimatedBytes,
-    mediaId: offer.mediaId || null,
-    bunnyVideoId: offer.bunnyVideoId || null,
-    storageBackend,
-    opfsSessionId,
-    container,
-    encoderKind,
-    createdAt,
-    expiresAt,
-    updatedAt: now,
-  };
-};
-
-const offerScreenStore = (offer) => {
-  if (offer?.storageBackend === "opfs" && offer.opfsSessionId) {
-    return openExistingChunksStore({
-      sessionId: offer.opfsSessionId,
-      track: "screen",
-      backend: "opfs",
-    }).store;
-  }
-  // Pre-migration default: cloud screen track was a localforage instance
-  // sharing the regular Recorder's IDB DB / "chunks" store name. The
-  // imported chunksStore matches that exactly.
-  return chunksStore;
-};
-
-const isLocalPlaybackOfferExpired = (offer) =>
-  !offer || Number(offer.expiresAt || 0) <= Date.now();
-
-const scheduleLocalPlaybackAlarm = async (offer) => {
-  if (!offer?.expiresAt || !chrome.alarms?.create) return;
-  try {
-    await chrome.alarms.clear(CLOUD_LOCAL_PLAYBACK_ALARM);
-    await chrome.alarms.create(CLOUD_LOCAL_PLAYBACK_ALARM, {
-      when: Number(offer.expiresAt),
-    });
-  } catch (err) {
-    console.warn("[InstructionsCrafter][BG] Failed to schedule local playback alarm", err);
-  }
-};
-
-const getStoredLocalPlaybackOffer = async () => {
-  const result = await chrome.storage.local.get([CLOUD_LOCAL_PLAYBACK_KEY]);
-  return result?.[CLOUD_LOCAL_PLAYBACK_KEY] || null;
-};
-
-const clearStoredLocalPlaybackOffer = async ({
-  reason = "unknown",
-  clearChunks = true,
-  onlyIfOfferId = null,
-} = {}) => {
-  const existing = await getStoredLocalPlaybackOffer();
-  if (onlyIfOfferId && existing?.offerId && existing.offerId !== onlyIfOfferId) {
-    return { ok: true, skipped: true, reason: "offer-id-mismatch" };
-  }
-
-  await chrome.storage.local.remove([CLOUD_LOCAL_PLAYBACK_KEY]);
-  if (chrome.alarms?.clear) {
-    await chrome.alarms.clear(CLOUD_LOCAL_PLAYBACK_ALARM).catch(() => {});
-  }
-
-  if (clearChunks) {
-    const targetStore = offerScreenStore(existing);
-    await targetStore.clear().catch((err) => {
-      console.warn(
-        "[InstructionsCrafter][BG] Failed to clear screen chunks while clearing local playback offer",
-        err,
-      );
-    });
-    if (
-      existing?.storageBackend === "opfs" &&
-      existing?.opfsSessionId
-    ) {
-      await destroySessionDir(existing.opfsSessionId).catch(() => {});
-    }
-  }
-
-  await chrome.storage.local.set({
-    [CLOUD_LOCAL_PLAYBACK_EVENT_KEY]: {
-      event: "offer-cleared",
-      reason,
-      clearedAt: Date.now(),
-      clearedOfferId: existing?.offerId || null,
-      clearChunks: Boolean(clearChunks),
-    },
-  });
-
-  if (existing?.offerId) {
-    console.info("[InstructionsCrafter][BG] Cleared local screen playback offer", {
-      reason,
-      offerId: existing.offerId,
-      clearChunks: Boolean(clearChunks),
-    });
-  }
-
-  return { ok: true, clearedOfferId: existing?.offerId || null };
-};
-
-const getValidLocalPlaybackOffer = async ({
-  offerId = null,
-  projectId = null,
-  sceneId = null,
-} = {}) => {
-  const offer = await getStoredLocalPlaybackOffer();
-  if (!offer) return null;
-
-  if (isLocalPlaybackOfferExpired(offer)) {
-    await clearStoredLocalPlaybackOffer({
-      reason: "offer-expired",
-      clearChunks: true,
-      onlyIfOfferId: offer.offerId || null,
-    });
-    return null;
-  }
-
-  if (offerId && offer.offerId !== offerId) return null;
-  if (projectId && offer.projectId !== projectId) return null;
-  if (sceneId && offer.sceneId && offer.sceneId !== sceneId) return null;
-  if (offer.trackType !== "screen") return null;
-  if (!offer.chunkCount || !offer.estimatedBytes) return null;
-
-  return offer;
 };
 
 const ensureAudioOffscreen = async () => {
@@ -1977,13 +1795,6 @@ export const setupHandlers = () => {
     const expectedKind = instantMode ? "view" : "editor";
     const publicUrl = message.publicUrl || pendingEditorOpen?.publicUrl || null;
     const sceneId = message.sceneId || null;
-    const localPlaybackOffer =
-      (await getValidLocalPlaybackOffer({
-        offerId: message?.localPlayback?.offerId || null,
-        projectId: projectId || null,
-        sceneId: sceneId || null,
-      })) ||
-      null;
 
     console.info("[InstructionsCrafter][BG] editor-ready received", {
       newProject: Boolean(message.newProject),
@@ -1992,8 +1803,6 @@ export const setupHandlers = () => {
       hasSceneId: Boolean(sceneId),
       editorUrl,
       hasPendingOpen: Boolean(pendingEditorOpen),
-      localPlaybackAvailable: Boolean(localPlaybackOffer?.offerId),
-      localPlaybackOfferId: localPlaybackOffer?.offerId || null,
     });
 
     if (message.newProject) {
@@ -2041,22 +1850,6 @@ export const setupHandlers = () => {
         newProject: Boolean(message.newProject),
         sceneId: sceneId,
         projectId,
-        localPlayback: localPlaybackOffer
-          ? {
-              available: true,
-              offerId: localPlaybackOffer.offerId,
-              trackType: "screen",
-              chunkCount: localPlaybackOffer.chunkCount,
-              estimatedBytes: localPlaybackOffer.estimatedBytes,
-              expiresAt: localPlaybackOffer.expiresAt,
-              source: localPlaybackOffer.source || "indexeddb-screen-chunks",
-              mediaId: localPlaybackOffer.mediaId || null,
-              bunnyVideoId: localPlaybackOffer.bunnyVideoId || null,
-            }
-          : {
-              available: false,
-              trackType: "screen",
-            },
       }).catch((err) =>
         console.warn("[InstructionsCrafter][BG] Failed to send update-project-ready", err),
       );
@@ -2067,182 +1860,6 @@ export const setupHandlers = () => {
     if (pendingEditorOpen) {
       await chrome.storage.local.remove(["pendingEditorOpen"]);
     }
-  });
-  registerMessage("cloud-local-playback-register", async (message) => {
-    const normalizedOffer = normalizeLocalPlaybackOffer(message?.offer || {});
-    if (!normalizedOffer.projectId || !normalizedOffer.sceneId) {
-      return { ok: false, error: "missing-project-or-scene" };
-    }
-    if (!normalizedOffer.chunkCount || !normalizedOffer.estimatedBytes) {
-      return { ok: false, error: "missing-local-screen-bytes" };
-    }
-    if (normalizedOffer.estimatedBytes > CLOUD_LOCAL_PLAYBACK_MAX_BYTES) {
-      return {
-        ok: false,
-        error: "offer-too-large",
-        maxBytes: CLOUD_LOCAL_PLAYBACK_MAX_BYTES,
-      };
-    }
-
-    await chrome.storage.local.set({
-      [CLOUD_LOCAL_PLAYBACK_KEY]: normalizedOffer,
-      [CLOUD_LOCAL_PLAYBACK_EVENT_KEY]: {
-        event: "offer-registered",
-        at: Date.now(),
-        offerId: normalizedOffer.offerId,
-        projectId: normalizedOffer.projectId,
-        sceneId: normalizedOffer.sceneId,
-        chunkCount: normalizedOffer.chunkCount,
-        estimatedBytes: normalizedOffer.estimatedBytes,
-        expiresAt: normalizedOffer.expiresAt,
-      },
-    });
-    await scheduleLocalPlaybackAlarm(normalizedOffer);
-
-    console.info("[InstructionsCrafter][BG] Registered local screen playback offer", {
-      offerId: normalizedOffer.offerId,
-      projectId: normalizedOffer.projectId,
-      sceneId: normalizedOffer.sceneId,
-      chunkCount: normalizedOffer.chunkCount,
-      estimatedBytes: normalizedOffer.estimatedBytes,
-      expiresAt: normalizedOffer.expiresAt,
-    });
-
-    return { ok: true, offer: normalizedOffer };
-  });
-  registerMessage("cloud-local-playback-clear", async (message) => {
-    const result = await clearStoredLocalPlaybackOffer({
-      reason: message?.reason || "explicit-clear",
-      clearChunks: message?.clearChunks !== false,
-      onlyIfOfferId: message?.offerId || null,
-    });
-    return result;
-  });
-  registerMessage("cloud-local-playback-get-offer", async (message) => {
-    const offer = await getValidLocalPlaybackOffer({
-      offerId: message?.offerId || null,
-      projectId: message?.projectId || null,
-      sceneId: message?.sceneId || null,
-    });
-    if (!offer) {
-      return { ok: false, error: "offer-unavailable" };
-    }
-    return { ok: true, offer };
-  });
-  registerMessage("cloud-local-playback-read-chunk", async (message) => {
-    const offer = await getValidLocalPlaybackOffer({
-      offerId: message?.offerId || null,
-      projectId: message?.projectId || null,
-      sceneId: message?.sceneId || null,
-    });
-    if (!offer) {
-      return { ok: false, error: "offer-unavailable" };
-    }
-
-    const index = Number(message?.index);
-    if (!Number.isInteger(index) || index < 0 || index >= offer.chunkCount) {
-      return { ok: false, error: "chunk-index-out-of-range", index };
-    }
-
-    const targetStore = offerScreenStore(offer);
-    const item = await targetStore.getItem(`chunk_${index}`).catch(() => null);
-    if (!item?.chunk) {
-      return { ok: false, error: "chunk-missing", index };
-    }
-
-    // OPFS-stored Blobs come back with type "" (raw bytes); reconstruct
-    // the mimeType from the offer's recorded container so the editor's
-    // <video> element knows whether it's MP4 or WebM.
-    const containerMime = offer.container || "video/webm";
-    const blob =
-      item.chunk instanceof Blob && item.chunk.type
-        ? item.chunk
-        : new Blob([item.chunk], { type: containerMime });
-    const arrayBuffer = await blob.arrayBuffer();
-    const base64 = btoa(
-      new Uint8Array(arrayBuffer).reduce(
-        (data, byte) => data + String.fromCharCode(byte),
-        "",
-      ),
-    );
-
-    return {
-      ok: true,
-      chunk: {
-        index,
-        size: blob.size,
-        mimeType: blob.type || containerMime,
-        base64,
-      },
-      offer: {
-        offerId: offer.offerId,
-        expiresAt: offer.expiresAt,
-      },
-    };
-  });
-  registerMessage("cloud-local-playback-mark-used", async (message) => {
-    const offer = await getValidLocalPlaybackOffer({
-      offerId: message?.offerId || null,
-      projectId: message?.projectId || null,
-      sceneId: message?.sceneId || null,
-    });
-    if (!offer) {
-      return { ok: false, error: "offer-unavailable" };
-    }
-    const updated = {
-      ...offer,
-      status: "used",
-      usedAt: Date.now(),
-      usedBy: message?.usedBy || "editor",
-      updatedAt: Date.now(),
-    };
-    await chrome.storage.local.set({
-      [CLOUD_LOCAL_PLAYBACK_KEY]: updated,
-      [CLOUD_LOCAL_PLAYBACK_EVENT_KEY]: {
-        event: "offer-used",
-        at: Date.now(),
-        offerId: updated.offerId,
-        projectId: updated.projectId,
-        sceneId: updated.sceneId,
-      },
-    });
-    console.info("[InstructionsCrafter][BG] Local screen playback offer marked used", {
-      offerId: updated.offerId,
-      projectId: updated.projectId,
-      sceneId: updated.sceneId,
-    });
-    return { ok: true, offer: updated };
-  });
-  registerMessage("cloud-local-playback-mark-fallback", async (message) => {
-    const offer = await getValidLocalPlaybackOffer({
-      offerId: message?.offerId || null,
-      projectId: message?.projectId || null,
-      sceneId: message?.sceneId || null,
-    });
-    if (!offer) {
-      return { ok: false, error: "offer-unavailable" };
-    }
-    const updated = {
-      ...offer,
-      status: "fallback",
-      fallbackReason: message?.reason || "unknown",
-      fallbackAt: Date.now(),
-      updatedAt: Date.now(),
-    };
-    await chrome.storage.local.set({
-      [CLOUD_LOCAL_PLAYBACK_KEY]: updated,
-      [CLOUD_LOCAL_PLAYBACK_EVENT_KEY]: {
-        event: "offer-fallback",
-        at: Date.now(),
-        offerId: updated.offerId,
-        reason: updated.fallbackReason,
-      },
-    });
-    console.info("[InstructionsCrafter][BG] Local screen playback offer fallback", {
-      offerId: updated.offerId,
-      reason: updated.fallbackReason,
-    });
-    return { ok: true, offer: updated };
   });
   registerMessage("finish-multi-recording", async () => {
     if (!CLOUD_FEATURES_ENABLED) {

@@ -4,13 +4,7 @@ import { sendMessageRecord } from "../recording/sendMessageRecord.js";
 import { handleRecordingError } from "../recording/recordingHelpers.js";
 import { diagEvent } from "../../utils/diagnosticLog";
 import { lifecycle } from "../../utils/lifecycleLog";
-import { chunksStore } from "../recording/chunkHandler";
 import { emitRecordingTelemetry } from "../recording/emitRecordingTelemetry";
-import {
-  CLOUD_LOCAL_PLAYBACK_KEY,
-  CLOUD_LOCAL_PLAYBACK_EVENT_KEY,
-  CLOUD_LOCAL_PLAYBACK_ALARM,
-} from "../recording/cloudLocalPlaybackConstants";
 import {
   FIRST_CHUNK_WATCHDOG_ALARM,
   RECORDER_KEEPALIVE_ALARM,
@@ -256,60 +250,4 @@ export const handleAlarm = async (alarm) => {
     return;
   }
 
-  if (alarm.name === CLOUD_LOCAL_PLAYBACK_ALARM) {
-    const {
-      [CLOUD_LOCAL_PLAYBACK_KEY]: localPlaybackOffer,
-      recording,
-      pendingRecording,
-      restarting,
-    } = await chrome.storage.local.get([
-      CLOUD_LOCAL_PLAYBACK_KEY,
-      "recording",
-      "pendingRecording",
-      "restarting",
-    ]);
-
-    if (!localPlaybackOffer?.offerId) {
-      await chrome.alarms.clear(CLOUD_LOCAL_PLAYBACK_ALARM);
-      return;
-    }
-
-    const hasActiveRecording = Boolean(recording || pendingRecording || restarting);
-    if (hasActiveRecording) {
-      // never clear chunks during an active recording
-      const retryAt = Date.now() + 5 * 60 * 1000;
-      await chrome.alarms
-        .create(CLOUD_LOCAL_PLAYBACK_ALARM, { when: retryAt })
-        .catch(() => {});
-      return;
-    }
-
-    const expired = Number(localPlaybackOffer.expiresAt || 0) <= Date.now();
-    if (!expired) {
-      await chrome.alarms
-        .create(CLOUD_LOCAL_PLAYBACK_ALARM, {
-          when: Number(localPlaybackOffer.expiresAt),
-        })
-        .catch(() => {});
-      return;
-    }
-
-    await chunksStore.clear().catch((err) => {
-      console.warn(
-        "[InstructionsCrafter][BG] Failed to clear chunksStore for local playback expiry",
-        err,
-      );
-    });
-    await chrome.storage.local.remove([CLOUD_LOCAL_PLAYBACK_KEY]);
-    await chrome.storage.local.set({
-      [CLOUD_LOCAL_PLAYBACK_EVENT_KEY]: {
-        event: "offer-expired",
-        at: Date.now(),
-        offerId: localPlaybackOffer.offerId,
-        projectId: localPlaybackOffer.projectId || null,
-        sceneId: localPlaybackOffer.sceneId || null,
-      },
-    });
-    await chrome.alarms.clear(CLOUD_LOCAL_PLAYBACK_ALARM);
-  }
 };
