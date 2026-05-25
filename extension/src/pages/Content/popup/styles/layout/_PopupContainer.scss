@@ -197,31 +197,3 @@
     color: $color-primary;
   }
 }
-
-.HelpSection {
-  position: absolute;
-  left: 0px;
-  right: 0px;
-  margin: auto;
-  bottom: -40px;
-  background: #edeef2;
-  border-radius: 30px;
-  padding: 4px 12px;
-  text-align: center;
-  font-family: $font-medium;
-  color: $color-text-secondary;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  width: fit-content;
-
-  .HelpIcon {
-    margin-top: 3px;
-  }
-
-  &:hover {
-    cursor: pointer;
-    background: #fefeff;
-  }
-}

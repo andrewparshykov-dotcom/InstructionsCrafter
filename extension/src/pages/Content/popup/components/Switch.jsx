@@ -28,9 +28,6 @@ const Switch = (props) => {
       <div className="SwitchRow" id={switchRowId}>
         <label className="Label" htmlFor={switchId} style={{ paddingRight: 15 }}>
           {props.label}
-          {props.experimental && (
-            <span className="ExperimentalLabel">Experimental</span>
-          )}
         </label>
         {props.value ? (
           <S.Root
