@@ -48,7 +48,7 @@ Put the HTML version of the policy below in `backend/templates/privacy.html`, de
 
 ### Option B — Host on GitHub
 
-Push `PRIVACY.md` to the (public) project repo and use the GitHub-rendered URL: `https://github.com/YOUR_ORG/InstructionsCrafter/blob/main/PRIVACY.md`. Requires the repo to be public — which you'll need anyway for GPLv3 disclosure.
+Push `PRIVACY.md` to the (public) project repo and use the GitHub-rendered URL: `https://github.com/andrewparshykov-dotcom/InstructionsCrafter/blob/main/PRIVACY.md`. Requires the repo to be public — which you'll need anyway for GPLv3 disclosure.
 
 ### Privacy policy content
 
@@ -96,7 +96,7 @@ We do not share, sell, or transfer user data beyond the third-party services lis
 
 ## Open source
 
-InstructionsCrafter is open source under GPLv3. Source code: [GITHUB_URL]. The Chrome extension portion is forked from [Screenity](https://github.com/alyssaxuu/screenity) (also GPLv3).
+InstructionsCrafter is open source under GPLv3. Source code: https://github.com/andrewparshykov-dotcom/InstructionsCrafter. The Chrome extension portion is forked from [Screenity](https://github.com/alyssaxuu/screenity) (also GPLv3).
 
 ## Contact
 
@@ -156,7 +156,7 @@ Hardware requirements: a working microphone (the document is built from what you
 
 Privacy: see https://instructionscrafter.com/privacy.
 
-Source code (GPLv3): https://github.com/YOUR_ORG/InstructionsCrafter
+Source code (GPLv3): https://github.com/andrewparshykov-dotcom/InstructionsCrafter
 ```
 
 ### Single purpose statement (≤1000 characters)

@@ -36,6 +36,8 @@ DOCX_MEDIA_TYPE = (
     "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
 )
 
+PRIVACY_HTML_PATH = Path(__file__).parent.parent / "templates" / "privacy.html"
+
 app = FastAPI(title="InstructionsCrafter API")
 
 # CORS — the Chrome extension's origin is `chrome-extension://<id>`. ALLOWED_ORIGINS
@@ -79,6 +81,12 @@ async def http_exception_handler(request: Request, exc: StarletteHTTPException):
 @app.get("/api/health")
 async def health():
     return {"status": "ok"}
+
+
+@app.get("/privacy")
+async def privacy_policy():
+    # Chrome Web Store requires a publicly accessible privacy policy URL.
+    return FileResponse(PRIVACY_HTML_PATH, media_type="text/html")
 
 
 @app.post("/api/generate")

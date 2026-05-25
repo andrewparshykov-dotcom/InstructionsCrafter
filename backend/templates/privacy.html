@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacy Policy — InstructionsCrafter</title>
+<style>
+  :root { color-scheme: light; }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 2.5rem 1.5rem 4rem;
+    background: #F6F7FB;
+    color: #15171C;
+    font-family: "Geist", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  main {
+    max-width: 720px;
+    margin: 0 auto;
+    background: #FBFBFE;
+    border: 1px solid #E8E9EE;
+    border-radius: 12px;
+    padding: 2.25rem 2.25rem 2.5rem;
+  }
+  h1 {
+    margin: 0 0 .25rem;
+    font-family: "Instrument Serif", Georgia, "Times New Roman", serif;
+    font-weight: 400;
+    font-size: 2.25rem;
+    letter-spacing: -0.01em;
+  }
+  .updated {
+    margin: 0 0 2rem;
+    color: #6E7684;
+    font-style: italic;
+    font-size: .9rem;
+  }
+  h2 {
+    margin: 2rem 0 .75rem;
+    font-family: "Instrument Serif", Georgia, "Times New Roman", serif;
+    font-weight: 400;
+    font-size: 1.5rem;
+  }
+  p { margin: .75rem 0; }
+  ul, ol { padding-left: 1.5rem; margin: .75rem 0; }
+  li { margin: .35rem 0; }
+  code {
+    background: #F6F7FB;
+    border: 1px solid #E8E9EE;
+    padding: .1em .35em;
+    border-radius: 4px;
+    font-size: .9em;
+    font-family: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  a {
+    color: #3080F8;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  a:hover { text-decoration-thickness: 2px; }
+  strong { font-weight: 600; }
+</style>
+</head>
+<body>
+<main>
+<h1>InstructionsCrafter — Privacy Policy</h1>
+<p class="updated">Last updated: 2026-05-25</p>
+
+<h2>What we collect</h2>
+<p>When you use the InstructionsCrafter Chrome extension:</p>
+<ul>
+  <li><strong>Screen recording and microphone audio</strong> captured during a recording session, plus mouse-click coordinates while recording.</li>
+  <li><strong>The document title</strong> you enter on the post-recording page.</li>
+  <li><strong>Local settings</strong> stored in <code>chrome.storage.local</code>: the backend URL, an optional default document title, and recording session state (which Chrome clears when you uninstall the extension).</li>
+</ul>
+<p>We do <strong>not</strong> collect: your name, email, IP address, browser history, cookies, screen content outside of an active recording session, or any data unrelated to producing the requested document.</p>
+
+<h2>Where the data goes</h2>
+<p>Recordings and titles are sent to <strong>our own backend server</strong> (default: <code>https://instructionscrafter.com</code>) over HTTPS. The backend pipeline:</p>
+<ol>
+  <li>Saves the upload to a per-request temporary directory.</li>
+  <li>Extracts the audio track and sends it to <strong>Groq's Whisper API</strong> for transcription.</li>
+  <li>Sends the transcript and selected screenshots to <strong>OpenAI's GPT API</strong> for narration polishing.</li>
+  <li>Returns a <code>.docx</code> file to your browser.</li>
+  <li><strong>Deletes the upload and every intermediate file</strong> as soon as the response is sent.</li>
+</ol>
+<p>No copy is retained on the server. No database persists user content.</p>
+
+<h2>Third-party services</h2>
+<ul>
+  <li><strong>Groq</strong> (transcription) — receives the recorded audio. Subject to <a href="https://groq.com/privacy-policy/" target="_blank" rel="noopener">Groq's privacy policy</a>.</li>
+  <li><strong>OpenAI</strong> (text polishing) — receives the transcript text. Subject to <a href="https://openai.com/policies/privacy-policy" target="_blank" rel="noopener">OpenAI's privacy policy</a>.</li>
+</ul>
+
+<h2>Authentication</h2>
+<p>The extension sends a shared password (entered on the post-recording page) with every request. The backend verifies it and rejects unauthenticated requests. The password is <strong>not</strong> stored locally between sessions.</p>
+
+<h2>Data sharing</h2>
+<p>We do not share, sell, or transfer user data beyond the third-party services listed above.</p>
+
+<h2>Open source</h2>
+<p>InstructionsCrafter is open source under GPLv3. Source code: <a href="https://github.com/andrewparshykov-dotcom/InstructionsCrafter" target="_blank" rel="noopener">github.com/andrewparshykov-dotcom/InstructionsCrafter</a>. The Chrome extension portion is forked from <a href="https://github.com/alyssaxuu/screenity" target="_blank" rel="noopener">Screenity</a> (also GPLv3).</p>
+
+<h2>Contact</h2>
+<p>Questions: <a href="mailto:andrewparshykov@gmail.com">andrewparshykov@gmail.com</a></p>
+</main>
+</body>
+</html>
