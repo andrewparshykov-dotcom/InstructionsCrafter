@@ -291,18 +291,6 @@
     "message": "Reanudar grabación",
     "description": "Botón de reanudar grabación en el modal"
   },
-  "recorderSelectTitle": {
-    "message": "Elige qué quieres grabar",
-    "description": "Título en la página de grabación"
-  },
-  "recorderSelectProgressTitle": {
-    "message": "Grabando...",
-    "description": "Título en la página de grabación mientras se está grabando"
-  },
-  "recorderSelectDescription": {
-    "message": "Mantén esta pestaña abierta. Se cerrará una vez que se haya guardado tu grabación.",
-    "description": "Descripción en la página de grabación"
-  },
   "sandboxEditorCancelButton": {
     "message": "Cancelar",
     "description": "Botón de cancelar en la página del editor de pruebas"
@@ -540,22 +528,6 @@
   "backupPermissionFailDescription": {
     "message": "No seleccionaste una carpeta para hacer una copia local de tus grabaciones. Dependiendo de la versión de tu navegador o sistema operativo, es posible que se te solicite seleccionar la carpeta cada vez que comiences a grabar. Puedes intentarlo de nuevo o desactivar las copias de seguridad por completo si prefieres no dar permisos repetidamente.",
     "description": "Descripción de falla de permiso de respaldo"
-  },
-  "recordAudioWarningMacTitle": {
-    "message": "Grabar audio de la computadora",
-    "description": "Título de advertencia de audio para macOS"
-  },
-  "recordAudioWarningMacDescription": {
-    "message": "En macOS, solo puedes grabar audio de pestañas. Selecciona la opción 'Pestaña de Chrome' y asegúrate de que 'Compartir también el audio de la pestaña' esté habilitado.",
-    "description": "Descripción de advertencia de audio para macOS"
-  },
-  "recordAudioWarningOtherTitle": {
-    "message": "Grabar audio de la computadora",
-    "description": "Título de advertencia de audio para otros sistemas"
-  },
-  "recordAudioWarningOtherDescription": {
-    "message": "Asegúrate de activar la opción 'Compartir audio del sistema' si deseas grabar audio de la computadora. Si no ves esta opción, intenta actualizar Chrome o cambia a la opción de grabación de pestañas.",
-    "description": "Descripción de advertencia de audio para otros sistemas"
   },
   "maxResolutionLabel": {
     "message": "Resolución máxima",

@@ -291,18 +291,6 @@
     "message": "继续录制",
     "description": "Discard recording modal resume button"
   },
-  "recorderSelectTitle": {
-    "message": "选择要录制的内容",
-    "description": "Title in recording page"
-  },
-  "recorderSelectProgressTitle": {
-    "message": "录制中...",
-    "description": "Title in recording page while recording"
-  },
-  "recorderSelectDescription": {
-    "message": "保持此选项卡打开。一旦保存录制，它将关闭。",
-    "description": "Description in recording page"
-  },
   "sandboxEditorCancelButton": {
     "message": "取消",
     "description": "Cancel button in sandbox editor page"
@@ -540,22 +528,6 @@
   "backupPermissionFailDescription": {
     "message": "您未选择要创建您的录制的本地副本的文件夹。根据浏览器或操作系统的版本，每次开始录制时可能会要求您选择文件夹。您可以再次尝试或完全禁用备份，如果您不想重复授予权限。",
     "description": "备份权限失败说明"
-  },
-  "recordAudioWarningMacTitle": {
-    "message": "录制计算机音频",
-    "description": "macOS音频警告标题"
-  },
-  "recordAudioWarningMacDescription": {
-    "message": "在macOS上，您只能录制选项卡的音频。请选择'Chrome选项卡'选项，并确保启用'同时共享选项卡音频'选项。",
-    "description": "macOS音频警告说明"
-  },
-  "recordAudioWarningOtherTitle": {
-    "message": "录制计算机音频",
-    "description": "其他系统音频警告标题"
-  },
-  "recordAudioWarningOtherDescription": {
-    "message": "如果您想录制计算机音频，请确保启用'共享系统音频'选项。如果您看不到此选项，请尝试更新Chrome或切换到选项卡录制选项。",
-    "description": "其他系统音频警告说明"
   },
   "maxResolutionLabel": {
     "message": "最高分辨率",

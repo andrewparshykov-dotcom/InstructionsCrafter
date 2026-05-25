@@ -291,18 +291,6 @@
     "message": "Continuar gravação",
     "description": "Botão de continuar gravação no modal"
   },
-  "recorderSelectTitle": {
-    "message": "Escolha o que deseja gravar",
-    "description": "Título na página de gravação"
-  },
-  "recorderSelectProgressTitle": {
-    "message": "Gravando...",
-    "description": "Título na página de gravação durante a gravação"
-  },
-  "recorderSelectDescription": {
-    "message": "Mantenha esta guia aberta. Ela será fechada assim que sua gravação for salva.",
-    "description": "Descrição na página de gravação"
-  },
   "sandboxEditorCancelButton": {
     "message": "Cancelar",
     "description": "Botão de cancelar na página do editor de testes"
@@ -540,22 +528,6 @@
   "backupPermissionFailDescription": {
     "message": "Você não selecionou uma pasta para fazer backup local das suas gravações. Dependendo da versão do seu navegador ou sistema operacional, você pode ser solicitado a selecionar a pasta toda vez que iniciar uma gravação. Você pode tentar novamente ou desativar completamente os backups se preferir não conceder permissões repetidamente.",
     "description": "Descrição de Falha de Permissão de Backup"
-  },
-  "recordAudioWarningMacTitle": {
-    "message": "Gravar Áudio do Computador",
-    "description": "Título de Aviso de Áudio para macOS"
-  },
-  "recordAudioWarningMacDescription": {
-    "message": "No macOS, você só pode gravar o áudio da guia. Selecione a opção 'Guia do Chrome' e certifique-se de que 'Também compartilhar áudio da guia' está ativado.",
-    "description": "Descrição de Aviso de Áudio para macOS"
-  },
-  "recordAudioWarningOtherTitle": {
-    "message": "Gravar Áudio do Computador",
-    "description": "Título de Aviso de Áudio para Outros Sistemas"
-  },
-  "recordAudioWarningOtherDescription": {
-    "message": "Certifique-se de ativar a opção 'Compartilhar áudio do sistema' se desejar gravar áudio do computador. Se você não vir essa opção, tente atualizar o Chrome ou alternar para a gravação da guia.",
-    "description": "Descrição de Aviso de Áudio para Outros Sistemas"
   },
   "maxResolutionLabel": {
     "message": "Resolução máxima",

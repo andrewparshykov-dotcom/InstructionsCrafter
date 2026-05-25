@@ -291,18 +291,6 @@
     "message": "Resume recording",
     "description": "Discard recording modal resume button"
   },
-  "recorderSelectTitle": {
-    "message": "Choose what you want to record",
-    "description": "Title in recording page"
-  },
-  "recorderSelectProgressTitle": {
-    "message": "Recording...",
-    "description": "Title in recording page while recording"
-  },
-  "recorderSelectDescription": {
-    "message": "Keep this tab open. It will close once your recording has been saved.",
-    "description": "Description in recording page"
-  },
   "sandboxEditorCancelButton": {
     "message": "Cancel",
     "description": "Cancel button in sandbox editor page"
@@ -572,22 +560,6 @@
   "backupPermissionFailDescription": {
     "message": "You didn't select a folder to backup your recordings. Depending on your browser version or operating system you might be asked to select the folder every time you start recording. You can try again, or disable backups entirely if you'd rather not give permissions repeatedly.",
     "description": "Backup permission fail description"
-  },
-  "recordAudioWarningMacTitle": {
-    "message": "Record computer audio",
-    "description": "Record audio warning title"
-  },
-  "recordAudioWarningMacDescription": {
-    "message": "In macOS, you can only record Tab audio. Select the Chrome Tab option and make sure 'Also share tab audio' is enabled.",
-    "description": "macOS audio warning description"
-  },
-  "recordAudioWarningOtherTitle": {
-    "message": "Record computer audio",
-    "description": "Record audio warning title"
-  },
-  "recordAudioWarningOtherDescription": {
-    "message": "Make sure to enable the option to 'Share system audio' if you want to record computer audio. If you don't see this option, try updating Chrome, or switch to Tab recording.",
-    "description": "Other audio warning description"
   },
   "maxResolutionLabel": {
     "message": "Max resolution",

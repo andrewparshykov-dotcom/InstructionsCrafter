@@ -291,18 +291,6 @@
     "message": "Wznów nagrywanie",
     "description": "Przycisk wznowienia nagrywania"
   },
-  "recorderSelectTitle": {
-    "message": "Wybierz, co chcesz nagrać",
-    "description": "Tytuł na stronie nagrywania"
-  },
-  "recorderSelectProgressTitle": {
-    "message": "Nagrywanie...",
-    "description": "Tytuł na stronie nagrywania podczas nagrywania"
-  },
-  "recorderSelectDescription": {
-    "message": "Zachowaj tę kartę otwartą. Zostanie zamknięta po zapisaniu nagrania.",
-    "description": "Opis na stronie nagrywania"
-  },
   "sandboxEditorCancelButton": {
     "message": "Anuluj",
     "description": "Przycisk anulowania na stronie edytora piaskownicy"
@@ -540,22 +528,6 @@
   "backupPermissionFailDescription": {
     "message": "Nie wybrałeś folderu do tworzenia lokalnych kopii zapasowych nagrań. W zależności od wersji przeglądarki lub systemu operacyjnego, możesz być proszony o wybranie folderu za każdym razem, gdy rozpoczniesz nagrywanie. Możesz spróbować ponownie lub całkowicie wyłączyć kopie zapasowe, jeśli wolisz nie udzielać uprawnień wielokrotnie.",
     "description": "Opis niepowodzenia uprawnień kopii zapasowych"
-  },
-  "recordAudioWarningMacTitle": {
-    "message": "Nagrywanie dźwięku z komputera",
-    "description": "Tytuł ostrzeżenia dźwiękowego dla macOS"
-  },
-  "recordAudioWarningMacDescription": {
-    "message": "W systemie macOS możesz nagrywać dźwięk tylko z zakładek. Wybierz opcję 'Zakładka Chrome' i upewnij się, że opcja 'Udostępnij także dźwięk zakładki' jest włączona.",
-    "description": "Opis ostrzeżenia dźwiękowego dla macOS"
-  },
-  "recordAudioWarningOtherTitle": {
-    "message": "Nagrywanie dźwięku z komputera",
-    "description": "Tytuł ostrzeżenia dźwiękowego dla innych systemów"
-  },
-  "recordAudioWarningOtherDescription": {
-    "message": "Aby nagrać dźwięk z komputera, upewnij się, że opcja 'Udostępnij dźwięk systemowy' jest włączona. Jeśli nie widzisz tej opcji, spróbuj zaktualizować Chrome lub przełączyć się na opcję nagrywania zakładek.",
-    "description": "Opis ostrzeżenia dźwiękowego dla innych systemów"
   },
   "maxResolutionLabel": {
     "message": "Maksymalna rozdzielczość",

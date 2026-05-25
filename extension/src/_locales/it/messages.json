@@ -291,18 +291,6 @@
     "message": "Riprendi registrazione",
     "description": "Pulsante per riprendere la registrazione nel modalità"
   },
-  "recorderSelectTitle": {
-    "message": "Scegli cosa registrare",
-    "description": "Titolo nella pagina di registrazione"
-  },
-  "recorderSelectProgressTitle": {
-    "message": "Registrazione in corso...",
-    "description": "Titolo nella pagina di registrazione durante la registrazione"
-  },
-  "recorderSelectDescription": {
-    "message": "Tieni aperta questa scheda. Si chiuderà una volta che il tuo video sarà salvato.",
-    "description": "Descrizione nella pagina di registrazione"
-  },
   "sandboxEditorCancelButton": {
     "message": "Annulla",
     "description": "Pulsante per annullare nella pagina dell'editor di prova"
@@ -540,22 +528,6 @@
   "backupPermissionFailDescription": {
     "message": "Non hai selezionato una cartella per il backup locale delle registrazioni. A seconda della versione del tuo browser o del sistema operativo, potrebbe essere richiesto di selezionare la cartella ogni volta che inizi a registrare. Puoi riprovare o disabilitare completamente i backup se preferisci non concedere autorizzazioni ripetutamente.",
     "description": "Descrizione del fallimento del permesso di backup"
-  },
-  "recordAudioWarningMacTitle": {
-    "message": "Registra l'audio del computer",
-    "description": "Titolo dell'avviso audio per macOS"
-  },
-  "recordAudioWarningMacDescription": {
-    "message": "Su macOS, puoi registrare solo l'audio della scheda. Seleziona l'opzione 'Scheda Chrome' e assicurati che 'Condividi anche l'audio della scheda' sia abilitato.",
-    "description": "Descrizione dell'avviso audio per macOS"
-  },
-  "recordAudioWarningOtherTitle": {
-    "message": "Registra l'audio del computer",
-    "description": "Titolo dell'avviso audio per altri sistemi"
-  },
-  "recordAudioWarningOtherDescription": {
-    "message": "Assicurati di attivare l'opzione 'Condividi l'audio del sistema' se desideri registrare l'audio del computer. Se non vedi questa opzione, prova a aggiornare Chrome o passa alla registrazione della scheda.",
-    "description": "Descrizione dell'avviso audio per altri sistemi"
   },
   "maxResolutionLabel": {
     "message": "Risoluzione massima",

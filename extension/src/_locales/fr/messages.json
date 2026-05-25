@@ -291,18 +291,6 @@
     "message": "Reprendre l'enregistrement",
     "description": "Bouton de reprise d'enregistrement dans le modal"
   },
-  "recorderSelectTitle": {
-    "message": "Choisissez ce que vous voulez enregistrer",
-    "description": "Titre sur la page d'enregistrement"
-  },
-  "recorderSelectProgressTitle": {
-    "message": "Enregistrement en cours...",
-    "description": "Titre sur la page d'enregistrement pendant l'enregistrement en cours"
-  },
-  "recorderSelectDescription": {
-    "message": "Laissez cet onglet ouvert. Il se fermera une fois votre enregistrement sauvegardé.",
-    "description": "Description sur la page d'enregistrement"
-  },
   "sandboxEditorCancelButton": {
     "message": "Annuler",
     "description": "Bouton d'annulation sur la page de l'éditeur de test"
@@ -540,22 +528,6 @@
   "backupPermissionFailDescription": {
     "message": "Vous n'avez pas sélectionné de dossier pour sauvegarder localement vos enregistrements. Selon la version de votre navigateur ou de votre système d'exploitation, il se peut que l'on vous demande de sélectionner le dossier à chaque début d'enregistrement. Vous pouvez réessayer ou désactiver complètement les sauvegardes si vous préférez ne pas donner des autorisations de manière répétée.",
     "description": "Description de l'échec de l'autorisation de sauvegarde"
-  },
-  "recordAudioWarningMacTitle": {
-    "message": "Enregistrement audio de l'ordinateur",
-    "description": "Titre de l'avertissement audio pour macOS"
-  },
-  "recordAudioWarningMacDescription": {
-    "message": "Sous macOS, vous ne pouvez enregistrer que l'audio de l'onglet. Sélectionnez l'option 'Onglet Chrome' et assurez-vous que 'Partager également l'audio de l'onglet' est activé.",
-    "description": "Description de l'avertissement audio pour macOS"
-  },
-  "recordAudioWarningOtherTitle": {
-    "message": "Enregistrement audio de l'ordinateur",
-    "description": "Titre de l'avertissement audio pour d'autres systèmes"
-  },
-  "recordAudioWarningOtherDescription": {
-    "message": "Assurez-vous d'activer l'option 'Partager l'audio du système' si vous souhaitez enregistrer l'audio de l'ordinateur. Si vous ne voyez pas cette option, essayez de mettre à jour Chrome ou basculez vers l'enregistrement de l'onglet.",
-    "description": "Description de l'avertissement audio pour d'autres systèmes"
   },
   "maxResolutionLabel": {
     "message": "Résolution maximale",

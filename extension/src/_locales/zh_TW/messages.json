@@ -291,18 +291,6 @@
     "message": "繼續錄製",
     "description": "Discard recording modal resume button"
   },
-  "recorderSelectTitle": {
-    "message": "選擇您要錄製的內容",
-    "description": "Title in recording page"
-  },
-  "recorderSelectProgressTitle": {
-    "message": "錄製中...",
-    "description": "Title in recording page while recording"
-  },
-  "recorderSelectDescription": {
-    "message": "請維持這個分頁開啟。您的錄影完成儲存之後它便會關閉。",
-    "description": "Description in recording page"
-  },
   "sandboxEditorCancelButton": {
     "message": "取消",
     "description": "Cancel button in sandbox editor page"
@@ -540,22 +528,6 @@
   "backupPermissionFailDescription": {
     "message": "您沒有選擇備份錄影的資料夾。依您的瀏覽器版本或是作業系統，每次開始錄製的時候可能都會請您再次選擇資料夾。您可以再試一次，或是如果不希望一天到晚重複提供權限的話也可以選擇完全停用備份。",
     "description": "Backup permission fail description"
-  },
-  "recordAudioWarningMacTitle": {
-    "message": "錄製電腦音訊",
-    "description": "Record audio warning title"
-  },
-  "recordAudioWarningMacDescription": {
-    "message": "在 macOS 上，您只能錄製分頁音訊。請選擇「Chrome 分頁」選項然後確保「也分享分頁音訊」有啟用。",
-    "description": "macOS audio warning description"
-  },
-  "recordAudioWarningOtherTitle": {
-    "message": "錄製電腦音訊",
-    "description": "Record audio warning title"
-  },
-  "recordAudioWarningOtherDescription": {
-    "message": "如果您要錄製電腦音訊請確保您啟用「分享系統音訊」選項。如果您沒有看到這個選項，請嘗試更新 Chrome 或是改為使用分頁錄製。",
-    "description": "Other audio warning description"
   },
   "maxResolutionLabel": {
     "message": "最大解析度",

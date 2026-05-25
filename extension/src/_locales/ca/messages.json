@@ -291,18 +291,6 @@
     "message": "Continua la gravació",
     "description": "Botó de continuar la gravació en el modal"
   },
-  "recorderSelectTitle": {
-    "message": "Escull què vols enregistrar",
-    "description": "Títol a la pàgina d'enregistrament"
-  },
-  "recorderSelectProgressTitle": {
-    "message": "Enregistrant...",
-    "description": "Títol a la pàgina d'enregistrament mentre s'està gravant"
-  },
-  "recorderSelectDescription": {
-    "message": "Deixa aquesta pestanya oberta. Es tancarà quan la gravació s'hagi guardat.",
-    "description": "Descripció a la pàgina d'enregistrament"
-  },
   "sandboxEditorCancelButton": {
     "message": "Cancel·la",
     "description": "Botó de cancel·lació a la pàgina de l'editor de l'àrea de proves"
@@ -540,22 +528,6 @@
   "backupPermissionFailDescription": {
     "message": "No has seleccionat cap carpeta per fer una còpia local de les gravacions. Depenent de la versió del teu navegador o sistema operatiu, potser se't demanarà seleccionar la carpeta cada vegada que comencis a gravar. Pots intentar-ho de nou o desactivar les còpies de seguretat per complet si prefereixes no atorgar permisos repetidament.",
     "description": "Descripció de fallada de permís de còpia de seguretat"
-  },
-  "recordAudioWarningMacTitle": {
-    "message": "Enregistra l'audio de l'ordinador",
-    "description": "Títol d'avís d'àudio per a macOS"
-  },
-  "recordAudioWarningMacDescription": {
-    "message": "A macOS, només pots enregistrar l'àudio de les pestanyes. Seleccioneu l'opció 'Pestanya de Chrome' i assegureu-vos que 'Comparteix també l'audio de la pestanya' estigui habilitat.",
-    "description": "Descripció d'avís d'àudio per a macOS"
-  },
-  "recordAudioWarningOtherTitle": {
-    "message": "Enregistra l'audio de l'ordinador",
-    "description": "Títol d'avís d'àudio per a altres sistemes"
-  },
-  "recordAudioWarningOtherDescription": {
-    "message": "Assegureu-vos d'activar l'opció 'Comparteix l'audio del sistema' si voleu enregistrar l'audio de l'ordinador. Si no veieu aquesta opció, proveu d'actualitzar Chrome o canviar a l'opció d'enregistrament de pestanyes.",
-    "description": "Descripció d'avís d'àudio per a altres sistemes"
   },
   "maxResolutionLabel": {
     "message": "Resolució màxima",

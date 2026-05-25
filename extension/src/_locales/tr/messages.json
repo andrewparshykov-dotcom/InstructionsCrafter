@@ -291,18 +291,6 @@
     "message": "Kayda devam et",
     "description": "Silme modalı devam et düğmesi"
   },
-  "recorderSelectTitle": {
-    "message": "Ne kaydetmek istediğinizi seçin",
-    "description": "Kayıt sayfasındaki başlık"
-  },
-  "recorderSelectProgressTitle": {
-    "message": "Kaydediliyor...",
-    "description": "Kayıt sayfasındaki kaydediliyor başlığı"
-  },
-  "recorderSelectDescription": {
-    "message": "Bu sekme açık kalmalıdır. Kaydınız kaydedildikten sonra kapanacaktır.",
-    "description": "Kayıt sayfasındaki açıklama"
-  },
   "sandboxEditorCancelButton": {
     "message": "İptal",
     "description": "Kum havuzu editör sayfasındaki İptal düğmesi"
@@ -540,22 +528,6 @@
   "backupPermissionFailDescription": {
     "message": "Kayıtlarınızın yerel bir kopyası oluşturmak için bir klasör seçmediniz. Tarayıcınızın veya işletim sisteminizin sürümüne bağlı olarak, her kayıt yapmaya başladığınızda klasörü seçmeniz istenebilir. Tekrar deneyebilir veya izinleri tekrar vermek istemiyorsanız yedeklemeleri tamamen devre dışı bırakabilirsiniz.",
     "description": "Yedekleme İzin Reddi Açıklaması"
-  },
-  "recordAudioWarningMacTitle": {
-    "message": "Bilgisayar Sesini Kaydet",
-    "description": "macOS İçin Ses Uyarı Başlığı"
-  },
-  "recordAudioWarningMacDescription": {
-    "message": "macOS'ta yalnızca sekmelerden ses kaydedebilirsiniz. 'Chrome Sekmesi' seçeneğini seçin ve 'Ses Sekmesiyle de paylaş' seçeneğinin etkin olduğundan emin olun.",
-    "description": "macOS İçin Ses Uyarı Açıklaması"
-  },
-  "recordAudioWarningOtherTitle": {
-    "message": "Bilgisayar Sesini Kaydet",
-    "description": "Diğer Sistemler İçin Ses Uyarı Başlığı"
-  },
-  "recordAudioWarningOtherDescription": {
-    "message": "Bilgisayar sesini kaydetmek istiyorsanız, 'Sistem Sesini Paylaş' seçeneğinin etkin olduğundan emin olun. Bu seçeneği görmüyorsanız, Chrome'u güncellemeyi deneyin veya sekme kaydı seçeneğine geçin.",
-    "description": "Diğer Sistemler İçin Ses Uyarı Açıklaması"
   },
   "maxResolutionLabel": {
     "message": "Maksimum çözünürlük",

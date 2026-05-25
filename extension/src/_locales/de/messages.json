@@ -291,18 +291,6 @@
     "message": "Aufnahme fortsetzen",
     "description": "Schaltfläche zum Fortsetzen der Aufnahme im Modal"
   },
-  "recorderSelectTitle": {
-    "message": "Wählen Sie, was Sie aufnehmen möchten",
-    "description": "Titel auf der Aufnahmeseite"
-  },
-  "recorderSelectProgressTitle": {
-    "message": "Aufnahme...",
-    "description": "Titel auf der Aufnahmeseite während der Aufnahme"
-  },
-  "recorderSelectDescription": {
-    "message": "Halten Sie diesen Tab geöffnet. Er wird sich schließen, sobald Ihre Aufnahme gespeichert wurde.",
-    "description": "Beschreibung auf der Aufnahmeseite"
-  },
   "sandboxEditorCancelButton": {
     "message": "Abbrechen",
     "description": "Abbrechen-Schaltfläche auf der Sandbox-Editor-Seite"
@@ -540,22 +528,6 @@
   "backupPermissionFailDescription": {
     "message": "Sie haben keinen Ordner für die lokale Sicherung Ihrer Aufnahmen ausgewählt. Je nach Browser-Version oder Betriebssystem kann es erforderlich sein, den Ordner jedes Mal auszuwählen, wenn Sie mit der Aufzeichnung beginnen. Sie können es erneut versuchen oder Backups ganz deaktivieren, wenn Sie wiederholte Berechtigungsanfragen vermeiden möchten.",
     "description": "Beschreibung des Backup-Berechtigungsfehlers"
-  },
-  "recordAudioWarningMacTitle": {
-    "message": "Computer-Audio aufzeichnen",
-    "description": "Titel der Audio-Warnung für macOS"
-  },
-  "recordAudioWarningMacDescription": {
-    "message": "Auf macOS können Sie nur den Tab-Audio aufzeichnen. Wählen Sie die Option 'Chrome-Tab' und stellen Sie sicher, dass 'Tab-Audio ebenfalls teilen' aktiviert ist.",
-    "description": "Beschreibung der Audio-Warnung für macOS"
-  },
-  "recordAudioWarningOtherTitle": {
-    "message": "Computer-Audio aufzeichnen",
-    "description": "Titel der Audio-Warnung für andere Systeme"
-  },
-  "recordAudioWarningOtherDescription": {
-    "message": "Stellen Sie sicher, dass Sie die Option 'System-Audio teilen' aktivieren, wenn Sie Computer-Audio aufzeichnen möchten. Wenn Sie diese Option nicht sehen, versuchen Sie, Chrome zu aktualisieren oder zur Tab-Aufzeichnung zu wechseln.",
-    "description": "Beschreibung der Audio-Warnung für andere Systeme"
   },
   "maxResolutionLabel": {
     "message": "Maximale Auflösung",

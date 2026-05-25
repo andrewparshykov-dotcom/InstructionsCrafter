@@ -291,18 +291,6 @@
     "message": "녹화 재개",
     "description": "Discard recording modal resume button"
   },
-  "recorderSelectTitle": {
-    "message": "녹화할 항목 선택",
-    "description": "Title in recording page"
-  },
-  "recorderSelectProgressTitle": {
-    "message": "녹화 중...",
-    "description": "Title in recording page while recording"
-  },
-  "recorderSelectDescription": {
-    "message": "이 탭을 열어둡니다. 녹화가 저장되면 자동으로 닫힙니다.",
-    "description": "Description in recording page"
-  },
   "sandboxEditorCancelButton": {
     "message": "취소",
     "description": "Cancel button in sandbox editor page"
@@ -540,22 +528,6 @@
   "backupPermissionFailDescription": {
     "message": "녹음의 로컬 사본을 만들기 위한 폴더를 선택하지 않았습니다. 브라우저 또는 운영 체제 버전에 따라 녹음을 시작할 때마다 폴더를 선택하라는 메시지가 나올 수 있습니다. 다시 시도하거나 권한을 반복적으로 부여하지 않으려면 백업을 완전히 비활성화할 수 있습니다.",
     "description": "녹음 백업 권한 부여 실패 설명"
-  },
-  "recordAudioWarningMacTitle": {
-    "message": "컴퓨터 오디오 녹음",
-    "description": "macOS용 오디오 경고 제목"
-  },
-  "recordAudioWarningMacDescription": {
-    "message": "macOS에서는 탭에서만 오디오를 녹음할 수 있습니다. 'Chrome 탭' 옵션을 선택하고 '탭 오디오도 공유'가 활성화되어 있는지 확인하세요.",
-    "description": "macOS용 오디오 경고 설명"
-  },
-  "recordAudioWarningOtherTitle": {
-    "message": "컴퓨터 오디오 녹음",
-    "description": "기타 시스템용 오디오 경고 제목"
-  },
-  "recordAudioWarningOtherDescription": {
-    "message": "컴퓨터 오디오를 녹음하려면 '시스템 오디오 공유' 옵션을 활성화하세요. 이 옵션을 보지 못하는 경우 Chrome을 업데이트하거나 탭 녹음 옵션으로 전환해 보세요.",
-    "description": "기타 시스템용 오디오 경고 설명"
   },
   "maxResolutionLabel": {
     "message": "최대 해상도",

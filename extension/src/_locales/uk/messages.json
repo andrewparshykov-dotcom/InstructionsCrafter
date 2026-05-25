@@ -291,18 +291,6 @@
     "message": "Продовжити запис",
     "description": "Discard recording modal resume button"
   },
-  "recorderSelectTitle": {
-    "message": "Виберіть, що ви хочете записати",
-    "description": "Title in recording page"
-  },
-  "recorderSelectProgressTitle": {
-    "message": "Запис...",
-    "description": "Title in recording page while recording"
-  },
-  "recorderSelectDescription": {
-    "message": "Залиште цю вкладку відкритою. Вона закриється, як тільки ваш запис буде збережено.",
-    "description": "Description in recording page"
-  },
   "sandboxEditorCancelButton": {
     "message": "Скасувати",
     "description": "Cancel button in sandbox editor page"
@@ -540,22 +528,6 @@
   "backupPermissionFailDescription": {
     "message": "Ви не вибрали папку для створення локальної копії ваших записів. Залежно від версії вашого браузера або операційної системи, вас можуть попросити вибрати папку кожного разу, коли ви починаєте записувати. Ви можете спробувати ще раз або повністю вимкнути резервне копіювання, якщо ви не хочете надавати дозволи повторно.",
     "description": "Опис помилки дозволу на резервне копіювання"
-  },
-  "recordAudioWarningMacTitle": {
-    "message": "Запис аудіо комп'ютера",
-    "description": "Заголовок попередження про аудіо для macOS"
-  },
-  "recordAudioWarningMacDescription": {
-    "message": "На macOS ви можете записувати звук лише з вкладок. Виберіть опцію 'Вкладка Chrome' і переконайтеся, що включена опція 'Також ділитися аудіо вкладки'.",
-    "description": "Опис попередження про аудіо для macOS"
-  },
-  "recordAudioWarningOtherTitle": {
-    "message": "Запис аудіо комп'ютера",
-    "description": "Заголовок попередження про аудіо для інших систем"
-  },
-  "recordAudioWarningOtherDescription": {
-    "message": "Якщо ви хочете записувати звук комп'ютера, переконайтеся, що опція 'Ділитися аудіо системи' активована. Якщо ви не бачите цю опцію, спробуйте оновити Chrome або перейти до опції запису вкладок.",
-    "description": "Опис попередження про аудіо для інших систем"
   },
   "maxResolutionLabel": {
     "message": "Максимальний роздільна здатність",
