@@ -16,8 +16,6 @@ import { CloseIconPopup, GrabIconPopup } from "../toolbar/components/SVG";
 
 import RecordingTab from "./layout/RecordingTab";
 
-import InactiveSubscription from "./layout/InactiveSubscription";
-import LoggedOut from "./layout/LoggedOut";
 import Welcome from "./layout/Welcome";
 import {
   runProPopupOnboardingIfNeeded,
@@ -518,67 +516,6 @@ const PopupContainer = (props) => {
                   chrome.storage.local.set({ showProSplash: false });
                 }}
                 setContentState={setContentState}
-              />
-            ) : isCloudBuild &&
-            contentState.isSubscribed === false &&
-            contentState.isLoggedIn === true ? (
-              <InactiveSubscription
-                subscription={contentState.proSubscription}
-                hasSubscribedBefore={contentState.hasSubscribedBefore}
-                onManageClick={() => {
-                  const type = contentState.hasSubscribedBefore
-                    ? "handle-reactivate"
-                    : "handle-upgrade";
-                  chrome.runtime.sendMessage({ type });
-                }}
-                onDowngradeClick={async () => {
-                  chrome.runtime.sendMessage({ type: "handle-logout" });
-                  setContentState((prev) => ({
-                    ...prev,
-                    isLoggedIn: false,
-                    isSubscribed: false,
-                    screenityUser: null,
-                    proSubscription: null,
-                    wasLoggedIn: false,
-                    bigTab: "record",
-                  }));
-                  contentState.openToast(
-                    chrome.i18n.getMessage("loggedOutToastTitle"),
-                    () => {},
-                    2000
-                  );
-                }}
-              />
-            ) : isCloudBuild &&
-              !contentState.isLoggedIn &&
-              contentState.wasLoggedIn ? (
-              <LoggedOut
-                onManageClick={() => {
-                  chrome.runtime.sendMessage({ type: "handle-login" });
-                }}
-                onDowngradeClick={() => {
-                  chrome.storage.local.set({
-                    wasLoggedIn: false,
-                    stayLoggedOut: true,
-                  });
-                  setContentState((prev) => ({
-                    ...prev,
-                    isLoggedIn: false,
-                    wasLoggedIn: false,
-                    bigTab: "record",
-                  }));
-                  setTab("record");
-
-                  requestAnimationFrame(() => {
-                    if (recordTabRef.current && pillRef.current) {
-                      const tabRef = recordTabRef.current;
-                      pillRef.current.style.left = `${tabRef.offsetLeft}px`;
-                      pillRef.current.style.width = `${
-                        tabRef.getBoundingClientRect().width
-                      }px`;
-                    }
-                  });
-                }}
               />
             ) : (
               <RecordingTab shadowRef={props.shadowRef} />
