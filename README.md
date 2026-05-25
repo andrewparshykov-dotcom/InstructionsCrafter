@@ -233,6 +233,12 @@ The Groq free tier (7,200 audio sec/hour, 28,800 sec/day, 2,000 req/day) is gene
 
 ---
 
+## Distribution
+
+The team distributes via **Chrome Web Store unlisted** — every team member installs from a private link that only people with the URL can access; the extension auto-updates when a new version is published.
+
+To publish a new version (or set up the listing for the first time), follow [docs/CHROME_WEB_STORE.md](./docs/CHROME_WEB_STORE.md). The guide covers: the GPLv3 disclosure obligation that comes with distributing publicly, hosting the privacy policy, ZIP packaging, store listing copy, permission justifications, screenshot guidelines, and post-publish backend `ALLOWED_ORIGINS` updates.
+
 ## License
 
-Internal-use fork. Screenity is GPLv3 — the extension code inherits that license. The backend (under `backend/`) is custom and unencumbered. See ARCHITECTURE.md "Licensing note" for distribution implications.
+Forked from [Screenity](https://github.com/alyssaxuu/screenity) (GPLv3) — the extension code inherits that license. The backend (under `backend/`) is custom and unencumbered. See [ARCHITECTURE.md](./ARCHITECTURE.md) "Licensing note" and [docs/CHROME_WEB_STORE.md](./docs/CHROME_WEB_STORE.md) "GPLv3 obligations" for distribution implications.
