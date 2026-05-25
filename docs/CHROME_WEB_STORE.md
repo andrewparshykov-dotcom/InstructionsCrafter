@@ -21,7 +21,7 @@ The rest of this guide assumes you've decided to proceed with store submission.
 ## Step 1: Create a developer account
 
 1. Open https://chrome.google.com/webstore/devconsole
-2. Sign in with the Google account that will own the extension. Consider creating a team account (e.g. `instructionscrafter@safeshieldins.com`) so the listing isn't tied to one person.
+2. Sign in with the Google account that will own the extension. Consider creating a dedicated team account so the listing isn't tied to one person.
 3. Pay the **one-time $5 registration fee**. Google charges this once per account, not per extension.
 4. Accept the developer agreement.
 
@@ -100,7 +100,7 @@ InstructionsCrafter is open source under GPLv3. Source code: [GITHUB_URL]. The C
 
 ## Contact
 
-Questions: andrewp@safeshieldins.com
+Questions: andrewparshykov@gmail.com
 ```
 
 ---
