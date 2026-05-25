@@ -6,7 +6,6 @@ import RegionDimensions from "../components/RegionDimensions";
 import Settings from "./Settings";
 import { contentStateContext } from "../../context/ContentState";
 import { MicOffBlue } from "../../images/popup/images";
-import TooltipWrap from "../components/TooltipWrap";
 
 import { AlertIcon, TimeIcon } from "../../toolbar/components/SVG";
 
@@ -195,69 +194,6 @@ const RecordingType = (props) => {
           {contentState.customRegion && <RegionDimensions />}
         </div>
       )}
-      {contentState.isLoggedIn &&
-        !contentState.recordingToScene &&
-        CLOUD_FEATURES_ENABLED && (
-          <>
-            <div className="popup-content-divider"></div>
-            <TooltipWrap
-              id="pro-onboarding-instant-mode-field"
-              content={
-                chrome.i18n.getMessage("instantRecordingModeTooltip") ||
-                "Instant download, but camera and layout won’t be editable later."
-              }
-              side="bottom"
-              sideOffset={2}
-            >
-              <div style={{ pointerEvents: "auto" }}>
-                <Switch
-                  label={
-                    chrome.i18n.getMessage("instantRecordingModeLabel") ||
-                    "Instant recording mode"
-                  }
-                  name="instantMode"
-                  value="instantMode"
-                  anchorId="pro-onboarding-instant-mode-toggle"
-                  rowAnchorId="pro-onboarding-instant-mode-toggle-row"
-                  onChange={async (checked) => {
-                    if (checked) {
-                      contentState.openModal(
-                        chrome.i18n.getMessage("instantRecordingModeTitle") ||
-                          "Instant recording mode",
-                        chrome.i18n.getMessage(
-                          "instantRecordingModeDescription"
-                        ) ||
-                          "This records everything into one video for instant download and sharing. You won’t be able to change the camera layout afterward, but other edits are still possible.",
-                        chrome.i18n.getMessage("instantRecordingModeAction") ||
-                          "Got it",
-                        chrome.i18n.getMessage("permissionsModalDismiss") ||
-                          "Dismiss",
-                        () => {},
-                        () => {},
-                        null,
-                        "",
-                        "",
-                        true,
-                        false
-                      );
-                    } else {
-                      // Turn off background effects in chrome.storage
-                      chrome.storage.local.set({
-                        backgroundEffectsActive: false,
-                      });
-
-                      // Update in memory
-                      setContentState((prev) => ({
-                        ...prev,
-                        backgroundEffectsActive: false,
-                      }));
-                    }
-                  }}
-                />
-              </div>
-            </TooltipWrap>
-          </>
-        )}
       <button
         role="button"
         className="main-button recording-button"
