@@ -77,9 +77,6 @@ const clearStaleLocks = async () => {
         stale.memoryError = false;
         // keep editorRecordingError + sandboxTab; the editor reads them on mount
         // and onTabRemovedListener clears sandboxTab when the editor closes.
-        stale.backup = false;
-        stale.backupSetup = false;
-        stale.backupTab = null;
         stale.paused = false;
         stale.pausedAt = null;
         stale.totalPausedMs = 0;
@@ -202,12 +199,11 @@ const recoverInFlightRecording = async () => {
       tabUrl: tab?.url,
       status: tab?.status,
     });
-    const { region, customRegion, tabRecordedID, backup, recordingType } =
+    const { region, customRegion, tabRecordedID, recordingType } =
       await chrome.storage.local.get([
         "region",
         "customRegion",
         "tabRecordedID",
-        "backup",
         "recordingType",
       ]);
     const isRegion = Boolean(region) && !customRegion;
@@ -215,7 +211,6 @@ const recoverInFlightRecording = async () => {
       await chrome.tabs.sendMessage(recordingTab, {
         type: "loaded",
         request: { recordingType, region, customRegion },
-        backup: Boolean(backup),
         tabPreferred: false,
         ...(isRegion && tabRecordedID
           ? { isTab: true, tabID: tabRecordedID }

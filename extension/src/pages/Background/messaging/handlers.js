@@ -10,10 +10,7 @@ import {
 
 import { startAfterCountdown, startRecording } from "../recording/startRecording";
 import { noteCountdownStarted } from "../recording/countdownFallback";
-import {
-  handleStopRecordingTab,
-  handleStopRecordingTabBackup,
-} from "../recording/stopRecording";
+import { handleStopRecordingTab } from "../recording/stopRecording";
 import { sendChunks } from "../recording/sendChunks";
 import { chunksStore } from "../recording/chunkHandler";
 import { addAlarmListener } from "../alarms/addAlarmListener";
@@ -598,9 +595,6 @@ export const setupHandlers = () => {
       }, 1000);
     }
   });
-  registerMessage("backup-created", (message) =>
-    startRecorderSession(message.request, message.tabId),
-  );
   registerMessage("start-recorder-keepalive-alarm", async () => {
     try {
       await chrome.alarms.create(RECORDER_KEEPALIVE_ALARM, {
@@ -1224,9 +1218,6 @@ export const setupHandlers = () => {
   registerMessage("clear-recordings", () => clearAllRecordings());
   registerMessage("focus-this-tab", (message, sender) =>
     focusTab(sender.tab.id),
-  );
-  registerMessage("stop-recording-tab-backup", (message) =>
-    handleStopRecordingTabBackup(message),
   );
   registerMessage("indexed-db-download", (message) =>
     downloadIndexedDB(message),

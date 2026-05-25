@@ -876,12 +876,6 @@ const Recorder = () => {
     }
   }
 
-  useEffect(() => {
-    chrome.storage.local.get(["backup"], (result) => {
-      backupRef.current = !!result.backup;
-      debug("Loaded backup flag from storage", backupRef.current);
-    });
-  }, []);
 
   // The recorder tab opens hidden (active:false for region/non-camera). Chrome
   // throttles silent hidden tabs after ~1s, before streaming-data arrives, so
@@ -3684,7 +3678,6 @@ const Recorder = () => {
     if (request.type === "loaded") {
       perfMark("Recorder loaded.received", { isTab: Boolean(request?.isTab) });
       slLog("msg-loaded");
-      backupRef.current = request.backup;
       if (!tabPreferred.current) {
         isTab.current = request.isTab;
         if (request.isTab) {

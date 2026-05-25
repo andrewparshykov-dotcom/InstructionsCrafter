@@ -9,7 +9,6 @@ import { perfMark, perfSpan } from "../../utils/perfMarks";
 
 const openRecorderTab = async (
   activeTab,
-  backup,
   isRegion,
   camera = false,
   request
@@ -166,7 +165,6 @@ const openRecorderTab = async (
       sendMessageRecord({
         type: "loaded",
         request: request,
-        backup: backup,
         tabPreferred: isPlayground,
         ...(isRegion
           ? {
@@ -191,7 +189,6 @@ export const startRecorderSession = async (request, tabId = null) => {
   });
   console.log("[InstructionsCrafter][startRecorderSession] entered", { request, tabId });
   const endStorage = perfSpan("BG.startRecorderSession storage.read");
-  const { backup } = await chrome.storage.local.get(["backup"]);
   endStorage();
   const endTab = perfSpan("BG.startRecorderSession getCurrentTab");
   let activeTab = await getCurrentTab();
@@ -232,7 +229,6 @@ export const startRecorderSession = async (request, tabId = null) => {
       sendMessageRecord({
         type: "loaded",
         request: request,
-        backup: backup,
         region: true,
       })
         .then(() => endSendLoaded({ ok: true }))
@@ -249,10 +245,10 @@ export const startRecorderSession = async (request, tabId = null) => {
         region: true,
         recordingUiTabId: activeTab.id,
       });
-      await openRecorderTab(activeTab, backup, true, false, request);
+      await openRecorderTab(activeTab, true, false, request);
     }
   } else {
     chrome.storage.local.set({ region: false });
-    await openRecorderTab(activeTab, backup, false, request.camera, request);
+    await openRecorderTab(activeTab, false, request.camera, request);
   }
 };

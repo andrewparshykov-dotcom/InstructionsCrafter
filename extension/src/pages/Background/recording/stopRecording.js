@@ -752,19 +752,3 @@ export const handleStopRecordingTab = async (request) => {
   })();
 };
 
-export const handleStopRecordingTabBackup = async (request) => {
-  // gated: unconditional flag would fire the modal on a clean backup-tab close
-  const isMemoryError = Boolean(request?.memoryError);
-  chrome.storage.local.set({
-    recording: false,
-    restarting: false,
-    tabRecordedID: null,
-    ...(isMemoryError ? { memoryError: true } : {}),
-  });
-  sendMessageRecord({ type: "stop-recording-tab" });
-
-  const { activeTab } = await chrome.storage.local.get(["activeTab"]);
-
-  sendMessageTab(activeTab, { type: "stop-pending" });
-  focusTab(activeTab);
-};

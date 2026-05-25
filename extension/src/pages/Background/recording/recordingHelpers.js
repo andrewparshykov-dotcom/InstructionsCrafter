@@ -288,8 +288,6 @@ export const handleRecordingError = async (request) => {
     }
     if (request.error === "stream-error") {
       sendMessageTab(activeTab, { type: "stream-error", errorCode });
-    } else if (request.error === "backup-error") {
-      sendMessageTab(activeTab, { type: "backup-error", errorCode });
     }
   });
 

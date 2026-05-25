@@ -12,7 +12,6 @@ const isDev = env.NODE_ENV === "development";
 // drops post-recording UI + WASM. recording + camera paths preserved.
 const isBsBuild = process.env.SCREENITY_BS_BUILD === "1";
 const BS_DROPPED_ENTRIES = new Set([
-  "backup",
   "download",
   "waveform",
   "playground",
@@ -62,7 +61,6 @@ const entryPoints = {
   playground: path.join(__dirname, "src", "pages", "Playground", "index.jsx"),
   region: path.join(__dirname, "src", "pages", "Region", "index.jsx"),
   download: path.join(__dirname, "src", "pages", "Download", "index.jsx"),
-  backup: path.join(__dirname, "src", "pages", "Backup", "index.jsx"),
   remuxoffscreen: path.join(
     __dirname,
     "src",
@@ -146,17 +144,7 @@ const htmlPlugins = Object.keys(entryPoints)
       ...(isRecorder ? { chunksSortMode: "manual" } : {}),
     };
 
-    // Add favicon only for backup page
-    if (entryName === "backup") {
-      options.favicon = path.join(
-        __dirname,
-        "src",
-        "assets",
-        "backup-favicon.ico"
-      );
-    } else {
-      options.favicon = path.join(__dirname, "src", "assets", "favicon.png");
-    }
+    options.favicon = path.join(__dirname, "src", "assets", "favicon.png");
 
     return new HtmlWebpackPlugin(options);
   })

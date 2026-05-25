@@ -51,11 +51,6 @@ export const onInstalledListener = () => {
       }
     }
 
-    // Backup mode is deprecated: hidden from the settings dropdown and
-    // forced off for all users on install/update. OPFS-backed recording
-    // covers the same crash-resilience without the picker UX.
-    chrome.storage.local.set({ backup: false, backupSetup: false });
-
     // F31: force-write on install AND update. The cog menu that let users
     // override systemAudio was removed; it bleeds into the Whisper transcript
     // (background music, browser notifications, etc.) so we keep it off for

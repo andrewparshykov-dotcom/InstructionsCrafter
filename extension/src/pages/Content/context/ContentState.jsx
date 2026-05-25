@@ -191,7 +191,6 @@ const ContentState = (props) => {
     const sourceTabId = tabIdRef.current ?? activeTabRef.current ?? null;
     chrome.storage.local.set({ restarting: true });
     setTimeout(() => {
-      chrome.runtime.sendMessage({ type: "discard-backup-restart" });
       chrome.runtime.sendMessage({ type: "handle-restart", sourceTabId });
       setTimer(0);
       setContentState((prevContentState) => ({
@@ -975,8 +974,6 @@ const ContentState = (props) => {
     // F31: narration-only recordings; system audio would bleed into the
     // Whisper transcript (background music, browser notifications, etc.).
     systemAudio: false,
-    backup: false,
-    backupSetup: false,
     openWarning: false,
     hasOpenedBefore: false,
     qualityValue: "1080p",

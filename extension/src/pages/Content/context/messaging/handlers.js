@@ -464,25 +464,6 @@ export const setupHandlers = () => {
     state.openToast(message?.message || "", () => {}, message?.timeout || 5000);
   });
 
-  registerMessage("backup-error", () => {
-    const state = getState();
-    state.openModal(
-      chrome.i18n.getMessage("backupPermissionFailTitle"),
-      chrome.i18n.getMessage("backupPermissionFailDescription"),
-      chrome.i18n.getMessage("permissionsModalDismiss"),
-      null,
-      () => {
-        state.dismissRecording();
-      },
-      () => {
-        state.dismissRecording();
-      },
-      null,
-      null,
-      null,
-      false,
-    );
-  });
 
   registerMessage("fast-recorder-hard-fail", () => {
     const state = getState();

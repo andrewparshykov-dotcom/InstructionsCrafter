@@ -2291,15 +2291,6 @@ const Recorder = () => {
     }
   }
 
-  useEffect(() => {
-    chrome.storage.local.get(["backup"], (result) => {
-      if (result.backup) {
-        backupRef.current = true;
-      } else {
-        backupRef.current = false;
-      }
-    });
-  }, []);
 
   useEffect(() => {
     const handleBeforeUnload = (e) => {
@@ -2350,7 +2341,6 @@ const Recorder = () => {
         perfMark("Region.Recorder loaded.received", {
           isRegion: Boolean(request.region),
         });
-        backupRef.current = request.backup;
         if (request.region) {
           requestStreamingDataWithRetry();
         }

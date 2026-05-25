@@ -59,8 +59,6 @@ export const updateFromStorage = (check = true, id = null) => {
       "strokeWidth",
       "quality",
       "systemAudio",
-      "backup",
-      "backupSetup",
       "qualityValue",
       "fpsValue",
       "fastRecorderBeta",
@@ -262,14 +260,6 @@ export const updateFromStorage = (check = true, id = null) => {
           result.systemAudio !== undefined && result.systemAudio !== null
             ? result.systemAudio
             : prevContentState.systemAudio,
-        backup:
-          result.backup !== undefined && result.backup !== null
-            ? result.backup
-            : prevContentState.backup,
-        backupSetup:
-          result.backupSetup !== undefined && result.backupSetup !== null
-            ? result.backupSetup
-            : prevContentState.backupSetup,
         qualityValue:
           result.qualityValue !== undefined && result.qualityValue !== null
             ? result.qualityValue
@@ -315,16 +305,8 @@ export const updateFromStorage = (check = true, id = null) => {
         chrome.storage.local.set({ backgroundEffect: "blur" });
       }
 
-      if (result.backup === undefined || result.backup === null) {
-        chrome.storage.local.set({ backup: false });
-      }
-
       if (result.countdown === undefined || result.countdown === null) {
         chrome.storage.local.set({ countdown: true });
-      }
-
-      if (result.backupSetup === undefined || result.backupSetup === null) {
-        chrome.storage.local.set({ backupSetup: false });
       }
 
       if (!hasStoredEffects && legacyMode) {

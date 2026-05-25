@@ -90,9 +90,6 @@ const _startRecordingInner = async (caller) => {
       "offscreen",
       "useWebCodecsRecorder",
       "fastRecorderInUse",
-      "backup",
-      "backupSetup",
-      "backupTab",
       "memoryError",
     ]);
     lifecycle("BG.startRecording", "session-boundary", {
@@ -212,12 +209,11 @@ const _startRecordingInner = async (caller) => {
 
   chrome.storage.local.set({ lastRecordingType: recordingType || "screen" });
 
-  const { quality, systemAudio, audioInput, backup, offscreen, alarm, alarmTime, countdown } =
+  const { quality, systemAudio, audioInput, offscreen, alarm, alarmTime, countdown } =
     await chrome.storage.local.get([
       "quality",
       "systemAudio",
       "audioInput",
-      "backup",
       "offscreen",
       "alarm",
       "alarmTime",
@@ -230,7 +226,6 @@ const _startRecordingInner = async (caller) => {
     region: Boolean(customRegion),
     systemAudio: Boolean(systemAudio),
     audioInput: Boolean(audioInput),
-    backup: Boolean(backup),
     offscreen: Boolean(offscreen),
     alarm: Boolean(alarm),
     alarmTime: alarm ? (alarmTime || null) : null,
