@@ -7,7 +7,7 @@ import Settings from "./Settings";
 import { contentStateContext } from "../../context/ContentState";
 import { MicOffBlue } from "../../images/popup/images";
 
-import { AlertIcon, TimeIcon } from "../../toolbar/components/SVG";
+import { AlertIcon } from "../../toolbar/components/SVG";
 
 const CLOUD_FEATURES_ENABLED =
   process.env.SCREENITY_ENABLE_CLOUD_FEATURES === "true";
@@ -15,7 +15,6 @@ const CLOUD_FEATURES_ENABLED =
 const RecordingType = (props) => {
   const [contentState, setContentState] = useContext(contentStateContext);
   const [cropActive, setCropActive] = useState(false);
-  const [time, setTime] = useState(0);
 
   const buttonRef = useRef(null);
   const isMac = navigator.platform.toUpperCase().indexOf("MAC") >= 0;
@@ -61,26 +60,6 @@ const RecordingType = (props) => {
       false
     );
   };
-
-  useEffect(() => {
-    // Convert seconds to mm:ss
-    let minutes = Math.floor(contentState.alarmTime / 60);
-    let seconds = contentState.alarmTime - minutes * 60;
-    if (seconds < 10) {
-      seconds = "0" + seconds;
-    }
-    setTime(minutes + ":" + seconds);
-  }, []);
-
-  useEffect(() => {
-    // Convert seconds to mm:ss
-    let minutes = Math.floor(contentState.alarmTime / 60);
-    let seconds = contentState.alarmTime - minutes * 60;
-    if (seconds < 10) {
-      seconds = "0" + seconds;
-    }
-    setTime(minutes + ":" + seconds);
-  }, [contentState.alarmTime]);
 
   // Start recording
   const startStreaming = () => {
@@ -206,12 +185,6 @@ const RecordingType = (props) => {
             contentState.recordingType === "camera")
         }
       >
-        {contentState.alarm && contentState.alarmTime > 0 && (
-          <div className="alarm-time-button">
-            <TimeIcon />
-            {time}
-          </div>
-        )}
         <span className="main-button-label">
           {contentState.pendingRecording
             ? chrome.i18n.getMessage("recordButtonInProgressLabel")

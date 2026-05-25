@@ -41,8 +41,6 @@ export const updateFromStorage = (check = true, id = null) => {
       "regionX",
       "regionY",
       "hideToolbar",
-      "alarm",
-      "alarmTime",
       "pendingRecording",
       "askForPermissions",
       "cursorMode",
@@ -192,14 +190,6 @@ export const updateFromStorage = (check = true, id = null) => {
           result.hideToolbar !== undefined && result.hideToolbar !== null
             ? result.hideToolbar
             : prevContentState.hideToolbar,
-        alarm:
-          result.alarm !== undefined && result.alarm !== null
-            ? result.alarm
-            : prevContentState.alarm,
-        alarmTime:
-          result.alarmTime !== undefined && result.alarmTime !== null
-            ? result.alarmTime
-            : prevContentState.alarmTime,
         pendingRecording:
           result.pendingRecording !== undefined &&
           result.pendingRecording !== null
@@ -352,13 +342,7 @@ export const updateFromStorage = (check = true, id = null) => {
         checkRecording(id);
       }
 
-      if (result.alarm) {
-        setContentState((prevContentState) => ({
-          ...prevContentState,
-          time: parseFloat(result.alarmTime),
-          timer: parseFloat(result.alarmTime),
-        }));
-      } else if (!result.recording) {
+      if (!result.recording) {
         setContentState((prevContentState) => ({
           ...prevContentState,
           time: 0,

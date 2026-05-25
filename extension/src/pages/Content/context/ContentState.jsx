@@ -160,20 +160,7 @@ const ContentState = (props) => {
     const shouldClearCountdown =
       !contentStateRef.current?.isCountdownVisible &&
       !contentStateRef.current?.countdownActive;
-    if (contentStateRef.current.alarm) {
-      if (contentStateRef.current.alarmTime === 0) {
-        setContentState((prevContentState) => ({
-          ...prevContentState,
-          alarm: false,
-        }));
-        chrome.storage.local.set({ alarm: false });
-        setTimer(0);
-      } else {
-        setTimer(contentStateRef.current.alarmTime);
-      }
-    } else {
-      setTimer(0);
-    }
+    setTimer(0);
     setContentState((prevContentState) => ({
       ...prevContentState,
       recording: true,
@@ -206,11 +193,7 @@ const ContentState = (props) => {
     setTimeout(() => {
       chrome.runtime.sendMessage({ type: "discard-backup-restart" });
       chrome.runtime.sendMessage({ type: "handle-restart", sourceTabId });
-      if (contentStateRef.current.alarm) {
-        setTimer(contentStateRef.current.alarmTime);
-      } else {
-        setTimer(0);
-      }
+      setTimer(0);
       setContentState((prevContentState) => ({
         ...prevContentState,
         recording: false,
@@ -240,7 +223,6 @@ const ContentState = (props) => {
   }, []);
 
   const stopRecording = useCallback(() => {
-    chrome.runtime.sendMessage({ type: "clear-recording-alarm" });
     chrome.storage.local.set({
       restarting: false,
       tabRecordedID: null,
@@ -323,7 +305,6 @@ const ContentState = (props) => {
   const dismissRecording = useCallback(() => {
     setStartFlowOutcome("cancelled");
     suppressStopBeepRef.current = true;
-    chrome.runtime.sendMessage({ type: "clear-recording-alarm" });
     chrome.storage.local.set({
       restarting: false,
       tabRecordedID: null,
@@ -975,9 +956,6 @@ const ContentState = (props) => {
     fromRegion: false,
     cropTarget: null,
     hideToolbar: false,
-    alarm: false,
-    alarmTime: 5 * 60,
-    fromAlarm: false,
     pendingRecording: false,
     askForPermissions: true,
     cameraPermission: true,
@@ -1385,13 +1363,6 @@ const ContentState = (props) => {
       0,
       Math.floor((now - recordingStartTime - basePaused - extraPaused) / 1000),
     );
-
-    if (contentStateRef.current?.alarm) {
-      const alarmTime = contentStateRef.current?.alarmTime || 0;
-      const nextRemaining = Math.max(0, alarmTime - elapsedSeconds);
-      setTimer((prev) => (prev === nextRemaining ? prev : nextRemaining));
-      return;
-    }
 
     setTimer((prev) => (prev === elapsedSeconds ? prev : elapsedSeconds));
   }, []);
