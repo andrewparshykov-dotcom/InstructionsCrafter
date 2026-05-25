@@ -99,3 +99,12 @@ Results in terminal.txt
 # ==========================================
 
 test_local.sh
+
+# ==========================================
+# Internal design + development notes (not published)
+# ==========================================
+# Kept locally for the maintainer's reference; not appropriate for the
+# public fork. History before they were untracked may still show them.
+
+ARCHITECTURE.md
+CLAUDE.md

@@ -4,7 +4,7 @@ Turn a screen recording with voice narration into a polished Microsoft Word step
 
 A Chrome extension records the screen + microphone, uploads to a FastAPI backend, which transcribes the audio (Groq Whisper), segments the narration into logical steps, extracts one screenshot per step (FFmpeg), polishes the text (OpenAI GPT-5.4), and returns a `.docx` file. No long-term storage — everything is processed in-memory and discarded after each request.
 
-**Internal tool** for ≤5 users. Forked from [Screenity](https://github.com/alyssaxuu/screenity) (GPLv3). See [ARCHITECTURE.md](./ARCHITECTURE.md) for the full design spec.
+**Internal tool** for ≤5 users. Forked from [Screenity](https://github.com/alyssaxuu/screenity) (GPLv3).
 
 ---
 
@@ -12,8 +12,6 @@ A Chrome extension records the screen + microphone, uploads to a FastAPI backend
 
 ```
 .
-├── ARCHITECTURE.md     # Full design spec (read this for "why")
-├── CLAUDE.md           # Current project state + deferred cleanup notes
 ├── backend/            # Python FastAPI server
 │   ├── app/            # Pipeline modules (transcription, segmentation, etc.)
 │   ├── templates/      # Word document template
@@ -29,7 +27,7 @@ A Chrome extension records the screen + microphone, uploads to a FastAPI backend
 
 ## Production deployment
 
-The backend is live at **`https://instructionscrafter.com`** on Azure (East US, `Standard_D2s_v3`, 24/7 always-on). Production state is documented in [CLAUDE.md](./CLAUDE.md).
+The backend is live at **`https://instructionscrafter.com`** on Azure (East US, `Standard_D2s_v3`, 24/7 always-on).
 
 ---
 

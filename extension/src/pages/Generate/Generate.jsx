@@ -568,7 +568,7 @@ function uploadRecording({
   });
 }
 
-// Per ARCHITECTURE.md: replace non-alphanumeric (except space and hyphen) with underscore.
+// Replace non-alphanumeric (except space and hyphen) with underscore.
 function sanitizeFilename(title) {
   return title.replace(/[^a-zA-Z0-9 \-]/g, "_").trim() || "document";
 }

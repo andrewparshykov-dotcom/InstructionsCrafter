@@ -3,9 +3,8 @@
 // recordings with a 400; catching it here lets the user re-record before
 // committing to an upload that's going to fail.
 //
-// Threshold per ARCHITECTURE.md Phase 8: >95% of samples below ~-50 dB.
-// Conservative defaults; tune against typical room noise once we see
-// real recordings.
+// Threshold: >95% of samples below ~-50 dB. Conservative defaults;
+// tune against typical room noise once we see real recordings.
 
 const SILENCE_THRESHOLD_DB = -50;
 const SILENT_FRACTION = 0.95;

@@ -12,7 +12,7 @@ InstructionsCrafter is **forked from Screenity (GPLv3)**. Publishing the extensi
 - **License notice.** The extension's UI or About page must surface a "this software is licensed under GPLv3" notice with a link to the license text.
 - **No additional restrictions.** You can't add a click-through EULA that contradicts GPLv3 terms.
 
-If you want to skip these obligations, the alternative is to keep distributing as unpacked (see CLAUDE.md "deferred cleanup" → distribution decision). **Reconsider with the team before spending the $5 and starting the submission.**
+If you want to skip these obligations, the alternative is to keep distributing as unpacked. **Reconsider with the team before spending the $5 and starting the submission.**
 
 The rest of this guide assumes you've decided to proceed with store submission.
 

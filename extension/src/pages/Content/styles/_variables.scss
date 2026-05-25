@@ -26,8 +26,7 @@
    PopupContainer body) stop reading as Screenity ink/icon-gray.
    Dead .scss files (_Welcome, _Tabs, _SettingsMenu, _Announcement,
    _VideoItem, _BackgroundEffects, _RegionDimensions, _Settings,
-   _TimeSetter) also inherit but never render — see CLAUDE.md
-   Phase 9 deferred-cleanup section. */
+   _TimeSetter) also inherit but never render. */
 $color-background: #fff;
 $color-light-grey: #f6f7fb;
 $color-primary: #3080f8;
