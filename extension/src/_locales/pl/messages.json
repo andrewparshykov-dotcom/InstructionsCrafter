@@ -367,10 +367,6 @@
     "message": "Anuluj",
     "description": "Anuluj w modalnym komunikacie o wyciszonym mikrofonie"
   },
-  "clickHereDrawOnboarding": {
-    "message": "Kliknij tutaj, aby rysować",
-    "description": "Komunikat o kliknięciu tutaj"
-  },
   "countdownMessage": {
     "message": "Spokojnie. Kliknij gdziekolwiek, aby zatrzymać odliczanie.",
     "description": "Komunikat odliczania"

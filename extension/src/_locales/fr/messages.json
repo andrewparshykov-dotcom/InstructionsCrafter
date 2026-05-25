@@ -367,10 +367,6 @@
     "message": "Annuler",
     "description": "Annuler la boîte de dialogue du microphone désactivé"
   },
-  "clickHereDrawOnboarding": {
-    "message": "Cliquez ici pour dessiner",
-    "description": "Instructions pour cliquer ici"
-  },
   "countdownMessage": {
     "message": "Détendez-vous. Cliquez n'importe où pour arrêter le compte à rebours.",
     "description": "Message de compte à rebours"

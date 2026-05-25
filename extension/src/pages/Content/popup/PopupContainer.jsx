@@ -17,10 +17,6 @@ import { CloseIconPopup, GrabIconPopup } from "../toolbar/components/SVG";
 import RecordingTab from "./layout/RecordingTab";
 
 import Welcome from "./layout/Welcome";
-import {
-  runProPopupOnboardingIfNeeded,
-  runProCameraOnboardingIfNeeded,
-} from "./onboarding/proOnboarding";
 
 import { contentStateContext } from "../context/ContentState";
 
@@ -40,7 +36,6 @@ const PopupContainer = (props) => {
   const videoTabRef = useRef(null);
   const pillRef = useRef(null);
   const isCloudBuild = process.env.SCREENITY_ENABLE_CLOUD_FEATURES === "true";
-  const wasCameraActiveRef = useRef(null);
 
   // Playground anchors the popup to a zero-height marker placed directly
   // below the toolbar's anchor inside the page's CSS layout
@@ -361,74 +356,6 @@ const PopupContainer = (props) => {
     contentState.bigTab,
     contentState.wasLoggedIn,
     pillRef.current,
-  ]);
-
-  useEffect(() => {
-    const isPro = Boolean(contentState.isLoggedIn && contentState.isSubscribed);
-    if (!isCloudBuild || !isPro) return;
-    runProPopupOnboardingIfNeeded({
-      rootContext: props.shadowRef?.current?.shadowRoot || document,
-      isPro,
-      isLoggedIn: Boolean(contentState.isLoggedIn),
-      popupOpen: Boolean(contentState.showPopup && contentState.showExtension),
-      cameraEnabled: Boolean(contentState.cameraActive),
-      pendingRecording: Boolean(contentState.pendingRecording),
-      preparingRecording: Boolean(contentState.preparingRecording),
-      recording: Boolean(contentState.recording),
-      countdownActive: Boolean(contentState.countdownActive),
-      isCountdownVisible: Boolean(contentState.isCountdownVisible),
-    });
-  }, [
-    isCloudBuild,
-    contentState.isLoggedIn,
-    contentState.isSubscribed,
-    contentState.showPopup,
-    contentState.showExtension,
-    contentState.recordingToScene,
-    contentState.cameraActive,
-    contentState.pendingRecording,
-    contentState.preparingRecording,
-    contentState.recording,
-    contentState.countdownActive,
-    contentState.isCountdownVisible,
-    props.shadowRef,
-  ]);
-
-  useEffect(() => {
-    const isPro = Boolean(contentState.isLoggedIn && contentState.isSubscribed);
-    const cameraEnabled = Boolean(contentState.cameraActive);
-    if (wasCameraActiveRef.current === null) {
-      wasCameraActiveRef.current = cameraEnabled;
-      return;
-    }
-    const becameEnabled = cameraEnabled && !wasCameraActiveRef.current;
-    wasCameraActiveRef.current = cameraEnabled;
-    if (!becameEnabled || !isCloudBuild || !isPro) return;
-    runProCameraOnboardingIfNeeded({
-      rootContext: props.shadowRef?.current?.shadowRoot || document,
-      isPro,
-      isLoggedIn: Boolean(contentState.isLoggedIn),
-      popupOpen: Boolean(contentState.showPopup && contentState.showExtension),
-      cameraEnabled,
-      pendingRecording: Boolean(contentState.pendingRecording),
-      preparingRecording: Boolean(contentState.preparingRecording),
-      recording: Boolean(contentState.recording),
-      countdownActive: Boolean(contentState.countdownActive),
-      isCountdownVisible: Boolean(contentState.isCountdownVisible),
-    });
-  }, [
-    isCloudBuild,
-    contentState.cameraActive,
-    contentState.isLoggedIn,
-    contentState.isSubscribed,
-    contentState.showPopup,
-    contentState.showExtension,
-    contentState.pendingRecording,
-    contentState.preparingRecording,
-    contentState.recording,
-    contentState.countdownActive,
-    contentState.isCountdownVisible,
-    props.shadowRef,
   ]);
 
   return (

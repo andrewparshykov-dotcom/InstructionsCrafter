@@ -367,10 +367,6 @@
     "message": "Cancelar",
     "description": "Cancelar del modal de micrófono apagado"
   },
-  "clickHereDrawOnboarding": {
-    "message": "Haz clic aquí para dibujar",
-    "description": "Instrucciones para hacer clic aquí"
-  },
   "countdownMessage": {
     "message": "Relájate. Haz clic en cualquier lugar para detener la cuenta regresiva.",
     "description": "Mensaje de cuenta regresiva"

@@ -367,10 +367,6 @@
     "message": "취소",
     "description": "Microphone muted modal cancel"
   },
-  "clickHereDrawOnboarding": {
-    "message": "여기를 클릭하여 그리기",
-    "description": "Click here onboarding"
-  },
   "countdownMessage": {
     "message": "편안하세요. 카운트다운을 중지하려면 어디든 클릭하세요.",
     "description": "Countdown message"

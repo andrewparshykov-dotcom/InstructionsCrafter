@@ -19,10 +19,6 @@
   "Satoshi-Bold",
   "chrome-extension://__MSG_@@extension_id__/assets/fonts/Satoshi-Bold"
 );
-@include font(
-  "Gloria Hallelujah",
-  "chrome-extension://__MSG_@@extension_id__/assets/fonts/GloriaHallelujah-Regular"
-);
 
 /* Colors — Editorial Manual palette (F48). Live popup .scss files @use
    these via the legacy names; values now match the page-level

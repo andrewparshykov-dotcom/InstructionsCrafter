@@ -367,10 +367,6 @@
     "message": "Annulla",
     "description": "Annulla del modalità di microfono spento"
   },
-  "clickHereDrawOnboarding": {
-    "message": "Clicca qui per disegnare",
-    "description": "Istruzioni per fare clic qui"
-  },
   "countdownMessage": {
     "message": "Rilassati. Fai clic ovunque per interrompere il conto alla rovescia.",
     "description": "Messaggio del conto alla rovescia"

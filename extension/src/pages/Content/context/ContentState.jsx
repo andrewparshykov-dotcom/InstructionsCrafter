@@ -603,11 +603,6 @@ const ContentState = (props) => {
       );
     }
 
-    setContentState((prevContentState) => ({
-      ...prevContentState,
-      showOnboardingArrow: false,
-    }));
-
     if (
       !contentStateRef.current.micActive &&
       contentStateRef.current.askMicrophone
@@ -967,7 +962,6 @@ const ContentState = (props) => {
     offscreenRecording: false,
     pipEnded: false,
     tabCaptureFrame: false,
-    showOnboardingArrow: false,
     offline: false,
     updateChrome: false,
     permissionsChecked: false,

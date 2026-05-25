@@ -367,10 +367,6 @@
     "message": "取消",
     "description": "Microphone muted modal cancel"
   },
-  "clickHereDrawOnboarding": {
-    "message": "单击此处进行绘制",
-    "description": "Click here onboarding"
-  },
   "countdownMessage": {
     "message": "放松。单击任何地方停止倒计时。",
     "description": "Countdown message"

@@ -367,10 +367,6 @@
     "message": "Abbrechen",
     "description": "Abbrechen der Mikrofon-Stummschaltungsmodalität"
   },
-  "clickHereDrawOnboarding": {
-    "message": "Hier klicken, um zu zeichnen",
-    "description": "Onboarding 'Hier klicken'"
-  },
   "countdownMessage": {
     "message": "Entspannen Sie sich. Klicken Sie überall hin, um den Countdown zu stoppen.",
     "description": "Meldung 'Countdown'"

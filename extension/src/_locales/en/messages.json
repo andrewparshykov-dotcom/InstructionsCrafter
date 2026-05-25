@@ -375,10 +375,6 @@
     "message": "Cancel",
     "description": "Microphone muted modal cancel"
   },
-  "clickHereDrawOnboarding": {
-    "message": "Click here to draw",
-    "description": "Click here onboarding"
-  },
   "countdownMessage": {
     "message": "Relax. Click anywhere to stop the countdown.",
     "description": "Countdown message"

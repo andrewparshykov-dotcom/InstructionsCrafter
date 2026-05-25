@@ -367,10 +367,6 @@
     "message": "Скасувати",
     "description": "Microphone muted modal cancel"
   },
-  "clickHereDrawOnboarding": {
-    "message": "Клацніть тут, щоб малювати",
-    "description": "Click here onboarding"
-  },
   "countdownMessage": {
     "message": "Розслабтеся. Клацніть будь-де, щоб зупинити відлік.",
     "description": "Countdown message"

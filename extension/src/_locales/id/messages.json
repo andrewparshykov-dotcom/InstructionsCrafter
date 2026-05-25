@@ -367,10 +367,6 @@
     "message": "Batal",
     "description": "Batal modal Mikrofon dimatikan"
   },
-  "clickHereDrawOnboarding": {
-    "message": "Klik di sini untuk menggambar",
-    "description": "Panduan Klik di sini"
-  },
   "countdownMessage": {
     "message": "Tenang. Klik di mana saja untuk menghentikan hitungan mundur.",
     "description": "Pesan hitungan mundur"

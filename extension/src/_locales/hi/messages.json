@@ -367,10 +367,6 @@
     "message": "रद्द करें",
     "description": "माइक्रोफ़ोन म्यूट हो गया मॉडल रद्द करें"
   },
-  "clickHereDrawOnboarding": {
-    "message": "ड्रा करने के लिए यहां क्लिक करें",
-    "description": "यहां क्लिक करने पर आग्रहण"
-  },
   "countdownMessage": {
     "message": "आराम करें। किसी भी जगह पर क्लिक करके गिनती रोकने के लिए।",
     "description": "गिनती संदेश"

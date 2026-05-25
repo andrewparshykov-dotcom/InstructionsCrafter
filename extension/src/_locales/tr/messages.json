@@ -367,10 +367,6 @@
     "message": "İptal",
     "description": "Mikrofon kapalı modal iptal"
   },
-  "clickHereDrawOnboarding": {
-    "message": "Çizim yapmak için buraya tıklayın",
-    "description": "Buraya tıklama rehberi"
-  },
   "countdownMessage": {
     "message": "Rahatlayın. Saymayı durdurmak için herhangi bir yere tıklayın.",
     "description": "Gerisayım mesajı"

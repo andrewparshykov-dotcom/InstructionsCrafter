@@ -416,13 +416,6 @@ export const setupHandlers = () => {
     }
   });
 
-  registerMessage("setup-complete", () => {
-    setContentState((prev) => ({
-      ...prev,
-      showOnboardingArrow: true,
-    }));
-  });
-
   registerMessage("hide-popup-recording", () => {
     setContentState((prev) => ({
       ...prev,

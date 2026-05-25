@@ -12,20 +12,10 @@ export const desktopCapture = async (request) => {
   });
   console.log("[InstructionsCrafter][desktopCapture] entered", request);
   // batched: two sequential gets added 80-160ms of storage-queue latency
-  const { backup, backupSetup, onboarding } = await chrome.storage.local.get([
+  const { backup, backupSetup } = await chrome.storage.local.get([
     "backup",
     "backupSetup",
-    "onboarding",
   ]);
-
-  // onboarding gate: prevent recorder tab opening behind the Welcome splash
-  if (onboarding === true) {
-    perfMark("BG.desktopCapture.blocked-by-onboarding");
-    console.log(
-      "[InstructionsCrafter][desktopCapture] blocked: onboarding active",
-    );
-    return;
-  }
 
   chrome.storage.local.set({ sendingChunks: false });
 

@@ -367,10 +367,6 @@
     "message": "Cancel·la",
     "description": "Cancel·la del modal de micròfon apagat"
   },
-  "clickHereDrawOnboarding": {
-    "message": "Fes clic aquí per dibuixar",
-    "description": "Onboarding per fer clic aquí"
-  },
   "countdownMessage": {
     "message": "Relaxa't. Fes clic en qualsevol lloc per aturar el compte enrere.",
     "description": "Missatge de compte enrere"

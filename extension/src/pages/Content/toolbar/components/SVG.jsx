@@ -422,16 +422,6 @@ const GrabIconPopup = (props) => {
   );
 };
 
-const OnboardingArrow = (props) => {
-  return (
-    <ReactSVG
-      src={URL + "/helper/onboarding-arrow.svg"}
-      width={props.width}
-      height={props.height}
-    />
-  );
-};
-
 const CloseButtonToolbar = (props) => {
   return (
     <ReactSVG
@@ -512,7 +502,6 @@ export {
   Pip,
   CloseIconPopup,
   GrabIconPopup,
-  OnboardingArrow,
   CloseButtonToolbar,
   HelpIconPopup,
   AudioIcon,

@@ -33,7 +33,6 @@ import {
   RestartIcon,
   DiscardIcon,
   BlurIcon,
-  OnboardingArrow,
   CloseButtonToolbar,
 } from "../components/SVG";
 
@@ -336,7 +335,6 @@ const ToolbarWrap = () => {
       setContentState((prevContentState) => ({
         ...prevContentState,
         drawingMode: true,
-        showOnboardingArrow: false,
       }));
     } else {
       setContentState((prevContentState) => ({
@@ -523,16 +521,6 @@ const ToolbarWrap = () => {
             onValueChange={handleChange}
           >
             <div className="ToolbarToggleWrap">
-              {contentState.showOnboardingArrow && (
-                <div className="OnboardingArrow">
-                  <div className="OnboardingText">
-                    {chrome.i18n.getMessage("clickHereDrawOnboarding")}
-                  </div>
-                  <div className="ArrowShape">
-                    <OnboardingArrow />
-                  </div>
-                </div>
-              )}
               <ToolTrigger
                 type="mode"
                 content={chrome.i18n.getMessage("toggleDrawingToolsTooltip")}
