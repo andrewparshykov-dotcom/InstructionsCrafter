@@ -1,5 +1,4 @@
 @charset "UTF-8";
-@import url("https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500&family=Geist:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&display=swap");
 @font-face {
   font-family: "Satoshi-Light";
   src: url("chrome-extension://__MSG_@@extension_id__/assets/fonts/Satoshi-Light.ttf") format("truetype");

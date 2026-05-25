@@ -290,6 +290,10 @@ const Wrapper = () => {
                 <PopupContainer shadowRef={shadowRef} />
               )}
             </div>
+            <link
+              rel="stylesheet"
+              href={chrome.runtime.getURL("assets/fonts/editorial-manual.css")}
+            />
             <style type="text/css">{styles}</style>
           </root.div>
         </div>

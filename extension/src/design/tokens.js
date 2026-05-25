@@ -59,8 +59,3 @@ export const radius = {
   m: 8,
   l: 12,
 };
-
-// Google Fonts CDN link. Use in each page's index.html <head>.
-// Instrument Serif: 400 + 400 italic. Geist: 300/400/500/600. Geist Mono: 400/500.
-export const FONTS_HREF =
-  "https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500&family=Geist:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&display=swap";
