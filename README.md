@@ -241,4 +241,6 @@ To publish a new version (or set up the listing for the first time), follow [doc
 
 ## License
 
-Forked from [Screenity](https://github.com/alyssaxuu/screenity) (GPLv3) — the extension code inherits that license. The backend (under `backend/`) is custom and unencumbered. See [ARCHITECTURE.md](./ARCHITECTURE.md) "Licensing note" and [docs/CHROME_WEB_STORE.md](./docs/CHROME_WEB_STORE.md) "GPLv3 obligations" for distribution implications.
+**GNU General Public License v3.0** — see [`LICENSE`](./LICENSE) for the full text and [`NOTICE.md`](./NOTICE.md) for component attribution.
+
+The extension is forked from [Screenity](https://github.com/alyssaxuu/screenity) (also GPLv3). The backend is original code, distributed under the same GPLv3 for consistency. Because the project is distributed via the Chrome Web Store, GPLv3 source-disclosure obligations apply — every recipient of the extension must be able to obtain the source. This repository is public for that purpose.
