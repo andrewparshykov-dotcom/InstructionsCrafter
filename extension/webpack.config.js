@@ -59,7 +59,6 @@ const entryPoints = {
   options: path.join(__dirname, "src", "pages", "Options", "index.js"),
   generate: path.join(__dirname, "src", "pages", "Generate", "index.jsx"),
   playground: path.join(__dirname, "src", "pages", "Playground", "index.jsx"),
-  region: path.join(__dirname, "src", "pages", "Region", "index.jsx"),
   download: path.join(__dirname, "src", "pages", "Download", "index.jsx"),
   remuxoffscreen: path.join(
     __dirname,

@@ -23,18 +23,6 @@
     "message": "Область вкладки",
     "description": "Tab area recording type label on popup"
   },
-  "customAreaRecordingDisabledTitle": {
-    "message": "Запис області користувача вимкнено",
-    "description": "Custom area recording disabled warning on popup for Chrome version older than 104"
-  },
-  "customAreaRecordingDisabledDescription": {
-    "message": "Оновіть версію Chrome до 110+",
-    "description": "Custom area recording disabled warning description on popup for Chrome version older than 104"
-  },
-  "customAreaRecordingDisabledAction": {
-    "message": "Оновити",
-    "description": "Custom area recording disabled warning action on popup for Chrome version older than 104"
-  },
   "permissionsModalTitle": {
     "message": "Перевірте ваші дозволи",
     "description": "Camera / microphone permissions warning modal title"
@@ -70,10 +58,6 @@
   "allowMicrophoneAccessButton": {
     "message": "Дозволити доступ до мікрофону",
     "description": "Allow microphone access button"
-  },
-  "customAreaLabel": {
-    "message": "Встановіть область для запису",
-    "description": "Custom area switch label"
   },
   "flipCameraLabel": {
     "message": "Перевернути камеру",
@@ -130,14 +114,6 @@
   "offLabel": {
     "message": "Вимкнено",
     "description": "Off label on dropdown"
-  },
-  "regionWidthLabel": {
-    "message": "Ширина",
-    "description": "Region width label"
-  },
-  "regionHeightLabel": {
-    "message": "Висота",
-    "description": "Region height label"
   },
   "finishRecordingTooltip": {
     "message": "Завершити запис",

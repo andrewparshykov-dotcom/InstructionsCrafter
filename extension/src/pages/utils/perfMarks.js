@@ -19,7 +19,6 @@ const buildDevImpl = () => {
     try {
       if (typeof window === "undefined") return "BG";
       const path = (window.location && window.location.pathname) || "";
-      if (path.endsWith("/region.html")) return "Region";
       if (path.endsWith("/recorder.html")) return "Recorder";
       if (path.endsWith("/cloudrecorder.html")) return "CloudRecorder";
       if (path.endsWith("/offscreenrecorder.html")) return "OffscreenRecorder";

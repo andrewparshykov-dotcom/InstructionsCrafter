@@ -210,8 +210,6 @@ export const handleRecordingError = async (request) => {
     postStopEditorOpened: false,
     // releases the editor-opening lock; otherwise next stopRecording refuses to open editor
     postStopEditorOpening: false,
-    region: false,
-    customRegion: false,
     // PiP + pause must follow recording down; otherwise next session inherits paused=true
     pipForceClose: Date.now(),
     paused: false,

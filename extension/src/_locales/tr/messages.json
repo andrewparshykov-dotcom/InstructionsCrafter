@@ -23,18 +23,6 @@
     "message": "Sekme alanı",
     "description": "Açılır pencere üzerinde sekme alanı kaydı türü etiketi"
   },
-  "customAreaRecordingDisabledTitle": {
-    "message": "Özel alan kaydı devre dışı",
-    "description": "Chrome sürümü 104'ten eski olanlar için özel alan kaydı devre dışı uyarısı başlığı"
-  },
-  "customAreaRecordingDisabledDescription": {
-    "message": "Daha fazla özellik için Chrome sürümünü 110+ olarak güncelleyin",
-    "description": "Chrome sürümü 104'ten eski olanlar için özel alan kaydı devre dışı uyarısı açıklaması"
-  },
-  "customAreaRecordingDisabledAction": {
-    "message": "Güncelle",
-    "description": "Chrome sürümü 104'ten eski olanlar için özel alan kaydı devre dışı uyarısı eylemi"
-  },
   "permissionsModalTitle": {
     "message": "İzinlerinizi kontrol edin",
     "description": "Kamera / mikrofon izinleri uyarı modalı başlığı"
@@ -70,10 +58,6 @@
   "allowMicrophoneAccessButton": {
     "message": "Mikrofon erişimine izin ver",
     "description": "Mikrofon erişimine izin verme düğmesi"
-  },
-  "customAreaLabel": {
-    "message": "Kaydedilecek bir alan belirleyin",
-    "description": "Özel alan anahtarı etiketi"
   },
   "flipCameraLabel": {
     "message": "Kamerayı çevir",
@@ -130,14 +114,6 @@
   "offLabel": {
     "message": "Kapalı",
     "description": "Açılır listede Kapalı etiketi"
-  },
-  "regionWidthLabel": {
-    "message": "Genişlik",
-    "description": "Bölge genişliği etiketi"
-  },
-  "regionHeightLabel": {
-    "message": "Yükseklik",
-    "description": "Bölge yüksekliği etiketi"
   },
   "finishRecordingTooltip": {
     "message": "Kaydı Bitir",

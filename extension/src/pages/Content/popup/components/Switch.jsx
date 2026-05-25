@@ -45,14 +45,6 @@ const Switch = (props) => {
               }));
               chrome.storage.local.set({ [props.value]: checked });
 
-              if (props.value === "customRegion") {
-                if (checked) {
-                  chrome.storage.local.set({
-                    region: true,
-                  });
-                }
-              }
-
               if (props.name === "hideUI") {
                 setContentState((prevContentState) => ({
                   ...prevContentState,

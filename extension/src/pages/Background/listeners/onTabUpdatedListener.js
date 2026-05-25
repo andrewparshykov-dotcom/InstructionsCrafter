@@ -14,7 +14,6 @@ export const handleTabUpdate = async (tabId, changeInfo, tab) => {
         pendingRecording,
         recordingStartTime,
         recorderSession,
-        customRegion,
         recordingType,
       } = await chrome.storage.local.get([
         "recording",
@@ -26,7 +25,6 @@ export const handleTabUpdate = async (tabId, changeInfo, tab) => {
         "pendingRecording",
         "recordingStartTime",
         "recorderSession",
-        "customRegion",
         "recordingType",
       ]);
 

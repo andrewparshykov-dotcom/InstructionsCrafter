@@ -588,21 +588,6 @@ const ContentState = (props) => {
     });
 
     if (
-      contentStateRef.current.recordingType === "region" &&
-      contentStateRef.current.cropTarget
-    ) {
-      contentStateRef.current.regionCaptureRef.contentWindow.postMessage(
-        {
-          type: "crop-target",
-          target: contentStateRef.current.cropTarget,
-          width: contentStateRef.current.regionWidth,
-          height: contentStateRef.current.regionHeight,
-        },
-        "*",
-      );
-    }
-
-    if (
       !contentStateRef.current.micActive &&
       contentStateRef.current.askMicrophone
     ) {
@@ -614,9 +599,6 @@ const ContentState = (props) => {
         () => {
           chrome.runtime.sendMessage({
             type: "desktop-capture",
-            region:
-              contentStateRef.current.recordingType === "region" ? true : false,
-            customRegion: contentStateRef.current.customRegion,
             offscreenRecording: contentStateRef.current.offscreenRecording,
             camera:
               contentStateRef.current.recordingType === "camera" ? true : false,
@@ -653,9 +635,6 @@ const ContentState = (props) => {
       perfMark("Content desktop-capture.sent");
       chrome.runtime.sendMessage({
         type: "desktop-capture",
-        region:
-          contentStateRef.current.recordingType === "region" ? true : false,
-        customRegion: contentStateRef.current.customRegion,
         offscreenRecording: contentStateRef.current.offscreenRecording,
         camera:
           contentStateRef.current.recordingType === "camera" ? true : false,
@@ -941,14 +920,7 @@ const ContentState = (props) => {
     showPopup: false,
     blurMode: false,
     recordingType: "screen",
-    customRegion: false,
-    regionWidth: 800,
     surface: "default",
-    regionHeight: 500,
-    regionX: 100,
-    regionY: 100,
-    fromRegion: false,
-    cropTarget: null,
     hideToolbar: false,
     pendingRecording: false,
     askForPermissions: true,
@@ -1288,7 +1260,6 @@ const ContentState = (props) => {
         !contentState.recording &&
         isMac &&
         warningList.some((el) => window.location.href.includes(el)) &&
-        contentState.recordingType != "region" &&
         contentState.recordingType != "camera"
       ) {
         contentState.openWarning(
@@ -1460,35 +1431,10 @@ const ContentState = (props) => {
             null,
         });
         if (isRecording && !isTargetTab()) {
-          // Tab/region recordings: clear UI flags that preparing-recording set on non-target tabs.
-          const recordingType =
-            recordingTypeFromChange ??
-            contentStateRef.current?.recordingType;
-          const isTabBound =
-            recordingType === "tab" || recordingType === "region";
-          if (isTabBound) {
-            setContentState((prev) => ({
-              ...prev,
-              recording: false,
-              showExtension: false,
-              showPopup: false,
-              preparingRecording: false,
-              countdownActive: false,
-              isCountdownVisible: false,
-              drawingMode: false,
-              blurMode: false,
-              cursorMode: "none",
-              cursorEffects: [],
-              // Camera bubble belongs to the captured tab; the cameraActive
-              // listener is isTargetTab-gated so stale-true would stick here.
-              cameraActive: false,
-            }));
-          } else {
-            setContentState((prev) => ({
-              ...prev,
-              recording: false,
-            }));
-          }
+          setContentState((prev) => ({
+            ...prev,
+            recording: false,
+          }));
           return;
         }
         const shouldHideCountdown =
@@ -1551,15 +1497,6 @@ const ContentState = (props) => {
     chrome.storage.onChanged.addListener(onChanged);
     return () => chrome.storage.onChanged.removeListener(onChanged);
   }, [isTargetTab, updateTimerFromStorage, verifyUser]);
-
-  useEffect(() => {
-    if (!contentState.customRegion) {
-      setContentState((prevContentState) => ({
-        ...prevContentState,
-        cropTarget: null,
-      }));
-    }
-  }, [contentState.customRegion]);
 
   useEffect(() => {
     if (contentState.hideToolbar && contentState.hideUI) {

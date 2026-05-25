@@ -14,8 +14,6 @@ const TRACKED_KEYS = new Set([
   "pendingRecording",
   "restarting",
   "offscreen",
-  "region",
-  "customRegion",
   "recordingType",
   "useWebCodecsRecorder",
   "fastRecorderInUse",

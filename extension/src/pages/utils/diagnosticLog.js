@@ -221,8 +221,6 @@ export const getStorageFlags = async () => {
     "cloudRestartHistory",
     "tabPreferred",
     "tabStreamIdCache",
-    "region",
-    "customRegion",
     "multiMode",
     "multiProjectId",
     "multiSceneCount",

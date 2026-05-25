@@ -132,14 +132,8 @@
   margin-top: -16px;
   margin-bottom: 8px;
 
-  .popup-warning-right {
-    color: $color-primary;
-    font-family: $font-medium;
-    width: 90px;
-  }
 }
-.popup-warning-left,
-.popup-warning-right {
+.popup-warning-left {
   width: 50px;
   display: flex;
   align-items: center;
@@ -150,9 +144,6 @@
   svg {
     color: $color-primary;
   }
-}
-.popup-warning-right {
-  cursor: pointer;
 }
 .popup-warning-middle {
   flex: 1;

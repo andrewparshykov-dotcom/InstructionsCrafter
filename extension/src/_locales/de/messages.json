@@ -23,18 +23,6 @@
     "message": "Tab-Bereich",
     "description": "Label für die Aufnahmeart 'Tab-Bereich' in der Popup-Ansicht"
   },
-  "customAreaRecordingDisabledTitle": {
-    "message": "Benutzerdefinierte Bereichsaufnahme deaktiviert",
-    "description": "Warnung 'Benutzerdefinierte Bereichsaufnahme deaktiviert' in der Popup-Ansicht für Chrome-Versionen älter als 104"
-  },
-  "customAreaRecordingDisabledDescription": {
-    "message": "Aktualisieren Sie die Chrome-Version auf 110+",
-    "description": "Beschreibung der Warnung 'Benutzerdefinierte Bereichsaufnahme deaktiviert' in der Popup-Ansicht für Chrome-Versionen älter als 104"
-  },
-  "customAreaRecordingDisabledAction": {
-    "message": "Aktualisieren",
-    "description": "Aktion der Warnung 'Benutzerdefinierte Bereichsaufnahme deaktiviert' in der Popup-Ansicht für Chrome-Versionen älter als 104"
-  },
   "permissionsModalTitle": {
     "message": "Überprüfen Sie Ihre Berechtigungen",
     "description": "Titel des Modals für Kamera- / Mikrofonberechtigungen"
@@ -70,10 +58,6 @@
   "allowMicrophoneAccessButton": {
     "message": "Mikrofonzugriff zulassen",
     "description": "Schaltfläche 'Mikrofonzugriff zulassen'"
-  },
-  "customAreaLabel": {
-    "message": "Bereich zum Aufnehmen festlegen",
-    "description": "Label für den Schalter 'Benutzerdefinierte Bereichsaufnahme'"
   },
   "flipCameraLabel": {
     "message": "Kamera umdrehen",
@@ -130,14 +114,6 @@
   "offLabel": {
     "message": "Aus",
     "description": "Beschreibung für 'Aus' in der Dropdown-Liste"
-  },
-  "regionWidthLabel": {
-    "message": "Breite",
-    "description": "Beschreibung für das Breiten-Label"
-  },
-  "regionHeightLabel": {
-    "message": "Höhe",
-    "description": "Beschreibung für das Höhen-Label"
   },
   "finishRecordingTooltip": {
     "message": "Aufnahme beenden",

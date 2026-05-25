@@ -23,18 +23,6 @@
     "message": "Area tab",
     "description": "Label jenis perekaman area tab pada popup"
   },
-  "customAreaRecordingDisabledTitle": {
-    "message": "Perekaman area kustom dinonaktifkan",
-    "description": "Peringatan perekaman area kustom dinonaktifkan pada popup untuk versi Chrome yang lebih lama dari 104"
-  },
-  "customAreaRecordingDisabledDescription": {
-    "message": "Perbarui versi Chrome ke 110+",
-    "description": "Deskripsi peringatan perekaman area kustom dinonaktifkan pada popup untuk versi Chrome yang lebih lama dari 104"
-  },
-  "customAreaRecordingDisabledAction": {
-    "message": "Perbarui",
-    "description": "Tindakan peringatan perekaman area kustom dinonaktifkan pada popup untuk versi Chrome yang lebih lama dari 104"
-  },
   "permissionsModalTitle": {
     "message": "Periksa izin Anda",
     "description": "Judul modal peringatan izin kamera/mikrofon"
@@ -70,10 +58,6 @@
   "allowMicrophoneAccessButton": {
     "message": "Izinkan akses mikrofon",
     "description": "Tombol izinkan akses mikrofon"
-  },
-  "customAreaLabel": {
-    "message": "Atur area untuk direkam",
-    "description": "Label sakelar area kustom"
   },
   "flipCameraLabel": {
     "message": "Putar kamera",
@@ -130,14 +114,6 @@
   "offLabel": {
     "message": "Mati",
     "description": "Label Mati pada dropdown"
-  },
-  "regionWidthLabel": {
-    "message": "Lebar",
-    "description": "Label lebar daerah"
-  },
-  "regionHeightLabel": {
-    "message": "Tinggi",
-    "description": "Label tinggi daerah"
   },
   "finishRecordingTooltip": {
     "message": "Selesaikan perekaman",

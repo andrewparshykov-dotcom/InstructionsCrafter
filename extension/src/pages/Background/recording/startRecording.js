@@ -81,8 +81,6 @@ const _startRecordingInner = async (caller) => {
       "recordingUiTabId",
       "tabRecordedID",
       "sandboxTab",
-      "region",
-      "customRegion",
       "recordingType",
       "recording",
       "pendingRecording",
@@ -168,44 +166,9 @@ const _startRecordingInner = async (caller) => {
     chrome.storage.local.set({ recordingUiTabId: activeTab });
   }
 
-  const { customRegion } = await chrome.storage.local.get(["customRegion"]);
-
   const { recordingType } = await chrome.storage.local.get(["recordingType"]);
 
-  if (recordingType === "region" || recordingType === "tab") {
-    chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-      const tab = tabs[0];
-      if (tab) {
-        const title = tab.title || "";
-        const url = tab.url || "";
-        chrome.storage.local.set({
-          recordingMeta: {
-            type: "tab",
-            title,
-            url,
-            startedAt: Date.now(),
-          },
-        });
-      }
-
-      if (tab && tab.url) {
-        try {
-          const url = new URL(tab.url);
-          let hostname = url.hostname;
-
-          if (hostname.startsWith("www.")) {
-            hostname = hostname.slice(4);
-          }
-
-          chrome.storage.local.set({ recordedTabDomain: hostname });
-        } catch (e) {
-          console.warn("Could not parse tab URL for domain:", e);
-        }
-      }
-    });
-  } else {
-    chrome.storage.local.remove(["recordingMeta"]);
-  }
+  chrome.storage.local.remove(["recordingMeta"]);
 
   chrome.storage.local.set({ lastRecordingType: recordingType || "screen" });
 
@@ -223,7 +186,6 @@ const _startRecordingInner = async (caller) => {
     recordingAttemptId,
     recordingType: recordingType || "screen",
     quality: quality || null,
-    region: Boolean(customRegion),
     systemAudio: Boolean(systemAudio),
     audioInput: Boolean(audioInput),
     offscreen: Boolean(offscreen),
@@ -232,7 +194,7 @@ const _startRecordingInner = async (caller) => {
     countdown: Boolean(countdown),
   });
   // sync log so the event flushes to storage before SW can be killed
-  diagEvent("session-start", { region: Boolean(customRegion), caller });
+  diagEvent("session-start", { caller });
 
   const { recordingTab: prevRecTab } = await chrome.storage.local.get([
     "recordingTab",
@@ -246,11 +208,7 @@ const _startRecordingInner = async (caller) => {
     }
   }
 
-  const startMsg = customRegion
-    ? { type: "start-recording-tab", region: true }
-    : { type: "start-recording-tab" };
-
-  sendMessageRecord(startMsg).catch((err) => {
+  sendMessageRecord({ type: "start-recording-tab" }).catch((err) => {
     const errStr = String(err).slice(0, 120);
     const isStaleTab =
       errStr.includes("Receiving end does not exist") ||
@@ -268,7 +226,6 @@ const _startRecordingInner = async (caller) => {
       } catch {}
       if (isReallyRecording) return;
       diagEvent("start-fail", {
-        region: Boolean(customRegion),
         error: errStr,
         staleTab: isStaleTab,
       });

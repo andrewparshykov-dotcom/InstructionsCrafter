@@ -23,18 +23,6 @@
     "message": "Obszar karty",
     "description": "Etykieta rodzaju nagrywania obszaru karty na okienku popup"
   },
-  "customAreaRecordingDisabledTitle": {
-    "message": "Nagrywanie niestandardowego obszaru wyłączone",
-    "description": "Ostrzeżenie o wyłączonym nagrywaniu niestandardowego obszaru na okienku popup dla wersji Chrome starszych niż 104"
-  },
-  "customAreaRecordingDisabledDescription": {
-    "message": "Zaktualizuj wersję Chrome do 110+",
-    "description": "Opis ostrzeżenia o wyłączonym nagrywaniu niestandardowego obszaru na okienku popup dla wersji Chrome starszych niż 104"
-  },
-  "customAreaRecordingDisabledAction": {
-    "message": "Zaktualizuj",
-    "description": "Działanie w ostrzeżeniu o wyłączonym nagrywaniu niestandardowego obszaru na okienku popup dla wersji Chrome starszych niż 104"
-  },
   "permissionsModalTitle": {
     "message": "Sprawdź swoje uprawnienia",
     "description": "Tytuł modalnego okienka ostrzeżenia o uprawnieniach kamery / mikrofonu"
@@ -70,10 +58,6 @@
   "allowMicrophoneAccessButton": {
     "message": "Zezwól na dostęp do mikrofonu",
     "description": "Przycisk zezwalający na dostęp do mikrofonu"
-  },
-  "customAreaLabel": {
-    "message": "Ustaw obszar do nagrywania",
-    "description": "Etykieta przełącznika Niestandardowy obszar"
   },
   "flipCameraLabel": {
     "message": "Obróć kamerę",
@@ -130,14 +114,6 @@
   "offLabel": {
     "message": "Wyłączone",
     "description": "Etykieta wyłączenia w rozwijanej liście"
-  },
-  "regionWidthLabel": {
-    "message": "Szerokość",
-    "description": "Etykieta szerokości regionu"
-  },
-  "regionHeightLabel": {
-    "message": "Wysokość",
-    "description": "Etykieta wysokości regionu"
   },
   "finishRecordingTooltip": {
     "message": "Zakończ nagrywanie",

@@ -31,14 +31,9 @@ export const handleTabActivation = async (activeInfo) => {
       recording || (recorderSession && recorderSession.status === "recording");
 
     if (isActivelyRecording) {
-      // Check if region recording and if the current tab is the recording tab
-      const { tabRecordedID, region, customRegion, recordingType } =
-        await chrome.storage.local.get([
-          "tabRecordedID",
-          "region",
-          "customRegion",
-          "recordingType",
-        ]);
+      const { tabRecordedID } = await chrome.storage.local.get([
+        "tabRecordedID",
+      ]);
       if (tabRecordedID && tabRecordedID !== activeInfo.tabId) {
         sendMessageTab(activeInfo.tabId, { type: "hide-popup-recording" });
       } else {
@@ -46,13 +41,10 @@ export const handleTabActivation = async (activeInfo) => {
         chrome.storage.local.set({ activeTab: activeInfo.tabId });
       }
 
-      // Check if it's region or customRegion recording
-      if (!region && !customRegion && recordingType !== "region") {
-        sendMessageTab(activeInfo.tabId, {
-          type: "recording-check",
-          recordingStartTime,
-        });
-      }
+      sendMessageTab(activeInfo.tabId, {
+        type: "recording-check",
+        recordingStartTime,
+      });
     } else if (!isActivelyRecording && !restarting && !pendingRecording) {
       sendMessageTab(activeInfo.tabId, { type: "recording-ended" });
     }

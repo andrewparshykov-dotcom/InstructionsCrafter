@@ -137,8 +137,6 @@ export const stopRecording = async () => {
     recordingDuration: duration,
     tabRecordedID: null,
     offscreen: false,
-    region: false,
-    customRegion: false,
     recordingUiTabId: null,
     pipForceClose: Date.now(),
     recordingStartTime: 0,
@@ -400,11 +398,6 @@ export const stopRecording = async () => {
     }
     endDiagSession("ok");
   })();
-
-  const { wasRegion } = await chrome.storage.local.get(["wasRegion"]);
-  if (wasRegion) {
-    chrome.storage.local.set({ wasRegion: false, region: true });
-  }
 
   // releasePostStopEditorLock preserves this for duplicate detection; clear here
   chrome.storage.local.set({ postStopEditorOpened: false });

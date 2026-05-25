@@ -23,18 +23,6 @@
     "message": "Area",
     "description": "Etichetta del tipo di registrazione dell'area della scheda nel menu a discesa"
   },
-  "customAreaRecordingDisabledTitle": {
-    "message": "Registrazione area personalizzata disabilitata",
-    "description": "Titolo del messaggio di avviso per la registrazione dell'area personalizzata disabilitata nelle versioni di Chrome precedenti alla 104"
-  },
-  "customAreaRecordingDisabledDescription": {
-    "message": "Aggiorna Chrome alla versione 110+",
-    "description": "Descrizione del messaggio di avviso per la registrazione dell'area personalizzata disabilitata nelle versioni di Chrome precedenti alla 104"
-  },
-  "customAreaRecordingDisabledAction": {
-    "message": "Aggiorna",
-    "description": "Azione del messaggio di avviso per la registrazione dell'area personalizzata disabilitata nelle versioni di Chrome precedenti alla 104"
-  },
   "permissionsModalTitle": {
     "message": "Verifica i tuoi permessi",
     "description": "Titolo del modulo di avviso dei permessi per fotocamera/microfono"
@@ -70,10 +58,6 @@
   "allowMicrophoneAccessButton": {
     "message": "Consenti accesso al microfono",
     "description": "Pulsante per consentire l'accesso al microfono"
-  },
-  "customAreaLabel": {
-    "message": "Imposta un'area di registrazione",
-    "description": "Etichetta dell'interruttore dell'area personalizzata"
   },
   "flipCameraLabel": {
     "message": "Rovescia la fotocamera",
@@ -130,14 +114,6 @@
   "offLabel": {
     "message": "Off",
     "description": "Etichetta per disattivare nel menu a discesa"
-  },
-  "regionWidthLabel": {
-    "message": "Larghezza",
-    "description": "Etichetta per la larghezza della regione"
-  },
-  "regionHeightLabel": {
-    "message": "Altezza",
-    "description": "Etichetta per l'altezza della regione"
   },
   "finishRecordingTooltip": {
     "message": "Termina la registrazione",

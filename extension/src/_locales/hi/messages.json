@@ -23,18 +23,6 @@
     "message": "टैब क्षेत्र",
     "description": "पॉपअप पर टैब क्षेत्र रिकॉर्डिंग प्रकार लेबल"
   },
-  "customAreaRecordingDisabledTitle": {
-    "message": "कस्टम क्षेत्र रिकॉर्डिंग अक्षम",
-    "description": "पॉपअप के लिए 104 से पुराने क्रोम संस्करण के लिए कस्टम क्षेत्र रिकॉर्डिंग अक्षम चेतावनी"
-  },
-  "customAreaRecordingDisabledDescription": {
-    "message": "क्रोम संस्करण को 110+ पर अपडेट करें",
-    "description": "क्रोम संस्करण 104 से पुराने के लिए कस्टम क्षेत्र रिकॉर्डिंग अक्षम चेतावनी विवरण"
-  },
-  "customAreaRecordingDisabledAction": {
-    "message": "अपडेट करें",
-    "description": "क्रोम संस्करण 104 से पुराने के लिए कस्टम क्षेत्र रिकॉर्डिंग अक्षम चेतावनी क्रिया"
-  },
   "permissionsModalTitle": {
     "message": "अपनी अनुमतियों की जांच करें",
     "description": "कैमरा / माइक्रोफ़ोन अनुमतियों की चेतावनी मॉडल शीर्षक"
@@ -70,10 +58,6 @@
   "allowMicrophoneAccessButton": {
     "message": "माइक्रोफ़ोन अनुमति दें",
     "description": "माइक्रोफ़ोन अनुमति दें बटन"
-  },
-  "customAreaLabel": {
-    "message": "रिकॉर्ड करने के लिए एक क्षेत्र सेट करें",
-    "description": "कस्टम क्षेत्र स्विच लेबल"
   },
   "flipCameraLabel": {
     "message": "कैमरा पलटें",
@@ -130,14 +114,6 @@
   "offLabel": {
     "message": "बंद",
     "description": "ड्रॉपडाउन पर बंद लेबल"
-  },
-  "regionWidthLabel": {
-    "message": "चौड़ाई",
-    "description": "क्षेत्र चौड़ाई लेबल"
-  },
-  "regionHeightLabel": {
-    "message": "ऊंचाई",
-    "description": "क्षेत्र ऊंचाई लेबल"
   },
   "finishRecordingTooltip": {
     "message": "रिकॉर्डिंग समाप्त करें",

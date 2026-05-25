@@ -23,18 +23,6 @@
     "message": "标签区域",
     "description": "Tab area recording type label on popup"
   },
-  "customAreaRecordingDisabledTitle": {
-    "message": "自定义区域录制已禁用",
-    "description": "Custom area recording disabled warning on popup for Chrome version older than 104"
-  },
-  "customAreaRecordingDisabledDescription": {
-    "message": "请更新Chrome版本至110+",
-    "description": "Custom area recording disabled warning description on popup for Chrome version older than 104"
-  },
-  "customAreaRecordingDisabledAction": {
-    "message": "更新",
-    "description": "Custom area recording disabled warning action on popup for Chrome version older than 104"
-  },
   "permissionsModalTitle": {
     "message": "请检查您的权限",
     "description": "Camera / microphone permissions warning modal title"
@@ -70,10 +58,6 @@
   "allowMicrophoneAccessButton": {
     "message": "允许麦克风访问",
     "description": "Allow microphone access button"
-  },
-  "customAreaLabel": {
-    "message": "设置要录制的区域",
-    "description": "Custom area switch label"
   },
   "flipCameraLabel": {
     "message": "翻转摄像头",
@@ -130,14 +114,6 @@
   "offLabel": {
     "message": "关闭",
     "description": "Off label on dropdown"
-  },
-  "regionWidthLabel": {
-    "message": "宽度",
-    "description": "Region width label"
-  },
-  "regionHeightLabel": {
-    "message": "高度",
-    "description": "Region height label"
   },
   "finishRecordingTooltip": {
     "message": "结束录制",

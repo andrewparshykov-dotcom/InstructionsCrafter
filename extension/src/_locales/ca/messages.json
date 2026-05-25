@@ -23,18 +23,6 @@
     "message": "Àrea",
     "description": "Etiqueta del tipus de gravació 'Àrea de la pestanya' en el pop-up"
   },
-  "customAreaRecordingDisabledTitle": {
-    "message": "Gravació d'àrea personalitzada desactivada",
-    "description": "Avís de desactivació de gravació d'àrea personalitzada en el pop-up per a versions de Chrome anteriors a 104"
-  },
-  "customAreaRecordingDisabledDescription": {
-    "message": "Actualitza la versió de Chrome a 110+",
-    "description": "Descripció de l'avís de desactivació de gravació d'àrea personalitzada en el pop-up per a versions de Chrome anteriors a 104"
-  },
-  "customAreaRecordingDisabledAction": {
-    "message": "Actualitza",
-    "description": "Acció de l'avís de desactivació de gravació d'àrea personalitzada en el pop-up per a versions de Chrome anteriors a 104"
-  },
   "permissionsModalTitle": {
     "message": "Comprova els teus permisos",
     "description": "Títol del modal d'avís de permisos de càmera / micròfon"
@@ -70,10 +58,6 @@
   "allowMicrophoneAccessButton": {
     "message": "Permet l'accés al micròfon",
     "description": "Botó per permetre l'accés al micròfon"
-  },
-  "customAreaLabel": {
-    "message": "Defineix una àrea per gravar",
-    "description": "Etiqueta de l'interruptor 'Defineix una àrea per gravar' en el pop-up"
   },
   "flipCameraLabel": {
     "message": "Inverteix la càmera",
@@ -130,14 +114,6 @@
   "offLabel": {
     "message": "Apagat",
     "description": "Etiqueta 'Apagar' a la llista desplegable"
-  },
-  "regionWidthLabel": {
-    "message": "Amplada",
-    "description": "Etiqueta de l'amplada de la regió"
-  },
-  "regionHeightLabel": {
-    "message": "Alçada",
-    "description": "Etiqueta de l'alçada de la regió"
   },
   "finishRecordingTooltip": {
     "message": "Finalitza la gravació",

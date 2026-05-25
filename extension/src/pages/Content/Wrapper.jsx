@@ -7,7 +7,6 @@ import Countdown from "./countdown/Countdown";
 import Modal from "./modal/Modal";
 import Warning from "./warning/Warning";
 
-import Region from "./region/Region";
 
 // Using ShadowDOM
 import root from "react-shadow";
@@ -112,7 +111,6 @@ const Wrapper = () => {
   const shadowRef = useRef(null);
   const parentRef = useRef(null);
   const permissionsRef = useRef(null);
-  const regionCaptureRef = useRef(null);
   const contentStateRef = useRef(contentState);
 
   useEffect(() => {
@@ -135,14 +133,6 @@ const Wrapper = () => {
       shadowRef: shadowRef.current,
     }));
   }, [shadowRef.current]);
-
-  useEffect(() => {
-    if (!regionCaptureRef.current) return;
-    setContentState((prevContentState) => ({
-      ...prevContentState,
-      regionCaptureRef: regionCaptureRef.current,
-    }));
-  }, [regionCaptureRef.current]);
 
   useEffect(() => {
     if (contentState.permissionsChecked) return;
@@ -172,27 +162,13 @@ const Wrapper = () => {
 
     // Start tracking clicks only when recording starts
     if (contentState.recording) {
-      stopTracking = startClickTracking(
-        contentState.customRegion,
-        contentState.regionWidth,
-        contentState.regionHeight,
-        contentState.regionX,
-        contentState.regionY,
-        contentStateRef
-      );
+      stopTracking = startClickTracking(contentStateRef);
     }
 
     return () => {
       stopTracking?.();
     };
-  }, [
-    contentState.recording,
-    contentState.customRegion,
-    contentState.regionWidth,
-    contentState.regionHeight,
-    contentState.regionX,
-    contentState.regionY,
-  ]);
+  }, [contentState.recording]);
 
   return (
     <div ref={parentRef}>
@@ -209,24 +185,6 @@ const Wrapper = () => {
           allow="camera *; microphone *"
         ></iframe>
       )}
-      {contentState.hasOpenedBefore && (
-        <iframe
-          className="instructionscrafter-iframe"
-          style={{
-            // all: "unset",
-            display: "none",
-            visibility: "hidden",
-          }}
-          ref={regionCaptureRef}
-          src={
-            contentState.isSubscribed
-              ? chrome.runtime.getURL("cloudrecorder.html?injected=true")
-              : chrome.runtime.getURL("region.html")
-          }
-          allow="camera *; microphone *; display-capture *"
-        ></iframe>
-      )}
-
       {contentState.zoomEnabled && <ZoomContainer />}
       <BlurTool />
       {contentState.showExtension || contentState.recording ? (
@@ -268,8 +226,7 @@ const Wrapper = () => {
                     window.location.href.indexOf(
                       chrome.runtime.getURL("playground.html")
                     ) === -1 &&
-                    !contentState.pendingRecording &&
-                    !contentState.customRegion
+                    !contentState.pendingRecording
                   ) {
                     setContentState((prevContentState) => ({
                       ...prevContentState,
@@ -315,8 +272,6 @@ const Wrapper = () => {
           >
             <div className="container">
               <Warning />
-              {contentState.recordingType === "region" &&
-                contentState.customRegion && <Region />}
               {shadowRef.current && <Modal shadowRef={shadowRef} />}
               {contentState.preparingRecording && (
                 <RecordingLoader />

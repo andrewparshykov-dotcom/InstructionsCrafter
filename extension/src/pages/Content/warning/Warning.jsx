@@ -51,14 +51,6 @@ const Warning = () => {
   }, []);
 
   useEffect(() => {
-    if (kind === "AudioIcon") {
-      if (contentState.recordingType === "region") {
-        setOpen(false);
-      }
-    }
-  }, [contentState.recordingType, kind]);
-
-  useEffect(() => {
     if (contentState.recording) {
       setOpen(false);
     }

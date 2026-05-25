@@ -54,7 +54,6 @@ import {
   checkCapturePermissions,
 } from "../recording/recordingHelpers";
 import { newChunk, clearAllRecordings } from "../recording/chunkHandler";
-import { setMicActiveTab } from "../tabManagement/tabHelpers";
 import { loginWithWebsite } from "../auth/loginWithWebsite";
 import {
   getDiagnosticLog,
@@ -865,73 +864,6 @@ export const setupHandlers = () => {
     }
   });
 
-  // pagehide from Region/Recorder.jsx; user navigated away from the recorded tab
-  registerMessage("region-iframe-destroyed", async () => {
-    const { recording, recorderSession, customRegion } =
-      await chrome.storage.local.get([
-        "recording",
-        "recorderSession",
-        "customRegion",
-      ]);
-    const isActivelyRecording =
-      recording ||
-      (recorderSession && recorderSession.status === "recording");
-    if (!isActivelyRecording) return;
-    // only customRegion hosts MediaRecorder in the iframe; plain tab capture lives
-    // in the pinned recorder tab and must not be torn down by recorded-page navigation
-    if (!customRegion) return;
-
-    diagEvent("region-iframe-destroyed");
-    await chrome.storage.local.set({
-      recording: false,
-      customRegion: false,
-      // recordingTab points to pinned recorder.html which didn't open the editor;
-      // clear it so stopRecording() doesn't skip editor open
-
-      recordingTab: null,
-      postStopEditorOpening: false,
-      postStopEditorOpened: false,
-      recorderSession: recorderSession
-        ? { ...recorderSession, status: "stopped" }
-        : null,
-    });
-
-    // user navigated before any chunks persisted; toast instead of empty editor
-    const chunkCount = await chunksStore.length().catch(() => 0);
-    if (chunkCount === 0) {
-      diagEvent("region-nav-no-chunks");
-      const { activeTab, sandboxTab } = await chrome.storage.local.get([
-        "activeTab",
-        "sandboxTab",
-      ]);
-      if (activeTab) {
-        sendMessageTab(activeTab, {
-          type: "show-toast",
-          message: chrome.i18n.getMessage("recordingTooShortToast"),
-          timeout: 5000,
-        }).catch(() => {});
-      }
-      // editor opened pre-unload would otherwise hang at "Preparing recording..."
-      if (Number.isInteger(sandboxTab)) {
-        try {
-          await chrome.storage.local.set({
-            editorRecordingError: {
-              ts: Date.now(),
-              sandboxTab,
-              error: "stream-error",
-              why: "Recording stopped before any data was captured",
-              errorCode: "REC_REGION_NAV_NO_CHUNKS",
-              source: "region-iframe-destroyed",
-            },
-          });
-        } catch {}
-      }
-      return;
-    }
-
-    await videoReady();
-  });
-
   registerMessage("start-recording", (message) => startRecording("start-recording-message"));
   registerMessage("countdown-finished", async (message) => {
     const { recording, restarting, pendingRecording } =
@@ -1114,7 +1046,6 @@ export const setupHandlers = () => {
     diagEvent("resume");
     return sendMessageRecord({ type: "resume-recording-tab" });
   });
-  registerMessage("set-mic-active-tab", (message) => setMicActiveTab(message));
 
   registerMessage("diag-countdown-started", () => {
     diagEvent("countdown-started");

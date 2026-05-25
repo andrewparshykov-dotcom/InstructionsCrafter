@@ -1,11 +1,4 @@
-export function startClickTracking(
-  isRegion = false,
-  regionWidth = 0,
-  regionHeight = 0,
-  regionX = 0,
-  regionY = 0,
-  contentStateRef = null // <- optional
-) {
+export function startClickTracking(contentStateRef = null) {
   // Refreshed on storage change: a restart can swap recordingType
   // (camera ↔ screen) and we'd otherwise dispatch against the prior mode.
   let cachedSurface = "unknown";
@@ -55,35 +48,14 @@ export function startClickTracking(
       return;
     }
 
-    let clickX = e.clientX;
-    let clickY = e.clientY;
-
-    if (isRegion) {
-      const inRegion =
-        clickX >= regionX &&
-        clickX <= regionX + regionWidth &&
-        clickY >= regionY &&
-        clickY <= regionY + regionHeight;
-
-      if (!inRegion) {
-        return;
-      }
-
-      clickX = clickX - regionX;
-      clickY = clickY - regionY;
-    }
-
     chrome.runtime.sendMessage({
       type: "click-event",
       payload: {
-        x: clickX,
-        y: clickY,
-        relativeToRegion: isRegion,
+        x: e.clientX,
+        y: e.clientY,
         surface: cachedSurface,
         recordingWindowId: cachedRecordingWindowId,
         timestamp: Date.now(),
-        region: isRegion,
-        isTab: cachedRecordingType === "region",
       },
     });
   };

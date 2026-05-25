@@ -23,18 +23,6 @@
     "message": "Tab area",
     "description": "Tab area recording type label on popup"
   },
-  "customAreaRecordingDisabledTitle": {
-    "message": "Custom area recording disabled",
-    "description": "Custom area recording disabled warning on popup for Chrome version older than 104"
-  },
-  "customAreaRecordingDisabledDescription": {
-    "message": "Update Chrome version to 110+",
-    "description": "Custom area recording disabled warning description on popup for Chrome version older than 104"
-  },
-  "customAreaRecordingDisabledAction": {
-    "message": "Update",
-    "description": "Custom area recording disabled warning action on popup for Chrome version older than 104"
-  },
   "permissionsModalTitle": {
     "message": "Check your permissions",
     "description": "Camera / microphone permissions warning modal title"
@@ -70,10 +58,6 @@
   "allowMicrophoneAccessButton": {
     "message": "Allow microphone access",
     "description": "Allow microphone access button"
-  },
-  "customAreaLabel": {
-    "message": "Set an area to record in",
-    "description": "Custom area switch label"
   },
   "flipCameraLabel": {
     "message": "Flip camera",
@@ -130,14 +114,6 @@
   "offLabel": {
     "message": "Off",
     "description": "Off label on dropdown"
-  },
-  "regionWidthLabel": {
-    "message": "Width",
-    "description": "Region width label"
-  },
-  "regionHeightLabel": {
-    "message": "Height",
-    "description": "Region height label"
   },
   "finishRecordingTooltip": {
     "message": "Finish recording",

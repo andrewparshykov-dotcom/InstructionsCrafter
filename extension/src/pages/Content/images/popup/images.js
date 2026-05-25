@@ -15,8 +15,6 @@ const VideoTabActive = `${URL}/video-tab-active.svg`;
 const VideoTabInactive = `${URL}/video-tab-inactive.svg`;
 const ScreenTabOn = `${URL}/screen-tab-on.svg`;
 const ScreenTabOff = `${URL}/screen-tab-off.svg`;
-const RegionTabOn = `${URL}/region-tab-on.svg`;
-const RegionTabOff = `${URL}/region-tab-off.svg`;
 const AudioTabOn = `${URL}/audio-tab-on.svg`;
 const AudioTabOff = `${URL}/audio-tab-off.svg`;
 const MockupTabOn = `${URL}/mockup-tab-on.svg`;
@@ -58,8 +56,6 @@ export {
   VideoTabInactive,
   ScreenTabOn,
   ScreenTabOff,
-  RegionTabOn,
-  RegionTabOff,
   AudioTabOn,
   AudioTabOff,
   MockupTabOn,

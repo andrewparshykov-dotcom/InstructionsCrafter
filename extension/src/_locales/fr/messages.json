@@ -23,18 +23,6 @@
     "message": "Zone",
     "description": "Étiquette du type d'enregistrement de zone d'onglet dans le menu déroulant"
   },
-  "customAreaRecordingDisabledTitle": {
-    "message": "Enregistrement de zone personnalisée désactivé",
-    "description": "Titre de l'avis d'enregistrement de zone personnalisée désactivé dans les versions de Chrome antérieures à la 104"
-  },
-  "customAreaRecordingDisabledDescription": {
-    "message": "Mettez à jour Chrome vers la version 110+",
-    "description": "Description de l'avis d'enregistrement de zone personnalisée désactivé dans les versions de Chrome antérieures à la 104"
-  },
-  "customAreaRecordingDisabledAction": {
-    "message": "Mettre à jour",
-    "description": "Action de l'avis d'enregistrement de zone personnalisée désactivé dans les versions de Chrome antérieures à la 104"
-  },
   "permissionsModalTitle": {
     "message": "Vérifiez vos autorisations",
     "description": "Titre de la fenêtre modale d'avertissement des autorisations de la caméra/du microphone"
@@ -70,10 +58,6 @@
   "allowMicrophoneAccessButton": {
     "message": "Autoriser l'accès au microphone",
     "description": "Bouton d'autorisation d'accès au microphone"
-  },
-  "customAreaLabel": {
-    "message": "Définir une zone d'enregistrement",
-    "description": "Étiquette du commutateur de zone personnalisée"
   },
   "flipCameraLabel": {
     "message": "Retourner la caméra",
@@ -130,14 +114,6 @@
   "offLabel": {
     "message": "Off",
     "description": "Étiquette d'extinction dans le menu déroulant"
-  },
-  "regionWidthLabel": {
-    "message": "Largeur",
-    "description": "Étiquette de largeur de la région"
-  },
-  "regionHeightLabel": {
-    "message": "Hauteur",
-    "description": "Étiquette de hauteur de la région"
   },
   "finishRecordingTooltip": {
     "message": "Terminer l'enregistrement",

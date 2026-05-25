@@ -23,18 +23,6 @@
     "message": "탭 영역",
     "description": "Tab area recording type label on popup"
   },
-  "customAreaRecordingDisabledTitle": {
-    "message": "사용자 정의 영역 녹화 비활성화됨",
-    "description": "Custom area recording disabled warning on popup for Chrome version older than 104"
-  },
-  "customAreaRecordingDisabledDescription": {
-    "message": "Chrome 버전을 104로 업데이트하세요.",
-    "description": "Custom area recording disabled warning description on popup for Chrome version older than 104"
-  },
-  "customAreaRecordingDisabledAction": {
-    "message": "업데이트",
-    "description": "Custom area recording disabled warning action on popup for Chrome version older than 104"
-  },
   "permissionsModalTitle": {
     "message": "권한 확인",
     "description": "Camera / microphone permissions warning modal title"
@@ -70,10 +58,6 @@
   "allowMicrophoneAccessButton": {
     "message": "마이크 액세스 허용",
     "description": "Allow microphone access button"
-  },
-  "customAreaLabel": {
-    "message": "녹화할 영역 설정",
-    "description": "Custom area switch label"
   },
   "flipCameraLabel": {
     "message": "카메라 뒤집기",
@@ -130,14 +114,6 @@
   "offLabel": {
     "message": "끄기",
     "description": "Off label on dropdown"
-  },
-  "regionWidthLabel": {
-    "message": "너비",
-    "description": "Region width label"
-  },
-  "regionHeightLabel": {
-    "message": "높이",
-    "description": "Region height label"
   },
   "finishRecordingTooltip": {
     "message": "녹화 종료",

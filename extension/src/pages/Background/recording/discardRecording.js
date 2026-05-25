@@ -53,8 +53,6 @@ export const discardRecording = async () => {
     pendingRecording: false,
     offscreen: false,
     postStopEditorOpened: false,
-    region: false,
-    customRegion: false,
     memoryError: false,
     ...multiState,
   });

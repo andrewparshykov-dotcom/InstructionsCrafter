@@ -23,18 +23,6 @@
     "message": "Область вкладки",
     "description": "Метка типа записи области вкладки на всплывающем окне"
   },
-  "customAreaRecordingDisabledTitle": {
-    "message": "Запись в произвольной области отключена",
-    "description": "Предупреждение о выключенной записи в произвольной области для версии Chrome старше 104"
-  },
-  "customAreaRecordingDisabledDescription": {
-    "message": "Обновите версию Chrome до 110+",
-    "description": "Описание предупреждения о выключенной записи в произвольной области для версии Chrome старше 104"
-  },
-  "customAreaRecordingDisabledAction": {
-    "message": "Обновить",
-    "description": "Действие предупреждения о выключенной записи в произвольной области для версии Chrome старше 104"
-  },
   "permissionsModalTitle": {
     "message": "Проверьте разрешения",
     "description": "Заголовок модального окна предупреждения о разрешениях для камеры / микрофона"
@@ -70,10 +58,6 @@
   "allowMicrophoneAccessButton": {
     "message": "Разрешить доступ к микрофону",
     "description": "Кнопка разрешения доступа к микрофону"
-  },
-  "customAreaLabel": {
-    "message": "Установите область для записи",
-    "description": "Метка переключения 'Custom area'"
   },
   "flipCameraLabel": {
     "message": "Повернуть камеру",
@@ -130,14 +114,6 @@
   "offLabel": {
     "message": "Выкл",
     "description": "Метка для отключения в выпадающем списке"
-  },
-  "regionWidthLabel": {
-    "message": "Ширина",
-    "description": "Метка для ширины области"
-  },
-  "regionHeightLabel": {
-    "message": "Высота",
-    "description": "Метка для высоты области"
   },
   "finishRecordingTooltip": {
     "message": "Завершить запись",

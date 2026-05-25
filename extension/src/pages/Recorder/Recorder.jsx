@@ -3924,8 +3924,6 @@ const Recorder = () => {
       })();
       sendResponse?.({ ok: true, accepted: true });
       return true;
-    } else if (request.type === "set-mic-active-tab") {
-      setMic(request);
     } else if (request.type === "set-audio-output-volume") {
       setAudioOutputVolume(request.volume);
     } else if (request.type === "pause-recording-tab") {

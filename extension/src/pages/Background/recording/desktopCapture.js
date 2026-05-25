@@ -3,9 +3,7 @@ import { perfMark } from "../../utils/perfMarks";
 
 export const desktopCapture = async (request) => {
   perfMark("BG.desktopCapture.enter", {
-    region: Boolean(request?.region),
     camera: Boolean(request?.camera),
-    customRegion: Boolean(request?.customRegion),
   });
   console.log("[InstructionsCrafter][desktopCapture] entered", request);
 

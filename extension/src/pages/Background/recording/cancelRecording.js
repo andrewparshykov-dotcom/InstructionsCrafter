@@ -7,15 +7,6 @@ export const handleDismiss = async () => {
   try {
     await chrome.storage.local.set({ restarting: true });
 
-    const { region, wasRegion } = await chrome.storage.local.get([
-      "region",
-      "wasRegion",
-    ]);
-
-    if (wasRegion) {
-      await chrome.storage.local.set({ wasRegion: false, region: true });
-    }
-
     chrome.action.setIcon({ path: "assets/icon-34.png" });
     chrome.runtime.sendMessage({ type: "turn-off-pip" });
     chrome.storage.local.set({ pipForceClose: Date.now() });
@@ -50,8 +41,6 @@ export const cancelRecording = async () => {
       tabRecordedID: null,
       recordingTab: null,
       // mirror stopRecording's cleared fields so cancel can't leak into next attempt
-      region: false,
-      customRegion: false,
       recording: false,
       restarting: false,
       offscreen: false,

@@ -9,12 +9,10 @@ import { perfMark, perfSpan } from "../../utils/perfMarks";
 
 const openRecorderTab = async (
   activeTab,
-  isRegion,
   camera = false,
   request
 ) => {
   perfMark("BG.openRecorderTab.enter", {
-    isRegion,
     camera,
     activeTabId: activeTab?.id || null,
   });
@@ -27,14 +25,8 @@ const openRecorderTab = async (
   const recorderUrl = isCloudRecorder
       ? chrome.runtime.getURL("cloudrecorder.html")
       : chrome.runtime.getURL("recorder.html");
-  if (!isRegion) {
-    if (camera) {
-      switchTab = false;
-    }
-  } else {
-    switchTab = activeTab.url.includes(
-      chrome.runtime.getURL("playground.html")
-    );
+  if (camera) {
+    switchTab = false;
   }
 
   // cloud recordings need the tab active briefly so keepalive can start
@@ -42,8 +34,7 @@ const openRecorderTab = async (
     switchTab = true;
   }
 
-  // Region recordings point recordingTab at the user's tab; never close that.
-  // For cloudrecorder.html, also skip removal while the previous session is
+  // For cloudrecorder.html, skip removal while the previous session is
   // still uploading: killing it mid-TUS-upload corrupts scene data. It
   // closes itself via window.close() when finalize lands.
   const {
@@ -71,11 +62,9 @@ const openRecorderTab = async (
     chrome.storage.local.set({ recordingTab: null });
   }
 
-  const finalUrl = isRegion ? `${recorderUrl}?tab=true` : recorderUrl;
-
   const endTabCreate = perfSpan("BG.openRecorderTab tabs.create");
   const tab = await chrome.tabs.create({
-    url: finalUrl,
+    url: recorderUrl,
     pinned: true,
     index: 0,
     active: switchTab,
@@ -103,11 +92,8 @@ const openRecorderTab = async (
   chrome.storage.local.set({
     recordingTab: tab.id,
     offscreen: false,
-    region: false,
-    wasRegion: true,
     clickEvents: [],
     recordingUiTabId: activeTab.id,
-    ...(isRegion ? { tabRecordedID: activeTab.id } : {}),
   });
 
   // under memory pressure the set can succeed silently while the property stays true;
@@ -166,12 +152,6 @@ const openRecorderTab = async (
         type: "loaded",
         request: request,
         tabPreferred: isPlayground,
-        ...(isRegion
-          ? {
-              isTab: true,
-              tabID: activeTab.id,
-            }
-          : {}),
       });
       // push streaming-data; tab also pulls but pull can drop on cold-SW/late-mount
       setTimeout(() => {
@@ -183,13 +163,9 @@ const openRecorderTab = async (
 
 export const startRecorderSession = async (request, tabId = null) => {
   perfMark("BG.startRecorderSession.enter", {
-    customRegion: Boolean(request?.customRegion),
-    region: Boolean(request?.region),
     camera: Boolean(request?.camera),
   });
   console.log("[InstructionsCrafter][startRecorderSession] entered", { request, tabId });
-  const endStorage = perfSpan("BG.startRecorderSession storage.read");
-  endStorage();
   const endTab = perfSpan("BG.startRecorderSession getCurrentTab");
   let activeTab = await getCurrentTab();
   endTab({ tabId: activeTab?.id || null });
@@ -215,40 +191,5 @@ export const startRecorderSession = async (request, tabId = null) => {
   await closeOffscreenDocument();
   endCloseOffscreen();
 
-  if (request.region) {
-    if (tabId !== null) chrome.tabs.update(tabId, { active: true });
-
-    if (request.customRegion) {
-      chrome.storage.local.set({
-        recordingTab: activeTab.id,
-        offscreen: false,
-        region: true,
-        recordingUiTabId: activeTab.id,
-      });
-      const endSendLoaded = perfSpan("BG.startRecorderSession customRegion.sendLoaded");
-      sendMessageRecord({
-        type: "loaded",
-        request: request,
-        region: true,
-      })
-        .then(() => endSendLoaded({ ok: true }))
-        .catch((err) =>
-          endSendLoaded({
-            ok: false,
-            err: String(err?.message || err).slice(0, 100),
-          }),
-        );
-    } else {
-      chrome.storage.local.set({
-        recordingTab: activeTab.id,
-        offscreen: false,
-        region: true,
-        recordingUiTabId: activeTab.id,
-      });
-      await openRecorderTab(activeTab, true, false, request);
-    }
-  } else {
-    chrome.storage.local.set({ region: false });
-    await openRecorderTab(activeTab, false, request.camera, request);
-  }
+  await openRecorderTab(activeTab, request.camera, request);
 };

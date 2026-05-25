@@ -35,11 +35,6 @@ export const updateFromStorage = (check = true, id = null) => {
       "toolbarPosition",
       "countdown",
       "recordingType",
-      "customRegion",
-      "regionWidth",
-      "regionHeight",
-      "regionX",
-      "regionY",
       "hideToolbar",
       "pendingRecording",
       "askForPermissions",
@@ -164,26 +159,6 @@ export const updateFromStorage = (check = true, id = null) => {
           result.recordingType !== undefined && result.recordingType !== null
             ? result.recordingType
             : prevContentState.recordingType,
-        customRegion:
-          result.customRegion !== undefined && result.customRegion !== null
-            ? result.customRegion
-            : prevContentState.customRegion,
-        regionWidth:
-          result.regionWidth !== undefined && result.regionWidth !== null
-            ? result.regionWidth
-            : prevContentState.regionWidth,
-        regionHeight:
-          result.regionHeight !== undefined && result.regionHeight !== null
-            ? result.regionHeight
-            : prevContentState.regionHeight,
-        regionX:
-          result.regionX !== undefined && result.regionX !== null
-            ? result.regionX
-            : prevContentState.regionX,
-        regionY:
-          result.regionY !== undefined && result.regionY !== null
-            ? result.regionY
-            : prevContentState.regionY,
         hideToolbar:
           result.hideToolbar !== undefined && result.hideToolbar !== null
             ? result.hideToolbar

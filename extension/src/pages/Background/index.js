@@ -21,7 +21,6 @@ const clearStaleLocks = async () => {
       restarting,
       recordingTab,
       multiMode,
-      region,
     } = await chrome.storage.local.get([
       "sendingChunks",
       "postStopEditorOpening",
@@ -31,7 +30,6 @@ const clearStaleLocks = async () => {
       "restarting",
       "recordingTab",
       "multiMode",
-      "region",
     ]);
 
     const stale = {};
@@ -72,7 +70,6 @@ const clearStaleLocks = async () => {
         stale.recordingStallLevel = 0;
         stale.firstChunkAt = null;
         stale.lastChunkAt = null;
-        stale.customRegion = false;
         stale.offscreen = false;
         stale.memoryError = false;
         // keep editorRecordingError + sandboxTab; the editor reads them on mount
@@ -95,11 +92,6 @@ const clearStaleLocks = async () => {
       stale.multiProjectId = null;
       stale.multiLastSceneId = null;
       console.warn("[InstructionsCrafter][BG] Stale multi-mode state found on startup, clearing");
-    }
-
-    if (region && !recording) {
-      stale.region = false;
-      console.warn("[InstructionsCrafter][BG] Stale region state found on startup, clearing");
     }
 
     if (Object.keys(stale).length > 0) {
@@ -199,22 +191,12 @@ const recoverInFlightRecording = async () => {
       tabUrl: tab?.url,
       status: tab?.status,
     });
-    const { region, customRegion, tabRecordedID, recordingType } =
-      await chrome.storage.local.get([
-        "region",
-        "customRegion",
-        "tabRecordedID",
-        "recordingType",
-      ]);
-    const isRegion = Boolean(region) && !customRegion;
+    const { recordingType } = await chrome.storage.local.get(["recordingType"]);
     try {
       await chrome.tabs.sendMessage(recordingTab, {
         type: "loaded",
-        request: { recordingType, region, customRegion },
+        request: { recordingType },
         tabPreferred: false,
-        ...(isRegion && tabRecordedID
-          ? { isTab: true, tabID: tabRecordedID }
-          : {}),
       });
     } catch (err) {
       console.warn("[InstructionsCrafter][BG] redeliver loaded failed:", err);

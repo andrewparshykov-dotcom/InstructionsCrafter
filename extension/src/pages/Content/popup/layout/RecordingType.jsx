@@ -2,7 +2,6 @@ import React, { useEffect, useContext, useState, useRef } from "react";
 
 import Dropdown from "../components/Dropdown";
 import Switch from "../components/Switch";
-import RegionDimensions from "../components/RegionDimensions";
 import Settings from "./Settings";
 import { contentStateContext } from "../../context/ContentState";
 import { MicOffBlue } from "../../images/popup/images";
@@ -14,7 +13,6 @@ const CLOUD_FEATURES_ENABLED =
 
 const RecordingType = (props) => {
   const [contentState, setContentState] = useContext(contentStateContext);
-  const [cropActive, setCropActive] = useState(false);
 
   const buttonRef = useRef(null);
   const isMac = navigator.platform.toUpperCase().indexOf("MAC") >= 0;
@@ -67,19 +65,6 @@ const RecordingType = (props) => {
   };
 
   useEffect(() => {
-    // Check if CropTarget is null
-    if (typeof CropTarget === "undefined") {
-      setCropActive(false);
-      setContentState((prevContentState) => ({
-        ...prevContentState,
-        customRegion: false,
-      }));
-    } else {
-      setCropActive(true);
-    }
-  }, []);
-
-  useEffect(() => {
     if (contentState.recording) {
       setContentState((prevContentState) => ({
         ...prevContentState,
@@ -105,33 +90,6 @@ const RecordingType = (props) => {
           </div>
         </div>
       )}
-      {!cropActive &&
-        contentState.recordingType === "region" &&
-        !contentState.offline && (
-          <div className="popup-warning">
-            <div className="popup-warning-left">
-              <AlertIcon />
-            </div>
-            <div className="popup-warning-middle">
-              <div className="popup-warning-title">
-                {chrome.i18n.getMessage("customAreaRecordingDisabledTitle")}
-              </div>
-              <div className="popup-warning-description">
-                {chrome.i18n.getMessage(
-                  "customAreaRecordingDisabledDescription"
-                )}
-              </div>
-            </div>
-            <div className="popup-warning-right">
-              <a
-                href="https://support.google.com/chrome/answer/95414?hl=en-GB&co=GENIE.Platform%3DDesktop"
-                target="_blank"
-              >
-                {chrome.i18n.getMessage("customAreaRecordingDisabledAction")}
-              </a>
-            </div>
-          </div>
-        )}
       {!contentState.microphonePermission && (
         <button
           className="permission-button"
@@ -160,17 +118,6 @@ const RecordingType = (props) => {
             allow="camera; microphone"
             src={chrome.runtime.getURL("waveform.html")}
           ></iframe>
-        </div>
-      )}
-      {contentState.recordingType === "region" && cropActive && (
-        <div>
-          <div className="popup-content-divider"></div>
-          <Switch
-            label={chrome.i18n.getMessage("customAreaLabel")}
-            name="customRegion"
-            value="customRegion"
-          />
-          {contentState.customRegion && <RegionDimensions />}
         </div>
       )}
       <button

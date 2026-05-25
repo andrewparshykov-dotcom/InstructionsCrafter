@@ -23,18 +23,6 @@
     "message": "Área",
     "description": "Etiqueta de tipo de gravação de área de página no popup"
   },
-  "customAreaRecordingDisabledTitle": {
-    "message": "Gravação de área personalizada desativada",
-    "description": "Aviso de gravação de área personalizada desativada para versões do Chrome anteriores à 104"
-  },
-  "customAreaRecordingDisabledDescription": {
-    "message": "Atualiza a versão do Chrome para 110+",
-    "description": "Descrição do aviso de gravação de área personalizada desativada para versões do Chrome anteriores à 104"
-  },
-  "customAreaRecordingDisabledAction": {
-    "message": "Atualizar",
-    "description": "Ação do aviso de gravação de área personalizada desativada para versões do Chrome anteriores à 104"
-  },
   "permissionsModalTitle": {
     "message": "Verifica as tuas permissões",
     "description": "Título do modal de aviso de permissões de câmara/microfone"
@@ -70,10 +58,6 @@
   "allowMicrophoneAccessButton": {
     "message": "Permitir acesso ao microfone",
     "description": "Botão de permitir acesso ao microfone"
-  },
-  "customAreaLabel": {
-    "message": "Definir uma área para gravar",
-    "description": "Etiqueta do interruptor de área personalizada"
   },
   "flipCameraLabel": {
     "message": "Inverter câmara",
@@ -130,14 +114,6 @@
   "offLabel": {
     "message": "Desligado",
     "description": "Etiqueta de desligado no menu suspenso"
-  },
-  "regionWidthLabel": {
-    "message": "Largura",
-    "description": "Etiqueta de largura de região"
-  },
-  "regionHeightLabel": {
-    "message": "Altura",
-    "description": "Etiqueta de altura de região"
   },
   "finishRecordingTooltip": {
     "message": "Terminar gravação",
