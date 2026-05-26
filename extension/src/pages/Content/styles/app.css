@@ -2810,15 +2810,6 @@ button {
 .recording-button:hover:not(:disabled) {
   background: #1f6cdc;
 }
-.dashboard-button {
-  background: #15171C;
-  box-shadow: 0px 0px 0px 0px rgba(41, 41, 47, 0.25);
-  transition: all 0.25s ease-in-out;
-}
-
-.dashboard-button:hover {
-  box-shadow: 0px 0px 0px 4px rgba(41, 41, 47, 0.25);
-}
 
 .background-effects-toggle-group {
   display: flex;

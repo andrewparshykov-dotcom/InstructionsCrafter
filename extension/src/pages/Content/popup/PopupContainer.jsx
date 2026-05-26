@@ -16,8 +16,6 @@ import { CloseIconPopup, GrabIconPopup } from "../toolbar/components/SVG";
 
 import RecordingTab from "./layout/RecordingTab";
 
-import Welcome from "./layout/Welcome";
-
 import { contentStateContext } from "../context/ContentState";
 
 const PopupContainer = (props) => {
@@ -30,12 +28,9 @@ const PopupContainer = (props) => {
   const [elastic, setElastic] = React.useState("");
   const [shake, setShake] = React.useState("");
   const [dragging, setDragging] = React.useState("");
-  const [onboarding, setOnboarding] = useState(false);
-  const [showProSplash, setShowProSplash] = useState(false);
   const recordTabRef = useRef(null);
   const videoTabRef = useRef(null);
   const pillRef = useRef(null);
-  const isCloudBuild = process.env.SCREENITY_ENABLE_CLOUD_FEATURES === "true";
 
   // Playground anchors the popup to a zero-height marker placed directly
   // below the toolbar's anchor inside the page's CSS layout
@@ -60,34 +55,6 @@ const PopupContainer = (props) => {
     // re-pin in useLayoutEffect will overwrite this once it appears.
     return { x: 80, y: 560 };
   };
-
-  useEffect(() => {
-    chrome.storage.local.get(["onboarding", "showProSplash"], (result) => {
-      const nextOnboarding = Boolean(result.onboarding);
-      const nextShowProSplash = Boolean(result.showProSplash);
-      setOnboarding(nextOnboarding);
-      setShowProSplash(nextShowProSplash);
-      setContentState((prevContentState) => ({
-        ...prevContentState,
-        onboarding: nextOnboarding,
-        showProSplash: nextShowProSplash,
-      }));
-    });
-  }, [setContentState]);
-
-  useEffect(() => {
-    if (contentState.isLoggedIn) {
-      setOnboarding(false);
-      setShowProSplash(false);
-      return;
-    }
-    setOnboarding(Boolean(contentState.onboarding));
-    setShowProSplash(Boolean(contentState.showProSplash));
-  }, [
-    contentState.isLoggedIn,
-    contentState.onboarding,
-    contentState.showProSplash,
-  ]);
 
   const onValueChange = (tab) => {
     setTab(tab);
@@ -129,18 +96,6 @@ const PopupContainer = (props) => {
     contentState.wasLoggedIn,
     tab,
   ]);
-
-  const showWelcomeSplash = Boolean(
-    isCloudBuild &&
-      !contentState.isLoggedIn &&
-      !contentState.wasLoggedIn &&
-      (
-        onboarding ||
-        showProSplash ||
-        contentState.onboarding ||
-        contentState.showProSplash
-      ),
-  );
 
   useLayoutEffect(() => {
     if (!recordTabRef.current || !videoTabRef.current || !pillRef.current)
@@ -393,7 +348,6 @@ const PopupContainer = (props) => {
       >
         <div
           className="popup-container"
-          id="pro-onboarding-popup-container"
           ref={PopupRef}
           // On Playground we anchor the popup via Rnd's transform; the
           // default CSS pins it to top-right of a width-0 wrapper (which
@@ -417,36 +371,7 @@ const PopupContainer = (props) => {
             </div>
           </div>
           <div className="popup-content">
-            {showWelcomeSplash ? (
-              <Welcome
-                setOnboarding={() => {
-                  setOnboarding(false);
-                  setShowProSplash(false);
-                  chrome.storage.local.set({
-                    onboarding: false,
-                    showProSplash: false,
-                    firstTimePro: false,
-                  });
-                  setContentState((prev) => ({
-                    ...prev,
-                    onboarding: false,
-                    showProSplash: false,
-                  }));
-                }}
-                isBack={showProSplash}
-                clearBack={() => {
-                  setShowProSplash(false);
-                  setContentState((prev) => ({
-                    ...prev,
-                    showProSplash: false,
-                  }));
-                  chrome.storage.local.set({ showProSplash: false });
-                }}
-                setContentState={setContentState}
-              />
-            ) : (
-              <RecordingTab shadowRef={props.shadowRef} />
-            )}
+            <RecordingTab shadowRef={props.shadowRef} />
           </div>
         </div>
       </Rnd>

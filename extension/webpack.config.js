@@ -301,9 +301,6 @@ const config = {
           from: "src/assets/",
           to: path.join(__dirname, "build/assets"),
           force: true,
-          filter: isBsBuild
-            ? (resourcePath) => !/\/videos\//.test(resourcePath)
-            : undefined,
         },
         {
           from: "src/_locales/",
