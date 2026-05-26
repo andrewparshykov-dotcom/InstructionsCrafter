@@ -24,9 +24,9 @@
    these via the legacy names; values now match the page-level
    tokens.js so the popup-internal surfaces (Dropdown, Tooltip, Switch,
    PopupContainer body) stop reading as Screenity ink/icon-gray.
-   Dead .scss files (_Welcome, _Tabs, _SettingsMenu, _Announcement,
-   _VideoItem, _BackgroundEffects, _RegionDimensions, _Settings,
-   _TimeSetter) also inherit but never render. */
+   Dead .scss files (_Tabs, _SettingsMenu, _VideoItem,
+   _BackgroundEffects, _RegionDimensions, _Settings, _TimeSetter)
+   also inherit but never render. */
 $color-background: #fff;
 $color-light-grey: #f6f7fb;
 $color-primary: #3080f8;
