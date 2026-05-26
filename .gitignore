@@ -121,3 +121,12 @@ docs/DEFERRED_CLEANUP.md
 
 docs/pasted*.png
 docs/store-screenshots/
+
+# ==========================================
+# Claude Code working state (per-project)
+# ==========================================
+# Per-developer settings.local.json + git worktrees for isolated
+# coding sessions + any other Claude Code per-project data. None of
+# this is appropriate to share via the public fork.
+
+.claude/
