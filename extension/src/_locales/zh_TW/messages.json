@@ -521,10 +521,6 @@
     "message": "再試一次",
     "description": "Agnostic button label to try again"
   },
-  "addedToMultiToast": {
-    "message": "場景已加入 Multi 錄製",
-    "description": "Toast message shown when a scene is added to multi-recording"
-  },
   "readyRecordSceneToast": {
     "message": "已準備好錄製影片中的新場景",
     "description": "Toast message shown when the user is in an existing project and ready to record a new scene"

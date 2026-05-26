@@ -516,23 +516,6 @@ export const setupHandlers = () => {
     }));
   });
 
-  registerMessage("reopen-popup-multi", (message) => {
-    setContentState((prev) => ({
-      ...prev,
-      showExtension: true,
-      showPopup: true,
-      preparingRecording: false,
-    }));
-    updateFromStorage(false, message.senderId);
-
-    setTimeout(() => {
-      const state = getState();
-      if (state.openToast) {
-        state.openToast(chrome.i18n.getMessage("addedToMultiToast"), () => {});
-      }
-    }, 1000);
-  });
-
   registerMessage("open-popup-project", (message) => {
     setContentState((prev) => ({
       ...prev,

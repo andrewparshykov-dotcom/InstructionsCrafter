@@ -159,22 +159,6 @@ const setTabAutoDiscardableSafe = async (message, sender) => {
   }
 };
 
-const handleReopenPopupMulti = async () => {
-  try {
-    const tab = await getCurrentTab();
-    if (!tab?.id) {
-      console.warn("No active tab found for popup reopen");
-      return;
-    }
-
-    await sendMessageTab(tab.id, {
-      type: "reopen-popup-multi",
-    });
-  } catch (err) {
-    console.warn("Failed to send popup reopen message:", err);
-  }
-};
-
 export const handleFinishMultiRecording = async () => {
   try {
     const { recordingToScene } = await chrome.storage.local.get([
@@ -1375,13 +1359,6 @@ export const setupHandlers = () => {
   registerMessage("fetch-videos", async (message, sender, sendResponse) => {
     sendResponse({ success: false, message: "Cloud features disabled" });
     return true;
-  });
-  registerMessage("reopen-popup-multi", async (message) => {
-    if (!CLOUD_FEATURES_ENABLED) {
-      console.warn("Cloud features disabled");
-      return;
-    }
-    await handleReopenPopupMulti();
   });
   registerMessage(
     "check-storage-quota",

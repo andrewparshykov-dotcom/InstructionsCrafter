@@ -521,10 +521,6 @@
     "message": "სცადე ხელახლა",
     "description": "Agnostic button label to try again"
   },
-  "addedToMultiToast": {
-    "message": "სცენა დაემატა Multi-ს",
-    "description": "Toast message shown when a scene is added to multi-recording"
-  },
   "readyRecordSceneToast": {
     "message": "მზად ხარ ახალი სცენის ჩასაწერად",
     "description": "Toast message shown when the user is in an existing project and ready to record a new scene"

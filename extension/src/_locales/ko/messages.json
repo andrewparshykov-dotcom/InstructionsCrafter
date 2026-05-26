@@ -521,10 +521,6 @@
     "message": "다시 시도",
     "description": "Agnostic button label to try again"
   },
-  "addedToMultiToast": {
-    "message": "장면이 Multi 녹화에 추가되었습니다",
-    "description": "Toast message shown when a scene is added to multi-recording"
-  },
   "readyRecordSceneToast": {
     "message": "새 장면을 녹화할 준비가 되었습니다",
     "description": "Toast message shown when the user is in an existing project and ready to record a new scene"

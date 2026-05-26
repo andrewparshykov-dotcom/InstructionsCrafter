@@ -553,10 +553,6 @@
     "message": "Try again",
     "description": "Agnostic button label to try again"
   },
-  "addedToMultiToast": {
-    "message": "Scene added to multi-recording",
-    "description": "Toast message shown when a scene is added to multi-recording"
-  },
   "readyRecordSceneToast": {
     "message": "Ready to record a new scene in your video",
     "description": "Toast message shown when the user is in an existing project and ready to record a new scene"

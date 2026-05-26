@@ -521,10 +521,6 @@
     "message": "Torna-ho a provar",
     "description": "Agnostic button label to try again"
   },
-  "addedToMultiToast": {
-    "message": "Escena afegida a la gravació Multi",
-    "description": "Toast message shown when a scene is added to multi-recording"
-  },
   "readyRecordSceneToast": {
     "message": "Preparat per gravar una nova escena al teu projecte",
     "description": "Toast message shown when the user is in an existing project and ready to record a new scene"

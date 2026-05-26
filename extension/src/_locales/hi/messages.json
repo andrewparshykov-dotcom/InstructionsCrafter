@@ -521,10 +521,6 @@
     "message": "फिर से प्रयास करें",
     "description": "Agnostic button label to try again"
   },
-  "addedToMultiToast": {
-    "message": "सीन को Multi रिकॉर्डिंग में जोड़ा गया",
-    "description": "Toast message shown when a scene is added to multi-recording"
-  },
   "readyRecordSceneToast": {
     "message": "अपने वीडियो में नया सीन रिकॉर्ड करने के लिए तैयार",
     "description": "Toast message shown when the user is in an existing project and ready to record a new scene"

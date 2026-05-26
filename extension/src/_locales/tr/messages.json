@@ -521,10 +521,6 @@
     "message": "Tekrar dene",
     "description": "Agnostic button label to try again"
   },
-  "addedToMultiToast": {
-    "message": "Sahne Multi kaydına eklendi",
-    "description": "Toast message shown when a scene is added to multi-recording"
-  },
   "readyRecordSceneToast": {
     "message": "Videona yeni bir sahne kaydetmeye hazırsın",
     "description": "Toast message shown when the user is in an existing project and ready to record a new scene"

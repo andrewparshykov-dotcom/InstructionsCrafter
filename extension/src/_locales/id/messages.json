@@ -521,10 +521,6 @@
     "message": "Coba lagi",
     "description": "Agnostic button label to try again"
   },
-  "addedToMultiToast": {
-    "message": "Adegan ditambahkan ke multi-recording",
-    "description": "Toast message shown when a scene is added to multi-recording"
-  },
   "readyRecordSceneToast": {
     "message": "Siap merekam adegan baru dalam videomu",
     "description": "Toast message shown when the user is in an existing project and ready to record a new scene"
