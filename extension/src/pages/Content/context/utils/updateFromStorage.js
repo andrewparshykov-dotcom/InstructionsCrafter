@@ -26,7 +26,6 @@ export const updateFromStorage = (check = true, id = null) => {
       "defaultVideoInputLabel",
       "cameraDimensions",
       "cameraFlipped",
-      "cameraActive",
       "micActive",
       "recording",
       "paused",
@@ -118,10 +117,6 @@ export const updateFromStorage = (check = true, id = null) => {
           result.cameraFlipped !== undefined && result.cameraFlipped !== null
             ? result.cameraFlipped
             : prevContentState.cameraFlipped,
-        cameraActive:
-          result.cameraActive !== undefined && result.cameraActive !== null
-            ? result.cameraActive
-            : prevContentState.cameraActive,
         micActive:
           result.micActive !== undefined && result.micActive !== null
             ? result.micActive

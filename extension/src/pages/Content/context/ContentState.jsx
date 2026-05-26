@@ -765,12 +765,10 @@ const ContentState = (props) => {
             ...prevContentState,
             defaultVideoInput: videoInput[0].deviceId,
             defaultVideoInputLabel: videoInput[0].label || "",
-            cameraActive: true,
           }));
           chrome.storage.local.set({
             defaultVideoInput: videoInput[0].deviceId,
             defaultVideoInputLabel: videoInput[0].label || "",
-            cameraActive: true,
           });
         }
         if (audioInput.length > 0 || videoInput.length > 0) {
@@ -886,7 +884,6 @@ const ContentState = (props) => {
     defaultVideoInput: "none",
     defaultAudioInputLabel: "",
     defaultVideoInputLabel: "",
-    cameraActive: false,
     micActive: false,
     sortBy: "newest",
     paused: false,
@@ -1406,14 +1403,6 @@ const ContentState = (props) => {
           paused: Boolean(changes.paused.newValue),
         }));
         shouldUpdateTimer = true;
-      }
-      if (changes.cameraActive && isTargetTab()) {
-        // CameraWrap renders off contentState.cameraActive; without this listener
-        // a storage toggle (from another tab's popup, automation seed) never reaches React.
-        setContentState((prev) => ({
-          ...prev,
-          cameraActive: Boolean(changes.cameraActive.newValue),
-        }));
       }
       if (changes.recording) {
         const isRecording = Boolean(changes.recording.newValue);

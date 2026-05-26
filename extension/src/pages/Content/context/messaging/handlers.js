@@ -368,11 +368,7 @@ export const setupHandlers = () => {
       showPopup: true,
     }));
 
-    if (state.recordingType !== "camera") {
-      state.startStreaming();
-    } else if (state.defaultVideoInput !== "none" && state.cameraActive) {
-      state.startStreaming();
-    }
+    state.startStreaming();
   });
 
   registerMessage("cancel-recording", () => {

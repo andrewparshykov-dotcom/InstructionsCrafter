@@ -126,18 +126,11 @@ const RecordingType = (props) => {
         ref={buttonRef}
         tabIndex="0"
         onClick={startStreaming}
-        disabled={
-          contentState.pendingRecording ||
-          ((!contentState.cameraPermission || !contentState.cameraActive) &&
-            contentState.recordingType === "camera")
-        }
+        disabled={contentState.pendingRecording}
       >
         <span className="main-button-label">
           {contentState.pendingRecording
             ? chrome.i18n.getMessage("recordButtonInProgressLabel")
-            : (!contentState.cameraPermission || !contentState.cameraActive) &&
-              contentState.recordingType === "camera"
-            ? chrome.i18n.getMessage("recordButtonNoCameraLabel")
             : contentState.multiMode && contentState.multiSceneCount > 0
             ? chrome.i18n.getMessage("recordButtonMultiLabel")
             : chrome.i18n.getMessage("recordButtonLabel")}
