@@ -21,7 +21,6 @@ export const onInstalledListener = () => {
 
       chrome.storage.local.set({
         firstTime: true,
-        bannerSupport: true,
       });
 
       chrome.storage.managed.get("skipSetup", (managedConfig) => {

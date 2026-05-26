@@ -961,15 +961,6 @@ export const setupHandlers = () => {
   registerMessage("open-support", async () => {
     console.warn("Cloud features disabled");
   });
-  registerMessage("check-banner-support", async (message, sendResponse) => {
-    const { bannerSupport } = await chrome.storage.local.get(["bannerSupport"]);
-    sendResponse({ bannerSupport: Boolean(bannerSupport) });
-    return true;
-  });
-  registerMessage("hide-banner", async () => {
-    await chrome.storage.local.set({ bannerSupport: false });
-    chrome.runtime.sendMessage({ type: "hide-banner" });
-  });
   registerMessage("clear-recording-alarm", async () => {
     await chrome.alarms.clear("recording-alarm");
   });

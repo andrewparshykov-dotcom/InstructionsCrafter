@@ -41,10 +41,7 @@ export const handleChunks = async (chunks, override = false, target = null) => {
   // outer try/finally guarantees lock release even if the storage read throws
   let mainCompleted = false;
   try {
-  const { sandboxTab, bannerSupport } = await chrome.storage.local.get([
-    "sandboxTab",
-    "bannerSupport",
-  ]);
+  const { sandboxTab } = await chrome.storage.local.get(["sandboxTab"]);
 
   if (DEBUG_POSTSTOP)
     console.debug("[InstructionsCrafter][BG] handleChunks called", {
@@ -116,15 +113,6 @@ export const handleChunks = async (chunks, override = false, target = null) => {
     } catch (err) {
       if (DEBUG_POSTSTOP)
         console.warn("[InstructionsCrafter][BG] chunk-count message failed", err);
-    }
-
-    if (bannerSupport) {
-      try {
-        await sendToTarget({ type: "banner-support" });
-      } catch (err) {
-        if (DEBUG_POSTSTOP)
-          console.warn("[InstructionsCrafter][BG] banner-support message failed", err);
-      }
     }
 
     const delay = (ms) => new Promise((res) => setTimeout(res, ms));
