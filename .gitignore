@@ -108,3 +108,14 @@ test_local.sh
 
 ARCHITECTURE.md
 CLAUDE.md
+
+# ==========================================
+# Chrome Web Store submission working files
+# ==========================================
+# Raw screen captures (macOS "pasted" naming) and processed 1280×800
+# versions used for the CWS listing. Kept locally for the maintainer's
+# reference; not appropriate for the public fork. The shaped versions
+# are already publicly viewable on the Chrome Web Store listing.
+
+docs/pasted*.png
+docs/store-screenshots/
