@@ -2,7 +2,6 @@ import { getCurrentTab } from "../tabManagement";
 import { removeTab } from "../tabManagement/removeTab";
 import { sendMessageRecord } from "./sendMessageRecord.js";
 import { closeOffscreenDocument } from "../offscreen/closeOffscreenDocument.js";
-import { loginWithWebsite } from "../auth/loginWithWebsite.js";
 import { traceStep } from "../../utils/startFlowTrace.js";
 import { handleGetStreamingData } from "./recordingHelpers.js";
 import { perfMark, perfSpan } from "../../utils/perfMarks";
@@ -18,20 +17,9 @@ const openRecorderTab = async (
   });
   let switchTab = true;
 
-  const endLogin = perfSpan("BG.openRecorderTab loginWithWebsite");
-  const { authenticated, subscribed, cached, transient, error: authError } = await loginWithWebsite();
-  endLogin({ authenticated, subscribed, cached: Boolean(cached) });
-  const isCloudRecorder = authenticated && subscribed;
-  const recorderUrl = isCloudRecorder
-      ? chrome.runtime.getURL("cloudrecorder.html")
-      : chrome.runtime.getURL("recorder.html");
+  const recorderUrl = chrome.runtime.getURL("recorder.html");
   if (camera) {
     switchTab = false;
-  }
-
-  // cloud recordings need the tab active briefly so keepalive can start
-  if (isCloudRecorder && !switchTab) {
-    switchTab = true;
   }
 
   // For cloudrecorder.html, skip removal while the previous session is

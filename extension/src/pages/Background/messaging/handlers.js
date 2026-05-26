@@ -54,7 +54,6 @@ import {
   checkCapturePermissions,
 } from "../recording/recordingHelpers";
 import { newChunk, clearAllRecordings } from "../recording/chunkHandler";
-import { loginWithWebsite } from "../auth/loginWithWebsite";
 import {
   getDiagnosticLog,
   getErrorSnapshot,
@@ -262,13 +261,8 @@ const handleCheckStorageQuota = async (retried = false) => {
       credentials: "include",
     });
 
-    // 401: invalidate auth cache so loginWithWebsite refreshes the token
+    // 401: not authenticated (cloud features are disabled)
     if (res.status === 401 && !retried) {
-      await chrome.storage.local.set({ lastAuthCheck: 0 });
-      const refresh = await loginWithWebsite();
-      if (refresh.authenticated) {
-        return handleCheckStorageQuota(true);
-      }
       return { success: false, error: "Not authenticated" };
     }
 
@@ -1113,26 +1107,6 @@ export const setupHandlers = () => {
   );
   registerMessage("check-recording", (message) => checkRecording(message));
   registerMessage("open-download-mp4", async () => {
-    // cloud-enabled signed-in users skip local fast-MP4 recovery to stay on the pro flow
-    if (CLOUD_FEATURES_ENABLED) {
-      try {
-        const { authenticated } = await loginWithWebsite();
-        if (authenticated) {
-          const tab = await getCurrentTab();
-          if (tab?.id) {
-            await sendMessageTab(tab.id, {
-              type: "show-toast",
-              message:
-                "Fast MP4 download is unavailable while signed in. Use the editor or download WEBM instead.",
-            }).catch(() => {});
-          }
-          return;
-        }
-      } catch (err) {
-        console.warn("Failed to check auth for open-download-mp4", err);
-      }
-    }
-
     const tab = await createTab("download.html", true, true);
     if (!tab?.id) return;
     chrome.tabs.onUpdated.addListener(function listener(tabId, info) {
@@ -1260,40 +1234,14 @@ export const setupHandlers = () => {
     ),
   );
   registerMessage("add-alarm-listener", (payload) => addAlarmListener(payload));
-  registerMessage(
-    "check-auth-status",
-    async () => {
-      if (!CLOUD_FEATURES_ENABLED) {
-        return {
-          authenticated: false,
-          message: "Cloud features disabled",
-        };
-      }
-      return await loginWithWebsite();
-    },
-  );
+  registerMessage("check-auth-status", async () => ({
+    authenticated: false,
+    message: "Cloud features disabled",
+  }));
   registerMessage(
     "create-video-project",
     async (message, sender, sendResponse) => {
-      if (!CLOUD_FEATURES_ENABLED) {
-        sendResponse({ success: false, message: "Cloud features disabled" });
-        return true;
-      }
-      const { authenticated, subscribed, user } = await loginWithWebsite();
-
-      if (!authenticated) {
-        sendResponse({ success: false, message: "User not authenticated" });
-        return true;
-      }
-
-      if (!subscribed) {
-        sendResponse({ success: false, message: "Subscription inactive" });
-        return true;
-      }
-
-      const response = await handleCreateVideoProject(message);
-      sendResponse(response);
-
+      sendResponse({ success: false, message: "Cloud features disabled" });
       return true;
     },
   );
@@ -1532,25 +1480,7 @@ export const setupHandlers = () => {
   registerMessage("get-monitor-for-window", getMonitorForWindow);
 
   registerMessage("fetch-videos", async (message, sender, sendResponse) => {
-    if (!CLOUD_FEATURES_ENABLED) {
-      sendResponse({ success: false, message: "Cloud features disabled" });
-      return true;
-    }
-    const { authenticated, subscribed, user } = await loginWithWebsite();
-
-    if (!authenticated) {
-      sendResponse({ success: false, message: "User not authenticated" });
-      return true;
-    }
-
-    if (!subscribed) {
-      sendResponse({ success: false, message: "Subscription inactive" });
-      return true;
-    }
-
-    const response = await handleFetchVideos(message);
-    sendResponse(response);
-
+    sendResponse({ success: false, message: "Cloud features disabled" });
     return true;
   });
   registerMessage("reopen-popup-multi", async (message) => {
@@ -1563,26 +1493,7 @@ export const setupHandlers = () => {
   registerMessage(
     "check-storage-quota",
     async (message, sender, sendResponse) => {
-      if (!CLOUD_FEATURES_ENABLED) {
-        sendResponse({ success: false, error: "Cloud features disabled" });
-        return true;
-      }
-      const authResult = await loginWithWebsite();
-      const { authenticated, subscribed } = authResult;
-
-      if (!authenticated) {
-        sendResponse({ success: false, error: "Not authenticated" });
-        return true;
-      }
-
-      if (!subscribed) {
-        sendResponse({ success: false, error: "Subscription inactive" });
-        return true;
-      }
-
-      const response = await handleCheckStorageQuota();
-      sendResponse(response);
-
+      sendResponse({ success: false, error: "Cloud features disabled" });
       return true;
     },
   );
@@ -1813,38 +1724,10 @@ export const setupHandlers = () => {
     });
   });
   registerMessage("open-account-settings", async () => {
-    if (!CLOUD_FEATURES_ENABLED) {
-      console.warn("Cloud features disabled");
-      return;
-    }
-    const { authenticated } = await loginWithWebsite();
-    if (!authenticated) {
-      console.warn("User not authenticated, cannot open account settings");
-      return;
-    }
-
-    const url = `${process.env.SCREENITY_APP_BASE}/?settings=open`;
-    createTab(url, true, true);
+    console.warn("Cloud features disabled");
   });
   registerMessage("open-support", async () => {
-    if (!CLOUD_FEATURES_ENABLED) {
-      console.warn("Cloud features disabled");
-      return;
-    }
-    const { authenticated, user } = await loginWithWebsite();
-    if (!authenticated || !user) {
-      console.warn("User not authenticated, cannot open support");
-      return;
-    }
-
-    const { name, email } = user;
-    const qs = await supportContextQuery({
-      includeRecordingState: true,
-      source: "settings",
-      user: { name, email },
-    });
-    const url = `https://tally.so/r/310MNg?extension=true&${qs}`;
-    createTab(url, true, true);
+    console.warn("Cloud features disabled");
   });
   registerMessage("check-banner-support", async (message, sendResponse) => {
     const { bannerSupport } = await chrome.storage.local.get(["bannerSupport"]);
@@ -1883,11 +1766,10 @@ export const setupHandlers = () => {
     if (sendResponse) sendResponse({ ok });
     return true;
   });
-  registerMessage("refresh-auth", async () => {
-    if (!CLOUD_FEATURES_ENABLED)
-      return { success: false, message: "Cloud features disabled" };
-    return await loginWithWebsite();
-  });
+  registerMessage("refresh-auth", async () => ({
+    success: false,
+    message: "Cloud features disabled",
+  }));
   registerMessage("sync-recording-state", async (message, sendResponse) => {
     const {
       recording,

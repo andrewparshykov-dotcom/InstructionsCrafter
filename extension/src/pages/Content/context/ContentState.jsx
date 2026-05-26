@@ -1381,8 +1381,8 @@ const ContentState = (props) => {
         changes.lastAuthCheck ||
         changes.isLoggedIn
       ) {
-        // Coalesce: loginWithWebsite writes isLoggedIn + isSubscribed +
-        // lastAuthCheck in quick succession.
+        // Coalesce: auth-state writes (isLoggedIn + isSubscribed +
+        // lastAuthCheck) may arrive in quick succession.
         clearTimeout(verifyDebounceRef.current);
         verifyDebounceRef.current = setTimeout(verifyUser, 2000);
       }

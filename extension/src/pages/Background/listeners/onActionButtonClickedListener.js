@@ -5,10 +5,6 @@ import {
   clearEditorTabReference,
 } from "../tabManagement";
 import { sendMessageRecord } from "../recording/sendMessageRecord.js";
-import { loginWithWebsite } from "../auth/loginWithWebsite.js";
-
-const CLOUD_FEATURES_ENABLED =
-  process.env.SCREENITY_ENABLE_CLOUD_FEATURES === "true";
 
 const handleTabMessaging = async (tab) => {
   const { activeTab, recordingUiTabId, offscreen } =
@@ -68,33 +64,11 @@ const openPlaygroundOrPopup = async (tab) => {
       expectedProjectId: projectIdFromUrl,
     });
 
-    if (CLOUD_FEATURES_ENABLED) {
-      const result = await loginWithWebsite();
-
-      if (result?.authenticated) {
-        await chrome.storage.local.set({
-          projectId: projectIdFromUrl,
-          recordingToScene: true,
-          instantMode: false,
-        });
-
-        sendMessageTab(tab.id, {
-          type: "get-project-info",
-        });
-      } else {
-        await chrome.storage.local.set({
-          projectId: null,
-          recordingToScene: false,
-          activeSceneId: null,
-        });
-      }
-    } else {
-      await chrome.storage.local.set({
-        projectId: null,
-        recordingToScene: false,
-        activeSceneId: null,
-      });
-    }
+    await chrome.storage.local.set({
+      projectId: null,
+      recordingToScene: false,
+      activeSceneId: null,
+    });
   } else {
     await clearEditorTabReference("action-click-non-editor-tab", {
       tabId: tab.id,
