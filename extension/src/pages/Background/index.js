@@ -102,39 +102,6 @@ const clearStaleLocks = async () => {
       );
     }
 
-    // drain deferred logout-token-clear if its inline listener died with the SW
-    try {
-      const {
-        logoutPendingTokenClear,
-        recording,
-        pendingRecording,
-        stayLoggedOut,
-      } = await chrome.storage.local.get([
-        "logoutPendingTokenClear",
-        "recording",
-        "pendingRecording",
-        "stayLoggedOut",
-      ]);
-      if (
-        logoutPendingTokenClear &&
-        !recording &&
-        !pendingRecording
-      ) {
-        if (stayLoggedOut === true) {
-          await chrome.storage.local.remove([
-            "screenityToken",
-            "logoutPendingTokenClear",
-          ]);
-          console.info(
-            "[InstructionsCrafter][BG] Drained deferred logout token-clear on startup",
-          );
-        } else {
-          // re-login during SW death; just clear the marker
-          await chrome.storage.local.remove(["logoutPendingTokenClear"]);
-        }
-      }
-    } catch {}
-
     // setIcon persists across SW restarts; reconcile so a stuck red icon clears
     try {
       const { recording: finalRecording } = await chrome.storage.local.get([

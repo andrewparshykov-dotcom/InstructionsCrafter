@@ -4,7 +4,6 @@ import { sendMessageRecord } from "../recording/sendMessageRecord.js";
 import { handleRecordingError } from "../recording/recordingHelpers.js";
 import { diagEvent } from "../../utils/diagnosticLog";
 import { lifecycle } from "../../utils/lifecycleLog";
-import { emitRecordingTelemetry } from "../recording/emitRecordingTelemetry";
 import {
   FIRST_CHUNK_WATCHDOG_ALARM,
   RECORDER_KEEPALIVE_ALARM,
@@ -124,10 +123,6 @@ export const handleAlarm = async (alarm) => {
         ageMs: age,
         tabId: snap.recordingTab,
       });
-      void emitRecordingTelemetry("recording_stall_detected", {
-        ageMs: age,
-        tabId: snap.recordingTab,
-      });
       try {
         await chrome.tabs.sendMessage(snap.recordingTab, {
           type: "recorder-wake-aggressive",
@@ -139,10 +134,6 @@ export const handleAlarm = async (alarm) => {
 
     if (stallLevel >= 1) {
       diagEvent("recording-stall-unrecoverable", {
-        ageMs: age,
-        tabId: snap.recordingTab,
-      });
-      void emitRecordingTelemetry("recording_stall_unrecoverable", {
         ageMs: age,
         tabId: snap.recordingTab,
       });
@@ -160,11 +151,6 @@ export const handleAlarm = async (alarm) => {
         return;
       }
 
-      void emitRecordingTelemetry("recording_outcome", {
-        outcome: "unrecoverable",
-        ageMs: age,
-        tabId: snap.recordingTab,
-      });
       try {
         await chrome.alarms.clear(RECORDER_KEEPALIVE_ALARM);
       } catch {}

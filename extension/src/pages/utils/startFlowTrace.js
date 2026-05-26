@@ -107,19 +107,6 @@ export const setStartFlowOutcome = async (outcome, extra = {}) => {
     if (extra.stuck) trace.stuck = extra.stuck;
 
     await chrome.storage.local.set({ [STORAGE_KEY]: trace });
-
-    // Submit to server for Pro users on terminal outcomes
-    if (wasInProgress) {
-      if (outcome === "error" || outcome === "stuck") {
-        submitDiagnosticReport(outcome);
-      } else if (outcome === "cancelled" && extra.error) {
-        // Only submit cancelled if there's a diagnostic reason
-        // (permission-denied, quota issues) not plain user dismiss
-        submitDiagnosticReport("cancelled");
-      } else if (outcome === "ok") {
-        submitDiagnosticReport("success-summary");
-      }
-    }
   } catch {
     // best effort
   }
@@ -132,41 +119,6 @@ export const getStartFlowTrace = async () => {
     return res?.[STORAGE_KEY] || null;
   } catch {
     return null;
-  }
-};
-
-// Track submitted attempt IDs to avoid duplicate submissions
-const submittedAttempts = new Set();
-
-/**
- * Submit the current trace to the server for Pro users.
- * Delegates to the background service worker which has no origin
- * restrictions. Best-effort, fire-and-forget. No retries.
- */
-export const submitDiagnosticReport = async (trigger) => {
-  try {
-    const res = await chrome.storage.local.get([
-      STORAGE_KEY,
-      "isSubscribed",
-      "isLoggedIn",
-    ]);
-    const trace = res?.[STORAGE_KEY];
-    if (!trace) return;
-
-    // Only submit for Pro users
-    if (!res.isSubscribed || !res.isLoggedIn) return;
-
-    // Dedupe by attemptId
-    if (!trace.attemptId || submittedAttempts.has(trace.attemptId)) return;
-    submittedAttempts.add(trace.attemptId);
-
-    // Send to background for the actual network call
-    chrome.runtime.sendMessage({
-      type: "submit-diagnostic-report",
-      trigger,
-    }).catch(() => {});
-  } catch {
-    // best effort
   }
 };
 

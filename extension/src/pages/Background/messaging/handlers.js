@@ -59,8 +59,6 @@ import {
   diagEvent,
 } from "../../utils/diagnosticLog";
 
-const API_BASE = process.env.SCREENITY_API_BASE_URL;
-
 const DEBUG_POSTSTOP = false;
 const STOP_RECORDING_TAB_DEBOUNCE_MS = 1200;
 let stopRecordingTabInFlight = false;
@@ -399,50 +397,6 @@ export const setupHandlers = () => {
       }
     }
     return { ok: false, error: lastErr || "tabs-sendMessage-failed" };
-  });
-
-  // Bearer-auth API call routed through the SW so it survives the calling
-  // tab's teardown (e.g. cloud recorder closing post-stop). Restricted to the
-  // configured Screenity API base. Kept for non-cloud-recorder callers; the
-  // cloud recorder uses the port-based path above instead.
-  registerMessage("pro-api-fetch", async (message) => {
-    // Heartbeat resets the SW idle timer for the duration of the fetch,
-    // helpful when the originating tab tears down right after dispatch.
-    const ping = () => {
-      try {
-        chrome.runtime.getPlatformInfo(() => void chrome.runtime.lastError);
-      } catch {}
-    };
-    ping();
-    const keepAlive = setInterval(ping, 10_000);
-    try {
-      const { path, method = "GET", body } = message || {};
-      if (typeof path !== "string" || !path.startsWith("/")) {
-        return { ok: false, error: "invalid-path" };
-      }
-      if (!API_BASE) return { ok: false, error: "no-api-base" };
-      const { screenityToken } = await chrome.storage.local.get([
-        "screenityToken",
-      ]);
-      const headers = { "Content-Type": "application/json" };
-      if (screenityToken) headers.Authorization = `Bearer ${screenityToken}`;
-      const res = await fetch(`${API_BASE}${path}`, {
-        method,
-        headers,
-        body: body != null ? JSON.stringify(body) : undefined,
-        keepalive: true,
-      });
-      const text = await res.text();
-      let json = null;
-      try {
-        json = text ? JSON.parse(text) : null;
-      } catch {}
-      return { ok: res.ok, status: res.status, body: json, text };
-    } catch (err) {
-      return { ok: false, error: err?.message || String(err) };
-    } finally {
-      clearInterval(keepAlive);
-    }
   });
 
   registerMessage("offscreen-diag", async (message) => {
@@ -848,62 +802,6 @@ export const setupHandlers = () => {
       return true;
     },
   );
-  registerMessage("submit-diagnostic-report", async (message) => {
-    try {
-      const appBase = process.env.SCREENITY_APP_BASE;
-      if (!appBase) return;
-      const { startFlowTrace, screenityToken, projectId, recorderSession } =
-        await chrome.storage.local.get([
-          "startFlowTrace",
-          "screenityToken",
-          "projectId",
-          "recorderSession",
-        ]);
-      if (!startFlowTrace || !screenityToken) return;
-      const trigger = message?.trigger || "manual";
-      const isSuccess = trigger === "success-summary";
-      const trace = startFlowTrace;
-      const ua = navigator.userAgent || "";
-      const payload = {
-        attemptId: trace.attemptId,
-        projectId: projectId || null,
-        recordingSessionId: recorderSession?.id || null,
-        extVersion: chrome.runtime.getManifest().version,
-        trigger,
-        env: {
-          os: (await chrome.runtime.getPlatformInfo()).os || null,
-          browser: (ua.match(/Chrome\/\d+/) || [""])[0] || null,
-        },
-        trace: isSuccess
-          ? {
-              recordingType: trace.recordingType,
-              surface: trace.surface,
-              isPro: trace.isPro,
-              countdown: trace.countdown,
-              outcome: trace.outcome,
-              t: {
-                startStreaming: trace.t?.startStreaming || null,
-                recordingStarted: trace.t?.recordingStarted || null,
-              },
-              routing: null,
-              error: null,
-              errorCode: null,
-              stuck: null,
-            }
-          : trace,
-      };
-      fetch(`${appBase}/api/log/diagnostic-report`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${screenityToken}`,
-        },
-        body: JSON.stringify(payload),
-        keepalive: true,
-      }).catch(() => {});
-    } catch {
-    }
-  });
   registerMessage("check-restore", async (message, sender, sendResponse) => {
     const response = await checkRestore();
     sendResponse(response);
@@ -912,13 +810,7 @@ export const setupHandlers = () => {
   registerMessage(
     "check-capture-permissions",
     async (message, sender, sendResponse) => {
-      const { isLoggedIn, isSubscribed } = message;
-
-      const response = await checkCapturePermissions({
-        isLoggedIn,
-        isSubscribed,
-      });
-
+      const response = await checkCapturePermissions();
       sendResponse(response);
       return true;
     },

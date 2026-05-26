@@ -40,12 +40,8 @@ const appendBgUploadTelemetryEvent = async (payload) => {
   }
 };
 
-export const checkCapturePermissions = async ({ isLoggedIn, isSubscribed }) => {
+export const checkCapturePermissions = async () => {
   const permissions = ["desktopCapture", "alarms", "offscreen"];
-
-  if (isLoggedIn && isSubscribed) {
-    permissions.push("clipboardWrite");
-  }
 
   // MUST be the first await; preceding awaits consume the user-gesture context
   // and Chrome rejects request() with "must be called during a user gesture"

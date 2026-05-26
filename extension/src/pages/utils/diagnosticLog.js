@@ -228,9 +228,6 @@ export const getStorageFlags = async () => {
     "sceneId",
     "sceneIdStatus",
     "projectId",
-    "isLoggedIn",
-    "isSubscribed",
-    "proSubscription",
   ];
   try {
     return await chrome.storage.local.get(keys);
