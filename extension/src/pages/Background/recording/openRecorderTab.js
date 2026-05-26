@@ -80,7 +80,6 @@ const openRecorderTab = async (
   chrome.storage.local.set({
     recordingTab: tab.id,
     offscreen: false,
-    clickEvents: [],
     recordingUiTabId: activeTab.id,
   });
 

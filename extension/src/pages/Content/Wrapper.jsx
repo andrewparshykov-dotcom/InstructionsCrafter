@@ -20,8 +20,6 @@ import CursorModes from "./utils/CursorModes";
 
 import { contentStateContext } from "./context/ContentState";
 
-import { startClickTracking } from "./cursor/trackClicks";
-
 const RecordingLoader = () => {
   const label = chrome.i18n.getMessage("preparingLabel") || "Preparing...";
   return (
@@ -156,19 +154,6 @@ const Wrapper = () => {
     contentState.showExtension,
     contentState.permissionsLoaded,
   ]);
-
-  useEffect(() => {
-    let stopTracking = null;
-
-    // Start tracking clicks only when recording starts
-    if (contentState.recording) {
-      stopTracking = startClickTracking(contentStateRef);
-    }
-
-    return () => {
-      stopTracking?.();
-    };
-  }, [contentState.recording]);
 
   return (
     <div ref={parentRef}>

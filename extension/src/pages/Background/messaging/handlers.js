@@ -25,8 +25,6 @@ import {
   restartActiveTab,
   getCurrentTab,
   sendMessageTab,
-  parseEditorTargetUrl,
-  resolveEditorTabForTarget,
   getValidatedEditorTab,
   setEditorTabReference,
 } from "../tabManagement";
@@ -62,43 +60,11 @@ import {
 } from "../../utils/diagnosticLog";
 
 const API_BASE = process.env.SCREENITY_API_BASE_URL;
-const APP_BASE = process.env.SCREENITY_APP_BASE;
 
-// Flip a project to isPublic:true after recording finishes. v2 removed
-// the publish system, so isPublic is the only access gate — without
-// this PATCH the share URL we copy to clipboard would 404 for viewers.
-// Fire-and-forget; clipboard/toast UX is identical on success or failure.
-const markProjectPublic = async (projectId) => {
-  if (!projectId || !API_BASE) return;
-  try {
-    const { screenityToken } = await chrome.storage.local.get("screenityToken");
-    if (!screenityToken) return;
-    await fetch(`${API_BASE}/videos/${projectId}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${screenityToken}`,
-      },
-      body: JSON.stringify({ isPublic: true }),
-    });
-  } catch (err) {
-    console.warn("markProjectPublic failed:", err?.message || err);
-  }
-};
-const CLOUD_FEATURES_ENABLED =
-  process.env.SCREENITY_ENABLE_CLOUD_FEATURES === "true";
 const DEBUG_POSTSTOP = false;
 const STOP_RECORDING_TAB_DEBOUNCE_MS = 1200;
 let stopRecordingTabInFlight = false;
 let stopRecordingTabLastAt = 0;
-
-const getEditorTargetUrl = ({ projectId, instantMode = false } = {}) => {
-  if (!projectId) return null;
-  if (instantMode) {
-    return `${APP_BASE}/view/${projectId}?load=true`;
-  }
-  return `${APP_BASE}/editor/${projectId}/edit?load=true`;
-};
 
 const ensureAudioOffscreen = async () => {
   if (!chrome.offscreen) return false;
@@ -156,119 +122,6 @@ const setTabAutoDiscardableSafe = async (message, sender) => {
     await chrome.tabs.update(tabId, { autoDiscardable: discardable });
   } catch (err) {
     console.warn("Failed to set tab autoDiscardable:", err);
-  }
-};
-
-export const handleFinishMultiRecording = async () => {
-  try {
-    const { recordingToScene } = await chrome.storage.local.get([
-      "recordingToScene",
-    ]);
-
-    if (!recordingToScene) {
-      const { multiProjectId } = await chrome.storage.local.get([
-        "multiProjectId",
-      ]);
-
-      if (!multiProjectId) {
-        console.warn("No project ID found for finishing multi recording.");
-        await chrome.storage.local.set({
-          multiMode: false,
-          multiSceneCount: 0,
-          multiProjectId: null,
-          multiLastSceneId: null,
-        });
-        return;
-      }
-
-      const url = `${process.env.SCREENITY_APP_BASE}/editor/${multiProjectId}/edit?share=true`;
-      const publicUrl = `${process.env.SCREENITY_APP_BASE}/view/${multiProjectId}/`;
-
-      markProjectPublic(multiProjectId);
-
-      createTab(url, true, true).then(() => {
-        if (publicUrl) {
-          copyToClipboard(publicUrl);
-          chrome.runtime.sendMessage({
-            type: "show-toast",
-            message: "Public video link copied to clipboard!",
-          });
-        }
-      });
-    } else {
-      // existing-project multi recording: only reuse editorTab if it still matches
-      const { projectId, instantMode } = await chrome.storage.local.get([
-        "projectId",
-        "instantMode",
-      ]);
-      const targetUrl = getEditorTargetUrl({
-        projectId,
-        instantMode: Boolean(instantMode),
-      });
-      const expectedKind = instantMode ? "view" : "editor";
-      const resolved = await resolveEditorTabForTarget({
-        targetUrl,
-        expectedProjectId: projectId || null,
-        expectedKind,
-        reason: "finish-multi-recording",
-      });
-      const messageTab = resolved.tabId || (await getCurrentTab())?.id || null;
-
-      if (messageTab) {
-        await focusTab(messageTab, { reason: "finish-multi-recording:notify" });
-        await sendMessageTab(messageTab, {
-          type: "update-project-ready",
-          share: false,
-          newProject: false,
-          projectId: projectId || null,
-        }).catch((err) =>
-          console.warn(
-            "[InstructionsCrafter][BG] Failed to send update-project-ready (finish-multi-recording)",
-            err,
-          ),
-        );
-      } else {
-        console.warn(
-          "[InstructionsCrafter][BG] No tab available for update-project-ready (finish-multi-recording)",
-          { projectId, instantMode: Boolean(instantMode) },
-        );
-      }
-
-      chrome.storage.local.set({
-        recordingProjectTitle: "",
-        projectId: null,
-        activeSceneId: null,
-        recordingToScene: false,
-        multiMode: false,
-        multiSceneCount: 0,
-        multiProjectId: null,
-        multiLastSceneId: null,
-        editorTab: null,
-        editorTabMeta: null,
-      });
-
-      const tab = await getCurrentTab();
-      if (tab?.id) {
-        sendMessageTab(tab.id, {
-          type: "clear-recordings",
-        });
-      }
-    }
-
-    await chrome.storage.local.set({
-      multiMode: false,
-      multiSceneCount: 0,
-      multiProjectId: null,
-      multiLastSceneId: null,
-    });
-  } catch (err) {
-    console.warn("Failed to finish multi recording", err);
-    await chrome.storage.local.set({
-      multiMode: false,
-      multiSceneCount: 0,
-      multiProjectId: null,
-      multiLastSceneId: null,
-    }).catch(() => {});
   }
 };
 
@@ -420,26 +273,6 @@ const resolveActiveSessionConflict = async (incomingSession) => {
     incomingId: incomingSession.id,
   });
   return { allow: true, staleRecovered: true };
-};
-
-export const copyToClipboard = (text) => {
-  if (!text) return;
-  chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-    if (!tabs.length) return;
-    const tabId = tabs[0].id;
-    chrome.scripting.executeScript({
-      target: { tabId },
-      func: (content) => {
-        navigator.clipboard.writeText(content).catch((err) => {
-          console.warn(
-            "❌ Failed to copy to clipboard in content script:",
-            err,
-          );
-        });
-      },
-      args: [text],
-    });
-  });
 };
 
 export const setupHandlers = () => {
@@ -1123,191 +956,12 @@ export const setupHandlers = () => {
     },
   );
   registerMessage("handle-login", async () => {
-    if (!CLOUD_FEATURES_ENABLED) {
-      console.warn("Cloud features disabled, cannot handle login");
-      return;
-    }
-    await chrome.storage.local.set({ stayLoggedOut: false });
-    // cancel deferred-logout token clear; otherwise drain listener clobbers fresh token
-    await chrome.storage.local.remove(["logoutPendingTokenClear"]);
-
-    const currentTab = await getCurrentTab();
-
-    if (currentTab?.id) {
-      await chrome.storage.local.set({ originalTabId: currentTab.id });
-    }
-    chrome.tabs.create({
-      url: `${process.env.SCREENITY_APP_BASE}/login?extension=true`,
-      active: true,
-    });
+    console.warn("Cloud features disabled, cannot handle login");
   });
   registerMessage("handle-logout", async (message, sender, sendResponse) => {
-    if (!CLOUD_FEATURES_ENABLED) {
-      sendResponse({ success: false, message: "Cloud features disabled" });
-      return true;
-    }
-    // keep screenityToken during active recording for bunnyTusUploader.refreshTusAuth;
-    // removed by recording-end cleanup
-    const { recording, pendingRecording } = await chrome.storage.local.get([
-      "recording",
-      "pendingRecording",
-    ]);
-    const recordingBusy = Boolean(recording || pendingRecording);
-    const removeKeys = [
-      "screenityUser",
-      "lastAuthCheck",
-      "isSubscribed",
-      "isLoggedIn",
-      "proSubscription",
-    ];
-    if (!recordingBusy) {
-      removeKeys.push("screenityToken");
-    }
-    await chrome.storage.local.remove(removeKeys);
-
-    // stayLoggedOut blocks auto-login until user explicitly clicks "Log in"
-    await chrome.storage.local.set({
-      isLoggedIn: false,
-      wasLoggedIn: true,
-      stayLoggedOut: true,
-      isSubscribed: false,
-      proSubscription: null,
-      screenityUser: null,
-      ...(recordingBusy ? { logoutPendingTokenClear: true } : {}),
-    });
-
-    if (recordingBusy) {
-      // drain listener; don't await, sendResponse must fire immediately
-      const drainListener = async (changes, area) => {
-        if (area !== "local") return;
-        if (
-          !(changes.recording || changes.pendingRecording)
-        )
-          return;
-        const snap = await chrome.storage.local.get([
-          "recording",
-          "pendingRecording",
-          "logoutPendingTokenClear",
-          "stayLoggedOut",
-        ]);
-        if (snap.recording || snap.pendingRecording) return;
-        if (!snap.logoutPendingTokenClear) {
-          // flag cleared by re-login
-          chrome.storage.onChanged.removeListener(drainListener);
-          return;
-        }
-        // gate on stayLoggedOut so a stray flag write can't silently log user out
-        if (snap.stayLoggedOut !== true) {
-          chrome.storage.onChanged.removeListener(drainListener);
-          await chrome.storage.local.remove(["logoutPendingTokenClear"]);
-          return;
-        }
-        chrome.storage.onChanged.removeListener(drainListener);
-        await chrome.storage.local.remove([
-          "screenityToken",
-          "logoutPendingTokenClear",
-        ]);
-      };
-      chrome.storage.onChanged.addListener(drainListener);
-    }
-    sendResponse({ success: true, deferredTokenClear: recordingBusy });
+    sendResponse({ success: false, message: "Cloud features disabled" });
     return true;
   });
-
-  registerMessage("click-event", async ({ payload }, sender) => {
-    if (!CLOUD_FEATURES_ENABLED) return;
-    const { x, y, surface, region, isTab } = payload;
-    const senderWindowId = sender.tab?.windowId;
-
-    sendMessageRecord({ type: "get-video-time" }, (response) => {
-      const videoTime = response?.videoTime ?? null;
-
-      const baseClick = { x, y, surface, region, timestamp: videoTime };
-
-      if (region || isTab) {
-        storeClick(baseClick);
-        return;
-      }
-
-      if (surface === "monitor" && typeof senderWindowId === "number") {
-        chrome.windows.get(senderWindowId, (win) => {
-          if (!win || chrome.runtime.lastError) {
-            console.warn("Failed to get window for click");
-            return;
-          }
-
-          chrome.system.display.getInfo((displays) => {
-            const monitor = displays.find(
-              (d) =>
-                win.left >= d.bounds.left &&
-                win.left < d.bounds.left + d.bounds.width &&
-                win.top >= d.bounds.top &&
-                win.top < d.bounds.top + d.bounds.height,
-            );
-
-            if (!monitor) {
-              console.warn("[click-event] No matching monitor found");
-              return;
-            }
-
-            const screenX = win.left + x;
-            const screenY = win.top + y;
-            const adjX = screenX - monitor.bounds.left;
-            const adjY = screenY - monitor.bounds.top;
-
-            storeClick({ ...baseClick, x: adjX, y: adjY });
-          });
-        });
-        return;
-      }
-
-      if (surface === "window" && typeof senderWindowId === "number") {
-        chrome.windows.get(senderWindowId, (win) => {
-          if (!win || chrome.runtime.lastError) {
-            console.warn("Failed to get window for window click");
-            return;
-          }
-
-          const screenX = win.left + x;
-          const screenY = win.top + y;
-
-          storeClick({ ...baseClick, x: screenX, y: screenY });
-        });
-        return;
-      }
-
-      storeClick(baseClick);
-    });
-  });
-
-  // serialize to avoid read-modify-write race losing clicks; cap array for long recordings
-  const CLICK_EVENTS_MAX = 5000;
-  let _clickWriteQueue = Promise.resolve();
-  function storeClick(click) {
-    _clickWriteQueue = _clickWriteQueue
-      .catch(() => {})
-      .then(async () => {
-        try {
-          // 2s cap so a wedged storage call can't block subsequent click writes
-          await Promise.race([
-            (async () => {
-              const { clickEvents = [] } = await chrome.storage.local.get({
-                clickEvents: [],
-              });
-              const next = clickEvents.concat(click);
-              if (next.length > CLICK_EVENTS_MAX) {
-                next.splice(0, next.length - CLICK_EVENTS_MAX);
-              }
-              await chrome.storage.local.set({ clickEvents: next });
-            })(),
-            new Promise((_, reject) =>
-              setTimeout(() => reject(new Error("click-write-timeout")), 2000),
-            ),
-          ]);
-        } catch {
-        }
-      });
-  }
 
   function getMonitorForWindow(message, sender, sendResponse) {
     chrome.system.display.getInfo((displays) => {
@@ -1384,85 +1038,10 @@ export const setupHandlers = () => {
     }
   });
   registerMessage("prepare-open-editor", async (message) => {
-    if (!CLOUD_FEATURES_ENABLED) {
-      console.warn("Cloud features disabled");
-      return;
-    }
-    const targetUrl = message.url || null;
-    const parsedTarget = parseEditorTargetUrl(targetUrl);
-    const expectedProjectId = message.projectId || parsedTarget?.projectId || null;
-
-    await chrome.storage.local.set({
-      pendingEditorOpen: {
-        url: targetUrl,
-        publicUrl: message.publicUrl || null,
-        projectId: expectedProjectId,
-        instantMode: Boolean(message.instantMode),
-        ts: Date.now(),
-      },
-    });
-
-    console.info("[InstructionsCrafter][BG] prepare-open-editor", {
-      projectId: expectedProjectId,
-      targetUrl,
-      instantMode: Boolean(message.instantMode),
-      hasPublicUrl: Boolean(message.publicUrl),
-    });
-
-    const expectedKind = message.instantMode ? "view" : "editor";
-    const resolved = await resolveEditorTabForTarget({
-      targetUrl,
-      expectedProjectId: expectedProjectId,
-      expectedKind,
-      reason: "prepare-open-editor",
-    });
-    console.info("[InstructionsCrafter][BG] prepare-open-editor resolved", {
-      tabId: resolved.tabId || null,
-      reused: Boolean(resolved.reused),
-      opened: Boolean(resolved.opened),
-      projectId: expectedProjectId,
-    });
+    console.warn("Cloud features disabled");
   });
   registerMessage("prepare-editor-existing", async (message) => {
-    if (!CLOUD_FEATURES_ENABLED) {
-      console.warn("Cloud features disabled");
-      return;
-    }
-    let messageTab = null;
-
-    if (message.multiMode) {
-      messageTab = (await getCurrentTab())?.id || null;
-    } else {
-      const { projectId, instantMode } = await chrome.storage.local.get([
-        "projectId",
-        "instantMode",
-      ]);
-      const targetUrl = getEditorTargetUrl({
-        projectId,
-        instantMode: Boolean(instantMode),
-      });
-      const resolved = await resolveEditorTabForTarget({
-        targetUrl,
-        expectedProjectId: projectId || null,
-        expectedKind: instantMode ? "view" : "editor",
-        reason: "prepare-editor-existing",
-      });
-      messageTab = resolved.tabId;
-    }
-
-    if (messageTab) {
-      await sendMessageTab(messageTab, {
-        type: "update-project-loading",
-        multiMode: message.multiMode,
-      }).catch((err) =>
-        console.warn(
-          "[InstructionsCrafter][BG] Failed to send update-project-loading",
-          err,
-        ),
-      );
-    } else {
-      console.warn("❗ No valid messageTab found in prepare-editor-existing");
-    }
+    console.warn("Cloud features disabled");
   });
   registerMessage("preparing-recording", async () => {
     // getCurrentTab can return the pinned recorder tab; prefer stored activeTab
@@ -1477,121 +1056,16 @@ export const setupHandlers = () => {
     }
   });
   registerMessage("editor-ready", async (message) => {
-    if (!CLOUD_FEATURES_ENABLED) {
-      console.warn("Cloud features disabled");
-      return;
-    }
-    const { pendingEditorOpen } = await chrome.storage.local.get([
-      "pendingEditorOpen",
-    ]);
-
-    let messageTab = null;
-    const projectId = message.projectId || pendingEditorOpen?.projectId || null;
-    const instantMode = Boolean(
-      message.instantMode ?? pendingEditorOpen?.instantMode,
-    );
-    const targetUrl = getEditorTargetUrl({
-      projectId,
-      instantMode,
-    });
-    const editorUrl = message.editorUrl || pendingEditorOpen?.url || targetUrl;
-    const expectedKind = instantMode ? "view" : "editor";
-    const publicUrl = message.publicUrl || pendingEditorOpen?.publicUrl || null;
-    const sceneId = message.sceneId || null;
-
-    console.info("[InstructionsCrafter][BG] editor-ready received", {
-      newProject: Boolean(message.newProject),
-      multiMode: Boolean(message.multiMode),
-      projectId,
-      hasSceneId: Boolean(sceneId),
-      editorUrl,
-      hasPendingOpen: Boolean(pendingEditorOpen),
-    });
-
-    if (message.newProject) {
-      const resolved = await resolveEditorTabForTarget({
-        targetUrl: editorUrl,
-        expectedProjectId: projectId,
-        expectedKind,
-        reason: "editor-ready:new-project",
-      });
-      messageTab = resolved.tabId;
-
-      chrome.runtime.sendMessage({ type: "turn-off-pip" });
-
-      // New-project recordings are user-facing public-shareable, so
-      // flip isPublic before we hand the share URL to the clipboard.
-      markProjectPublic(projectId);
-
-      if (publicUrl) {
-        copyToClipboard(publicUrl);
-      }
-    } else if (message.multiMode) {
-      messageTab = (await getCurrentTab())?.id || null;
-    } else {
-      const resolved = await resolveEditorTabForTarget({
-        targetUrl: editorUrl,
-        expectedProjectId: projectId,
-        expectedKind,
-        reason: "editor-ready:existing-project",
-      });
-      messageTab = resolved.tabId;
-
-      chrome.runtime.sendMessage({ type: "turn-off-pip" });
-    }
-
-    // non-newProject paths only; scene additions have null publicUrl, multiMode
-    // new-project goes through handleFinishMultiRecording with its own clipboard
-    if (publicUrl && !message.newProject) {
-      copyToClipboard(publicUrl);
-    }
-
-    if (messageTab) {
-      await sendMessageTab(messageTab, {
-        type: "update-project-ready",
-        share: Boolean(publicUrl),
-        newProject: Boolean(message.newProject),
-        sceneId: sceneId,
-        projectId,
-      }).catch((err) =>
-        console.warn("[InstructionsCrafter][BG] Failed to send update-project-ready", err),
-      );
-    } else {
-      console.warn("❗ No valid messageTab found in editor-ready");
-    }
-
-    if (pendingEditorOpen) {
-      await chrome.storage.local.remove(["pendingEditorOpen"]);
-    }
+    console.warn("Cloud features disabled");
   });
   registerMessage("finish-multi-recording", async () => {
-    if (!CLOUD_FEATURES_ENABLED) {
-      console.warn("Cloud features disabled");
-      return;
-    }
-    await handleFinishMultiRecording();
+    console.warn("Cloud features disabled");
   });
   registerMessage("handle-reactivate", async () => {
-    if (!CLOUD_FEATURES_ENABLED) {
-      console.warn("Cloud features disabled");
-      return;
-    }
-
-    chrome.tabs.create({
-      url: `${process.env.SCREENITY_APP_BASE}/reactivate`,
-      active: true,
-    });
+    console.warn("Cloud features disabled");
   });
   registerMessage("handle-upgrade", async () => {
-    if (!CLOUD_FEATURES_ENABLED) {
-      console.warn("Cloud features disabled");
-      return;
-    }
-
-    chrome.tabs.create({
-      url: `${process.env.SCREENITY_APP_BASE}/upgrade`,
-      active: true,
-    });
+    console.warn("Cloud features disabled");
   });
   registerMessage("open-account-settings", async () => {
     console.warn("Cloud features disabled");

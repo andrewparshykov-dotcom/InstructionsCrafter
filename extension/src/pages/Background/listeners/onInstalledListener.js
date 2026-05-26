@@ -1,9 +1,6 @@
 import { removeTab } from "../tabManagement";
 import { executeScripts } from "../utils/executeScripts";
 
-const cloudFeaturesEnabled =
-  process.env.SCREENITY_ENABLE_CLOUD_FEATURES === "true";
-
 export const onInstalledListener = () => {
   chrome.runtime.onInstalled.addListener(async (details) => {
     // Permanent toolbar tooltip reminder of the narration requirement.
@@ -24,9 +21,7 @@ export const onInstalledListener = () => {
 
       chrome.storage.local.set({
         firstTime: true,
-        onboarding: cloudFeaturesEnabled,
         bannerSupport: true,
-        firstTimePro: cloudFeaturesEnabled,
       });
 
       chrome.storage.managed.get("skipSetup", (managedConfig) => {
@@ -40,14 +35,6 @@ export const onInstalledListener = () => {
         chrome.storage.local.set({ updatingFromOld: true });
       } else {
         chrome.storage.local.set({ updatingFromOld: false });
-
-        if (details.previousVersion === "3.1.16" && cloudFeaturesEnabled) {
-          chrome.storage.local.set({
-            showProSplash: cloudFeaturesEnabled,
-            bannerSupport: true,
-            onboarding: cloudFeaturesEnabled,
-          });
-        }
       }
     }
 
