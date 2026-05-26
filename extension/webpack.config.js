@@ -246,18 +246,6 @@ const config = {
       "process.env.SCREENITY_APP_BASE": JSON.stringify(
         process.env.SCREENITY_APP_BASE
       ),
-      "process.env.SCREENITY_WEBSITE_BASE": JSON.stringify(
-        process.env.SCREENITY_WEBSITE_BASE
-      ),
-      "process.env.SCREENITY_API_BASE_URL": JSON.stringify(
-        process.env.SCREENITY_API_BASE_URL
-      ),
-      "process.env.MAX_RECORDING_DURATION": JSON.stringify(
-        process.env.MAX_RECORDING_DURATION || 3600 // Default to 1 hour
-      ),
-      "process.env.RECORDING_WARNING_THRESHOLD": JSON.stringify(
-        process.env.RECORDING_WARNING_THRESHOLD || 60 // Default to 1 minute
-      ),
       "process.env.SCREENITY_DEV_MODE": JSON.stringify(
         process.env.SCREENITY_DEV_MODE || ""
       ),
