@@ -620,11 +620,6 @@ const ContentState = (props) => {
           contentStateRef.current.defaultVideoInputLabel,
       });
 
-      chrome.runtime.sendMessage({
-        type: "switch-camera",
-        id: contentStateRef.current.defaultVideoInput,
-      });
-
       if (!contentStateRef.current.setDevices) {
         if (audioInput.length > 0) {
           setContentState((prevContentState) => ({
