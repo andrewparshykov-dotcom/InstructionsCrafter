@@ -108,6 +108,8 @@ test_local.sh
 
 ARCHITECTURE.md
 CLAUDE.md
+docs/PHASE_HISTORY.md
+docs/DEFERRED_CLEANUP.md
 
 # ==========================================
 # Chrome Web Store submission working files
