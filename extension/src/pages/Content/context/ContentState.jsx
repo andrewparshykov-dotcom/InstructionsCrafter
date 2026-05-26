@@ -721,7 +721,6 @@ const ContentState = (props) => {
     defaultAudioInput: "none",
     defaultAudioInputLabel: "",
     micActive: false,
-    sortBy: "newest",
     paused: false,
     toolbarPosition: {
       left: true,
@@ -774,7 +773,6 @@ const ContentState = (props) => {
     hasOpenedBefore: false,
     qualityValue: "1080p",
     fpsValue: "30",
-    fastRecorderBeta: null,
     fastRecorderStatus: null,
     useWebCodecsRecorder: true,
     countdownActive: false,
@@ -783,10 +781,7 @@ const ContentState = (props) => {
     isCountdownVisible: false,
     multiSceneCount: 0,
     preparingRecording: false,
-    hasSeenInstantModeModal: false,
-    instantMode: false,
     onboarding: false,
-    showProSplash: false,
     startRecordingAfterCountdown: () => {
       if (!contentStateRef.current.countdownCancelled) {
         contentStateRef.current.startRecording();

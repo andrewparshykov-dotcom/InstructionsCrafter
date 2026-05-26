@@ -19,22 +19,12 @@ export const onInstalledListener = () => {
     if (details.reason === "install") {
       chrome.storage.local.clear();
 
-      chrome.storage.local.set({
-        firstTime: true,
-      });
-
       chrome.storage.managed.get("skipSetup", (managedConfig) => {
         const skipSetup = managedConfig.skipSetup ?? false;
         if (!skipSetup) {
           chrome.tabs.create({ url: "welcome.html" });
         }
       });
-    } else if (details.reason === "update") {
-      if (details.previousVersion === "2.8.6") {
-        chrome.storage.local.set({ updatingFromOld: true });
-      } else {
-        chrome.storage.local.set({ updatingFromOld: false });
-      }
     }
 
     // F31: force-write on install AND update. The cog menu that let users

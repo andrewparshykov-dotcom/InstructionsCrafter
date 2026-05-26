@@ -48,14 +48,10 @@ export const updateFromStorage = (check = true, id = null) => {
       "systemAudio",
       "qualityValue",
       "fpsValue",
-      "fastRecorderBeta",
       "fastRecorderStatus",
       "useWebCodecsRecorder",
       "multiMode",
       "multiSceneCount",
-      "sortBy",
-      "instantMode",
-      "hasSeenInstantModeModal",
     ],
     (result) => {
       const storedEffects = normalizeCursorEffects(result.cursorEffects);
@@ -196,11 +192,6 @@ export const updateFromStorage = (check = true, id = null) => {
           result.fpsValue !== undefined && result.fpsValue !== null
             ? result.fpsValue
             : prevContentState.fpsValue,
-        fastRecorderBeta:
-          result.fastRecorderBeta !== undefined &&
-          result.fastRecorderBeta !== null
-            ? result.fastRecorderBeta
-            : prevContentState.fastRecorderBeta,
         fastRecorderStatus:
           result.fastRecorderStatus !== undefined &&
           result.fastRecorderStatus !== null
@@ -213,11 +204,7 @@ export const updateFromStorage = (check = true, id = null) => {
             : prevContentState.useWebCodecsRecorder,
         multiMode: result.multiMode || false,
         multiSceneCount: result.multiSceneCount || 0,
-        sortBy: result.sortBy || "newest",
-        instantMode: result.instantMode || false,
-        hasSeenInstantModeModal: result.hasSeenInstantModeModal || false,
         onboarding: result.onboarding || false,
-        showProSplash: result.showProSplash || false,
       }));
 
       if (result.systemAudio === undefined || result.systemAudio === null) {

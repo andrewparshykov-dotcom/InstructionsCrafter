@@ -30,7 +30,6 @@ export type FastRecorderValidationResult = {
 };
 
 const STORAGE_KEYS = {
-  userSetting: "fastRecorderBeta",
   stickyDisabled: "fastRecorderDisabledForDevice",
   stickyReason: "fastRecorderDisabledReason",
   stickyDetails: "fastRecorderDisabledDetails",
