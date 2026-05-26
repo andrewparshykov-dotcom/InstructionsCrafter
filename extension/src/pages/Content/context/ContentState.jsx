@@ -575,15 +575,11 @@ const ContentState = (props) => {
   const handleDevicePermissions = (data) => {
     if (data && data != undefined && data.success) {
       const audioInput = data.audioinput;
-      const videoInput = data.videoinput;
-      const cameraPermission = data.cameraPermission;
       const microphonePermission = data.microphonePermission;
 
       setContentState((prevContentState) => ({
         ...prevContentState,
         audioInput: audioInput,
-        videoInput: videoInput,
-        cameraPermission: cameraPermission,
         microphonePermission: microphonePermission,
       }));
 
@@ -592,32 +588,20 @@ const ContentState = (props) => {
             audioInput.map((device) => [device.deviceId, device.label]),
           )
         : {};
-      const videoInputById = Array.isArray(videoInput)
-        ? Object.fromEntries(
-            videoInput.map((device) => [device.deviceId, device.label]),
-          )
-        : {};
 
       const defaultAudioInputLabel =
         audioInputById[contentStateRef.current.defaultAudioInput] || "";
-      const defaultVideoInputLabel =
-        videoInputById[contentStateRef.current.defaultVideoInput] || "";
 
       setContentState((prevContentState) => ({
         ...prevContentState,
         defaultAudioInputLabel:
           defaultAudioInputLabel || prevContentState.defaultAudioInputLabel,
-        defaultVideoInputLabel:
-          defaultVideoInputLabel || prevContentState.defaultVideoInputLabel,
       }));
 
       chrome.storage.local.set({
         defaultAudioInputLabel:
           defaultAudioInputLabel ||
           contentStateRef.current.defaultAudioInputLabel,
-        defaultVideoInputLabel:
-          defaultVideoInputLabel ||
-          contentStateRef.current.defaultVideoInputLabel,
       });
 
       if (!contentStateRef.current.setDevices) {
@@ -627,30 +611,12 @@ const ContentState = (props) => {
             defaultAudioInput: audioInput[0].deviceId,
             defaultAudioInputLabel: audioInput[0].label || "",
             micActive: true,
+            setDevices: true,
           }));
           chrome.storage.local.set({
             defaultAudioInput: audioInput[0].deviceId,
             defaultAudioInputLabel: audioInput[0].label || "",
             micActive: true,
-          });
-        }
-        if (videoInput.length > 0) {
-          setContentState((prevContentState) => ({
-            ...prevContentState,
-            defaultVideoInput: videoInput[0].deviceId,
-            defaultVideoInputLabel: videoInput[0].label || "",
-          }));
-          chrome.storage.local.set({
-            defaultVideoInput: videoInput[0].deviceId,
-            defaultVideoInputLabel: videoInput[0].label || "",
-          });
-        }
-        if (audioInput.length > 0 || videoInput.length > 0) {
-          setContentState((prevContentState) => ({
-            ...prevContentState,
-            setDevices: true,
-          }));
-          chrome.storage.local.set({
             setDevices: true,
           });
         }
@@ -658,7 +624,6 @@ const ContentState = (props) => {
     } else {
       setContentState((prevContentState) => ({
         ...prevContentState,
-        cameraPermission: false,
         microphonePermission: false,
       }));
       if (contentStateRef.current.askForPermissions) {
@@ -752,12 +717,9 @@ const ContentState = (props) => {
     sitePermissionsBlocked: false,
     timeWarning: false,
     audioInput: [],
-    videoInput: [],
     setDevices: false,
     defaultAudioInput: "none",
-    defaultVideoInput: "none",
     defaultAudioInputLabel: "",
-    defaultVideoInputLabel: "",
     micActive: false,
     sortBy: "newest",
     paused: false,
@@ -793,7 +755,6 @@ const ContentState = (props) => {
     hideToolbar: false,
     pendingRecording: false,
     askForPermissions: true,
-    cameraPermission: true,
     microphonePermission: true,
     askMicrophone: true,
     cursorMode: "none",

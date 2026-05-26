@@ -19,11 +19,8 @@ export const updateFromStorage = (check = true, id = null) => {
   chrome.storage.local.get(
     [
       "audioInput",
-      "videoInput",
       "defaultAudioInput",
-      "defaultVideoInput",
       "defaultAudioInputLabel",
-      "defaultVideoInputLabel",
       "cameraDimensions",
       "cameraFlipped",
       "micActive",
@@ -82,30 +79,16 @@ export const updateFromStorage = (check = true, id = null) => {
           result.audioInput !== undefined && result.audioInput !== null
             ? result.audioInput
             : prevContentState.audioInput,
-        videoInput:
-          result.videoInput !== undefined && result.videoInput !== null
-            ? result.videoInput
-            : prevContentState.videoInput,
         defaultAudioInput:
           result.defaultAudioInput !== undefined &&
           result.defaultAudioInput !== null
             ? result.defaultAudioInput
             : prevContentState.defaultAudioInput,
-        defaultVideoInput:
-          result.defaultVideoInput !== undefined &&
-          result.defaultVideoInput !== null
-            ? result.defaultVideoInput
-            : prevContentState.defaultVideoInput,
         defaultAudioInputLabel:
           result.defaultAudioInputLabel !== undefined &&
           result.defaultAudioInputLabel !== null
             ? result.defaultAudioInputLabel
             : prevContentState.defaultAudioInputLabel,
-        defaultVideoInputLabel:
-          result.defaultVideoInputLabel !== undefined &&
-          result.defaultVideoInputLabel !== null
-            ? result.defaultVideoInputLabel
-            : prevContentState.defaultVideoInputLabel,
         cameraDimensions:
           result.cameraDimensions !== undefined &&
           result.cameraDimensions !== null

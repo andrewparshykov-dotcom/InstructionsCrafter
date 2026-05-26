@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef, useCallback } from "react";
+import React, { useEffect } from "react";
 
 const Recorder = () => {
   useEffect(() => {
@@ -12,7 +12,7 @@ const Recorder = () => {
 
   useEffect(() => {
     const handleDeviceChange = () => {
-      // Recheck permissions and enumerate devices
+      // Recheck permission and enumerate devices
       checkPermissions();
     };
 
@@ -27,34 +27,21 @@ const Recorder = () => {
   }, []);
 
   const checkPermissions = async () => {
-    // Individually check the camera and microphone permissions using the Permissions API. Then enumerate devices respectively.
+    // Check microphone permission only; the extension records screen + audio
+    // narration and never uses the camera. (Camera permission was asked for
+    // historically when the Screenity camera-overlay UI existed.)
     try {
-      const cameraPermission = await navigator.permissions.query({
-        name: "camera",
-      });
       const microphonePermission = await navigator.permissions.query({
         name: "microphone",
       });
-
-      cameraPermission.onchange = () => {
-        checkPermissions();
-      };
 
       microphonePermission.onchange = () => {
         checkPermissions();
       };
 
-      // If the permissions are granted, enumerate devices
-      if (
-        cameraPermission.state === "granted" ||
-        microphonePermission.state === "granted"
-      ) {
-        enumerateDevices(
-          cameraPermission.state === "granted",
-          microphonePermission.state === "granted"
-        );
+      if (microphonePermission.state === "granted") {
+        enumerateDevices(true);
       } else {
-        // Post message to parent window
         window.parent.postMessage(
           {
             type: "instructionscrafter-permissions",
@@ -63,25 +50,22 @@ const Recorder = () => {
           },
           "*"
         );
-        // sendResponse({ success: false, error: err.name });
       }
     } catch (err) {
       enumerateDevices();
     }
   };
 
-  const enumerateDevices = async (camGranted = true, micGranted = true) => {
+  const enumerateDevices = async (micGranted = true) => {
     try {
       const stream = await navigator.mediaDevices.getUserMedia({
         audio: micGranted,
-        video: camGranted,
       });
 
       const devicesInfo = await navigator.mediaDevices.enumerateDevices();
 
       let audioinput = [];
       let audiooutput = [];
-      let videoinput = [];
 
       if (micGranted) {
         // Filter by audio input
@@ -101,23 +85,10 @@ const Recorder = () => {
           }));
       }
 
-      if (camGranted) {
-        // Filter by video input and extract relevant properties
-        videoinput = devicesInfo
-          .filter((device) => device.kind === "videoinput")
-          .map((device) => ({
-            deviceId: device.deviceId,
-            label: device.label,
-          }));
-      }
-
       // Save in Chrome local storage
       chrome.storage.local.set({
-        // Set available devices
         audioinput: audioinput,
         audiooutput: audiooutput,
-        videoinput: videoinput,
-        cameraPermission: camGranted,
         microphonePermission: micGranted,
       });
 
@@ -128,14 +99,10 @@ const Recorder = () => {
           success: true,
           audioinput: audioinput,
           audiooutput: audiooutput,
-          videoinput: videoinput,
-          cameraPermission: camGranted,
           microphonePermission: micGranted,
         },
         "*"
       );
-
-      //sendResponse({ success: true, audioinput, audiooutput, videoinput });
 
       // End the stream
       stream.getTracks().forEach(function (track) {
@@ -151,7 +118,6 @@ const Recorder = () => {
         },
         "*"
       );
-      //sendResponse({ success: false, error: err.name });
     }
   };
 
