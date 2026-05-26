@@ -5,12 +5,8 @@ import {
 import { setContentState, contentStateRef } from "../ContentState";
 import { updateFromStorage } from "../utils/updateFromStorage";
 
-import { checkAuthStatus } from "../utils/checkAuthStatus";
 import { traceStep, setStartFlowOutcome } from "../../../utils/startFlowTrace";
 import { perfMark } from "../../../utils/perfMarks";
-
-const CLOUD_FEATURES_ENABLED =
-  process.env.SCREENITY_ENABLE_CLOUD_FEATURES === "true";
 
 const getState = () => contentStateRef.current;
 
@@ -580,51 +576,17 @@ export const setupHandlers = () => {
     postProjectHandoff(payload);
   });
   registerMessage("check-auth", async (message) => {
-    if (!CLOUD_FEATURES_ENABLED) {
-      const { recording } = await chrome.storage.local.get("recording");
-
-      setContentState((prev) => ({
-        ...prev,
-        isLoggedIn: false,
-        screenityUser: null,
-        isSubscribed: false,
-        proSubscription: null,
-        showExtension: true,
-        showPopup: !recording,
-      }));
-
-      return;
-    }
-
-    const result = await checkAuthStatus();
-
     const { recording } = await chrome.storage.local.get("recording");
 
     setContentState((prev) => ({
       ...prev,
-      isLoggedIn: result.authenticated,
-      screenityUser: result.user,
-      isSubscribed: result.subscribed,
-      proSubscription: result.proSubscription,
-      ...(result.authenticated ? { wasLoggedIn: false } : {}),
+      isLoggedIn: false,
+      screenityUser: null,
+      isSubscribed: false,
+      proSubscription: null,
       showExtension: true,
       showPopup: !recording,
     }));
-
-    if (result.authenticated) {
-      // Client-side zoom is unavailable for authenticated users.
-      setContentState((prev) => ({
-        ...prev,
-        onboarding: false,
-        showProSplash: false,
-        zoomEnabled: false,
-      }));
-
-      chrome.storage.local.set({
-        zoomEnabled: false,
-        wasLoggedIn: false,
-      });
-    }
   });
   registerMessage("update-project-loading", (message, sender) => {
     window.postMessage(

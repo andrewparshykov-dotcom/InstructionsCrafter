@@ -944,10 +944,6 @@ export const setupHandlers = () => {
     ),
   );
   registerMessage("add-alarm-listener", (payload) => addAlarmListener(payload));
-  registerMessage("check-auth-status", async () => ({
-    authenticated: false,
-    message: "Cloud features disabled",
-  }));
   registerMessage(
     "create-video-project",
     async (message, sender, sendResponse) => {

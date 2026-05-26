@@ -16,7 +16,6 @@ import DevHUD from "../DevHUD";
 
 import { setupHandlers } from "./messaging/handlers";
 
-import { checkAuthStatus } from "./utils/checkAuthStatus";
 import {
   initStartFlowTrace,
   traceStep,
@@ -44,8 +43,6 @@ const deriveCursorMode = (effects, fallbackMode) => {
 
 const ContentState = (props) => {
   const [timer, setTimerInternal] = React.useState(0);
-  const CLOUD_FEATURES_ENABLED =
-    process.env.SCREENITY_ENABLE_CLOUD_FEATURES === "true";
   setTimer = setTimerInternal;
   const startBeepRef = useRef(null);
   const stopBeepRef = useRef(null);
@@ -61,7 +58,6 @@ const ContentState = (props) => {
   const timerReadSeqRef = useRef(0);
   const lastBeepStartTimeRef = useRef(null);
   const recordingBeepTabIdRef = useRef(null);
-  const verifyDebounceRef = useRef(null);
 
   const isTargetTab = useCallback(() => {
     const tabId = tabIdRef.current;
@@ -80,37 +76,6 @@ const ContentState = (props) => {
     }
     return true;
   }, []);
-
-  const verifyUser = useCallback(async () => {
-    if (!CLOUD_FEATURES_ENABLED) return;
-    const result = await checkAuthStatus();
-
-    setContentState((prev) => ({
-      ...prev,
-      isLoggedIn: result.authenticated,
-      screenityUser: result.user,
-      isSubscribed: result.subscribed,
-      hasSubscribedBefore: result.hasSubscribedBefore,
-      proSubscription: result.proSubscription,
-      ...(result.authenticated ? { wasLoggedIn: false } : {}),
-    }));
-
-    if (result.authenticated) {
-      // Client-side zoom is unavailable for authenticated users.
-      setContentState((prev) => ({
-        ...prev,
-        zoomEnabled: false,
-      }));
-
-      chrome.storage.local.set({
-        zoomEnabled: false,
-        wasLoggedIn: false,
-      });
-    }
-  }, [CLOUD_FEATURES_ENABLED]);
-  useEffect(() => {
-    verifyUser();
-  }, [verifyUser]);
 
   useEffect(() => {
     chrome.runtime.sendMessage({ type: "get-tab-id" }, (response) => {
@@ -415,11 +380,7 @@ const ContentState = (props) => {
     const attemptId = `ra-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 8)}`;
     await initStartFlowTrace(attemptId, {
       recordingType: contentStateRef.current.recordingType,
-      isPro: Boolean(
-        contentStateRef.current.isLoggedIn &&
-        contentStateRef.current.isSubscribed &&
-        CLOUD_FEATURES_ENABLED,
-      ),
+      isPro: false,
       countdown: Boolean(contentStateRef.current.countdown),
     });
     traceStep("startStreaming");
@@ -439,76 +400,6 @@ const ContentState = (props) => {
     }));
 
     let permission = false;
-
-    if (
-      contentStateRef.current?.isLoggedIn &&
-      contentStateRef.current?.isSubscribed &&
-      CLOUD_FEATURES_ENABLED
-    ) {
-      const storageResponse = await chrome.runtime.sendMessage({
-        type: "check-storage-quota",
-      });
-
-      const { success, canUpload, error } = storageResponse;
-
-      if (success && canUpload === false) {
-        contentStateRef.current.openModal(
-          chrome.i18n.getMessage("storageLimitReachedTitle"),
-          chrome.i18n.getMessage("storageLimitReachedDescription"),
-          chrome.i18n.getMessage("manageStorageButtonLabel"),
-          chrome.i18n.getMessage("closeModalLabel"),
-          () => {
-            window.open(process.env.SCREENITY_APP_BASE, "_blank");
-          },
-          () => {},
-        );
-      } else if (!success) {
-        const isSubError = error === "Subscription inactive";
-        const isAuthError = error === "Not authenticated";
-
-        if (isSubError) {
-          contentStateRef.current.setContentState((prev) => ({
-            ...prev,
-            isSubscribed: false,
-          }));
-        } else if (isAuthError) {
-          contentStateRef.current.setContentState((prev) => ({
-            ...prev,
-            isSubscribed: false,
-            isLoggedIn: false,
-            screenityUser: null,
-            proSubscription: null,
-          }));
-        }
-
-        const message = isAuthError
-          ? chrome.i18n.getMessage("storageCheckFailAuthDescription")
-          : chrome.i18n.getMessage("storageCheckFailDescription");
-
-        contentStateRef.current.openModal(
-          chrome.i18n.getMessage("storageCheckFailTitle"),
-          message,
-          chrome.i18n.getMessage("retryButtonLabel"),
-          chrome.i18n.getMessage("closeModalLabel"),
-          async () => {
-            window.location.reload();
-          },
-          () => {},
-        );
-      }
-
-      if (!success || (success && canUpload === false)) {
-        setStartFlowOutcome("error", {
-          error: canUpload === false ? "storage-limit" : (error || "quota-check-failed"),
-        });
-        setContentState((prev) => ({
-          ...prev,
-          pendingRecording: false,
-          preparingRecording: false,
-        }));
-        return;
-      }
-    }
 
     if (isExtensionPage) {
       permission = await checkChromeCapturePermissions();
@@ -1368,19 +1259,6 @@ const ContentState = (props) => {
         recordingBeepTabIdRef.current =
           changes.recordingBeepTabId.newValue ?? null;
       }
-      if (
-        changes.screenityToken ||
-        changes.screenityUser ||
-        changes.isSubscribed ||
-        changes.proSubscription ||
-        changes.lastAuthCheck ||
-        changes.isLoggedIn
-      ) {
-        // Coalesce: auth-state writes (isLoggedIn + isSubscribed +
-        // lastAuthCheck) may arrive in quick succession.
-        clearTimeout(verifyDebounceRef.current);
-        verifyDebounceRef.current = setTimeout(verifyUser, 2000);
-      }
       if (changes.recordingNow) {
         shouldUpdateTimer = true;
       }
@@ -1483,7 +1361,7 @@ const ContentState = (props) => {
 
     chrome.storage.onChanged.addListener(onChanged);
     return () => chrome.storage.onChanged.removeListener(onChanged);
-  }, [isTargetTab, updateTimerFromStorage, verifyUser]);
+  }, [isTargetTab, updateTimerFromStorage]);
 
   useEffect(() => {
     if (contentState.hideToolbar && contentState.hideUI) {

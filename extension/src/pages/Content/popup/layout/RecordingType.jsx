@@ -8,9 +8,6 @@ import { MicOffBlue } from "../../images/popup/images";
 
 import { AlertIcon } from "../../toolbar/components/SVG";
 
-const CLOUD_FEATURES_ENABLED =
-  process.env.SCREENITY_ENABLE_CLOUD_FEATURES === "true";
-
 const RecordingType = (props) => {
   const [contentState, setContentState] = useContext(contentStateContext);
 

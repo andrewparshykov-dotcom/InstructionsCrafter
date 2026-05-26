@@ -252,9 +252,6 @@ const config = {
       "process.env.SCREENITY_API_BASE_URL": JSON.stringify(
         process.env.SCREENITY_API_BASE_URL
       ),
-      "process.env.SCREENITY_ENABLE_CLOUD_FEATURES": JSON.stringify(
-        process.env.SCREENITY_ENABLE_CLOUD_FEATURES
-      ),
       "process.env.MAX_RECORDING_DURATION": JSON.stringify(
         process.env.MAX_RECORDING_DURATION || 3600 // Default to 1 hour
       ),

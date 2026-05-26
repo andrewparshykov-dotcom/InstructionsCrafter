@@ -12,7 +12,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const BUILD_DIR = process.argv[2] || join(__dirname, "..", "build");
 
 // Allowed (do not flag): public homepage URLs, OAuth client_ids, public
-// CDN endpoints (dead code when CLOUD_FEATURES_ENABLED=false).
+// CDN endpoints (dead code; cloud features were removed in Phase 9).
 // Forbidden: JWT/bearer tokens, API keys, .env values, Sentry DSNs.
 const FORBIDDEN_PATTERNS = [
   /https?:\/\/[a-f0-9]{16,}@[a-z0-9.]+\.ingest\.sentry\.io/i,
