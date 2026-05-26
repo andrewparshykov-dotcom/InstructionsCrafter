@@ -8,7 +8,5 @@ export const setSurface = async (request) => {
   sendMessageTab(activeTab, {
     type: "set-surface",
     surface: request.surface,
-    subscribed: false,
-    instantMode: false,
   });
 };
