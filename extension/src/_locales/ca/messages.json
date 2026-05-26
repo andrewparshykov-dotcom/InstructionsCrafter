@@ -67,10 +67,6 @@
     "message": "Inicia la gravació",
     "description": "Etiqueta del botó d'iniciar la gravació en el pop-up"
   },
-  "recordButtonNoCameraLabel": {
-    "message": "Selecciona una càmera per gravar",
-    "description": "Etiqueta del botó d'enregistrament quan està en mode càmera i cap càmera està seleccionada"
-  },
   "recordButtonInProgressLabel": {
     "message": "Iniciant la gravació...",
     "description": "Etiqueta del botó d'iniciar la gravació en progrés en el pop-up"

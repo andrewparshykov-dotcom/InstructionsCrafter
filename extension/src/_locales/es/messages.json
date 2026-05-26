@@ -67,10 +67,6 @@
     "message": "Iniciar grabación",
     "description": "Etiqueta del botón de grabación"
   },
-  "recordButtonNoCameraLabel": {
-    "message": "Selecciona una cámara para grabar",
-    "description": "Etiqueta del botón de grabación cuando está en modo de cámara y no se ha seleccionado ninguna cámara"
-  },
   "recordButtonInProgressLabel": {
     "message": "Iniciando grabación...",
     "description": "Etiqueta del botón de grabación en progreso"

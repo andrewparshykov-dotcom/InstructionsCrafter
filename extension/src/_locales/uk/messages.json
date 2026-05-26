@@ -71,10 +71,6 @@
     "message": "Початок запису...",
     "description": "Record button in progress label"
   },
-  "recordButtonNoCameraLabel": {
-    "message": "Встановіть камеру для запису",
-    "description": "Record button label when in camera mode and no camera is selected"
-  },
   "showMoreOptionsLabel": {
     "message": "Показати більше опцій",
     "description": "Show more options label"

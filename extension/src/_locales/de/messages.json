@@ -71,10 +71,6 @@
     "message": "Starte Aufnahme...",
     "description": "Label für die Schaltfläche 'Aufnahme starten' im Fortschritt"
   },
-  "recordButtonNoCameraLabel": {
-    "message": "Kamera auswählen, um aufzunehmen",
-    "description": "Label für die Schaltfläche 'Aufnahme starten' im Kameramodus, wenn keine Kamera ausgewählt ist"
-  },
   "showMoreOptionsLabel": {
     "message": "Weitere Optionen anzeigen",
     "description": "Label für die Schaltfläche 'Weitere Optionen anzeigen'"

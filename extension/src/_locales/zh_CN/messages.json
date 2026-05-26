@@ -71,10 +71,6 @@
     "message": "正在开始录制...",
     "description": "Record button in progress label"
   },
-  "recordButtonNoCameraLabel": {
-    "message": "设置摄像头以开始录制",
-    "description": "Record button label when in camera mode and no camera is selected"
-  },
   "showMoreOptionsLabel": {
     "message": "显示更多选项",
     "description": "Show more options label"

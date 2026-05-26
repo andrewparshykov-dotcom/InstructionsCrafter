@@ -71,10 +71,6 @@
     "message": "Запуск записи...",
     "description": "Метка кнопки записи в процессе"
   },
-  "recordButtonNoCameraLabel": {
-    "message": "Выберите камеру для записи",
-    "description": "Метка кнопки записи в режиме камеры, когда не выбрана камера"
-  },
   "showMoreOptionsLabel": {
     "message": "Показать больше опций",
     "description": "Метка для показа больше опций"

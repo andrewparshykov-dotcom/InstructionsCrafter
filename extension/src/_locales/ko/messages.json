@@ -71,10 +71,6 @@
     "message": "녹화 시작 중...",
     "description": "Record button in progress label"
   },
-  "recordButtonNoCameraLabel": {
-    "message": "녹화할 카메라를 설정하세요",
-    "description": "Record button label when in camera mode and no camera is selected"
-  },
   "showMoreOptionsLabel": {
     "message": "더 많은 옵션 표시",
     "description": "Show more options label"

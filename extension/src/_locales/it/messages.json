@@ -67,10 +67,6 @@
     "message": "Avvia la registrazione",
     "description": "Etichetta del pulsante di registrazione"
   },
-  "recordButtonNoCameraLabel": {
-    "message": "Seleziona una fotocamera per registrare",
-    "description": "Etichetta del pulsante di registrazione quando è in modalità fotocamera e non è stata selezionata alcuna fotocamera"
-  },
   "recordButtonInProgressLabel": {
     "message": "Registrazione in corso...",
     "description": "Etichetta del pulsante di registrazione in corso"

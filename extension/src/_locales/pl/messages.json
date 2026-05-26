@@ -71,10 +71,6 @@
     "message": "Rozpoczynanie nagrywania...",
     "description": "Etykieta przycisku nagrywania w trakcie"
   },
-  "recordButtonNoCameraLabel": {
-    "message": "Wybierz kamerę do nagrywania",
-    "description": "Etykieta przycisku nagrywania w trybie kamery, gdy nie wybrano kamery"
-  },
   "showMoreOptionsLabel": {
     "message": "Pokaż więcej opcji",
     "description": "Etykieta przycisku Pokaż więcej opcji"

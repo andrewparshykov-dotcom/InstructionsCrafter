@@ -71,10 +71,6 @@
     "message": "正在開始...",
     "description": "Record button in progress label"
   },
-  "recordButtonNoCameraLabel": {
-    "message": "設定要錄製的攝影機",
-    "description": "Record button label when in camera mode and no camera is selected"
-  },
   "showMoreOptionsLabel": {
     "message": "顯示更多選項",
     "description": "Show more options label"

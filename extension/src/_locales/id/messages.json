@@ -71,10 +71,6 @@
     "message": "Memulai merekam...",
     "description": "Label tombol rekam dalam proses"
   },
-  "recordButtonNoCameraLabel": {
-    "message": "Atur kamera untuk merekam",
-    "description": "Label tombol rekam saat dalam mode kamera dan tidak ada kamera yang dipilih"
-  },
   "showMoreOptionsLabel": {
     "message": "Tampilkan opsi lebih lanjut",
     "description": "Label tampilkan opsi lebih lanjut"

@@ -71,10 +71,6 @@
     "message": "रिकॉर्डिंग शुरू हो रही है...",
     "description": "रिकॉर्ड बटन कार्रवाई में लेबल"
   },
-  "recordButtonNoCameraLabel": {
-    "message": "रिकॉर्ड करने के लिए कैमरा सेट करें",
-    "description": "कैमरा मोड में होते हुए रिकॉर्ड बटन लेबल और कोई कैमरा चयन नहीं किया गया है"
-  },
   "showMoreOptionsLabel": {
     "message": "अधिक विकल्प दिखाएं",
     "description": "अधिक विकल्प लेबल"

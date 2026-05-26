@@ -71,10 +71,6 @@
     "message": "Starting recording...",
     "description": "Record button in progress label"
   },
-  "recordButtonNoCameraLabel": {
-    "message": "Set a camera to record",
-    "description": "Record button label when in camera mode and no camera is selected"
-  },
   "showMoreOptionsLabel": {
     "message": "Show more options",
     "description": "Show more options label"

@@ -67,10 +67,6 @@
     "message": "Démarrer l'enregistrement",
     "description": "Étiquette du bouton d'enregistrement"
   },
-  "recordButtonNoCameraLabel": {
-    "message": "Sélectionnez une caméra pour enregistrer",
-    "description": "Étiquette du bouton d'enregistrement en mode caméra lorsque aucune caméra n'est sélectionnée"
-  },
   "recordButtonInProgressLabel": {
     "message": "Démarrage de l'enregistrement...",
     "description": "Étiquette du bouton d'enregistrement en cours"

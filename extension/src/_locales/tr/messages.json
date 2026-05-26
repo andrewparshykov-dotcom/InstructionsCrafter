@@ -71,10 +71,6 @@
     "message": "Kayıt başlatılıyor...",
     "description": "Kayıt düğmesi işlem süreci etiketi"
   },
-  "recordButtonNoCameraLabel": {
-    "message": "Kayıt yapmak için bir kamera seçin",
-    "description": "Kamera modundayken ve hiçbir kamera seçilmediğinde kayıt düğme etiketi"
-  },
   "showMoreOptionsLabel": {
     "message": "Daha fazla seçeneği göster",
     "description": "Daha fazla seçenekler etiketi"
