@@ -60,7 +60,6 @@ import {
   getStorageFlags,
   diagEvent,
 } from "../../utils/diagnosticLog";
-import { supportContextQuery } from "../../utils/buildSupportContext";
 
 const API_BASE = process.env.SCREENITY_API_BASE_URL;
 const APP_BASE = process.env.SCREENITY_APP_BASE;
@@ -160,79 +159,6 @@ const setTabAutoDiscardableSafe = async (message, sender) => {
   }
 };
 
-const handleCreateVideoProject = async (message) => {
-  try {
-    const res = await fetch(`${API_BASE}/videos/create`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${await chrome.storage.local
-          .get("screenityToken")
-          .then((r) => r.screenityToken)}`,
-      },
-      body: JSON.stringify({
-        title: message.title || "Untitled Recording",
-        data: message.data || {},
-        instantMode: message.instantMode || false,
-        recording: true,
-        isPublic: message.instantMode ? true : false,
-      }),
-    });
-
-    const result = await res.json();
-
-    if (!res.ok || !result?.videoId) {
-      return {
-        success: false,
-        error: result?.error || "Server error",
-      };
-    }
-
-    return { success: true, videoId: result.videoId };
-  } catch (err) {
-    console.error("❌ Failed to create video:", err.message);
-    return { success: false, error: err.message };
-  }
-};
-
-const handleFetchVideos = async (message) => {
-  try {
-    const page = message.page || 0;
-    const pageSize = message.pageSize || 12;
-    const sort = message.sort || "newest";
-    const filter = message.filter || "all";
-
-    const token = await chrome.storage.local
-      .get("screenityToken")
-      .then((r) => r.screenityToken);
-
-    const res = await fetch(
-      `${API_BASE}/videos?page=${page}&pageSize=${pageSize}&sort=${sort}&filter=${filter}`,
-      {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-        credentials: "include",
-      },
-    );
-
-    const result = await res.json();
-
-    if (!res.ok || !result?.videos) {
-      return {
-        success: false,
-        error: result?.error || "Failed to fetch videos",
-      };
-    }
-
-    return { success: true, videos: result.videos };
-  } catch (err) {
-    console.error("❌ Failed to fetch videos:", err.message);
-    return { success: false, error: err.message };
-  }
-};
-
 const handleReopenPopupMulti = async () => {
   try {
     const tab = await getCurrentTab();
@@ -246,39 +172,6 @@ const handleReopenPopupMulti = async () => {
     });
   } catch (err) {
     console.warn("Failed to send popup reopen message:", err);
-  }
-};
-
-const handleCheckStorageQuota = async (retried = false) => {
-  try {
-    const { screenityToken } = await chrome.storage.local.get("screenityToken");
-
-    const res = await fetch(`${API_BASE}/storage/quota`, {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${screenityToken}`,
-      },
-      credentials: "include",
-    });
-
-    // 401: not authenticated (cloud features are disabled)
-    if (res.status === 401 && !retried) {
-      return { success: false, error: "Not authenticated" };
-    }
-
-    const result = await res.json();
-
-    if (!res.ok) {
-      return {
-        success: false,
-        error: result?.error || "Fetch failed",
-      };
-    }
-
-    return { success: true, ...result };
-  } catch (err) {
-    console.error("❌ Error checking storage quota:", err);
-    return { success: false, error: err.message };
   }
 };
 
