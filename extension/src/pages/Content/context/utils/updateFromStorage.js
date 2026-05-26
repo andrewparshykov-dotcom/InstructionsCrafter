@@ -30,8 +30,6 @@ export const updateFromStorage = (check = true, id = null) => {
       "micActive",
       "recording",
       "paused",
-      "backgroundEffect",
-      "backgroundEffectsActive",
       "toolbarPosition",
       "countdown",
       "recordingType",
@@ -128,16 +126,6 @@ export const updateFromStorage = (check = true, id = null) => {
           result.micActive !== undefined && result.micActive !== null
             ? result.micActive
             : prevContentState.micActive,
-        backgroundEffect:
-          result.backgroundEffect !== undefined &&
-          result.backgroundEffect !== null
-            ? result.backgroundEffect
-            : prevContentState.backgroundEffect,
-        backgroundEffectsActive:
-          result.backgroundEffectsActive !== undefined &&
-          result.backgroundEffectsActive !== null
-            ? result.backgroundEffectsActive
-            : prevContentState.backgroundEffectsActive,
         toolbarPosition:
           result.toolbarPosition !== undefined &&
           result.toolbarPosition !== null
@@ -273,13 +261,6 @@ export const updateFromStorage = (check = true, id = null) => {
         chrome.storage.local.set({ systemAudio: true });
       }
 
-      if (
-        result.backgroundEffect === undefined ||
-        result.backgroundEffect === null
-      ) {
-        chrome.storage.local.set({ backgroundEffect: "blur" });
-      }
-
       if (result.countdown === undefined || result.countdown === null) {
         chrome.storage.local.set({ countdown: true });
       }
@@ -289,10 +270,6 @@ export const updateFromStorage = (check = true, id = null) => {
           cursorEffects: cursorEffects,
           cursorMode: cursorMode,
         });
-      }
-
-      if (result.backgroundEffectsActive) {
-        chrome.runtime.sendMessage({ type: "backgroundEffectsActive" });
       }
 
       if (check) {

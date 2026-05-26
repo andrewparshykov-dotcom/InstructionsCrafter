@@ -63,10 +63,6 @@
     "message": "कैमरा पलटें",
     "description": "कैमरा पलटने का स्विच लेबल"
   },
-  "backgroundEffectsLabel": {
-    "message": "पृष्ठभूमि प्रभाव",
-    "description": "पृष्ठभूमि प्रभाव स्विच लेबल"
-  },
   "recordButtonLabel": {
     "message": "रिकॉर्डिंग शुरू करें",
     "description": "रिकॉर्ड बटन लेबल"

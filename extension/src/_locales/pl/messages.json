@@ -63,10 +63,6 @@
     "message": "Obróć kamerę",
     "description": "Etykieta przełącznika Obróć kamerę"
   },
-  "backgroundEffectsLabel": {
-    "message": "Efekty tła",
-    "description": "Etykieta przełącznika efektów tła"
-  },
   "recordButtonLabel": {
     "message": "Rozpocznij nagrywanie",
     "description": "Etykieta przycisku nagrywania"

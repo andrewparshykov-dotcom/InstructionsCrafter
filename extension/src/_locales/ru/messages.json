@@ -63,10 +63,6 @@
     "message": "Повернуть камеру",
     "description": "Метка переключения 'Flip camera'"
   },
-  "backgroundEffectsLabel": {
-    "message": "Эффекты фона",
-    "description": "Метка переключения 'Background effects'"
-  },
   "recordButtonLabel": {
     "message": "Начать запись",
     "description": "Метка кнопки записи"

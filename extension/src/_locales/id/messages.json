@@ -63,10 +63,6 @@
     "message": "Putar kamera",
     "description": "Label sakelar putar kamera"
   },
-  "backgroundEffectsLabel": {
-    "message": "Efek latar belakang",
-    "description": "Label sakelar efek latar belakang"
-  },
   "recordButtonLabel": {
     "message": "Mulai merekam",
     "description": "Label tombol rekam"

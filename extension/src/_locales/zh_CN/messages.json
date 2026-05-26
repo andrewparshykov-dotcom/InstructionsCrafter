@@ -63,10 +63,6 @@
     "message": "翻转摄像头",
     "description": "Flip camera switch label"
   },
-  "backgroundEffectsLabel": {
-    "message": "背景效果",
-    "description": "Background effects switch label"
-  },
   "recordButtonLabel": {
     "message": "开始录制",
     "description": "Record button label"

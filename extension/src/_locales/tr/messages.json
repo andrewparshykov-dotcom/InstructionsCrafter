@@ -63,10 +63,6 @@
     "message": "Kamerayı çevir",
     "description": "Kamera çevirme anahtarı etiketi"
   },
-  "backgroundEffectsLabel": {
-    "message": "Arka plan efektleri",
-    "description": "Arka plan efektleri anahtarı etiketi"
-  },
   "recordButtonLabel": {
     "message": "Kayda başla",
     "description": "Kayıt düğme etiketi"

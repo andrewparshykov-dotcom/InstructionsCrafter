@@ -63,10 +63,6 @@
     "message": "Inverteix la càmera",
     "description": "Etiqueta de l'interruptor 'Inverteix la càmera' en el pop-up"
   },
-  "backgroundEffectsLabel": {
-    "message": "Efectes de fons",
-    "description": "Etiqueta de l'interruptor 'Efectes de fons' en el pop-up"
-  },
   "recordButtonLabel": {
     "message": "Inicia la gravació",
     "description": "Etiqueta del botó d'iniciar la gravació en el pop-up"

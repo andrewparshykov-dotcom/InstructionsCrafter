@@ -63,10 +63,6 @@
     "message": "கேமரா தளம்",
     "description": "கேமரா தளம் ஸ்விட்ச் பொத்தான்"
   },
-  "backgroundEffectsLabel": {
-    "message": "பின்னணி விளைவுகள்",
-    "description": "பின்னணி விளைவுகள் ஸ்விட்ச் பொத்தான்"
-  },
   "recordButtonLabel": {
     "message": "பதிவு செய்ய ஆரம்பிக்கவும்",
     "description": "பதிவு பொத்தான் பொத்தான்"

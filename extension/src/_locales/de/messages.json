@@ -63,10 +63,6 @@
     "message": "Kamera umdrehen",
     "description": "Label für den Schalter 'Kamera umdrehen'"
   },
-  "backgroundEffectsLabel": {
-    "message": "Hintergrundeffekte",
-    "description": "Label für den Schalter 'Hintergrundeffekte'"
-  },
   "recordButtonLabel": {
     "message": "Aufnahme starten",
     "description": "Label für die Schaltfläche 'Aufnahme starten'"

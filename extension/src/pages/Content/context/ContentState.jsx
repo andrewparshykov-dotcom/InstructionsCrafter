@@ -913,8 +913,6 @@ const ContentState = (props) => {
       y: 100,
     },
     cameraFlipped: false,
-    backgroundEffect: "blur",
-    backgroundEffectsActive: false,
     countdown: true,
     showExtension: false,
     showPopup: false,
@@ -1527,23 +1525,6 @@ const ContentState = (props) => {
       chrome.storage.local.set({ qualityValue: suggested });
     }
   }, []);
-
-  useEffect(() => {
-    if (contentState.backgroundEffectsActive) {
-      chrome.runtime.sendMessage({ type: "background-effects-active" });
-    } else {
-      chrome.runtime.sendMessage({ type: "background-effects-inactive" });
-    }
-  }, [contentState.backgroundEffectsActive]);
-
-  useEffect(() => {
-    if (contentState.backgroundEffectsActive) {
-      chrome.runtime.sendMessage({
-        type: "set-background-effect",
-        effect: contentState.backgroundEffect,
-      });
-    }
-  }, [contentState.backgroundEffect, contentState.backgroundEffectsActive]);
 
   useEffect(() => {
     if (!contentState.parentRef) return;

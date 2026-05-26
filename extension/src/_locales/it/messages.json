@@ -63,10 +63,6 @@
     "message": "Rovescia la fotocamera",
     "description": "Etichetta dell'interruttore per rovesciare la fotocamera"
   },
-  "backgroundEffectsLabel": {
-    "message": "Effetti di sfondo",
-    "description": "Etichetta dell'interruttore per gli effetti di sfondo"
-  },
   "recordButtonLabel": {
     "message": "Avvia la registrazione",
     "description": "Etichetta del pulsante di registrazione"

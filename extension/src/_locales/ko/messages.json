@@ -63,10 +63,6 @@
     "message": "카메라 뒤집기",
     "description": "Flip camera switch label"
   },
-  "backgroundEffectsLabel": {
-    "message": "배경 효과",
-    "description": "Background effects switch label"
-  },
   "recordButtonLabel": {
     "message": "녹화 시작",
     "description": "Record button label"

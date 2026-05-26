@@ -63,10 +63,6 @@
     "message": "Voltear cámara",
     "description": "Etiqueta del interruptor de voltear cámara"
   },
-  "backgroundEffectsLabel": {
-    "message": "Efectos de fondo",
-    "description": "Etiqueta del interruptor de efectos de fondo"
-  },
   "recordButtonLabel": {
     "message": "Iniciar grabación",
     "description": "Etiqueta del botón de grabación"

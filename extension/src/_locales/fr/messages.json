@@ -63,10 +63,6 @@
     "message": "Retourner la caméra",
     "description": "Étiquette du commutateur Retourner la caméra"
   },
-  "backgroundEffectsLabel": {
-    "message": "Effets de fond",
-    "description": "Étiquette du commutateur Effets de fond"
-  },
   "recordButtonLabel": {
     "message": "Démarrer l'enregistrement",
     "description": "Étiquette du bouton d'enregistrement"

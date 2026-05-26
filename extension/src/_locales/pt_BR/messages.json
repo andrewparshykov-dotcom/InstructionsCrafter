@@ -63,10 +63,6 @@
     "message": "Inverter câmera",
     "description": "Etiqueta do interruptor de inverter câmera"
   },
-  "backgroundEffectsLabel": {
-    "message": "Efeitos de fundo",
-    "description": "Etiqueta do interruptor de efeitos de fundo"
-  },
   "recordButtonLabel": {
     "message": "Iniciar gravação",
     "description": "Etiqueta do botão de gravar"

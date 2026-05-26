@@ -63,10 +63,6 @@
     "message": "Flip camera",
     "description": "Flip camera switch label"
   },
-  "backgroundEffectsLabel": {
-    "message": "Background effects",
-    "description": "Background effects switch label"
-  },
   "recordButtonLabel": {
     "message": "Start recording",
     "description": "Record button label"
