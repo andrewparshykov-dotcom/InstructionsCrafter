@@ -580,10 +580,6 @@ export const setupHandlers = () => {
 
     setContentState((prev) => ({
       ...prev,
-      isLoggedIn: false,
-      screenityUser: null,
-      isSubscribed: false,
-      proSubscription: null,
       showExtension: true,
       showPopup: !recording,
     }));

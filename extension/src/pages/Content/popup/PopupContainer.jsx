@@ -59,15 +59,10 @@ const PopupContainer = (props) => {
   const onValueChange = (tab) => {
     setTab(tab);
 
-    if (contentState.isLoggedIn && contentState.isSubscribed === false) {
-      setBadge(
-        "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32'><text x='0' y='24' font-size='28'>⚠️</text></svg>"
-      );
-    } else if (tab === "record" && !contentState.isLoggedIn) {
+    if (tab === "record") {
       setBadge(TempLogo);
     } else {
-      const avatar = contentState?.screenityUser?.avatar;
-      setBadge(avatar || ProfilePic);
+      setBadge(ProfilePic);
     }
 
     setContentState((prevContentState) => ({
@@ -80,22 +75,12 @@ const PopupContainer = (props) => {
   }, []);
 
   useEffect(() => {
-    if (contentState.isLoggedIn && contentState.isSubscribed === false) {
-      setBadge(
-        "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32'><text x='0' y='24' font-size='28'>⚠️</text></svg>"
-      );
-    } else if (tab === "record" && !contentState.isLoggedIn) {
+    if (tab === "record") {
       setBadge(TempLogo);
     } else {
-      const avatar = contentState?.screenityUser?.avatar;
-      setBadge(avatar || ProfilePic);
+      setBadge(ProfilePic);
     }
-  }, [
-    contentState.isLoggedIn,
-    contentState.isSubscribed,
-    contentState.wasLoggedIn,
-    tab,
-  ]);
+  }, [tab]);
 
   useLayoutEffect(() => {
     if (!recordTabRef.current || !videoTabRef.current || !pillRef.current)
@@ -306,12 +291,7 @@ const PopupContainer = (props) => {
         }px`;
       }
     });
-  }, [
-    contentState.isLoggedIn,
-    contentState.bigTab,
-    contentState.wasLoggedIn,
-    pillRef.current,
-  ]);
+  }, [contentState.bigTab, pillRef.current]);
 
   return (
     <div

@@ -59,10 +59,8 @@ export const updateFromStorage = (check = true, id = null) => {
       "multiMode",
       "multiSceneCount",
       "sortBy",
-      "wasLoggedIn",
       "instantMode",
       "hasSeenInstantModeModal",
-      "hasSubscribedBefore",
     ],
     (result) => {
       const storedEffects = normalizeCursorEffects(result.cursorEffects);
@@ -243,12 +241,10 @@ export const updateFromStorage = (check = true, id = null) => {
             : prevContentState.useWebCodecsRecorder,
         multiMode: result.multiMode || false,
         multiSceneCount: result.multiSceneCount || 0,
-        wasLoggedIn: result.wasLoggedIn || false,
         sortBy: result.sortBy || "newest",
         instantMode: result.instantMode || false,
         hasSeenInstantModeModal: result.hasSeenInstantModeModal || false,
         onboarding: result.onboarding || false,
-        hasSubscribedBefore: result.hasSubscribedBefore || false,
         showProSplash: result.showProSplash || false,
       }));
 

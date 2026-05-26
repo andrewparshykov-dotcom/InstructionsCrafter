@@ -263,12 +263,7 @@ const Wrapper = () => {
               )}
               <Countdown />
               {!(contentState.hideToolbar && contentState.hideUI) &&
-                !contentState.onboarding &&
-                !(
-                  contentState.isSubscribed === false &&
-                  contentState.isLoggedIn === true
-                ) &&
-                !(!contentState.isLoggedIn && contentState.wasLoggedIn) && (
+                !contentState.onboarding && (
                   <Toolbar />
                 )}
               {contentState.showPopup && (

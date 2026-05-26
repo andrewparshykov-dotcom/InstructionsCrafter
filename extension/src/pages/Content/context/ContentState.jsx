@@ -308,13 +308,6 @@ const ContentState = (props) => {
   const checkChromeCapturePermissions = useCallback(async () => {
     const permissions = ["desktopCapture", "alarms", "offscreen"];
 
-    if (
-      contentStateRef.current?.isLoggedIn &&
-      contentStateRef.current?.isSubscribed
-    ) {
-      permissions.push("clipboardWrite");
-    }
-
     const containsPromise = new Promise((resolve) => {
       chrome.permissions.contains({ permissions }, (result) => {
         resolve(result);
@@ -347,10 +340,9 @@ const ContentState = (props) => {
   // activation propagates through sendMessage. Awaiting the returned Promise
   // is fine; awaiting anything before invoking is not.
   const checkChromeCapturePermissionsSW = useCallback(() => {
-    const { isLoggedIn, isSubscribed } = contentStateRef.current || {};
     return new Promise((resolve) => {
       chrome.runtime.sendMessage(
-        { type: "check-capture-permissions", isLoggedIn, isSubscribed },
+        { type: "check-capture-permissions" },
         (response) => {
           resolve(Boolean(response && response.status === "ok"));
         },
@@ -434,11 +426,7 @@ const ContentState = (props) => {
 
     const data = await chrome.runtime.sendMessage({ type: "available-memory" });
 
-    if (
-      data.quota < 524288000 &&
-      !contentStateRef.current.isLoggedIn &&
-      !contentStateRef.current.isSubscribed
-    ) {
+    if (data.quota < 524288000) {
       if (typeof contentStateRef.current.openModal === "function") {
         let clear = null;
         let clearAction = () => {};
@@ -845,12 +833,10 @@ const ContentState = (props) => {
     isCountdownVisible: false,
     multiSceneCount: 0,
     preparingRecording: false,
-    wasLoggedIn: false,
     hasSeenInstantModeModal: false,
     instantMode: false,
     onboarding: false,
     showProSplash: false,
-    hasSubscribedBefore: false,
     startRecordingAfterCountdown: () => {
       if (!contentStateRef.current.countdownCancelled) {
         contentStateRef.current.startRecording();

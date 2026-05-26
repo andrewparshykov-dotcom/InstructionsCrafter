@@ -99,8 +99,7 @@ const RecordingType = (props) => {
       {contentState.microphonePermission && (
         <Dropdown type="mic" shadowRef={props.shadowRef} />
       )}
-      {!contentState.isLoggedIn &&
-        contentState.microphonePermission &&
+      {contentState.microphonePermission &&
         contentState.defaultAudioInput != "none" &&
         contentState.micActive && (
         <div>
