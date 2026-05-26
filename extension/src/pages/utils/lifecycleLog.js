@@ -1,6 +1,6 @@
 // cross-session ring buffer of lifecycle events for state-bleed bugs
-// (recordingTab left set, region stuck, etc). per-session detail lives
-// in diagnosticLog. ~500 entries in chrome.storage.local, dumped in the
+// (recordingTab left set, etc). per-session detail lives in
+// diagnosticLog. ~500 entries in chrome.storage.local, dumped in the
 // diag zip. writes serialized through a per-context promise chain.
 // entry: { ts, src, ev, data? }
 

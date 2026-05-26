@@ -4,7 +4,6 @@
 export const REC_START_PERM = "REC_START_PERM";
 export const REC_START_STREAM = "REC_START_STREAM";
 export const REC_START_CODEC = "REC_START_CODEC";
-export const REC_START_REGION = "REC_START_REGION";
 export const REC_START_TAB = "REC_START_TAB";
 export const REC_START_TIMEOUT = "REC_START_TIMEOUT";
 export const REC_START_CANCEL = "REC_START_CANCEL";
@@ -57,7 +56,6 @@ const STREAM_PATTERNS = [
   "failed to setup streaming",
   "failed to get stream",
   "failed to access screen stream",
-  "failed to access region stream",
   "no streams to record",
   "no screen video track",
   "no camera video track",
@@ -88,14 +86,6 @@ const TIMEOUT_PATTERNS = [
   "taking too long",
   "timed out",
   "timeout",
-];
-
-const REGION_PATTERNS = [
-  "crop target",
-  "crop region",
-  "failed to crop",
-  "region capture",
-  "no crop target",
 ];
 
 /**
@@ -141,10 +131,6 @@ export const classifyError = (errorStr = "", errorType = "") => {
 
   if (TIMEOUT_PATTERNS.some((p) => lower.includes(p))) {
     return REC_START_TIMEOUT;
-  }
-
-  if (REGION_PATTERNS.some((p) => lower.includes(p))) {
-    return REC_START_REGION;
   }
 
   if (typeLower === "stream-ended" || lower.includes("stream ended")) {
