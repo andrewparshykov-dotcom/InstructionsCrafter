@@ -302,11 +302,7 @@ const config = {
           to: path.join(__dirname, "build/assets"),
           force: true,
           filter: isBsBuild
-            ? (resourcePath) =>
-                !/ffmpeg-core\.wasm$/.test(resourcePath) &&
-                !/vision_wasm.*\.wasm$/.test(resourcePath) &&
-                !/\/videos\//.test(resourcePath) &&
-                !/pin\.gif$/.test(resourcePath)
+            ? (resourcePath) => !/\/videos\//.test(resourcePath)
             : undefined,
         },
         {
