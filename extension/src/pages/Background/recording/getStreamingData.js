@@ -3,13 +3,11 @@ export const getStreamingData = async () => {
     const {
       micActive,
       defaultAudioInput,
-      defaultAudioOutput,
       systemAudio,
       recordingType,
     } = await chrome.storage.local.get([
       "micActive",
       "defaultAudioInput",
-      "defaultAudioOutput",
       "systemAudio",
       "recordingType",
     ]);
@@ -17,7 +15,6 @@ export const getStreamingData = async () => {
     return {
       micActive,
       defaultAudioInput,
-      defaultAudioOutput,
       systemAudio,
       recordingType,
     };

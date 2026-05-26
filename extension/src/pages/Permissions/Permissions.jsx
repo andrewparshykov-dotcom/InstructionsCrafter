@@ -65,7 +65,6 @@ const Recorder = () => {
       const devicesInfo = await navigator.mediaDevices.enumerateDevices();
 
       let audioinput = [];
-      let audiooutput = [];
 
       if (micGranted) {
         // Filter by audio input
@@ -75,20 +74,11 @@ const Recorder = () => {
             deviceId: device.deviceId,
             label: device.label,
           }));
-
-        // Filter by audio output and extract relevant properties
-        audiooutput = devicesInfo
-          .filter((device) => device.kind === "audiooutput")
-          .map((device) => ({
-            deviceId: device.deviceId,
-            label: device.label,
-          }));
       }
 
       // Save in Chrome local storage
       chrome.storage.local.set({
         audioinput: audioinput,
-        audiooutput: audiooutput,
         microphonePermission: micGranted,
       });
 
@@ -98,7 +88,6 @@ const Recorder = () => {
           type: "instructionscrafter-permissions",
           success: true,
           audioinput: audioinput,
-          audiooutput: audiooutput,
           microphonePermission: micGranted,
         },
         "*"

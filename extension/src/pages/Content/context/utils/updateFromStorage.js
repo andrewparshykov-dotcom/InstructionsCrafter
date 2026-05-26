@@ -21,8 +21,6 @@ export const updateFromStorage = (check = true, id = null) => {
       "audioInput",
       "defaultAudioInput",
       "defaultAudioInputLabel",
-      "cameraDimensions",
-      "cameraFlipped",
       "micActive",
       "recording",
       "paused",
@@ -89,15 +87,6 @@ export const updateFromStorage = (check = true, id = null) => {
           result.defaultAudioInputLabel !== null
             ? result.defaultAudioInputLabel
             : prevContentState.defaultAudioInputLabel,
-        cameraDimensions:
-          result.cameraDimensions !== undefined &&
-          result.cameraDimensions !== null
-            ? result.cameraDimensions
-            : prevContentState.cameraDimensions,
-        cameraFlipped:
-          result.cameraFlipped !== undefined && result.cameraFlipped !== null
-            ? result.cameraFlipped
-            : prevContentState.cameraFlipped,
         micActive:
           result.micActive !== undefined && result.micActive !== null
             ? result.micActive

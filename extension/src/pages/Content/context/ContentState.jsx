@@ -740,12 +740,6 @@ const ContentState = (props) => {
       offsetY: 0,
       fixed: true,
     },
-    cameraDimensions: {
-      size: 200,
-      x: 100,
-      y: 100,
-    },
-    cameraFlipped: false,
     countdown: true,
     showExtension: false,
     showPopup: false,
