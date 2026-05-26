@@ -7,18 +7,6 @@
     "message": "Turn a screen recording with voice narration into a step-by-step Microsoft Word instruction document.",
     "description": "Deskripsi ekstensi"
   },
-  "recordTab": {
-    "message": "Rekam",
-    "description": "Label tab Rekam pada popup"
-  },
-  "videosTab": {
-    "message": "Video Anda",
-    "description": "Label tab Video pada popup"
-  },
-  "screenType": {
-    "message": "Layar",
-    "description": "Label jenis perekaman layar pada popup"
-  },
   "tabType": {
     "message": "Area tab",
     "description": "Label jenis perekaman area tab pada popup"
@@ -51,17 +39,9 @@
     "message": "Perekaman dihentikan karena masalah penyimpanan. Rekaman parsial Anda telah disimpan.",
     "description": "Toast shown when the recording chunk writer fails mid-recording and the partial file is preserved"
   },
-  "allowCameraAccessButton": {
-    "message": "Izinkan akses kamera",
-    "description": "Tombol izinkan akses kamera"
-  },
   "allowMicrophoneAccessButton": {
     "message": "Izinkan akses mikrofon",
     "description": "Tombol izinkan akses mikrofon"
-  },
-  "flipCameraLabel": {
-    "message": "Putar kamera",
-    "description": "Label sakelar putar kamera"
   },
   "recordButtonLabel": {
     "message": "Mulai merekam",
@@ -71,37 +51,13 @@
     "message": "Memulai merekam...",
     "description": "Label tombol rekam dalam proses"
   },
-  "showMoreOptionsLabel": {
-    "message": "Tampilkan opsi lebih lanjut",
-    "description": "Label tampilkan opsi lebih lanjut"
-  },
-  "systemAudioLabel": {
-    "message": "Sertakan audio sistem",
-    "description": "Label audio sistem/tab"
-  },
   "hideToolbarLabel": {
     "message": "Sembunyikan toolbar",
     "description": "Label sembunyikan toolbar"
   },
-  "alarmLabel": {
-    "message": "Atur batas waktu",
-    "description": "Label alarm"
-  },
-  "blurTypeLabel": {
-    "message": "Blur",
-    "description": "Label latar belakang blur"
-  },
-  "noCameraDropdownLabel": {
-    "message": "Tidak ada kamera",
-    "description": "Tidak ada kamera yang dipilih"
-  },
   "noMicrophoneDropdownLabel": {
     "message": "Tidak ada mikrofon",
     "description": "Tidak ada mikrofon yang dipilih"
-  },
-  "selectSourceDropdownPlaceholder": {
-    "message": "Pilih sumber",
-    "description": "Pilih tempat untuk sumber"
   },
   "offLabel": {
     "message": "Mati",
@@ -138,18 +94,6 @@
   "toggleCursorOptionsTooltip": {
     "message": "Hidupkan/Matikan opsi kursor",
     "description": "Petunjuk untuk mengaktifkan/menonaktifkan opsi kursor"
-  },
-  "disableMicrophoneTooltip": {
-    "message": "Matikan mikrofon",
-    "description": "Petunjuk untuk mematikan mikrofon"
-  },
-  "enableMicrophoneTooltip": {
-    "message": "Hidupkan mikrofon",
-    "description": "Petunjuk untuk menghidupkan mikrofon"
-  },
-  "noMicrophonePermissionsTooltip": {
-    "message": "Tidak ada izin mikrofon",
-    "description": "Petunjuk untuk tidak ada izin mikrofon"
   },
   "selectToolTooltip": {
     "message": "Pilih alat",
@@ -259,10 +203,6 @@
     "message": "Lanjutkan perekaman",
     "description": "Tombol lanjutkan modal Membuang Perekaman"
   },
-  "sandboxEditorCancelButton": {
-    "message": "Batal",
-    "description": "Tombol batal di halaman editor sandbox"
-  },
   "learnMoreDot": {
     "message": "Pelajari lebih lanjut.",
     "description": "Pelajari lebih lanjut dengan titik"
@@ -270,34 +210,6 @@
   "preparingLabel": {
     "message": "Menyiapkan...",
     "description": "Label Persiapan"
-  },
-  "shareModalSandboxTitle": {
-    "message": "Siap tingkatkan rekamanmu?",
-    "description": "Share modal title in sandbox editor page"
-  },
-  "shareModalSandboxDescription": {
-    "message": "Bagikan ke cloud, gunakan zoom, template... dan dukung alat ramah privasi buatan seorang developer indie! ❤️",
-    "description": "Share modal description in sandbox editor page"
-  },
-  "shareModalSandboxButton": {
-    "message": "Pelajari tentang Pro",
-    "description": "Share modal email placeholder in sandbox editor page"
-  },
-  "shareModalSandboxLogin": {
-    "message": "Sudah punya akun? Masuk",
-    "description": "Share modal login link in sandbox editor page"
-  },
-  "zoomToPointPopup": {
-    "message": "Perbesar ke kursor",
-    "description": "Popup Perbesar ke titik"
-  },
-  "micReminderPopup": {
-    "message": "Peringatan mikrofon mati",
-    "description": "Popup Pengingat mikrofon"
-  },
-  "helpPopup": {
-    "message": "Bantuan",
-    "description": "Tombol Popup Bantuan"
   },
   "pausedRecordingToast": {
     "message": "Perekaman dijeda. Tekan tombol putar untuk melanjutkan.",
@@ -335,37 +247,9 @@
     "message": "Batal",
     "description": "Batal modal Mikrofon dimatikan"
   },
-  "countdownMessage": {
-    "message": "Tenang. Klik di mana saja untuk menghentikan hitungan mundur.",
-    "description": "Pesan hitungan mundur"
-  },
-  "micOnToast": {
-    "message": "Mikrofon diaktifkan",
-    "description": "Judul toast Mikrofon diaktifkan"
-  },
-  "micOffToast": {
-    "message": "Mikrofon dimatikan",
-    "description": "Judul toast Mikrofon dimatikan"
-  },
   "noShowAgain": {
     "message": "Jangan tampilkan lagi",
     "description": "Tombol Jangan tampilkan lagi"
-  },
-  "updateAnnouncementTitle": {
-    "message": "Selamat datang di InstructionsCrafter yang baru!",
-    "description": "Judul pengumuman pembaruan untuk pengguna yang sudah ada"
-  },
-  "updateAnnouncementDescription": {
-    "message": "Kami memperkenalkan tampilan baru dan banyak fitur menarik, tetapi jangan khawatir, ini masih merupakan perluasan gratis, pribadi, dan open source yang sama yang Anda kenal dan cintai.",
-    "description": "Deskripsi pengumuman pembaruan untuk pengguna yang sudah ada"
-  },
-  "updateAnnouncementLearnMore": {
-    "message": "Pelajari lebih lanjut tentang pembaruan.",
-    "description": "Tautan pelajari lebih lanjut pengumuman pembaruan untuk pengguna yang sudah ada"
-  },
-  "updateAnnouncementButton": {
-    "message": "Mulai sekarang",
-    "description": "Tombol pengumuman pembaruan untuk pengguna yang sudah ada"
   },
   "streamErrorModalTitle": {
     "message": "Kesalahan saat memulai perekaman",
@@ -399,35 +283,9 @@
     "message": "Hapus Rekaman Sebelumnya",
     "description": "Tombol Hapus Rekaman Sebelumnya"
   },
-  "troubleshootModalTitle": {
-    "message": "Unduh informasi sistem dan data video untuk penyelesaian masalah",
-    "description": "Judul modal Penyelesaian Masalah"
-  },
-  "troubleshootModalDescription": {
-    "message": "Setelah mengunduh, kirim berkas ini ke Andrew dengan informasi relevan. Kami akan menggunakan data ini untuk membantu Anda menyelesaikan masalah dengan ekstensi dan memulihkan video Anda jika memungkinkan.",
-    "description": "Deskripsi modal Penyelesaian Masalah"
-  },
-  "troubleshootModalButton": {
-    "message": "Unduh",
-    "description": "Tombol modal Penyelesaian Masalah"
-  },
-  "downloadForTroubleshootingOption": {
-    "message": "Unduh data untuk perbaikan masalah",
-    "description": "Pilihan unduhan untuk perbaikan masalah"
-  },
   "audioWarningTitle": {
     "message": "Merekam Audio dari Halaman",
     "description": "Judul Peringatan Audio"
-  },
-  "audioWarningDescription": {
-    "message": "Untuk merekam audio dari halaman ini, Anda harus menggunakan opsi '$tab$'.",
-    "description": "Deskripsi Peringatan Audio",
-    "placeholders": {
-      "tab": {
-        "content": "$1",
-        "example": "Area Tab"
-      }
-    }
   },
   "extensionNotSupportedTitle": {
     "message": "Ekstensi Tidak Didukung di Halaman",
@@ -436,26 +294,6 @@
   "extensionNotSupportedDescription": {
     "message": "InstructionsCrafter tidak mendukung di tab sebelumnya Anda. Meskipun begitu, Anda masih bisa memulai perekaman di sini dan kemudian beralih ke tab lain, tetapi toolbar Anda tidak akan terlihat.",
     "description": "Deskripsi Ekstensi Tidak Didukung di Tab"
-  },
-  "maxResolutionLabel": {
-    "message": "Resolusi Maksimum",
-    "description": "Label resolusi maksimum dalam menu pengaturan"
-  },
-  "maxFPSLabel": {
-    "message": "FPS Maksimum",
-    "description": "Label FPS maksimum dalam menu pengaturan"
-  },
-  "resizeWindowLabel": {
-    "message": "Ubah Ukuran Jendela",
-    "description": "Label Ubah Ukuran Jendela di menu pengaturan"
-  },
-  "screenTooSmallTooltip": {
-    "message": "Layar terlalu kecil untuk resolusi ini",
-    "description": "Tooltip Layar terlalu kecil di menu pengaturan"
-  },
-  "maxResolutionTooltip": {
-    "message": "Tidak dapat merekam pada resolusi ini di perangkat Anda",
-    "description": "Tooltip Resolusi maksimum di menu pengaturan"
   },
   "permissionsModalReview": {
     "message": "Ulasan Izin",
@@ -469,50 +307,6 @@
     "message": "Toolbar disembunyikan. Aktifkan kembali di pengaturan popup.",
     "description": "Toast message explaining to reopen the toolbar in the popup options"
   },
-  "loginButtonLabel": {
-    "message": "Masuk atau daftar",
-    "description": "Login button label in popup settings menu"
-  },
-  "logoutButtonLabel": {
-    "message": "Keluar",
-    "description": "Logout button label in popup settings menu"
-  },
-  "loggedOutToastTitle": {
-    "message": "Kamu telah keluar",
-    "description": "Toast message shown when the user logs out"
-  },
-  "storageLimitReachedTitle": {
-    "message": "Batas penyimpanan tercapai",
-    "description": "Modal message shown when the storage limit is reached"
-  },
-  "storageLimitReachedDescription": {
-    "message": "Kamu telah menggunakan seluruh 100 GB penyimpanan. Hapus video atau adegan lama untuk melanjutkan merekam.",
-    "description": "Modal description shown when the storage limit is reached"
-  },
-  "manageStorageButtonLabel": {
-    "message": "Kelola penyimpanan",
-    "description": "Button label to manage storage in the popup settings menu"
-  },
-  "closeModalLabel": {
-    "message": "Tutup",
-    "description": "Agnostic close modal button label"
-  },
-  "storageCheckFailTitle": {
-    "message": "Gagal memeriksa penyimpanan",
-    "description": "Title shown when the storage check fails"
-  },
-  "storageCheckFailAuthDescription": {
-    "message": "Terjadi masalah saat memeriksa penyimpanan. Silakan masuk kembali dan coba rekam lagi.",
-    "description": "Description shown when the storage check fails due to authentication"
-  },
-  "storageCheckFailDescription": {
-    "message": "Kami tidak dapat memverifikasi kuota penyimpananmu. Coba lagi beberapa detik lagi atau muat ulang halaman.",
-    "description": "Description shown when the storage check fails"
-  },
-  "retryButtonLabel": {
-    "message": "Coba lagi",
-    "description": "Agnostic button label to try again"
-  },
   "readyRecordSceneToast": {
     "message": "Siap merekam adegan baru dalam videomu",
     "description": "Toast message shown when the user is in an existing project and ready to record a new scene"
@@ -524,66 +318,6 @@
   "recordingLimitReachedToast": {
     "message": "Rekaman dihentikan karena batas 90 menit",
     "description": "Toast message shown when the recording limit is reached"
-  },
-  "tabRecordingDisabledToast": {
-    "message": "Rekaman tab dinonaktifkan di halaman ini. Beralih ke rekaman layar.",
-    "description": "Toast message shown when tab recording is disabled on a page"
-  },
-  "projectRecordingCancelledToast": {
-    "message": "Rekaman video dibatalkan",
-    "description": "Toast message shown when the user cancels project recording"
-  },
-  "copiedToClipboardToast": {
-    "message": "Tautan disalin ke clipboard",
-    "description": "Toast message shown when link has been copied to clipboard"
-  },
-  "failedToCopyToClipboardToast": {
-    "message": "Gagal menyalin tautan",
-    "description": "Toast message shown when failed to copy link to clipboard"
-  },
-  "newestSortLabel": {
-    "message": "Terbaru",
-    "description": "Label for the newest sort option"
-  },
-  "oldestSortLabel": {
-    "message": "Terlama",
-    "description": "Label for the oldest sort option"
-  },
-  "allVideosHeading": {
-    "message": "Semua video",
-    "description": "Heading for the all videos section in the popup"
-  },
-  "noVideosFound": {
-    "message": "Tidak ada video ditemukan",
-    "description": "Message shown when no videos are found in the popup"
-  },
-  "loadingVideosLabel": {
-    "message": "Memuat video...",
-    "description": "Label shown when videos are loading in the popup"
-  },
-  "goToDashboardButtonLabel": {
-    "message": "Ke dashboard",
-    "description": "Button label to go to the dashboard in the popup"
-  },
-  "welcomePopupTitle": {
-    "message": "Selamat datang di InstructionsCrafter",
-    "description": "Title for the welcome popup shown to new users"
-  },
-  "welcomePopupDescriptionTop": {
-    "message": "Tanpa iklan. Tanpa pelacakan. Tanpa batas.",
-    "description": "Description for the welcome popup shown to new users"
-  },
-  "welcomePopupDescriptionBottom": {
-    "message": "Langsung rekam.",
-    "description": "Description for the welcome popup shown to new users"
-  },
-  "welcomePopupCTA": {
-    "message": "Gunakan gratis — tanpa perlu daftar!",
-    "description": "Call to action button for the welcome popup shown to new users"
-  },
-  "welcomePopupCloudTitle": {
-    "message": "Ingin melakukan lebih banyak dengan videomu?",
-    "description": "Title for the cloud storage feature in the welcome popup"
   },
   "welcomePopupCloudFeature1": {
     "message": "Penyimpanan cloud, bagikan video dengan tautan",
@@ -605,169 +339,9 @@
     "message": "Latar belakang dan mockup khusus",
     "description": "Feature 5 for the cloud storage in the welcome popup"
   },
-  "welcomePopupSupport": {
-    "message": "+ Dukung pengembangan oleh pembuat indie tunggal!",
-    "description": "Message for supporting the indie maker in the welcome popup"
-  },
-  "accountSettingsOption": {
-    "message": "Pengaturan akun",
-    "description": "Label for the account settings option in the popup"
-  },
-  "supportSettingsOption": {
-    "message": "Dukungan",
-    "description": "Label for the support option in the popup"
-  },
-  "inactiveSubscriptionTitle": {
-    "message": "Langganan Pro kamu tidak aktif",
-    "description": "Title shown when the user's subscription is inactive"
-  },
-  "inactiveSubscriptionDescription": {
-    "message": "Langganan InstructionsCrafter Pro kamu tidak aktif.",
-    "description": "Description shown when the user's subscription is inactive"
-  },
-  "inactiveSubscriptionReactivation": {
-    "message": "Aktifkan kembali untuk melanjutkan akses.",
-    "description": "Message prompting the user to reactivate their subscription"
-  },
-  "inactiveSubscriptionDeletionWarning": {
-    "message": "Video dan datamu akan dihapus secara permanen pada ",
-    "description": "Warning message about the deletion of videos and data"
-  },
-  "manageSubscriptionButton": {
-    "message": "Kelola langgananmu",
-    "description": "Button to manage the user's subscription"
-  },
-  "inactiveSubscriptionFreeVersion": {
-    "message": "Ingin tetap menggunakan versi gratis?",
-    "description": "Message prompting the user to continue using the free version"
-  },
-  "downgradeToFreeButton": {
-    "message": "Keluar dan turunkan versi",
-    "description": "Button to log out and downgrade to the free version"
-  },
-  "loggedOutTitle": {
-    "message": "Kamu telah keluar",
-    "description": "Title shown when the user is logged out"
-  },
-  "loggedOutDescription": {
-    "message": "Untuk menyinkronkan rekamanmu dan mengakses fitur premium, kamu perlu masuk kembali.",
-    "description": "Description shown when the user is logged out"
-  },
-  "logBackInButton": {
-    "message": "Masuk kembali",
-    "description": "Button to log back in after being logged out"
-  },
-  "loggedOutFreeVersion": {
-    "message": "Kamu tetap bisa menggunakan ekstensi tanpa akun - tapi rekamanmu tidak akan disimpan dan tidak bisa dipulihkan.",
-    "description": "Message shown when the user is logged out and using the free version"
-  },
-  "continueWithoutLogin": {
-    "message": "Lanjut tanpa login",
-    "description": "Button to continue using the extension without logging in"
-  },
-  "instantRecordingModeLabel": {
-    "message": "Mode rekam instan",
-    "description": "Label for the instant recording mode"
-  },
-  "instantRecordingModeTooltip": {
-    "message": "Unduh instan, tapi kamera dan tata letak tidak bisa diedit nanti.",
-    "description": "Tooltip for the instant recording mode"
-  },
-  "instantRecordingModeTitle": {
-    "message": "Mode rekam instan",
-    "description": "Title for the instant recording mode"
-  },
-  "instantRecordingModeDescription": {
-    "message": "Semua direkam dalam satu video untuk unduhan dan berbagi instan. Tata letak kamera tidak bisa diubah nanti, tapi pengeditan lainnya tetap bisa.",
-    "description": "Description for the instant recording mode"
-  },
-  "instantRecordingModeAction": {
-    "message": "Mengerti",
-    "description": "Action button for the instant recording mode"
-  },
-  "tabRecordingDisabledTooltip": {
-    "message": "Rekaman tab dinonaktifkan di halaman ini",
-    "description": "Tooltip shown when tab recording is disabled on a page"
-  },
-  "addingToLabel": {
-    "message": "Menambahkan ke: ",
-    "description": "Label shown when a scene is being recorded to a project"
-  },
-  "multiLabel": {
-    "message": "Multi",
-    "description": "Label for the multi-recording mode"
-  },
-  "finishLabelMulti": {
-    "message": "Selesai",
-    "description": "Label for the finish multi-recording button"
-  },
-  "welcomeProTitle": {
-    "message": "Ingin melakukan lebih banyak dengan rekamanmu?",
-    "description": "Title for the welcome Pro popup"
-  },
-  "welcomeProDescription": {
-    "message": "Masuk untuk menyimpan video ke cloud, berbagi dengan tautan, dan akses fitur editing lanjutan.",
-    "description": "Description for the welcome Pro popup"
-  },
-  "welcomeProButton": {
-    "message": "Masuk untuk membuka fitur berbayar",
-    "description": "Button to sign in"
-  },
-  "welcomeProSupport": {
-    "message": "Dukung pengembangan oleh pembuat indie tunggal",
-    "description": "Message for supporting the indie maker in the welcome Pro popup"
-  },
-  "multiRecordingModeTitle": {
-    "message": "Mode Multi",
-    "description": "Title for the multi-recording mode modal"
-  },
-  "multiRecordingModeDescription": {
-    "message": "Rekam beberapa adegan—layar, kamera, atau keduanya—secara berurutan. Cocok untuk mengambil beberapa ulangan, mengganti tampilan, atau membagi rekaman menjadi beberapa bagian. Setelah selesai, klik Selesai untuk membuka editor dengan semua adegan digabungkan dalam satu video.",
-    "description": "Description for the multi-recording mode modal"
-  },
-  "noSubscriptionYetTitle": {
-    "message": "Aktifkan Pro untuk memulai",
-    "description": "Title shown when the user has no active subscription"
-  },
-  "noSubscriptionYetDescription": {
-    "message": "Berlangganan untuk mengakses fitur Pro.",
-    "description": "Message prompting the user to subscribe to reactivate their Pro features"
-  },
-  "upgradeToProButton": {
-    "message": "Langganan Pro",
-    "description": "Button to upgrade to Pro"
-  },
-  "welcomeBackPopupTitle": {
-    "message": "Selamat datang kembali di InstructionsCrafter",
-    "description": "Judul pop-up sambutan yang ditampilkan untuk pengguna yang kembali"
-  },
-  "welcomeBackProTitle": {
-    "message": "✨ Baru: Tingkatkan rekamanmu ke level berikutnya",
-    "description": "Judul fitur penyimpanan cloud di pop-up sambutan"
-  },
-  "welcomeBackProDescription": {
-    "message": "InstructionsCrafter Pro adalah platform opsional baru untuk menyimpan video ke cloud, membagikannya lewat tautan, dan membuka alat pengeditan lanjutan — jika dan saat kamu membutuhkannya.",
-    "description": "Deskripsi fitur penyimpanan cloud di pop-up sambutan"
-  },
-  "welcomeBackProCTA": {
-    "message": "Pelajari lebih lanjut tentang InstructionsCrafter Pro",
-    "description": "Tombol ajakan bertindak untuk fitur penyimpanan cloud di pop-up sambutan"
-  },
-  "webcodecsToggleLabel": {
-    "message": "Fast MP4",
-    "description": "WebCodecs recorder toggle label"
-  },
   "webcodecsFailedOffToast": {
     "message": "Fast MP4 gagal — mati",
     "description": "WebCodecs failure auto-disable toast"
-  },
-  "resetOnboardingOption": {
-    "message": "Reset onboarding",
-    "description": "Reset pro onboarding option label in popup settings menu"
-  },
-  "recoverLastRecordingOption": {
-    "message": "Recover last recording",
-    "description": "Settings menu item to manually trigger cloud recording recovery"
   },
   "toastStorageCritical": {
     "message": "Ruang disk rendah. Menyimpan rekaman Anda. Semua yang direkam sejauh ini aman.",
@@ -796,14 +370,6 @@
   "stopAckTimeoutToast": {
     "message": "Penyimpanan memakan waktu lebih lama dari yang diharapkan. Data Anda aman. Editor akan segera terbuka.",
     "description": "Toast shown when the recorder does not acknowledge the stop request within a few seconds"
-  },
-  "getHelpButton": {
-    "message": "Dapatkan bantuan",
-    "description": "Side button on error modals that opens a prefilled support form"
-  },
-  "recordingTooShortToast": {
-    "message": "Rekaman terlalu singkat untuk disimpan",
-    "description": "Toast shown when a region recording is stopped by navigation but no chunks were saved"
   },
   "fastRecorderFailedTitle": {
     "message": "Perekam cepat gagal",

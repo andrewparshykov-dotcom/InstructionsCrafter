@@ -7,18 +7,6 @@
     "message": "Turn a screen recording with voice narration into a step-by-step Microsoft Word instruction document.",
     "description": "Extension description"
   },
-  "recordTab": {
-    "message": "Запис",
-    "description": "Record tab label on popup"
-  },
-  "videosTab": {
-    "message": "Ваші відео",
-    "description": "Videos tab label on popup"
-  },
-  "screenType": {
-    "message": "Екран",
-    "description": "Screen recording type label on popup"
-  },
   "tabType": {
     "message": "Область вкладки",
     "description": "Tab area recording type label on popup"
@@ -51,17 +39,9 @@
     "message": "Запис зупинено через проблему зі сховищем. Частковий запис збережено.",
     "description": "Toast shown when the recording chunk writer fails mid-recording and the partial file is preserved"
   },
-  "allowCameraAccessButton": {
-    "message": "Дозволити доступ до камери",
-    "description": "Allow camera access button"
-  },
   "allowMicrophoneAccessButton": {
     "message": "Дозволити доступ до мікрофону",
     "description": "Allow microphone access button"
-  },
-  "flipCameraLabel": {
-    "message": "Перевернути камеру",
-    "description": "Flip camera switch label"
   },
   "recordButtonLabel": {
     "message": "Почати запис",
@@ -71,37 +51,13 @@
     "message": "Початок запису...",
     "description": "Record button in progress label"
   },
-  "showMoreOptionsLabel": {
-    "message": "Показати більше опцій",
-    "description": "Show more options label"
-  },
-  "systemAudioLabel": {
-    "message": "Включити системний звук",
-    "description": "Мітка системного аудіо/вкладка"
-  },
   "hideToolbarLabel": {
     "message": "Приховати панель інструментів",
     "description": "Hide toolbar label"
   },
-  "alarmLabel": {
-    "message": "Встановити обмеження за часом",
-    "description": "Alarm label"
-  },
-  "blurTypeLabel": {
-    "message": "Розмиття",
-    "description": "Blur background label"
-  },
-  "noCameraDropdownLabel": {
-    "message": "Немає камери",
-    "description": "No camera selected"
-  },
   "noMicrophoneDropdownLabel": {
     "message": "Немає мікрофону",
     "description": "No microphone selected"
-  },
-  "selectSourceDropdownPlaceholder": {
-    "message": "Виберіть джерело",
-    "description": "Select source placeholder"
   },
   "offLabel": {
     "message": "Вимкнено",
@@ -138,18 +94,6 @@
   "toggleCursorOptionsTooltip": {
     "message": "Перемкнути параметри курсора",
     "description": "Toggle cursor options tooltip"
-  },
-  "disableMicrophoneTooltip": {
-    "message": "Вимкнути мікрофон",
-    "description": "Disable microphone tooltip"
-  },
-  "enableMicrophoneTooltip": {
-    "message": "Увімкнути мікрофон",
-    "description": "Enable microphone tooltip"
-  },
-  "noMicrophonePermissionsTooltip": {
-    "message": "Відсутні дозволи на мікрофон",
-    "description": "No microphone permissions tooltip"
   },
   "selectToolTooltip": {
     "message": "Вибрати інструмент",
@@ -259,10 +203,6 @@
     "message": "Продовжити запис",
     "description": "Discard recording modal resume button"
   },
-  "sandboxEditorCancelButton": {
-    "message": "Скасувати",
-    "description": "Cancel button in sandbox editor page"
-  },
   "learnMoreDot": {
     "message": "Дізнайтеся більше.",
     "description": "Learn more with a dot"
@@ -270,34 +210,6 @@
   "preparingLabel": {
     "message": "Підготовка...",
     "description": "Preparing label"
-  },
-  "shareModalSandboxTitle": {
-    "message": "Готовий покращити свої записи?",
-    "description": "Share modal title in sandbox editor page"
-  },
-  "shareModalSandboxDescription": {
-    "message": "Хмарне поширення, зуми, шаблони... і підтримка інструменту від інді-розробниці, яка поважає твою приватність ❤️",
-    "description": "Share modal description in sandbox editor page"
-  },
-  "shareModalSandboxButton": {
-    "message": "Дізнатися більше про Pro",
-    "description": "Share modal email placeholder in sandbox editor page"
-  },
-  "shareModalSandboxLogin": {
-    "message": "Вже маєш акаунт? Увійти",
-    "description": "Share modal login link in sandbox editor page"
-  },
-  "zoomToPointPopup": {
-    "message": "Збільшити до курсору",
-    "description": "Zoom to point popup"
-  },
-  "micReminderPopup": {
-    "message": "Попередження про вимкнений мікрофон",
-    "description": "Mic reminder popup"
-  },
-  "helpPopup": {
-    "message": "Довідка",
-    "description": "Help popup button"
   },
   "pausedRecordingToast": {
     "message": "Запис призупинено. Натисніть кнопку відтворення для продовження.",
@@ -335,37 +247,9 @@
     "message": "Скасувати",
     "description": "Microphone muted modal cancel"
   },
-  "countdownMessage": {
-    "message": "Розслабтеся. Клацніть будь-де, щоб зупинити відлік.",
-    "description": "Countdown message"
-  },
-  "micOnToast": {
-    "message": "Мікрофон увімкнено",
-    "description": "Microphone enabled toast title"
-  },
-  "micOffToast": {
-    "message": "Мікрофон вимкнено",
-    "description": "Microphone disabled toast title"
-  },
   "noShowAgain": {
     "message": "Не показувати знову",
     "description": "Don't show again button"
-  },
-  "updateAnnouncementTitle": {
-    "message": "Ласкаво просимо до нового InstructionsCrafter!",
-    "description": "Заголовок оголошення про оновлення для існуючих користувачів"
-  },
-  "updateAnnouncementDescription": {
-    "message": "Ми представляємо новий вигляд та багато цікавих функцій, але не хвилюйтеся, це все ще та сама безкоштовна, конфіденційна та відкрита розширення, яке ви знаєте і любите.",
-    "description": "Опис оголошення про оновлення для існуючих користувачів"
-  },
-  "updateAnnouncementLearnMore": {
-    "message": "Дізнайтеся більше про оновлення.",
-    "description": "Посилання 'Дізнатися більше' для оголошення про оновлення для існуючих користувачів"
-  },
-  "updateAnnouncementButton": {
-    "message": "Почати",
-    "description": "Кнопка оголошення про оновлення для існуючих користувачів"
   },
   "streamErrorModalTitle": {
     "message": "Помилка при запуску запису",
@@ -399,35 +283,9 @@
     "message": "Видалити попередні записи",
     "description": "Кнопка 'Видалити попередні записи'"
   },
-  "troubleshootModalTitle": {
-    "message": "Завантажте системну інформацію та дані відео для відправки на усунення неполадок",
-    "description": "Заголовок модального вікна усунення неполадок"
-  },
-  "troubleshootModalDescription": {
-    "message": "Після завантаження надішліть файл до Andrew з будь-якою відповідною інформацією. Ми використовуватимемо ці дані для вирішення будь-яких проблем, які у вас виникли з розширенням, і можливо, відновлення вашого відео.",
-    "description": "Опис модального вікна усунення неполадок"
-  },
-  "troubleshootModalButton": {
-    "message": "Завантажити",
-    "description": "Кнопка модального вікна усунення неполадок"
-  },
-  "downloadForTroubleshootingOption": {
-    "message": "Завантажити дані для усунення проблем",
-    "description": "Опція завантаження для усунення проблем"
-  },
   "audioWarningTitle": {
     "message": "Запис звуку сторінки",
     "description": "Заголовок попередження про аудіо"
-  },
-  "audioWarningDescription": {
-    "message": "Для запису звуку цієї сторінки використовуйте опцію '$tab$'.",
-    "description": "Опис попередження про аудіо",
-    "placeholders": {
-      "tab": {
-        "content": "$1",
-        "example": "Область вкладки"
-      }
-    }
   },
   "extensionNotSupportedTitle": {
     "message": "Розширення не підтримується на сторінці",
@@ -436,26 +294,6 @@
   "extensionNotSupportedDescription": {
     "message": "InstructionsCrafter не підтримувався на вашій попередній вкладці. Проте ви можете розпочати запис тут, а потім перейти на вкладку, але панель інструментів не буде видимою.",
     "description": "Опис попередження про непідтримку розширення на вкладці"
-  },
-  "maxResolutionLabel": {
-    "message": "Максимальний роздільна здатність",
-    "description": "Максимальний підпис роздільної здатності в меню налаштувань"
-  },
-  "maxFPSLabel": {
-    "message": "Максимальний кадровий кут",
-    "description": "Максимальний підпис кадрового кута в меню налаштувань"
-  },
-  "resizeWindowLabel": {
-    "message": "Змінити розмір вікна",
-    "description": "Мітка зміни розміру вікна в меню налаштувань"
-  },
-  "screenTooSmallTooltip": {
-    "message": "Екран занадто малий для цієї роздільної здатності",
-    "description": "Підказка про занадто малий екран в меню налаштувань"
-  },
-  "maxResolutionTooltip": {
-    "message": "Не можливо записувати у цій роздільній здатності на вашому пристрої",
-    "description": "Підказка про максимальну роздільну здатність в меню налаштувань"
   },
   "permissionsModalReview": {
     "message": "Переглянути дозволи",
@@ -469,50 +307,6 @@
     "message": "Панель інструментів приховано. Увімкніть її в налаштуваннях спливаючого вікна.",
     "description": "Toast message explaining to reopen the toolbar in the popup options"
   },
-  "loginButtonLabel": {
-    "message": "Увійти або зареєструватися",
-    "description": "Login button label in popup settings menu"
-  },
-  "logoutButtonLabel": {
-    "message": "Вийти",
-    "description": "Logout button label in popup settings menu"
-  },
-  "loggedOutToastTitle": {
-    "message": "Ви вийшли з облікового запису",
-    "description": "Toast message shown when the user logs out"
-  },
-  "storageLimitReachedTitle": {
-    "message": "Досягнуто межі сховища",
-    "description": "Modal message shown when the storage limit is reached"
-  },
-  "storageLimitReachedDescription": {
-    "message": "Ви використали всі 50 ГБ сховища. Видаліть старі відео або сцени, щоб продовжити запис.",
-    "description": "Modal description shown when the storage limit is reached"
-  },
-  "manageStorageButtonLabel": {
-    "message": "Керувати сховищем",
-    "description": "Button label to manage storage in the popup settings menu"
-  },
-  "closeModalLabel": {
-    "message": "Закрити",
-    "description": "Agnostic close modal button label"
-  },
-  "storageCheckFailTitle": {
-    "message": "Не вдалося перевірити сховище",
-    "description": "Title shown when the storage check fails"
-  },
-  "storageCheckFailAuthDescription": {
-    "message": "Сталася помилка під час перевірки сховища. Увійдіть знову та спробуйте записати.",
-    "description": "Description shown when the storage check fails due to authentication"
-  },
-  "storageCheckFailDescription": {
-    "message": "Не вдалося перевірити квоту сховища. Спробуйте ще раз за кілька секунд або оновіть сторінку.",
-    "description": "Description shown when the storage check fails"
-  },
-  "retryButtonLabel": {
-    "message": "Спробувати ще раз",
-    "description": "Agnostic button label to try again"
-  },
   "readyRecordSceneToast": {
     "message": "Готово до запису нової сцени у відео",
     "description": "Toast message shown when the user is in an existing project and ready to record a new scene"
@@ -524,66 +318,6 @@
   "recordingLimitReachedToast": {
     "message": "Запис зупинено через 90-хвилинне обмеження",
     "description": "Toast message shown when the recording limit is reached"
-  },
-  "tabRecordingDisabledToast": {
-    "message": "Запис вкладки вимкнено на цій сторінці. Перемкнено на запис екрана.",
-    "description": "Toast message shown when tab recording is disabled on a page"
-  },
-  "projectRecordingCancelledToast": {
-    "message": "Запис відео скасовано",
-    "description": "Toast message shown when the user cancels project recording"
-  },
-  "copiedToClipboardToast": {
-    "message": "Посилання скопійовано в буфер обміну",
-    "description": "Toast message shown when link has been copied to clipboard"
-  },
-  "failedToCopyToClipboardToast": {
-    "message": "Не вдалося скопіювати посилання",
-    "description": "Toast message shown when failed to copy link to clipboard"
-  },
-  "newestSortLabel": {
-    "message": "Останні",
-    "description": "Label for the newest sort option"
-  },
-  "oldestSortLabel": {
-    "message": "Найстаріші",
-    "description": "Label for the oldest sort option"
-  },
-  "allVideosHeading": {
-    "message": "Усі відео",
-    "description": "Heading for the all videos section in the popup"
-  },
-  "noVideosFound": {
-    "message": "Відео не знайдено",
-    "description": "Message shown when no videos are found in the popup"
-  },
-  "loadingVideosLabel": {
-    "message": "Завантаження відео...",
-    "description": "Label shown when videos are loading in the popup"
-  },
-  "goToDashboardButtonLabel": {
-    "message": "Перейти до панелі",
-    "description": "Button label to go to the dashboard in the popup"
-  },
-  "welcomePopupTitle": {
-    "message": "Ласкаво просимо до InstructionsCrafter",
-    "description": "Title for the welcome popup shown to new users"
-  },
-  "welcomePopupDescriptionTop": {
-    "message": "Без реклами. Без стеження. Без обмежень.",
-    "description": "Description for the welcome popup shown to new users"
-  },
-  "welcomePopupDescriptionBottom": {
-    "message": "Просто натисніть «Запис».",
-    "description": "Description for the welcome popup shown to new users"
-  },
-  "welcomePopupCTA": {
-    "message": "Користуйтесь безкоштовно — без реєстрації!",
-    "description": "Call to action button for the welcome popup shown to new users"
-  },
-  "welcomePopupCloudTitle": {
-    "message": "Хочете зробити більше зі своїми відео?",
-    "description": "Title for the cloud storage feature in the welcome popup"
   },
   "welcomePopupCloudFeature1": {
     "message": "Хмарне сховище, діліться відео через посилання",
@@ -605,169 +339,9 @@
     "message": "Користувацькі фони та макети",
     "description": "Feature 5 for the cloud storage in the welcome popup"
   },
-  "welcomePopupSupport": {
-    "message": "+ Підтримайте розробку від інді-розробниці!",
-    "description": "Message for supporting the indie maker in the welcome popup"
-  },
-  "accountSettingsOption": {
-    "message": "Налаштування облікового запису",
-    "description": "Label for the account settings option in the popup"
-  },
-  "supportSettingsOption": {
-    "message": "Підтримка",
-    "description": "Label for the support option in the popup"
-  },
-  "inactiveSubscriptionTitle": {
-    "message": "Ваша підписка Pro неактивна",
-    "description": "Title shown when the user's subscription is inactive"
-  },
-  "inactiveSubscriptionDescription": {
-    "message": "Ваша підписка на InstructionsCrafter Pro неактивна.",
-    "description": "Description shown when the user's subscription is inactive"
-  },
-  "inactiveSubscriptionReactivation": {
-    "message": "Будь ласка, активуйте знову, щоб відновити доступ.",
-    "description": "Message prompting the user to reactivate their subscription"
-  },
-  "inactiveSubscriptionDeletionWarning": {
-    "message": "Ваші відео та дані будуть остаточно видалені ",
-    "description": "Warning message about the deletion of videos and data"
-  },
-  "manageSubscriptionButton": {
-    "message": "Керувати підпискою",
-    "description": "Button to manage the user's subscription"
-  },
-  "inactiveSubscriptionFreeVersion": {
-    "message": "Хочете продовжити користування безкоштовною версією?",
-    "description": "Message prompting the user to continue using the free version"
-  },
-  "downgradeToFreeButton": {
-    "message": "Вийти та перейти на безкоштовну версію",
-    "description": "Button to log out and downgrade to the free version"
-  },
-  "loggedOutTitle": {
-    "message": "Ви вийшли з облікового запису",
-    "description": "Title shown when the user is logged out"
-  },
-  "loggedOutDescription": {
-    "message": "Щоб синхронізувати записи з обліковим записом та отримати доступ до преміум-функцій, увійдіть знову.",
-    "description": "Description shown when the user is logged out"
-  },
-  "logBackInButton": {
-    "message": "Увійти знову",
-    "description": "Button to log back in after being logged out"
-  },
-  "loggedOutFreeVersion": {
-    "message": "Ви можете користуватися розширенням без облікового запису — але ваші записи не зберігатимуться і не можуть бути відновлені.",
-    "description": "Message shown when the user is logged out and using the free version"
-  },
-  "continueWithoutLogin": {
-    "message": "Продовжити без входу",
-    "description": "Button to continue using the extension without logging in"
-  },
-  "instantRecordingModeLabel": {
-    "message": "Режим миттєвого запису",
-    "description": "Label for the instant recording mode"
-  },
-  "instantRecordingModeTooltip": {
-    "message": "Миттєве завантаження, але камеру та макет не можна буде змінити пізніше.",
-    "description": "Tooltip for the instant recording mode"
-  },
-  "instantRecordingModeTitle": {
-    "message": "Режим миттєвого запису",
-    "description": "Title for the instant recording mode"
-  },
-  "instantRecordingModeDescription": {
-    "message": "Це записує все в одне відео для миттєвого завантаження та поширення. Розташування камери не можна буде змінити, але інші правки будуть доступні.",
-    "description": "Description for the instant recording mode"
-  },
-  "instantRecordingModeAction": {
-    "message": "Зрозуміло",
-    "description": "Action button for the instant recording mode"
-  },
-  "tabRecordingDisabledTooltip": {
-    "message": "Запис вкладки вимкнено на цій сторінці",
-    "description": "Tooltip shown when tab recording is disabled on a page"
-  },
-  "addingToLabel": {
-    "message": "Додається до: ",
-    "description": "Label shown when a scene is being recorded to a project"
-  },
-  "multiLabel": {
-    "message": "Multi",
-    "description": "Label for the multi-recording mode"
-  },
-  "finishLabelMulti": {
-    "message": "Завершити",
-    "description": "Label for the finish multi-recording button"
-  },
-  "welcomeProTitle": {
-    "message": "Хочете зробити більше зі своїми записами?",
-    "description": "Title for the welcome Pro popup"
-  },
-  "welcomeProDescription": {
-    "message": "Увійдіть, щоб зберігати відео в хмарі, ділитися посиланням і редагувати з розширеними функціями.",
-    "description": "Description for the welcome Pro popup"
-  },
-  "welcomeProButton": {
-    "message": "Увійти, щоб відкрити платні функції",
-    "description": "Button to sign in"
-  },
-  "welcomeProSupport": {
-    "message": "Підтримайте розробку від інді-розробниці",
-    "description": "Message for supporting the indie maker in the welcome Pro popup"
-  },
-  "multiRecordingModeTitle": {
-    "message": "Режим Multi",
-    "description": "Title for the multi-recording mode modal"
-  },
-  "multiRecordingModeDescription": {
-    "message": "Записуйте кілька сцен — екран, камеру або обидва варіанти — одну за одною. Це чудово підходить для кількох дублів, зміни ракурсу або поділу запису на частини. Коли завершите, натисніть «Готово», щоб відкрити редактор з усіма сценами, об’єднаними в одне відео.",
-    "description": "Description for the multi-recording mode modal"
-  },
-  "noSubscriptionYetTitle": {
-    "message": "Активуйте Pro, щоб почати",
-    "description": "Title shown when the user has no active subscription"
-  },
-  "noSubscriptionYetDescription": {
-    "message": "Оформіть підписку, щоб отримати доступ до функцій Pro.",
-    "description": "Message prompting the user to subscribe to reactivate their Pro features"
-  },
-  "upgradeToProButton": {
-    "message": "Підписатися на Pro",
-    "description": "Button to upgrade to Pro"
-  },
-  "welcomeBackPopupTitle": {
-    "message": "З поверненням до InstructionsCrafter",
-    "description": "Заголовок для вікна привітання для користувачів, які повернулися"
-  },
-  "welcomeBackProTitle": {
-    "message": "✨ Нове: Виведіть свої записи на новий рівень",
-    "description": "Заголовок для функції хмарного зберігання у вікні привітання"
-  },
-  "welcomeBackProDescription": {
-    "message": "InstructionsCrafter Pro — це нова додаткова платформа для збереження відео в хмарі, спільного доступу за посиланням та розблокування розширених інструментів редагування, коли і якщо вони вам потрібні.",
-    "description": "Опис функції хмарного зберігання у вікні привітання"
-  },
-  "welcomeBackProCTA": {
-    "message": "Дізнатися більше про InstructionsCrafter Pro",
-    "description": "Кнопка заклику до дії для функції хмарного зберігання у вікні привітання"
-  },
-  "webcodecsToggleLabel": {
-    "message": "Fast MP4",
-    "description": "WebCodecs recorder toggle label"
-  },
   "webcodecsFailedOffToast": {
     "message": "Fast MP4 помилка — вимк",
     "description": "WebCodecs failure auto-disable toast"
-  },
-  "resetOnboardingOption": {
-    "message": "Скинути онбординг",
-    "description": "Reset pro onboarding option label in popup settings menu"
-  },
-  "recoverLastRecordingOption": {
-    "message": "Recover last recording",
-    "description": "Settings menu item to manually trigger cloud recording recovery"
   },
   "toastStorageCritical": {
     "message": "Мало місця на диску. Зберігаємо запис. Все, що було записано, у безпеці.",
@@ -796,14 +370,6 @@
   "stopAckTimeoutToast": {
     "message": "Збереження триває довше, ніж очікувалось. Ваші дані у безпеці. Редактор незабаром відкриється.",
     "description": "Toast shown when the recorder does not acknowledge the stop request within a few seconds"
-  },
-  "getHelpButton": {
-    "message": "Отримати допомогу",
-    "description": "Side button on error modals that opens a prefilled support form"
-  },
-  "recordingTooShortToast": {
-    "message": "Запис занадто короткий для збереження",
-    "description": "Toast shown when a region recording is stopped by navigation but no chunks were saved"
   },
   "fastRecorderFailedTitle": {
     "message": "Швидкий запис не вдався",

@@ -7,18 +7,6 @@
     "message": "Turn a screen recording with voice narration into a step-by-step Microsoft Word instruction document.",
     "description": "Extension description"
   },
-  "recordTab": {
-    "message": "녹화",
-    "description": "Record tab label on popup"
-  },
-  "videosTab": {
-    "message": "귀하의 동영상",
-    "description": "Videos tab label on popup"
-  },
-  "screenType": {
-    "message": "화면",
-    "description": "Screen recording type label on popup"
-  },
   "tabType": {
     "message": "탭 영역",
     "description": "Tab area recording type label on popup"
@@ -51,17 +39,9 @@
     "message": "저장소 문제로 녹화가 중지되었어요. 부분 녹화는 저장되었어요.",
     "description": "Toast shown when the recording chunk writer fails mid-recording and the partial file is preserved"
   },
-  "allowCameraAccessButton": {
-    "message": "카메라 액세스 허용",
-    "description": "Allow camera access button"
-  },
   "allowMicrophoneAccessButton": {
     "message": "마이크 액세스 허용",
     "description": "Allow microphone access button"
-  },
-  "flipCameraLabel": {
-    "message": "카메라 뒤집기",
-    "description": "Flip camera switch label"
   },
   "recordButtonLabel": {
     "message": "녹화 시작",
@@ -71,37 +51,13 @@
     "message": "녹화 시작 중...",
     "description": "Record button in progress label"
   },
-  "showMoreOptionsLabel": {
-    "message": "더 많은 옵션 표시",
-    "description": "Show more options label"
-  },
-  "systemAudioLabel": {
-    "message": "시스템 오디오 포함",
-    "description": "탭/시스템 오디오 레이블"
-  },
   "hideToolbarLabel": {
     "message": "툴바 숨기기",
     "description": "Hide toolbar label"
   },
-  "alarmLabel": {
-    "message": "시간 제한 설정",
-    "description": "Alarm label"
-  },
-  "blurTypeLabel": {
-    "message": "흐림",
-    "description": "Blur background label"
-  },
-  "noCameraDropdownLabel": {
-    "message": "카메라 없음",
-    "description": "No camera selected"
-  },
   "noMicrophoneDropdownLabel": {
     "message": "마이크 없음",
     "description": "No microphone selected"
-  },
-  "selectSourceDropdownPlaceholder": {
-    "message": "소스 선택",
-    "description": "Select source placeholder"
   },
   "offLabel": {
     "message": "끄기",
@@ -138,18 +94,6 @@
   "toggleCursorOptionsTooltip": {
     "message": "커서 옵션 전환",
     "description": "Toggle cursor options tooltip"
-  },
-  "disableMicrophoneTooltip": {
-    "message": "마이크 비활성화",
-    "description": "Disable microphone tooltip"
-  },
-  "enableMicrophoneTooltip": {
-    "message": "마이크 활성화",
-    "description": "Enable microphone tooltip"
-  },
-  "noMicrophonePermissionsTooltip": {
-    "message": "마이크 권한 없음",
-    "description": "No microphone permissions tooltip"
   },
   "selectToolTooltip": {
     "message": "도구 선택",
@@ -259,10 +203,6 @@
     "message": "녹화 재개",
     "description": "Discard recording modal resume button"
   },
-  "sandboxEditorCancelButton": {
-    "message": "취소",
-    "description": "Cancel button in sandbox editor page"
-  },
   "learnMoreDot": {
     "message": "더 알아보기.",
     "description": "Learn more with a dot"
@@ -270,34 +210,6 @@
   "preparingLabel": {
     "message": "준비 중...",
     "description": "Preparing label"
-  },
-  "shareModalSandboxTitle": {
-    "message": "녹화를 한 단계 업그레이드해 볼까요?",
-    "description": "Share modal title in sandbox editor page"
-  },
-  "shareModalSandboxDescription": {
-    "message": "클라우드 공유, 줌, 템플릿 제공… 그리고 프라이버시를 지키는 여성 인디 개발자를 응원해 주세요! ❤️",
-    "description": "Share modal description in sandbox editor page"
-  },
-  "shareModalSandboxButton": {
-    "message": "Pro 자세히 알아보기",
-    "description": "Share modal email placeholder in sandbox editor page"
-  },
-  "shareModalSandboxLogin": {
-    "message": "이미 계정이 있으신가요? 로그인",
-    "description": "Share modal login link in sandbox editor page"
-  },
-  "zoomToPointPopup": {
-    "message": "커서로 확대",
-    "description": "Zoom to point popup"
-  },
-  "micReminderPopup": {
-    "message": "마이크 꺼짐 경고",
-    "description": "Mic reminder popup"
-  },
-  "helpPopup": {
-    "message": "도움말",
-    "description": "Help popup button"
   },
   "pausedRecordingToast": {
     "message": "녹화 일시 중지. 계속하려면 재생 버튼을 누르세요.",
@@ -335,37 +247,9 @@
     "message": "취소",
     "description": "Microphone muted modal cancel"
   },
-  "countdownMessage": {
-    "message": "편안하세요. 카운트다운을 중지하려면 어디든 클릭하세요.",
-    "description": "Countdown message"
-  },
-  "micOnToast": {
-    "message": "마이크 활성화됨",
-    "description": "Microphone enabled toast title"
-  },
-  "micOffToast": {
-    "message": "마이크 비활성화됨",
-    "description": "Microphone disabled toast title"
-  },
   "noShowAgain": {
     "message": "다시 표시하지 않음",
     "description": "Don't show again button"
-  },
-  "updateAnnouncementTitle": {
-    "message": "새로운 InstructionsCrafter에 오신 것을 환영합니다!",
-    "description": "기존 사용자를 위한 업데이트 공지 제목"
-  },
-  "updateAnnouncementDescription": {
-    "message": "새로운 디자인과 다양한 기능을 소개합니다. 걱정 마세요. 여전히 무료, 개인 정보 보호, 오픈 소스 확장 프로그램입니다.",
-    "description": "기존 사용자를 위한 업데이트 공지 설명"
-  },
-  "updateAnnouncementLearnMore": {
-    "message": "업데이트에 대한 자세한 정보 알아보기.",
-    "description": "기존 사용자를 위한 업데이트 공지 자세히 알아보기 링크"
-  },
-  "updateAnnouncementButton": {
-    "message": "시작하기",
-    "description": "기존 사용자를 위한 업데이트 공지 버튼"
   },
   "streamErrorModalTitle": {
     "message": "녹화 시작 중 오류 발생",
@@ -399,35 +283,9 @@
     "message": "이전 녹화 삭제",
     "description": "이전 녹화 삭제 버튼"
   },
-  "troubleshootModalTitle": {
-    "message": "시스템 정보 및 비디오 데이터 다운로드 및 문제 해결 전송",
-    "description": "문제 해결 모달 제목"
-  },
-  "troubleshootModalDescription": {
-    "message": "다운로드 후 해당 파일을 Andrew에게 보내 주십시오. 우리는 이 데이터를 사용하여 확장 프로그램과 관련된 문제를 해결하고 가능한 경우 비디오를 복구하는 데 도움을 드리겠습니다.",
-    "description": "문제 해결 모달 설명"
-  },
-  "troubleshootModalButton": {
-    "message": "다운로드",
-    "description": "문제 해결 모달 버튼"
-  },
-  "downloadForTroubleshootingOption": {
-    "message": "문제 해결을 위한 데이터 다운로드",
-    "description": "문제 해결을 위한 다운로드 옵션"
-  },
   "audioWarningTitle": {
     "message": "페이지 오디오 녹음",
     "description": "오디오 경고 제목"
-  },
-  "audioWarningDescription": {
-    "message": "이 페이지의 오디오를 녹음하려면 '$tab$' 옵션을 사용해야 합니다.",
-    "description": "오디오 경고 설명",
-    "placeholders": {
-      "tab": {
-        "content": "$1",
-        "example": "탭 영역"
-      }
-    }
   },
   "extensionNotSupportedTitle": {
     "message": "페이지에서 지원되지 않는 확장 프로그램",
@@ -436,26 +294,6 @@
   "extensionNotSupportedDescription": {
     "message": "InstructionsCrafter는 이전 탭에서 지원되지 않았습니다. 그럼에도 불구하고 여기에서 녹음을 시작한 다음 다른 탭으로 전환할 수 있지만 도구 모음은 표시되지 않습니다.",
     "description": "탭에서 지원되지 않는 확장 프로그램 설명"
-  },
-  "maxResolutionLabel": {
-    "message": "최대 해상도",
-    "description": "설정 메뉴에서 최대 해상도 레이블"
-  },
-  "maxFPSLabel": {
-    "message": "최대 FPS",
-    "description": "설정 메뉴에서 최대 FPS 레이블"
-  },
-  "resizeWindowLabel": {
-    "message": "창 크기 조절",
-    "description": "설정 메뉴의 창 크기 조절 레이블"
-  },
-  "screenTooSmallTooltip": {
-    "message": "이 화면은 이 해상도로 조절하기에 너무 작습니다",
-    "description": "설정 메뉴의 화면 너무 작음 툴팁"
-  },
-  "maxResolutionTooltip": {
-    "message": "귀하의 장치에서 이 해상도로 녹화할 수 없습니다",
-    "description": "설정 메뉴의 최대 해상도 툴팁"
   },
   "permissionsModalReview": {
     "message": "권한 검토",
@@ -469,50 +307,6 @@
     "message": "툴바가 숨겨졌습니다. 팝업 옵션에서 다시 활성화하세요.",
     "description": "Toast message explaining to reopen the toolbar in the popup options"
   },
-  "loginButtonLabel": {
-    "message": "로그인 또는 가입",
-    "description": "Login button label in popup settings menu"
-  },
-  "logoutButtonLabel": {
-    "message": "로그아웃",
-    "description": "Logout button label in popup settings menu"
-  },
-  "loggedOutToastTitle": {
-    "message": "로그아웃되었습니다",
-    "description": "Toast message shown when the user logs out"
-  },
-  "storageLimitReachedTitle": {
-    "message": "저장 공간 한도 도달",
-    "description": "Modal message shown when the storage limit is reached"
-  },
-  "storageLimitReachedDescription": {
-    "message": "100GB 저장 공간을 모두 사용하셨습니다. 계속 녹화하려면 이전 영상이나 장면을 삭제해 주세요.",
-    "description": "Modal description shown when the storage limit is reached"
-  },
-  "manageStorageButtonLabel": {
-    "message": "저장 공간 관리",
-    "description": "Button label to manage storage in the popup settings menu"
-  },
-  "closeModalLabel": {
-    "message": "닫기",
-    "description": "Agnostic close modal button label"
-  },
-  "storageCheckFailTitle": {
-    "message": "저장 공간 확인 실패",
-    "description": "Title shown when the storage check fails"
-  },
-  "storageCheckFailAuthDescription": {
-    "message": "저장 공간을 확인하는 중 문제가 발생했습니다. 다시 로그인하고 녹화를 시도해 주세요.",
-    "description": "Description shown when the storage check fails due to authentication"
-  },
-  "storageCheckFailDescription": {
-    "message": "저장 공간을 확인할 수 없습니다. 잠시 후 다시 시도하거나 페이지를 새로고침해 주세요.",
-    "description": "Description shown when the storage check fails"
-  },
-  "retryButtonLabel": {
-    "message": "다시 시도",
-    "description": "Agnostic button label to try again"
-  },
   "readyRecordSceneToast": {
     "message": "새 장면을 녹화할 준비가 되었습니다",
     "description": "Toast message shown when the user is in an existing project and ready to record a new scene"
@@ -524,66 +318,6 @@
   "recordingLimitReachedToast": {
     "message": "90분 녹화 제한으로 녹화가 종료되었습니다",
     "description": "Toast message shown when the recording limit is reached"
-  },
-  "tabRecordingDisabledToast": {
-    "message": "이 페이지에서는 탭 녹화가 비활성화되어 있어 화면 녹화로 전환되었습니다.",
-    "description": "Toast message shown when tab recording is disabled on a page"
-  },
-  "projectRecordingCancelledToast": {
-    "message": "영상 녹화가 취소되었습니다",
-    "description": "Toast message shown when the user cancels project recording"
-  },
-  "copiedToClipboardToast": {
-    "message": "링크가 클립보드에 복사되었습니다",
-    "description": "Toast message shown when link has been copied to clipboard"
-  },
-  "failedToCopyToClipboardToast": {
-    "message": "링크 복사에 실패했습니다",
-    "description": "Toast message shown when failed to copy link to clipboard"
-  },
-  "newestSortLabel": {
-    "message": "최신순",
-    "description": "Label for the newest sort option"
-  },
-  "oldestSortLabel": {
-    "message": "오래된순",
-    "description": "Label for the oldest sort option"
-  },
-  "allVideosHeading": {
-    "message": "모든 영상",
-    "description": "Heading for the all videos section in the popup"
-  },
-  "noVideosFound": {
-    "message": "영상이 없습니다",
-    "description": "Message shown when no videos are found in the popup"
-  },
-  "loadingVideosLabel": {
-    "message": "영상을 불러오는 중...",
-    "description": "Label shown when videos are loading in the popup"
-  },
-  "goToDashboardButtonLabel": {
-    "message": "대시보드로 이동",
-    "description": "Button label to go to the dashboard in the popup"
-  },
-  "welcomePopupTitle": {
-    "message": "InstructionsCrafter에 오신 것을 환영합니다",
-    "description": "Title for the welcome popup shown to new users"
-  },
-  "welcomePopupDescriptionTop": {
-    "message": "광고 없음. 추적 없음. 제한 없음.",
-    "description": "Description for the welcome popup shown to new users"
-  },
-  "welcomePopupDescriptionBottom": {
-    "message": "그냥 녹화 버튼만 누르세요.",
-    "description": "Description for the welcome popup shown to new users"
-  },
-  "welcomePopupCTA": {
-    "message": "가입 없이 무료로 사용해보세요!",
-    "description": "Call to action button for the welcome popup shown to new users"
-  },
-  "welcomePopupCloudTitle": {
-    "message": "영상으로 더 많은 걸 해보고 싶으신가요?",
-    "description": "Title for the cloud storage feature in the welcome popup"
   },
   "welcomePopupCloudFeature1": {
     "message": "클라우드 저장소, 링크로 공유",
@@ -605,169 +339,9 @@
     "message": "맞춤형 배경 및 목업",
     "description": "Feature 5 for the cloud storage in the welcome popup"
   },
-  "welcomePopupSupport": {
-    "message": "+ 1인 인디 개발자를 응원해 주세요!",
-    "description": "Message for supporting the indie maker in the welcome popup"
-  },
-  "accountSettingsOption": {
-    "message": "계정 설정",
-    "description": "Label for the account settings option in the popup"
-  },
-  "supportSettingsOption": {
-    "message": "지원",
-    "description": "Label for the support option in the popup"
-  },
-  "inactiveSubscriptionTitle": {
-    "message": "Pro 구독이 비활성화되었습니다",
-    "description": "Title shown when the user's subscription is inactive"
-  },
-  "inactiveSubscriptionDescription": {
-    "message": "InstructionsCrafter Pro 구독이 비활성화되어 있습니다.",
-    "description": "Description shown when the user's subscription is inactive"
-  },
-  "inactiveSubscriptionReactivation": {
-    "message": "접근을 재개하려면 구독을 다시 활성화해 주세요.",
-    "description": "Message prompting the user to reactivate their subscription"
-  },
-  "inactiveSubscriptionDeletionWarning": {
-    "message": "다음 날짜에 영상과 데이터가 영구적으로 삭제됩니다: ",
-    "description": "Warning message about the deletion of videos and data"
-  },
-  "manageSubscriptionButton": {
-    "message": "구독 관리",
-    "description": "Button to manage the user's subscription"
-  },
-  "inactiveSubscriptionFreeVersion": {
-    "message": "무료 버전을 계속 사용하시겠어요?",
-    "description": "Message prompting the user to continue using the free version"
-  },
-  "downgradeToFreeButton": {
-    "message": "로그아웃하고 무료 버전으로 전환",
-    "description": "Button to log out and downgrade to the free version"
-  },
-  "loggedOutTitle": {
-    "message": "로그아웃되었습니다",
-    "description": "Title shown when the user is logged out"
-  },
-  "loggedOutDescription": {
-    "message": "녹화를 계정과 동기화하고 프리미엄 기능을 사용하려면 다시 로그인해야 합니다.",
-    "description": "Description shown when the user is logged out"
-  },
-  "logBackInButton": {
-    "message": "다시 로그인",
-    "description": "Button to log back in after being logged out"
-  },
-  "loggedOutFreeVersion": {
-    "message": "계정 없이도 확장 기능을 계속 사용할 수 있지만, 녹화는 저장되지 않으며 나중에 복구할 수 없습니다.",
-    "description": "Message shown when the user is logged out and using the free version"
-  },
-  "continueWithoutLogin": {
-    "message": "로그인 없이 계속하기",
-    "description": "Button to continue using the extension without logging in"
-  },
-  "instantRecordingModeLabel": {
-    "message": "즉시 녹화 모드",
-    "description": "Label for the instant recording mode"
-  },
-  "instantRecordingModeTooltip": {
-    "message": "즉시 다운로드 가능하지만, 카메라 및 레이아웃은 나중에 편집할 수 없습니다.",
-    "description": "Tooltip for the instant recording mode"
-  },
-  "instantRecordingModeTitle": {
-    "message": "즉시 녹화 모드",
-    "description": "Title for the instant recording mode"
-  },
-  "instantRecordingModeDescription": {
-    "message": "이 모드는 모든 것을 하나의 영상으로 녹화하여 즉시 다운로드 및 공유할 수 있게 해줍니다. 나중에 카메라 레이아웃은 변경할 수 없지만, 다른 편집은 가능합니다.",
-    "description": "Description for the instant recording mode"
-  },
-  "instantRecordingModeAction": {
-    "message": "확인",
-    "description": "Action button for the instant recording mode"
-  },
-  "tabRecordingDisabledTooltip": {
-    "message": "이 페이지에서는 탭 녹화가 비활성화되어 있습니다",
-    "description": "Tooltip shown when tab recording is disabled on a page"
-  },
-  "addingToLabel": {
-    "message": "추가 중: ",
-    "description": "Label shown when a scene is being recorded to a project"
-  },
-  "multiLabel": {
-    "message": "Multi",
-    "description": "Label for the multi-recording mode"
-  },
-  "finishLabelMulti": {
-    "message": "완료",
-    "description": "Label for the finish multi-recording button"
-  },
-  "welcomeProTitle": {
-    "message": "녹화로 더 많은 것을 해보고 싶으신가요?",
-    "description": "Title for the welcome Pro popup"
-  },
-  "welcomeProDescription": {
-    "message": "영상을 클라우드에 저장하고 링크로 공유하며 고급 편집 기능을 사용하려면 로그인하세요.",
-    "description": "Description for the welcome Pro popup"
-  },
-  "welcomeProButton": {
-    "message": "유료 기능 잠금 해제를 위해 로그인",
-    "description": "Button to sign in"
-  },
-  "welcomeProSupport": {
-    "message": "1인 인디 개발자를 응원해 주세요",
-    "description": "Message for supporting the indie maker in the welcome Pro popup"
-  },
-  "multiRecordingModeTitle": {
-    "message": "멀티 모드",
-    "description": "Title for the multi-recording mode modal"
-  },
-  "multiRecordingModeDescription": {
-    "message": "화면, 카메라 또는 둘 다를 순차적으로 녹화하세요. 여러 번 촬영하거나 시점을 바꾸거나 녹화를 여러 부분으로 나누기에 좋습니다. 완료되면 '완료'를 클릭하여 모든 장면이 하나의 영상으로 결합된 편집기를 열 수 있습니다.",
-    "description": "Description for the multi-recording mode modal"
-  },
-  "noSubscriptionYetTitle": {
-    "message": "Pro를 활성화하여 시작하세요",
-    "description": "Title shown when the user has no active subscription"
-  },
-  "noSubscriptionYetDescription": {
-    "message": "Pro 기능에 접근하려면 구독해 주세요.",
-    "description": "Message prompting the user to subscribe to reactivate their Pro features"
-  },
-  "upgradeToProButton": {
-    "message": "Pro 구독하기",
-    "description": "Button to upgrade to Pro"
-  },
-  "welcomeBackPopupTitle": {
-    "message": "InstructionsCrafter에 다시 오신 걸 환영해요",
-    "description": "다시 방문한 사용자에게 보여지는 환영 팝업의 제목"
-  },
-  "welcomeBackProTitle": {
-    "message": "✨ 새로워졌어요: 녹화 그 이상을 원하시나요?",
-    "description": "환영 팝업에 표시되는 클라우드 저장 기능의 제목"
-  },
-  "welcomeBackProDescription": {
-    "message": "InstructionsCrafter Pro는 동영상을 클라우드에 저장하고, 링크로 공유하며, 고급 편집 도구를 사용할 수 있는 선택적인 새로운 플랫폼이에요. 필요할 때 언제든 사용할 수 있어요.",
-    "description": "환영 팝업에 표시되는 클라우드 저장 기능 설명"
-  },
-  "welcomeBackProCTA": {
-    "message": "InstructionsCrafter Pro 자세히 알아보기",
-    "description": "환영 팝업의 클라우드 저장 기능에 대한 클릭 유도 문구"
-  },
-  "webcodecsToggleLabel": {
-    "message": "Fast MP4",
-    "description": "WebCodecs recorder toggle label"
-  },
   "webcodecsFailedOffToast": {
     "message": "Fast MP4 실패 — 꺼짐",
     "description": "WebCodecs failure auto-disable toast"
-  },
-  "resetOnboardingOption": {
-    "message": "온보딩 다시 시작",
-    "description": "Reset pro onboarding option label in popup settings menu"
-  },
-  "recoverLastRecordingOption": {
-    "message": "Recover last recording",
-    "description": "Settings menu item to manually trigger cloud recording recovery"
   },
   "toastStorageCritical": {
     "message": "디스크 공간이 부족합니다. 녹화를 저장하고 있어요. 지금까지 캡처된 내용은 안전합니다.",
@@ -796,14 +370,6 @@
   "stopAckTimeoutToast": {
     "message": "저장이 예상보다 오래 걸리고 있어요. 데이터는 안전합니다. 편집기가 곧 열릴 거예요.",
     "description": "Toast shown when the recorder does not acknowledge the stop request within a few seconds"
-  },
-  "getHelpButton": {
-    "message": "도움 받기",
-    "description": "Side button on error modals that opens a prefilled support form"
-  },
-  "recordingTooShortToast": {
-    "message": "녹화 시간이 너무 짧아 저장할 수 없습니다",
-    "description": "Toast shown when a region recording is stopped by navigation but no chunks were saved"
   },
   "fastRecorderFailedTitle": {
     "message": "빠른 녹화기 실패",

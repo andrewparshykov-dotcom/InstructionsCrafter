@@ -7,18 +7,6 @@
     "message": "Turn a screen recording with voice narration into a step-by-step Microsoft Word instruction document.",
     "description": "Descripción de la extensión"
   },
-  "recordTab": {
-    "message": "Grabar",
-    "description": "Etiqueta de la pestaña Grabar en el menú desplegable"
-  },
-  "videosTab": {
-    "message": "Tus vídeos",
-    "description": "Etiqueta de la pestaña Tus vídeos en el menú desplegable"
-  },
-  "screenType": {
-    "message": "Pantalla",
-    "description": "Etiqueta de tipo de grabación de pantalla en el menú desplegable"
-  },
   "tabType": {
     "message": "Área",
     "description": "Etiqueta de tipo de grabación de área de pestaña en el menú desplegable"
@@ -51,17 +39,9 @@
     "message": "Grabación detenida por un problema de almacenamiento. Tu grabación parcial se guardó.",
     "description": "Toast shown when the recording chunk writer fails mid-recording and the partial file is preserved"
   },
-  "allowCameraAccessButton": {
-    "message": "Permitir acceso a la cámara",
-    "description": "Botón de permitir acceso a la cámara"
-  },
   "allowMicrophoneAccessButton": {
     "message": "Permitir acceso al micrófono",
     "description": "Botón de permitir acceso al micrófono"
-  },
-  "flipCameraLabel": {
-    "message": "Voltear cámara",
-    "description": "Etiqueta del interruptor de voltear cámara"
   },
   "recordButtonLabel": {
     "message": "Iniciar grabación",
@@ -71,37 +51,13 @@
     "message": "Iniciando grabación...",
     "description": "Etiqueta del botón de grabación en progreso"
   },
-  "showMoreOptionsLabel": {
-    "message": "Mostrar más opciones",
-    "description": "Etiqueta de mostrar más opciones"
-  },
-  "systemAudioLabel": {
-    "message": "Incluir audio del sistema",
-    "description": "Etiqueta de audio del sistema/tabulador"
-  },
   "hideToolbarLabel": {
     "message": "Ocultar barra de herramientas",
     "description": "Etiqueta de ocultar barra de herramientas"
   },
-  "alarmLabel": {
-    "message": "Establecer límite de tiempo",
-    "description": "Etiqueta de alarma"
-  },
-  "blurTypeLabel": {
-    "message": "Blur",
-    "description": "Etiqueta de fondo de desenfoque"
-  },
-  "noCameraDropdownLabel": {
-    "message": "Sin cámara",
-    "description": "Ninguna cámara seleccionada"
-  },
   "noMicrophoneDropdownLabel": {
     "message": "Sin micrófono",
     "description": "Ningún micrófono seleccionado"
-  },
-  "selectSourceDropdownPlaceholder": {
-    "message": "Seleccionar una fuente",
-    "description": "Marcador de posición de selección de fuente"
   },
   "offLabel": {
     "message": "Apagado",
@@ -138,18 +94,6 @@
   "toggleCursorOptionsTooltip": {
     "message": "Opciones de cursor",
     "description": "Consejo para alternar opciones de cursor"
-  },
-  "disableMicrophoneTooltip": {
-    "message": "Desactivar micrófono",
-    "description": "Consejo para desactivar el micrófono"
-  },
-  "enableMicrophoneTooltip": {
-    "message": "Activar micrófono",
-    "description": "Consejo para activar el micrófono"
-  },
-  "noMicrophonePermissionsTooltip": {
-    "message": "Sin permisos de micrófono",
-    "description": "Consejo para sin permisos de micrófono"
   },
   "selectToolTooltip": {
     "message": "Herramienta de selecciones",
@@ -259,10 +203,6 @@
     "message": "Reanudar grabación",
     "description": "Botón de reanudar grabación en el modal"
   },
-  "sandboxEditorCancelButton": {
-    "message": "Cancelar",
-    "description": "Botón de cancelar en la página del editor de pruebas"
-  },
   "learnMoreDot": {
     "message": "Aprende más.",
     "description": "Aprende más con un punto"
@@ -270,34 +210,6 @@
   "preparingLabel": {
     "message": "Preparando...",
     "description": "Etiqueta de preparación"
-  },
-  "shareModalSandboxTitle": {
-    "message": "¿Listo para mejorar tus grabaciones?",
-    "description": "Share modal title in sandbox editor page"
-  },
-  "shareModalSandboxDescription": {
-    "message": "Comparte en la nube, usa zooms, plantillas... y apoya a una dev indie que cuida tu privacidad ❤️",
-    "description": "Share modal description in sandbox editor page"
-  },
-  "shareModalSandboxButton": {
-    "message": "Ver más sobre Pro",
-    "description": "Share modal email placeholder in sandbox editor page"
-  },
-  "shareModalSandboxLogin": {
-    "message": "¿Ya tienes cuenta? Inicia sesión",
-    "description": "Share modal login link in sandbox editor page"
-  },
-  "zoomToPointPopup": {
-    "message": "Zoom al cursor",
-    "description": "Ventana emergente de zoom al punto"
-  },
-  "micReminderPopup": {
-    "message": "Muestra un aviso si el micrófono está desactivado",
-    "description": "Ventana emergente de recordatorio de micrófono"
-  },
-  "helpPopup": {
-    "message": "Ayuda",
-    "description": "Botón de ventana emergente de ayuda"
   },
   "pausedRecordingToast": {
     "message": "Grabación aturada. Presiona el botón de reproducción para continuar.",
@@ -335,37 +247,9 @@
     "message": "Cancelar",
     "description": "Cancelar del modal de micrófono apagado"
   },
-  "countdownMessage": {
-    "message": "Relájate. Haz clic en cualquier lugar para detener la cuenta regresiva.",
-    "description": "Mensaje de cuenta regresiva"
-  },
-  "micOnToast": {
-    "message": "Micrófono activado",
-    "description": "Título del aviso de micrófono habilitado"
-  },
-  "micOffToast": {
-    "message": "Micrófono desactivado",
-    "description": "Título del aviso de micrófono deshabilitado"
-  },
   "noShowAgain": {
     "message": "No mostrar de nuevo",
     "description": "Botón de no mostrar de nuevo"
-  },
-  "updateAnnouncementTitle": {
-    "message": "¡Bienvenido al nuevo InstructionsCrafter!",
-    "description": "Título del anuncio de actualización para usuarios existentes"
-  },
-  "updateAnnouncementDescription": {
-    "message": "Hemos actualizado el diseño y desarrollado nuevas funcionalidades, pero no te preocupes, sigue siendo la misma extensión gratuita, privada y de código abierto.",
-    "description": "Descripción del anuncio de actualización para usuarios existentes"
-  },
-  "updateAnnouncementLearnMore": {
-    "message": "Obtén más información sobre la actualización.",
-    "description": "Enlace 'Obtener más información' del anuncio de actualización para usuarios existentes"
-  },
-  "updateAnnouncementButton": {
-    "message": "Empezar",
-    "description": "Botón del anuncio de actualización para usuarios existentes"
   },
   "streamErrorModalTitle": {
     "message": "Error al iniciar la grabación",
@@ -399,35 +283,9 @@
     "message": "Eliminar grabaciones anteriores",
     "description": "Botón de eliminar grabaciones anteriores"
   },
-  "troubleshootModalTitle": {
-    "message": "Descargar información del sistema y datos de video para enviar y solucionar problemas",
-    "description": "Título del modal de solución de problemas"
-  },
-  "troubleshootModalDescription": {
-    "message": "Después de descargar, envía el archivo a Andrew con cualquier información relevante. Utilizaremos estos datos para ayudarte a solucionar cualquier problema que tengas con la extensión y, si es posible, recuperar tu video.",
-    "description": "Descripción del modal de solución de problemas"
-  },
-  "troubleshootModalButton": {
-    "message": "Descargar",
-    "description": "Botón del modal de solución de problemas"
-  },
-  "downloadForTroubleshootingOption": {
-    "message": "Descargar datos para solucionar problemas",
-    "description": "Opción de descarga para solución de problemas"
-  },
   "audioWarningTitle": {
     "message": "Grabar audio de la página",
     "description": "Título de advertencia de audio"
-  },
-  "audioWarningDescription": {
-    "message": "Para grabar audio de esta página, debes utilizar la opción de '$tab$'.",
-    "description": "Descripción de advertencia de audio",
-    "placeholders": {
-      "tab": {
-        "content": "$1",
-        "example": "Área de la pestaña"
-      }
-    }
   },
   "extensionNotSupportedTitle": {
     "message": "Extensión no compatible en la página",
@@ -436,26 +294,6 @@
   "extensionNotSupportedDescription": {
     "message": "InstructionsCrafter no fue compatible en tu pestaña anterior. Aún así, puedes comenzar tu grabación aquí y luego cambiar a la pestaña, pero tu barra de herramientas no será visible.",
     "description": "Descripción de extensión no compatible en la pestaña"
-  },
-  "maxResolutionLabel": {
-    "message": "Resolución máxima",
-    "description": "Etiqueta de resolución máxima en el menú de configuración"
-  },
-  "maxFPSLabel": {
-    "message": "FPS máximos",
-    "description": "Etiqueta de FPS máximos en el menú de configuración"
-  },
-  "resizeWindowLabel": {
-    "message": "Redimensionar ventana",
-    "description": "Etiqueta de redimensionar ventana en el menú de configuración"
-  },
-  "screenTooSmallTooltip": {
-    "message": "La pantalla es demasiado pequeña para esta resolución",
-    "description": "Consejo para pantallas demasiado pequeñas en el menú de configuración"
-  },
-  "maxResolutionTooltip": {
-    "message": "No es posible grabar en esta resolución en su dispositivo",
-    "description": "Consejo para resolución máxima en el menú de configuración"
   },
   "permissionsModalReview": {
     "message": "Revisar permisos",
@@ -469,50 +307,6 @@
     "message": "Barra de herramientas oculta. Reactívala desde las opciones.",
     "description": "Toast message explaining to reopen the toolbar in the popup options"
   },
-  "loginButtonLabel": {
-    "message": "Inicia sesión o regístrate",
-    "description": "Login button label in popup settings menu"
-  },
-  "logoutButtonLabel": {
-    "message": "Cerrar sesión",
-    "description": "Logout button label in popup settings menu"
-  },
-  "loggedOutToastTitle": {
-    "message": "Sesión cerrada",
-    "description": "Toast message shown when the user logs out"
-  },
-  "storageLimitReachedTitle": {
-    "message": "Has alcanzado el límite de almacenamiento",
-    "description": "Modal message shown when the storage limit is reached"
-  },
-  "storageLimitReachedDescription": {
-    "message": "Has usado los 100 GB de almacenamiento. Elimina vídeos o escenas antiguas para seguir grabando.",
-    "description": "Modal description shown when the storage limit is reached"
-  },
-  "manageStorageButtonLabel": {
-    "message": "Gestionar almacenamiento",
-    "description": "Button label to manage storage in the popup settings menu"
-  },
-  "closeModalLabel": {
-    "message": "Cerrar",
-    "description": "Agnostic close modal button label"
-  },
-  "storageCheckFailTitle": {
-    "message": "No se pudo comprobar el almacenamiento",
-    "description": "Title shown when the storage check fails"
-  },
-  "storageCheckFailAuthDescription": {
-    "message": "Hubo un problema al comprobar el almacenamiento. Inicia sesión de nuevo e intenta grabar otra vez.",
-    "description": "Description shown when the storage check fails due to authentication"
-  },
-  "storageCheckFailDescription": {
-    "message": "No se pudo verificar tu cuota de almacenamiento. Vuelve a intentarlo en unos segundos o actualiza la página.",
-    "description": "Description shown when the storage check fails"
-  },
-  "retryButtonLabel": {
-    "message": "Volver a intentar",
-    "description": "Agnostic button label to try again"
-  },
   "readyRecordSceneToast": {
     "message": "Listo para grabar una nueva escena en tu vídeo",
     "description": "Toast message shown when the user is in an existing project and ready to record a new scene"
@@ -524,66 +318,6 @@
   "recordingLimitReachedToast": {
     "message": "Grabación detenida por alcanzar el límite de 90 minutos",
     "description": "Toast message shown when the recording limit is reached"
-  },
-  "tabRecordingDisabledToast": {
-    "message": "La grabación de pestañas está desactivada en esta página. Se ha activado la grabación de pantalla por defecto.",
-    "description": "Toast message shown when tab recording is disabled on a page"
-  },
-  "projectRecordingCancelledToast": {
-    "message": "Grabación del vídeo cancelada",
-    "description": "Toast message shown when the user cancels project recording"
-  },
-  "copiedToClipboardToast": {
-    "message": "Enlace copiado al portapapeles",
-    "description": "Toast message shown when link has been copied to clipboard"
-  },
-  "failedToCopyToClipboardToast": {
-    "message": "No se pudo copiar el enlace",
-    "description": "Toast message shown when failed to copy link to clipboard"
-  },
-  "newestSortLabel": {
-    "message": "Más recientes",
-    "description": "Label for the newest sort option"
-  },
-  "oldestSortLabel": {
-    "message": "Más antiguos",
-    "description": "Label for the oldest sort option"
-  },
-  "allVideosHeading": {
-    "message": "Todos los vídeos",
-    "description": "Heading for the all videos section in the popup"
-  },
-  "noVideosFound": {
-    "message": "No se han encontrado vídeos",
-    "description": "Message shown when no videos are found in the popup"
-  },
-  "loadingVideosLabel": {
-    "message": "Cargando vídeos...",
-    "description": "Label shown when videos are loading in the popup"
-  },
-  "goToDashboardButtonLabel": {
-    "message": "Ir al panel de control",
-    "description": "Button label to go to the dashboard in the popup"
-  },
-  "welcomePopupTitle": {
-    "message": "Bienvenida a InstructionsCrafter",
-    "description": "Title for the welcome popup shown to new users"
-  },
-  "welcomePopupDescriptionTop": {
-    "message": "Sin anuncios. Sin seguimiento. Sin límites.",
-    "description": "Description for the welcome popup shown to new users"
-  },
-  "welcomePopupDescriptionBottom": {
-    "message": "Graba, simplemente.",
-    "description": "Description for the welcome popup shown to new users"
-  },
-  "welcomePopupCTA": {
-    "message": "Úsalo gratis — ¡sin registro!",
-    "description": "Call to action button for the welcome popup shown to new users"
-  },
-  "welcomePopupCloudTitle": {
-    "message": "¿Quieres hacer más con tus vídeos?",
-    "description": "Title for the cloud storage feature in the welcome popup"
   },
   "welcomePopupCloudFeature1": {
     "message": "Almacenamiento en la nube, comparte con enlace",
@@ -605,169 +339,9 @@
     "message": "Fondos y disposición de cámara personalizados",
     "description": "Feature 5 for the cloud storage in the welcome popup"
   },
-  "welcomePopupSupport": {
-    "message": "+ ¡Apoya el desarrollo independiente!",
-    "description": "Message for supporting the indie maker in the welcome popup"
-  },
-  "accountSettingsOption": {
-    "message": "Configuración de cuenta",
-    "description": "Label for the account settings option in the popup"
-  },
-  "supportSettingsOption": {
-    "message": "Soporte",
-    "description": "Label for the support option in the popup"
-  },
-  "inactiveSubscriptionTitle": {
-    "message": "Suscripción Pro inactiva",
-    "description": "Title shown when the user's subscription is inactive"
-  },
-  "inactiveSubscriptionDescription": {
-    "message": "Tu suscripción a InstructionsCrafter Pro está inactiva.",
-    "description": "Description shown when the user's subscription is inactive"
-  },
-  "inactiveSubscriptionReactivation": {
-    "message": "Reactívala para volver a acceder.",
-    "description": "Message prompting the user to reactivate their subscription"
-  },
-  "inactiveSubscriptionDeletionWarning": {
-    "message": "Tus vídeos y datos se eliminarán definitivamente el ",
-    "description": "Warning message about the deletion of videos and data"
-  },
-  "manageSubscriptionButton": {
-    "message": "Gestionar suscripción",
-    "description": "Button to manage the user's subscription"
-  },
-  "inactiveSubscriptionFreeVersion": {
-    "message": "¿Quieres seguir usando la versión gratuita?",
-    "description": "Message prompting the user to continue using the free version"
-  },
-  "downgradeToFreeButton": {
-    "message": "Cerrar sesión y cambiar a versión gratuita",
-    "description": "Button to log out and downgrade to the free version"
-  },
-  "loggedOutTitle": {
-    "message": "Sesión cerrada",
-    "description": "Title shown when the user is logged out"
-  },
-  "loggedOutDescription": {
-    "message": "Para mantener tus grabaciones sincronizadas y acceder a funciones Pro, inicia sesión de nuevo.",
-    "description": "Description shown when the user is logged out"
-  },
-  "logBackInButton": {
-    "message": "Iniciar sesión de nuevo",
-    "description": "Button to log back in after being logged out"
-  },
-  "loggedOutFreeVersion": {
-    "message": "Puedes seguir usando la extensión sin cuenta, pero las grabaciones no se guardarán ni se podrán recuperar más adelante.",
-    "description": "Message shown when the user is logged out and using the free version"
-  },
-  "continueWithoutLogin": {
-    "message": "Continuar sin iniciar sesión",
-    "description": "Button to continue using the extension without logging in"
-  },
-  "instantRecordingModeLabel": {
-    "message": "Modo de grabación instantánea",
-    "description": "Label for the instant recording mode"
-  },
-  "instantRecordingModeTooltip": {
-    "message": "Descarga inmediata, pero no se podrá editar la disposición de la cámara una vez empezada la grabación.",
-    "description": "Tooltip for the instant recording mode"
-  },
-  "instantRecordingModeTitle": {
-    "message": "Modo de grabación instantánea",
-    "description": "Title for the instant recording mode"
-  },
-  "instantRecordingModeDescription": {
-    "message": "Este modo graba todo en un solo vídeo para descargar y compartir al instante. No podrás modificar la disposición de la cámara, pero sí hacer otras ediciones.",
-    "description": "Description for the instant recording mode"
-  },
-  "instantRecordingModeAction": {
-    "message": "Entendido",
-    "description": "Action button for the instant recording mode"
-  },
-  "tabRecordingDisabledTooltip": {
-    "message": "La grabación de pestañas está desactivada en esta página",
-    "description": "Tooltip shown when tab recording is disabled on a page"
-  },
-  "addingToLabel": {
-    "message": "Añadiendo a: ",
-    "description": "Label shown when a scene is being recorded to a project"
-  },
-  "multiLabel": {
-    "message": "Multi",
-    "description": "Label for the multi-recording mode"
-  },
-  "finishLabelMulti": {
-    "message": "Finalizar",
-    "description": "Label for the finish multi-recording button"
-  },
-  "welcomeProTitle": {
-    "message": "¿Quieres hacer más con tus grabaciones?",
-    "description": "Title for the welcome Pro popup"
-  },
-  "welcomeProDescription": {
-    "message": "Inicia sesión para guardar los vídeos en la nube, compartir con enlace y acceder a funciones avanzadas de edición.",
-    "description": "Description for the welcome Pro popup"
-  },
-  "welcomeProButton": {
-    "message": "Inicia sesión para desbloquear funciones Pro",
-    "description": "Button to sign in"
-  },
-  "welcomeProSupport": {
-    "message": "¡Apoya a la desarrolladora independiente!",
-    "description": "Message for supporting the indie maker in the welcome Pro popup"
-  },
-  "multiRecordingModeTitle": {
-    "message": "Modo Multi",
-    "description": "Title for the multi-recording mode modal"
-  },
-  "multiRecordingModeDescription": {
-    "message": "Graba varias escenas, como tu pantalla, cámara o ambas, una tras otra. Es ideal para hacer varias tomas, cambiar de vista o dividir tu grabación en partes. Al terminar, haz clic en Finalizar para abrir el editor con todas tus escenas combinadas en un solo video.",
-    "description": "Description for the multi-recording mode modal"
-  },
-  "noSubscriptionYetTitle": {
-    "message": "Activa Pro para empezar",
-    "description": "Title shown when the user has no active subscription"
-  },
-  "noSubscriptionYetDescription": {
-    "message": "Suscríbete para acceder a las funciones Pro.",
-    "description": "Message prompting the user to subscribe to reactivate their Pro features"
-  },
-  "upgradeToProButton": {
-    "message": "Suscríbete a Pro",
-    "description": "Button to upgrade to Pro"
-  },
-  "welcomeBackPopupTitle": {
-    "message": "Bienvenido de nuevo a InstructionsCrafter",
-    "description": "Título para el popup de bienvenida mostrado a los usuarios que regresan"
-  },
-  "welcomeBackProTitle": {
-    "message": "✨ Novedad: Lleva tus grabaciones al siguiente nivel",
-    "description": "Título para la función de almacenamiento en la nube en el popup de bienvenida"
-  },
-  "welcomeBackProDescription": {
-    "message": "InstructionsCrafter Pro es una nueva plataforma opcional para guardar videos en la nube, compartirlos con un enlace y desbloquear herramientas avanzadas de edición, si y cuando las necesites.",
-    "description": "Descripción de la función de almacenamiento en la nube en el popup de bienvenida"
-  },
-  "welcomeBackProCTA": {
-    "message": "Conoce más sobre InstructionsCrafter Pro",
-    "description": "Botón de llamada a la acción para la función de almacenamiento en la nube en el popup de bienvenida"
-  },
-  "webcodecsToggleLabel": {
-    "message": "Fast MP4",
-    "description": "WebCodecs recorder toggle label"
-  },
   "webcodecsFailedOffToast": {
     "message": "Fast MP4 falló — off",
     "description": "WebCodecs failure auto-disable toast"
-  },
-  "resetOnboardingOption": {
-    "message": "Reiniciar onboarding",
-    "description": "Reset pro onboarding option label in popup settings menu"
-  },
-  "recoverLastRecordingOption": {
-    "message": "Recover last recording",
-    "description": "Settings menu item to manually trigger cloud recording recovery"
   },
   "toastStorageCritical": {
     "message": "Poco espacio en disco. Guardando tu grabación. Todo lo capturado hasta ahora está seguro.",
@@ -796,14 +370,6 @@
   "stopAckTimeoutToast": {
     "message": "El guardado está tardando más de lo esperado. Tus datos están seguros. El editor se abrirá pronto.",
     "description": "Toast shown when the recorder does not acknowledge the stop request within a few seconds"
-  },
-  "getHelpButton": {
-    "message": "Obtener ayuda",
-    "description": "Side button on error modals that opens a prefilled support form"
-  },
-  "recordingTooShortToast": {
-    "message": "La grabación fue demasiado corta para guardarla",
-    "description": "Toast shown when a region recording is stopped by navigation but no chunks were saved"
   },
   "fastRecorderFailedTitle": {
     "message": "El grabador rápido falló",

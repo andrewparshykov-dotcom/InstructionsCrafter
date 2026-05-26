@@ -7,18 +7,6 @@
     "message": "Turn a screen recording with voice narration into a step-by-step Microsoft Word instruction document.",
     "description": "நீட்சிதம் விளக்கம்"
   },
-  "recordTab": {
-    "message": "பதிவு",
-    "description": "பதிவு தலைப்பு படிதம்"
-  },
-  "videosTab": {
-    "message": "உங்கள் வீடியோக்கள்",
-    "description": "வீடியோக்கள் தலைப்பு படிதம்"
-  },
-  "screenType": {
-    "message": "திரை",
-    "description": "திரை படம் பதிவு வகை படிதம்"
-  },
   "tabType": {
     "message": "கையெழுத்து பகுதி",
     "description": "கையெழுத்து பகுதி படம் பதிவு வகை படிதம்"
@@ -51,17 +39,9 @@
     "message": "சேமிப்பக சிக்கல் காரணமாக பதிவு நிறுத்தப்பட்டது. உங்கள் பகுதி பதிவு சேமிக்கப்பட்டது.",
     "description": "Toast shown when the recording chunk writer fails mid-recording and the partial file is preserved"
   },
-  "allowCameraAccessButton": {
-    "message": "கேமரா அணுகலை அனுமதிக்கவும்",
-    "description": "கேமரா அணுகலை அனுமதிக்க பொத்தான்"
-  },
   "allowMicrophoneAccessButton": {
     "message": "மைக்ரோஃபோன் அணுகலை அனுமதிக்கவும்",
     "description": "மைக்ரோஃபோன் அணுகலை அனுமதிக்க பொத்தான்"
-  },
-  "flipCameraLabel": {
-    "message": "கேமரா தளம்",
-    "description": "கேமரா தளம் ஸ்விட்ச் பொத்தான்"
   },
   "recordButtonLabel": {
     "message": "பதிவு செய்ய ஆரம்பிக்கவும்",
@@ -71,37 +51,13 @@
     "message": "பதிவு ஆரம்பிக்கின்றது...",
     "description": "பதிவு பொத்தான் செயலி ஆரம்பிக்கின்றது செய்தி"
   },
-  "showMoreOptionsLabel": {
-    "message": "மேலும் விருப்பங்கள் காட்டு",
-    "description": "மேலும் விருப்பங்கள் செய்தி"
-  },
-  "systemAudioLabel": {
-    "message": "அமைப்பு ஒலியை சேர்க்கவும்",
-    "description": "அமைப்பு ஒலி குறியீடு/அறை"
-  },
   "hideToolbarLabel": {
     "message": "கட்டுப்பாடு மறை",
     "description": "கட்டுப்பாடு மறை செய்தி"
   },
-  "alarmLabel": {
-    "message": "நேரம் எதிர்க்காட்டவும்",
-    "description": "அலாரம் செய்தி"
-  },
-  "blurTypeLabel": {
-    "message": "மறை",
-    "description": "பிரிவு பிரிப்பு செய்தி"
-  },
-  "noCameraDropdownLabel": {
-    "message": "கேமரா இல்லை",
-    "description": "கேமரா தேர்வு செய்தி"
-  },
   "noMicrophoneDropdownLabel": {
     "message": "மைக்ரோஃபோன் இல்லை",
     "description": "மைக்ரோஃபோன் தேர்வு செய்தி"
-  },
-  "selectSourceDropdownPlaceholder": {
-    "message": "ஒரு மூலம் தேர்வு செய்யவும்",
-    "description": "மூலம் தேர்வு செய்தி உள்ளிடம்"
   },
   "offLabel": {
     "message": "அணுக்கம் இல்லை",
@@ -138,18 +94,6 @@
   "toggleCursorOptionsTooltip": {
     "message": "கோசர் விருப்பங்களை மாற்று",
     "description": "கோசர் விருப்பங்களை மாற்று உத்திபத்தி"
-  },
-  "disableMicrophoneTooltip": {
-    "message": "மைக்ரோஃபோன் முடக்கு",
-    "description": "மைக்ரோஃபோன் முடக்கு உத்திபத்தி"
-  },
-  "enableMicrophoneTooltip": {
-    "message": "மைக்ரோஃபோன் இயக்கு",
-    "description": "மைக்ரோஃபோன் இயக்கு உத்திபத்தி"
-  },
-  "noMicrophonePermissionsTooltip": {
-    "message": "மைக்ரோஃபோன் அனுமதிகள் இல்லை",
-    "description": "மைக்ரோஃபோன் அனுமதிகள் இல்லை உத்திபத்தி"
   },
   "selectToolTooltip": {
     "message": "கருவியை தேர்ந்தெடு",
@@ -259,10 +203,6 @@
     "message": "வீடியோ செயலாக்கம் தொடர்க",
     "description": "வீடியோ விலக்க மாடல் தொடர்க பொத்தான்"
   },
-  "sandboxEditorCancelButton": {
-    "message": "ரத்து செய்",
-    "description": "ரத்து செய்க பொத்தான் முகத்தில் உள்ள பொத்தான்"
-  },
   "learnMoreDot": {
     "message": "அதிகம் அறிய",
     "description": "ஒரு டாட் சொல் சார்பு வெளியீடு செய்யும்"
@@ -270,34 +210,6 @@
   "preparingLabel": {
     "message": "தயாராகிறது...",
     "description": "தயாரிக்கின்றது லேபிள்"
-  },
-  "shareModalSandboxTitle": {
-    "message": "உங்கள் பதிவு தரத்தை உயர்த்த தயாரா?",
-    "description": "Share modal title in sandbox editor page"
-  },
-  "shareModalSandboxDescription": {
-    "message": "க்ளவுட் பகிர்வு, பூம், டெம்ப்ளேட்டுகள்... மற்றும் தனியொரு டெவலப்பரால் உருவாக்கப்பட்ட, தனியுரிமையை மதிக்கும் டூலை ஆதரிக்கவும் ❤️",
-    "description": "Share modal description in sandbox editor page"
-  },
-  "shareModalSandboxButton": {
-    "message": "Pro பற்றி மேலும் அறிக",
-    "description": "Share modal email placeholder in sandbox editor page"
-  },
-  "shareModalSandboxLogin": {
-    "message": "ஏற்கனவே கணக்கு உள்ளதா? உள்நுழைக",
-    "description": "Share modal login link in sandbox editor page"
-  },
-  "zoomToPointPopup": {
-    "message": "கோர்சரை முடக்கு",
-    "description": "புள்ளி புள்ளி பெயர் பொத்தான்"
-  },
-  "micReminderPopup": {
-    "message": "மைக்ரோஃபோன் அணை எச்சரிக்கை",
-    "description": "மைக் அனுக்கிரிப் பப்"
-  },
-  "helpPopup": {
-    "message": "உத்தமம்",
-    "description": "உத்தமம் பப் பொத்தான்"
   },
   "pausedRecordingToast": {
     "message": "பதிவு நிறுத்தப்பட்டது. மீடியோ தொடர இயக்க புத்தரம் அழுக்கவும்.",
@@ -335,37 +247,9 @@
     "message": "ரத்து செய்",
     "description": "மைக்ரோஃபோன் அமைக்கப்பட்டுள்ள விளக்கம் ரத்து"
   },
-  "countdownMessage": {
-    "message": "சமாதானமாக. எங்கேயும் கிளிக் செய்யவும் எண்ணிக்கொள்ள முடியும்.",
-    "description": "எண்ணிக்கொள்ள செய்தி"
-  },
-  "micOnToast": {
-    "message": "மைக்ரோஃபோன் இயக்கப்பட்டுள்ளது",
-    "description": "மைக்ரோஃபோன் இயக்கப்பட்டுள்ளது விளக்க தலைப்பு"
-  },
-  "micOffToast": {
-    "message": "மைக்ரோஃபோன் முடக்கப்பட்டுள்ளது",
-    "description": "மைக்ரோஃபோன் முடக்கப்பட்டுள்ளது விளக்க தலைப்பு"
-  },
   "noShowAgain": {
     "message": "மீண்டும் காட்ட விரும்பாதே",
     "description": "மீண்டும் காட்ட விரும்பாதே பொது"
-  },
-  "updateAnnouncementTitle": {
-    "message": "புதிய InstructionsCrafter க்கு வரவேற்கின்றது!",
-    "description": "அந்தப் பயனாளர்களுக்காக புதியது அற்புதம் தலைப்பு"
-  },
-  "updateAnnouncementDescription": {
-    "message": "நாங்கள் புதிய பார்வையும் அந்தப் பயனாளர்களுக்கு அற்புதமான அமைப்பை அறிமுகப்படுத்துகின்றோம், ஆனால் சிறுபக்கங்கள் அனைத்து இலவச, தனியுரிமையுடன் மூன்று விளம்பரச் செயல்பாடுகளாக இல்லை என்றாக, அதே கூட நீங்கள் அறிந்து கொள்ளும் மற்றும் காத்திருப்பதே அந்த படிவிக்கு மீதம்.",
-    "description": "அப்டேட் அறிவிப்பு விளக்கம் ஏற்படும் பயனாளர்களுக்கு"
-  },
-  "updateAnnouncementLearnMore": {
-    "message": "அப்டேட் பற்றி மேலும் அறிந்து கொள்ளவும்.",
-    "description": "அப்டேட் அறிவிப்பு மேலும் அறிந்து கொள்ள பட்டன் பயனாளர்களுக்கு"
-  },
-  "updateAnnouncementButton": {
-    "message": "ஆரம்பிக்கவும்",
-    "description": "அப்டேட் அறிவிப்பு பட்டன் பயனாளர்களுக்கு"
   },
   "streamErrorModalTitle": {
     "message": "பதிவு ஆரம்பிப்பதில் பிழை",
@@ -399,35 +283,9 @@
     "message": "முந்தைய பதிவுகளை நீக்கு",
     "description": "முந்தைய பதிவுகளை நீக்கு பட்டன்"
   },
-  "troubleshootModalTitle": {
-    "message": "அமைப்பு தகவலுக்கு மற்றும் வீடியோ தரவுகளுக்கு உதவிக்கு அளிக்கவும்",
-    "description": "தகவலுக்கு உதவி மாடல் தலைப்பு"
-  },
-  "troubleshootModalDescription": {
-    "message": "பதிவிறக்கும் பின், இந்த கோப்பை Andrew-க்கு அனுப்புங்கள் மற்றும் அதிக தொடர்பான தகவலுடன். நாங்கள் இந்த தரவை பயன்படுத்தி உங்கள் விளக்க பெறும் பிரச்சினைகளை தீர்க்க உதவுவோம் மற்றும் வாடிக்கைக்கு வரை உங்கள் வீடியோவை மீட்டரியாக்குவதில் முடியும் என்பதை நிச்சயமாக சொல்லுக.",
-    "description": "தகவலுக்கு உதவி மாடல் விளக்கம்"
-  },
-  "troubleshootModalButton": {
-    "message": "பதிவிறக்குக",
-    "description": "தகவலுக்கு உதவி மாடல் பட்டன்"
-  },
-  "downloadForTroubleshootingOption": {
-    "message": "பிரச்சனைகளை தீர்க்க தரவை பதிவிறக்கவும்",
-    "description": "பிரச்சனைகளை தீர்க்க விருப்ப பதிவிறக்க விருப்பம்"
-  },
   "audioWarningTitle": {
     "message": "பக்கத்தில் ஒலி பதிவு",
     "description": "ஒலி எச்சரிக்கை தலைப்பு"
-  },
-  "audioWarningDescription": {
-    "message": "இந்த பக்கத்தில் ஒலியை பதிவு செய்ய உங்கள் விருப்பத்தை '$tab$' விருப்பம் பயன்படுத்த வேண்டும்.",
-    "description": "ஒலி எச்சரிக்கை விளக்கம்",
-    "placeholders": {
-      "tab": {
-        "content": "$1",
-        "example": "Tab area"
-      }
-    }
   },
   "extensionNotSupportedTitle": {
     "message": "பக்கத்தில் கொள்ளும்போது ஆதரிக்கப்படாத நீக்கம்",
@@ -436,26 +294,6 @@
   "extensionNotSupportedDescription": {
     "message": "உங்கள் முந்தைய பக்கத்தில் InstructionsCrafter ஆதரிக்கப்படவில்லை. இதையடுத்து, நீங்கள் இங்கே பதிவு ஆரம்பிக்கலாம், அப்போது மற்றொரு பக்கத்திற்கு செல்ல அநுமதிக்கப்படும், ஆனால் உங்கள் கருவிப்பட்டி காணப்படாது.",
     "description": "அட்டவணை ஆதரிக்கப்படாத நீக்கம் விளக்கம்"
-  },
-  "maxResolutionLabel": {
-    "message": "அதிசய கருவி",
-    "description": "அமைப்புகள் பட்டியலில் அதிசய கருவி குறியீட்டு"
-  },
-  "maxFPSLabel": {
-    "message": "அதிசய கோட்டிகள் கோட்டிகள்",
-    "description": "அமைப்புகள் பட்டியலில் அதிசய கோட்டிகள் குறியீட்டு"
-  },
-  "resizeWindowLabel": {
-    "message": "சாளரம் பருவமை",
-    "description": "அமைப்புகள் பட்டியலில் சாளரம் பருவமை குறிப்பு"
-  },
-  "screenTooSmallTooltip": {
-    "message": "இந்த திசையுக்கு உயர்வு மிகவும் சிறியது",
-    "description": "அமைப்புகள் பட்டியலில் திசை மிகவும் சிறியது குறிப்பு"
-  },
-  "maxResolutionTooltip": {
-    "message": "உங்கள் சாதனத்தில் இந்த உயர்வில் பதிவு செய்ய முடியாது",
-    "description": "அமைப்புகள் பட்டியலில் அதிசய உயர்வு குறிப்பு"
   },
   "permissionsModalReview": {
     "message": "அனுமதிகளை பரவி",
@@ -469,50 +307,6 @@
     "message": "ხელსაწყოთა ზოლი დამალულია. ჩართე ხელახლა მენიუდან.",
     "description": "Toast message explaining to reopen the toolbar in the popup options"
   },
-  "loginButtonLabel": {
-    "message": "შესვლა ან რეგისტრაცია",
-    "description": "Login button label in popup settings menu"
-  },
-  "logoutButtonLabel": {
-    "message": "გასვლა",
-    "description": "Logout button label in popup settings menu"
-  },
-  "loggedOutToastTitle": {
-    "message": "თქვენ გამოხვედით სისტემიდან",
-    "description": "Toast message shown when the user logs out"
-  },
-  "storageLimitReachedTitle": {
-    "message": "საცავის ლიმიტი ამოწურულია",
-    "description": "Modal message shown when the storage limit is reached"
-  },
-  "storageLimitReachedDescription": {
-    "message": "გამოიყენე მთელი 100 GB. წაშალე ძველი ვიდეოები ან სცენები გასაგრძელებლად.",
-    "description": "Modal description shown when the storage limit is reached"
-  },
-  "manageStorageButtonLabel": {
-    "message": "მართე საცავი",
-    "description": "Button label to manage storage in the popup settings menu"
-  },
-  "closeModalLabel": {
-    "message": "დახურვა",
-    "description": "Agnostic close modal button label"
-  },
-  "storageCheckFailTitle": {
-    "message": "შეცდომა საცავის შემოწმებისას",
-    "description": "Title shown when the storage check fails"
-  },
-  "storageCheckFailAuthDescription": {
-    "message": "პრობლემა წარმოიშვა საცავის შემოწმებისას. შედი ხელახლა და სცადე თავიდან.",
-    "description": "Description shown when the storage check fails due to authentication"
-  },
-  "storageCheckFailDescription": {
-    "message": "ვერ შემოწმდა საცავის კვოტა. სცადე თავიდან ან განაახლე გვერდი.",
-    "description": "Description shown when the storage check fails"
-  },
-  "retryButtonLabel": {
-    "message": "სცადე ხელახლა",
-    "description": "Agnostic button label to try again"
-  },
   "readyRecordSceneToast": {
     "message": "მზად ხარ ახალი სცენის ჩასაწერად",
     "description": "Toast message shown when the user is in an existing project and ready to record a new scene"
@@ -524,66 +318,6 @@
   "recordingLimitReachedToast": {
     "message": "ჩაწერა შეწყდა 90 წუთის ლიმიტის გამო",
     "description": "Toast message shown when the recording limit is reached"
-  },
-  "tabRecordingDisabledToast": {
-    "message": "ჩანართის ჩაწერა ამ გვერდზე მიუწვდომელია. ჩაირთო ეკრანის ჩაწერა.",
-    "description": "Toast message shown when tab recording is disabled on a page"
-  },
-  "projectRecordingCancelledToast": {
-    "message": "ვიდეოს ჩაწერა გაუქმდა",
-    "description": "Toast message shown when the user cancels project recording"
-  },
-  "copiedToClipboardToast": {
-    "message": "ბმული დაკოპირდა",
-    "description": "Toast message shown when link has been copied to clipboard"
-  },
-  "failedToCopyToClipboardToast": {
-    "message": "ბმულის დაკოპირება ვერ მოხერხდა",
-    "description": "Toast message shown when failed to copy link to clipboard"
-  },
-  "newestSortLabel": {
-    "message": "უახლესი",
-    "description": "Label for the newest sort option"
-  },
-  "oldestSortLabel": {
-    "message": "უძველესი",
-    "description": "Label for the oldest sort option"
-  },
-  "allVideosHeading": {
-    "message": "ყველა ვიდეო",
-    "description": "Heading for the all videos section in the popup"
-  },
-  "noVideosFound": {
-    "message": "ვიდეოები არ მოიძებნა",
-    "description": "Message shown when no videos are found in the popup"
-  },
-  "loadingVideosLabel": {
-    "message": "იტვირთება ვიდეოები...",
-    "description": "Label shown when videos are loading in the popup"
-  },
-  "goToDashboardButtonLabel": {
-    "message": "გადადით პანელზე",
-    "description": "Button label to go to the dashboard in the popup"
-  },
-  "welcomePopupTitle": {
-    "message": "მოგესალმებით InstructionsCrafter-ში",
-    "description": "Title for the welcome popup shown to new users"
-  },
-  "welcomePopupDescriptionTop": {
-    "message": "არა რეკლამებს. არა თვალთვალს. არა ლიმიტებს.",
-    "description": "Description for the welcome popup shown to new users"
-  },
-  "welcomePopupDescriptionBottom": {
-    "message": "  უბრალოდ დააჭირე ჩაწერას.",
-    "description": "Description for the welcome popup shown to new users"
-  },
-  "welcomePopupCTA": {
-    "message": "გამოიყენე უფასოდ — რეგისტრაციის გარეშე!",
-    "description": "Call to action button for the welcome popup shown to new users"
-  },
-  "welcomePopupCloudTitle": {
-    "message": "გინდა უფრო მეტი გააკეთო ვიდეოებით?",
-    "description": "Title for the cloud storage feature in the welcome popup"
   },
   "welcomePopupCloudFeature1": {
     "message": "საცავი ღრუბელში, ვიდეოს გაზიარება ბმულით",
@@ -605,169 +339,9 @@
     "message": "მორგებული ფონი და მაკეტები",
     "description": "Feature 5 for the cloud storage in the welcome popup"
   },
-  "welcomePopupSupport": {
-    "message": "+ მხარი დაუჭირე დამოუკიდებელ შემქმნელს!",
-    "description": "Message for supporting the indie maker in the welcome popup"
-  },
-  "accountSettingsOption": {
-    "message": "ანგარიშის პარამეტრები",
-    "description": "Label for the account settings option in the popup"
-  },
-  "supportSettingsOption": {
-    "message": "მხარდაჭერა",
-    "description": "Label for the support option in the popup"
-  },
-  "inactiveSubscriptionTitle": {
-    "message": "თქვენი Pro გამოწერა არ არის აქტიური",
-    "description": "Title shown when the user's subscription is inactive"
-  },
-  "inactiveSubscriptionDescription": {
-    "message": "თქვენი InstructionsCrafter Pro გამოწერა არ არის აქტიური.",
-    "description": "Description shown when the user's subscription is inactive"
-  },
-  "inactiveSubscriptionReactivation": {
-    "message": "გთხოვთ, გაააქტიურეთ ხელახლა, რომ კვლავ მიიღოთ წვდომა.",
-    "description": "Message prompting the user to reactivate their subscription"
-  },
-  "inactiveSubscriptionDeletionWarning": {
-    "message": "თქვენი ვიდეოები და მონაცემები წაიშლება სამუდამოდ ",
-    "description": "Warning message about the deletion of videos and data"
-  },
-  "manageSubscriptionButton": {
-    "message": "მართე გამოწერა",
-    "description": "Button to manage the user's subscription"
-  },
-  "inactiveSubscriptionFreeVersion": {
-    "message": "გინდა გააგრძელო უფასო ვერსიის გამოყენება?",
-    "description": "Message prompting the user to continue using the free version"
-  },
-  "downgradeToFreeButton": {
-    "message": "გასვლა და უფასო ვერსიაზე გადართვა",
-    "description": "Button to log out and downgrade to the free version"
-  },
-  "loggedOutTitle": {
-    "message": "თქვენ გამოხვედით სისტემიდან",
-    "description": "Title shown when the user is logged out"
-  },
-  "loggedOutDescription": {
-    "message": "ჩაწერების ანგარიშთან სინქრონიზაციისა და პრემიუმ ფუნქციებზე წვდომისთვის, შედით ხელახლა.",
-    "description": "Description shown when the user is logged out"
-  },
-  "logBackInButton": {
-    "message": "შედი ხელახლა",
-    "description": "Button to log back in after being logged out"
-  },
-  "loggedOutFreeVersion": {
-    "message": "შეგიძლიათ გააგრძელოთ გამოყენება ანგარიშის გარეშე – მაგრამ ჩაწერები არ შეინახება და აღდგენადიც არ იქნება.",
-    "description": "Message shown when the user is logged out and using the free version"
-  },
-  "continueWithoutLogin": {
-    "message": "გაგრძელება ანგარიშის გარეშე",
-    "description": "Button to continue using the extension without logging in"
-  },
-  "instantRecordingModeLabel": {
-    "message": "მყისიერი ჩაწერის რეჟიმი",
-    "description": "Label for the instant recording mode"
-  },
-  "instantRecordingModeTooltip": {
-    "message": "მყისიერი ჩამოტვირთვა, მაგრამ კამერისა და განლაგების შეცვლა შეუძლებელი იქნება მოგვიანებით.",
-    "description": "Tooltip for the instant recording mode"
-  },
-  "instantRecordingModeTitle": {
-    "message": "მყისიერი ჩაწერის რეჟიმი",
-    "description": "Title for the instant recording mode"
-  },
-  "instantRecordingModeDescription": {
-    "message": "ეს ყველაფერი ჩაწერს ერთ ვიდეოში მყისიერი ჩამოსატვირთად და გასაზიარებლად. მოგვიანებით ვერ შეცვლი კამერის განლაგებას, მაგრამ სხვა რედაქტირება შესაძლებელი იქნება.",
-    "description": "Description for the instant recording mode"
-  },
-  "instantRecordingModeAction": {
-    "message": "გასაგებია",
-    "description": "Action button for the instant recording mode"
-  },
-  "tabRecordingDisabledTooltip": {
-    "message": "ჩანართის ჩაწერა ამ გვერდზე მიუწვდომელია",
-    "description": "Tooltip shown when tab recording is disabled on a page"
-  },
-  "addingToLabel": {
-    "message": "დამატება პროექტში: ",
-    "description": "Label shown when a scene is being recorded to a project"
-  },
-  "multiLabel": {
-    "message": "Multi",
-    "description": "Label for the multi-recording mode"
-  },
-  "finishLabelMulti": {
-    "message": "დასრულება",
-    "description": "Label for the finish multi-recording button"
-  },
-  "welcomeProTitle": {
-    "message": "გინდა მეტი შეძლო ჩაწერებით?",
-    "description": "Title for the welcome Pro popup"
-  },
-  "welcomeProDescription": {
-    "message": "შედით, რომ შეინახოთ ვიდეოები ღრუბელში, გაუზიაროთ ბმულით და გამოიყენოთ დამატებითი რედაქტირების ფუნქციები.",
-    "description": "Description for the welcome Pro popup"
-  },
-  "welcomeProButton": {
-    "message": "შედით ფასიანი ფუნქციების გასახსნელად",
-    "description": "Button to sign in"
-  },
-  "welcomeProSupport": {
-    "message": "მხარი დაუჭირე დამოუკიდებელ შემქმნელს",
-    "description": "Message for supporting the indie maker in the welcome Pro popup"
-  },
-  "multiRecordingModeTitle": {
-    "message": "მულტი რეჟიმი",
-    "description": "Title for the multi-recording mode modal"
-  },
-  "multiRecordingModeDescription": {
-    "message": "ჩაწერე რამდენიმე სცენა — ეკრანი, კამერა ან ორივე — თანმიმდევრობით. შესანიშნავია მრავალჯერადი დუბლებისთვის, ხედების გადასართავად ან ჩანაწერის ნაწილებად დასაყოფად. დასრულების შემდეგ დააჭირე 'დასრულება', რომ ყველა სცენა ერთ ვიდეოში გაერთიანებული იხსნა რედაქტორში.",
-    "description": "Description for the multi-recording mode modal"
-  },
-  "noSubscriptionYetTitle": {
-    "message": "გააქტიურეთ Pro დასაწყებად",
-    "description": "Title shown when the user has no active subscription"
-  },
-  "noSubscriptionYetDescription": {
-    "message": "გადახდით सदस्यობას Pro ფუნქციებზე წვდომისთვის.",
-    "description": "Message prompting the user to subscribe to reactivate their Pro features"
-  },
-  "upgradeToProButton": {
-    "message": "გადადი Pro-ზე",
-    "description": "Button to upgrade to Pro"
-  },
-  "welcomeBackPopupTitle": {
-    "message": "திரும்ப வருக InstructionsCrafter-க்கு!",
-    "description": "திரும்ப வந்த பயனர்களுக்கான வரவேற்பு பாப்அப்பின் தலைப்பு"
-  },
-  "welcomeBackProTitle": {
-    "message": "✨ புதியது: உங்கள் பதிவு அனுபவத்தை மேம்படுத்துங்கள்",
-    "description": "மேகம் சார்ந்த சேமிப்பு அம்சத்துக்கான தலைப்பு"
-  },
-  "welcomeBackProDescription": {
-    "message": "InstructionsCrafter Pro என்பது உங்கள் வீடியோக்களை மேகத்தில் சேமிக்க, ஒரு இணைப்பின் மூலம் பகிர, மேலும் மேம்பட்ட தொகுப்பு கருவிகளை அணுக ஒரு விருப்பமான புதிய தளமாகும் – நீங்கள் விரும்பும் நேரத்தில் பயன்படுத்தலாம்.",
-    "description": "மேக சேமிப்பு அம்சத்தின் விளக்கம்"
-  },
-  "welcomeBackProCTA": {
-    "message": "InstructionsCrafter Pro பற்றி மேலும் அறிக",
-    "description": "மேக சேமிப்பு அம்சத்துக்கான செயல் அழைப்பு பொத்தான்"
-  },
-  "webcodecsToggleLabel": {
-    "message": "Fast MP4",
-    "description": "WebCodecs recorder toggle label"
-  },
   "webcodecsFailedOffToast": {
     "message": "Fast MP4 தோல்வி — ஆஃப்",
     "description": "WebCodecs failure auto-disable toast"
-  },
-  "resetOnboardingOption": {
-    "message": "Onboarding-ஐ மீட்டமை",
-    "description": "Reset pro onboarding option label in popup settings menu"
-  },
-  "recoverLastRecordingOption": {
-    "message": "Recover last recording",
-    "description": "Settings menu item to manually trigger cloud recording recovery"
   },
   "toastStorageCritical": {
     "message": "டிஸ்க் இடம் குறைவு. உங்கள் பதிவு சேமிக்கப்படுகிறது. இதுவரை பதிவான அனைத்தும் பாதுகாப்பாக உள்ளது.",
@@ -796,14 +370,6 @@
   "stopAckTimeoutToast": {
     "message": "சேமிப்பு எதிர்பார்த்ததை விட அதிக நேரம் எடுக்கிறது. உங்கள் தரவு பாதுகாப்பாக உள்ளது. எடிட்டர் விரைவில் திறக்கும்.",
     "description": "Toast shown when the recorder does not acknowledge the stop request within a few seconds"
-  },
-  "getHelpButton": {
-    "message": "உதவி பெறுங்கள்",
-    "description": "Side button on error modals that opens a prefilled support form"
-  },
-  "recordingTooShortToast": {
-    "message": "பதிவு சேமிக்க முடியாத அளவுக்கு சிறியது",
-    "description": "Toast shown when a region recording is stopped by navigation but no chunks were saved"
   },
   "fastRecorderFailedTitle": {
     "message": "வேகமான பதிவி தோல்வியடைந்தது",

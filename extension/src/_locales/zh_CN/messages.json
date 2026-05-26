@@ -7,18 +7,6 @@
     "message": "Turn a screen recording with voice narration into a step-by-step Microsoft Word instruction document.",
     "description": "Extension description"
   },
-  "recordTab": {
-    "message": "录制",
-    "description": "Record tab label on popup"
-  },
-  "videosTab": {
-    "message": "您的视频",
-    "description": "Videos tab label on popup"
-  },
-  "screenType": {
-    "message": "屏幕",
-    "description": "Screen recording type label on popup"
-  },
   "tabType": {
     "message": "标签区域",
     "description": "Tab area recording type label on popup"
@@ -51,17 +39,9 @@
     "message": "录制因存储问题停止。您的部分录制已保存。",
     "description": "Toast shown when the recording chunk writer fails mid-recording and the partial file is preserved"
   },
-  "allowCameraAccessButton": {
-    "message": "允许摄像头访问",
-    "description": "Allow camera access button"
-  },
   "allowMicrophoneAccessButton": {
     "message": "允许麦克风访问",
     "description": "Allow microphone access button"
-  },
-  "flipCameraLabel": {
-    "message": "翻转摄像头",
-    "description": "Flip camera switch label"
   },
   "recordButtonLabel": {
     "message": "开始录制",
@@ -71,37 +51,13 @@
     "message": "正在开始录制...",
     "description": "Record button in progress label"
   },
-  "showMoreOptionsLabel": {
-    "message": "显示更多选项",
-    "description": "Show more options label"
-  },
-  "systemAudioLabel": {
-    "message": "包括系统音频",
-    "description": "选项卡/系统音频标签"
-  },
   "hideToolbarLabel": {
     "message": "隐藏工具栏",
     "description": "Hide toolbar label"
   },
-  "alarmLabel": {
-    "message": "设置时间限制",
-    "description": "Alarm label"
-  },
-  "blurTypeLabel": {
-    "message": "模糊背景",
-    "description": "Blur background label"
-  },
-  "noCameraDropdownLabel": {
-    "message": "无摄像头",
-    "description": "No camera selected"
-  },
   "noMicrophoneDropdownLabel": {
     "message": "无麦克风",
     "description": "No microphone selected"
-  },
-  "selectSourceDropdownPlaceholder": {
-    "message": "选择源",
-    "description": "Select source placeholder"
   },
   "offLabel": {
     "message": "关闭",
@@ -138,18 +94,6 @@
   "toggleCursorOptionsTooltip": {
     "message": "切换光标选项",
     "description": "Toggle cursor options tooltip"
-  },
-  "disableMicrophoneTooltip": {
-    "message": "禁用麦克风",
-    "description": "Disable microphone tooltip"
-  },
-  "enableMicrophoneTooltip": {
-    "message": "启用麦克风",
-    "description": "Enable microphone tooltip"
-  },
-  "noMicrophonePermissionsTooltip": {
-    "message": "无麦克风权限",
-    "description": "No microphone permissions tooltip"
   },
   "selectToolTooltip": {
     "message": "选择",
@@ -259,10 +203,6 @@
     "message": "继续录制",
     "description": "Discard recording modal resume button"
   },
-  "sandboxEditorCancelButton": {
-    "message": "取消",
-    "description": "Cancel button in sandbox editor page"
-  },
   "learnMoreDot": {
     "message": "了解更多。",
     "description": "Learn more with a dot"
@@ -270,34 +210,6 @@
   "preparingLabel": {
     "message": "正在准备...",
     "description": "Preparing label"
-  },
-  "shareModalSandboxTitle": {
-    "message": "准备好提升你的录屏了吗？",
-    "description": "Share modal title in sandbox editor page"
-  },
-  "shareModalSandboxDescription": {
-    "message": "云端分享、缩放、模板功能… 支持一位注重隐私的独立女性开发者 ❤️",
-    "description": "Share modal description in sandbox editor page"
-  },
-  "shareModalSandboxButton": {
-    "message": "了解 Pro 版",
-    "description": "Share modal email placeholder in sandbox editor page"
-  },
-  "shareModalSandboxLogin": {
-    "message": "已有账号？登录",
-    "description": "Share modal login link in sandbox editor page"
-  },
-  "zoomToPointPopup": {
-    "message": "缩放到光标位置",
-    "description": "Zoom to point popup"
-  },
-  "micReminderPopup": {
-    "message": "麦克风已关闭警告",
-    "description": "Mic reminder popup"
-  },
-  "helpPopup": {
-    "message": "帮助",
-    "description": "Help popup button"
   },
   "pausedRecordingToast": {
     "message": "录制已暂停。按播放按钮继续。",
@@ -335,37 +247,9 @@
     "message": "取消",
     "description": "Microphone muted modal cancel"
   },
-  "countdownMessage": {
-    "message": "放松。单击任何地方停止倒计时。",
-    "description": "Countdown message"
-  },
-  "micOnToast": {
-    "message": "麦克风已启用",
-    "description": "Microphone enabled toast title"
-  },
-  "micOffToast": {
-    "message": "麦克风已禁用",
-    "description": "Microphone disabled toast title"
-  },
   "noShowAgain": {
     "message": "不再显示",
     "description": "Don't show again button"
-  },
-  "updateAnnouncementTitle": {
-    "message": "欢迎使用新版 InstructionsCrafter！",
-    "description": "现有用户的更新公告标题"
-  },
-  "updateAnnouncementDescription": {
-    "message": "我们进行了设计更新并增加了许多新功能，但请放心，它仍然是您熟悉和喜爱的免费、私密且开源的扩展。",
-    "description": "现有用户的更新公告描述"
-  },
-  "updateAnnouncementLearnMore": {
-    "message": "了解有关更新的更多信息。",
-    "description": "现有用户的更新公告了解更多链接"
-  },
-  "updateAnnouncementButton": {
-    "message": "开始使用",
-    "description": "现有用户的更新公告按钮"
   },
   "streamErrorModalTitle": {
     "message": "启动录制时出错",
@@ -399,35 +283,9 @@
     "message": "清除之前的录制",
     "description": "清除之前的录制按钮"
   },
-  "troubleshootModalTitle": {
-    "message": "下载系统信息和视频数据并发送进行故障排除",
-    "description": "故障排除模态框标题"
-  },
-  "troubleshootModalDescription": {
-    "message": "下载后，请将文件发送至 Andrew，附上任何相关信息。我们将使用此数据帮助您解决扩展程序的任何问题，并在可能的情况下恢复您的视频。",
-    "description": "故障排除模态框描述"
-  },
-  "troubleshootModalButton": {
-    "message": "下载",
-    "description": "故障排除模态框按钮"
-  },
-  "downloadForTroubleshootingOption": {
-    "message": "下载故障排除数据",
-    "description": "故障排除选项"
-  },
   "audioWarningTitle": {
     "message": "录制页面音频",
     "description": "音频警告标题"
-  },
-  "audioWarningDescription": {
-    "message": "要录制此页面的音频，请使用'$tab$'选项。",
-    "description": "音频警告说明",
-    "placeholders": {
-      "tab": {
-        "content": "$1",
-        "example": "选项卡区域"
-      }
-    }
   },
   "extensionNotSupportedTitle": {
     "message": "页面不支持扩展",
@@ -436,26 +294,6 @@
   "extensionNotSupportedDescription": {
     "message": "InstructionsCrafter在您之前的选项卡上不受支持。尽管如此，您可以在此开始录制，然后切换到选项卡，但您的工具栏将不可见。",
     "description": "选项卡上不支持扩展的说明"
-  },
-  "maxResolutionLabel": {
-    "message": "最高分辨率",
-    "description": "设置菜单中的最高分辨率标签"
-  },
-  "maxFPSLabel": {
-    "message": "最高帧率",
-    "description": "设置菜单中的最高帧率标签"
-  },
-  "resizeWindowLabel": {
-    "message": "调整窗口大小",
-    "description": "设置菜单中的调整窗口大小标签"
-  },
-  "screenTooSmallTooltip": {
-    "message": "屏幕尺寸不足以支持此分辨率",
-    "description": "设置菜单中的屏幕尺寸不足提示"
-  },
-  "maxResolutionTooltip": {
-    "message": "您的设备无法以此分辨率录制",
-    "description": "设置菜单中的最大分辨率提示"
   },
   "permissionsModalReview": {
     "message": "审查权限",
@@ -469,50 +307,6 @@
     "message": "工具栏已隐藏。可在弹出窗口中重新启用。",
     "description": "Toast message explaining to reopen the toolbar in the popup options"
   },
-  "loginButtonLabel": {
-    "message": "登录或注册",
-    "description": "Login button label in popup settings menu"
-  },
-  "logoutButtonLabel": {
-    "message": "退出登录",
-    "description": "Logout button label in popup settings menu"
-  },
-  "loggedOutToastTitle": {
-    "message": "你已退出登录",
-    "description": "Toast message shown when the user logs out"
-  },
-  "storageLimitReachedTitle": {
-    "message": "已达存储上限",
-    "description": "Modal message shown when the storage limit is reached"
-  },
-  "storageLimitReachedDescription": {
-    "message": "你已使用完全部 100 GB 存储空间。请删除旧的视频或片段以继续录制。",
-    "description": "Modal description shown when the storage limit is reached"
-  },
-  "manageStorageButtonLabel": {
-    "message": "管理存储空间",
-    "description": "Button label to manage storage in the popup settings menu"
-  },
-  "closeModalLabel": {
-    "message": "关闭",
-    "description": "Agnostic close modal button label"
-  },
-  "storageCheckFailTitle": {
-    "message": "无法检查存储空间",
-    "description": "Title shown when the storage check fails"
-  },
-  "storageCheckFailAuthDescription": {
-    "message": "检查存储空间时出现问题。请重新登录并尝试录制。",
-    "description": "Description shown when the storage check fails due to authentication"
-  },
-  "storageCheckFailDescription": {
-    "message": "我们无法验证你的存储额度。请稍后再试或刷新页面。",
-    "description": "Description shown when the storage check fails"
-  },
-  "retryButtonLabel": {
-    "message": "重试",
-    "description": "Agnostic button label to try again"
-  },
   "readyRecordSceneToast": {
     "message": "准备好录制视频中的新片段",
     "description": "Toast message shown when the user is in an existing project and ready to record a new scene"
@@ -524,66 +318,6 @@
   "recordingLimitReachedToast": {
     "message": "录制已因超过 90 分钟限制而停止",
     "description": "Toast message shown when the recording limit is reached"
-  },
-  "tabRecordingDisabledToast": {
-    "message": "此页面已禁用标签页录制，已默认切换为屏幕录制。",
-    "description": "Toast message shown when tab recording is disabled on a page"
-  },
-  "projectRecordingCancelledToast": {
-    "message": "视频录制已取消",
-    "description": "Toast message shown when the user cancels project recording"
-  },
-  "copiedToClipboardToast": {
-    "message": "链接已复制到剪贴板",
-    "description": "Toast message shown when link has been copied to clipboard"
-  },
-  "failedToCopyToClipboardToast": {
-    "message": "复制链接失败",
-    "description": "Toast message shown when failed to copy link to clipboard"
-  },
-  "newestSortLabel": {
-    "message": "最新",
-    "description": "Label for the newest sort option"
-  },
-  "oldestSortLabel": {
-    "message": "最早",
-    "description": "Label for the oldest sort option"
-  },
-  "allVideosHeading": {
-    "message": "所有视频",
-    "description": "Heading for the all videos section in the popup"
-  },
-  "noVideosFound": {
-    "message": "未找到任何视频",
-    "description": "Message shown when no videos are found in the popup"
-  },
-  "loadingVideosLabel": {
-    "message": "正在加载视频…",
-    "description": "Label shown when videos are loading in the popup"
-  },
-  "goToDashboardButtonLabel": {
-    "message": "前往控制面板",
-    "description": "Button label to go to the dashboard in the popup"
-  },
-  "welcomePopupTitle": {
-    "message": "欢迎使用 InstructionsCrafter",
-    "description": "Title for the welcome popup shown to new users"
-  },
-  "welcomePopupDescriptionTop": {
-    "message": "无广告，无追踪，无限制。",
-    "description": "Description for the welcome popup shown to new users"
-  },
-  "welcomePopupDescriptionBottom": {
-    "message": "只需点击录制。",
-    "description": "Description for the welcome popup shown to new users"
-  },
-  "welcomePopupCTA": {
-    "message": "免费使用 — 无需注册！",
-    "description": "Call to action button for the welcome popup shown to new users"
-  },
-  "welcomePopupCloudTitle": {
-    "message": "想让你的视频更强大？",
-    "description": "Title for the cloud storage feature in the welcome popup"
   },
   "welcomePopupCloudFeature1": {
     "message": "云端存储，一键分享链接",
@@ -605,169 +339,9 @@
     "message": "自定义背景和样机",
     "description": "Feature 5 for the cloud storage in the welcome popup"
   },
-  "welcomePopupSupport": {
-    "message": "+ 支持独立开发者的持续开发！",
-    "description": "Message for supporting the indie maker in the welcome popup"
-  },
-  "accountSettingsOption": {
-    "message": "账户设置",
-    "description": "Label for the account settings option in the popup"
-  },
-  "supportSettingsOption": {
-    "message": "支持",
-    "description": "Label for the support option in the popup"
-  },
-  "inactiveSubscriptionTitle": {
-    "message": "你的 Pro 订阅已失效",
-    "description": "Title shown when the user's subscription is inactive"
-  },
-  "inactiveSubscriptionDescription": {
-    "message": "你的 InstructionsCrafter Pro 订阅已失效。",
-    "description": "Description shown when the user's subscription is inactive"
-  },
-  "inactiveSubscriptionReactivation": {
-    "message": "请重新激活以恢复访问权限。",
-    "description": "Message prompting the user to reactivate their subscription"
-  },
-  "inactiveSubscriptionDeletionWarning": {
-    "message": "你的所有视频和数据将于以下日期被永久删除：",
-    "description": "Warning message about the deletion of videos and data"
-  },
-  "manageSubscriptionButton": {
-    "message": "管理订阅",
-    "description": "Button to manage the user's subscription"
-  },
-  "inactiveSubscriptionFreeVersion": {
-    "message": "想继续使用免费版？",
-    "description": "Message prompting the user to continue using the free version"
-  },
-  "downgradeToFreeButton": {
-    "message": "退出并切换为免费版",
-    "description": "Button to log out and downgrade to the free version"
-  },
-  "loggedOutTitle": {
-    "message": "你已退出登录",
-    "description": "Title shown when the user is logged out"
-  },
-  "loggedOutDescription": {
-    "message": "要将录制内容同步到你的账户并访问高级功能，请重新登录。",
-    "description": "Description shown when the user is logged out"
-  },
-  "logBackInButton": {
-    "message": "重新登录",
-    "description": "Button to log back in after being logged out"
-  },
-  "loggedOutFreeVersion": {
-    "message": "你可以在未登录状态下继续使用扩展程序，但录制将不会保存，也无法恢复。",
-    "description": "Message shown when the user is logged out and using the free version"
-  },
-  "continueWithoutLogin": {
-    "message": "继续使用（无需登录）",
-    "description": "Button to continue using the extension without logging in"
-  },
-  "instantRecordingModeLabel": {
-    "message": "即时录制模式",
-    "description": "Label for the instant recording mode"
-  },
-  "instantRecordingModeTooltip": {
-    "message": "可即时下载，但摄像头和布局之后无法编辑。",
-    "description": "Tooltip for the instant recording mode"
-  },
-  "instantRecordingModeTitle": {
-    "message": "即时录制模式",
-    "description": "Title for the instant recording mode"
-  },
-  "instantRecordingModeDescription": {
-    "message": "会将所有内容录制成一个视频以便即时下载和分享。你将无法在之后更改摄像头布局，但仍可进行其他编辑。",
-    "description": "Description for the instant recording mode"
-  },
-  "instantRecordingModeAction": {
-    "message": "知道了",
-    "description": "Action button for the instant recording mode"
-  },
-  "tabRecordingDisabledTooltip": {
-    "message": "此页面禁用了标签页录制",
-    "description": "Tooltip shown when tab recording is disabled on a page"
-  },
-  "addingToLabel": {
-    "message": "正在添加至：",
-    "description": "Label shown when a scene is being recorded to a project"
-  },
-  "multiLabel": {
-    "message": "Multi",
-    "description": "Label for the multi-recording mode"
-  },
-  "finishLabelMulti": {
-    "message": "完成",
-    "description": "Label for the finish multi-recording button"
-  },
-  "welcomeProTitle": {
-    "message": "想充分利用你的录制内容？",
-    "description": "Title for the welcome Pro popup"
-  },
-  "welcomeProDescription": {
-    "message": "登录即可将视频保存到云端、生成分享链接并使用高级编辑功能。",
-    "description": "Description for the welcome Pro popup"
-  },
-  "welcomeProButton": {
-    "message": "登录以解锁付费功能",
-    "description": "Button to sign in"
-  },
-  "welcomeProSupport": {
-    "message": "支持独立开发者的持续开发",
-    "description": "Message for supporting the indie maker in the welcome Pro popup"
-  },
-  "multiRecordingModeTitle": {
-    "message": "Multi 模式",
-    "description": "Title for the multi-recording mode modal"
-  },
-  "multiRecordingModeDescription": {
-    "message": "连续录制多个场景，例如你的屏幕、摄像头或两者兼有。非常适合多次拍摄、切换视角或将录制内容分段。完成后，点击“完成”以打开编辑器，所有场景将合并为一个视频。",
-    "description": "Description for the multi-recording mode modal"
-  },
-  "noSubscriptionYetTitle": {
-    "message": "启用 Pro 开始使用",
-    "description": "Title shown when the user has no active subscription"
-  },
-  "noSubscriptionYetDescription": {
-    "message": "请订阅以访问 Pro 功能。",
-    "description": "Message prompting the user to subscribe to reactivate their Pro features"
-  },
-  "upgradeToProButton": {
-    "message": "订阅 Pro",
-    "description": "Button to upgrade to Pro"
-  },
-  "welcomeBackPopupTitle": {
-    "message": "欢迎回到 InstructionsCrafter",
-    "description": "返回用户欢迎弹窗的标题"
-  },
-  "welcomeBackProTitle": {
-    "message": "✨ 新功能：让录制更进一步",
-    "description": "欢迎弹窗中云存储功能的标题"
-  },
-  "welcomeBackProDescription": {
-    "message": "InstructionsCrafter Pro 是一个可选的新平台，用于将视频保存到云端、通过链接分享，并在需要时解锁高级编辑工具。",
-    "description": "欢迎弹窗中云存储功能的描述"
-  },
-  "welcomeBackProCTA": {
-    "message": "了解 InstructionsCrafter Pro",
-    "description": "欢迎弹窗中云存储功能的号召性按钮"
-  },
-  "webcodecsToggleLabel": {
-    "message": "极速 MP4",
-    "description": "WebCodecs recorder toggle label"
-  },
   "webcodecsFailedOffToast": {
     "message": "极速 MP4 失败 — 关闭",
     "description": "WebCodecs failure auto-disable toast"
-  },
-  "resetOnboardingOption": {
-    "message": "重置引导",
-    "description": "Reset pro onboarding option label in popup settings menu"
-  },
-  "recoverLastRecordingOption": {
-    "message": "Recover last recording",
-    "description": "Settings menu item to manually trigger cloud recording recovery"
   },
   "toastStorageCritical": {
     "message": "磁盘空间不足，正在保存录制内容。已录制的内容是安全的。",
@@ -796,14 +370,6 @@
   "stopAckTimeoutToast": {
     "message": "保存时间比预期长。您的数据是安全的，编辑器即将打开。",
     "description": "Toast shown when the recorder does not acknowledge the stop request within a few seconds"
-  },
-  "getHelpButton": {
-    "message": "获取帮助",
-    "description": "Side button on error modals that opens a prefilled support form"
-  },
-  "recordingTooShortToast": {
-    "message": "录制时间太短，无法保存",
-    "description": "Toast shown when a region recording is stopped by navigation but no chunks were saved"
   },
   "fastRecorderFailedTitle": {
     "message": "快速录制器失败",

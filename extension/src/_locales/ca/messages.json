@@ -7,18 +7,6 @@
     "message": "Turn a screen recording with voice narration into a step-by-step Microsoft Word instruction document.",
     "description": "Descripció de l'extensió"
   },
-  "recordTab": {
-    "message": "Enregistra",
-    "description": "Etiqueta de la pestanya 'Enregistra' en el pop-up"
-  },
-  "videosTab": {
-    "message": "Els teus vídeos",
-    "description": "Etiqueta de la pestanya 'Els teus vídeos' en el pop-up"
-  },
-  "screenType": {
-    "message": "Pantalla",
-    "description": "Etiqueta del tipus de gravació 'Pantalla' en el pop-up"
-  },
   "tabType": {
     "message": "Àrea",
     "description": "Etiqueta del tipus de gravació 'Àrea de la pestanya' en el pop-up"
@@ -51,17 +39,9 @@
     "message": "Gravació aturada per un problema d'emmagatzematge. La gravació parcial s'ha desat.",
     "description": "Toast shown when the recording chunk writer fails mid-recording and the partial file is preserved"
   },
-  "allowCameraAccessButton": {
-    "message": "Permet l'accés a la càmera",
-    "description": "Botó per permetre l'accés a la càmera"
-  },
   "allowMicrophoneAccessButton": {
     "message": "Permet l'accés al micròfon",
     "description": "Botó per permetre l'accés al micròfon"
-  },
-  "flipCameraLabel": {
-    "message": "Inverteix la càmera",
-    "description": "Etiqueta de l'interruptor 'Inverteix la càmera' en el pop-up"
   },
   "recordButtonLabel": {
     "message": "Inicia la gravació",
@@ -71,37 +51,13 @@
     "message": "Iniciant la gravació...",
     "description": "Etiqueta del botó d'iniciar la gravació en progrés en el pop-up"
   },
-  "showMoreOptionsLabel": {
-    "message": "Mostra més opcions",
-    "description": "Etiqueta de 'Mostra més opcions' en el pop-up"
-  },
-  "systemAudioLabel": {
-    "message": "Inclou l'àudio del sistema",
-    "description": "Etiqueta de l'àudio del sistema/pestanya"
-  },
   "hideToolbarLabel": {
     "message": "Amaga la barra d'eines",
     "description": "Etiqueta d'amagar la barra d'eines"
   },
-  "alarmLabel": {
-    "message": "Estableix un límit de temps",
-    "description": "Etiqueta de 'Estableix un límit de temps'"
-  },
-  "blurTypeLabel": {
-    "message": "Blur",
-    "description": "Etiqueta de fons 'Difumina'"
-  },
-  "noCameraDropdownLabel": {
-    "message": "Sense càmera",
-    "description": "Cap càmera seleccionada"
-  },
   "noMicrophoneDropdownLabel": {
     "message": "Sense micròfon",
     "description": "Cap micròfon seleccionat"
-  },
-  "selectSourceDropdownPlaceholder": {
-    "message": "Selecciona una font",
-    "description": "Marc de selecció de font"
   },
   "offLabel": {
     "message": "Apagat",
@@ -138,18 +94,6 @@
   "toggleCursorOptionsTooltip": {
     "message": "Opcions del cursor",
     "description": "Missatge emergent 'Activa/desactiva les opcions del cursor'"
-  },
-  "disableMicrophoneTooltip": {
-    "message": "Desactiva el micròfon",
-    "description": "Missatge emergent 'Desactiva el micròfon'"
-  },
-  "enableMicrophoneTooltip": {
-    "message": "Activa el micròfon",
-    "description": "Missatge emergent 'Activa el micròfon'"
-  },
-  "noMicrophonePermissionsTooltip": {
-    "message": "Sense permisos de micròfon",
-    "description": "Missatge emergent 'Sense permisos de micròfon'"
   },
   "selectToolTooltip": {
     "message": "Eina de selecció",
@@ -259,10 +203,6 @@
     "message": "Continua la gravació",
     "description": "Botó de continuar la gravació en el modal"
   },
-  "sandboxEditorCancelButton": {
-    "message": "Cancel·la",
-    "description": "Botó de cancel·lació a la pàgina de l'editor de l'àrea de proves"
-  },
   "learnMoreDot": {
     "message": "Aprèn més.",
     "description": "Aprèn més amb un punt"
@@ -270,34 +210,6 @@
   "preparingLabel": {
     "message": "Preparant...",
     "description": "Etiqueta de preparació"
-  },
-  "shareModalSandboxTitle": {
-    "message": "Preparat per millorar les teves gravacions?",
-    "description": "Share modal title in sandbox editor page"
-  },
-  "shareModalSandboxDescription": {
-    "message": "Comparteix al núvol, fes zooms, usa plantilles... i dona suport a una desenvolupadora indie que respecta la teva privadesa ❤️",
-    "description": "Share modal description in sandbox editor page"
-  },
-  "shareModalSandboxButton": {
-    "message": "Més info sobre Pro",
-    "description": "Share modal email placeholder in sandbox editor page"
-  },
-  "shareModalSandboxLogin": {
-    "message": "Ja tens compte? Inicia sessió",
-    "description": "Share modal login link in sandbox editor page"
-  },
-  "zoomToPointPopup": {
-    "message": "Fes zoom al cursor",
-    "description": "Finestra emergent de zoom a un punt"
-  },
-  "micReminderPopup": {
-    "message": "Mostra un avís si el micròfon està apagat",
-    "description": "Finestra emergent de recordança de micròfon"
-  },
-  "helpPopup": {
-    "message": "Ajuda",
-    "description": "Botó de finestra emergent d'ajuda"
   },
   "pausedRecordingToast": {
     "message": "Gravació aturada. Prem el botó de reproducció per continuar.",
@@ -335,37 +247,9 @@
     "message": "Cancel·la",
     "description": "Cancel·la del modal de micròfon apagat"
   },
-  "countdownMessage": {
-    "message": "Relaxa't. Fes clic en qualsevol lloc per aturar el compte enrere.",
-    "description": "Missatge de compte enrere"
-  },
-  "micOnToast": {
-    "message": "Microfon activat",
-    "description": "Títol del missatge emergent amb el microfon habilitat"
-  },
-  "micOffToast": {
-    "message": "Microfon desactivat",
-    "description": "Títol del missatge emergent amb el microfon deshabilitat"
-  },
   "noShowAgain": {
     "message": "No tornis a mostrar",
     "description": "Botó de no tornis a mostrar"
-  },
-  "updateAnnouncementTitle": {
-    "message": "Benvingut al nou InstructionsCrafter!",
-    "description": "Títol de l'anunci d'actualització per als usuaris existents"
-  },
-  "updateAnnouncementDescription": {
-    "message": "Hem actualitzat el disseny i desenvolupat noves funcionalitats, però no et preocupis, segueix sent la mateixa extensió gratuïta, privada i de codi obert.",
-    "description": "Descripció de l'anunci d'actualització per als usuaris existents"
-  },
-  "updateAnnouncementLearnMore": {
-    "message": "Obtén més informació sobre la actualització.",
-    "description": "Enllaç 'Obtenir més informació' de l'anunci d'actualització per als usuaris existents"
-  },
-  "updateAnnouncementButton": {
-    "message": "Començar",
-    "description": "Botó de l'anunci d'actualització per als usuaris existents"
   },
   "streamErrorModalTitle": {
     "message": "Error en iniciar la gravació",
@@ -399,35 +283,9 @@
     "message": "Esborra gravacions anteriors",
     "description": "Botó d'esborra gravacions anteriors"
   },
-  "troubleshootModalTitle": {
-    "message": "Descarrega la informació del sistema i les dades de vídeo per a l'enviament i la solució de problemes",
-    "description": "Títol del modal de solució de problemes"
-  },
-  "troubleshootModalDescription": {
-    "message": "Després de la descàrrega, envia l'arxiu a Andrew amb qualsevol informació rellevant. Farem servir aquestes dades per ajudar-te a solucionar qualsevol problema que tinguis amb l'extensió i, si és possible, recuperar el teu vídeo.",
-    "description": "Descripció del modal de solució de problemes"
-  },
-  "troubleshootModalButton": {
-    "message": "Descarrega",
-    "description": "Botó del modal de solució de problemes"
-  },
-  "downloadForTroubleshootingOption": {
-    "message": "Descarregar dades per solucionar problemes",
-    "description": "Opció de descàrrega per solucionar problemes"
-  },
   "audioWarningTitle": {
     "message": "Enregistra l'àudio de la pàgina",
     "description": "Títol d'avís d'àudio"
-  },
-  "audioWarningDescription": {
-    "message": "Per enregistrar l'àudio d'aquesta pàgina, has de canviar a '$tab$'.",
-    "description": "Descripció d'avís d'àudio",
-    "placeholders": {
-      "tab": {
-        "content": "$1",
-        "example": "Àrea de la pestanya"
-      }
-    }
   },
   "extensionNotSupportedTitle": {
     "message": "Extensió no compatible a la pestanya",
@@ -436,26 +294,6 @@
   "extensionNotSupportedDescription": {
     "message": "InstructionsCrafter no era compatible a la teva pestanya anterior. No obstant això, pots començar la gravació aquí i després canviar a la pestanya, però la barra de ferramentes no serà visible.",
     "description": "Descripció d'extensió no compatible a la pestanya"
-  },
-  "maxResolutionLabel": {
-    "message": "Resolució màxima",
-    "description": "Etiqueta de resolució màxima al menú de configuració"
-  },
-  "maxFPSLabel": {
-    "message": "FPS màxims",
-    "description": "Etiqueta de FPS màxims al menú de configuració"
-  },
-  "resizeWindowLabel": {
-    "message": "Redimensionar finestra",
-    "description": "Etiqueta de redimensionar finestra al menú de configuració"
-  },
-  "screenTooSmallTooltip": {
-    "message": "La pantalla és massa petita per a aquesta resolució",
-    "description": "Consell per a pantalles massa petites al menú de configuració"
-  },
-  "maxResolutionTooltip": {
-    "message": "No es pot enregistrar en aquesta resolució al seu dispositiu",
-    "description": "Consell per a la resolució màxima al menú de configuració"
   },
   "permissionsModalReview": {
     "message": "Revisar permisos",
@@ -469,50 +307,6 @@
     "message": "Barra d'eines amagada. Torna a activar-la a les opcions del.",
     "description": "Toast message explaining to reopen the toolbar in the popup options"
   },
-  "loginButtonLabel": {
-    "message": "Inicia sessió o registra't",
-    "description": "Login button label in popup settings menu"
-  },
-  "logoutButtonLabel": {
-    "message": "Tanca la sessió",
-    "description": "Logout button label in popup settings menu"
-  },
-  "loggedOutToastTitle": {
-    "message": "Has tancat la sessió",
-    "description": "Toast message shown when the user logs out"
-  },
-  "storageLimitReachedTitle": {
-    "message": "Has arribat al límit d'emmagatzematge",
-    "description": "Modal message shown when the storage limit is reached"
-  },
-  "storageLimitReachedDescription": {
-    "message": "Has utilitzat els 100 GB d'emmagatzematge. Elimina projectes o escenes antics per continuar gravant.",
-    "description": "Modal description shown when the storage limit is reached"
-  },
-  "manageStorageButtonLabel": {
-    "message": "Gestiona l'emmagatzematge",
-    "description": "Button label to manage storage in the popup settings menu"
-  },
-  "closeModalLabel": {
-    "message": "Tanca",
-    "description": "Agnostic close modal button label"
-  },
-  "storageCheckFailTitle": {
-    "message": "No s'ha pogut comprovar l'emmagatzematge",
-    "description": "Title shown when the storage check fails"
-  },
-  "storageCheckFailAuthDescription": {
-    "message": "Hi ha hagut un problema en comprovar l'emmagatzematge. Torna a iniciar sessió i intenta gravar de nou.",
-    "description": "Description shown when the storage check fails due to authentication"
-  },
-  "storageCheckFailDescription": {
-    "message": "No hem pogut verificar la teva quota d'emmagatzematge. Torna-ho a provar d'aquí uns segons o actualitza la pàgina.",
-    "description": "Description shown when the storage check fails"
-  },
-  "retryButtonLabel": {
-    "message": "Torna-ho a provar",
-    "description": "Agnostic button label to try again"
-  },
   "readyRecordSceneToast": {
     "message": "Preparat per gravar una nova escena al teu projecte",
     "description": "Toast message shown when the user is in an existing project and ready to record a new scene"
@@ -524,66 +318,6 @@
   "recordingLimitReachedToast": {
     "message": "Gravació aturada pel límit de 90 minuts",
     "description": "Toast message shown when the recording limit is reached"
-  },
-  "tabRecordingDisabledToast": {
-    "message": "La gravació de pestanyes està desactivada en aquesta pàgina. S'ha activat la gravació de pantalla per defecte.",
-    "description": "Toast message shown when tab recording is disabled on a page"
-  },
-  "projectRecordingCancelledToast": {
-    "message": "Gravació del projecte cancel·lada",
-    "description": "Toast message shown when the user cancels project recording"
-  },
-  "copiedToClipboardToast": {
-    "message": "Enllaç copiat al porta-retalls",
-    "description": "Toast message shown when link has been copied to clipboard"
-  },
-  "failedToCopyToClipboardToast": {
-    "message": "No s'ha pogut copiar l'enllaç",
-    "description": "Toast message shown when failed to copy link to clipboard"
-  },
-  "newestSortLabel": {
-    "message": "Més recents",
-    "description": "Label for the newest sort option"
-  },
-  "oldestSortLabel": {
-    "message": "Més antics",
-    "description": "Label for the oldest sort option"
-  },
-  "allVideosHeading": {
-    "message": "Tots els vídeos",
-    "description": "Heading for the all videos section in the popup"
-  },
-  "noVideosFound": {
-    "message": "No s'han trobat vídeos",
-    "description": "Message shown when no videos are found in the popup"
-  },
-  "loadingVideosLabel": {
-    "message": "Carregant vídeos...",
-    "description": "Label shown when videos are loading in the popup"
-  },
-  "goToDashboardButtonLabel": {
-    "message": "Ves al panell de control",
-    "description": "Button label to go to the dashboard in the popup"
-  },
-  "welcomePopupTitle": {
-    "message": "Benvingut a InstructionsCrafter",
-    "description": "Title for the welcome popup shown to new users"
-  },
-  "welcomePopupDescriptionTop": {
-    "message": "Sense anuncis. Sense seguiment. Sense límits.",
-    "description": "Description for the welcome popup shown to new users"
-  },
-  "welcomePopupDescriptionBottom": {
-    "message": "Grava, simplement.",
-    "description": "Description for the welcome popup shown to new users"
-  },
-  "welcomePopupCTA": {
-    "message": "Fes-ho servir gratis — no cal registrar-se!",
-    "description": "Call to action button for the welcome popup shown to new users"
-  },
-  "welcomePopupCloudTitle": {
-    "message": "Vols fer més amb els teus vídeos?",
-    "description": "Title for the cloud storage feature in the welcome popup"
   },
   "welcomePopupCloudFeature1": {
     "message": "Emmagatzematge al núvol, comparteix amb un enllaç",
@@ -605,169 +339,9 @@
     "message": "Fons i distribució de càmera personalitzats",
     "description": "Feature 5 for the cloud storage in the welcome popup"
   },
-  "welcomePopupSupport": {
-    "message": "+ Dona suport al desenvolupament independent!",
-    "description": "Message for supporting the indie maker in the welcome popup"
-  },
-  "accountSettingsOption": {
-    "message": "Configuració del compte",
-    "description": "Label for the account settings option in the popup"
-  },
-  "supportSettingsOption": {
-    "message": "Suport",
-    "description": "Label for the support option in the popup"
-  },
-  "inactiveSubscriptionTitle": {
-    "message": "Subscripció Pro inactiva",
-    "description": "Title shown when the user's subscription is inactive"
-  },
-  "inactiveSubscriptionDescription": {
-    "message": "La teva subscripció a InstructionsCrafter Pro està inactiva.",
-    "description": "Description shown when the user's subscription is inactive"
-  },
-  "inactiveSubscriptionReactivation": {
-    "message": "Reactiva-la per tornar-hi a accedir.",
-    "description": "Message prompting the user to reactivate their subscription"
-  },
-  "inactiveSubscriptionDeletionWarning": {
-    "message": "Els teus vídeos i dades s'eliminaran definitivament el ",
-    "description": "Warning message about the deletion of videos and data"
-  },
-  "manageSubscriptionButton": {
-    "message": "Gestiona la teva subscripció",
-    "description": "Button to manage the user's subscription"
-  },
-  "inactiveSubscriptionFreeVersion": {
-    "message": "Vols continuar utilitzant la versió gratuïta?",
-    "description": "Message prompting the user to continue using the free version"
-  },
-  "downgradeToFreeButton": {
-    "message": "Tanca la sessió i baixa de pla",
-    "description": "Button to log out and downgrade to the free version"
-  },
-  "loggedOutTitle": {
-    "message": "Has tancat la sessió",
-    "description": "Title shown when the user is logged out"
-  },
-  "loggedOutDescription": {
-    "message": "Per mantenir les teves gravacions sincronitzades i accedir a funcions Pro, cal que iniciïs sessió de nou.",
-    "description": "Description shown when the user is logged out"
-  },
-  "logBackInButton": {
-    "message": "Torna a iniciar sessió",
-    "description": "Button to log back in after being logged out"
-  },
-  "loggedOutFreeVersion": {
-    "message": "Pots continuar utilitzant l'extensió sense compte, però les gravacions no es guardaran ni es podran recuperar més tard.",
-    "description": "Message shown when the user is logged out and using the free version"
-  },
-  "continueWithoutLogin": {
-    "message": "Continua sense iniciar sessió",
-    "description": "Button to continue using the extension without logging in"
-  },
-  "instantRecordingModeLabel": {
-    "message": "Mode de gravació instantani",
-    "description": "Label for the instant recording mode"
-  },
-  "instantRecordingModeTooltip": {
-    "message": "Descarrega immediata, però la distribució de la càmera no es podrà editar un cop la gravació hagi començat.",
-    "description": "Tooltip for the instant recording mode"
-  },
-  "instantRecordingModeTitle": {
-    "message": "Mode de gravació instantani",
-    "description": "Title for the instant recording mode"
-  },
-  "instantRecordingModeDescription": {
-    "message": "Aquest mode grava tot en un sol vídeo per descarregar i compartir a l'instant. No podràs modificar la distribució de la càmera, però podràs fer altres tipus d'edicions.",
-    "description": "Description for the instant recording mode"
-  },
-  "instantRecordingModeAction": {
-    "message": "Entès",
-    "description": "Action button for the instant recording mode"
-  },
-  "tabRecordingDisabledTooltip": {
-    "message": "La gravació de pestanyes està desactivada en aquesta pàgina",
-    "description": "Tooltip shown when tab recording is disabled on a page"
-  },
-  "addingToLabel": {
-    "message": "Afegint a: ",
-    "description": "Label shown when a scene is being recorded to a project"
-  },
-  "multiLabel": {
-    "message": "Multi",
-    "description": "Label for the multi-recording mode"
-  },
-  "finishLabelMulti": {
-    "message": "Finalitza",
-    "description": "Label for the finish multi-recording button"
-  },
-  "welcomeProTitle": {
-    "message": "Vols fer més amb les teves gravacions?",
-    "description": "Title for the welcome Pro popup"
-  },
-  "welcomeProDescription": {
-    "message": "Inicia sessió per guardar els vídeos al núvol, compartir amb enllaç i accedir a funcions avançades d'edició.",
-    "description": "Description for the welcome Pro popup"
-  },
-  "welcomeProButton": {
-    "message": "Inicia sessió per desbloquejar funcions Pro",
-    "description": "Button to sign in"
-  },
-  "welcomeProSupport": {
-    "message": "Dona suport a la desenvolupadora independent!",
-    "description": "Message for supporting the indie maker in the welcome Pro popup"
-  },
-  "multiRecordingModeTitle": {
-    "message": "Mode Multi",
-    "description": "Title for the multi-recording mode modal"
-  },
-  "multiRecordingModeDescription": {
-    "message": "Grava múltiples escenes, com la pantalla, la càmera o totes dues, una rere l'altra. És ideal per fer diverses preses, canviar de vista o dividir la gravació en parts. Quan acabis, fes clic a Finalitza per obrir l'editor amb totes les escenes combinades en un sol vídeo.",
-    "description": "Description for the multi-recording mode modal"
-  },
-  "noSubscriptionYetTitle": {
-    "message": "Activa Pro per començar",
-    "description": "Title shown when the user has no active subscription"
-  },
-  "noSubscriptionYetDescription": {
-    "message": "Subscriu-te per accedir a les funcions Pro.",
-    "description": "Message prompting the user to subscribe to reactivate their Pro features"
-  },
-  "upgradeToProButton": {
-    "message": "Subscriu-te a Pro",
-    "description": "Button to upgrade to Pro"
-  },
-  "welcomeBackPopupTitle": {
-    "message": "Benvingut de nou a InstructionsCrafter",
-    "description": "Títol del popup de benvinguda mostrat als usuaris que tornen"
-  },
-  "welcomeBackProTitle": {
-    "message": "✨ Novetat: Porta les teves gravacions al següent nivell",
-    "description": "Títol per a la funció d'emmagatzematge al núvol en el popup de benvinguda"
-  },
-  "welcomeBackProDescription": {
-    "message": "InstructionsCrafter Pro és una nova plataforma opcional per desar vídeos al núvol, compartir-los amb un enllaç i desbloquejar eines avançades d’edició, si i quan les necessitis.",
-    "description": "Descripció de la funció d'emmagatzematge al núvol en el popup de benvinguda"
-  },
-  "welcomeBackProCTA": {
-    "message": "Descobreix InstructionsCrafter Pro",
-    "description": "Botó de crida a l'acció per a la funció d'emmagatzematge al núvol en el popup de benvinguda"
-  },
-  "webcodecsToggleLabel": {
-    "message": "Fast MP4",
-    "description": "WebCodecs recorder toggle label"
-  },
   "webcodecsFailedOffToast": {
     "message": "Fast MP4 fallat — off",
     "description": "WebCodecs failure auto-disable toast"
-  },
-  "resetOnboardingOption": {
-    "message": "Reinicia l'onboarding",
-    "description": "Reset pro onboarding option label in popup settings menu"
-  },
-  "recoverLastRecordingOption": {
-    "message": "Recover last recording",
-    "description": "Settings menu item to manually trigger cloud recording recovery"
   },
   "toastStorageCritical": {
     "message": "Poc espai al disc. S'està desant l'enregistrament. Tot el que s'ha capturat és segur.",
@@ -796,14 +370,6 @@
   "stopAckTimeoutToast": {
     "message": "El desament està trigant més del previst. Les dades capturades són segures. L'editor s'obrirà en breu.",
     "description": "Toast shown when the recorder does not acknowledge the stop request within a few seconds"
-  },
-  "getHelpButton": {
-    "message": "Obtenir ajuda",
-    "description": "Side button on error modals that opens a prefilled support form"
-  },
-  "recordingTooShortToast": {
-    "message": "L'enregistrament era massa curt per desar-lo",
-    "description": "Toast shown when a region recording is stopped by navigation but no chunks were saved"
   },
   "fastRecorderFailedTitle": {
     "message": "L'enregistrador ràpid ha fallat",
