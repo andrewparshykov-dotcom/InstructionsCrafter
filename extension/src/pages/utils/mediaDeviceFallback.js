@@ -31,15 +31,6 @@ const updateConstraintsDeviceId = (constraints, kind, deviceId) => {
       ...constraints.audio,
       deviceId: { exact: deviceId },
     };
-    return;
-  }
-
-  if (kind === "videoinput") {
-    if (!constraints.video || typeof constraints.video !== "object") return;
-    constraints.video = {
-      ...constraints.video,
-      deviceId: { exact: deviceId },
-    };
   }
 };
 
