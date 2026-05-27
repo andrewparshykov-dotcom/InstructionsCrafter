@@ -31,7 +31,6 @@ export const onInstalledListener = () => {
     // (background music, browser notifications, etc.) so we keep it off for
     // everyone, including users who had the Screenity-era `true` in storage.
     chrome.storage.local.set({ systemAudio: false });
-    chrome.storage.local.set({ offscreenRecording: false });
 
     // update only; manifest auto-injects on page load. install would double-mount React on dev.
     if (details.reason === "update") {

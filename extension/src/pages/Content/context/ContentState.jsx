@@ -478,7 +478,6 @@ const ContentState = (props) => {
         () => {
           chrome.runtime.sendMessage({
             type: "desktop-capture",
-            offscreenRecording: contentStateRef.current.offscreenRecording,
             camera:
               contentStateRef.current.recordingType === "camera" ? true : false,
           });
@@ -514,7 +513,6 @@ const ContentState = (props) => {
       perfMark("Content desktop-capture.sent");
       chrome.runtime.sendMessage({
         type: "desktop-capture",
-        offscreenRecording: contentStateRef.current.offscreenRecording,
         camera:
           contentStateRef.current.recordingType === "camera" ? true : false,
       });
@@ -753,7 +751,6 @@ const ContentState = (props) => {
     cursorMode: "none",
     cursorEffects: [],
     zoomEnabled: false,
-    offscreenRecording: false,
     pipEnded: false,
     tabCaptureFrame: false,
     offline: false,
@@ -773,7 +770,6 @@ const ContentState = (props) => {
     hasOpenedBefore: false,
     qualityValue: "1080p",
     fpsValue: "30",
-    fastRecorderStatus: null,
     useWebCodecsRecorder: true,
     countdownActive: false,
     countdownCancelled: false,
@@ -781,7 +777,6 @@ const ContentState = (props) => {
     isCountdownVisible: false,
     multiSceneCount: 0,
     preparingRecording: false,
-    onboarding: false,
     startRecordingAfterCountdown: () => {
       if (!contentStateRef.current.countdownCancelled) {
         contentStateRef.current.startRecording();

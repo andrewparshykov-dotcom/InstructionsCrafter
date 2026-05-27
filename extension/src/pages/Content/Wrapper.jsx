@@ -201,12 +201,6 @@ const Wrapper = () => {
                   left: 0,
                 }}
                 onClick={() => {
-                  const onboardingActive =
-                    document.documentElement.classList.contains(
-                      "instructionscrafter-driver-active"
-                    ) || Boolean(document.querySelector(".driver-overlay"));
-                  if (onboardingActive) return;
-
                   if (
                     window.location.href.indexOf(
                       chrome.runtime.getURL("playground.html")
@@ -262,10 +256,9 @@ const Wrapper = () => {
                 <RecordingLoader />
               )}
               <Countdown />
-              {!(contentState.hideToolbar && contentState.hideUI) &&
-                !contentState.onboarding && (
-                  <Toolbar />
-                )}
+              {!(contentState.hideToolbar && contentState.hideUI) && (
+                <Toolbar />
+              )}
               {contentState.showPopup && (
                 <PopupContainer shadowRef={shadowRef} />
               )}

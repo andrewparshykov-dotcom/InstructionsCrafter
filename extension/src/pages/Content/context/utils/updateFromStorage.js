@@ -33,7 +33,6 @@ export const updateFromStorage = (check = true, id = null) => {
       "cursorMode",
       "cursorEffects",
       "askMicrophone",
-      "offscreenRecording",
       "zoomEnabled",
       "setDevices",
       "popupPosition",
@@ -48,7 +47,6 @@ export const updateFromStorage = (check = true, id = null) => {
       "systemAudio",
       "qualityValue",
       "fpsValue",
-      "fastRecorderStatus",
       "useWebCodecsRecorder",
       "multiMode",
       "multiSceneCount",
@@ -135,11 +133,6 @@ export const updateFromStorage = (check = true, id = null) => {
           result.askMicrophone !== undefined && result.askMicrophone !== null
             ? result.askMicrophone
             : prevContentState.askMicrophone,
-        offscreenRecording:
-          result.offscreenRecording !== undefined &&
-          result.offscreenRecording !== null
-            ? result.offscreenRecording
-            : prevContentState.offscreenRecording,
         setDevices:
           result.setDevices !== undefined && result.setDevices !== null
             ? result.setDevices
@@ -192,11 +185,6 @@ export const updateFromStorage = (check = true, id = null) => {
           result.fpsValue !== undefined && result.fpsValue !== null
             ? result.fpsValue
             : prevContentState.fpsValue,
-        fastRecorderStatus:
-          result.fastRecorderStatus !== undefined &&
-          result.fastRecorderStatus !== null
-            ? result.fastRecorderStatus
-            : prevContentState.fastRecorderStatus,
         useWebCodecsRecorder:
           result.useWebCodecsRecorder !== undefined &&
           result.useWebCodecsRecorder !== null
@@ -204,7 +192,6 @@ export const updateFromStorage = (check = true, id = null) => {
             : prevContentState.useWebCodecsRecorder,
         multiMode: result.multiMode || false,
         multiSceneCount: result.multiSceneCount || 0,
-        onboarding: result.onboarding || false,
       }));
 
       if (result.systemAudio === undefined || result.systemAudio === null) {
