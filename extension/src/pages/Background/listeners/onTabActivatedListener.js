@@ -60,14 +60,7 @@ export const handleTabActivation = async (activeInfo) => {
         Math.floor((now - recordingStartTime - basePaused - extraPaused) / 1000)
       );
 
-      const { alarm } = await chrome.storage.local.get(["alarm"]);
-      if (alarm) {
-        const { alarmTime } = await chrome.storage.local.get(["alarmTime"]);
-        const remaining = Math.max(0, Math.floor(alarmTime - elapsed));
-        sendMessageTab(activeInfo.tabId, { type: "time", time: remaining });
-      } else {
-        sendMessageTab(activeInfo.tabId, { type: "time", time: elapsed });
-      }
+      sendMessageTab(activeInfo.tabId, { type: "time", time: elapsed });
     }
   } catch (error) {
     console.error("Error in handleTabActivation:", error.message);

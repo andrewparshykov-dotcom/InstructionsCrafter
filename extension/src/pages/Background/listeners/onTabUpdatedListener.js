@@ -63,14 +63,7 @@ export const handleTabUpdate = async (tabId, changeInfo, tab) => {
           )
         );
 
-        const { alarm } = await chrome.storage.local.get(["alarm"]);
-        if (alarm) {
-          const { alarmTime } = await chrome.storage.local.get(["alarmTime"]);
-          const remaining = Math.max(0, Math.floor(alarmTime - elapsed));
-          sendMessageTab(tabId, { type: "time", time: remaining });
-        } else {
-          sendMessageTab(tabId, { type: "time", time: elapsed });
-        }
+        sendMessageTab(tabId, { type: "time", time: elapsed });
       }
 
       // Check if tab is playground.html

@@ -172,14 +172,12 @@ const _startRecordingInner = async (caller) => {
 
   chrome.storage.local.set({ lastRecordingType: recordingType || "screen" });
 
-  const { quality, systemAudio, audioInput, offscreen, alarm, alarmTime, countdown } =
+  const { quality, systemAudio, audioInput, offscreen, countdown } =
     await chrome.storage.local.get([
       "quality",
       "systemAudio",
       "audioInput",
       "offscreen",
-      "alarm",
-      "alarmTime",
       "countdown",
     ]);
   await initDiagSession({
@@ -189,8 +187,6 @@ const _startRecordingInner = async (caller) => {
     systemAudio: Boolean(systemAudio),
     audioInput: Boolean(audioInput),
     offscreen: Boolean(offscreen),
-    alarm: Boolean(alarm),
-    alarmTime: alarm ? (alarmTime || null) : null,
     countdown: Boolean(countdown),
   });
   // sync log so the event flushes to storage before SW can be killed
@@ -253,14 +249,6 @@ const _startRecordingInner = async (caller) => {
     }, 2500);
   });
   chrome.action.setIcon({ path: "assets/recording-logo.png" });
-  // chrome.alarms 30s minimum in prod; sub-30s silently bumps or never fires
-  if (alarm) {
-    const seconds = parseFloat(alarmTime);
-    if (Number.isFinite(seconds) && seconds > 0) {
-      const delayInMinutes = Math.max(seconds / 60, 0.5);
-      chrome.alarms.create("recording-alarm", { delayInMinutes });
-    }
-  }
 };
 
 export const startAfterCountdown = (caller = "startAfterCountdown") => {

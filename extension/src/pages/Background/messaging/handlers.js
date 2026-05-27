@@ -686,9 +686,6 @@ export const setupHandlers = () => {
       );
     }
   });
-  registerMessage("clear-recording-alarm", async () => {
-    await chrome.alarms.clear("recording-alarm");
-  });
   // extension pages can't message content scripts directly
   registerMessage("show-toast", async (message) => {
     try {

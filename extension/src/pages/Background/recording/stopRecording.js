@@ -195,7 +195,6 @@ export const stopRecording = async () => {
   }
 
   if (isSubscribed) {
-    chrome.alarms.clear("recording-alarm");
     discardOffscreenDocuments();
     chrome.storage.local.remove(["recordingMeta"]);
   } else if (postStopEditorOpening || postStopEditorOpened) {
@@ -402,7 +401,6 @@ export const stopRecording = async () => {
   // releasePostStopEditorLock preserves this for duplicate detection; clear here
   chrome.storage.local.set({ postStopEditorOpened: false });
 
-  chrome.alarms.clear("recording-alarm");
   discardOffscreenDocuments();
 };
 

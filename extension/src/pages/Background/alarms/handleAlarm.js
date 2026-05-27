@@ -177,20 +177,6 @@ export const handleAlarm = async (alarm) => {
     return;
   }
 
-  if (alarm.name === "recording-alarm") {
-    const { recording } = await chrome.storage.local.get(["recording"]);
-
-    if (recording) {
-      diagEvent("alarm-fired");
-      stopRecording();
-      sendMessageRecord({ type: "stop-recording-tab" });
-      await handleTabMessaging(null);
-    }
-
-    await chrome.alarms.clear("recording-alarm");
-    return;
-  }
-
   if (alarm.name === FIRST_CHUNK_WATCHDOG_ALARM) {
     const { recording } = await chrome.storage.local.get(["recording"]);
     if (recording) {

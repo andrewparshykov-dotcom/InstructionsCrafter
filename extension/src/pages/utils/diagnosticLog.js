@@ -109,7 +109,6 @@ export const diagEvent = (eventType, data) => {
     "restart-requested",
     "restart-completed",
     "restart-failed",
-    "alarm-fired",
     "recorded-tab-closed",
     "recorded-tab-navigated",
     "drive-upload-start",
