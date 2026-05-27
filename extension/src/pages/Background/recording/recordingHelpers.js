@@ -388,6 +388,3 @@ export const videoReady = async () => {
   await stopRecording();
 };
 
-export const writeFile = async () => {
-  sendMessageRecord({ type: "stop-recording-tab" });
-};

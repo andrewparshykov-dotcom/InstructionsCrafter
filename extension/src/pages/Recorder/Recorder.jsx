@@ -331,8 +331,6 @@ const Recorder = () => {
   const recordedTabId = useRef(null);
   const tabPreferred = useRef(false);
 
-  const backupRef = useRef(false);
-
   const pending = useRef([]);
   const draining = useRef(false);
   const lowStorageAbort = useRef(false);
@@ -754,9 +752,6 @@ const Recorder = () => {
     lastSize.current = e.data.size;
     savedCount.current += 1;
 
-    if (backupRef.current) {
-      chrome.runtime.sendMessage({ type: "write-file", index: i });
-    }
     return true;
   }
 
@@ -1465,9 +1460,6 @@ const Recorder = () => {
             });
           }
 
-          if (backupRef.current) {
-            chrome.runtime.sendMessage({ type: "write-file", index: i });
-          }
         } catch (err) {
           debugError("Failed to save WebCodecs chunk", err);
           // Stop recording but preserve what's on disk.

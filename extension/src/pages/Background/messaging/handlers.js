@@ -33,7 +33,6 @@ import { checkRestore } from "../recording/restoreRecording";
 import { FIRST_CHUNK_WATCHDOG_ALARM, RECORDER_KEEPALIVE_ALARM } from "../alarms/alarmConstants";
 import { desktopCapture } from "../recording/desktopCapture";
 import {
-  writeFile,
   videoReady,
   handleGetStreamingData,
   handleRecordingError,
@@ -341,7 +340,6 @@ export const setupHandlers = () => {
       return { ok: false, error: err?.message || String(err) };
     }
   });
-  registerMessage("write-file", (message) => writeFile(message));
   registerMessage("handle-restart", (message, sender) =>
     handleRestart(message, sender),
   );
