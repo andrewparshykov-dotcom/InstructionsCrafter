@@ -62,83 +62,10 @@ export const setupHandlers = () => {
     return true;
   };
 
-  // Pending scene-create handoffs awaiting reply from the editor page.
-  // Keyed by requestId so concurrent multi-scene flows don't collide.
-  const pendingSceneCreates = new Map();
-
-  const onWindowProjectMessage = (event) => {
-    if (event.source !== window) return;
-    if (event.origin !== TRUSTED_APP_ORIGIN) return;
-    const data = event?.data || {};
-
-    if (data?.source === "create-scene-from-recording-result") {
-      const pending = pendingSceneCreates.get(data.requestId);
-      if (pending) {
-        pendingSceneCreates.delete(data.requestId);
-        clearTimeout(pending.timeout);
-        pending.respond({
-          ok: !!data.ok,
-          status: data.status ?? 0,
-          body: data.body ?? null,
-          error: data.error || null,
-        });
-      }
-      return;
-    }
-
-  };
-
-  window.addEventListener("message", onWindowProjectMessage);
-
   if (!window.__instructionsCrafterHandlersInitialized) {
     messageRouter();
     window.__instructionsCrafterHandlersInitialized = true;
   }
-
-  // Bridge from BG to the editor page: BG forwards a scene-create payload
-  // here; we postMessage it into the page (same-origin) so the editor's own
-  // app code does the API call (cookie auth, no CORS, no SW lifecycle).
-  registerMessage("proxy-create-scene", (message, sender) => {
-    if (window.location.origin !== TRUSTED_APP_ORIGIN) {
-      return { ok: false, error: "untrusted-origin" };
-    }
-    const { projectId, requestId, payload } = message || {};
-    if (!projectId || !requestId || !payload) {
-      return { ok: false, error: "invalid-proxy-create-scene" };
-    }
-    return new Promise((resolve) => {
-      const post = () => {
-        window.postMessage(
-          {
-            source: "create-scene-from-recording",
-            projectId,
-            requestId,
-            payload,
-          },
-          TRUSTED_APP_ORIGIN,
-        );
-      };
-      // Repost on a 500ms cadence in case the editor app's listener
-      // isn't mounted yet (?load=true loading shell, async route swap).
-      // The pending entry gates against duplicate replies.
-      post();
-      const repost = setInterval(post, 500);
-      const timeout = setTimeout(() => {
-        if (pendingSceneCreates.has(requestId)) {
-          pendingSceneCreates.delete(requestId);
-          clearInterval(repost);
-          resolve({ ok: false, error: "editor-no-reply-timeout" });
-        }
-      }, 15_000);
-      pendingSceneCreates.set(requestId, {
-        respond: (val) => {
-          clearInterval(repost);
-          resolve(val);
-        },
-        timeout,
-      });
-    });
-  });
 
   registerMessage("time", () => {
     // Timer is driven by ContentState's storage tick;

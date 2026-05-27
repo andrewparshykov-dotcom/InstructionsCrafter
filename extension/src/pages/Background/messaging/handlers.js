@@ -1,14 +1,13 @@
 import { registerMessage } from "../../../messaging/messageRouter";
 import { perfMark, perfSpan } from "../../utils/perfMarks";
 import {
-  focusTab,
   createTab,
   resetActiveTab,
   resetActiveTabRestart,
   setSurface,
 } from "../tabManagement";
 
-import { startAfterCountdown, startRecording } from "../recording/startRecording";
+import { startAfterCountdown } from "../recording/startRecording";
 import { noteCountdownStarted } from "../recording/countdownFallback";
 import { handleStopRecordingTab } from "../recording/stopRecording";
 import { sendChunks } from "../recording/sendChunks";
@@ -20,24 +19,16 @@ import { sendMessageRecord } from "../recording/sendMessageRecord";
 import { startRecorderSession } from "../recording/openRecorderTab";
 import { acquireStreamForOffscreen } from "../offscreen/acquireStream";
 import { registerProxyStorageHandlers } from "../offscreen/proxyStorageHandlers";
-import { ensureRemuxOffscreen } from "../offscreen/ensureRemuxOffscreen";
 import {
-  restartActiveTab,
   getCurrentTab,
   sendMessageTab,
-  getValidatedEditorTab,
-  setEditorTabReference,
 } from "../tabManagement";
 import {
   handleRestart,
 } from "../recording/restartRecording";
-import { checkRecording } from "../recording/checkRecording";
 import {
-  isPinned,
-  getPlatformInfo,
   checkAvailableMemory,
 } from "../utils/browserHelpers";
-import { requestDownload, downloadIndexedDB } from "../utils/downloadHelpers";
 import { checkRestore } from "../recording/restoreRecording";
 import { FIRST_CHUNK_WATCHDOG_ALARM, RECORDER_KEEPALIVE_ALARM } from "../alarms/alarmConstants";
 import { desktopCapture } from "../recording/desktopCapture";
@@ -53,9 +44,6 @@ import {
 } from "../recording/recordingHelpers";
 import { newChunk, clearAllRecordings } from "../recording/chunkHandler";
 import {
-  getDiagnosticLog,
-  getErrorSnapshot,
-  getStorageFlags,
   diagEvent,
 } from "../../utils/diagnosticLog";
 
@@ -63,27 +51,6 @@ const DEBUG_POSTSTOP = false;
 const STOP_RECORDING_TAB_DEBOUNCE_MS = 1200;
 let stopRecordingTabInFlight = false;
 let stopRecordingTabLastAt = 0;
-
-const ensureAudioOffscreen = async () => {
-  if (!chrome.offscreen) return false;
-  try {
-    const contexts = await chrome.runtime.getContexts({});
-    const hasAnyOffscreen = contexts.some(
-      (context) => context.contextType === "OFFSCREEN_DOCUMENT",
-    );
-    // reuse existing offscreen doc if any; Chrome only allows one per extension
-    if (hasAnyOffscreen) return true;
-    await chrome.offscreen.createDocument({
-      url: "audiooffscreen.html",
-      reasons: ["AUDIO_PLAYBACK"],
-      justification: "Play short UI beep sounds.",
-    });
-    return true;
-  } catch (error) {
-    console.warn("Failed to ensure audio offscreen document", error);
-    return false;
-  }
-};
 
 const logStopRecordingTabEvent = (message, sender) => {
   try {
@@ -314,91 +281,6 @@ export const setupHandlers = () => {
       return { ok: false, error: err?.message || String(err) };
     }
   });
-  // Forward a scene-create payload to the editor tab, which does the
-  // POST itself (same-origin cookie auth). Sidesteps the MV3 SW-fetch
-  // hang we hit when the cloud recorder tab tears down right after
-  // dispatching the request. The editor confirms via reply message.
-  registerMessage("forward-create-scene", async (message) => {
-    const { projectId, payload } = message || {};
-    if (!projectId || !payload) {
-      return { ok: false, error: "missing-projectId-or-payload" };
-    }
-    let validated = await getValidatedEditorTab({
-      expectedProjectId: projectId,
-      expectedKind: "editor",
-      reason: "forward-create-scene",
-    });
-    let openedTabId = null;
-    if (!validated.ok || !validated.tab?.id) {
-      // No editor tab; happens in multi-mode between scenes. Open one
-      // in the background as a same-origin proxy: same-origin POST is
-      // immune to the MV3 SW-fetch lifecycle hang we hit when posting
-      // bearer-auth from the SW alone. The tab stays open to serve
-      // subsequent scenes; finish-multi-recording will reuse/focus it.
-      const targetUrl = `${process.env.SCREENITY_APP_BASE}/editor/${projectId}/edit?load=true`;
-      try {
-        const tab = await chrome.tabs.create({
-          url: targetUrl,
-          active: false,
-        });
-        if (tab?.id) {
-          openedTabId = tab.id;
-          await setEditorTabReference({
-            tabId: tab.id,
-            tabUrl: targetUrl,
-            source: "forward-create-scene:auto-open",
-            expectedProjectId: projectId,
-          });
-          validated = { ok: true, tab: { id: tab.id }, reason: null };
-        }
-      } catch (err) {
-        return {
-          ok: false,
-          error: `failed-to-open-editor-tab:${err?.message || err}`,
-        };
-      }
-      if (!validated.tab?.id) {
-        return { ok: false, error: "no-editor-tab" };
-      }
-    }
-    const requestId =
-      (typeof crypto !== "undefined" && crypto.randomUUID?.()) ||
-      `scene-${Date.now()}-${Math.random().toString(16).slice(2, 8)}`;
-    // Editor tab was just opened by prepare-open-editor; the content
-    // script may not have mounted yet. Retry with backoff until it can
-    // receive messages, capped at ~10s total.
-    const backoffsMs = [0, 200, 400, 800, 1200, 1600, 2000, 2400, 2800];
-    let lastErr = null;
-    for (const wait of backoffsMs) {
-      if (wait > 0) {
-        await new Promise((r) => setTimeout(r, wait));
-      }
-      try {
-        const reply = await chrome.tabs.sendMessage(
-          validated.tab.id,
-          {
-            type: "proxy-create-scene",
-            projectId,
-            requestId,
-            payload,
-          },
-          // Target top frame only: content script also runs in any
-          // sub-iframes (manifest matches <all_urls>), and a postMessage
-          // from a sub-iframe doesn't bubble to the editor's top window.
-          { frameId: 0 },
-        );
-        return reply || { ok: false, error: "no-reply-from-editor" };
-      } catch (err) {
-        lastErr = err?.message || String(err);
-        if (!/Receiving end does not exist|Could not establish/i.test(lastErr)) {
-          // Different error; don't keep retrying.
-          break;
-        }
-      }
-    }
-    return { ok: false, error: lastErr || "tabs-sendMessage-failed" };
-  });
-
   registerMessage("offscreen-diag", async (message) => {
     console.warn("[InstructionsCrafter][OffscreenDiag]", message.source, message.payload);
     return { ok: true };
@@ -474,55 +356,6 @@ export const setupHandlers = () => {
     await clearRecordingSessionSafe("video-ready");
   });
 
-  // download-path remux request from sandbox; falls back to in-sandbox BufferTarget on failure
-  registerMessage("remux-request", async (message) => {
-    if (
-      !message?.requestId ||
-      !message?.inputFileName ||
-      !message?.outputFileName
-    ) {
-      return { ok: false, error: "invalid-remux-request-payload" };
-    }
-    try {
-      await ensureRemuxOffscreen();
-    } catch (err) {
-      return {
-        ok: false,
-        error: String(err?.message || err || "ensure-offscreen-failed"),
-      };
-    }
-    try {
-      // deterministic timeout so a wedged offscreen can't hang the caller forever
-      const REMUX_TIMEOUT_MS = 60_000;
-      let timeoutId = null;
-      try {
-        const response = await Promise.race([
-          chrome.runtime.sendMessage({
-            type: "remux-start",
-            requestId: message.requestId,
-            inputFileName: message.inputFileName,
-            outputFileName: message.outputFileName,
-          }),
-          new Promise((_, reject) => {
-            timeoutId = setTimeout(
-              () => reject(new Error("remux-offscreen-timeout")),
-              REMUX_TIMEOUT_MS,
-            );
-          }),
-        ]);
-        return response || { ok: false, error: "no-offscreen-response" };
-      } finally {
-        if (timeoutId) clearTimeout(timeoutId);
-      }
-    } catch (err) {
-      return {
-        ok: false,
-        error: String(err?.message || err || "forward-to-offscreen-failed"),
-      };
-    }
-  });
-
-  registerMessage("start-recording", (message) => startRecording("start-recording-message"));
   registerMessage("countdown-finished", async (message) => {
     const { recording, restarting, pendingRecording } =
       await chrome.storage.local.get([
@@ -568,7 +401,6 @@ export const setupHandlers = () => {
     startAfterCountdown("countdown-finished");
     return { ok: true };
   });
-  registerMessage("restarted", (message) => restartActiveTab(message));
   const sendChunksToSandbox = async (sender) => {
     perfMark("BG.handlers sendChunksToSandbox.enter", {
       senderTab: sender?.tab?.id || null,
@@ -712,9 +544,6 @@ export const setupHandlers = () => {
     noteCountdownStarted();
   });
   registerMessage("diag-countdown-cancelled", () => diagEvent("countdown-cancelled"));
-  registerMessage("diag-editor-ready", (message) =>
-    diagEvent("editor-load-ready", { path: message?.path || null }),
-  );
   // prefix allowlist so a compromised context can't spoof lifecycle events
   registerMessage("diag-forward", (message) => {
     const ev = typeof message?.event === "string" ? message.event : null;
@@ -723,41 +552,11 @@ export const setupHandlers = () => {
     if (!allowedPrefixes.some((p) => ev.startsWith(p))) return;
     diagEvent(ev, message?.data ?? null);
   });
-  registerMessage("open-editor-recovery", async () => {
-    const { editorRecoveryUrl } = await chrome.storage.local.get(["editorRecoveryUrl"]);
-    if (!editorRecoveryUrl) return;
-    chrome.storage.local.remove(["editorRecoveryUrl", "editorRecoveryAt"]);
-    chrome.tabs.create({ url: editorRecoveryUrl, active: true });
-  });
   registerMessage("recording-error", async (message) => {
     await handleRecordingError(message);
     await clearRecordingSessionSafe("recording-error", {
       error: message?.error || null,
     });
-  });
-  // camera bubble failed but recording is live; surface as toast, never tear down
-  registerMessage("camera-bubble-unavailable", async (message) => {
-    try {
-      const { tabRecordedID, recordingUiTabId } = await chrome.storage.local.get([
-        "tabRecordedID",
-        "recordingUiTabId",
-      ]);
-      const target = tabRecordedID || recordingUiTabId;
-      if (target) {
-        sendMessageTab(target, {
-          type: "show-toast",
-          message:
-            chrome.i18n.getMessage("cameraUnavailableToast") ||
-            "Camera disconnected. Still recording your screen.",
-          timeout: 6000,
-        }).catch((err) => {
-          diagEvent("warning", {
-            note: "camera-unavailable-toast undelivered",
-            err: String(err).slice(0, 80),
-          });
-        });
-      }
-    } catch {}
   });
   registerMessage("on-get-permissions", (message) =>
     handleOnGetPermissions(message),
@@ -769,7 +568,6 @@ export const setupHandlers = () => {
       return await handleRecordingComplete(message, sender);
     },
   );
-  registerMessage("check-recording", (message) => checkRecording(message));
   registerMessage("open-download-mp4", async () => {
     const tab = await createTab("download.html", true, true);
     if (!tab?.id) return;
@@ -785,23 +583,6 @@ export const setupHandlers = () => {
   registerMessage("pip-ended", () => handlePip(false));
   registerMessage("pip-started", () => handlePip(true));
   registerMessage("clear-recordings", () => clearAllRecordings());
-  registerMessage("focus-this-tab", (message, sender) =>
-    focusTab(sender.tab.id),
-  );
-  registerMessage("indexed-db-download", (message) =>
-    downloadIndexedDB(message),
-  );
-  registerMessage("get-platform-info", async () => await getPlatformInfo());
-  registerMessage(
-    "get-diagnostic-log",
-    async (_message, _sender, sendResponse) => {
-      const log = await getDiagnosticLog();
-      const errors = await getErrorSnapshot();
-      const flags = await getStorageFlags();
-      sendResponse({ log, errors, flags });
-      return true;
-    },
-  );
   registerMessage("check-restore", async (message, sender, sendResponse) => {
     const response = await checkRestore();
     sendResponse(response);
@@ -815,16 +596,11 @@ export const setupHandlers = () => {
       return true;
     },
   );
-  registerMessage("is-pinned", async () => await isPinned());
-
   // prevent Chrome from discarding the CloudRecorder tab while recording
   registerMessage("set-tab-auto-discardable", (message, sender) =>
     setTabAutoDiscardableSafe(message, sender),
   );
 
-  registerMessage("request-download", (message) =>
-    requestDownload(message.base64, message.title),
-  );
   registerMessage("available-memory", async () => {
     return await checkAvailableMemory();
   });
@@ -836,20 +612,6 @@ export const setupHandlers = () => {
     ),
   );
   registerMessage("add-alarm-listener", (payload) => addAlarmListener(payload));
-  registerMessage(
-    "create-video-project",
-    async (message, sender, sendResponse) => {
-      sendResponse({ success: false, message: "Cloud features disabled" });
-      return true;
-    },
-  );
-  registerMessage("handle-login", async () => {
-    console.warn("Cloud features disabled, cannot handle login");
-  });
-  registerMessage("handle-logout", async (message, sender, sendResponse) => {
-    sendResponse({ success: false, message: "Cloud features disabled" });
-    return true;
-  });
 
   function getMonitorForWindow(message, sender, sendResponse) {
     chrome.system.display.getInfo((displays) => {
@@ -898,17 +660,6 @@ export const setupHandlers = () => {
 
   registerMessage("get-monitor-for-window", getMonitorForWindow);
 
-  registerMessage("fetch-videos", async (message, sender, sendResponse) => {
-    sendResponse({ success: false, message: "Cloud features disabled" });
-    return true;
-  });
-  registerMessage(
-    "check-storage-quota",
-    async (message, sender, sendResponse) => {
-      sendResponse({ success: false, error: "Cloud features disabled" });
-      return true;
-    },
-  );
   registerMessage("time-warning", async (message) => {
     const tab = await getCurrentTab();
     if (tab?.id) {
@@ -925,12 +676,6 @@ export const setupHandlers = () => {
       }).catch((e) => console.warn("Failed to send time-stopped to tab:", e));
     }
   });
-  registerMessage("prepare-open-editor", async (message) => {
-    console.warn("Cloud features disabled");
-  });
-  registerMessage("prepare-editor-existing", async (message) => {
-    console.warn("Cloud features disabled");
-  });
   registerMessage("preparing-recording", async () => {
     // getCurrentTab can return the pinned recorder tab; prefer stored activeTab
     const { activeTab } = await chrome.storage.local.get(["activeTab"]);
@@ -942,24 +687,6 @@ export const setupHandlers = () => {
         console.warn("Failed to send preparing-recording to tab:", e),
       );
     }
-  });
-  registerMessage("editor-ready", async (message) => {
-    console.warn("Cloud features disabled");
-  });
-  registerMessage("finish-multi-recording", async () => {
-    console.warn("Cloud features disabled");
-  });
-  registerMessage("handle-reactivate", async () => {
-    console.warn("Cloud features disabled");
-  });
-  registerMessage("handle-upgrade", async () => {
-    console.warn("Cloud features disabled");
-  });
-  registerMessage("open-account-settings", async () => {
-    console.warn("Cloud features disabled");
-  });
-  registerMessage("open-support", async () => {
-    console.warn("Cloud features disabled");
   });
   registerMessage("clear-recording-alarm", async () => {
     await chrome.alarms.clear("recording-alarm");
@@ -981,18 +708,6 @@ export const setupHandlers = () => {
     sendResponse({ tabId: sender?.tab?.id ?? null });
     return true;
   });
-  registerMessage("play-beep", async (message, sender, sendResponse) => {
-    const ok = await ensureAudioOffscreen();
-    if (ok) {
-      chrome.runtime.sendMessage({ type: "play-beep-offscreen" });
-    }
-    if (sendResponse) sendResponse({ ok });
-    return true;
-  });
-  registerMessage("refresh-auth", async () => ({
-    success: false,
-    message: "Cloud features disabled",
-  }));
   registerMessage("sync-recording-state", async (message, sendResponse) => {
     const {
       recording,

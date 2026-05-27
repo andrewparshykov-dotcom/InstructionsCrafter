@@ -1,22 +1,3 @@
-export const isPinned = async () => {
-  try {
-    const userSettings = await chrome.action.getUserSettings();
-    return userSettings.isOnToolbar;
-  } catch (error) {
-    console.error("Failed to check if the extension is pinned:", error.message);
-    return false;
-  }
-};
-
-export const getPlatformInfo = async () => {
-  try {
-    return await chrome.runtime.getPlatformInfo();
-  } catch (error) {
-    console.error("Failed to retrieve platform info:", error.message);
-    return null;
-  }
-};
-
 export const checkAvailableMemory = async () => {
   try {
     const data = await navigator.storage.estimate();
