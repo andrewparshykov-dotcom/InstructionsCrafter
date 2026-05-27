@@ -1,4 +1,3 @@
-import { removeTab } from "../tabManagement";
 import { executeScripts } from "../utils/executeScripts";
 
 export const onInstalledListener = () => {
@@ -33,11 +32,6 @@ export const onInstalledListener = () => {
     // everyone, including users who had the Screenity-era `true` in storage.
     chrome.storage.local.set({ systemAudio: false });
     chrome.storage.local.set({ offscreenRecording: false });
-
-    const { backupTab } = await chrome.storage.local.get(["backupTab"]);
-    if (backupTab) {
-      removeTab(backupTab);
-    }
 
     // update only; manifest auto-injects on page load. install would double-mount React on dev.
     if (details.reason === "update") {
