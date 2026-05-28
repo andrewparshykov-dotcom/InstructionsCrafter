@@ -187,6 +187,67 @@
       .status.visible {
         opacity: 1;
       }
+
+      .about {
+        margin-top: 80px;
+        padding-top: 48px;
+        border-top: 1px solid var(--hairline);
+      }
+
+      .about-headline {
+        font-family: var(--font-display);
+        font-size: 32px;
+        font-weight: 400;
+        line-height: 1.1;
+        letter-spacing: -0.01em;
+        color: var(--ink);
+        margin: 0 0 20px;
+      }
+
+      .about-body {
+        font-family: var(--font-body);
+        font-size: 15px;
+        line-height: 1.6;
+        color: var(--mid);
+        margin: 0 0 16px;
+        max-width: 480px;
+      }
+
+      .about-body a,
+      .about-meta dd a {
+        color: var(--accent);
+        text-decoration: none;
+        border-bottom: 1px solid var(--accent-soft);
+        transition: border-color 0.15s ease;
+      }
+      .about-body a:hover,
+      .about-meta dd a:hover {
+        border-bottom-color: var(--accent);
+      }
+
+      .about-meta {
+        display: grid;
+        grid-template-columns: 120px 1fr;
+        gap: 10px 20px;
+        margin: 32px 0 0;
+        font-family: var(--font-body);
+        font-size: 14px;
+        line-height: 1.5;
+      }
+      .about-meta dt {
+        font-family: var(--font-mono);
+        font-size: 11px;
+        font-weight: 500;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--mid);
+        padding-top: 3px;
+      }
+      .about-meta dd {
+        margin: 0;
+        color: var(--ink);
+        word-break: break-word;
+      }
     </style>
   </head>
   <body>
@@ -235,6 +296,36 @@
         <button id="save" type="button">Save</button>
         <span class="status" id="status">Saved.</span>
       </div>
+
+      <section class="about">
+        <header class="eyebrow">
+          INSTRUCTIONSCRAFTER<span class="eyebrow-dot">·</span>ABOUT
+        </header>
+
+        <h2 class="about-headline">About this extension.</h2>
+
+        <p class="about-body">
+          InstructionsCrafter turns screen recordings with voice narration
+          into Microsoft Word step-by-step instructions.
+        </p>
+
+        <p class="about-body">
+          The screen and audio capture is built on a modified version of
+          <a href="https://github.com/alyssaxuu/screenity" target="_blank" rel="noopener">Screenity</a>
+          by Alyssa X, released under the GNU General Public License v3.
+        </p>
+
+        <dl class="about-meta">
+          <dt>Version</dt>
+          <dd id="version">—</dd>
+          <dt>License</dt>
+          <dd><a href="https://www.gnu.org/licenses/gpl-3.0.html" target="_blank" rel="noopener">GPLv3</a></dd>
+          <dt>Source code</dt>
+          <dd><a href="https://github.com/andrewparshykov-dotcom/InstructionsCrafter" target="_blank" rel="noopener">github.com/andrewparshykov-dotcom/InstructionsCrafter</a></dd>
+          <dt>Upstream</dt>
+          <dd><a href="https://github.com/alyssaxuu/screenity" target="_blank" rel="noopener">github.com/alyssaxuu/screenity</a></dd>
+        </dl>
+      </section>
     </main>
   </body>
 </html>

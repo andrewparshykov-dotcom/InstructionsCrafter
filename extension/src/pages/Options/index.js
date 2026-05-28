@@ -22,3 +22,8 @@ saveButton.addEventListener("click", () => {
     setTimeout(() => { status.classList.remove("visible"); }, 2000);
   });
 });
+
+const versionEl = document.getElementById("version");
+if (versionEl) {
+  versionEl.textContent = chrome.runtime.getManifest().version;
+}
