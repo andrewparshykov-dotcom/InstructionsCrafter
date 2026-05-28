@@ -319,26 +319,6 @@
     "message": "录制已因超过 90 分钟限制而停止",
     "description": "Toast message shown when the recording limit is reached"
   },
-  "welcomePopupCloudFeature1": {
-    "message": "云端存储，一键分享链接",
-    "description": "Feature 1 for the cloud storage in the welcome popup"
-  },
-  "welcomePopupCloudFeature2": {
-    "message": "将多个片段合成一个故事",
-    "description": "Feature 2 for the cloud storage in the welcome popup"
-  },
-  "welcomePopupCloudFeature3": {
-    "message": "点击智能缩放（或自定义缩放）",
-    "description": "Feature 3 for the cloud storage in the welcome popup"
-  },
-  "welcomePopupCloudFeature4": {
-    "message": "添加模板、字幕、布局……",
-    "description": "Feature 4 for the cloud storage in the welcome popup"
-  },
-  "welcomePopupCloudFeature5": {
-    "message": "自定义背景和样机",
-    "description": "Feature 5 for the cloud storage in the welcome popup"
-  },
   "webcodecsFailedOffToast": {
     "message": "极速 MP4 失败 — 关闭",
     "description": "WebCodecs failure auto-disable toast"

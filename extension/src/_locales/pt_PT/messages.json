@@ -319,26 +319,6 @@
     "message": "Gravação interrompida ao atingir o limite de 90 minutos",
     "description": "Toast message shown when the recording limit is reached"
   },
-  "welcomePopupCloudFeature1": {
-    "message": "Armazenamento na cloud, partilha por ligação",
-    "description": "Feature 1 for the cloud storage in the welcome popup"
-  },
-  "welcomePopupCloudFeature2": {
-    "message": "Combina vários clips como capítulos de uma história",
-    "description": "Feature 2 for the cloud storage in the welcome popup"
-  },
-  "welcomePopupCloudFeature3": {
-    "message": "Zooms inteligentes com clique (ou adiciona os teus!)",
-    "description": "Feature 3 for the cloud storage in the welcome popup"
-  },
-  "welcomePopupCloudFeature4": {
-    "message": "Adiciona modelos, legendas, mockups...",
-    "description": "Feature 4 for the cloud storage in the welcome popup"
-  },
-  "welcomePopupCloudFeature5": {
-    "message": "Fundos e disposição da câmara personalizados",
-    "description": "Feature 5 for the cloud storage in the welcome popup"
-  },
   "webcodecsFailedOffToast": {
     "message": "Fast MP4 falhou — off",
     "description": "WebCodecs failure auto-disable toast"

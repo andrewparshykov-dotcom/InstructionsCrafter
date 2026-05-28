@@ -319,26 +319,6 @@
     "message": "已達 90 分鐘上限，錄製已停止",
     "description": "Toast message shown when the recording limit is reached"
   },
-  "welcomePopupCloudFeature1": {
-    "message": "雲端儲存，一鍵分享影片連結",
-    "description": "Feature 1 for the cloud storage in the welcome popup"
-  },
-  "welcomePopupCloudFeature2": {
-    "message": "將多個片段合併成完整影片",
-    "description": "Feature 2 for the cloud storage in the welcome popup"
-  },
-  "welcomePopupCloudFeature3": {
-    "message": "點擊智慧縮放（也可以自訂）",
-    "description": "Feature 3 for the cloud storage in the welcome popup"
-  },
-  "welcomePopupCloudFeature4": {
-    "message": "加入範本、字幕、版面配置⋯",
-    "description": "Feature 4 for the cloud storage in the welcome popup"
-  },
-  "welcomePopupCloudFeature5": {
-    "message": "自訂背景與模擬圖",
-    "description": "Feature 5 for the cloud storage in the welcome popup"
-  },
   "webcodecsFailedOffToast": {
     "message": "快速 MP4 失敗 — 關閉",
     "description": "WebCodecs failure auto-disable toast"

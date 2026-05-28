@@ -319,26 +319,6 @@
     "message": "90 मिनट की सीमा के कारण रिकॉर्डिंग बंद हो गई",
     "description": "Toast message shown when the recording limit is reached"
   },
-  "welcomePopupCloudFeature1": {
-    "message": "क्लाउड स्टोरेज, लिंक के साथ वीडियो साझा करें",
-    "description": "Feature 1 for the cloud storage in the welcome popup"
-  },
-  "welcomePopupCloudFeature2": {
-    "message": "कई क्लिप को एक कहानी में जोड़ें",
-    "description": "Feature 2 for the cloud storage in the welcome popup"
-  },
-  "welcomePopupCloudFeature3": {
-    "message": "क्लिक पर स्मार्ट ज़ूम (या अपना जोड़ें!)",
-    "description": "Feature 3 for the cloud storage in the welcome popup"
-  },
-  "welcomePopupCloudFeature4": {
-    "message": "टेम्पलेट, कैप्शन, लेआउट जोड़ें...",
-    "description": "Feature 4 for the cloud storage in the welcome popup"
-  },
-  "welcomePopupCloudFeature5": {
-    "message": "कस्टम बैकग्राउंड और मॉकअप",
-    "description": "Feature 5 for the cloud storage in the welcome popup"
-  },
   "webcodecsFailedOffToast": {
     "message": "Fast MP4 विफल — ऑफ",
     "description": "WebCodecs failure auto-disable toast"

@@ -319,26 +319,6 @@
     "message": "Aufnahme wegen 90-Minuten-Limit gestoppt",
     "description": "Toast message shown when the recording limit is reached"
   },
-  "welcomePopupCloudFeature1": {
-    "message": "Cloud-Speicher, teile Videos per Link",
-    "description": "Feature 1 for the cloud storage in the welcome popup"
-  },
-  "welcomePopupCloudFeature2": {
-    "message": "Mehrere Clips zu einer Story kombinieren",
-    "description": "Feature 2 for the cloud storage in the welcome popup"
-  },
-  "welcomePopupCloudFeature3": {
-    "message": "Intelligente Zooms per Klick (oder selbst hinzufügen!)",
-    "description": "Feature 3 for the cloud storage in the welcome popup"
-  },
-  "welcomePopupCloudFeature4": {
-    "message": "Vorlagen, Untertitel, Layouts hinzufügen...",
-    "description": "Feature 4 for the cloud storage in the welcome popup"
-  },
-  "welcomePopupCloudFeature5": {
-    "message": "Eigene Hintergründe und Mockups",
-    "description": "Feature 5 for the cloud storage in the welcome popup"
-  },
   "webcodecsFailedOffToast": {
     "message": "Fast MP4 Fehler — aus",
     "description": "WebCodecs failure auto-disable toast"

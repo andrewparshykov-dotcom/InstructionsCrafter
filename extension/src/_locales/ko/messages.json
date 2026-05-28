@@ -319,26 +319,6 @@
     "message": "90분 녹화 제한으로 녹화가 종료되었습니다",
     "description": "Toast message shown when the recording limit is reached"
   },
-  "welcomePopupCloudFeature1": {
-    "message": "클라우드 저장소, 링크로 공유",
-    "description": "Feature 1 for the cloud storage in the welcome popup"
-  },
-  "welcomePopupCloudFeature2": {
-    "message": "여러 클립을 하나의 스토리로 결합",
-    "description": "Feature 2 for the cloud storage in the welcome popup"
-  },
-  "welcomePopupCloudFeature3": {
-    "message": "클릭 시 스마트 줌 (또는 직접 추가!)",
-    "description": "Feature 3 for the cloud storage in the welcome popup"
-  },
-  "welcomePopupCloudFeature4": {
-    "message": "템플릿, 자막, 레이아웃 추가...",
-    "description": "Feature 4 for the cloud storage in the welcome popup"
-  },
-  "welcomePopupCloudFeature5": {
-    "message": "맞춤형 배경 및 목업",
-    "description": "Feature 5 for the cloud storage in the welcome popup"
-  },
   "webcodecsFailedOffToast": {
     "message": "Fast MP4 실패 — 꺼짐",
     "description": "WebCodecs failure auto-disable toast"

@@ -319,26 +319,6 @@
     "message": "Rekaman dihentikan karena batas 90 menit",
     "description": "Toast message shown when the recording limit is reached"
   },
-  "welcomePopupCloudFeature1": {
-    "message": "Penyimpanan cloud, bagikan video dengan tautan",
-    "description": "Feature 1 for the cloud storage in the welcome popup"
-  },
-  "welcomePopupCloudFeature2": {
-    "message": "Gabungkan beberapa klip jadi satu cerita",
-    "description": "Feature 2 for the cloud storage in the welcome popup"
-  },
-  "welcomePopupCloudFeature3": {
-    "message": "Zoom pintar saat klik (atau tambahkan sendiri!)",
-    "description": "Feature 3 for the cloud storage in the welcome popup"
-  },
-  "welcomePopupCloudFeature4": {
-    "message": "Tambahkan template, teks, tata letak...",
-    "description": "Feature 4 for the cloud storage in the welcome popup"
-  },
-  "welcomePopupCloudFeature5": {
-    "message": "Latar belakang dan mockup khusus",
-    "description": "Feature 5 for the cloud storage in the welcome popup"
-  },
   "webcodecsFailedOffToast": {
     "message": "Fast MP4 gagal — mati",
     "description": "WebCodecs failure auto-disable toast"

@@ -319,26 +319,6 @@
     "message": "Kayıt 90 dakikalık sınıra ulaştığı için durduruldu",
     "description": "Toast message shown when the recording limit is reached"
   },
-  "welcomePopupCloudFeature1": {
-    "message": "Bulut depolama, bağlantıyla paylaş",
-    "description": "Feature 1 for the cloud storage in the welcome popup"
-  },
-  "welcomePopupCloudFeature2": {
-    "message": "Birden fazla klibi tek bir hikâyede birleştir",
-    "description": "Feature 2 for the cloud storage in the welcome popup"
-  },
-  "welcomePopupCloudFeature3": {
-    "message": "Tıklamada akıllı yakınlaştırmalar (ya da kendi yakınlaştırmanı ekle!)",
-    "description": "Feature 3 for the cloud storage in the welcome popup"
-  },
-  "welcomePopupCloudFeature4": {
-    "message": "Şablonlar, altyazılar, düzenler ekle...",
-    "description": "Feature 4 for the cloud storage in the welcome popup"
-  },
-  "welcomePopupCloudFeature5": {
-    "message": "Özel arka planlar ve maketler",
-    "description": "Feature 5 for the cloud storage in the welcome popup"
-  },
   "webcodecsFailedOffToast": {
     "message": "Fast MP4 hata — kapalı",
     "description": "WebCodecs failure auto-disable toast"
