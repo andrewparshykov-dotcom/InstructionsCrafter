@@ -1,4 +1,4 @@
-import { sendMessageTab, clearEditorTabReference } from "../tabManagement";
+import { sendMessageTab } from "../tabManagement";
 import { removeTab } from "../tabManagement/removeTab";
 import { sendMessageRecord } from "../recording/sendMessageRecord";
 import { isRecordingStartInFlight } from "../recording/startRecording";
@@ -17,7 +17,6 @@ export const onTabRemovedListener = () => {
         "recordingUiTabId",
         "activeTab",
         "recorderSession",
-        "editorTab",
         "sandboxTab",
       ]);
       const {
@@ -29,24 +28,15 @@ export const onTabRemovedListener = () => {
         recordingUiTabId,
         activeTab,
         recorderSession,
-        editorTab,
         sandboxTab,
       } = flags;
       // `recording` isn't true yet during start, so without this guard
       // the cleanup below tears down the recorder tab being prepared.
       const startInFlight = isRecordingStartInFlight(flags);
 
-      if (tabId === editorTab) {
-        await clearEditorTabReference("editor-tab-closed", { tabId });
-      }
-
-      // close orphaned recorder.html when editor/sandbox closes.
-      // stopRecording opens as sandboxTab (not editorTab), so check both.
-      const isEditorOrSandbox = tabId === editorTab || tabId === sandboxTab;
-      if (isEditorOrSandbox) {
-        if (tabId === sandboxTab) {
-          chrome.storage.local.set({ sandboxTab: null });
-        }
+      // close orphaned recorder.html when sandbox closes.
+      if (tabId === sandboxTab) {
+        chrome.storage.local.set({ sandboxTab: null });
         const isStillRecording =
           recording ||
           (recorderSession && recorderSession.status === "recording");

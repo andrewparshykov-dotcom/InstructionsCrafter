@@ -1,9 +1,4 @@
-import {
-  sendMessageTab,
-  getCurrentTab,
-  setEditorTabReference,
-  clearEditorTabReference,
-} from "../tabManagement";
+import { sendMessageTab, getCurrentTab } from "../tabManagement";
 import { sendMessageRecord } from "../recording/sendMessageRecord.js";
 
 const handleTabMessaging = async (tab) => {
@@ -51,35 +46,11 @@ const handleTabMessaging = async (tab) => {
 };
 
 const openPlaygroundOrPopup = async (tab) => {
-  const editorUrlPattern =
-    /https:\/\/app\.screenity\.io\/editor\/([^\/]+)(\/edit)?\/?/;
-
-  if (tab.url && editorUrlPattern.test(tab.url)) {
-    const match = tab.url.match(editorUrlPattern);
-    const projectIdFromUrl = match?.[2] || null;
-    await setEditorTabReference({
-      tabId: tab.id,
-      tabUrl: tab.url,
-      source: "action-click-editor",
-      expectedProjectId: projectIdFromUrl,
-    });
-
-    await chrome.storage.local.set({
-      projectId: null,
-      recordingToScene: false,
-      activeSceneId: null,
-    });
-  } else {
-    await clearEditorTabReference("action-click-non-editor-tab", {
-      tabId: tab.id,
-      tabUrl: tab.url,
-    });
-    await chrome.storage.local.set({
-      projectId: null,
-      recordingToScene: false,
-      activeSceneId: null, // reset scene too if needed
-    });
-  }
+  await chrome.storage.local.set({
+    projectId: null,
+    recordingToScene: false,
+    activeSceneId: null,
+  });
 
   const forbiddenURLs = [
     "chrome://",

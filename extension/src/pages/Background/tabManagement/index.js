@@ -9,13 +9,6 @@ import {
   restartActiveTab,
 } from "./resetActiveTab";
 import { setSurface } from "./setSurface";
-import {
-  parseEditorTargetUrl,
-  setEditorTabReference,
-  clearEditorTabReference,
-  getValidatedEditorTab,
-  resolveEditorTabForTarget,
-} from "./editorTab";
 
 export {
   createTab,
@@ -27,9 +20,4 @@ export {
   resetActiveTabRestart,
   restartActiveTab,
   setSurface,
-  parseEditorTargetUrl,
-  setEditorTabReference,
-  clearEditorTabReference,
-  getValidatedEditorTab,
-  resolveEditorTabForTarget,
 };
