@@ -186,15 +186,8 @@ const config = {
   module: {
     rules: [
       {
-        test: /\.(css|scss)$/,
-        use: [
-          { loader: "style-loader" },
-          { loader: "css-loader" },
-          {
-            loader: "sass-loader",
-            options: { sourceMap: true },
-          },
-        ],
+        test: /\.css$/,
+        use: [{ loader: "style-loader" }, { loader: "css-loader" }],
       },
       {
         test: new RegExp(`.(${fileExtensions.join("|")})$`),
