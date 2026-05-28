@@ -269,7 +269,12 @@ export const handleRecordingError = async (request) => {
     });
   } catch {}
 
-  sendMessageRecord({ type: "recording-error" }).then(() => {
+  sendMessageRecord({
+    type: "recording-error",
+    error: request?.error,
+    why: request?.why,
+    errorCode,
+  }).then(() => {
     const candidateTabs = [activeTab, recordingUiTabId, tabRecordedID].filter(
       (id, idx, arr) => Number.isInteger(id) && arr.indexOf(id) === idx,
     );

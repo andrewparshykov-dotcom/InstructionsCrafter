@@ -239,7 +239,7 @@ export const setupHandlers = () => {
     }
   });
 
-  registerMessage("recording-error", () => {
+  registerMessage("recording-error", (message) => {
     setStartFlowOutcome("error");
     setContentState((prev) => ({
       ...prev,
@@ -251,6 +251,16 @@ export const setupHandlers = () => {
       timer: 0,
       pipEnded: false,
     }));
+    // Deliberate share-picker cancel is a user choice, not an error — skip
+    // the modal. Match on the `why` prefix because the startStreaming()
+    // catch-block also sets error: "cancel-modal" for genuine failures
+    // that we DO want to surface.
+    if (
+      message?.error === "cancel-modal" &&
+      (message?.why || "").startsWith("User cancelled")
+    ) {
+      return;
+    }
     const state = getState();
     if (state && typeof state.openModal === "function") {
       state.openModal(
