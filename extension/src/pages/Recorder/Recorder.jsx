@@ -153,11 +153,8 @@ const clampQualityValue = (value, maxValue) => {
 
 const getFreeCaptureCaps = async () => {
   try {
-    const { isLoggedIn, isSubscribed } = await chrome.storage.local.get([
-      "isLoggedIn",
-      "isSubscribed",
-    ]);
-    const isPro = Boolean(isLoggedIn && isSubscribed);
+    const { isLoggedIn } = await chrome.storage.local.get(["isLoggedIn"]);
+    const isPro = Boolean(isLoggedIn);
     return {
       isPro,
       maxQuality: "1080p",

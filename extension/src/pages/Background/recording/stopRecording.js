@@ -98,10 +98,9 @@ export const stopRecording = async () => {
   chrome.action.setIcon({ path: "assets/icon-34.png" });
   // await the clear so a quick subsequent restart can't race startRecording's gate
   await chrome.storage.local.set({ restarting: false });
-  const { recordingStartTime, isSubscribed, paused, pausedAt, totalPausedMs, recordingDuration: storedDuration } =
+  const { recordingStartTime, paused, pausedAt, totalPausedMs, recordingDuration: storedDuration } =
     await chrome.storage.local.get([
       "recordingStartTime",
-      "isSubscribed",
       "paused",
       "pausedAt",
       "totalPausedMs",
@@ -129,7 +128,7 @@ export const stopRecording = async () => {
   }
   const maxDuration = 7 * 60 * 1000;
 
-  diagEvent("stop", { duration, isSubscribed: Boolean(isSubscribed) });
+  diagEvent("stop", { duration });
 
   // single batched write; splitting risks partial cleanup on storage failure
   await chrome.storage.local.set({
@@ -194,10 +193,7 @@ export const stopRecording = async () => {
     chrome.storage.local.set({ completingRecordingTab: recordingTab });
   }
 
-  if (isSubscribed) {
-    discardOffscreenDocuments();
-    chrome.storage.local.remove(["recordingMeta"]);
-  } else if (postStopEditorOpening || postStopEditorOpened) {
+  if (postStopEditorOpening || postStopEditorOpened) {
     // editor already opened by stop-recording-tab flow; avoid duplicate
   } else if (hasWebCodecs) {
     diagEvent("editor-open", { type: "editorwebcodecs" });
@@ -427,7 +423,6 @@ export const handleStopRecordingTab = async (request) => {
   // batched: each unbatched get adds ~1s when storage queue backs up during stop
   const endStorageGet1 = perfSpan("BG.stopRecording storage-get-batch");
   const {
-    isSubscribed,
     recordingStartTime,
     paused,
     pausedAt,
@@ -436,7 +431,6 @@ export const handleStopRecordingTab = async (request) => {
     fastRecorderActiveRecordingId,
     lastRecordingBackendRef,
   } = await chrome.storage.local.get([
-    "isSubscribed",
     "recordingStartTime",
     "paused",
     "pausedAt",
@@ -474,8 +468,6 @@ export const handleStopRecordingTab = async (request) => {
     chrome.storage.local.set({ recordingDuration: stopTabDuration });
   }
 
-  perfMark("BG.stopRecording pre-isSubscribed-branch", { isSubscribed: Boolean(isSubscribed) });
-  if (!isSubscribed) {
     const recordingId =
       fastRecorderActiveRecordingId ||
       `${Date.now()}-${Math.random().toString(16).slice(2, 8)}`;
@@ -696,7 +688,6 @@ export const handleStopRecordingTab = async (request) => {
           });
         });
       }
-    }
 
   (async () => {
     const STOP_ACK_TIMEOUT_MS = 3000;
