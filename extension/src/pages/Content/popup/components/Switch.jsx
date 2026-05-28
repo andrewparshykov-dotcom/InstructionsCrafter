@@ -18,14 +18,11 @@ export const BaseSwitch = ({ value, checked, onChange }) => (
 const Switch = (props) => {
   const [contentState, setContentState] = useContext(contentStateContext);
   const switchRef = useRef(null);
-  const switchId = props.anchorId || props.value || props.name;
-  const switchRowId =
-    props.rowAnchorId ||
-    (props.anchorId ? `${props.anchorId}-row` : undefined);
+  const switchId = props.value || props.name;
 
   return (
     <form>
-      <div className="SwitchRow" id={switchRowId}>
+      <div className="SwitchRow">
         <label className="Label" htmlFor={switchId} style={{ paddingRight: 15 }}>
           {props.label}
         </label>
