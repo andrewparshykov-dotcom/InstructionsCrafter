@@ -398,8 +398,5 @@
   },
   "recordingFailedModalDescription": {
     "message": "Sesuatu menghalangi rekaman untuk dimulai. Silakan coba lagi. Jika hal ini terus terjadi, hubungi Andrew."
-  },
-  "cameraUnavailableToast": {
-    "message": "Kamera terputus. Perekaman layar tetap berjalan."
   }
 }

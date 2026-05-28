@@ -398,8 +398,5 @@
   },
   "recordingFailedModalDescription": {
     "message": "Algo impediu o início da gravação. Tenta novamente. Se continuar a acontecer, fala com Andrew."
-  },
-  "cameraUnavailableToast": {
-    "message": "Câmara desligada. A gravação do ecrã continua."
   }
 }

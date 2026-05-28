@@ -398,8 +398,5 @@
   },
   "recordingFailedModalDescription": {
     "message": "Qualcosa ha impedito l'avvio della registrazione. Riprova. Se continua a succedere, scrivi a Andrew."
-  },
-  "cameraUnavailableToast": {
-    "message": "Fotocamera disconnessa. La registrazione dello schermo continua."
   }
 }

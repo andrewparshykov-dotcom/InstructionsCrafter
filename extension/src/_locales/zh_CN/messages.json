@@ -398,8 +398,5 @@
   },
   "recordingFailedModalDescription": {
     "message": "录制未能开始。请重试。如果问题持续出现，请联系 Andrew。"
-  },
-  "cameraUnavailableToast": {
-    "message": "摄像头已断开。屏幕录制继续。"
   }
 }

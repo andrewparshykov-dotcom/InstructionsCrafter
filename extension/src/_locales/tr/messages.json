@@ -398,8 +398,5 @@
   },
   "recordingFailedModalDescription": {
     "message": "Bir şey kaydın başlamasını engelledi. Lütfen tekrar deneyin. Sorun devam ederse Andrew'a ulaşın."
-  },
-  "cameraUnavailableToast": {
-    "message": "Kamera bağlantısı kesildi. Ekran kaydı devam ediyor."
   }
 }

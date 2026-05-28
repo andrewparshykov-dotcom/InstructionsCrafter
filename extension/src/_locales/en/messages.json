@@ -402,9 +402,5 @@
   "stopAckTimeoutToast": {
     "message": "Saving is taking longer than expected. Your captured data is safe. The editor will open shortly.",
     "description": "Toast shown when the recorder does not acknowledge the stop request within a few seconds"
-  },
-  "cameraUnavailableToast": {
-    "message": "Camera disconnected. Still recording your screen.",
-    "description": "Toast shown when the camera bubble fails during an active recording but the screen recording continues"
   }
 }

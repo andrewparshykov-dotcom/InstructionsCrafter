@@ -398,8 +398,5 @@
   },
   "recordingFailedModalDescription": {
     "message": "Coś przeszkodziło w rozpoczęciu nagrywania. Spróbuj ponownie. Jeśli problem się powtarza, napisz do Andrew."
-  },
-  "cameraUnavailableToast": {
-    "message": "Kamera odłączona. Nagrywanie ekranu trwa dalej."
   }
 }

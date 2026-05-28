@@ -398,8 +398,5 @@
   },
   "recordingFailedModalDescription": {
     "message": "Щось завадило розпочати запис. Будь ласка, спробуйте ще раз. Якщо це повторюється, напишіть Andrew."
-  },
-  "cameraUnavailableToast": {
-    "message": "Камеру відключено. Запис екрана триває."
   }
 }

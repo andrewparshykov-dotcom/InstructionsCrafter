@@ -398,8 +398,5 @@
   },
   "recordingFailedModalDescription": {
     "message": "Etwas hat den Start der Aufnahme verhindert. Bitte versuchen Sie es erneut. Wenn das Problem weiterhin besteht, kontaktieren Sie Andrew."
-  },
-  "cameraUnavailableToast": {
-    "message": "Kamera getrennt. Bildschirmaufnahme läuft weiter."
   }
 }

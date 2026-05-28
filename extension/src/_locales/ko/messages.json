@@ -398,8 +398,5 @@
   },
   "recordingFailedModalDescription": {
     "message": "녹화를 시작하지 못했습니다. 다시 시도해 주세요. 문제가 계속되면 Andrew에게 문의해 주세요."
-  },
-  "cameraUnavailableToast": {
-    "message": "카메라 연결이 끊어졌습니다. 화면 녹화는 계속됩니다."
   }
 }

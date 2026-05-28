@@ -398,8 +398,5 @@
   },
   "recordingFailedModalDescription": {
     "message": "Alguna cosa ha impedit que la gravació s'iniciés. Torna-ho a provar. Si segueix passant, escriu a Andrew."
-  },
-  "cameraUnavailableToast": {
-    "message": "Càmera desconnectada. Es continua gravant la pantalla."
   }
 }

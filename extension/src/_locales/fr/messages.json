@@ -398,8 +398,5 @@
   },
   "recordingFailedModalDescription": {
     "message": "Quelque chose a empêché le démarrage de l'enregistrement. Réessayez. Si le problème persiste, écrivez à Andrew."
-  },
-  "cameraUnavailableToast": {
-    "message": "Caméra déconnectée. L'enregistrement de l'écran continue."
   }
 }
