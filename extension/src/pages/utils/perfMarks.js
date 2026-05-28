@@ -22,7 +22,6 @@ const buildDevImpl = () => {
       if (path.endsWith("/recorder.html")) return "Recorder";
       if (path.endsWith("/cloudrecorder.html")) return "CloudRecorder";
       if (path.endsWith("/offscreenrecorder.html")) return "OffscreenRecorder";
-      if (path.endsWith("/audiooffscreen.html")) return "AudioOffscreen";
       if (path.endsWith("/remuxoffscreen.html")) return "RemuxOffscreen";
       if (path.endsWith("/popup.html")) return "Popup";
       return "Content";
