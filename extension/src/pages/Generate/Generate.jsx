@@ -8,7 +8,9 @@ import { colors, fonts, sizes, space, radius } from "../../design/tokens";
 // non-sandboxed and is the permanent destination after Stage D strips the editor.
 // Phase 8 visual rebrand: Editorial Manual aesthetic shared with Welcome + Playground.
 
-const DEFAULT_BACKEND_URL = "http://127.0.0.1:8000";
+// DECISION: default to the production backend (mirrors Options/index.js).
+// Localhost was only for local dev; users never point at a local server.
+const DEFAULT_BACKEND_URL = "https://instructionscrafter.com";
 
 // Arrival animation: page scales in + fades in, mirroring Welcome's close
 // transition for design-system coherence. Honors prefers-reduced-motion.

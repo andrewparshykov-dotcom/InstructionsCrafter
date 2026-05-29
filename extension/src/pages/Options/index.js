@@ -2,7 +2,10 @@
 // so BACKEND_URL is configurable when we switch from localhost during dev to the deployed
 // domain after Phase 7 — without having to edit code at that transition.
 
-const DEFAULT_BACKEND_URL = "http://127.0.0.1:8000";
+// DECISION: default to the production backend so fresh installs work with no
+// setup. Localhost was only for local dev — point it back here via Options when
+// developing against a local server.
+const DEFAULT_BACKEND_URL = "https://instructionscrafter.com";
 
 const backendInput = document.getElementById("backendUrl");
 const titleInput = document.getElementById("defaultTitle");
