@@ -43,10 +43,19 @@ const Generate = () => {
     const obj = Object.fromEntries(searchParams.entries());
     setParams(obj);
 
-    chrome.storage.local.get(["defaultTitle", "backendUrl"], (data) => {
-      if (data.defaultTitle) setTitle(data.defaultTitle);
-      if (data.backendUrl) setBackendUrl(data.backendUrl);
-    });
+    chrome.storage.local.get(
+      ["defaultTitle", "backendUrl", "sharedPassword"],
+      (data) => {
+        if (data.defaultTitle) setTitle(data.defaultTitle);
+        if (data.backendUrl) setBackendUrl(data.backendUrl);
+        // Pre-fill the shared password if a previous successful generation
+        // saved it, so colleagues only type it once. Stored in
+        // chrome.storage.local (plaintext, per-device) — an accepted trade-off
+        // for a shared internal-team password. Cleared on a 401 (see the
+        // upload catch block below) in case the team rotates the password.
+        if (data.sharedPassword) setPassword(data.sharedPassword);
+      }
+    );
 
     (async () => {
       try {
@@ -127,7 +136,9 @@ const Generate = () => {
     setUploadError("");
     setUploadPhase("idle");
     setUploadProgress(0);
-    setPassword("");
+    // Do NOT clear the password here — it may have been pre-filled from a
+    // previous successful generation (loaded from chrome.storage.local on
+    // mount). Leaving it lets colleagues click Generate without re-typing.
     setModalOpen(true);
   };
 
@@ -208,6 +219,9 @@ const Generate = () => {
         onProgress: (pct) => setUploadProgress(pct),
         onProcessingStart: () => setUploadPhase("processing"),
       });
+      // The server accepted the password (HTTP 2xx), so it is valid — remember
+      // it for next time. Saving only on success means we never persist a typo.
+      chrome.storage.local.set({ sharedPassword: password });
       const filename = getDocxFilename(title.trim());
       const docxUrl = URL.createObjectURL(docxBlob);
       await chrome.downloads.download({
@@ -227,6 +241,13 @@ const Generate = () => {
       }, 1500);
     } catch (err) {
       console.error("Upload failed:", err);
+      // A 401 means the saved password is now wrong (e.g. the team rotated it).
+      // Drop it so the next visit prompts for a fresh one instead of silently
+      // pre-filling the stale password again.
+      if (err.status === 401) {
+        chrome.storage.local.remove("sharedPassword");
+        setPassword("");
+      }
       setUploadError(err.message || "Upload failed.");
       setUploadPhase("error");
     }
@@ -546,7 +567,9 @@ function uploadRecording({
         } catch {
           // Couldn't parse JSON — keep the default message.
         }
-        reject(new Error(errorMsg));
+        const err = new Error(errorMsg);
+        err.status = xhr.status;
+        reject(err);
       }
     });
 
