@@ -50,13 +50,13 @@ END_CLAMP_MARGIN_SECONDS = 0.5
 # exact seek fails to produce a frame.
 CLICK_FALLBACK_OFFSETS = (0.0, -0.15, 0.15, -0.3, 0.3)
 
-# For an AUTHORITATIVE (recorded) click we bias the screenshot slightly BEFORE
-# the click. The recorded timestamp marks the mouse press, but a fast control
-# can navigate on release a few frames later; leading by ~0.15s keeps the shot
-# on the control being clicked rather than the page it opens, and also absorbs
-# the small (late-leaning) video-start anchor skew. Tunable via env. Values
-# after the first are fallbacks tried in order if a seek fails (e.g. video end).
-AUTHORITATIVE_CLICK_LEAD_SECONDS = float(os.getenv("CLICK_LEAD_SECONDS", "0.15"))
+# For an AUTHORITATIVE (recorded) click we bias the screenshot a hair BEFORE the
+# press -- just enough that a fast control navigating on release can't swap the
+# screen first. Calibration on real recordings settled on ~30ms, which is under
+# one video frame, so the shot is effectively the press instant. Tunable via the
+# CLICK_LEAD_SECONDS env var. Values after the first are fallbacks tried in order
+# if a seek fails (e.g. near the video's end).
+AUTHORITATIVE_CLICK_LEAD_SECONDS = float(os.getenv("CLICK_LEAD_SECONDS", "0.03"))
 AUTHORITATIVE_CLICK_OFFSETS = (
     -AUTHORITATIVE_CLICK_LEAD_SECONDS,
     -AUTHORITATIVE_CLICK_LEAD_SECONDS - 0.15,
@@ -64,12 +64,12 @@ AUTHORITATIVE_CLICK_OFFSETS = (
     0.15,
 )
 
-# A voice "screenshot" cue (desktop recordings) is also authoritative, but the
-# narrator usually says the word a moment AFTER the action, so we lead by more
-# than a web click -- enough to land on what they just did rather than on the
-# word. Tunable via env: raise it if you narrate well after acting, lower it if
-# you say "screenshot" right as you act. Later values are seek-failure fallbacks.
-VOICE_CUE_LEAD_SECONDS = float(os.getenv("VOICE_CUE_LEAD_SECONDS", "0.5"))
+# A voice "screenshot" cue is also authoritative. We capture it at the moment
+# Gemini reports the cue word -- no lead by default, since testing showed the
+# spoken moment lands well as-is. Tunable via VOICE_CUE_LEAD_SECONDS: raise it if
+# you tend to say the word a beat after acting. Later values are seek-failure
+# fallbacks.
+VOICE_CUE_LEAD_SECONDS = float(os.getenv("VOICE_CUE_LEAD_SECONDS", "0.0"))
 VOICE_CUE_OFFSETS = (
     -VOICE_CUE_LEAD_SECONDS,
     -VOICE_CUE_LEAD_SECONDS - 0.5,
