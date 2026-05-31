@@ -98,3 +98,47 @@ def _parse_db(match: re.Match | None) -> float | None:
     if "inf" in val:
         return float("-inf")
     return float(val)
+
+
+def probe_duration(video_path: Path) -> float | None:
+    """Return the video's duration in seconds via ffprobe, or None.
+
+    Tries the video stream's duration first (the true extent of the picture),
+    then falls back to the container/format duration. The video-stream value
+    matters because a recording's audio can run longer than its video (e.g.
+    when a new tab opens and the recorder keeps capturing audio while the
+    picture freezes); clamping screenshot timestamps to the *video* duration
+    avoids seeking past the last real frame.
+
+    Returns None if ffprobe is unavailable or its output cannot be parsed, in
+    which case the caller should skip clamping and rely on its extraction
+    fallbacks.
+    """
+    for extra_args in (
+        ["-select_streams", "v:0", "-show_entries", "stream=duration"],
+        ["-show_entries", "format=duration"],
+    ):
+        try:
+            result = subprocess.run(
+                [
+                    "ffprobe",
+                    "-v", "error",
+                    *extra_args,
+                    "-of", "default=noprint_wrappers=1:nokey=1",
+                    str(video_path),
+                ],
+                capture_output=True,
+                text=True,
+                timeout=FFMPEG_TIMEOUT_SECONDS,
+                check=False,
+            )
+        except (FileNotFoundError, subprocess.TimeoutExpired):
+            return None
+        for line in result.stdout.strip().splitlines():
+            try:
+                value = float(line.strip())
+            except ValueError:
+                continue
+            if value > 0:
+                return value
+    return None
