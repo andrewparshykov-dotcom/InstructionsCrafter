@@ -21,9 +21,12 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse, JSONResponse
 from starlette.exceptions import HTTPException as StarletteHTTPException
 
-from app.pipeline import cleanup_workdir, create_temp_workdir, process_video
-
+# Load .env BEFORE importing app modules: app.pipeline / app.gemini read tuning
+# knobs (AUTO_FPS, MARKER_FPS, CLICK_LEAD_SECONDS, VOICE_CUE_LEAD_SECONDS) at
+# import time, so those values must already be in the environment first.
 load_dotenv()
+
+from app.pipeline import cleanup_workdir, create_temp_workdir, process_video
 
 SHARED_PASSWORD = os.getenv("SHARED_PASSWORD", "")
 MAX_VIDEO_SIZE_MB = int(os.getenv("MAX_VIDEO_SIZE_MB", "500"))

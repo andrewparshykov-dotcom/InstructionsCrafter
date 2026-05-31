@@ -63,6 +63,19 @@ AUTHORITATIVE_CLICK_OFFSETS = (
     0.0,
     0.15,
 )
+
+# A voice "screenshot" cue (desktop recordings) is also authoritative, but the
+# narrator usually says the word a moment AFTER the action, so we lead by more
+# than a web click -- enough to land on what they just did rather than on the
+# word. Tunable via env: raise it if you narrate well after acting, lower it if
+# you say "screenshot" right as you act. Later values are seek-failure fallbacks.
+VOICE_CUE_LEAD_SECONDS = float(os.getenv("VOICE_CUE_LEAD_SECONDS", "0.5"))
+VOICE_CUE_OFFSETS = (
+    -VOICE_CUE_LEAD_SECONDS,
+    -VOICE_CUE_LEAD_SECONDS - 0.5,
+    -VOICE_CUE_LEAD_SECONDS / 2,
+    0.0,
+)
 # A click_time is trusted only if it falls within the step's narration window
 # (plus this slack); otherwise we fall back to sampling the window.
 CLICK_WINDOW_SLACK_SECONDS = 2.0
@@ -186,23 +199,24 @@ def _select_step_frame(
 ) -> Path:
     """Pick one screenshot for a step.
 
-    Preferred: a tight cluster around the click_time Gemini located (via the
-    red click-highlight ring) -- the cursor-on-control instant. Falls back to
-    sampling the narration window, then to coarse fixed points. Returns the
-    chosen frame's path (resized in place).
+    Preferred: the step's anchor moment -- a recorded web click ("click"), a
+    spoken "screenshot" cue ("voice"), or Gemini's own pick ("auto"). The first
+    two are authoritative and biased slightly earlier; "auto" is trusted only if
+    it sits inside the narration window. Falls back to sampling the window, then
+    to coarse fixed points. Returns the chosen frame's path (resized in place).
     """
     raw_start, raw_end = step.get("start_time"), step.get("end_time")
     start = float(raw_start) if isinstance(raw_start, (int, float)) else 0.0
     end = float(raw_end) if isinstance(raw_end, (int, float)) else start
     final = workdir / f"frame_{index:03d}.jpg"
 
-    # 1) Click-centered: extract the click instant itself (the cursor-on-
-    #    control frame). An *authoritative* click_time comes from the
-    #    extension's recorded click log, so trust it outright. A
-    #    non-authoritative one is Gemini's own guess from the video, so trust it
-    #    only if it sits within the step's narration window (guards overshoot).
+    # 1) Anchor-centered. "click" (recorded web click) and "voice" (spoken
+    #    "screenshot" cue) are authoritative -> trust outright, each with its own
+    #    early bias. "auto" is Gemini's own guess -> trust only if it sits within
+    #    the step's narration window (guards against overshoot).
     click = step.get("click_time")
-    authoritative = bool(step.get("click_authoritative"))
+    anchor = step.get("anchor_source", "auto")
+    authoritative = anchor in ("click", "voice")
     if isinstance(click, (int, float)) and (
         authoritative
         or (
@@ -211,9 +225,12 @@ def _select_step_frame(
             <= end + CLICK_WINDOW_SLACK_SECONDS
         )
     ):
-        offsets = (
-            AUTHORITATIVE_CLICK_OFFSETS if authoritative else CLICK_FALLBACK_OFFSETS
-        )
+        if anchor == "voice":
+            offsets = VOICE_CUE_OFFSETS
+        elif anchor == "click":
+            offsets = AUTHORITATIVE_CLICK_OFFSETS
+        else:
+            offsets = CLICK_FALLBACK_OFFSETS
         for off in offsets:
             try:
                 extract_frame(
@@ -330,7 +347,8 @@ async def process_video(
                 print(
                     f"[{request_id}] step={i} "
                     f"window=[{step.get('start_time')}, {step.get('end_time')}]s "
-                    f"click={step.get('click_time')}s -> {frame_path.name}"
+                    f"anchor={step.get('anchor_source')}@{step.get('click_time')}s "
+                    f"-> {frame_path.name}"
                 )
 
         output_path = workdir / "output.docx"

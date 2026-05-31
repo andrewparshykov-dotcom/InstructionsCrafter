@@ -64,6 +64,13 @@ PERCEPTION_FPS_DEFAULT = 2.0  # used only if the duration probe fails
 # longer/denser recording ever needs more temporal detail.
 MARKER_PERCEPTION_FPS = float(os.getenv("MARKER_FPS", "1.0"))
 
+# Auto mode (no click log -- desktop, or web where click capture failed) also
+# runs at 1 fps. The "screenshot" voice cue is audio-based (fps-independent),
+# and 1 fps is Gemini's own default video sampling rate -- plenty for captions
+# and for the automatic moment-pick on any uncued step, while keeping tokens low
+# and removing the old high-fps cost risk. Override via the AUTO_FPS env var.
+AUTO_PERCEPTION_FPS = float(os.getenv("AUTO_FPS", "1.0"))
+
 # High resolution so Gemini can read fine on-screen text and clearly see the
 # red click-highlight ring. (Final screenshots are native-quality regardless.)
 PERCEPTION_MEDIA_RESOLUTION = types.MediaResolution.MEDIA_RESOLUTION_HIGH
@@ -74,9 +81,12 @@ You convert a screen recording with voice narration into a step-by-step
 how-to document. Work ONLY from what you can see and hear in this video. Do
 not invent anything that is not shown or said.
 
-The recording highlights the mouse cursor, and draws a brief RED RING around
-the cursor at the exact instant of each physical left-click. Use that red ring
-to pinpoint when and where clicks happen.
+The narrator may say a CUE WORD out loud to mark the exact moment they want
+captured for the step they are describing -- "screenshot", "скріншот", or
+"скриншот" (the same word in English, Ukrainian, and Russian; also accept an
+obvious inflected form of it). They typically perform an action and then say
+it. Treat a cue word purely as a marker command -- NEVER write it into the
+instruction or caption.
 
 Return a JSON object with two keys: "introduction" and "steps".
 
@@ -88,25 +98,26 @@ show you...", "You will learn...", or "In this video...".
 the subject, return an empty string.
 
 STEPS -- one object per logical step. A step is ONE action a reader would
-perform (for example, "open the bookmarks bar and click the RLI bookmark"),
-even if the narrator pauses or explains across several sentences. Keep an
-explanation that belongs to a step together with that step; do not split it
-into its own step. Skip pure end-filler like "and that's all".
+perform (for example, "open the settings menu and choose Account"), even if the
+narrator pauses or explains across several sentences. Keep an explanation that
+belongs to a step together with that step; do not split it into its own step.
+Skip pure end-filler like "and that's all".
 
 Each step object must have:
 - "start_time" and "end_time" (numbers, seconds): the precise span of THIS
 step's narration, taken from the audio.
-- "click_time" (number, seconds): the exact moment the user clicks the control
-this step is about -- identified by the RED RING appearing around the cursor on
-that control. Be precise. If a step has no click (it only observes or explains
-something on screen), set click_time to the moment the relevant screen is most
-clearly and completely shown.
+- "voice_cued" (boolean): true if the narrator said a cue word to mark this
+step's moment, false otherwise.
+- "screenshot_time" (number, seconds): the moment to capture for this step.
+  If voice_cued is true, set it to the instant the narrator says the cue word.
+  If voice_cued is false, set it to the moment the step's action or result is
+  most clearly and completely shown on screen.
 - "instruction" (string): imperative voice ("Click X", not "I click X" or "you
 need to click X"). Preserve useful detail the narrator gave -- if they
-explained WHY, keep the why. Strip filler ("um", "okay", "as you can see").
-Do not number the step.
+explained WHY, keep the why. Strip filler ("um", "okay", "as you can see") and
+never include a cue word. Do not number the step.
 - "caption" (string): one sentence, under 25 words, describing what is visible
-on screen at the click_time moment.\
+on screen at the screenshot_time moment.\
 """
 
 
@@ -164,7 +175,8 @@ on screen when the step's action happens.\
 class _GeminiStep(BaseModel):
     start_time: float
     end_time: float
-    click_time: float
+    voice_cued: bool  # narrator said "screenshot" to mark this step's moment
+    screenshot_time: float
     instruction: str
     caption: str
 
@@ -231,13 +243,14 @@ def generate_document(
       exactly when/what the user clicked. Gemini is given that list and only
       maps each step to a click NUMBER; the click's recorder timestamp is
       authoritative, so screenshots land precisely and we can run a low fps.
-    - **auto mode** (no ``clicks``): Gemini locates each click itself from the
-      video (the red click-highlight ring) and returns a click_time it guessed.
+    - **auto mode** (no ``clicks`` -- e.g. desktop recordings): the narrator can
+      say "screenshot" to mark a step's moment; Gemini reports that time and a
+      voice_cued flag, falling back to its own best-moment pick for uncued steps.
 
     Returns ``{"introduction": str, "steps": list[dict]}`` where each step dict
-    has start_time, end_time, click_time (float or None), click_authoritative
-    (bool), instruction, and caption. Synchronous -- call via
-    ``asyncio.to_thread`` from the async pipeline.
+    has start_time, end_time, click_time (float or None), anchor_source
+    ("click" | "voice" | "auto"), instruction, and caption. Synchronous -- call
+    via ``asyncio.to_thread`` from the async pipeline.
 
     Raises HTTPException on missing key, upload/processing failure, rate
     limits, or an unparseable response.
@@ -292,6 +305,7 @@ def generate_document(
             prompt = MARKER_PROMPT_TEMPLATE.format(clicks=_format_clicks(clicks))
             schema = _GeminiDocMarker
         else:
+            fps = min(fps, AUTO_PERCEPTION_FPS)
             prompt = PROMPT
             schema = _GeminiDoc
         print(
@@ -357,27 +371,30 @@ def generate_document(
             )
 
     # 4) Normalize both modes to a uniform step dict the pipeline understands:
-    #    a click_time (float or None) plus whether it is authoritative (a real
-    #    recorded click) or merely Gemini's guess from the video.
+    #    a click_time (float or None) plus an anchor_source telling the pipeline
+    #    how to trust/extract it:
+    #      "click" -> a real recorded web click (authoritative, small lead)
+    #      "voice" -> the narrator said "screenshot" (authoritative, bigger lead)
+    #      "auto"  -> Gemini's own guess from the video (window-checked, no lead)
     steps: list[dict[str, Any]] = []
     for s in doc.steps:
         if marker_mode:
             idx = s.click_index
             if 0 <= idx < len(clicks):
                 click_time = float(clicks[idx]["t"])
-                authoritative = True
+                anchor_source = "click"
             else:
                 click_time = None
-                authoritative = False
+                anchor_source = "auto"
         else:
-            click_time = s.click_time
-            authoritative = False
+            click_time = s.screenshot_time
+            anchor_source = "voice" if s.voice_cued else "auto"
         steps.append(
             {
                 "start_time": s.start_time,
                 "end_time": s.end_time,
                 "click_time": click_time,
-                "click_authoritative": authoritative,
+                "anchor_source": anchor_source,
                 "instruction": s.instruction,
                 "caption": s.caption,
             }
