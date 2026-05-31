@@ -55,6 +55,15 @@ PERCEPTION_FPS_MIN = 0.2
 PERCEPTION_FPS_MAX = 10.0
 PERCEPTION_FPS_DEFAULT = 2.0  # used only if the duration probe fails
 
+# Marker mode (a click log was supplied) gets its screenshot precision from the
+# recorded click timestamps, NOT from watching the video, so it runs at a very
+# low perception fps -- enough for Gemini to follow the flow and write captions,
+# while cutting video tokens roughly 10x vs auto mode. (A ~1-minute clip at
+# 10 fps is ~145k tokens; at 1 fps it is ~15k.) Auto mode keeps the dynamic
+# high fps it needs to spot the red click-ring itself. Override via env if a
+# longer/denser recording ever needs more temporal detail.
+MARKER_PERCEPTION_FPS = float(os.getenv("MARKER_FPS", "1.0"))
+
 # High resolution so Gemini can read fine on-screen text and clearly see the
 # red click-highlight ring. (Final screenshots are native-quality regardless.)
 PERCEPTION_MEDIA_RESOLUTION = types.MediaResolution.MEDIA_RESOLUTION_HIGH
@@ -101,6 +110,57 @@ on screen at the click_time moment.\
 """
 
 
+# Marker mode: the extension already captured exactly when/what the user
+# clicked, so we hand Gemini that list and it only maps each step to a click
+# NUMBER. The click's timestamp (from the recorder) is authoritative, which
+# removes the screenshot-overshoot problem and lets us run at a low fps.
+MARKER_PROMPT_TEMPLATE = """\
+You convert a screen recording with voice narration into a step-by-step
+how-to document. Work ONLY from what you can see and hear in this video. Do
+not invent anything that is not shown or said.
+
+You are given the exact list of mouse clicks the user made during the
+recording. Each click has a NUMBER, a TIME in seconds from the start of the
+video, and the on-screen LABEL of the control that was clicked:
+
+{clicks}
+
+These clicks are ground truth -- they tell you precisely when and what the
+user clicked. Use them instead of guessing from the video.
+
+Return a JSON object with two keys: "introduction" and "steps".
+
+INTRODUCTION
+- 3-4 sentences summarizing what the whole guide accomplishes, in
+task-oriented voice ("This guide walks through..."). Do NOT write "I will
+show you...", "You will learn...", or "In this video...".
+- Ground it strictly in the narration. If you cannot confidently determine
+the subject, return an empty string.
+
+STEPS -- one object per logical step. A step is ONE action a reader would
+perform (for example, "open the bookmarks bar and click the RLI bookmark"),
+even if the narrator pauses or explains across several sentences. Keep an
+explanation that belongs to a step together with that step; do not split it
+into its own step. Skip pure end-filler like "and that's all".
+
+Each step object must have:
+- "start_time" and "end_time" (numbers, seconds): the precise span of THIS
+step's narration, taken from the audio.
+- "click_index" (integer): the NUMBER of the click (from the list above) that
+this step performs -- the one whose time falls within this step's narration
+and whose label matches what the step is about. If the step only observes or
+explains something on screen and performs none of the listed clicks, set
+click_index to -1.
+- "instruction" (string): imperative voice ("Click X", not "I click X" or "you
+need to click X"). When the step has a click, name the control using its LABEL
+from the list above so the wording is exact. Preserve useful detail the
+narrator gave -- if they explained WHY, keep the why. Strip filler ("um",
+"okay", "as you can see"). Do not number the step.
+- "caption" (string): one sentence, under 25 words, describing what is visible
+on screen when the step's action happens.\
+"""
+
+
 class _GeminiStep(BaseModel):
     start_time: float
     end_time: float
@@ -112,6 +172,32 @@ class _GeminiStep(BaseModel):
 class _GeminiDoc(BaseModel):
     introduction: str
     steps: list[_GeminiStep]
+
+
+class _GeminiStepMarker(BaseModel):
+    start_time: float
+    end_time: float
+    click_index: int  # index into the supplied click list; -1 = no click
+    instruction: str
+    caption: str
+
+
+class _GeminiDocMarker(BaseModel):
+    introduction: str
+    steps: list[_GeminiStepMarker]
+
+
+def _format_clicks(clicks: list[dict]) -> str:
+    """Render the click list as a numbered block for the marker prompt."""
+    lines = []
+    for i, c in enumerate(clicks):
+        label = (c.get("label") or "").strip()
+        if label:
+            desc = f'"{label}"'
+        else:
+            desc = f"<{c.get('role') or c.get('tag') or 'element'}>"
+        lines.append(f"{i}: {float(c['t']):.2f}s -- {desc}")
+    return "\n".join(lines)
 
 
 def _target_fps(video_duration: float | None) -> float:
@@ -136,16 +222,28 @@ def generate_document(
     video_path: Path,
     request_id: str,
     video_duration: float | None = None,
+    clicks: list[dict] | None = None,
 ) -> dict[str, Any]:
     """Run the single Gemini video call.
 
+    Two modes, chosen by whether a click log was supplied:
+    - **marker mode** (``clicks`` non-empty): the extension already captured
+      exactly when/what the user clicked. Gemini is given that list and only
+      maps each step to a click NUMBER; the click's recorder timestamp is
+      authoritative, so screenshots land precisely and we can run a low fps.
+    - **auto mode** (no ``clicks``): Gemini locates each click itself from the
+      video (the red click-highlight ring) and returns a click_time it guessed.
+
     Returns ``{"introduction": str, "steps": list[dict]}`` where each step dict
-    has start_time, end_time, click_time, instruction, and caption.
-    Synchronous -- call via ``asyncio.to_thread`` from the async pipeline.
+    has start_time, end_time, click_time (float or None), click_authoritative
+    (bool), instruction, and caption. Synchronous -- call via
+    ``asyncio.to_thread`` from the async pipeline.
 
     Raises HTTPException on missing key, upload/processing failure, rate
     limits, or an unparseable response.
     """
+    clicks = clicks or []
+    marker_mode = bool(clicks)
     api_key = os.getenv("GEMINI_API_KEY")
     if not api_key:
         raise HTTPException(
@@ -187,10 +285,22 @@ def generate_document(
         # 2) One generation call: video sampled at a length-aware fps, high
         #    media resolution, high thinking, constrained to our JSON schema.
         fps = _target_fps(video_duration)
-        print(f"[{request_id}] gemini: fps={fps:.2f} (duration={video_duration})")
+        if marker_mode:
+            # Markers carry the precision; drop fps low to save tokens. min()
+            # keeps the budget-based throttle for very long recordings.
+            fps = min(fps, MARKER_PERCEPTION_FPS)
+            prompt = MARKER_PROMPT_TEMPLATE.format(clicks=_format_clicks(clicks))
+            schema = _GeminiDocMarker
+        else:
+            prompt = PROMPT
+            schema = _GeminiDoc
+        print(
+            f"[{request_id}] gemini: fps={fps:.2f} (duration={video_duration}) "
+            f"mode={'marker' if marker_mode else 'auto'} clicks={len(clicks)}"
+        )
         config = types.GenerateContentConfig(
             response_mime_type="application/json",
-            response_schema=_GeminiDoc,
+            response_schema=schema,
             media_resolution=PERCEPTION_MEDIA_RESOLUTION,
             thinking_config=types.ThinkingConfig(
                 thinking_level=types.ThinkingLevel.HIGH
@@ -199,7 +309,7 @@ def generate_document(
         try:
             response = client.models.generate_content(
                 model=model,
-                contents=[_video_part(uploaded, fps), PROMPT],
+                contents=[_video_part(uploaded, fps), prompt],
                 config=config,
             )
         except genai_errors.APIError as exc:
@@ -228,14 +338,14 @@ def generate_document(
     # 3) Parse + validate. Prefer the SDK's schema-parsed object; fall back to
     #    parsing the raw JSON text if needed.
     doc = getattr(response, "parsed", None)
-    if not isinstance(doc, _GeminiDoc):
+    if not isinstance(doc, schema):
         raw = getattr(response, "text", None)
         if not raw:
             raise HTTPException(
                 status_code=502, detail="Gemini returned an empty response"
             )
         try:
-            doc = _GeminiDoc.model_validate_json(raw)
+            doc = schema.model_validate_json(raw)
         except (ValidationError, ValueError, json.JSONDecodeError) as exc:
             print(
                 f"[{request_id}] gemini response parse failed: {exc!r}",
@@ -246,6 +356,35 @@ def generate_document(
                 detail="Gemini returned an unexpected response",
             )
 
-    steps = [s.model_dump() for s in doc.steps]
-    print(f"[{request_id}] gemini: {len(steps)} steps, model={model}")
+    # 4) Normalize both modes to a uniform step dict the pipeline understands:
+    #    a click_time (float or None) plus whether it is authoritative (a real
+    #    recorded click) or merely Gemini's guess from the video.
+    steps: list[dict[str, Any]] = []
+    for s in doc.steps:
+        if marker_mode:
+            idx = s.click_index
+            if 0 <= idx < len(clicks):
+                click_time = float(clicks[idx]["t"])
+                authoritative = True
+            else:
+                click_time = None
+                authoritative = False
+        else:
+            click_time = s.click_time
+            authoritative = False
+        steps.append(
+            {
+                "start_time": s.start_time,
+                "end_time": s.end_time,
+                "click_time": click_time,
+                "click_authoritative": authoritative,
+                "instruction": s.instruction,
+                "caption": s.caption,
+            }
+        )
+
+    print(
+        f"[{request_id}] gemini: {len(steps)} steps, model={model}, "
+        f"mode={'marker' if marker_mode else 'auto'}"
+    )
     return {"introduction": doc.introduction.strip(), "steps": steps}

@@ -168,7 +168,9 @@ const _startRecordingInner = async (caller) => {
 
   const { recordingType } = await chrome.storage.local.get(["recordingType"]);
 
-  chrome.storage.local.remove(["recordingMeta"]);
+  // Clear any click log from a previous recording so a new session starts
+  // with a clean slate (see ClickLogger / the "log-click" handler).
+  chrome.storage.local.remove(["recordingMeta", "clickLog", "clickLogSession"]);
 
   chrome.storage.local.set({ lastRecordingType: recordingType || "screen" });
 

@@ -1,5 +1,6 @@
 """FastAPI application for the InstructionsCrafter backend."""
 
+import json
 import os
 import re
 import secrets
@@ -95,6 +96,12 @@ async def generate(
     video: UploadFile = File(...),
     title: str = Form(...),
     password: str = Form(...),
+    # Optional click log captured by the extension's content script: a JSON
+    # array of {t, label, role, tag} marking each click's time on the video
+    # timeline. When present, these are authoritative screenshot anchors (see
+    # gemini.py marker mode); when absent, the pipeline falls back to letting
+    # Gemini locate clicks itself.
+    clicklog: str | None = Form(None),
 ):
     if not SHARED_PASSWORD or not secrets.compare_digest(password, SHARED_PASSWORD):
         raise HTTPException(status_code=401, detail="Unauthorized")
@@ -117,7 +124,8 @@ async def generate(
             while chunk := await video.read(UPLOAD_CHUNK_BYTES):
                 out.write(chunk)
 
-        output_path = await process_video(upload_path, title, workdir)
+        clicks = _parse_clicklog(clicklog)
+        output_path = await process_video(upload_path, title, workdir, clicks=clicks)
     except Exception:
         # Failure path: clean up immediately, before the exception propagates.
         cleanup_workdir(workdir)
@@ -137,3 +145,45 @@ async def generate(
 def _sanitize_title(title: str) -> str:
     cleaned = re.sub(r"[^A-Za-z0-9 \-]", "_", title).strip()
     return cleaned or "document"
+
+
+# Defensive caps for the click log (it comes from the extension, so treat it as
+# untrusted input). A real recording has at most a few hundred clicks.
+_MAX_CLICKS = 1000
+_MAX_LABEL_LEN = 200
+
+
+def _parse_clicklog(raw: str | None) -> list[dict]:
+    """Parse the extension's click-log JSON into a clean, sorted list.
+
+    Returns ``[]`` for anything missing or malformed -- a bad/absent click log
+    must never fail a request, it just drops the pipeline back to auto mode.
+    Each returned item is ``{"t": float>=0, "label": str, "role": str,
+    "tag": str}``, sorted by ``t``.
+    """
+    if not raw:
+        return []
+    try:
+        data = json.loads(raw)
+    except (ValueError, TypeError):
+        return []
+    if not isinstance(data, list):
+        return []
+
+    clicks: list[dict] = []
+    for item in data[:_MAX_CLICKS]:
+        if not isinstance(item, dict):
+            continue
+        t = item.get("t")
+        if not isinstance(t, (int, float)) or isinstance(t, bool) or t < 0:
+            continue
+        clicks.append(
+            {
+                "t": float(t),
+                "label": str(item.get("label") or "")[:_MAX_LABEL_LEN],
+                "role": str(item.get("role") or "")[:_MAX_LABEL_LEN],
+                "tag": str(item.get("tag") or "")[:_MAX_LABEL_LEN],
+            }
+        )
+    clicks.sort(key=lambda c: c["t"])
+    return clicks

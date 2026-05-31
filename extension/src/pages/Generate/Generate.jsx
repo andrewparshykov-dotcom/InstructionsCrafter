@@ -211,6 +211,11 @@ const Generate = () => {
     setUploadPhase("uploading");
     setUploadProgress(0);
 
+    // The recorded click log (if any) lets the backend place each screenshot on
+    // the exact control the user clicked. Absent/empty is fine — the backend
+    // just falls back to locating clicks itself.
+    const { clickLog } = await chrome.storage.local.get(["clickLog"]);
+
     try {
       const docxBlob = await uploadRecording({
         blob: recording.blob,
@@ -218,6 +223,7 @@ const Generate = () => {
         title: title.trim(),
         password,
         backendUrl,
+        clickLog,
         onProgress: (pct) => setUploadProgress(pct),
         onProcessingStart: () => setUploadPhase("processing"),
       });
@@ -537,6 +543,7 @@ function uploadRecording({
   title,
   password,
   backendUrl,
+  clickLog,
   onProgress,
   onProcessingStart,
 }) {
@@ -589,6 +596,9 @@ function uploadRecording({
     formData.append("video", blob, `recording.${extension}`);
     formData.append("title", title);
     formData.append("password", password);
+    if (Array.isArray(clickLog) && clickLog.length > 0) {
+      formData.append("clicklog", JSON.stringify(clickLog));
+    }
     xhr.send(formData);
   });
 }

@@ -45,10 +45,24 @@ SILENT_MEAN_THRESHOLD_DB = -50.0
 # it so the seek lands on a real, decodable frame rather than past the last one.
 END_CLAMP_MARGIN_SECONDS = 0.5
 
-# At a located click we extract the click instant itself (offset 0.0 = the
-# cursor-on-control frame the red ring marks); the other offsets (seconds) are
-# only fallbacks if that exact seek fails to produce a frame.
+# At a Gemini-guessed (non-authoritative) click we extract the click instant
+# itself (offset 0.0); the other offsets (seconds) are only fallbacks if that
+# exact seek fails to produce a frame.
 CLICK_FALLBACK_OFFSETS = (0.0, -0.15, 0.15, -0.3, 0.3)
+
+# For an AUTHORITATIVE (recorded) click we bias the screenshot slightly BEFORE
+# the click. The recorded timestamp marks the mouse press, but a fast control
+# can navigate on release a few frames later; leading by ~0.15s keeps the shot
+# on the control being clicked rather than the page it opens, and also absorbs
+# the small (late-leaning) video-start anchor skew. Tunable via env. Values
+# after the first are fallbacks tried in order if a seek fails (e.g. video end).
+AUTHORITATIVE_CLICK_LEAD_SECONDS = float(os.getenv("CLICK_LEAD_SECONDS", "0.15"))
+AUTHORITATIVE_CLICK_OFFSETS = (
+    -AUTHORITATIVE_CLICK_LEAD_SECONDS,
+    -AUTHORITATIVE_CLICK_LEAD_SECONDS - 0.15,
+    0.0,
+    0.15,
+)
 # A click_time is trusted only if it falls within the step's narration window
 # (plus this slack); otherwise we fall back to sampling the window.
 CLICK_WINDOW_SLACK_SECONDS = 2.0
@@ -183,15 +197,24 @@ def _select_step_frame(
     final = workdir / f"frame_{index:03d}.jpg"
 
     # 1) Click-centered: extract the click instant itself (the cursor-on-
-    #    control frame the red ring marks). Trust click_time only if it sits
-    #    within the step's narration window (guards against a stray value).
+    #    control frame). An *authoritative* click_time comes from the
+    #    extension's recorded click log, so trust it outright. A
+    #    non-authoritative one is Gemini's own guess from the video, so trust it
+    #    only if it sits within the step's narration window (guards overshoot).
     click = step.get("click_time")
+    authoritative = bool(step.get("click_authoritative"))
     if isinstance(click, (int, float)) and (
-        start - CLICK_WINDOW_SLACK_SECONDS
-        <= float(click)
-        <= end + CLICK_WINDOW_SLACK_SECONDS
+        authoritative
+        or (
+            start - CLICK_WINDOW_SLACK_SECONDS
+            <= float(click)
+            <= end + CLICK_WINDOW_SLACK_SECONDS
+        )
     ):
-        for off in CLICK_FALLBACK_OFFSETS:
+        offsets = (
+            AUTHORITATIVE_CLICK_OFFSETS if authoritative else CLICK_FALLBACK_OFFSETS
+        )
+        for off in offsets:
             try:
                 extract_frame(
                     video_path,
@@ -235,8 +258,13 @@ async def process_video(
     video_path: Path,
     title: str,
     workdir: Path,
+    clicks: list[dict] | None = None,
 ) -> Path:
     """Run the full pipeline against `video_path`. Returns the .docx path.
+
+    `clicks` is the extension's recorded click log (a list of {t, label, role,
+    tag}); when present it drives Gemini's marker mode and gives authoritative
+    screenshot timestamps. When empty/None, Gemini locates clicks itself.
 
     Caller owns the lifecycle of `workdir`. This function does not delete it on
     success or failure; the route handler does, via BackgroundTasks on success
@@ -274,7 +302,7 @@ async def process_video(
         # loop since the SDK calls are blocking.
         with _step(request_id, "generate_document"):
             result = await asyncio.to_thread(
-                generate_document, video_path, request_id, video_duration
+                generate_document, video_path, request_id, video_duration, clicks
             )
         introduction = result["introduction"]
         steps = result["steps"]

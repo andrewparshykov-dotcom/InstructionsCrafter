@@ -17,6 +17,7 @@ import styles from "!raw-loader!./styles/app.css";
 import ZoomContainer from "./utils/ZoomContainer";
 import BlurTool from "./utils/BlurTool";
 import CursorModes from "./utils/CursorModes";
+import ClickLogger from "./utils/ClickLogger";
 
 import { contentStateContext } from "./context/ContentState";
 
@@ -218,6 +219,7 @@ const Wrapper = () => {
             )}
           <Canvas />
           <CursorModes />
+          <ClickLogger />
           <root.div
             className="root-container"
             id="instructionscrafter-root-container"

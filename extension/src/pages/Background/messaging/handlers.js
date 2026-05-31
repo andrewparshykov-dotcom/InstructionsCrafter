@@ -239,8 +239,66 @@ const resolveActiveSessionConflict = async (incomingSession) => {
   return { allow: true, staleRecovered: true };
 };
 
+// --- Click log -------------------------------------------------------------
+// The content script (ClickLogger) sends a "log-click" message for every
+// left-click during a recording. We accumulate them in chrome.storage.local so
+// the Generate page can attach the list to the upload. Writes are serialized
+// through a promise chain so rapid clicks can't race and drop an entry. The log
+// is keyed to recordingStartTime, so it also auto-resets if a new recording
+// begins without the start hook having cleared it.
+let clickLogWriteChain = Promise.resolve();
+
+const appendClick = async (message, sender) => {
+  const { recordingUiTabId, recordingStartTime, clickLog, clickLogSession } =
+    await chrome.storage.local.get([
+      "recordingUiTabId",
+      "recordingStartTime",
+      "clickLog",
+      "clickLogSession",
+    ]);
+
+  // No active recording -> nothing to anchor the click to.
+  if (!recordingStartTime) return { ok: false, reason: "not-recording" };
+
+  // Light attribution: when we know which tab hosts the recording UI, ignore
+  // clicks from other tabs (their frames aren't in this recording).
+  if (
+    recordingUiTabId != null &&
+    sender?.tab?.id != null &&
+    sender.tab.id !== recordingUiTabId
+  ) {
+    return { ok: false, reason: "other-tab" };
+  }
+
+  const log =
+    clickLogSession === recordingStartTime && Array.isArray(clickLog)
+      ? clickLog
+      : [];
+  log.push({
+    t: typeof message.t === "number" ? message.t : 0,
+    label: typeof message.label === "string" ? message.label : "",
+    role: typeof message.role === "string" ? message.role : "",
+    tag: typeof message.tag === "string" ? message.tag : "",
+  });
+  await chrome.storage.local.set({
+    clickLog: log,
+    clickLogSession: recordingStartTime,
+  });
+  return { ok: true, count: log.length };
+};
+
 export const setupHandlers = () => {
   registerProxyStorageHandlers();
+
+  registerMessage("log-click", (message, sender) => {
+    // Serialize storage writes; recover the chain whether the prior link
+    // resolved or rejected so one failure can't stall later clicks.
+    clickLogWriteChain = clickLogWriteChain.then(
+      () => appendClick(message, sender),
+      () => appendClick(message, sender),
+    );
+    return clickLogWriteChain;
+  });
   registerMessage("desktop-capture", async (message, sender) => {
     const now = Date.now();
     if (desktopCaptureInFlight || now - lastDesktopCaptureAt < 1200) {
