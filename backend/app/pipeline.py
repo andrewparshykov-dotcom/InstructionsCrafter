@@ -1,10 +1,12 @@
 """End-to-end processing pipeline for /api/generate.
 
 A single Gemini call watches the screen recording and returns the document's
-introduction + steps (instruction, caption, and the narration time span of
-each step). This module then picks one screenshot per step by sampling that
-step's narration window with FFmpeg, and renders the .docx. (Replaces the
-former Groq-transcribe -> GPT-segment -> GPT-polish chain; see app/gemini.py.)
+introduction + steps (instruction, caption, narration span, and the click
+timestamp located via the recorder's red click-highlight ring). This module
+then picks one screenshot per step -- tightly around the click instant when
+available, otherwise by sampling the narration window -- and renders the .docx.
+(Replaces the former Groq-transcribe -> GPT-segment -> GPT-polish chain; see
+app/gemini.py.)
 
 Workdir lifecycle is owned by the caller (the route handler) so cleanup can run
 via FastAPI's BackgroundTasks AFTER the FileResponse is sent.
@@ -43,16 +45,19 @@ SILENT_MEAN_THRESHOLD_DB = -50.0
 # it so the seek lands on a real, decodable frame rather than past the last one.
 END_CLAMP_MARGIN_SECONDS = 0.5
 
-# Per-step screenshot selection: sample several frames across the step's
-# narration window and keep the most-detailed one. This anchors the screenshot
-# to the window Gemini reliably identifies, instead of trusting a single
-# predicted timestamp (which overshot in testing), and the "most-detailed"
-# rule skips blank / half-loaded frames (which compress to small JPEGs).
+# At a located click we extract the click instant itself (offset 0.0 = the
+# cursor-on-control frame the red ring marks); the other offsets (seconds) are
+# only fallbacks if that exact seek fails to produce a frame.
+CLICK_FALLBACK_OFFSETS = (0.0, -0.15, 0.15, -0.3, 0.3)
+# A click_time is trusted only if it falls within the step's narration window
+# (plus this slack); otherwise we fall back to sampling the window.
+CLICK_WINDOW_SLACK_SECONDS = 2.0
+
+# Fallback narration-window sampling: sample several frames across the leading
+# part of a step's window and keep the most-detailed one (skips blank /
+# half-loaded frames, which compress to small JPEGs).
 MIN_CANDIDATES = 2
 MAX_CANDIDATES = 6
-# Sample only the leading part of the narration window: the screen a step acts
-# on is shown while the narrator describes it, but the tail of the window often
-# already shows the *next* screen (users click before they finish talking).
 WINDOW_LEAD_FRACTION = 0.85
 
 
@@ -120,13 +125,42 @@ def _candidate_timestamps(
         return [_clamp_timestamp(start, video_duration)]
     lead_end = start + WINDOW_LEAD_FRACTION * (end - start)
     span = lead_end - start
-    # Roughly one sample per 2 seconds of window, bounded.
     n = max(MIN_CANDIDATES, min(MAX_CANDIDATES, int(span // 2) + 1))
     if n == 1:
         points = [start + span / 2]
     else:
         points = [start + span * k / (n - 1) for k in range(n)]
     return [_clamp_timestamp(p, video_duration) for p in points]
+
+
+def _extract_best(
+    video_path: Path,
+    timestamps: list[float],
+    index: int,
+    video_duration: float | None,
+    workdir: Path,
+    final: Path,
+    tag: str,
+) -> Path | None:
+    """Extract frames at the given timestamps and keep the largest (most
+    detail) as `final`. Returns `final`, or None if none could be extracted.
+    """
+    candidates: list[tuple[Path, int]] = []
+    for j, ts in enumerate(timestamps):
+        cand = workdir / f"frame_{index:03d}_{tag}{j}.jpg"
+        try:
+            extract_frame(video_path, _clamp_timestamp(ts, video_duration), cand)
+        except HTTPException:
+            continue
+        candidates.append((cand, cand.stat().st_size))
+    if not candidates:
+        return None
+    # Largest JPEG = most detail -> skips blank / half-loaded frames.
+    # max() keeps the earliest on ties.
+    best_path = max(candidates, key=lambda c: c[1])[0]
+    best_path.replace(final)
+    resize_screenshot(final)
+    return final
 
 
 def _select_step_frame(
@@ -136,37 +170,53 @@ def _select_step_frame(
     video_duration: float | None,
     workdir: Path,
 ) -> Path:
-    """Pick one screenshot for a step by sampling its narration window.
+    """Pick one screenshot for a step.
 
-    Extracts several candidate frames across the window and keeps the largest
-    JPEG (most visual detail), which skips blank / half-loaded frames. Falls
-    back to the narration midpoint, start, then 0s if every sample fails to
-    extract. Returns the chosen frame's path (resized in place).
+    Preferred: a tight cluster around the click_time Gemini located (via the
+    red click-highlight ring) -- the cursor-on-control instant. Falls back to
+    sampling the narration window, then to coarse fixed points. Returns the
+    chosen frame's path (resized in place).
     """
     raw_start, raw_end = step.get("start_time"), step.get("end_time")
     start = float(raw_start) if isinstance(raw_start, (int, float)) else 0.0
     end = float(raw_end) if isinstance(raw_end, (int, float)) else start
-
     final = workdir / f"frame_{index:03d}.jpg"
 
-    candidates: list[tuple[Path, int]] = []
-    for j, ts in enumerate(_candidate_timestamps(start, end, video_duration)):
-        cand = workdir / f"frame_{index:03d}_c{j}.jpg"
-        try:
-            extract_frame(video_path, ts, cand)
-        except HTTPException:
-            continue
-        candidates.append((cand, cand.stat().st_size))
+    # 1) Click-centered: extract the click instant itself (the cursor-on-
+    #    control frame the red ring marks). Trust click_time only if it sits
+    #    within the step's narration window (guards against a stray value).
+    click = step.get("click_time")
+    if isinstance(click, (int, float)) and (
+        start - CLICK_WINDOW_SLACK_SECONDS
+        <= float(click)
+        <= end + CLICK_WINDOW_SLACK_SECONDS
+    ):
+        for off in CLICK_FALLBACK_OFFSETS:
+            try:
+                extract_frame(
+                    video_path,
+                    _clamp_timestamp(float(click) + off, video_duration),
+                    final,
+                )
+                resize_screenshot(final)
+                return final
+            except HTTPException:
+                continue
 
-    if candidates:
-        # Largest JPEG = most detail -> skips blank / half-loaded frames.
-        # max() keeps the earliest on ties (the action screen, not the next).
-        best_path = max(candidates, key=lambda c: c[1])[0]
-        best_path.replace(final)
-        resize_screenshot(final)
-        return final
+    # 2) Narration-window sampling.
+    chosen = _extract_best(
+        video_path,
+        _candidate_timestamps(start, end, video_duration),
+        index,
+        video_duration,
+        workdir,
+        final,
+        "c",
+    )
+    if chosen is not None:
+        return chosen
 
-    # Every windowed sample failed to extract; try coarse fallbacks.
+    # 3) Coarse last-resort fallbacks.
     last_error: HTTPException | None = None
     for ts in ((start + end) / 2.0, start, 0.0):
         try:
@@ -214,12 +264,17 @@ async def process_video(
                     ),
                 )
 
+        # Duration is needed before the Gemini call to pick the perception fps.
+        with _step(request_id, "probe_duration"):
+            video_duration = probe_duration(video_path)
+            print(f"[{request_id}] video duration: {video_duration}")
+
         # One Gemini call does transcription, segmentation, instruction
-        # writing, and captions. Run it off the event loop since the SDK
-        # calls are blocking.
+        # writing, captions, and click localization. Run it off the event
+        # loop since the SDK calls are blocking.
         with _step(request_id, "generate_document"):
             result = await asyncio.to_thread(
-                generate_document, video_path, request_id
+                generate_document, video_path, request_id, video_duration
             )
         introduction = result["introduction"]
         steps = result["steps"]
@@ -238,10 +293,6 @@ async def process_video(
                 ),
             )
 
-        with _step(request_id, "probe_duration"):
-            video_duration = probe_duration(video_path)
-            print(f"[{request_id}] video duration: {video_duration}")
-
         with _step(request_id, "extract_screenshots"):
             for i, step in enumerate(steps):
                 frame_path = _select_step_frame(
@@ -251,7 +302,7 @@ async def process_video(
                 print(
                     f"[{request_id}] step={i} "
                     f"window=[{step.get('start_time')}, {step.get('end_time')}]s "
-                    f"-> {frame_path.name}"
+                    f"click={step.get('click_time')}s -> {frame_path.name}"
                 )
 
         output_path = workdir / "output.docx"
