@@ -70,6 +70,13 @@ You convert a screen recording with voice narration into a step-by-step
 how-to document. Work ONLY from what you can see and hear in this video. Do
 not invent anything that is not shown or said.
 
+Write the entire document -- the introduction, every instruction, and every
+caption -- in clear, grammatically correct English, regardless of the language
+the narrator speaks (often Ukrainian or Russian): translate as needed, and fix
+grammar and phrasing, including when the narration is already in English. Keep
+any on-screen text and control labels exactly as they appear on screen (do not
+translate those), so the reader can match them to what they see.
+
 {clicks_section}\
 The narrator may also say a CUE WORD out loud to mark the exact moment they want
 captured for a step -- "screenshot", "скріншот", or "скриншот" (the same word in
@@ -82,17 +89,21 @@ click when choosing the step's screenshot moment.
 Return a JSON object with two keys: "introduction" and "steps".
 
 INTRODUCTION
-- 3-4 sentences summarizing what the whole guide accomplishes, in
-task-oriented voice ("This guide walks through..."). Do NOT write "I will
-show you...", "You will learn...", or "In this video...".
-- Ground it strictly in the narration. If you cannot confidently determine
-the subject, return an empty string.
+- ONE sentence stating what this document helps the reader accomplish (its
+overall purpose), in task-oriented voice ("This guide walks through..."). Do
+NOT write "I will show you...", "You will learn...", or "In this video...", and
+do NOT restate or list the individual steps -- the steps section covers those.
+- Ground it strictly in the narration. If you cannot confidently determine the
+subject, return an empty string.
 
-STEPS -- one object per logical step. A step is ONE action a reader would
-perform (for example, "open the settings menu and choose Account"), even if the
-narrator pauses or explains across several sentences. Keep an explanation that
-belongs to a step together with that step; do not split it into its own step.
-Skip pure end-filler like "and that's all".
+STEPS -- one object per action. A step is a SINGLE action the reader performs --
+typically one click, selection, or entry. Split distinct actions into separate
+steps: "open the Settings menu" is one step and "choose Account" is the next,
+even if the narrator described both in one breath. Do NOT, however, split a
+single action's narration into pieces -- the explanation, the "why", a pause, or
+a description of what is on screen all stay attached to that action's step
+(never make an explanation a step of its own). Skip pure end-filler like "and
+that's all".
 
 Each step object must have:
 - "start_time" and "end_time" (numbers, seconds): the precise span of THIS
@@ -110,9 +121,13 @@ otherwise set it to the moment the step's action or result is most clearly and
 completely shown on screen.
 - "instruction" (string): imperative voice ("Click X", not "I click X" or "you
 need to click X"). When the step uses a listed click, name the control using its
-LABEL so the wording is exact. Preserve useful detail the narrator gave -- if
-they explained WHY, keep the why. Strip filler ("um", "okay", "as you can see")
-and never include a cue word. Do not number the step.
+LABEL so the wording is exact. Preserve ALL the explanatory detail the narrator
+gave -- if they explained why, keep the why; if they described what is on screen
+or gave context, warnings, or tips, keep those too. There is NO length limit:
+use as many sentences as the narration warrants, so a richly-explained step
+produces a rich, multi-sentence instruction rather than a one-line summary.
+Strip only filler ("um", "okay", "as you can see") and never include a cue word.
+Do not number the step.
 - "caption" (string): one sentence, under 25 words, describing what is visible
 on screen at the chosen moment.\
 """
