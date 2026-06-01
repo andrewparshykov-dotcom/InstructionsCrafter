@@ -22,8 +22,8 @@ from fastapi.responses import FileResponse, JSONResponse
 from starlette.exceptions import HTTPException as StarletteHTTPException
 
 # Load .env BEFORE importing app modules: app.pipeline / app.gemini read tuning
-# knobs (AUTO_FPS, MARKER_FPS, CLICK_LEAD_SECONDS, VOICE_CUE_LEAD_SECONDS) at
-# import time, so those values must already be in the environment first.
+# knobs (PERCEPTION_FPS, CLICK_LEAD_SECONDS, VOICE_CUE_LEAD_SECONDS) at import
+# time, so those values must already be in the environment first.
 load_dotenv()
 
 from app.pipeline import cleanup_workdir, create_temp_workdir, process_video
