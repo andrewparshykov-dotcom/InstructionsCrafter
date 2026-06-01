@@ -46,7 +46,7 @@ app = FastAPI(title="InstructionsCrafter API")
 
 # CORS — the Chrome extension's origin is `chrome-extension://<id>`. ALLOWED_ORIGINS
 # in .env can be a comma-separated list of explicit origins. If it is empty or only
-# contains the placeholder from .env.example, fall back to a regex that accepts any
+# contains the placeholder value, fall back to a regex that accepts any
 # chrome-extension origin so local development works without looking up the ID.
 # DECISION: dev-mode fallback is intentionally permissive for ≤5-user internal use.
 # For Phase 7 production, set ALLOWED_ORIGINS to the exact deployed extension origin.

@@ -36,7 +36,6 @@ htmlcov/
 .envrc.*
 
 # But DO commit example/template files (safe to share)
-!.env.example
 !.env.template
 !.envrc.example
 

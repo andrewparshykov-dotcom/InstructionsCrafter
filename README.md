@@ -15,8 +15,7 @@ A Chrome extension records the screen + microphone and uploads to a FastAPI back
 ├── backend/            # Python FastAPI server
 │   ├── app/            # Pipeline modules (gemini, pipeline, screenshots, etc.)
 │   ├── templates/      # Word document template
-│   ├── requirements.txt
-│   └── .env.example
+│   └── requirements.txt
 └── extension/          # Chrome extension (Screenity fork)
     ├── src/            # Source
     ├── build/          # `npm run build` output (load this into Chrome)
@@ -64,9 +63,10 @@ python3.11 -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
 
-# Copy and fill in your Gemini API key + a shared password
-cp .env.example .env
-# edit .env
+# Create a .env file with your Gemini API key + a shared password:
+#   GEMINI_API_KEY=your-key
+#   SHARED_PASSWORD=your-password
+# (optional: MAX_VIDEO_SIZE_MB, TEMP_DIR, ALLOWED_ORIGINS)
 
 # Run the server
 uvicorn app.main:app --reload --host 127.0.0.1 --port 8000
