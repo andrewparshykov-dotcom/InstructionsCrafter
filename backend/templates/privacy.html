@@ -66,14 +66,14 @@
 <body>
 <main>
 <h1>InstructionsCrafter — Privacy Policy</h1>
-<p class="updated">Last updated: 2026-05-25</p>
+<p class="updated">Last updated: 2026-06-01</p>
 
 <h2>What we collect</h2>
 <p>When you use the InstructionsCrafter Chrome extension:</p>
 <ul>
-  <li><strong>Screen recording and microphone audio</strong> captured during a recording session, plus mouse-click coordinates while recording.</li>
+  <li><strong>Screen recording and microphone audio</strong> captured during a recording session, plus the timing of your mouse clicks and the on-screen labels of the controls you click (used to place each screenshot at the right moment).</li>
   <li><strong>The document title</strong> you enter on the post-recording page.</li>
-  <li><strong>Local settings</strong> stored in <code>chrome.storage.local</code>: the backend URL, an optional default document title, and recording session state (which Chrome clears when you uninstall the extension).</li>
+  <li><strong>Local settings</strong> stored in <code>chrome.storage.local</code>: the backend URL, an optional default document title, recording session state, and the shared password (saved after a successful generation so you do not have to retype it, and cleared automatically if the server rejects it). Chrome clears all of this when you uninstall the extension.</li>
 </ul>
 <p>We do <strong>not</strong> collect: your name, email, IP address, browser history, cookies, screen content outside of an active recording session, or any data unrelated to producing the requested document.</p>
 
@@ -81,24 +81,24 @@
 <p>Recordings and titles are sent to <strong>our own backend server</strong> (default: <code>https://instructionscrafter.com</code>) over HTTPS. The backend pipeline:</p>
 <ol>
   <li>Saves the upload to a per-request temporary directory.</li>
-  <li>Extracts the audio track and sends it to <strong>Groq's Whisper API</strong> for transcription.</li>
-  <li>Sends the transcript and selected screenshots to <strong>OpenAI's GPT API</strong> for narration polishing.</li>
-  <li>Returns a <code>.docx</code> file to your browser.</li>
-  <li><strong>Deletes the upload and every intermediate file</strong> as soon as the response is sent.</li>
+  <li>Sends the <strong>entire recording — both the video and the audio</strong> — to <strong>Google's Gemini API</strong>, which watches it and returns the document's introduction, the step-by-step instructions, and the moment to capture for each screenshot.</li>
+  <li>Extracts the screenshots locally with FFmpeg and assembles them with the text into a <code>.docx</code> file.</li>
+  <li>Returns the <code>.docx</code> file to your browser.</li>
+  <li><strong>Deletes the upload and every intermediate file</strong> from our server as soon as the response is sent, and deletes the copy uploaded to Google as soon as Gemini finishes processing it.</li>
 </ol>
-<p>No copy is retained on the server. No database persists user content.</p>
+<p>No copy is retained on our server. No database persists user content.</p>
 
 <h2>Third-party services</h2>
 <ul>
-  <li><strong>Groq</strong> (transcription) — receives the recorded audio. Subject to <a href="https://groq.com/privacy-policy/" target="_blank" rel="noopener">Groq's privacy policy</a>.</li>
-  <li><strong>OpenAI</strong> (text polishing) — receives the transcript text. Subject to <a href="https://openai.com/policies/privacy-policy" target="_blank" rel="noopener">OpenAI's privacy policy</a>.</li>
+  <li><strong>Google (Gemini API)</strong> — receives the entire recording (video and audio) in order to generate the document. InstructionsCrafter uses a <strong>paid Gemini API tier, on which Google does not use the content you submit to train or improve its models</strong>. Subject to <a href="https://ai.google.dev/gemini-api/terms" target="_blank" rel="noopener">Google's Gemini API Additional Terms of Service</a> and the <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google Privacy Policy</a>.</li>
 </ul>
+<p>Google is the only third party that receives your recording.</p>
 
 <h2>Authentication</h2>
-<p>The extension sends a shared password (entered on the post-recording page) with every request. The backend verifies it and rejects unauthenticated requests. The password is <strong>not</strong> stored locally between sessions.</p>
+<p>The extension sends a shared password (entered on the post-recording page) with every request. The backend verifies it and rejects unauthenticated requests. After a successful generation the password is saved in <code>chrome.storage.local</code> so you do not have to retype it on later visits; it is cleared automatically if the server rejects it, and Chrome removes it when you uninstall the extension. It is never sent anywhere except to our own backend.</p>
 
 <h2>Data sharing</h2>
-<p>We do not share, sell, or transfer user data beyond the third-party services listed above.</p>
+<p>We do not share, sell, or transfer user data beyond the third-party service listed above.</p>
 
 <h2>Open source</h2>
 <p>InstructionsCrafter is open source under GPLv3. Source code: <a href="https://github.com/andrewparshykov-dotcom/InstructionsCrafter" target="_blank" rel="noopener">github.com/andrewparshykov-dotcom/InstructionsCrafter</a>. The Chrome extension portion is forked from <a href="https://github.com/alyssaxuu/screenity" target="_blank" rel="noopener">Screenity</a> (also GPLv3).</p>
