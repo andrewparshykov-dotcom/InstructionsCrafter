@@ -2,7 +2,7 @@
 
 Turn a screen recording with voice narration into a polished Microsoft Word step-by-step instruction document.
 
-A Chrome extension records the screen + microphone, uploads to a FastAPI backend, which transcribes the audio (Groq Whisper), segments the narration into logical steps, extracts one screenshot per step (FFmpeg), polishes the text (OpenAI GPT-5.4), and returns a `.docx` file. No long-term storage — everything is processed in-memory and discarded after each request.
+A Chrome extension records the screen + microphone and uploads to a FastAPI backend, which sends the whole recording (video + audio) to Google's Gemini API in a single call. Gemini watches the recording and returns the document's introduction plus one step per action — each with its instruction, a caption, and the moment to screenshot. The backend extracts those screenshots (FFmpeg) and assembles them into a `.docx` file. No long-term storage — everything is processed and discarded after each request.
 
 **Internal tool** for ≤5 users. Forked from [Screenity](https://github.com/alyssaxuu/screenity) (GPLv3).
 
@@ -13,7 +13,7 @@ A Chrome extension records the screen + microphone, uploads to a FastAPI backend
 ```
 .
 ├── backend/            # Python FastAPI server
-│   ├── app/            # Pipeline modules (transcription, segmentation, etc.)
+│   ├── app/            # Pipeline modules (gemini, pipeline, screenshots, etc.)
 │   ├── templates/      # Word document template
 │   ├── requirements.txt
 │   └── .env.example
@@ -47,7 +47,7 @@ The shared password lives in the backend's `.env`. Ask the team for it.
 
 1. Click the InstructionsCrafter icon → **Start**.
 2. Choose what to record (entire screen, window, or tab).
-3. **Narrate every step out loud** — the document is built from what you *say*, not from what you click.
+3. **Narrate every step out loud** — the instructions are built from what you *say*. Your clicks are captured automatically to time the screenshots; if a click can't be captured (a desktop app, an embedded frame), just say **"screenshot"** out loud at the moment you want captured.
 4. Click **Stop** when done.
 5. The post-recording page opens. Enter a document title, the shared password, and click **Generate Document**.
 6. A `.docx` file downloads in a few seconds.
@@ -64,7 +64,7 @@ python3.11 -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
 
-# Copy and fill in API keys (Groq, OpenAI) + a shared password
+# Copy and fill in your Gemini API key + a shared password
 cp .env.example .env
 # edit .env
 
@@ -118,7 +118,7 @@ pip install -r requirements.txt
 
 # Create production .env (file mode 600, owner-only)
 sudo nano .env
-# Fill in OPENAI_API_KEY, GROQ_API_KEY, SHARED_PASSWORD,
+# Fill in GEMINI_API_KEY, SHARED_PASSWORD,
 # MAX_VIDEO_SIZE_MB=500, TEMP_DIR=/tmp/instruction-generator,
 # ALLOWED_ORIGINS=chrome-extension://<your-extension-id>
 sudo chmod 600 .env
@@ -223,11 +223,10 @@ Annual operating cost (production estimate):
 | Azure VM (`Standard_D2s_v3`, always-on) | ~$70/mo |
 | Disk + IP + bandwidth | ~$6/mo |
 | Domain (Namecheap, year-2 onward) | ~$15/yr |
-| Groq Whisper (free tier covers our usage) | $0 |
-| OpenAI GPT-5.4 (segmentation + polishing) | $10–30/yr |
+| Google Gemini 3.5 Flash (one call per document, ~$0.03 each on the paid tier) | ~$10–30/yr |
 | **Total** | **~$940–960/yr** |
 
-The Groq free tier (7,200 audio sec/hour, 28,800 sec/day, 2,000 req/day) is generous enough for 5 internal users.
+Gemini 3.5 Flash processes the whole recording in one call (~3¢ per document on the paid tier). The free tier (20 requests/day) also covers light internal use, but Google may use free-tier content to improve its models, so production uses the paid tier.
 
 ---
 
