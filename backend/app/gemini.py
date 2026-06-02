@@ -421,11 +421,14 @@ the Nth screenshot.
 - Each step is an object with:
   - "instruction" (string): imperative voice ("Click X", not "I click X" or "you
   need to click X"). Name the clicked control using its LABEL so the wording is
-  exact (e.g. Click "Get a Quote"). If narration explained why, or gave context,
-  a warning, or a tip for this action, include it. There is NO length limit: use
-  as many sentences as the narration warrants. If there is no narration for this
-  action, write a clear, straightforward instruction from the screenshot and the
-  label alone. Strip filler ("um", "okay", "as you can see"). Do not number it.
+  exact (e.g. Click "Get a Quote"). Preserve ALL the explanatory detail the
+  narrator gave for this screenshot -- if they explained why, keep the why; if
+  they gave context, warnings, or tips, keep those too. There is NO length limit:
+  use as many sentences as the narration warrants, so a richly-explained step
+  produces a rich, multi-sentence instruction rather than a one-line summary. If
+  there is no narration for this action, write a clear, straightforward
+  instruction from the screenshot and the label alone. Strip only filler ("um",
+  "okay", "as you can see"). Do not number it.
   - "caption" (string): one sentence, under 25 words, describing what is visible
   on screen in this screenshot.\
 """
