@@ -25,6 +25,7 @@ precision, and 1 fps keeps token cost ~10x lower.
 Runs synchronously; the async pipeline calls it via ``asyncio.to_thread``.
 """
 
+import io
 import json
 import os
 import sys
@@ -34,6 +35,7 @@ from typing import Any
 
 from fastapi import HTTPException
 from pydantic import BaseModel, ValidationError
+from PIL import Image
 
 from google import genai
 from google.genai import errors as genai_errors
@@ -363,4 +365,224 @@ def generate_document(
         f"anchors: voice={counts['voice']} click={counts['click']} "
         f"auto={counts['auto']}"
     )
+    return {"introduction": doc.introduction.strip(), "steps": steps}
+
+
+# ---------------------------------------------------------------------------
+# Click-capture mode
+# ---------------------------------------------------------------------------
+# A separate one-call path for the browser "Click capture" mode: instead of a
+# video, Gemini is given an ORDERED set of screenshots (one per click, each
+# labeled with the control that was clicked) plus optional voice narration, and
+# writes the introduction + exactly one imperative step per screenshot. No
+# ffmpeg frame extraction -- the screenshots already are the per-step images.
+
+# Each screenshot is downscaled to at most this width before being sent to
+# Gemini (the full-resolution shot is kept for the document). Keeps the inline
+# request small without hurting on-screen-text legibility. Env-overridable.
+CLICKS_PERCEPTION_MAX_WIDTH = int(os.getenv("CLICKS_PERCEPTION_MAX_WIDTH", "1280"))
+CLICKS_PERCEPTION_JPEG_QUALITY = 80
+# Defensive cap on screenshots sent in one call (a real flow is far smaller).
+CLICKS_MAX_SHOTS = 80
+
+
+CLICKS_PROMPT = """\
+You convert an ORDERED sequence of screenshots into a step-by-step how-to
+document. Each screenshot was captured at the moment the user clicked, and is
+preceded by a line naming the control they clicked (its on-screen LABEL). The
+screenshots are in the exact order the actions happened. A voice narration of
+the whole flow MAY also be provided as audio; if so, use it to understand intent
+and add the explanation the narrator gave -- but it is optional and may be
+silent or absent.
+
+Work ONLY from what you can see in the screenshots, the provided labels, and any
+narration. Do not invent anything that is not shown or said.
+
+Write the entire document -- the introduction and every instruction and caption
+-- in clear, grammatically correct English, regardless of the language any
+narration is in (often Ukrainian or Russian): translate as needed, and fix
+grammar and phrasing, including when the narration is already in English. Keep
+any on-screen text and control labels exactly as they appear on screen (do not
+translate those), so the reader can match them to what they see.
+
+Return a JSON object with two keys: "introduction" and "steps".
+
+INTRODUCTION
+- ONE sentence stating what this document helps the reader accomplish, in
+task-oriented voice ("This guide walks through..."). Do NOT write "I will show
+you...", "You will learn...", or "In this video...", and do NOT restate the
+individual steps. If you cannot confidently determine the subject, return an
+empty string.
+
+STEPS
+- Produce EXACTLY ONE step per screenshot, in the SAME ORDER as the screenshots.
+Do not merge, split, reorder, add, or drop steps -- the Nth step corresponds to
+the Nth screenshot.
+- Each step is an object with:
+  - "instruction" (string): imperative voice ("Click X", not "I click X" or "you
+  need to click X"). Name the clicked control using its LABEL so the wording is
+  exact (e.g. Click "Get a Quote"). If narration explained why, or gave context,
+  a warning, or a tip for this action, include it. There is NO length limit: use
+  as many sentences as the narration warrants. If there is no narration for this
+  action, write a clear, straightforward instruction from the screenshot and the
+  label alone. Strip filler ("um", "okay", "as you can see"). Do not number it.
+  - "caption" (string): one sentence, under 25 words, describing what is visible
+  on screen in this screenshot.\
+"""
+
+
+class _ClicksStep(BaseModel):
+    instruction: str
+    caption: str
+
+
+class _ClicksDoc(BaseModel):
+    introduction: str
+    steps: list[_ClicksStep]
+
+
+def _downscaled_jpeg_bytes(path: Path, max_width: int) -> bytes:
+    """Read an image and return JPEG bytes downscaled to at most ``max_width``
+    (kept as-is if already narrower). Used only for what Gemini perceives."""
+    with Image.open(path) as im:
+        im = im.convert("RGB")
+        if im.width > max_width:
+            new_height = round(im.height * (max_width / im.width))
+            im = im.resize((max_width, new_height), Image.Resampling.LANCZOS)
+        buf = io.BytesIO()
+        im.save(buf, "JPEG", quality=CLICKS_PERCEPTION_JPEG_QUALITY)
+        return buf.getvalue()
+
+
+def _default_instruction(label: str) -> str:
+    label = (label or "").strip()
+    return f'Click "{label}".' if label else "Click the control shown."
+
+
+def generate_document_from_clicks(
+    shots: list[dict],
+    request_id: str,
+    audio_path: Path | None = None,
+) -> dict[str, Any]:
+    """Run the single Gemini call for Click-capture mode.
+
+    ``shots`` is the ordered list of ``{"image_path": Path, "label": str}`` (one
+    per click). ``audio_path`` is an optional narration file in a Gemini-supported
+    audio format (the pipeline transcodes to MP3 before calling). Returns
+    ``{"introduction": str, "steps": [{"instruction", "caption"}]}`` with EXACTLY
+    one step per shot, in order. Synchronous -- call via ``asyncio.to_thread``.
+
+    Raises HTTPException on missing key, rate limits, or an unparseable response.
+    """
+    if not shots:
+        raise HTTPException(status_code=400, detail="No screenshots to process")
+    shots = shots[:CLICKS_MAX_SHOTS]
+
+    api_key = os.getenv("GEMINI_API_KEY")
+    if not api_key:
+        raise HTTPException(
+            status_code=500,
+            detail="Gemini API key is not configured on the server",
+        )
+    model = os.getenv("GEMINI_MODEL", DEFAULT_MODEL)
+    client = genai.Client(api_key=api_key)
+
+    # Build the multimodal request: prompt, then each labeled screenshot in
+    # order, then the optional narration. Images are sent inline (downscaled),
+    # so -- unlike the video path -- there is no File API upload/poll/delete.
+    contents: list[Any] = [CLICKS_PROMPT]
+    for i, shot in enumerate(shots):
+        label = (shot.get("label") or "").strip()
+        if label:
+            contents.append(f'Screenshot {i + 1} -- control clicked: "{label}"')
+        else:
+            contents.append(f"Screenshot {i + 1} -- (no control label captured)")
+        contents.append(
+            types.Part.from_bytes(
+                data=_downscaled_jpeg_bytes(
+                    Path(shot["image_path"]), CLICKS_PERCEPTION_MAX_WIDTH
+                ),
+                mime_type="image/jpeg",
+            )
+        )
+    if audio_path is not None:
+        contents.append(
+            "Voice narration for the whole flow (optional context; may be silent):"
+        )
+        contents.append(
+            types.Part.from_bytes(
+                data=Path(audio_path).read_bytes(), mime_type="audio/mp3"
+            )
+        )
+
+    print(
+        f"[{request_id}] gemini clicks: shots={len(shots)} "
+        f"audio={'yes' if audio_path else 'no'}"
+    )
+    config = types.GenerateContentConfig(
+        response_mime_type="application/json",
+        response_schema=_ClicksDoc,
+        media_resolution=PERCEPTION_MEDIA_RESOLUTION,
+        thinking_config=types.ThinkingConfig(
+            thinking_level=types.ThinkingLevel.HIGH
+        ),
+    )
+    try:
+        response = client.models.generate_content(
+            model=model, contents=contents, config=config
+        )
+    except genai_errors.APIError as exc:
+        code = getattr(exc, "code", None)
+        if code == 429 or "RESOURCE_EXHAUSTED" in str(exc):
+            raise HTTPException(
+                status_code=429,
+                detail=(
+                    "Gemini rate limit reached (free tier allows 20 "
+                    "requests/day). Try again later or enable billing."
+                ),
+            )
+        print(f"[{request_id}] gemini clicks error: {exc!r}", file=sys.stderr)
+        raise HTTPException(status_code=502, detail="Gemini request failed")
+
+    # Parse + validate (prefer the SDK's schema-parsed object).
+    doc = getattr(response, "parsed", None)
+    if not isinstance(doc, _ClicksDoc):
+        raw = getattr(response, "text", None)
+        if not raw:
+            raise HTTPException(
+                status_code=502, detail="Gemini returned an empty response"
+            )
+        try:
+            doc = _ClicksDoc.model_validate_json(raw)
+        except (ValidationError, ValueError, json.JSONDecodeError) as exc:
+            print(
+                f"[{request_id}] gemini clicks parse failed: {exc!r}",
+                file=sys.stderr,
+            )
+            raise HTTPException(
+                status_code=502, detail="Gemini returned an unexpected response"
+            )
+
+    # Force exactly one step per screenshot, index-aligned. Gemini is told to
+    # return them 1:1 and in order; if it returns too few (or a blank
+    # instruction), fall back to a label-based default so the doc still renders.
+    parsed = doc.steps
+    steps: list[dict[str, Any]] = []
+    for i, shot in enumerate(shots):
+        label = shot.get("label") or ""
+        if i < len(parsed):
+            instruction = parsed[i].instruction.strip() or _default_instruction(label)
+            caption = parsed[i].caption.strip()
+        else:
+            instruction = _default_instruction(label)
+            caption = ""
+        steps.append({"instruction": instruction, "caption": caption})
+
+    if len(parsed) != len(shots):
+        print(
+            f"[{request_id}] gemini clicks: step/shot mismatch "
+            f"({len(parsed)} vs {len(shots)}); normalized to {len(shots)}",
+            file=sys.stderr,
+        )
+    print(f"[{request_id}] gemini clicks: {len(steps)} steps, model={model}")
     return {"introduction": doc.introduction.strip(), "steps": steps}

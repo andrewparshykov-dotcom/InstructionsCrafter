@@ -27,6 +27,7 @@ export const updateFromStorage = (check = true, id = null) => {
       "toolbarPosition",
       "countdown",
       "recordingType",
+      "captureMode",
       "hideToolbar",
       "pendingRecording",
       "askForPermissions",
@@ -106,6 +107,10 @@ export const updateFromStorage = (check = true, id = null) => {
           result.recordingType !== undefined && result.recordingType !== null
             ? result.recordingType
             : prevContentState.recordingType,
+        captureMode:
+          result.captureMode !== undefined && result.captureMode !== null
+            ? result.captureMode
+            : prevContentState.captureMode,
         hideToolbar:
           result.hideToolbar !== undefined && result.hideToolbar !== null
             ? result.hideToolbar

@@ -109,6 +109,19 @@ const accessibleName = (el) => {
   return attr(el, "title") || attr(el, "placeholder") || attr(el, "name") || "";
 };
 
+// Many custom-built controls (cards, menu rows, icon buttons) carry no semantic
+// role/href but set `cursor: pointer` to signal they are clickable. Treating
+// that as actionable too lets us capture real controls while ignoring clicks on
+// inert text / whitespace, which compute a default/text/auto cursor.
+const hasPointerCursor = (el) => {
+  try {
+    const view = el.ownerDocument && el.ownerDocument.defaultView;
+    return !!view && view.getComputedStyle(el).cursor === "pointer";
+  } catch {
+    return false;
+  }
+};
+
 const describeTarget = (e) => {
   // composedPath()[0] is the true target even across shadow boundaries;
   // e.target gets retargeted to the shadow host on web-component pages.
@@ -118,23 +131,62 @@ const describeTarget = (e) => {
   const actionable = el && el.closest ? el.closest(ACTIONABLE_SELECTOR) : null;
   const chosen = actionable || el;
   if (!chosen || chosen.nodeType !== 1) {
-    return { label: "", role: "", tag: "" };
+    return { label: "", role: "", tag: "", actionable: false };
   }
+  // "actionable" = a real interactive control. Click-capture mode screenshots
+  // only these, so clicking empty page space never adds a step.
   return {
     label: accessibleName(chosen),
     role: attr(chosen, "role"),
     tag: chosen.tagName ? chosen.tagName.toLowerCase() : "",
+    actionable: Boolean(actionable) || hasPointerCursor(chosen),
   };
 };
+
+// True if the click landed on the extension's OWN UI (the recorder popup,
+// toolbar, or any namespaced element) rather than the page. composedPath
+// crosses shadow boundaries, so a click inside our shadow root includes the
+// host #instructionscrafter-root-container. These must never be logged or
+// screenshotted -- otherwise e.g. the Stop control becomes a "step".
+const isExtensionUiEvent = (e) => {
+  const path = typeof e.composedPath === "function" ? e.composedPath() : [];
+  for (const node of path) {
+    if (!node || node.nodeType !== 1) continue;
+    const id = typeof node.id === "string" ? node.id : "";
+    const cls = typeof node.className === "string" ? node.className : "";
+    if (
+      id.indexOf("instructionscrafter") !== -1 ||
+      cls.indexOf("instructionscrafter") !== -1
+    ) {
+      return true;
+    }
+  }
+  return false;
+};
+
+// Last mouse position seen in this frame, used to place the cursor-arrow marker
+// on a manual (hotkey) capture -- captureVisibleTab can't include the real OS
+// cursor, so we draw one at where the pointer last was. Updated on mousemove
+// while ClickLogger is mounted (i.e. only during a click-capture recording).
+let lastMouse = null;
 
 const ClickLogger = () => {
   useEffect(() => {
     const onMouseDown = (e) => {
       // Left button only.
       if (e.button !== 0) return;
+      // Never capture clicks on our own UI (popup, toolbar, Stop, etc.).
+      if (isExtensionUiEvent(e)) return;
       // Capture the timestamp synchronously, before the async storage read.
       const now = Date.now();
       const info = describeTarget(e);
+      // Click point in CSS pixels relative to the viewport, plus the device
+      // pixel ratio. Click-capture mode uses these to draw the ring marker on
+      // the captured screenshot (image px = CSS px * dpr); video mode ignores
+      // them. Captured synchronously off the event.
+      const x = Math.round(e.clientX);
+      const y = Math.round(e.clientY);
+      const dpr = window.devicePixelRatio || 1;
       chrome.storage.local.get(
         ["recording", "recordingStartTime", "paused", "totalPausedMs"],
         (s) => {
@@ -152,10 +204,28 @@ const ClickLogger = () => {
               label: info.label,
               role: info.role,
               tag: info.tag,
+              actionable: info.actionable,
+              x,
+              y,
+              dpr,
             })
             .catch(() => {});
         }
       );
+    };
+    // Track the pointer so a manual (hotkey) capture can mark where it was.
+    const onMouseMove = (e) => {
+      lastMouse = {
+        x: Math.round(e.clientX),
+        y: Math.round(e.clientY),
+        dpr: window.devicePixelRatio || 1,
+      };
+    };
+    // The background asks for that position when the hotkey fires.
+    const onMessage = (msg, sender, sendResponse) => {
+      if (msg && msg.type === "get-last-mouse") {
+        sendResponse(lastMouse);
+      }
     };
     // mousedown (not click): a control's own handler runs on RELEASE and may
     // navigate away, so the press instant is the last moment the control is
@@ -165,8 +235,16 @@ const ClickLogger = () => {
       capture: true,
       passive: true,
     });
-    return () =>
+    document.addEventListener("mousemove", onMouseMove, {
+      capture: true,
+      passive: true,
+    });
+    chrome.runtime.onMessage.addListener(onMessage);
+    return () => {
       document.removeEventListener("mousedown", onMouseDown, { capture: true });
+      document.removeEventListener("mousemove", onMouseMove, { capture: true });
+      chrome.runtime.onMessage.removeListener(onMessage);
+    };
   }, []);
 
   return null;

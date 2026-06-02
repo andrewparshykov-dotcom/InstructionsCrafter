@@ -4,6 +4,12 @@
 // MediaRecorder writes timeslice WebM chunks that concatenate into a valid file).
 
 import localforage from "localforage";
+import {
+  clickShotsStore,
+  clickAudioStore,
+  CLICK_AUDIO_KEY,
+  clearClickCaptureStores,
+} from "../utils/clickCaptureStores";
 
 // Mirror the recorder's database name so we open the same store it wrote to.
 localforage.config({
@@ -31,6 +37,35 @@ export async function loadRecording() {
   }
 
   return await loadFromIndexedDB();
+}
+
+// Click-capture mode: load the ordered per-click screenshots (+ optional
+// narration) the background/offscreen wrote to IndexedDB. Each screenshot
+// carries its own metadata (label + click x/y/dpr), so they stay aligned even
+// if some captures failed. Returns shots sorted by capture order.
+export async function loadClickCapture() {
+  const shots = [];
+  await clickShotsStore.iterate((value) => {
+    if (value && value.blob) shots.push(value);
+  });
+
+  if (shots.length === 0) {
+    throw new Error(
+      "No click screenshots were found. The capture may have been discarded, " +
+        "or this page opened before capture finished. Try recording again."
+    );
+  }
+  shots.sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
+
+  let audio = null;
+  try {
+    const rec = await clickAudioStore.getItem(CLICK_AUDIO_KEY);
+    if (rec && rec.blob && rec.blob.size > 0) audio = rec; // { blob, mimeType }
+  } catch (err) {
+    console.warn("Loading click narration failed (continuing silent):", err);
+  }
+
+  return { mode: "clicks", shots, audio };
 }
 
 async function loadFromOpfs(fileName) {
@@ -115,6 +150,14 @@ export async function discardRecording() {
     await chrome.storage.local.set({ lastRecordingBackendRef: null });
   } catch (err) {
     console.warn("Clearing lastRecordingBackendRef failed:", err);
+  }
+
+  // Also clear any Click-capture data so a discard wipes both modes.
+  try {
+    await clearClickCaptureStores();
+    await chrome.storage.local.set({ lastRecordingMode: null, clickShotCount: 0 });
+  } catch (err) {
+    console.warn("Clearing click-capture stores failed:", err);
   }
 }
 

@@ -61,6 +61,17 @@ const RecordingType = (props) => {
     contentState.startStreaming();
   };
 
+  // Capture mode: "video" (narrated screen recording) | "clicks" (Click-capture:
+  // a screenshot per click, narration optional, browser tab only).
+  const captureMode = contentState.captureMode || "video";
+  const setCaptureMode = (mode) => {
+    setContentState((prevContentState) => ({
+      ...prevContentState,
+      captureMode: mode,
+    }));
+    chrome.storage.local.set({ captureMode: mode });
+  };
+
   useEffect(() => {
     if (contentState.recording) {
       setContentState((prevContentState) => ({
@@ -72,6 +83,36 @@ const RecordingType = (props) => {
 
   return (
     <div>
+      <div style={modeStyles.wrap} role="group" aria-label="Capture mode">
+        <button
+          type="button"
+          style={{
+            ...modeStyles.btn,
+            ...(captureMode === "video" ? modeStyles.btnActive : {}),
+          }}
+          onClick={() => setCaptureMode("video")}
+        >
+          Video
+        </button>
+        <button
+          type="button"
+          style={{
+            ...modeStyles.btn,
+            ...(captureMode === "clicks" ? modeStyles.btnActive : {}),
+          }}
+          onClick={() => setCaptureMode("clicks")}
+        >
+          Click capture
+        </button>
+      </div>
+      {captureMode === "clicks" && (
+        <div style={modeStyles.hint}>
+          Browser tabs only · one screenshot per click · narration optional.
+          Press Alt+Shift+S to capture the screen without clicking — you can
+          change this key on Chrome's keyboard-shortcuts page. Click the toolbar
+          icon to stop.
+        </div>
+      )}
       {contentState.updateChrome && (
         <div className="popup-warning">
           <div className="popup-warning-left">
@@ -132,9 +173,48 @@ const RecordingType = (props) => {
             : chrome.i18n.getMessage("recordButtonLabel")}
         </span>
       </button>
-      <Settings />
+      {captureMode !== "clicks" && <Settings />}
     </div>
   );
+};
+
+// Inline styles for the Video / Click-capture segmented toggle. Inline (rather
+// than the popup CSS) keeps this self-contained and immune to shadow-DOM class
+// collisions.
+const modeStyles = {
+  wrap: {
+    display: "flex",
+    gap: 4,
+    padding: 4,
+    marginBottom: 12,
+    background: "rgba(0,0,0,0.05)",
+    borderRadius: 10,
+  },
+  btn: {
+    flex: 1,
+    appearance: "none",
+    border: "none",
+    cursor: "pointer",
+    background: "transparent",
+    color: "#15171C",
+    fontFamily: "inherit",
+    fontSize: 13,
+    fontWeight: 600,
+    padding: "8px 10px",
+    borderRadius: 8,
+    transition: "background 0.15s ease, color 0.15s ease",
+  },
+  btnActive: {
+    background: "#fff",
+    color: "#3080F8",
+    boxShadow: "0 1px 3px rgba(0,0,0,0.12)",
+  },
+  hint: {
+    fontSize: 11.5,
+    lineHeight: 1.4,
+    color: "#5B616E",
+    margin: "0 2px 12px",
+  },
 };
 
 export default RecordingType;

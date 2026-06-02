@@ -173,7 +173,14 @@ const Wrapper = () => {
       )}
       {contentState.zoomEnabled && <ZoomContainer />}
       <BlurTool />
-      {contentState.showExtension || contentState.recording ? (
+      {contentState.recording && contentState.captureMode === "clicks" ? (
+        // Click-capture recording: ONLY the click logger in the page. No
+        // toolbar/canvas/cursor overlays and no status bar -- any in-page
+        // element would be baked into captureVisibleTab screenshots and could
+        // intercept the page clicks we need. The recording indicator + Stop
+        // live on the extension toolbar icon (badge) instead.
+        <ClickLogger />
+      ) : contentState.showExtension || contentState.recording ? (
         <div>
           {!contentState.recording &&
             !contentState.drawingMode &&

@@ -10,6 +10,11 @@ import {
 import { startAfterCountdown } from "../recording/startRecording";
 import { noteCountdownStarted } from "../recording/countdownFallback";
 import { handleStopRecordingTab } from "../recording/stopRecording";
+import {
+  startClickCapture,
+  stopClickCapture,
+  captureClickShot,
+} from "../recording/clickCapture";
 import { sendChunks } from "../recording/sendChunks";
 import { chunksStore } from "../recording/chunkHandler";
 import { addAlarmListener } from "../alarms/addAlarmListener";
@@ -283,17 +288,45 @@ const appendClick = async (message) => {
   return { ok: true, count: log.length };
 };
 
+// Route a logged click by the active capture mode: Click-capture mode takes a
+// real screenshot of the tab (and stores it with the click's metadata), while
+// the default video mode just records the click's timestamp + label.
+const handleLoggedClick = async (message, sender) => {
+  const { recordingStartTime, captureMode } = await chrome.storage.local.get([
+    "recordingStartTime",
+    "captureMode",
+  ]);
+  // No active recording -> nothing to anchor the click to.
+  if (!recordingStartTime) return { ok: false, reason: "not-recording" };
+  if (captureMode === "clicks") {
+    return captureClickShot(message, sender);
+  }
+  return appendClick(message);
+};
+
 export const setupHandlers = () => {
   registerProxyStorageHandlers();
 
-  registerMessage("log-click", (message) => {
-    // Serialize storage writes; recover the chain whether the prior link
-    // resolved or rejected so one failure can't stall later clicks.
+  registerMessage("log-click", (message, sender) => {
+    // Serialize storage writes / screenshot captures; recover the chain whether
+    // the prior link resolved or rejected so one failure can't stall later
+    // clicks. Serializing also paces captureVisibleTab to one call at a time.
     clickLogWriteChain = clickLogWriteChain.then(
-      () => appendClick(message),
-      () => appendClick(message),
+      () => handleLoggedClick(message, sender),
+      () => handleLoggedClick(message, sender),
     );
     return clickLogWriteChain;
+  });
+
+  // Click-capture mode lifecycle (the lightweight, video-less recorder). The
+  // content side sends these from the popup's Record / toolbar Stop.
+  registerMessage("start-click-capture", async () => {
+    await startClickCapture();
+    return { ok: true };
+  });
+  registerMessage("stop-click-capture", async () => {
+    await stopClickCapture();
+    return { ok: true };
   });
   registerMessage("desktop-capture", async (message, sender) => {
     const now = Date.now();

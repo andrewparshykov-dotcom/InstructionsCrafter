@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { loadRecording, discardRecording } from "./loadRecording";
+import { loadRecording, loadClickCapture, discardRecording } from "./loadRecording";
 import { checkAudioSilence } from "./audioCheck";
 import { colors, fonts, sizes, space, radius } from "../../design/tokens";
 
@@ -20,6 +20,12 @@ const Generate = () => {
   const [params, setParams] = useState({});
   const [recording, setRecording] = useState(null);
   const [loadingError, setLoadingError] = useState("");
+
+  // Click-capture mode ("clicks") vs the default narrated video ("video").
+  const [mode, setMode] = useState("video");
+  const [clickShots, setClickShots] = useState([]); // [{ blob, label, x, y, dpr, order }]
+  const [clickAudio, setClickAudio] = useState(null); // { blob, mimeType } | null
+  const [shotUrls, setShotUrls] = useState([]); // object URLs for the thumbnail strip
 
   const [modalOpen, setModalOpen] = useState(false);
   const [title, setTitle] = useState("");
@@ -61,12 +67,27 @@ const Generate = () => {
 
     (async () => {
       try {
-        const result = await loadRecording();
-        const blobUrl = URL.createObjectURL(result.blob);
-        setRecording({ ...result, blobUrl });
-        console.log(
-          `Loaded recording from ${result.source}: ${result.blob.size} bytes (${result.mimeType})`
-        );
+        const { lastRecordingMode } = await chrome.storage.local.get([
+          "lastRecordingMode",
+        ]);
+        if (lastRecordingMode === "clicks") {
+          const result = await loadClickCapture();
+          setMode("clicks");
+          setClickShots(result.shots);
+          setClickAudio(result.audio);
+          setShotUrls(result.shots.map((s) => URL.createObjectURL(s.blob)));
+          console.log(
+            `Loaded click capture: ${result.shots.length} shots, ` +
+              `audio=${result.audio ? "yes" : "no"}`
+          );
+        } else {
+          const result = await loadRecording();
+          const blobUrl = URL.createObjectURL(result.blob);
+          setRecording({ ...result, blobUrl });
+          console.log(
+            `Loaded recording from ${result.source}: ${result.blob.size} bytes (${result.mimeType})`
+          );
+        }
       } catch (err) {
         console.error("Failed to load recording:", err);
         setLoadingError(err.message || "Failed to load the recording.");
@@ -94,6 +115,12 @@ const Generate = () => {
       if (recording?.blobUrl) URL.revokeObjectURL(recording.blobUrl);
     };
   }, [recording]);
+
+  useEffect(() => {
+    return () => {
+      shotUrls.forEach((u) => URL.revokeObjectURL(u));
+    };
+  }, [shotUrls]);
 
   useEffect(() => {
     if (!recording) return;
@@ -201,8 +228,48 @@ const Generate = () => {
     );
   };
 
+  const handleSubmitClicks = async () => {
+    setUploadError("");
+    setUploadPhase("uploading");
+    setUploadProgress(0);
+    try {
+      const docxBlob = await uploadClickCapture({
+        shots: clickShots,
+        audio: clickAudio,
+        title: title.trim(),
+        password,
+        backendUrl,
+        onProgress: (pct) => setUploadProgress(pct),
+        onProcessingStart: () => setUploadPhase("processing"),
+      });
+      chrome.storage.local.set({ sharedPassword: password });
+      const filename = getDocxFilename(title.trim());
+      const docxUrl = URL.createObjectURL(docxBlob);
+      await chrome.downloads.download({ url: docxUrl, filename, saveAs: false });
+      setTimeout(() => {
+        URL.revokeObjectURL(docxUrl);
+        window.close();
+      }, 1500);
+    } catch (err) {
+      console.error("Upload failed:", err);
+      if (err.status === 401) {
+        chrome.storage.local.remove("sharedPassword");
+        setPassword("");
+      }
+      setUploadError(err.message || "Upload failed.");
+      setUploadPhase("error");
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (mode === "clicks") {
+      if (clickShots.length === 0) {
+        setUploadError("No screenshots loaded.");
+        return;
+      }
+      return handleSubmitClicks();
+    }
     if (!recording) {
       setUploadError("Recording not loaded.");
       return;
@@ -261,13 +328,18 @@ const Generate = () => {
     }
   };
 
+  const hasContent = mode === "clicks" ? clickShots.length > 0 : !!recording;
+
   const canSubmit =
-    !!recording &&
+    hasContent &&
     title.trim().length > 0 &&
     password.length > 0 &&
     !isUploading;
 
-  const generateDisabled = !recording || audioCheck.status === "silent";
+  // Silence only blocks the video path (narration is required there); in
+  // Click-capture mode narration is optional, so silence never blocks.
+  const generateDisabled =
+    !hasContent || (mode === "video" && audioCheck.status === "silent");
 
   return (
     <div
@@ -301,21 +373,60 @@ const Generate = () => {
         <section style={styles.previewSection}>
           <div style={styles.previewCaption}>
             <span>PREVIEW</span>
-          </div>
-          <div style={styles.previewFrame}>
-            {recording ? (
-              <video src={recording.blobUrl} controls style={styles.video} />
-            ) : loadingError ? (
-              <div style={styles.previewError}>
-                <em style={styles.previewErrorHeading}>
-                  Could not load the recording.
-                </em>
-                <p style={styles.previewErrorBody}>{loadingError}</p>
-              </div>
-            ) : (
-              <em style={styles.previewLoading}>Loading recording…</em>
+            {mode === "clicks" && clickShots.length > 0 && (
+              <>
+                <span style={styles.versionDot}>·</span>
+                <span>
+                  {clickShots.length} SCREENSHOT
+                  {clickShots.length === 1 ? "" : "S"}
+                </span>
+                <span style={styles.versionDot}>·</span>
+                <span>NARRATION {clickAudio ? "ON" : "OFF"}</span>
+              </>
             )}
           </div>
+          {mode === "clicks" ? (
+            <div style={styles.stripFrame}>
+              {shotUrls.length > 0 ? (
+                <div style={styles.strip}>
+                  {shotUrls.map((u, i) => (
+                    <div key={i} style={styles.thumbWrap}>
+                      <span style={styles.thumbNum}>{i + 1}</span>
+                      <img
+                        src={u}
+                        style={styles.thumb}
+                        alt={`Click ${i + 1}`}
+                      />
+                    </div>
+                  ))}
+                </div>
+              ) : loadingError ? (
+                <div style={styles.previewError}>
+                  <em style={styles.previewErrorHeading}>
+                    Could not load the screenshots.
+                  </em>
+                  <p style={styles.previewErrorBody}>{loadingError}</p>
+                </div>
+              ) : (
+                <em style={styles.previewLoading}>Loading screenshots…</em>
+              )}
+            </div>
+          ) : (
+            <div style={styles.previewFrame}>
+              {recording ? (
+                <video src={recording.blobUrl} controls style={styles.video} />
+              ) : loadingError ? (
+                <div style={styles.previewError}>
+                  <em style={styles.previewErrorHeading}>
+                    Could not load the recording.
+                  </em>
+                  <p style={styles.previewErrorBody}>{loadingError}</p>
+                </div>
+              ) : (
+                <em style={styles.previewLoading}>Loading recording…</em>
+              )}
+            </div>
+          )}
         </section>
 
         <hr style={styles.rule} />
@@ -367,31 +478,35 @@ const Generate = () => {
           </button>
 
           <div style={styles.utilityRow}>
-            <button
-              type="button"
-              className="ic-generate-util"
-              style={styles.utilityLink}
-              onClick={handleDownloadRecording}
-              disabled={!recording}
-              title={
-                recording
-                  ? `Save as .${recording.extension}`
-                  : "Recording not loaded yet"
-              }
-            >
-              Download recording
-            </button>
-            <span style={styles.utilityDot}>·</span>
+            {mode !== "clicks" && (
+              <>
+                <button
+                  type="button"
+                  className="ic-generate-util"
+                  style={styles.utilityLink}
+                  onClick={handleDownloadRecording}
+                  disabled={!recording}
+                  title={
+                    recording
+                      ? `Save as .${recording.extension}`
+                      : "Recording not loaded yet"
+                  }
+                >
+                  Download recording
+                </button>
+                <span style={styles.utilityDot}>·</span>
+              </>
+            )}
             <button
               type="button"
               className="ic-generate-util"
               style={styles.utilityLinkMuted}
               onClick={handleDiscardClick}
-              disabled={!recording || isDiscarding}
+              disabled={!hasContent || isDiscarding}
               title={
-                recording
+                hasContent
                   ? "Permanently delete this recording"
-                  : "Recording not loaded yet"
+                  : "Nothing loaded yet"
               }
             >
               Discard
@@ -598,6 +713,91 @@ function uploadRecording({
     formData.append("password", password);
     if (Array.isArray(clickLog) && clickLog.length > 0) {
       formData.append("clicklog", JSON.stringify(clickLog));
+    }
+    xhr.send(formData);
+  });
+}
+
+// Click-capture upload: ordered screenshots + per-click metadata (+ optional
+// narration) to /api/generate-clicks. The `shots` files are appended in order,
+// and `meta[i]` aligns with the i-th file.
+function uploadClickCapture({
+  shots,
+  audio,
+  title,
+  password,
+  backendUrl,
+  onProgress,
+  onProcessingStart,
+}) {
+  return new Promise((resolve, reject) => {
+    const xhr = new XMLHttpRequest();
+    let processingFlagged = false;
+
+    xhr.upload.addEventListener("progress", (e) => {
+      if (e.lengthComputable) {
+        onProgress(Math.round((e.loaded / e.total) * 100));
+      }
+    });
+
+    xhr.upload.addEventListener("load", () => {
+      if (!processingFlagged) {
+        processingFlagged = true;
+        onProcessingStart();
+      }
+    });
+
+    xhr.addEventListener("load", async () => {
+      if (xhr.status >= 200 && xhr.status < 300) {
+        resolve(xhr.response);
+      } else {
+        let errorMsg = `Server returned status ${xhr.status}.`;
+        try {
+          const text = await xhr.response.text();
+          const json = JSON.parse(text);
+          if (json.error) errorMsg = json.error;
+        } catch {
+          // Couldn't parse JSON — keep the default message.
+        }
+        const err = new Error(errorMsg);
+        err.status = xhr.status;
+        reject(err);
+      }
+    });
+
+    xhr.addEventListener("error", () =>
+      reject(
+        new Error(`Network error — is the backend running at ${backendUrl}?`)
+      )
+    );
+    xhr.addEventListener("abort", () => reject(new Error("Upload aborted.")));
+
+    xhr.responseType = "blob";
+    xhr.open("POST", `${backendUrl}/api/generate-clicks`);
+
+    const formData = new FormData();
+    formData.append("title", title);
+    formData.append("password", password);
+    formData.append(
+      "meta",
+      JSON.stringify(
+        shots.map((s) => ({
+          label: s.label || "",
+          x: s.x || 0,
+          y: s.y || 0,
+          dpr: s.dpr || 1,
+          marker: s.marker || "ring",
+        }))
+      )
+    );
+    shots.forEach((s, i) => {
+      const name = `shot_${String(i).padStart(4, "0")}.jpg`;
+      formData.append("shots", s.blob, name);
+    });
+    if (audio && audio.blob) {
+      const ext =
+        audio.mimeType && audio.mimeType.includes("ogg") ? "ogg" : "webm";
+      formData.append("audio", audio.blob, `narration.${ext}`);
     }
     xhr.send(formData);
   });
@@ -816,6 +1016,55 @@ const styles = {
     height: "100%",
     objectFit: "contain",
     background: "#000",
+  },
+  stripFrame: {
+    background: colors.surfaceRaised,
+    border: `1px solid ${colors.hairline}`,
+    borderRadius: radius.m,
+    minHeight: 180,
+    maxHeight: 320,
+    display: "flex",
+    alignItems: "center",
+    overflow: "hidden",
+    padding: space.s,
+    boxSizing: "border-box",
+  },
+  strip: {
+    display: "flex",
+    gap: space.s,
+    overflowX: "auto",
+    width: "100%",
+    padding: "4px 2px",
+    alignItems: "flex-start",
+  },
+  thumbWrap: {
+    position: "relative",
+    flex: "0 0 auto",
+  },
+  thumb: {
+    height: 260,
+    width: "auto",
+    maxWidth: 520,
+    borderRadius: radius.s,
+    border: `1px solid ${colors.hairline}`,
+    background: "#fff",
+    display: "block",
+  },
+  thumbNum: {
+    position: "absolute",
+    top: 6,
+    left: 6,
+    minWidth: 18,
+    height: 18,
+    padding: "0 5px",
+    borderRadius: 999,
+    background: colors.accent,
+    color: "#fff",
+    fontFamily: fonts.mono,
+    fontSize: 11,
+    fontWeight: 600,
+    lineHeight: "18px",
+    textAlign: "center",
   },
   previewLoading: {
     fontFamily: fonts.display,

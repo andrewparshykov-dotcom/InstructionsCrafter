@@ -1,5 +1,6 @@
 import { sendMessageTab, getCurrentTab } from "../tabManagement";
 import { sendMessageRecord } from "../recording/sendMessageRecord.js";
+import { stopClickCapture } from "../recording/clickCapture";
 
 const handleTabMessaging = async (tab) => {
   const { activeTab, recordingUiTabId, offscreen } =
@@ -115,9 +116,18 @@ export const onActionButtonClickedListener = () => {
         "recording", "pendingRecording", "restarting", "recorderSession",
         "recordingTab", "offscreen",
         "postStopEditorOpening", "postStopEditorOpened",
-        "editorRecoveryUrl",
+        "editorRecoveryUrl", "captureMode",
       ]);
       console.log("[InstructionsCrafter][ActionClick] storage:", snap, "tab:", tab.id);
+
+      // Click-capture mode has no recorder tab/offscreen recorder; the toolbar
+      // icon IS the Stop control (the only recording UI that isn't baked into
+      // the captured screenshots). Stop and finalize the session.
+      if (snap.captureMode === "clicks" && snap.recording) {
+        console.log("[InstructionsCrafter][ActionClick] branch: stop-click-capture");
+        await stopClickCapture();
+        return;
+      }
 
       if (snap.editorRecoveryUrl) {
         await chrome.storage.local.remove(["editorRecoveryUrl", "editorRecoveryAt"]);

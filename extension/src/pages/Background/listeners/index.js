@@ -6,6 +6,7 @@ import { onTabUpdatedListener } from "./onTabUpdatedListener";
 import { onWindowFocusChangedListener } from "./onWindowFocusChangedListener";
 import { onActionButtonClickedListener } from "./onActionButtonClickedListener";
 import { onStartupListener } from "./onStartupListener";
+import { onCommandListener } from "./onCommandListener";
 
 export const initializeListeners = () => {
   onInstalledListener();
@@ -16,4 +17,5 @@ export const initializeListeners = () => {
   onWindowFocusChangedListener();
   onActionButtonClickedListener();
   onStartupListener();
+  onCommandListener();
 };

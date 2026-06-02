@@ -83,5 +83,14 @@
     "offscreen",
     "desktopCapture",
     "alarms"
-  ]
+  ],
+  "commands": {
+    "capture-click-screenshot": {
+      "suggested_key": {
+        "default": "Alt+Shift+S",
+        "mac": "Alt+Shift+S"
+      },
+      "description": "Capture the current screen (Click capture mode)"
+    }
+  }
 }

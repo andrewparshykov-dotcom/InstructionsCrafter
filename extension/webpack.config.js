@@ -46,6 +46,13 @@ const entryPoints = {
     "OffscreenRecorder",
     "index.jsx"
   ),
+  offscreenaudio: path.join(
+    __dirname,
+    "src",
+    "pages",
+    "OffscreenAudio",
+    "index.js"
+  ),
   waveform: path.join(__dirname, "src", "pages", "Waveform", "index.jsx"),
   permissions: path.join(__dirname, "src", "pages", "Permissions", "index.jsx"),
   welcome: path.join(__dirname, "src", "pages", "Welcome", "index.jsx"),
@@ -104,6 +111,7 @@ const htmlPlugins = Object.keys(entryPoints)
     const folderNameMap = {
       offscreenrecorder: "OffscreenRecorder",
       remuxoffscreen: "RemuxOffscreen",
+      offscreenaudio: "OffscreenAudio",
     };
 
     const folderName =

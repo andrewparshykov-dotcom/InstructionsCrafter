@@ -187,6 +187,23 @@ const ContentState = (props) => {
   }, []);
 
   const stopRecording = useCallback(() => {
+    // Click-capture mode has no recorder tab to stop; the background finalizes
+    // the session (narration blob) and opens the Generate page.
+    if (contentStateRef.current.captureMode === "clicks") {
+      chrome.runtime.sendMessage({ type: "stop-click-capture" });
+      setContentState((prevContentState) => ({
+        ...prevContentState,
+        recording: false,
+        paused: false,
+        showPopup: false,
+        showExtension: false,
+        pendingRecording: false,
+        time: 0,
+        timer: 0,
+      }));
+      setTimer(0);
+      return;
+    }
     chrome.storage.local.set({
       restarting: false,
       tabRecordedID: null,
@@ -420,6 +437,29 @@ const ContentState = (props) => {
         ...prevContentState,
         pendingRecording: false,
         preparingRecording: false,
+      }));
+      return;
+    }
+
+    // Click-capture mode: no recorder tab, desktopCapture, or video. The
+    // background sets the session flags (recording/recordingStartTime/captureMode
+    // that ClickLogger keys off) and starts the offscreen mic recorder; each
+    // click then captures a screenshot. Skip the video-only memory check below.
+    if (contentStateRef.current.captureMode === "clicks") {
+      perfMark("Content start-click-capture.sent");
+      chrome.runtime.sendMessage({ type: "start-click-capture" });
+      traceStep("startClickCaptureSent");
+      setStartFlowOutcome("ok");
+      setContentState((prevContentState) => ({
+        ...prevContentState,
+        recording: true,
+        captureMode: "clicks",
+        pendingRecording: false,
+        preparingRecording: false,
+        showPopup: false,
+        showExtension: false,
+        time: 0,
+        timer: 0,
       }));
       return;
     }
@@ -742,6 +782,9 @@ const ContentState = (props) => {
     showPopup: false,
     blurMode: false,
     recordingType: "screen",
+    // "video" (default narrated screen recording) | "clicks" (Click-capture
+    // mode: per-click screenshots, optional narration, no video).
+    captureMode: "video",
     surface: "default",
     hideToolbar: false,
     pendingRecording: false,
