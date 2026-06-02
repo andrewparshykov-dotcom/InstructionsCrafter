@@ -172,7 +172,14 @@ const _startRecordingInner = async (caller) => {
   // with a clean slate (see ClickLogger / the "log-click" handler).
   chrome.storage.local.remove(["recordingMeta", "clickLog", "clickLogSession"]);
 
-  chrome.storage.local.set({ lastRecordingType: recordingType || "screen" });
+  // Stamp the capture mode so the Generate page shows the VIDEO preview, not
+  // the click-capture strip. Click capture sets lastRecordingMode to "clicks";
+  // without resetting it here, a video recording started after a click-capture
+  // session would wrongly load the clicks UI on the Generate page.
+  chrome.storage.local.set({
+    lastRecordingType: recordingType || "screen",
+    lastRecordingMode: "video",
+  });
 
   const { quality, systemAudio, audioInput, offscreen, countdown } =
     await chrome.storage.local.get([
