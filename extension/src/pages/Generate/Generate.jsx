@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { loadRecording, loadClickCapture, discardRecording } from "./loadRecording";
 import { checkAudioSilence } from "./audioCheck";
+import ScreenshotEditor from "./ScreenshotEditor";
 import { colors, fonts, sizes, space, radius } from "../../design/tokens";
 
 // DECISION (2026-05-15): Post-recording flows all route here (not Screenity's editor)
@@ -26,6 +27,13 @@ const Generate = () => {
   const [clickShots, setClickShots] = useState([]); // [{ blob, label, x, y, dpr, order }]
   const [clickAudio, setClickAudio] = useState(null); // { blob, mimeType } | null
   const [shotUrls, setShotUrls] = useState([]); // object URLs for the thumbnail strip
+
+  // Per-screenshot annotations from the editor, keyed by shot index →
+  // { annotations: <fabric JSON string>, blob: <flattened JPEG>, url: <objectURL> }.
+  // Originals in clickShots are never mutated; edited blobs are uploaded instead.
+  const [edits, setEdits] = useState({});
+  const [editorIndex, setEditorIndex] = useState(null);
+  const editsRef = useRef({});
 
   const [modalOpen, setModalOpen] = useState(false);
   const [title, setTitle] = useState("");
@@ -121,6 +129,19 @@ const Generate = () => {
       shotUrls.forEach((u) => URL.revokeObjectURL(u));
     };
   }, [shotUrls]);
+
+  // Keep a ref of the current edits so the unmount cleanup can revoke their
+  // object URLs (a []-dependency effect can't observe later state otherwise).
+  useEffect(() => {
+    editsRef.current = edits;
+  }, [edits]);
+  useEffect(() => {
+    return () => {
+      Object.values(editsRef.current).forEach((e) => {
+        if (e?.url) URL.revokeObjectURL(e.url);
+      });
+    };
+  }, []);
 
   useEffect(() => {
     if (!recording) return;
@@ -233,8 +254,13 @@ const Generate = () => {
     setUploadPhase("uploading");
     setUploadProgress(0);
     try {
+      // Send the edited (blurred/annotated) screenshot where one exists,
+      // otherwise the original. Metadata (label/x/y/dpr/marker) is unchanged.
+      const shotsToSend = clickShots.map((s, i) =>
+        edits[i]?.blob ? { ...s, blob: edits[i].blob } : s
+      );
       const docxBlob = await uploadClickCapture({
-        shots: clickShots,
+        shots: shotsToSend,
         audio: clickAudio,
         title: title.trim(),
         password,
@@ -386,19 +412,37 @@ const Generate = () => {
             )}
           </div>
           {mode === "clicks" ? (
+            <>
             <div style={styles.stripFrame}>
               {shotUrls.length > 0 ? (
                 <div style={styles.strip}>
-                  {shotUrls.map((u, i) => (
-                    <div key={i} style={styles.thumbWrap}>
-                      <span style={styles.thumbNum}>{i + 1}</span>
-                      <img
-                        src={u}
-                        style={styles.thumb}
-                        alt={`Click ${i + 1}`}
-                      />
-                    </div>
-                  ))}
+                  {shotUrls.map((u, i) => {
+                    const edited = edits[i];
+                    return (
+                      <button
+                        key={i}
+                        type="button"
+                        className="ic-thumb"
+                        style={styles.thumbWrap}
+                        onClick={() => setEditorIndex(i)}
+                        title="Click to blur or annotate this screenshot"
+                      >
+                        <span style={styles.thumbNum}>{i + 1}</span>
+                        {edited && <span style={styles.thumbEdited}>EDITED</span>}
+                        <img
+                          src={edited ? edited.url : u}
+                          style={styles.thumb}
+                          alt={`Click ${i + 1}`}
+                        />
+                        <span
+                          className="ic-thumb-edit"
+                          style={styles.thumbEditHint}
+                        >
+                          Edit
+                        </span>
+                      </button>
+                    );
+                  })}
                 </div>
               ) : loadingError ? (
                 <div style={styles.previewError}>
@@ -411,6 +455,14 @@ const Generate = () => {
                 <em style={styles.previewLoading}>Loading screenshots…</em>
               )}
             </div>
+            {shotUrls.length > 0 && (
+              <p style={styles.stripHint}>
+                Click any screenshot to blur sensitive areas or add arrows,
+                lines, and notes — edits stay with the screenshot until you
+                generate.
+              </p>
+            )}
+            </>
           ) : (
             <div style={styles.previewFrame}>
               {recording ? (
@@ -647,6 +699,30 @@ const Generate = () => {
             </form>
           </div>
         </div>
+      )}
+
+      {editorIndex !== null && clickShots[editorIndex] && (
+        <ScreenshotEditor
+          imageBlob={clickShots[editorIndex].blob}
+          initialAnnotations={edits[editorIndex]?.annotations || null}
+          shotNumber={editorIndex + 1}
+          onCancel={() => setEditorIndex(null)}
+          onSave={(annotations, blob) => {
+            setEdits((prev) => {
+              const old = prev[editorIndex];
+              if (old?.url) URL.revokeObjectURL(old.url);
+              return {
+                ...prev,
+                [editorIndex]: {
+                  annotations,
+                  blob,
+                  url: URL.createObjectURL(blob),
+                },
+              };
+            });
+            setEditorIndex(null);
+          }}
+        />
       )}
     </div>
   );
@@ -930,6 +1006,21 @@ const cssRules = `
     cursor: not-allowed;
     text-decoration-color: ${colors.hairline};
   }
+
+  /* Click-capture strip thumbnails are buttons that open the editor */
+  .ic-thumb {
+    transition: transform 0.12s ease;
+  }
+  .ic-thumb:hover {
+    transform: translateY(-2px);
+  }
+  .ic-thumb:hover .ic-thumb-edit {
+    opacity: 1;
+  }
+  .ic-thumb:focus-visible {
+    outline: 2px solid ${colors.accent};
+    outline-offset: 3px;
+  }
 `;
 
 const styles = {
@@ -1040,6 +1131,53 @@ const styles = {
   thumbWrap: {
     position: "relative",
     flex: "0 0 auto",
+    appearance: "none",
+    border: "none",
+    background: "none",
+    padding: 0,
+    margin: 0,
+    cursor: "pointer",
+    display: "block",
+    borderRadius: radius.s,
+  },
+  thumbEdited: {
+    position: "absolute",
+    top: 6,
+    right: 6,
+    padding: "0 6px",
+    height: 18,
+    lineHeight: "18px",
+    borderRadius: 999,
+    background: colors.accent,
+    color: "#fff",
+    fontFamily: fonts.mono,
+    fontSize: 10,
+    fontWeight: 700,
+    letterSpacing: "0.08em",
+    zIndex: 2,
+  },
+  thumbEditHint: {
+    position: "absolute",
+    bottom: 8,
+    left: "50%",
+    transform: "translateX(-50%)",
+    padding: "4px 12px",
+    borderRadius: 999,
+    background: "rgba(15,17,28,0.82)",
+    color: "#fff",
+    fontFamily: fonts.body,
+    fontSize: 12,
+    fontWeight: 600,
+    opacity: 0,
+    transition: "opacity 0.15s ease",
+    pointerEvents: "none",
+  },
+  stripHint: {
+    fontFamily: fonts.body,
+    fontSize: sizes.caption,
+    color: colors.mid,
+    margin: `${space.s}px 2px 0`,
+    lineHeight: 1.5,
   },
   thumb: {
     height: 260,
