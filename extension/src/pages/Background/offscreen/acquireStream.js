@@ -1,8 +1,8 @@
 // SW-side stream acquisition for the offscreen recorder. Offscreen docs
-// can't call getDisplayMedia / tabCapture; SW acquires a streamId and hands
-// it over. Picker anchors to initiatingTabId so it appears on the user's tab.
+// can't call getDisplayMedia; the SW acquires a streamId and hands it over.
+// Picker anchors to initiatingTabId so it appears on the user's tab.
 
-const DEFAULT_SCREEN_SOURCES = ["screen", "window", "tab"];
+const DEFAULT_SCREEN_SOURCES = ["screen", "window"];
 
 const getInitiatingTab = async (tabId) => {
   if (!tabId) return null;
@@ -52,44 +52,13 @@ const acquireScreenStream = ({ sources, anchorTab }) =>
     }
   });
 
-const acquireTabStream = ({ targetTabId }) =>
-  new Promise((resolve, reject) => {
-    if (!targetTabId) {
-      reject(new Error("tab capture requires targetTabId"));
-      return;
-    }
-    try {
-      chrome.tabCapture.getMediaStreamId(
-        { targetTabId },
-        (streamId) => {
-          if (chrome.runtime.lastError) {
-            reject(new Error(chrome.runtime.lastError.message));
-            return;
-          }
-          if (!streamId) {
-            resolve({ streamId: "", source: "cancelled" });
-            return;
-          }
-          resolve({ streamId, source: "tab" });
-        }
-      );
-    } catch (err) {
-      reject(err);
-    }
-  });
-
 export const acquireStreamForOffscreen = async ({
   mode,
   initiatingTabId,
-  targetTabId,
   sources,
 }) => {
   if (mode === "camera") {
     return { streamId: null, source: "camera" };
-  }
-
-  if (mode === "tab") {
-    return acquireTabStream({ targetTabId: targetTabId || initiatingTabId });
   }
 
   const anchorTab = await getInitiatingTab(initiatingTabId);

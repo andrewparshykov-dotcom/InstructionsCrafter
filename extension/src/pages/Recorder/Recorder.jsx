@@ -320,11 +320,9 @@ const Recorder = () => {
   const chunkBackendRef = useRef(null);
 
   const isTab = useRef(false);
-  const tabID = useRef(null);
   const tabIDError = useRef(null);
-  // Numeric chrome tab id (tabID holds the chromeMediaSourceId from
-  // tabCapture). Used to query the tab's viewport for aspect-correct
-  // capture constraints.
+  // Numeric chrome tab id, used to query the recorded tab's viewport for
+  // aspect-correct capture constraints.
   const recordedTabId = useRef(null);
   const tabPreferred = useRef(false);
 
@@ -3411,13 +3409,9 @@ const Recorder = () => {
 
     try {
       if (!isTab.current) {
-        let captureTypes = ["screen", "window", "tab"];
-        if (tabPreferred.current) {
-          captureTypes = ["tab", "screen", "window"];
-        }
+        const captureTypes = ["screen", "window"];
         debug("desktopCapture.chooseDesktopMedia", {
           captureTypes,
-          tabPreferred: tabPreferred.current,
           host: IS_OFFSCREEN_HOST ? "offscreen" : "tab",
         });
         slLog("chooseDesktopMedia-show");
@@ -3426,8 +3420,7 @@ const Recorder = () => {
             .sendMessage({
               type: "offscreen-request-stream",
               mode: "screen",
-              // "tab" excluded - offscreen can't consume tab-scoped streamIds as desktop sources.
-              sources: captureTypes.filter((t) => t !== "tab"),
+              sources: captureTypes,
             })
             .catch((err) => ({ ok: false, error: String(err) }));
           slLog("chooseDesktopMedia-picked", {
@@ -3480,22 +3473,6 @@ const Recorder = () => {
             },
           );
         }
-      } else {
-        perfMark("Recorder path.tab-precapture");
-        const tabStreamId = await waitForTabStreamId();
-        debug("Streaming with pre-resolved tabID", tabStreamId);
-        if (!tabStreamId) {
-          resetGateState();
-          const underlying = tabIDError.current
-            ? `: ${tabIDError.current}`
-            : "";
-          sendRecordingError(
-            `Unable to resolve tab stream id${underlying}`,
-            false,
-          );
-          return;
-        }
-        startStream(data, tabStreamId, null, permissions, permissions2);
       }
     } catch (err) {
       debugError("startStreaming() error", err);
@@ -3510,59 +3487,6 @@ const Recorder = () => {
       debug("Loaded tabPreferred", tabPreferred.current);
     });
   }, []);
-
-  const getStreamID = async (id) => {
-    perfMark("Recorder getStreamID.enter", { tabId: id });
-    debug("getStreamID()", id);
-    tabIDError.current = null;
-    let streamId;
-    try {
-      if (IS_OFFSCREEN_HOST) {
-        // chrome.tabCapture isn't callable from offscreen; delegate to SW.
-        const endOff = perfSpan("Recorder offscreen-request-stream(tab)");
-        const response = await chrome.runtime
-          .sendMessage({
-            type: "offscreen-request-stream",
-            mode: "tab",
-            targetTabId: id,
-          })
-          .catch((err) => ({ ok: false, error: String(err) }));
-        endOff({ ok: Boolean(response?.ok) });
-        if (!response?.ok || !response.streamId) {
-          debug("Offscreen tab stream acquisition failed", response);
-          tabIDError.current =
-            response?.error || "offscreen-tab-stream-empty-response";
-          return;
-        }
-        streamId = response.streamId;
-      } else {
-        if (!chrome?.tabCapture?.getMediaStreamId) {
-          tabIDError.current = "chrome.tabCapture.getMediaStreamId unavailable";
-          return;
-        }
-        const endTc = perfSpan("Recorder tabCapture.getMediaStreamId");
-        streamId = await chrome.tabCapture.getMediaStreamId({
-          targetTabId: id,
-        });
-        endTc({ hasStreamId: Boolean(streamId) });
-        if (!streamId) {
-          tabIDError.current = "tabCapture.getMediaStreamId returned empty";
-          return;
-        }
-      }
-      debug("Resolved tabCapture streamId", streamId);
-      tabID.current = streamId;
-    } catch (err) {
-      const errStr = String(err?.message || err);
-      debugWarn("getStreamID failed", errStr);
-      tabIDError.current = errStr;
-    } finally {
-      perfMark("Recorder getStreamID.done", {
-        ok: Boolean(tabID.current),
-        error: tabIDError.current,
-      });
-    }
-  };
 
   // chromeMediaSource constraints have no "no padding" knob: any combo
   // (including no width/height) still produces the 1920x1080 padded box.
@@ -3597,26 +3521,6 @@ const Recorder = () => {
       debugWarn("getRecordedTabViewport failed", err);
       return null;
     }
-  };
-
-  const waitForTabStreamId = async () => {
-    if (tabID.current) return tabID.current;
-    const endWait = perfSpan("Recorder waitForTabStreamId");
-    let attempts = 0;
-    for (let i = 0; i < 30; i += 1) {
-      attempts = i + 1;
-      await new Promise((resolve) => setTimeout(resolve, 100));
-      if (tabID.current) {
-        endWait({ attempts, hasId: true });
-        return tabID.current;
-      }
-      if (tabIDError.current) {
-        endWait({ attempts, hasId: false, error: tabIDError.current });
-        return null;
-      }
-    }
-    endWait({ attempts, hasId: false });
-    return null;
   };
 
   useEffect(() => {
@@ -3669,12 +3573,6 @@ const Recorder = () => {
       slLog("msg-loaded");
       if (!tabPreferred.current) {
         isTab.current = request.isTab;
-        if (request.isTab) {
-          recordedTabId.current = request.tabID ?? null;
-          getStreamID(request.tabID).catch((err) => {
-            tabIDError.current = String(err?.message || err);
-          });
-        }
       } else {
         isTab.current = false;
         recordedTabId.current = null;
