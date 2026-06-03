@@ -2,11 +2,10 @@ import { executeScripts } from "../utils/executeScripts";
 
 export const onInstalledListener = () => {
   chrome.runtime.onInstalled.addListener(async (details) => {
-    // Permanent toolbar tooltip reminder of the narration requirement.
-    chrome.action.setTitle({
-      title:
-        "InstructionsCrafter — voice narration is required while recording",
-    });
+    // Toolbar tooltip: just the program name. Set explicitly so it also
+    // overrides the old "voice narration is required" title for users
+    // updating from a previous version.
+    chrome.action.setTitle({ title: "InstructionsCrafter" });
 
     // Clear any stale uninstall URL left over from earlier Screenity-branded
     // installs (the old code set chrome.runtime.setUninstallURL to a tally.so

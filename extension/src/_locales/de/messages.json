@@ -4,7 +4,7 @@
     "description": "Erweiterungsname"
   },
   "extDesc": {
-    "message": "Turn a screen recording with voice narration into a step-by-step Microsoft Word instruction document.",
+    "message": "Turn a screen recording or a series of clicks into a polished step-by-step Microsoft Word how-to. Narration optional.",
     "description": "Beschreibung der Erweiterung"
   },
   "tabType": {
