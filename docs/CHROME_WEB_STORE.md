@@ -85,7 +85,7 @@ Built for internal teams:
 • No accounts, no cloud storage of your recordings, no telemetry — files are processed once, then deleted on the server.
 • A single shared password gates the backend.
 • In Click-capture mode you can blur/redact, add arrows, or draw on any screenshot before it is uploaded — sensitive details never leave your browser.
-• Multilingual — narrate in your language and get a clean document.
+• Multilingual — narrate in any language and get a clean document in English.
 
 Privacy: https://instructionscrafter.com/privacy
 Source code (GPLv3): https://github.com/andrewparshykov-dotcom/InstructionsCrafter
