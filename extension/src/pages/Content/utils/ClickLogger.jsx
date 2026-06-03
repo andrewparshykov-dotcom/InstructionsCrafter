@@ -27,7 +27,9 @@ import { useEffect } from "react";
 // Elements that represent a real, clickable control. We climb from the literal
 // click target (often an inner <span> / <svg>) up to the nearest one of these,
 // so the logged label names the control the user actually meant to click.
-const ACTIONABLE_SELECTOR = [
+//
+// STRONG: genuine semantic controls. These count as actionable at ANY size.
+const STRONG_ACTIONABLE_SELECTOR = [
   "button",
   "a[href]",
   "input",
@@ -46,9 +48,18 @@ const ACTIONABLE_SELECTOR = [
   "[role=radio]",
   "[role=option]",
   "[role=switch]",
-  "[onclick]",
-  "[tabindex]",
 ].join(",");
+
+// WEAK: a focusable element ([tabindex], which also matches tabindex="-1") or an
+// inline click handler. Dense web apps (e.g. Outlook) put these on big SCROLL
+// CONTAINERS / layout regions purely for keyboard focus, so on their own they
+// over-match clicks on empty space. We trust them only on a control-sized
+// element -- see isContainerSized / isActionable below.
+const WEAK_ACTIONABLE_SELECTOR = ["[onclick]", "[tabindex]"].join(",");
+
+// Combined list -- used to climb to the nearest control for the label/role/tag.
+const ACTIONABLE_SELECTOR =
+  STRONG_ACTIONABLE_SELECTOR + "," + WEAK_ACTIONABLE_SELECTOR;
 
 const MAX_LABEL_LEN = 200;
 
@@ -122,24 +133,64 @@ const hasPointerCursor = (el) => {
   }
 };
 
+// A weak hint ([tabindex]/[onclick]) or cursor:pointer is trusted only on a
+// control-sized element. Outlook's message list, folder rail and header are
+// focusable CONTAINERS (a tabindex'd scroll region / layout region) that cover
+// most of the viewport, so a click on their empty space would otherwise be
+// mistaken for a control. A real control is a small slice of the screen. We flag
+// "container-sized" by a large AREA or a near-full HEIGHT -- a tall, narrow rail
+// is only ~11% of the area but ~90% of the height, so area alone would miss it.
+// (Width is deliberately ignored: an email row is ~83% wide but only ~2% tall.)
+const VIEWPORT_AREA_MAX = 0.5; // larger than half the viewport's area, or...
+const VIEWPORT_HEIGHT_MAX = 0.6; // ...taller than 60% of the viewport height
+const isContainerSized = (el) => {
+  try {
+    const view = el.ownerDocument && el.ownerDocument.defaultView;
+    if (!view || !view.innerWidth || !view.innerHeight) return false;
+    const r = el.getBoundingClientRect();
+    const areaFrac =
+      (r.width * r.height) / (view.innerWidth * view.innerHeight);
+    const heightFrac = r.height / view.innerHeight;
+    return areaFrac > VIEWPORT_AREA_MAX || heightFrac > VIEWPORT_HEIGHT_MAX;
+  } catch {
+    return false;
+  }
+};
+
+// Whether a click should be screenshotted. A real semantic control always counts;
+// a weak hint or the cursor:pointer fallback counts only on a control-sized
+// element, never on a big focusable container. `matched` is the nearest
+// ACTIONABLE_SELECTOR ancestor (or null); `el` is the literal click target.
+const isActionable = (matched, el) => {
+  if (matched && matched.matches(STRONG_ACTIONABLE_SELECTOR)) {
+    return true; // real control -- any size
+  }
+  if (matched && !isContainerSized(matched)) {
+    return true; // [tabindex]/[onclick], but a control-sized element
+  }
+  // cursor:pointer inherits, so testing the click target reflects the leaf.
+  return hasPointerCursor(el) && !isContainerSized(el);
+};
+
 const describeTarget = (e) => {
   // composedPath()[0] is the true target even across shadow boundaries;
   // e.target gets retargeted to the shadow host on web-component pages.
   const path = typeof e.composedPath === "function" ? e.composedPath() : null;
   let el = (path && path[0]) || e.target;
   if (el && el.nodeType === 3) el = el.parentElement; // text node -> parent
-  const actionable = el && el.closest ? el.closest(ACTIONABLE_SELECTOR) : null;
-  const chosen = actionable || el;
+  const matched = el && el.closest ? el.closest(ACTIONABLE_SELECTOR) : null;
+  const chosen = matched || el;
   if (!chosen || chosen.nodeType !== 1) {
     return { label: "", role: "", tag: "", actionable: false };
   }
   // "actionable" = a real interactive control. Click-capture mode screenshots
-  // only these, so clicking empty page space never adds a step.
+  // only these, so clicking empty page space -- or a big focusable container
+  // (Outlook's scroll regions / folder rail) -- never adds a step.
   return {
     label: accessibleName(chosen),
     role: attr(chosen, "role"),
     tag: chosen.tagName ? chosen.tagName.toLowerCase() : "",
-    actionable: Boolean(actionable) || hasPointerCursor(chosen),
+    actionable: isActionable(matched, el),
   };
 };
 
