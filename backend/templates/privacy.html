@@ -66,12 +66,12 @@
 <body>
 <main>
 <h1>InstructionsCrafter — Privacy Policy</h1>
-<p class="updated">Last updated: 2026-06-01</p>
+<p class="updated">Last updated: 2026-06-03</p>
 
 <h2>What we collect</h2>
 <p>When you use the InstructionsCrafter Chrome extension:</p>
 <ul>
-  <li><strong>Screen recording and microphone audio</strong> captured during a recording session, plus the timing of your mouse clicks and the on-screen labels of the controls you click (used to place each screenshot at the right moment).</li>
+  <li><strong>Your recording.</strong> In <strong>narrated-video mode</strong>: the screen or window video and your microphone audio. In <strong>Click-capture mode</strong>: a screenshot of the page for each click you make, plus your microphone audio if you leave narration on (narration is optional in this mode). In both modes we also capture the timing of your clicks and the on-screen labels of the controls you click, so each step lands on the right moment.</li>
   <li><strong>The document title</strong> you enter on the post-recording page.</li>
   <li><strong>Local settings</strong> stored in <code>chrome.storage.local</code>: the backend URL, an optional default document title, recording session state, and the shared password (saved after a successful generation so you do not have to retype it, and cleared automatically if the server rejects it). Chrome clears all of this when you uninstall the extension.</li>
 </ul>
@@ -81,16 +81,18 @@
 <p>Recordings and titles are sent to <strong>our own backend server</strong> (default: <code>https://instructionscrafter.com</code>) over HTTPS. The backend pipeline:</p>
 <ol>
   <li>Saves the upload to a per-request temporary directory.</li>
-  <li>Sends the <strong>entire recording — both the video and the audio</strong> — to <strong>Google's Gemini API</strong>, which watches it and returns the document's introduction, the step-by-step instructions, and the moment to capture for each screenshot.</li>
-  <li>Extracts the screenshots locally with FFmpeg and assembles them with the text into a <code>.docx</code> file.</li>
+  <li>Sends your recording to <strong>Google's Gemini API</strong> — in narrated-video mode the <strong>entire video and audio</strong>; in Click-capture mode the <strong>per-click screenshots</strong> and any narration audio — which Gemini reads to return the document's introduction and the step-by-step instructions (and, for video, the moment to capture each screenshot).</li>
+  <li>Assembles the screenshots and text into a <code>.docx</code> file — in narrated-video mode the screenshots are extracted from the video with FFmpeg; in Click-capture mode they are the screenshots already captured in your browser.</li>
   <li>Returns the <code>.docx</code> file to your browser.</li>
   <li><strong>Deletes the upload and every intermediate file</strong> from our server as soon as the response is sent, and deletes the copy uploaded to Google as soon as Gemini finishes processing it.</li>
 </ol>
 <p>No copy is retained on our server. No database persists user content.</p>
 
+<p>In Click-capture mode you can blur or redact parts of any screenshot — and add arrows or notes — <strong>in your browser, before it is uploaded</strong>. The edits are baked into the image on your device, so anything you redact never reaches our server or Google.</p>
+
 <h2>Third-party services</h2>
 <ul>
-  <li><strong>Google (Gemini API)</strong> — receives the entire recording (video and audio) in order to generate the document. InstructionsCrafter uses a <strong>paid Gemini API tier, on which Google does not use the content you submit to train or improve its models</strong>. Subject to <a href="https://ai.google.dev/gemini-api/terms" target="_blank" rel="noopener">Google's Gemini API Additional Terms of Service</a> and the <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google Privacy Policy</a>.</li>
+  <li><strong>Google (Gemini API)</strong> — receives your recording (the video and audio, or the per-click screenshots and any narration) in order to generate the document. InstructionsCrafter uses a <strong>paid Gemini API tier, on which Google does not use the content you submit to train or improve its models</strong>. Subject to <a href="https://ai.google.dev/gemini-api/terms" target="_blank" rel="noopener">Google's Gemini API Additional Terms of Service</a> and the <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google Privacy Policy</a>.</li>
 </ul>
 <p>Google is the only third party that receives your recording.</p>
 

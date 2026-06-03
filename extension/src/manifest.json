@@ -67,7 +67,6 @@
     "extension_pages": "script-src 'self' 'wasm-unsafe-eval'; object-src 'self'; media-src 'self' data: blob: *; img-src 'self' https: data: blob:"
   },
   "permissions": [
-    "activeTab",
     "storage",
     "unlimitedStorage",
     "downloads",
