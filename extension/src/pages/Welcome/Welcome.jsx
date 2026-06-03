@@ -170,6 +170,12 @@ const Welcome = () => {
     }, PAGE_RECEDE_MS);
   };
 
+  // Respect reduced-motion: don't auto-loop the pin clip; offer controls instead.
+  const prefersReducedMotion =
+    typeof window !== "undefined" &&
+    window.matchMedia &&
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
   return (
     <div
       style={styles.page}
@@ -257,6 +263,25 @@ const Welcome = () => {
         />
 
         <hr style={styles.rule} />
+
+        <figure style={styles.pinFigure}>
+          <figcaption style={styles.pinLabel}>
+            PIN THE EXTENSION · ЗАКРІПІТЬ РОЗШИРЕННЯ
+          </figcaption>
+          <video
+            ref={(el) => {
+              if (el) el.muted = true;
+            }}
+            style={styles.pinVideo}
+            src={chrome.runtime.getURL("assets/helper/pin-extension.mp4")}
+            autoPlay={!prefersReducedMotion}
+            loop
+            muted
+            playsInline
+            controls={prefersReducedMotion}
+            aria-label="How to pin the InstructionsCrafter extension to the Chrome toolbar"
+          />
+        </figure>
 
         <footer style={styles.cta}>
           <button
@@ -494,6 +519,31 @@ const styles = {
     color: colors.ink,
   },
 
+  pinFigure: {
+    margin: 0,
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    textAlign: "center",
+  },
+  pinLabel: {
+    fontFamily: fonts.mono,
+    fontSize: sizes.mono,
+    fontWeight: 500,
+    letterSpacing: "0.14em",
+    color: colors.mid,
+    marginBottom: space.s,
+  },
+  pinVideo: {
+    width: "100%",
+    maxWidth: 400,
+    height: "auto",
+    display: "block",
+    borderRadius: radius.l,
+    border: `1px solid ${colors.hairline}`,
+    background: colors.surfaceRaised,
+    boxShadow: "0 8px 28px rgba(21, 23, 28, 0.10)",
+  },
   cta: {
     marginTop: space.xl,
     textAlign: "center",
