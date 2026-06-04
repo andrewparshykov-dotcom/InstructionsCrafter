@@ -1,6 +1,6 @@
 {
   "name": "instructions-crafter",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "The free and privacy-friendly screen recorder with no sign in needed.",
   "scripts": {
     "build": "cross-env NODE_ENV=development node utils/build.js",
