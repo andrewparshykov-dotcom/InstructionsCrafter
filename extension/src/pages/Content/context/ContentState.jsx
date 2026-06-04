@@ -1155,7 +1155,7 @@ const ContentState = (props) => {
               and switch back to it once recording begins.
               <span style={{ display: "block", marginTop: 10, color: "#6E7684" }}>
                 InstructionsCrafter не може працювати на сторінці, з якої ви
-                прийшли (сторінка Chrome, веб-магазин або PDF), тож воно
+                перейшли (сторінка Chrome, веб-магазин або PDF), тож воно
                 відкрило цю сторінку. Починайте запис тут; щоб записати ту іншу
                 сторінку, оберіть «Відео» й поверніться до неї, щойно почнеться
                 запис.
