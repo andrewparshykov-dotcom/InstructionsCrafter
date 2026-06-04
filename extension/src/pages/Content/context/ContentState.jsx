@@ -1132,10 +1132,38 @@ const ContentState = (props) => {
         !contentState.recording
       ) {
         contentState.openWarning(
-          chrome.i18n.getMessage("extensionNotSupportedTitle"),
-          chrome.i18n.getMessage("extensionNotSupportedDescription"),
+          (
+            <>
+              What does this notification stand for?
+              <span
+                style={{
+                  display: "block",
+                  marginTop: 4,
+                  color: "#6E7684",
+                  fontWeight: 400,
+                }}
+              >
+                Що це за сповіщення?
+              </span>
+            </>
+          ),
+          (
+            <>
+              InstructionsCrafter can't run on the page you came from (a Chrome
+              page, the Web Store, or a PDF), so it opened this page for you.
+              Start your recording here; to record that other page, use Video
+              and switch back to it once recording begins.
+              <span style={{ display: "block", marginTop: 10, color: "#6E7684" }}>
+                InstructionsCrafter не може працювати на сторінці, з якої ви
+                прийшли (сторінка Chrome, веб-магазин або PDF), тож воно
+                відкрило цю сторінку. Починайте запис тут; щоб записати ту іншу
+                сторінку, оберіть «Відео» й поверніться до неї, щойно почнеться
+                запис.
+              </span>
+            </>
+          ),
           "NotSupportedIcon",
-          10000,
+          14000,
         );
       }
     }

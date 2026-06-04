@@ -84,9 +84,15 @@ const Setup = () => {
           <em style={styles.headlineItalic}>to record from.</em>
         </h1>
         <p style={styles.body}>
-          Click the InstructionsCrafter icon in your toolbar to begin. Narrate
-          every step out loud — the document is built from what you{" "}
-          <em style={styles.emphasis}>say</em>, not from what you click.
+          Click the InstructionsCrafter icon to begin, then pick Video or Click
+          capture. In Video mode, narrate each step out loud; in Click capture,
+          your clicks become the steps and narration is optional.
+        </p>
+        <p style={styles.bodyUk}>
+          Натисніть піктограму InstructionsCrafter, щоб почати, і оберіть
+          «Відео» або «Фіксацію кліків». У режимі «Відео» проговорюйте кожен
+          крок; у «Фіксації кліків» вашими кроками стають кліки, а озвучення
+          необов'язкове.
         </p>
 
         {/* Anchors for the content-script overlays (toolbar + popup). These
@@ -214,11 +220,13 @@ const styles = {
     margin: 0,
     maxWidth: 440,
   },
-  emphasis: {
-    fontFamily: fonts.display,
-    fontStyle: "italic",
-    fontSize: "1.08em",
-    color: colors.ink,
+  bodyUk: {
+    fontFamily: fonts.body,
+    fontSize: 15,
+    lineHeight: 1.55,
+    color: colors.mid,
+    margin: "12px 0 0",
+    maxWidth: 440,
   },
 
   overlayAnchors: {
