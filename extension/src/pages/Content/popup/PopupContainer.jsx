@@ -110,9 +110,14 @@ const PopupContainer = (props) => {
       // before the host page's React tree commits its anchors).
       const raf = requestAnimationFrame(pin);
       window.addEventListener("resize", pin);
+      // The Playground page scrolls on short screens; keep the popup glued to
+      // its in-page anchor as the user scrolls. The anchor's getBoundingClientRect
+      // is viewport-relative, so it shifts on scroll just like on resize.
+      window.addEventListener("scroll", pin, { passive: true });
       return () => {
         cancelAnimationFrame(raf);
         window.removeEventListener("resize", pin);
+        window.removeEventListener("scroll", pin);
       };
     }
     function setPopupPosition(e) {

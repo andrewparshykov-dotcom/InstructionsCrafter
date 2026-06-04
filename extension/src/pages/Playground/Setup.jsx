@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { colors, fonts } from "../../design/tokens";
 import IconHero from "./IconHero";
 
 // Approximate popup height in CSS pixels (RECORDER label + mic dropdown +
-// waveform iframe + Start button + Hide toolbar row + padding). Used to
-// predict whether the popup will collide with the footer at the current
-// viewport size, so the footer can fade out gracefully on cramped screens.
-// See F34.
-const PREDICTED_POPUP_HEIGHT = 300;
-const POPUP_FOOTER_GAP = 16;
+// waveform iframe + Start button + Hide toolbar row + padding). The popup is
+// drawn by the content script in a separate fixed layer, so it takes up no
+// space in this page's normal flow. We reserve this much height where it floats
+// (see overlayAnchors) so the page grows tall enough to scroll the popup -- and
+// the footer below it -- fully into view on short laptops. See F34.
+const POPUP_RESERVED_HEIGHT = 300;
 
 // Playground page. The "blank canvas" tab the extension opens when there's
 // no real page to record. The popup overlay (mic dropdown, Start recording)
@@ -21,29 +21,6 @@ const POPUP_FOOTER_GAP = 16;
 // record, so it should set context without nagging.
 
 const Setup = () => {
-  // When the predicted bottom of the popup overlay (rendered by the content
-  // script in its own shadow DOM, but anchored to #playground-popup-anchor)
-  // would crowd the footer, fade the footer to invisible. We keep it in the
-  // grid slot (visibility/opacity, not display:none) so the rest of the
-  // layout doesn't reflow. See F34.
-  const [cramped, setCramped] = useState(false);
-
-  useEffect(() => {
-    const checkCramped = () => {
-      const anchor = document.getElementById("playground-popup-anchor");
-      const footer = document.getElementById("playground-footer");
-      if (!anchor || !footer) return;
-      const predictedBottom =
-        anchor.getBoundingClientRect().top + PREDICTED_POPUP_HEIGHT;
-      const footerTop = footer.getBoundingClientRect().top;
-      setCramped(predictedBottom + POPUP_FOOTER_GAP > footerTop);
-    };
-
-    checkCramped();
-    window.addEventListener("resize", checkCramped);
-    return () => window.removeEventListener("resize", checkCramped);
-  }, []);
-
   useEffect(() => {
     // Inject the extension content script -- this is what creates the
     // popup overlay on top of the page.
@@ -109,15 +86,7 @@ const Setup = () => {
         </div>
       </main>
 
-      <footer
-        id="playground-footer"
-        style={{
-          ...styles.footer,
-          opacity: cramped ? 0 : 1,
-          transition: "opacity 0.2s ease",
-          pointerEvents: cramped ? "none" : "auto",
-        }}
-      >
+      <footer style={styles.footer}>
         <span>INSTRUCTIONSCRAFTER</span>
         <span style={styles.dot}>·</span>
         <span>SCRATCHPAD</span>
@@ -134,7 +103,9 @@ const cssRules = `
   body {
     margin: 0;
     background: ${colors.surface};
-    overflow: hidden;
+    /* Allow vertical scrolling on short screens; block only sideways scroll.
+       (overflow-x: hidden makes overflow-y compute to auto.) */
+    overflow-x: hidden;
   }
   body::before {
     content: "";
@@ -243,7 +214,11 @@ const styles = {
     marginLeft: -20,
     position: "relative",
     pointerEvents: "none",
-    height: 0,
+    // Reserve the popup's footprint in the page flow (the popup itself floats
+    // in a separate fixed layer and would otherwise occupy 0 page height). This
+    // makes the page tall enough to scroll the popup + footer into view on
+    // short screens, and pushes the footer to sit just below the popup.
+    height: POPUP_RESERVED_HEIGHT,
   },
   toolbarAnchor: {
     // Default flow position (top: 0, left: 0 inside the wrapper) — the
