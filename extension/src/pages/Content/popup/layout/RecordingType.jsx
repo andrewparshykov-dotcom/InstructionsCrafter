@@ -61,6 +61,14 @@ const RecordingType = (props) => {
     contentState.startStreaming();
   };
 
+  // Opens the "Which mode should I use?" guide in a standalone window. The
+  // background handles it -- content scripts cannot open windows themselves.
+  const openGuide = () => {
+    try {
+      chrome.runtime.sendMessage({ type: "open-guide" }).catch(() => {});
+    } catch (e) {}
+  };
+
   // Capture mode: "video" (narrated screen recording) | "clicks" (Click-capture:
   // a screenshot per click, narration optional, browser tab only).
   const captureMode = contentState.captureMode || "video";
@@ -105,6 +113,9 @@ const RecordingType = (props) => {
           Click capture
         </button>
       </div>
+      <button type="button" style={modeStyles.guideLink} onClick={openGuide}>
+        Which mode should I use? →
+      </button>
       {captureMode === "clicks" && (
         <div style={modeStyles.hint}>
           Browser tabs only · one screenshot per click · narration optional.
@@ -214,6 +225,21 @@ const modeStyles = {
     lineHeight: 1.4,
     color: "#5B616E",
     margin: "0 2px 12px",
+  },
+  guideLink: {
+    display: "block",
+    width: "100%",
+    appearance: "none",
+    border: "none",
+    background: "transparent",
+    color: "#3080F8",
+    fontFamily: "inherit",
+    fontSize: 12.5,
+    fontWeight: 600,
+    cursor: "pointer",
+    padding: 0,
+    margin: "-4px 0 12px",
+    textAlign: "center",
   },
 };
 

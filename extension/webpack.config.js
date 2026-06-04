@@ -56,6 +56,7 @@ const entryPoints = {
   waveform: path.join(__dirname, "src", "pages", "Waveform", "index.jsx"),
   permissions: path.join(__dirname, "src", "pages", "Permissions", "index.jsx"),
   welcome: path.join(__dirname, "src", "pages", "Welcome", "index.jsx"),
+  guide: path.join(__dirname, "src", "pages", "Guide", "index.jsx"),
   options: path.join(__dirname, "src", "pages", "Options", "index.js"),
   generate: path.join(__dirname, "src", "pages", "Generate", "index.jsx"),
   playground: path.join(__dirname, "src", "pages", "Playground", "index.jsx"),

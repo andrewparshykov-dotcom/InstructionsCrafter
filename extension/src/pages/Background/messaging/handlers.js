@@ -328,6 +328,18 @@ export const setupHandlers = () => {
     await stopClickCapture();
     return { ok: true };
   });
+  // Opens the "Which mode should I use?" guide in its own popup window. The
+  // recorder popup is a content script and cannot open windows itself, so it
+  // sends this message instead.
+  registerMessage("open-guide", async () => {
+    await chrome.windows.create({
+      url: chrome.runtime.getURL("guide.html"),
+      type: "popup",
+      width: 920,
+      height: 860,
+    });
+    return { ok: true };
+  });
   registerMessage("desktop-capture", async (message, sender) => {
     const now = Date.now();
     if (desktopCaptureInFlight || now - lastDesktopCaptureAt < 1200) {
