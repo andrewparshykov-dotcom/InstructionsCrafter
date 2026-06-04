@@ -116,14 +116,6 @@ const RecordingType = (props) => {
       <button type="button" style={modeStyles.guideLink} onClick={openGuide}>
         Which mode should I use? →
       </button>
-      {captureMode === "clicks" && (
-        <div style={modeStyles.hint}>
-          Browser tabs only · one screenshot per click · narration optional.
-          Press Alt+Shift+S to capture the screen without clicking — you can
-          change this key on Chrome's keyboard-shortcuts page. Click the toolbar
-          icon to stop.
-        </div>
-      )}
       {contentState.updateChrome && (
         <div className="popup-warning">
           <div className="popup-warning-left">
@@ -219,12 +211,6 @@ const modeStyles = {
     background: "#fff",
     color: "#3080F8",
     boxShadow: "0 1px 3px rgba(0,0,0,0.12)",
-  },
-  hint: {
-    fontSize: 11.5,
-    lineHeight: 1.4,
-    color: "#5B616E",
-    margin: "0 2px 12px",
   },
   guideLink: {
     display: "block",
