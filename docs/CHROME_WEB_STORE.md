@@ -34,7 +34,7 @@ Already done — the item exists under the team's developer account (one-time $5
 
 The privacy policy is **already written and hosted**: `backend/templates/privacy.html`, served by FastAPI at **https://instructionscrafter.com/privacy** (route in `backend/app/main.py`). It is Gemini-accurate.
 
-> ✅ **DONE (2026-06-13, live):** the privacy policy now covers Click-capture too (verified live — it mentions per-click screenshots + in-browser blur/redact). _Original note:_ the live policy used to describe only the **narrated-video** pipeline ("the entire recording — video and audio" → Gemini). Add a short paragraph for **Click-capture mode**: the extension uploads a **screenshot of the page for each click** (plus the click's on-screen label) to the backend → Gemini, and the user can **blur/redact/annotate each screenshot in the browser before it is uploaded**, so redacted pixels never leave the device. Keep the existing "paid Gemini tier → Google does not train on the content" and "deleted after processing" wording.
+> The policy covers **both** capture modes — narrated-video ("the entire recording — video and audio" → Gemini) and Click-capture (a per-click screenshot + the click's label → Gemini, with in-browser blur/redact/annotate before upload so redacted pixels never leave the device) — plus the "paid Gemini tier → Google does not train on the content" and "deleted after processing" wording. Keep it in sync if the data flow changes.
 
 Hosting reference (if the URL ever needs to move):
 - **Option A (current):** the FastAPI `/privacy` route returns `backend/templates/privacy.html`.
@@ -123,7 +123,7 @@ English (United States) — `en-US`
 
 Justify each permission the manifest requests (≤1000 chars each). The current manifest requests: `host_permissions: ["<all_urls>"]`; `permissions: [storage, unlimitedStorage, downloads, tabs, scripting, system.display]`; `optional_permissions: [offscreen, desktopCapture, alarms]`.
 
-> ⚠️ **Remove `activeTab` from the manifest before building the resubmission.** A code audit found nothing uses the `activeTab` *permission* — the only `activeTab` references in the source are a `chrome.storage.local` key that stores a tab id, and `<all_urls>` already grants everything `activeTab` would. Shipping an unused permission is exactly what got v1.0.0 rejected, so drop it (no justification needed once removed).
+> **Re-audit permissions before each submission.** v1.0.0 was rejected for requesting a permission nothing used (`clipboardWrite`). Confirm every entry above is still actually exercised by the code, and that nothing unused (e.g. `activeTab`, `tabCapture`, `clipboardWrite`) has crept back into the manifest.
 
 ### `host_permissions: ["<all_urls>"]`
 
@@ -233,7 +233,7 @@ In the developer console:
 5. Distribution: **Visibility = Unlisted**, Geographic distribution: **All regions**.
 6. Click **Submit for review**.
 
-Review typically takes **1–3 business days**. Because v1.0.0 was rejected for an unused permission, double-check the manifest contains **no** unused permissions (notably remove `activeTab`) before submitting.
+Review typically takes **1–3 business days**. Because v1.0.0 was rejected for an unused permission, double-check the manifest contains **no** unused permissions before submitting.
 
 ---
 

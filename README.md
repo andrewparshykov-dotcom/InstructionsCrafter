@@ -1,8 +1,13 @@
 # InstructionsCrafter
 
-Turn a screen recording with voice narration into a polished Microsoft Word step-by-step instruction document.
+Turn a screen recording — or a series of clicks — into a polished Microsoft Word step-by-step instruction document.
 
-A Chrome extension records the screen + microphone and uploads to a FastAPI backend, which sends the whole recording (video + audio) to Google's Gemini API in a single call. Gemini watches the recording and returns the document's introduction plus one step per action — each with its instruction, a caption, and the moment to screenshot. The backend extracts those screenshots (FFmpeg) and assembles them into a `.docx` file. No long-term storage — everything is processed and discarded after each request.
+A Chrome extension captures what you do and uploads it to a FastAPI backend, which sends it to Google's Gemini API in a single call. There are **two capture modes**:
+
+- **Narrated video** — record the screen or a window and talk through the steps; Gemini watches the video + audio.
+- **Click capture** — browser-only; the extension screenshots each meaningful click (narration optional), and you can blur/redact/annotate any screenshot before it uploads.
+
+Gemini returns the document's introduction plus one step per action — each with its instruction and screenshot — and the backend assembles them into a `.docx` file (FFmpeg extracts the frames in video mode). No long-term storage — everything is processed and discarded after each request.
 
 **Internal tool** for ≤5 users. Forked from [Screenity](https://github.com/alyssaxuu/screenity) (GPLv3).
 
@@ -44,12 +49,26 @@ The shared password lives in the backend's `.env`. Ask the team for it.
 
 ### Using the extension
 
-1. Click the InstructionsCrafter icon → **Start**.
-2. Choose what to record (entire screen, window, or tab).
+The popup offers two capture modes. Pick one, then **Start**.
+
+**Narrated video** — record your screen and talk through the steps:
+
+1. Click the InstructionsCrafter icon → **Video** → **Start**.
+2. Choose what to record (entire screen or a window).
 3. **Narrate every step out loud** — the instructions are built from what you *say*. Your clicks are captured automatically to time the screenshots; if a click can't be captured (a desktop app, an embedded frame), just say **"screenshot"** out loud at the moment you want captured.
 4. Click **Stop** when done.
-5. The post-recording page opens. Enter a document title, the shared password, and click **Generate Document**.
-6. A `.docx` file downloads in a few seconds.
+
+**Click capture** — build a how-to from your clicks (narration optional):
+
+1. Click the InstructionsCrafter icon → **Click capture** → **Start**.
+2. Work through the task in your browser tab. Each meaningful click is screenshotted automatically; press **Alt+Shift+S** to capture any other moment.
+3. Click the toolbar icon to **Stop** (the recording indicator lives on the icon, so nothing appears in your screenshots).
+4. On the post-recording page you can blur/redact, add arrows, or draw on any screenshot before uploading.
+
+Then, for either mode:
+
+- Enter a document title and the shared password, and click **Generate Document**.
+- A `.docx` file downloads in a few seconds.
 
 ---
 
