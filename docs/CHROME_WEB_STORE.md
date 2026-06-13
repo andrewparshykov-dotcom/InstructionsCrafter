@@ -6,7 +6,9 @@ Step-by-step guide for publishing InstructionsCrafter to the Chrome Web Store as
 > - **Narrated video** — record the screen or a window and talk through the steps (Gemini watches the video + audio).
 > - **Click capture** — browser-only; the extension screenshots each meaningful click (narration optional) and Gemini writes one imperative step per screenshot. Screenshots can be blurred/redacted/annotated in the browser before upload.
 >
-> This replaces the old Groq-Whisper + OpenAI-GPT pipeline. The `tabCapture` and `clipboardWrite` permissions have been removed. Target version for the next submission: **1.1.0**.
+> This replaces the old Groq-Whisper + OpenAI-GPT pipeline. The `tabCapture` and `clipboardWrite` permissions have been removed.
+>
+> ✅ **PUBLISHED & LIVE: v1.1.0 was approved and went live on the Chrome Web Store on 2026-06-13** (unlisted, item `fcogglgcploggfgchifbeaoofljfgmoc`); the team installed it and confirmed it works. The steps below now describe the process for the *next* update.
 
 ---
 
@@ -32,7 +34,7 @@ Already done — the item exists under the team's developer account (one-time $5
 
 The privacy policy is **already written and hosted**: `backend/templates/privacy.html`, served by FastAPI at **https://instructionscrafter.com/privacy** (route in `backend/app/main.py`). It is Gemini-accurate.
 
-> ⚠️ **Update before resubmit:** the live policy currently describes only the **narrated-video** pipeline ("the entire recording — video and audio" → Gemini). Add a short paragraph for **Click-capture mode**: the extension uploads a **screenshot of the page for each click** (plus the click's on-screen label) to the backend → Gemini, and the user can **blur/redact/annotate each screenshot in the browser before it is uploaded**, so redacted pixels never leave the device. Keep the existing "paid Gemini tier → Google does not train on the content" and "deleted after processing" wording.
+> ✅ **DONE (2026-06-13, live):** the privacy policy now covers Click-capture too (verified live — it mentions per-click screenshots + in-browser blur/redact). _Original note:_ the live policy used to describe only the **narrated-video** pipeline ("the entire recording — video and audio" → Gemini). Add a short paragraph for **Click-capture mode**: the extension uploads a **screenshot of the page for each click** (plus the click's on-screen label) to the backend → Gemini, and the user can **blur/redact/annotate each screenshot in the browser before it is uploaded**, so redacted pixels never leave the device. Keep the existing "paid Gemini tier → Google does not train on the content" and "deleted after processing" wording.
 
 Hosting reference (if the URL ever needs to move):
 - **Option A (current):** the FastAPI `/privacy` route returns `backend/templates/privacy.html`.
@@ -205,7 +207,7 @@ Check the boxes:
 
 ## Step 7: Screenshots
 
-Chrome Web Store requires **at least 1**, allows up to 5, preferred size **1280 × 800**. The current set in `docs/store-screenshots/` (`01`–`06-cws.png`, dated May 2026) is **stale** — it predates Gemini and Click-capture mode and still shows the removed "Chrome Tab" share option. Recapture before resubmit.
+Chrome Web Store requires **at least 1**, allows up to 5, preferred size **1280 × 800**. ✅ **DONE (2026-06-13):** `docs/store-screenshots/` now holds 5 fresh 1280 × 800 shots (`01`–`05-cws.png`) for the Gemini + two-mode product, uploaded to the live listing — the stale May-2026 set (which showed the removed "Chrome Tab" option) was replaced.
 
 Suggested order for the refreshed set:
 
