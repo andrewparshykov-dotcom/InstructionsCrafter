@@ -40,8 +40,8 @@ const T = {
 
   worksLabel: { en: "HOW EACH MODE WORKS", uk: "ЯК ПРАЦЮЄ КОЖЕН РЕЖИМ" },
   worksVideo: {
-    en: "Video — InstructionsCrafter records your screen (or a window) and your microphone. The whole recording, picture and sound, goes to Google Gemini, which watches it and writes one clear step per action, choosing the right moment for each screenshot. The screenshots are pulled from the video frames.",
-    uk: "«Відео» — InstructionsCrafter записує ваш екран (або вікно) та мікрофон. Увесь запис — зображення і звук — надсилається в Google Gemini, який переглядає його й дає опис по одному зрозумілому кроку на кожну дію, обираючи влучний момент для кожного знімка. Знімки беруться з кадрів відео.",
+    en: "Video — InstructionsCrafter records your screen (or a window) and your microphone. The whole recording, picture and sound, goes to Google Gemini, which watches it and writes one clear step per action, choosing the right moment for each screenshot. You can also say “screenshot” out loud while recording to mark the exact moment to capture — handy for a result, a confirmation, or anything a click cannot reach. The word itself never appears in the finished document. The screenshots are pulled from the video frames.",
+    uk: "«Відео» — InstructionsCrafter записує ваш екран (або вікно) та мікрофон. Увесь запис — зображення і звук — надсилається в Google Gemini, який переглядає його й дає опис по одному зрозумілому кроку на кожну дію, обираючи влучний момент для кожного знімка. Також під час запису ви можете сказати вголос «скріншот», щоб позначити точний момент для знімка — зручно для результату, підтвердження чи будь-чого, що не вдається зафіксувати кліком. Саме це слово в готовий документ не потрапляє. Знімки беруться з кадрів відео.",
   },
   worksClicks: {
     en: "Click capture — there is no video. Each time you click something meaningful, the extension takes a screenshot of the visible tab and remembers what you clicked. Gemini writes one step per screenshot, and a ring marks where you clicked. Clicks on empty space are ignored.",
