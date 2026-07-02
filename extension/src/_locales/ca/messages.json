@@ -12,11 +12,11 @@
     "description": "Etiqueta del tipus de gravació 'Àrea de la pestanya' en el pop-up"
   },
   "permissionsModalTitle": {
-    "message": "Comprova els teus permisos",
+    "message": "Comprova l'accés al micròfon",
     "description": "Títol del modal d'avís de permisos de càmera / micròfon"
   },
   "permissionsModalDescription": {
-    "message": "InstructionsCrafter no pot accedir a la teva càmera o micròfon. Permet l'accés fent clic a l'ícona de la càmera a la barra d'adreces.",
+    "message": "Sembla que InstructionsCrafter no pot accedir al teu micròfon. Permet l'accés al micròfon des de la barra d'adreces del navegador i torna-ho a provar.",
     "description": "Descripció del modal d'avís de permisos de càmera / micròfon"
   },
   "permissionsModalDismiss": {

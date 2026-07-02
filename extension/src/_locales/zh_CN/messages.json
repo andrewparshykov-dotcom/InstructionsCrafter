@@ -12,11 +12,11 @@
     "description": "Tab area recording type label on popup"
   },
   "permissionsModalTitle": {
-    "message": "请检查您的权限",
+    "message": "检查麦克风访问权限",
     "description": "Camera / microphone permissions warning modal title"
   },
   "permissionsModalDescription": {
-    "message": "看起来InstructionsCrafter无法访问您的摄像头或麦克风。请确保通过单击地址栏中的摄像机图标允许访问。",
+    "message": "看起来 InstructionsCrafter 无法访问您的麦克风。请在浏览器地址栏中允许麦克风访问，然后重试。",
     "description": "Camera / microphone permissions warning modal description"
   },
   "permissionsModalDismiss": {

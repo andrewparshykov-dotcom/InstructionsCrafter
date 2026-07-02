@@ -12,11 +12,11 @@
     "description": "Tab area recording type label on popup"
   },
   "permissionsModalTitle": {
-    "message": "Перевірте ваші дозволи",
+    "message": "Перевірте доступ до мікрофона",
     "description": "Camera / microphone permissions warning modal title"
   },
   "permissionsModalDescription": {
-    "message": "Схоже, що InstructionsCrafter не може отримати доступ до вашої камери або мікрофону. Обов'язково дозвольте доступ, натиснувши на значок камери у панелі адреси.",
+    "message": "Схоже, InstructionsCrafter не може отримати доступ до вашого мікрофона. Дозвольте доступ до мікрофона в адресному рядку браузера й спробуйте ще раз.",
     "description": "Camera / microphone permissions warning modal description"
   },
   "permissionsModalDismiss": {

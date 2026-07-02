@@ -12,11 +12,11 @@
     "description": "Label jenis perekaman area tab pada popup"
   },
   "permissionsModalTitle": {
-    "message": "Periksa izin Anda",
+    "message": "Periksa akses mikrofon",
     "description": "Judul modal peringatan izin kamera/mikrofon"
   },
   "permissionsModalDescription": {
-    "message": "Sepertinya InstructionsCrafter tidak dapat mengakses kamera atau mikrofon Anda. Pastikan untuk mengizinkan akses dengan mengklik ikon kamera di bilah alamat.",
+    "message": "Sepertinya InstructionsCrafter tidak dapat mengakses mikrofon Anda. Izinkan akses mikrofon dari bilah alamat browser Anda, lalu coba lagi.",
     "description": "Deskripsi modal peringatan izin kamera/mikrofon"
   },
   "permissionsModalDismiss": {

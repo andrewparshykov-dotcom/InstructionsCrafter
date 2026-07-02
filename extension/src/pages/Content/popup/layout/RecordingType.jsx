@@ -48,7 +48,7 @@ const RecordingType = (props) => {
         });
       },
       () => {},
-      chrome.runtime.getURL("assets/helper/permissions.webp"),
+      null,
       null,
       null,
       true,

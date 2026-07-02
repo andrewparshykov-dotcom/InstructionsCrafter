@@ -12,11 +12,11 @@
     "description": "Etiqueta de tipo de gravação de área de página no popup"
   },
   "permissionsModalTitle": {
-    "message": "Verifica as tuas permissões",
+    "message": "Verifica o acesso ao microfone",
     "description": "Título do modal de aviso de permissões de câmara/microfone"
   },
   "permissionsModalDescription": {
-    "message": "Parece que o InstructionsCrafter não consegue aceder à tua câmara ou microfone. Certifica-te de permitir o acesso ao clicar no ícone da câmara na barra de endereço.",
+    "message": "Parece que o InstructionsCrafter não consegue aceder ao teu microfone. Permite o acesso ao microfone na barra de endereço do navegador e tenta novamente.",
     "description": "Descrição do modal de aviso de permissões de câmara/microfone"
   },
   "permissionsModalDismiss": {

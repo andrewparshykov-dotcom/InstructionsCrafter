@@ -12,11 +12,11 @@
     "description": "Açılır pencere üzerinde sekme alanı kaydı türü etiketi"
   },
   "permissionsModalTitle": {
-    "message": "İzinlerinizi kontrol edin",
+    "message": "Mikrofon erişiminizi kontrol edin",
     "description": "Kamera / mikrofon izinleri uyarı modalı başlığı"
   },
   "permissionsModalDescription": {
-    "message": "InstructionsCrafter'nin kamera veya mikrofonunuza erişemiyor gibi görünüyor. Kameranın simgesine tıklayarak erişime izin verdiğinizden emin olun.",
+    "message": "Görünüşe göre InstructionsCrafter mikrofonunuza erişemiyor. Tarayıcınızın adres çubuğundan mikrofon erişimine izin verin ve tekrar deneyin.",
     "description": "Kamera / mikrofon izinleri uyarı modalı açıklaması"
   },
   "permissionsModalDismiss": {

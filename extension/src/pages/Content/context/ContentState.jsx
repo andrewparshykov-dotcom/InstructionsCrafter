@@ -689,7 +689,7 @@ const ContentState = (props) => {
             () => {
               noMorePermissions();
             },
-            chrome.runtime.getURL("assets/helper/permissions.webp"),
+            null,
             null,
             null,
             true,

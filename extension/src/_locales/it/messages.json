@@ -12,11 +12,11 @@
     "description": "Etichetta del tipo di registrazione dell'area della scheda nel menu a discesa"
   },
   "permissionsModalTitle": {
-    "message": "Verifica i tuoi permessi",
+    "message": "Controlla l'accesso al microfono",
     "description": "Titolo del modulo di avviso dei permessi per fotocamera/microfono"
   },
   "permissionsModalDescription": {
-    "message": "Sembra che InstructionsCrafter non possa accedere alla tua fotocamera o al tuo microfono. Consenti l'accesso facendo clic sull'icona della fotocamera nella barra degli indirizzi.",
+    "message": "Sembra che InstructionsCrafter non possa accedere al tuo microfono. Consenti l'accesso al microfono dalla barra degli indirizzi del browser, quindi riprova.",
     "description": "Descrizione del modulo di avviso dei permessi per fotocamera/microfono"
   },
   "permissionsModalDismiss": {

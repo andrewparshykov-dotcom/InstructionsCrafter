@@ -12,11 +12,11 @@
     "description": "Etiqueta de tipo de grabación de área de pestaña en el menú desplegable"
   },
   "permissionsModalTitle": {
-    "message": "Verifica tus permisos",
+    "message": "Comprueba el acceso al micrófono",
     "description": "Título del modal de advertencia de permisos de cámara/micrófono"
   },
   "permissionsModalDescription": {
-    "message": "Parece que InstructionsCrafter no puede acceder a tu cámara o micrófono. Permite el acceso haciendo clic en el icono de la cámara en la barra de direcciones.",
+    "message": "Parece que InstructionsCrafter no puede acceder a tu micrófono. Permite el acceso al micrófono desde la barra de direcciones del navegador e inténtalo de nuevo.",
     "description": "Descripción del modal de advertencia de permisos de cámara/micrófono"
   },
   "permissionsModalDismiss": {

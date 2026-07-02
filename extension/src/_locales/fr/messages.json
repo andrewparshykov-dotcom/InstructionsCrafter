@@ -12,11 +12,11 @@
     "description": "Étiquette du type d'enregistrement de zone d'onglet dans le menu déroulant"
   },
   "permissionsModalTitle": {
-    "message": "Vérifiez vos autorisations",
+    "message": "Vérifiez l'accès au microphone",
     "description": "Titre de la fenêtre modale d'avertissement des autorisations de la caméra/du microphone"
   },
   "permissionsModalDescription": {
-    "message": "Il semble que InstructionsCrafter ne puisse pas accéder à votre caméra ou à votre microphone. Autorisez l'accès en cliquant sur l'icône de la caméra dans la barre d'adresse.",
+    "message": "Il semble qu'InstructionsCrafter ne puisse pas accéder à votre microphone. Autorisez l'accès au microphone depuis la barre d'adresse de votre navigateur, puis réessayez.",
     "description": "Description de la fenêtre modale d'avertissement des autorisations de la caméra/du microphone"
   },
   "permissionsModalDismiss": {

@@ -12,11 +12,11 @@
     "description": "Tab area recording type label on popup"
   },
   "permissionsModalTitle": {
-    "message": "Check your permissions",
+    "message": "Check your microphone access",
     "description": "Camera / microphone permissions warning modal title"
   },
   "permissionsModalDescription": {
-    "message": "Looks like InstructionsCrafter can’t access your camera or microphone. Make sure to allow access by clicking on the camera icon in the address bar.",
+    "message": "Looks like InstructionsCrafter can’t access your microphone. Allow microphone access from your browser’s address bar, then try again.",
     "description": "Camera / microphone permissions warning modal description"
   },
   "permissionsModalDismiss": {

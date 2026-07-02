@@ -12,11 +12,11 @@
     "description": "Etykieta rodzaju nagrywania obszaru karty na okienku popup"
   },
   "permissionsModalTitle": {
-    "message": "Sprawdź swoje uprawnienia",
+    "message": "Sprawdź dostęp do mikrofonu",
     "description": "Tytuł modalnego okienka ostrzeżenia o uprawnieniach kamery / mikrofonu"
   },
   "permissionsModalDescription": {
-    "message": "Wygląda na to, że InstructionsCrafter nie ma dostępu do twojej kamery lub mikrofonu. Upewnij się, że zezwoliłeś na dostęp, klikając ikonę kamery w pasku adresu.",
+    "message": "Wygląda na to, że InstructionsCrafter nie ma dostępu do Twojego mikrofonu. Zezwól na dostęp do mikrofonu z paska adresu przeglądarki, a następnie spróbuj ponownie.",
     "description": "Opis modalnego okienka ostrzeżenia o uprawnieniach kamery / mikrofonu"
   },
   "permissionsModalDismiss": {

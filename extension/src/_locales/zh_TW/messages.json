@@ -12,11 +12,11 @@
     "description": "Tab area recording type label on popup"
   },
   "permissionsModalTitle": {
-    "message": "請檢查您的權限",
+    "message": "檢查麥克風存取權限",
     "description": "Camera / microphone permissions warning modal title"
   },
   "permissionsModalDescription": {
-    "message": "InstructionsCrafter 似乎無法存取您的攝影機或麥克風。請確保您點擊位址列當中的相機圖示來允許存取。",
+    "message": "InstructionsCrafter 似乎無法存取您的麥克風。請在瀏覽器網址列中允許麥克風存取，然後再試一次。",
     "description": "Camera / microphone permissions warning modal description"
   },
   "permissionsModalDismiss": {

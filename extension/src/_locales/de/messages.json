@@ -12,11 +12,11 @@
     "description": "Label für die Aufnahmeart 'Tab-Bereich' in der Popup-Ansicht"
   },
   "permissionsModalTitle": {
-    "message": "Überprüfen Sie Ihre Berechtigungen",
+    "message": "Mikrofonzugriff prüfen",
     "description": "Titel des Modals für Kamera- / Mikrofonberechtigungen"
   },
   "permissionsModalDescription": {
-    "message": "Es scheint, dass InstructionsCrafter keinen Zugriff auf Ihre Kamera oder Ihr Mikrofon hat. Stellen Sie sicher, dass Sie den Zugriff zulassen, indem Sie auf das Kamera-Symbol in der Adressleiste klicken.",
+    "message": "Es scheint, dass InstructionsCrafter nicht auf Ihr Mikrofon zugreifen kann. Erlauben Sie den Mikrofonzugriff über die Adressleiste Ihres Browsers und versuchen Sie es erneut.",
     "description": "Beschreibung des Modals für Kamera- / Mikrofonberechtigungen"
   },
   "permissionsModalDismiss": {
