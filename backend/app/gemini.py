@@ -82,7 +82,7 @@ grammar and phrasing, including when the narration is already in English. Keep
 any on-screen text and control labels exactly as they appear on screen (do not
 translate those), so the reader can match them to what they see.
 
-{clicks_section}\
+{duration_section}{clicks_section}\
 The narrator may also say a CUE WORD out loud to mark the exact moment they want
 captured for a step -- "screenshot", "скріншот", or "скриншот" (the same word in
 English, Ukrainian, and Russian; also accept an obvious inflected form of it).
@@ -183,6 +183,31 @@ def _clicks_section(clicks: list[dict]) -> str:
     )
 
 
+def _duration_section(video_duration: float | None) -> str:
+    """Build the prompt's timeline-bounds paragraph (or nothing if unknown).
+
+    Added after a pause-heavy recording made Gemini inflate its timeline past
+    the real end of the video: each recorder pause leaves a hard visual cut in
+    the (otherwise gap-free) video, and the model inferred "elapsed" time
+    across those cuts — plausibly by reading on-screen clocks — pushing late
+    steps up to ~160s beyond the last frame, where the pipeline's clamp turned
+    them into duplicated end-frame screenshots. Stating the exact duration and
+    forbidding that inference pins every timestamp to the video's own
+    timeline. See PHASE_HISTORY.md (2026-07-03).
+    """
+    if not video_duration or video_duration <= 0:
+        return ""
+    return (
+        f"The video is exactly {video_duration:.1f} seconds long. Every "
+        f'"start_time", "end_time", and "screenshot_time" you return MUST lie '
+        f"between 0 and {video_duration:.1f}. The recording may contain hard "
+        "cuts where the user paused the recorder: the picture jumps, but NO "
+        "time passes across a cut. Never infer elapsed time from clocks, "
+        "dates, or timestamps visible on screen -- place every step only by "
+        "its position on this video's own timeline.\n\n"
+    )
+
+
 def _target_fps(video_duration: float | None) -> float:
     """Pick a perception fps that keeps the video within the token budget.
 
@@ -269,7 +294,10 @@ def generate_document(
         # 2) One generation call: video sampled at a low fps (anchors carry the
         #    precision), high media resolution, high thinking, JSON schema.
         fps = min(_target_fps(video_duration), PERCEPTION_FPS)
-        prompt = PROMPT_TEMPLATE.format(clicks_section=_clicks_section(clicks))
+        prompt = PROMPT_TEMPLATE.format(
+            duration_section=_duration_section(video_duration),
+            clicks_section=_clicks_section(clicks),
+        )
         print(
             f"[{request_id}] gemini: fps={fps:.2f} (duration={video_duration}) "
             f"clicks={len(clicks)}"
@@ -362,6 +390,24 @@ def generate_document(
                 "caption": s.caption,
             }
         )
+
+    # A step whose times exceed the real video length means the model drifted
+    # off the timeline despite the prompt bounds (the pipeline clamps such
+    # times to the last frame, so the doc gets a wrong screenshot). Log loudly
+    # so recurrences are visible in the server log. +2s slack for rounding.
+    if video_duration:
+        drifted = [
+            i
+            for i, s in enumerate(steps)
+            if max(s["start_time"], s["end_time"], s["click_time"] or 0)
+            > video_duration + 2
+        ]
+        if drifted:
+            print(
+                f"[{request_id}] gemini: WARNING {len(drifted)} step(s) exceed "
+                f"video duration {video_duration:.1f}s: indexes {drifted}",
+                file=sys.stderr,
+            )
 
     print(
         f"[{request_id}] gemini: {len(steps)} steps, model={model}, "
