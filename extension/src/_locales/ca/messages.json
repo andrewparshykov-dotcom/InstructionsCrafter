@@ -11,25 +11,9 @@
     "message": "Àrea",
     "description": "Etiqueta del tipus de gravació 'Àrea de la pestanya' en el pop-up"
   },
-  "permissionsModalTitle": {
-    "message": "Comprova l'accés al micròfon",
-    "description": "Títol del modal d'avís de permisos de càmera / micròfon"
-  },
-  "permissionsModalDescription": {
-    "message": "Sembla que InstructionsCrafter no pot accedir al teu micròfon. Permet l'accés al micròfon des de la barra d'adreces del navegador i torna-ho a provar.",
-    "description": "Descripció del modal d'avís de permisos de càmera / micròfon"
-  },
   "permissionsModalDismiss": {
     "message": "Descarta",
     "description": "Botó de descarta del modal d'avís de permisos de càmera / micròfon"
-  },
-  "sitePermissionsBlockedTitle": {
-    "message": "Aquest lloc no permet accedir a la càmera ni al micròfon",
-    "description": "Modal title shown when the current page's Permissions-Policy header blocks browser extensions from using camera or microphone"
-  },
-  "sitePermissionsBlockedDescription": {
-    "message": "Sembla que la configuració de seguretat d'aquest lloc web impedeix que les extensions del navegador utilitzin la càmera o el micròfon en aquesta pàgina. Per gravar amb ells, inicia una gravació des d'una altra pestanya i torna aquí un cop comenci.",
-    "description": "Modal description shown when the current page's Permissions-Policy header blocks browser extensions from using camera or microphone"
   },
   "opfsLoadErrorDescription": {
     "message": "Sembla que InstructionsCrafter no ha pogut carregar la gravació de l'emmagatzematge del teu dispositiu. És possible que s'hagi esborrat o mogut. Si això continua passant, contacta amb Andrew.",
@@ -167,10 +151,6 @@
     "message": "Enfoca el cursor",
     "description": "Missatge emergent 'Projecció del cursor'"
   },
-  "permissionsModalNoShowAgain": {
-    "message": "No tornis a mostrar-ho",
-    "description": "Botó de descarta del modal d'avís de permisos"
-  },
   "restartModalTitle": {
     "message": "Segur que vols reiniciar la gravació?",
     "description": "Títol del modal de reiniciar la gravació"
@@ -294,10 +274,6 @@
   "extensionNotSupportedDescription": {
     "message": "InstructionsCrafter no era compatible a la teva pestanya anterior. No obstant això, pots començar la gravació aquí i després canviar a la pestanya, però la barra de ferramentes no serà visible.",
     "description": "Descripció d'extensió no compatible a la pestanya"
-  },
-  "permissionsModalReview": {
-    "message": "Revisar permisos",
-    "description": "Botó de revisar permisos"
   },
   "recordButtonMultiLabel": {
     "message": "Afegeix una altra gravació",

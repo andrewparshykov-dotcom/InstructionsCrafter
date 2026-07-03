@@ -11,25 +11,9 @@
     "message": "Tab area",
     "description": "Tab area recording type label on popup"
   },
-  "permissionsModalTitle": {
-    "message": "Check your microphone access",
-    "description": "Camera / microphone permissions warning modal title"
-  },
-  "permissionsModalDescription": {
-    "message": "Looks like InstructionsCrafter can’t access your microphone. Allow microphone access from your browser’s address bar, then try again.",
-    "description": "Camera / microphone permissions warning modal description"
-  },
   "permissionsModalDismiss": {
     "message": "Dismiss",
     "description": "Camera / microphone permissions warning modal dismiss button"
-  },
-  "sitePermissionsBlockedTitle": {
-    "message": "This site doesn't allow camera or microphone access",
-    "description": "Modal title shown when the current page's Permissions-Policy header blocks browser extensions from using camera or microphone"
-  },
-  "sitePermissionsBlockedDescription": {
-    "message": "Looks like this website's security settings prevent browser extensions from using your camera or microphone on this page. To record with them, start a recording from another tab and switch back here once it begins.",
-    "description": "Modal description shown when the current page's Permissions-Policy header blocks browser extensions from using camera or microphone"
   },
   "opfsLoadErrorDescription": {
     "message": "Looks like InstructionsCrafter couldn't load the recording from your device's storage. It may have been cleared or moved. If this keeps happening, please contact Andrew.",
@@ -166,10 +150,6 @@
   "spotlightCursorTooltip": {
     "message": "Spotlight cursor",
     "description": "Spotlight cursor tooltip"
-  },
-  "permissionsModalNoShowAgain": {
-    "message": "Don't show again",
-    "description": "Permissions modal dismiss button"
   },
   "restartModalTitle": {
     "message": "Are you sure you want to restart the recording?",
@@ -318,10 +298,6 @@
   "extensionNotSupportedDescription": {
     "message": "InstructionsCrafter wasn't supported in your previous tab. You can still start your recording here and switch back to the tab, but your toolbar won't be visible.",
     "description": "Extension not supported on tab description"
-  },
-  "permissionsModalReview": {
-    "message": "Review permissions",
-    "description": "Review permissions button"
   },
   "recordButtonMultiLabel": {
     "message": "Add another recording",

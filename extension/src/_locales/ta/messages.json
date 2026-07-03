@@ -11,25 +11,9 @@
     "message": "கையெழுத்து பகுதி",
     "description": "கையெழுத்து பகுதி படம் பதிவு வகை படிதம்"
   },
-  "permissionsModalTitle": {
-    "message": "உங்கள் மைக்ரோஃபோன் அணுகலைச் சரிபார்க்கவும்",
-    "description": "கேமரா / மைக்ரோஃபோன் அனுமதிகள் எச்சரிக்கை செய்தியின் தலைப்பு"
-  },
-  "permissionsModalDescription": {
-    "message": "InstructionsCrafter உங்கள் மைக்ரோஃபோனை அணுக முடியவில்லை எனத் தெரிகிறது. உங்கள் உலாவியின் முகவரிப் பட்டியில் மைக்ரோஃபோன் அணுகலை அனுமதித்து மீண்டும் முயற்சிக்கவும்.",
-    "description": "கேமரா / மைக்ரோஃபோன் அனுமதிகள் எச்சரிக்கை செய்தியின் விளக்கம் விளக்கம்"
-  },
   "permissionsModalDismiss": {
     "message": "விலகு",
     "description": "கேமரா / மைக்ரோஃபோன் அனுமதிகள் எச்சரிக்கை செய்தியின் விளக்கம் விளக்கம்"
-  },
-  "sitePermissionsBlockedTitle": {
-    "message": "இந்த தளம் கேமரா அல்லது மைக்ரோஃபோன் அணுகலை அனுமதிக்கவில்லை",
-    "description": "Modal title shown when the current page's Permissions-Policy header blocks browser extensions from using camera or microphone"
-  },
-  "sitePermissionsBlockedDescription": {
-    "message": "இந்த வலைத்தளத்தின் பாதுகாப்பு அமைப்புகள் உலாவி நீட்டிப்புகள் இந்தப் பக்கத்தில் உங்கள் கேமராவையோ அல்லது மைக்ரோஃபோனையோ பயன்படுத்துவதைத் தடுக்கின்றன. இவற்றுடன் பதிவு செய்ய, மற்றொரு தாவலில் பதிவைத் தொடங்கி, அது தொடங்கியதும் இங்கே திரும்பவும்.",
-    "description": "Modal description shown when the current page's Permissions-Policy header blocks browser extensions from using camera or microphone"
   },
   "opfsLoadErrorDescription": {
     "message": "InstructionsCrafter உங்கள் சாதனத்தின் சேமிப்பகத்திலிருந்து பதிவை ஏற்ற முடியவில்லை. அது அழிக்கப்பட்டிருக்கலாம் அல்லது நகர்த்தப்பட்டிருக்கலாம். இது தொடர்ந்து நடந்தால், Andrew-ஐ தொடர்பு கொள்ளவும்.",
@@ -167,10 +151,6 @@
     "message": "கோர்சரை ஒளிப்படுத்து",
     "description": "கோர்சரை ஒளிப்படுத்து டூல்டிப்"
   },
-  "permissionsModalNoShowAgain": {
-    "message": "மீது காண்பிக்க வேண்டாம்",
-    "description": "அனுமதிகள் மோடால் காண்பிக்க பொதுப்படுத்து பொத்தான்"
-  },
   "restartModalTitle": {
     "message": "புதியதாக பதிவுசெய்ய விரும்புகிறீர்களா?",
     "description": "புதியதாக பதிவுசெய்ய விரும்புகிறீர்களா மோடால் தலைப்பு"
@@ -294,10 +274,6 @@
   "extensionNotSupportedDescription": {
     "message": "உங்கள் முந்தைய பக்கத்தில் InstructionsCrafter ஆதரிக்கப்படவில்லை. இதையடுத்து, நீங்கள் இங்கே பதிவு ஆரம்பிக்கலாம், அப்போது மற்றொரு பக்கத்திற்கு செல்ல அநுமதிக்கப்படும், ஆனால் உங்கள் கருவிப்பட்டி காணப்படாது.",
     "description": "அட்டவணை ஆதரிக்கப்படாத நீக்கம் விளக்கம்"
-  },
-  "permissionsModalReview": {
-    "message": "அனுமதிகளை பரவி",
-    "description": "அனுமதிகளை பரவி பொத்தானை"
   },
   "recordButtonMultiLabel": {
     "message": "დაამატე კიდევ ერთი ჩაწერა",

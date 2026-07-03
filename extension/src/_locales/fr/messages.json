@@ -11,25 +11,9 @@
     "message": "Zone",
     "description": "Étiquette du type d'enregistrement de zone d'onglet dans le menu déroulant"
   },
-  "permissionsModalTitle": {
-    "message": "Vérifiez l'accès au microphone",
-    "description": "Titre de la fenêtre modale d'avertissement des autorisations de la caméra/du microphone"
-  },
-  "permissionsModalDescription": {
-    "message": "Il semble qu'InstructionsCrafter ne puisse pas accéder à votre microphone. Autorisez l'accès au microphone depuis la barre d'adresse de votre navigateur, puis réessayez.",
-    "description": "Description de la fenêtre modale d'avertissement des autorisations de la caméra/du microphone"
-  },
   "permissionsModalDismiss": {
     "message": "Rejeter",
     "description": "Bouton de rejet de la fenêtre modale d'avertissement des autorisations de la caméra/du microphone"
-  },
-  "sitePermissionsBlockedTitle": {
-    "message": "Ce site ne permet pas l'accès à la caméra ou au microphone",
-    "description": "Modal title shown when the current page's Permissions-Policy header blocks browser extensions from using camera or microphone"
-  },
-  "sitePermissionsBlockedDescription": {
-    "message": "Il semble que les paramètres de sécurité de ce site empêchent les extensions de navigateur d'utiliser votre caméra ou votre microphone sur cette page. Pour enregistrer avec eux, démarrez un enregistrement depuis un autre onglet et revenez ici une fois qu'il a commencé.",
-    "description": "Modal description shown when the current page's Permissions-Policy header blocks browser extensions from using camera or microphone"
   },
   "opfsLoadErrorDescription": {
     "message": "Il semble que InstructionsCrafter n'ait pas pu charger l'enregistrement depuis le stockage de votre appareil. Il a peut-être été effacé ou déplacé. Si cela se reproduit, contactez Andrew.",
@@ -167,10 +151,6 @@
     "message": "Projecteur sur le curseur",
     "description": "Conseil pour mettre en lumière le curseur"
   },
-  "permissionsModalNoShowAgain": {
-    "message": "Ne plus afficher",
-    "description": "Bouton de ne plus afficher du modal d'avertissement de permissions"
-  },
   "restartModalTitle": {
     "message": "Êtes-vous sûr de vouloir redémarrer l'enregistrement ?",
     "description": "Titre du modal de redémarrage d'enregistrement"
@@ -294,10 +274,6 @@
   "extensionNotSupportedDescription": {
     "message": "InstructionsCrafter n'était pas pris en charge dans votre onglet précédent. Vous pouvez toujours commencer votre enregistrement ici et basculer vers l'onglet, mais votre barre d'outils ne sera pas visible.",
     "description": "Description de l'extension non prise en charge sur l'onglet"
-  },
-  "permissionsModalReview": {
-    "message": "Réviser les autorisations",
-    "description": "Bouton de révision des autorisations"
   },
   "recordButtonMultiLabel": {
     "message": "Ajouter un autre enregistrement",

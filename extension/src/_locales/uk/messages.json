@@ -11,25 +11,9 @@
     "message": "Область вкладки",
     "description": "Tab area recording type label on popup"
   },
-  "permissionsModalTitle": {
-    "message": "Перевірте доступ до мікрофона",
-    "description": "Camera / microphone permissions warning modal title"
-  },
-  "permissionsModalDescription": {
-    "message": "Схоже, InstructionsCrafter не може отримати доступ до вашого мікрофона. Дозвольте доступ до мікрофона в адресному рядку браузера й спробуйте ще раз.",
-    "description": "Camera / microphone permissions warning modal description"
-  },
   "permissionsModalDismiss": {
     "message": "Відхилити",
     "description": "Camera / microphone permissions warning modal dismiss button"
-  },
-  "sitePermissionsBlockedTitle": {
-    "message": "Цей сайт не дозволяє доступ до камери або мікрофона",
-    "description": "Modal title shown when the current page's Permissions-Policy header blocks browser extensions from using camera or microphone"
-  },
-  "sitePermissionsBlockedDescription": {
-    "message": "Схоже, налаштування безпеки цього сайту не дозволяють розширенням браузера використовувати камеру або мікрофон на цій сторінці. Щоб записувати з ними, почніть запис в іншій вкладці та поверніться сюди після її початку.",
-    "description": "Modal description shown when the current page's Permissions-Policy header blocks browser extensions from using camera or microphone"
   },
   "opfsLoadErrorDescription": {
     "message": "Схоже, InstructionsCrafter не зміг завантажити запис зі сховища вашого пристрою. Можливо, його було очищено або переміщено. Якщо це повторюється, зв'яжіться з Andrew.",
@@ -167,10 +151,6 @@
     "message": "Спрямовувати прожектор на курсор",
     "description": "Spotlight cursor tooltip"
   },
-  "permissionsModalNoShowAgain": {
-    "message": "Не показувати знову",
-    "description": "Permissions modal dismiss button"
-  },
   "restartModalTitle": {
     "message": "Ви впевнені, що хочете перезапустити запис?",
     "description": "Restart recording modal title"
@@ -294,10 +274,6 @@
   "extensionNotSupportedDescription": {
     "message": "InstructionsCrafter не підтримувався на вашій попередній вкладці. Проте ви можете розпочати запис тут, а потім перейти на вкладку, але панель інструментів не буде видимою.",
     "description": "Опис попередження про непідтримку розширення на вкладці"
-  },
-  "permissionsModalReview": {
-    "message": "Переглянути дозволи",
-    "description": "Кнопка перегляду дозволів"
   },
   "recordButtonMultiLabel": {
     "message": "Додати ще один запис",

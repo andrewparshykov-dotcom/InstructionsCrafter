@@ -11,25 +11,9 @@
     "message": "탭 영역",
     "description": "Tab area recording type label on popup"
   },
-  "permissionsModalTitle": {
-    "message": "마이크 액세스 확인",
-    "description": "Camera / microphone permissions warning modal title"
-  },
-  "permissionsModalDescription": {
-    "message": "InstructionsCrafter가 마이크에 액세스할 수 없는 것 같습니다. 브라우저 주소 표시줄에서 마이크 액세스를 허용한 후 다시 시도하세요.",
-    "description": "Camera / microphone permissions warning modal description"
-  },
   "permissionsModalDismiss": {
     "message": "닫기",
     "description": "Camera / microphone permissions warning modal dismiss button"
-  },
-  "sitePermissionsBlockedTitle": {
-    "message": "이 사이트에서는 카메라 또는 마이크 접근이 허용되지 않아요",
-    "description": "Modal title shown when the current page's Permissions-Policy header blocks browser extensions from using camera or microphone"
-  },
-  "sitePermissionsBlockedDescription": {
-    "message": "이 웹사이트의 보안 설정이 브라우저 확장 프로그램에서 이 페이지의 카메라나 마이크를 사용하지 못하게 차단하고 있어요. 카메라와 마이크를 사용해 녹화하려면, 다른 탭에서 녹화를 시작한 뒤 녹화가 시작되면 이 탭으로 돌아오세요.",
-    "description": "Modal description shown when the current page's Permissions-Policy header blocks browser extensions from using camera or microphone"
   },
   "opfsLoadErrorDescription": {
     "message": "InstructionsCrafter가 기기 저장소에서 녹화 파일을 불러오지 못했어요. 삭제되었거나 이동되었을 수 있어요. 계속 발생하면 Andrew에게 문의해 주세요.",
@@ -167,10 +151,6 @@
     "message": "커서 하이라이트",
     "description": "Spotlight cursor tooltip"
   },
-  "permissionsModalNoShowAgain": {
-    "message": "다시 표시하지 않음",
-    "description": "Permissions modal dismiss button"
-  },
   "restartModalTitle": {
     "message": "녹화를 다시 시작하시겠습니까?",
     "description": "Restart recording modal title"
@@ -294,10 +274,6 @@
   "extensionNotSupportedDescription": {
     "message": "InstructionsCrafter는 이전 탭에서 지원되지 않았습니다. 그럼에도 불구하고 여기에서 녹음을 시작한 다음 다른 탭으로 전환할 수 있지만 도구 모음은 표시되지 않습니다.",
     "description": "탭에서 지원되지 않는 확장 프로그램 설명"
-  },
-  "permissionsModalReview": {
-    "message": "권한 검토",
-    "description": "권한 검토 버튼"
   },
   "recordButtonMultiLabel": {
     "message": "녹화 추가",

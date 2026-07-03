@@ -11,25 +11,9 @@
     "message": "标签区域",
     "description": "Tab area recording type label on popup"
   },
-  "permissionsModalTitle": {
-    "message": "检查麦克风访问权限",
-    "description": "Camera / microphone permissions warning modal title"
-  },
-  "permissionsModalDescription": {
-    "message": "看起来 InstructionsCrafter 无法访问您的麦克风。请在浏览器地址栏中允许麦克风访问，然后重试。",
-    "description": "Camera / microphone permissions warning modal description"
-  },
   "permissionsModalDismiss": {
     "message": "忽略",
     "description": "Camera / microphone permissions warning modal dismiss button"
-  },
-  "sitePermissionsBlockedTitle": {
-    "message": "此网站不允许访问摄像头或麦克风",
-    "description": "Modal title shown when the current page's Permissions-Policy header blocks browser extensions from using camera or microphone"
-  },
-  "sitePermissionsBlockedDescription": {
-    "message": "此网站的安全设置阻止浏览器扩展在此页面上使用您的摄像头或麦克风。如需使用它们录制，请从另一个标签页开始录制，并在录制开始后切换回此处。",
-    "description": "Modal description shown when the current page's Permissions-Policy header blocks browser extensions from using camera or microphone"
   },
   "opfsLoadErrorDescription": {
     "message": "InstructionsCrafter 无法从您设备的存储中加载录制内容。它可能已被清除或移动。如果此问题持续存在，请联系 Andrew。",
@@ -167,10 +151,6 @@
     "message": "聚焦光标",
     "description": "Spotlight cursor tooltip"
   },
-  "permissionsModalNoShowAgain": {
-    "message": "不再显示",
-    "description": "Permissions modal dismiss button"
-  },
   "restartModalTitle": {
     "message": "确定要重新开始录制吗？",
     "description": "Restart recording modal title"
@@ -294,10 +274,6 @@
   "extensionNotSupportedDescription": {
     "message": "InstructionsCrafter在您之前的选项卡上不受支持。尽管如此，您可以在此开始录制，然后切换到选项卡，但您的工具栏将不可见。",
     "description": "选项卡上不支持扩展的说明"
-  },
-  "permissionsModalReview": {
-    "message": "审查权限",
-    "description": "审查权限按钮"
   },
   "recordButtonMultiLabel": {
     "message": "添加另一段录制",

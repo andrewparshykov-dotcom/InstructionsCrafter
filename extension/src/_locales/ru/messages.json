@@ -11,25 +11,9 @@
     "message": "Область вкладки",
     "description": "Метка типа записи области вкладки на всплывающем окне"
   },
-  "permissionsModalTitle": {
-    "message": "Проверьте доступ к микрофону",
-    "description": "Заголовок модального окна предупреждения о разрешениях для камеры / микрофона"
-  },
-  "permissionsModalDescription": {
-    "message": "Похоже, InstructionsCrafter не может получить доступ к вашему микрофону. Разрешите доступ к микрофону в адресной строке браузера и повторите попытку.",
-    "description": "Описание модального окна предупреждения о разрешениях для камеры / микрофона"
-  },
   "permissionsModalDismiss": {
     "message": "Отклонить",
     "description": "Кнопка закрытия модального окна предупреждения о разрешениях для камеры / микрофона"
-  },
-  "sitePermissionsBlockedTitle": {
-    "message": "Этот сайт не разрешает доступ к камере или микрофону",
-    "description": "Modal title shown when the current page's Permissions-Policy header blocks browser extensions from using camera or microphone"
-  },
-  "sitePermissionsBlockedDescription": {
-    "message": "Похоже, настройки безопасности этого сайта не позволяют расширениям браузера использовать камеру или микрофон на этой странице. Чтобы записывать с их использованием, начните запись в другой вкладке и переключитесь сюда после её начала.",
-    "description": "Modal description shown when the current page's Permissions-Policy header blocks browser extensions from using camera or microphone"
   },
   "opfsLoadErrorDescription": {
     "message": "Похоже, InstructionsCrafter не смог загрузить запись из хранилища вашего устройства. Возможно, она была удалена или перемещена. Если это продолжится, свяжитесь с Andrew.",
@@ -167,10 +151,6 @@
     "message": "Прожектор на курсор",
     "description": "Подсказка для прожектора на курсор"
   },
-  "permissionsModalNoShowAgain": {
-    "message": "Больше не показывать",
-    "description": "Кнопка отклонения в модальном окне разрешений"
-  },
   "restartModalTitle": {
     "message": "Вы уверены, что хотите перезапустить запись?",
     "description": "Заголовок модального окна перезапуска записи"
@@ -294,10 +274,6 @@
   "extensionNotSupportedDescription": {
     "message": "InstructionsCrafter не поддерживался на вашей предыдущей вкладке. Тем не менее, вы все равно можете начать запись здесь, а затем перейти на другую вкладку, но панель инструментов не будет видна.",
     "description": "Описание предупреждения о не поддерживаемом расширении на вкладке"
-  },
-  "permissionsModalReview": {
-    "message": "Просмотреть разрешения",
-    "description": "Кнопка просмотра разрешений"
   },
   "recordButtonMultiLabel": {
     "message": "Добавить ещё одну запись",

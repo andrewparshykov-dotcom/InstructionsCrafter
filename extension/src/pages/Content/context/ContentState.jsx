@@ -103,24 +103,6 @@ const ContentState = (props) => {
     );
   }, []);
 
-  // Permissions-Policy: camera=(), microphone=() on the host page disables
-  // those APIs in every iframe including ours, surfacing as NotAllowedError;
-  // distinguish from a real permission issue.
-  useEffect(() => {
-    try {
-      const pp = document.permissionsPolicy || document.featurePolicy;
-      if (!pp || typeof pp.allowsFeature !== "function") return;
-      const cameraBlocked = !pp.allowsFeature("camera");
-      const micBlocked = !pp.allowsFeature("microphone");
-      if (cameraBlocked || micBlocked) {
-        setContentState((prev) => ({
-          ...prev,
-          sitePermissionsBlocked: true,
-        }));
-      }
-    } catch {}
-  }, []);
-
   const startRecording = useCallback(() => {
     const shouldClearCountdown =
       !contentStateRef.current?.isCountdownVisible &&
@@ -673,14 +655,6 @@ const ContentState = (props) => {
     }
   };
 
-  const noMorePermissions = useCallback(() => {
-    setContentState((prevContentState) => ({
-      ...prevContentState,
-      askForPermissions: false,
-    }));
-    chrome.storage.local.set({ askForPermissions: false });
-  });
-
   useEffect(() => {
     const handleMessage = (event) => {
       if (event.data.type === "instructionscrafter-permissions") {
@@ -723,9 +697,6 @@ const ContentState = (props) => {
     setToolbarMode: null,
     openModal: null,
     openToast: null,
-    // Page-level Permissions-Policy disallows camera/mic. Lets us show a
-    // site-specific modal instead of the misleading "check your permissions" one.
-    sitePermissionsBlocked: false,
     timeWarning: false,
     audioInput: [],
     setDevices: false,

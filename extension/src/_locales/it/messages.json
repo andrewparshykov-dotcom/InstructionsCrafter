@@ -11,25 +11,9 @@
     "message": "Area",
     "description": "Etichetta del tipo di registrazione dell'area della scheda nel menu a discesa"
   },
-  "permissionsModalTitle": {
-    "message": "Controlla l'accesso al microfono",
-    "description": "Titolo del modulo di avviso dei permessi per fotocamera/microfono"
-  },
-  "permissionsModalDescription": {
-    "message": "Sembra che InstructionsCrafter non possa accedere al tuo microfono. Consenti l'accesso al microfono dalla barra degli indirizzi del browser, quindi riprova.",
-    "description": "Descrizione del modulo di avviso dei permessi per fotocamera/microfono"
-  },
   "permissionsModalDismiss": {
     "message": "Annulla",
     "description": "Pulsante di annullamento del modulo di avviso dei permessi per fotocamera/microfono"
-  },
-  "sitePermissionsBlockedTitle": {
-    "message": "Questo sito non consente l'accesso alla fotocamera o al microfono",
-    "description": "Modal title shown when the current page's Permissions-Policy header blocks browser extensions from using camera or microphone"
-  },
-  "sitePermissionsBlockedDescription": {
-    "message": "Sembra che le impostazioni di sicurezza di questo sito impediscano alle estensioni del browser di utilizzare la fotocamera o il microfono in questa pagina. Per registrare con essi, avvia una registrazione da un'altra scheda e torna qui una volta iniziata.",
-    "description": "Modal description shown when the current page's Permissions-Policy header blocks browser extensions from using camera or microphone"
   },
   "opfsLoadErrorDescription": {
     "message": "Sembra che InstructionsCrafter non sia riuscito a caricare la registrazione dall'archiviazione del dispositivo. Potrebbe essere stata cancellata o spostata. Se il problema persiste, contatta Andrew.",
@@ -167,10 +151,6 @@
     "message": "Punto focale sul cursore",
     "description": "Suggerimento per il punto focale sul cursore"
   },
-  "permissionsModalNoShowAgain": {
-    "message": "Non mostrare più",
-    "description": "Pulsante per non mostrare più nel modalità di autorizzazioni"
-  },
   "restartModalTitle": {
     "message": "Sei sicuro di voler riavviare la registrazione?",
     "description": "Titolo del modalità di riavvio registrazione"
@@ -294,10 +274,6 @@
   "extensionNotSupportedDescription": {
     "message": "InstructionsCrafter non è stato supportato nella tua scheda precedente. Puoi comunque iniziare la registrazione qui e passare alla scheda, ma la barra degli strumenti non sarà visibile.",
     "description": "Descrizione dell'estensione non supportata sulla scheda"
-  },
-  "permissionsModalReview": {
-    "message": "Rivedi le autorizzazioni",
-    "description": "Pulsante per la revisione delle autorizzazioni"
   },
   "recordButtonMultiLabel": {
     "message": "Aggiungi un'altra registrazione",

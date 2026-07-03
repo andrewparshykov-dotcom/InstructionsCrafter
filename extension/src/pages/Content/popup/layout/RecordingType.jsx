@@ -14,48 +14,6 @@ const RecordingType = (props) => {
   const buttonRef = useRef(null);
   const isMac = navigator.platform.toUpperCase().indexOf("MAC") >= 0;
 
-  // Opens the right permissions modal based on why access is blocked.
-  // When the hosting page's Permissions-Policy header disallows camera or
-  // microphone, the usual "click the camera icon in the address bar" advice
-  // is wrong (the site is the blocker, not the browser). Route to a
-  // site-specific modal in that case.
-  const openPermissionsModal = () => {
-    if (typeof contentState.openModal !== "function") return;
-    if (contentState.sitePermissionsBlocked) {
-      contentState.openModal(
-        chrome.i18n.getMessage("sitePermissionsBlockedTitle"),
-        chrome.i18n.getMessage("sitePermissionsBlockedDescription"),
-        null,
-        chrome.i18n.getMessage("permissionsModalDismiss"),
-        () => {},
-        () => {},
-        null,
-        chrome.i18n.getMessage("learnMoreDot"),
-        "https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Permissions-Policy",
-        true,
-        false
-      );
-      return;
-    }
-    contentState.openModal(
-      chrome.i18n.getMessage("permissionsModalTitle"),
-      chrome.i18n.getMessage("permissionsModalDescription"),
-      chrome.i18n.getMessage("permissionsModalReview"),
-      chrome.i18n.getMessage("permissionsModalDismiss"),
-      () => {
-        chrome.runtime.sendMessage({
-          type: "extension-media-permissions",
-        });
-      },
-      () => {},
-      null,
-      null,
-      null,
-      true,
-      false
-    );
-  };
-
   // Start recording
   const startStreaming = () => {
     contentState.startStreaming();

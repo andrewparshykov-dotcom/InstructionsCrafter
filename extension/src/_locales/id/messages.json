@@ -11,25 +11,9 @@
     "message": "Area tab",
     "description": "Label jenis perekaman area tab pada popup"
   },
-  "permissionsModalTitle": {
-    "message": "Periksa akses mikrofon",
-    "description": "Judul modal peringatan izin kamera/mikrofon"
-  },
-  "permissionsModalDescription": {
-    "message": "Sepertinya InstructionsCrafter tidak dapat mengakses mikrofon Anda. Izinkan akses mikrofon dari bilah alamat browser Anda, lalu coba lagi.",
-    "description": "Deskripsi modal peringatan izin kamera/mikrofon"
-  },
   "permissionsModalDismiss": {
     "message": "Abaikan",
     "description": "Tombol abaikan modal peringatan izin kamera/mikrofon"
-  },
-  "sitePermissionsBlockedTitle": {
-    "message": "Situs ini tidak mengizinkan akses kamera atau mikrofon",
-    "description": "Modal title shown when the current page's Permissions-Policy header blocks browser extensions from using camera or microphone"
-  },
-  "sitePermissionsBlockedDescription": {
-    "message": "Tampaknya pengaturan keamanan situs web ini mencegah ekstensi peramban menggunakan kamera atau mikrofon Anda di halaman ini. Untuk merekam dengan keduanya, mulai rekaman dari tab lain dan beralih kembali ke sini setelah rekaman dimulai.",
-    "description": "Modal description shown when the current page's Permissions-Policy header blocks browser extensions from using camera or microphone"
   },
   "opfsLoadErrorDescription": {
     "message": "Sepertinya InstructionsCrafter tidak dapat memuat rekaman dari penyimpanan perangkat Anda. Rekaman mungkin telah dihapus atau dipindahkan. Jika ini terus terjadi, hubungi Andrew.",
@@ -167,10 +151,6 @@
     "message": "Kursor Spotlight",
     "description": "Tooltip Kursor Spotlight"
   },
-  "permissionsModalNoShowAgain": {
-    "message": "Jangan tampilkan lagi",
-    "description": "Tombol tolak modal Izin"
-  },
   "restartModalTitle": {
     "message": "Apakah Anda yakin ingin memulai ulang perekaman?",
     "description": "Judul modal Memulai Ulang Perekaman"
@@ -294,10 +274,6 @@
   "extensionNotSupportedDescription": {
     "message": "InstructionsCrafter tidak mendukung di tab sebelumnya Anda. Meskipun begitu, Anda masih bisa memulai perekaman di sini dan kemudian beralih ke tab lain, tetapi toolbar Anda tidak akan terlihat.",
     "description": "Deskripsi Ekstensi Tidak Didukung di Tab"
-  },
-  "permissionsModalReview": {
-    "message": "Ulasan Izin",
-    "description": "Tombol Ulasan Izin"
   },
   "recordButtonMultiLabel": {
     "message": "Tambah rekaman lain",

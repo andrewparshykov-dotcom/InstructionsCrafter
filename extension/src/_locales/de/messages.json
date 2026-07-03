@@ -11,25 +11,9 @@
     "message": "Tab-Bereich",
     "description": "Label für die Aufnahmeart 'Tab-Bereich' in der Popup-Ansicht"
   },
-  "permissionsModalTitle": {
-    "message": "Mikrofonzugriff prüfen",
-    "description": "Titel des Modals für Kamera- / Mikrofonberechtigungen"
-  },
-  "permissionsModalDescription": {
-    "message": "Es scheint, dass InstructionsCrafter nicht auf Ihr Mikrofon zugreifen kann. Erlauben Sie den Mikrofonzugriff über die Adressleiste Ihres Browsers und versuchen Sie es erneut.",
-    "description": "Beschreibung des Modals für Kamera- / Mikrofonberechtigungen"
-  },
   "permissionsModalDismiss": {
     "message": "Verwerfen",
     "description": "Schaltfläche 'Verwerfen' im Modal für Kamera- / Mikrofonberechtigungen"
-  },
-  "sitePermissionsBlockedTitle": {
-    "message": "Diese Seite erlaubt keinen Zugriff auf Kamera oder Mikrofon",
-    "description": "Modal title shown when the current page's Permissions-Policy header blocks browser extensions from using camera or microphone"
-  },
-  "sitePermissionsBlockedDescription": {
-    "message": "Die Sicherheitseinstellungen dieser Website verhindern, dass Browser-Erweiterungen auf dieser Seite deine Kamera oder dein Mikrofon verwenden. Um mit ihnen aufzunehmen, starte die Aufnahme in einem anderen Tab und wechsle zurück hierher, sobald sie begonnen hat.",
-    "description": "Modal description shown when the current page's Permissions-Policy header blocks browser extensions from using camera or microphone"
   },
   "opfsLoadErrorDescription": {
     "message": "InstructionsCrafter konnte die Aufnahme aus dem Speicher deines Geräts nicht laden. Sie wurde möglicherweise gelöscht oder verschoben. Falls dies weiterhin geschieht, kontaktiere Andrew.",
@@ -167,10 +151,6 @@
     "message": "Cursor im Spotlight",
     "description": "Tooltip für den Cursor im Spotlight"
   },
-  "permissionsModalNoShowAgain": {
-    "message": "Nicht mehr anzeigen",
-    "description": "Schaltfläche zum Ausblenden des Berechtigungsmodals"
-  },
   "restartModalTitle": {
     "message": "Möchten Sie die Aufnahme wirklich neu starten?",
     "description": "Titel des Modals zum Neustart der Aufnahme"
@@ -294,10 +274,6 @@
   "extensionNotSupportedDescription": {
     "message": "InstructionsCrafter wurde in Ihrem vorherigen Tab nicht unterstützt. Sie können Ihre Aufnahme hier dennoch starten und dann zum Tab wechseln, aber Ihre Symbolleiste wird nicht sichtbar sein.",
     "description": "Beschreibung der Erweiterung nicht auf Tab unterstützt"
-  },
-  "permissionsModalReview": {
-    "message": "Berechtigungen überprüfen",
-    "description": "Schaltfläche zur Überprüfung von Berechtigungen"
   },
   "recordButtonMultiLabel": {
     "message": "Weitere Aufnahme hinzufügen",

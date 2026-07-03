@@ -11,25 +11,9 @@
     "message": "Obszar karty",
     "description": "Etykieta rodzaju nagrywania obszaru karty na okienku popup"
   },
-  "permissionsModalTitle": {
-    "message": "Sprawdź dostęp do mikrofonu",
-    "description": "Tytuł modalnego okienka ostrzeżenia o uprawnieniach kamery / mikrofonu"
-  },
-  "permissionsModalDescription": {
-    "message": "Wygląda na to, że InstructionsCrafter nie ma dostępu do Twojego mikrofonu. Zezwól na dostęp do mikrofonu z paska adresu przeglądarki, a następnie spróbuj ponownie.",
-    "description": "Opis modalnego okienka ostrzeżenia o uprawnieniach kamery / mikrofonu"
-  },
   "permissionsModalDismiss": {
     "message": "Odrzuć",
     "description": "Przycisk odrzucenia w modalnym okienku ostrzeżenia o uprawnieniach kamery / mikrofonu"
-  },
-  "sitePermissionsBlockedTitle": {
-    "message": "Ta strona nie zezwala na dostęp do kamery ani mikrofonu",
-    "description": "Modal title shown when the current page's Permissions-Policy header blocks browser extensions from using camera or microphone"
-  },
-  "sitePermissionsBlockedDescription": {
-    "message": "Wygląda na to, że ustawienia bezpieczeństwa tej witryny uniemożliwiają rozszerzeniom przeglądarki korzystanie z kamery i mikrofonu na tej stronie. Aby nagrywać z ich użyciem, rozpocznij nagrywanie z innej karty i wróć tutaj po jego rozpoczęciu.",
-    "description": "Modal description shown when the current page's Permissions-Policy header blocks browser extensions from using camera or microphone"
   },
   "opfsLoadErrorDescription": {
     "message": "Wygląda na to, że InstructionsCrafter nie mógł załadować nagrania z pamięci urządzenia. Mogło zostać usunięte lub przeniesione. Jeśli problem się powtarza, skontaktuj się z Andrew.",
@@ -167,10 +151,6 @@
     "message": "Reflektor na kursorze",
     "description": "Podpowiedź reflektora na kursorze"
   },
-  "permissionsModalNoShowAgain": {
-    "message": "Nie pokazuj ponownie",
-    "description": "Przycisk odrzucenia modalu uprawnień"
-  },
   "restartModalTitle": {
     "message": "Czy na pewno chcesz zrestartować nagrywanie?",
     "description": "Tytuł modalu restartowania nagrywania"
@@ -294,10 +274,6 @@
   "extensionNotSupportedDescription": {
     "message": "InstructionsCrafter nie był obsługiwany na twojej poprzedniej karcie. Mimo to, możesz rozpocząć nagrywanie tutaj, a następnie przejść na inną kartę, ale pasek narzędzi nie będzie widoczny.",
     "description": "Opis ostrzeżenia o nieobsługiwanym rozszerzeniu na karcie"
-  },
-  "permissionsModalReview": {
-    "message": "Przejrzyj uprawnienia",
-    "description": "Etykieta przycisku przejrzenia uprawnień w oknie dialogowym uprawnień"
   },
   "recordButtonMultiLabel": {
     "message": "Dodaj kolejne nagranie",

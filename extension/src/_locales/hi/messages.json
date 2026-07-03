@@ -11,25 +11,9 @@
     "message": "टैब क्षेत्र",
     "description": "पॉपअप पर टैब क्षेत्र रिकॉर्डिंग प्रकार लेबल"
   },
-  "permissionsModalTitle": {
-    "message": "अपने माइक्रोफ़ोन एक्सेस की जाँच करें",
-    "description": "कैमरा / माइक्रोफ़ोन अनुमतियों की चेतावनी मॉडल शीर्षक"
-  },
-  "permissionsModalDescription": {
-    "message": "ऐसा लगता है कि InstructionsCrafter आपके माइक्रोफ़ोन तक नहीं पहुँच पा रहा है। अपने ब्राउज़र की पता बार से माइक्रोफ़ोन एक्सेस की अनुमति दें, फिर पुनः प्रयास करें।",
-    "description": "कैमरा / माइक्रोफ़ोन अनुमतियों की चेतावनी मॉडल विवरण"
-  },
   "permissionsModalDismiss": {
     "message": "रद्द करें",
     "description": "कैमरा / माइक्रोफ़ोन अनुमतियों की चेतावनी मॉडल निरस्त करें बटन"
-  },
-  "sitePermissionsBlockedTitle": {
-    "message": "यह साइट कैमरा या माइक्रोफोन एक्सेस की अनुमति नहीं देती",
-    "description": "Modal title shown when the current page's Permissions-Policy header blocks browser extensions from using camera or microphone"
-  },
-  "sitePermissionsBlockedDescription": {
-    "message": "ऐसा लगता है कि इस वेबसाइट की सुरक्षा सेटिंग्स ब्राउज़र एक्सटेंशन को इस पेज पर आपके कैमरा या माइक्रोफोन का उपयोग करने से रोकती हैं। इनके साथ रिकॉर्ड करने के लिए, किसी अन्य टैब से रिकॉर्डिंग शुरू करें और रिकॉर्डिंग शुरू होने के बाद यहाँ वापस आएँ।",
-    "description": "Modal description shown when the current page's Permissions-Policy header blocks browser extensions from using camera or microphone"
   },
   "opfsLoadErrorDescription": {
     "message": "ऐसा लगता है कि InstructionsCrafter आपके डिवाइस के स्टोरेज से रिकॉर्डिंग लोड नहीं कर सका। यह मिटा दी गई हो या हटाई गई हो सकती है। अगर यह समस्या बार-बार हो, तो कृपया Andrew से संपर्क करें।",
@@ -167,10 +151,6 @@
     "message": "कर्सर को स्पॉटलाइट करें",
     "description": "कर्सर को स्पॉटलाइट करें टूलटिप"
   },
-  "permissionsModalNoShowAgain": {
-    "message": "फिर से न दिखाएं",
-    "description": "अनुमतियों मॉडल डिस्मिस बटन"
-  },
   "restartModalTitle": {
     "message": "क्या आप वीडियो को पुनः प्रारंभ करना चाहते हैं?",
     "description": "वीडियो पुनः प्रारंभ मॉडल शीर्षक"
@@ -294,10 +274,6 @@
   "extensionNotSupportedDescription": {
     "message": "आपके पिछले टैब पर InstructionsCrafter समर्थित नहीं था। आप अपनी रिकॉर्डिंग यहाँ पर शुरू कर सकते हैं और फिर टैब पर स्विच कर सकते हैं, लेकिन आपका टूलबार दिखाई नहीं देगा।",
     "description": "एक्सटेंशन टैब पर समर्थित नहीं शीर्षक विवरण"
-  },
-  "permissionsModalReview": {
-    "message": "अनुमतियों की समीक्षा करें",
-    "description": "अनुमतियों की समीक्षा करने का बटन"
   },
   "recordButtonMultiLabel": {
     "message": "एक और रिकॉर्डिंग जोड़ें",

@@ -11,25 +11,9 @@
     "message": "Área",
     "description": "Etiqueta de tipo de gravação de área de página no popup"
   },
-  "permissionsModalTitle": {
-    "message": "Verifique o acesso ao microfone",
-    "description": "Título do modal de aviso de permissões de câmera/microfone"
-  },
-  "permissionsModalDescription": {
-    "message": "Parece que o InstructionsCrafter não consegue acessar seu microfone. Permita o acesso ao microfone na barra de endereço do navegador e tente novamente.",
-    "description": "Descrição do modal de aviso de permissões de câmera/microfone"
-  },
   "permissionsModalDismiss": {
     "message": "Ignorar",
     "description": "Botão de ignorar no modal de aviso de permissões de câmera/microfone"
-  },
-  "sitePermissionsBlockedTitle": {
-    "message": "Este site não permite acesso à câmera ou ao microfone",
-    "description": "Modal title shown when the current page's Permissions-Policy header blocks browser extensions from using camera or microphone"
-  },
-  "sitePermissionsBlockedDescription": {
-    "message": "Parece que as configurações de segurança deste site impedem que extensões do navegador usem sua câmera ou microfone nesta página. Para gravar com eles, inicie uma gravação em outra aba e volte para cá assim que ela começar.",
-    "description": "Modal description shown when the current page's Permissions-Policy header blocks browser extensions from using camera or microphone"
   },
   "opfsLoadErrorDescription": {
     "message": "Parece que o InstructionsCrafter não conseguiu carregar a gravação do armazenamento do seu dispositivo. Ela pode ter sido apagada ou movida. Se isso continuar acontecendo, entre em contato com Andrew.",
@@ -167,10 +151,6 @@
     "message": "Foco no cursor",
     "description": "Dica de foco no cursor"
   },
-  "permissionsModalNoShowAgain": {
-    "message": "Não mostrar novamente",
-    "description": "Botão de fechar modal de permissões"
-  },
   "restartModalTitle": {
     "message": "Você tem certeza de que deseja reiniciar a gravação?",
     "description": "Título do modal de reiniciar gravação"
@@ -294,10 +274,6 @@
   "extensionNotSupportedDescription": {
     "message": "O InstructionsCrafter não foi suportado na sua guia anterior. Ainda é possível iniciar a sua gravação aqui e alternar para a guia, mas a sua barra de ferramentas não será visível.",
     "description": "Descrição de Extensão não Suportada na Guia"
-  },
-  "permissionsModalReview": {
-    "message": "Revisar permissões",
-    "description": "Botão de revisão de permissões"
   },
   "recordButtonMultiLabel": {
     "message": "Adicionar outra gravação",
