@@ -29,6 +29,7 @@ load_dotenv()
 
 from app.pipeline import cleanup_workdir, create_temp_workdir, process_video
 from app.clicks_pipeline import process_clicks
+from app import jobs
 
 SHARED_PASSWORD = os.getenv("SHARED_PASSWORD", "")
 MAX_VIDEO_SIZE_MB = int(os.getenv("MAX_VIDEO_SIZE_MB", "500"))
@@ -108,27 +109,12 @@ async def generate(
     # Gemini locate clicks itself.
     clicklog: str | None = Form(None),
 ):
-    if not SHARED_PASSWORD or not secrets.compare_digest(password, SHARED_PASSWORD):
-        raise HTTPException(status_code=401, detail="Unauthorized")
-
-    if not (1 <= len(title) <= 200):
-        raise HTTPException(status_code=400, detail="Title must be 1 to 200 characters")
-
-    if video.size is not None and video.size > MAX_VIDEO_SIZE_BYTES:
-        raise HTTPException(status_code=413, detail="Video exceeds maximum size")
-    if video.size == 0:
-        raise HTTPException(status_code=400, detail="Empty video file")
+    _require_valid_request(password, title)
+    _require_valid_video(video)
 
     workdir = create_temp_workdir()
     try:
-        # Stream the upload to disk in chunks so a 500 MB request does not
-        # have to be held entirely in memory.
-        upload_ext = Path(video.filename or "upload.mp4").suffix or ".mp4"
-        upload_path = workdir / f"upload{upload_ext}"
-        with upload_path.open("wb") as out:
-            while chunk := await video.read(UPLOAD_CHUNK_BYTES):
-                out.write(chunk)
-
+        upload_path = await _save_video_upload(video, workdir)
         clicks = _parse_clicklog(clicklog)
         output_path = await process_video(upload_path, title, workdir, clicks=clicks)
     except Exception:
@@ -139,11 +125,10 @@ async def generate(
     # Success path: cleanup runs AFTER FileResponse has finished streaming.
     background_tasks.add_task(cleanup_workdir, workdir)
 
-    filename = f"{_sanitize_title(title)}_{date.today().isoformat()}.docx"
     return FileResponse(
         path=str(output_path),
         media_type=DOCX_MEDIA_TYPE,
-        filename=filename,
+        filename=_docx_filename(title),
     )
 
 
@@ -167,49 +152,14 @@ async def generate_clicks(
     of a video; the screenshots are the per-step images, so there is no ffmpeg
     frame extraction (see app/clicks_pipeline.py).
     """
-    if not SHARED_PASSWORD or not secrets.compare_digest(password, SHARED_PASSWORD):
-        raise HTTPException(status_code=401, detail="Unauthorized")
-
-    if not (1 <= len(title) <= 200):
-        raise HTTPException(status_code=400, detail="Title must be 1 to 200 characters")
-
-    if not shots:
-        raise HTTPException(status_code=400, detail="No screenshots were uploaded")
-    if len(shots) > _MAX_SHOTS:
-        raise HTTPException(
-            status_code=413,
-            detail=f"Too many screenshots (max {_MAX_SHOTS})",
-        )
+    _require_valid_request(password, title)
+    _require_valid_shots(shots)
 
     metas = _parse_clickmeta(meta, len(shots))
 
     workdir = create_temp_workdir()
     try:
-        shot_paths: list[Path] = []
-        for i, up in enumerate(shots):
-            suffix = (Path(up.filename or "").suffix or ".jpg").lower()
-            if suffix not in _ALLOWED_SHOT_SUFFIXES:
-                suffix = ".jpg"  # we re-encode through Pillow anyway
-            data = await up.read()
-            if len(data) == 0:
-                raise HTTPException(status_code=400, detail="Empty screenshot file")
-            if len(data) > _MAX_SHOT_SIZE_BYTES:
-                raise HTTPException(status_code=413, detail="A screenshot is too large")
-            shot_path = workdir / f"shot_{i:03d}{suffix}"
-            shot_path.write_bytes(data)
-            shot_paths.append(shot_path)
-
-        audio_path: Path | None = None
-        if audio is not None and audio.filename:
-            audio_ext = Path(audio.filename).suffix or ".webm"
-            candidate = workdir / f"narration{audio_ext}"
-            with candidate.open("wb") as out:
-                while chunk := await audio.read(UPLOAD_CHUNK_BYTES):
-                    out.write(chunk)
-            # An empty audio part means "no narration" -- treat as absent.
-            if candidate.stat().st_size > 0:
-                audio_path = candidate
-
+        shot_paths, audio_path = await _save_click_inputs(shots, audio, workdir)
         output_path = await process_clicks(
             shot_paths, metas, audio_path, title.strip(), workdir
         )
@@ -219,17 +169,183 @@ async def generate_clicks(
 
     background_tasks.add_task(cleanup_workdir, workdir)
 
-    filename = f"{_sanitize_title(title)}_{date.today().isoformat()}.docx"
     return FileResponse(
         path=str(output_path),
         media_type=DOCX_MEDIA_TYPE,
-        filename=filename,
+        filename=_docx_filename(title),
+    )
+
+
+# --- Async job endpoints (submit -> poll -> download) -----------------------
+# The extension polls every few seconds instead of holding one long HTTP
+# request open while the pipeline runs — see app/jobs.py for why. The legacy
+# synchronous endpoints above are kept so already-installed extensions
+# (v1.1.0) keep working; remove them once every install runs the polling
+# version.
+
+
+@app.post("/api/jobs/generate")
+async def submit_generate(
+    video: UploadFile = File(...),
+    title: str = Form(...),
+    password: str = Form(...),
+    clicklog: str | None = Form(None),
+):
+    _require_valid_request(password, title)
+    _require_valid_video(video)
+
+    workdir = create_temp_workdir()
+    try:
+        upload_path = await _save_video_upload(video, workdir)
+        clicks = _parse_clicklog(clicklog)
+    except Exception:
+        cleanup_workdir(workdir)
+        raise
+
+    job = jobs.create_job(workdir, _docx_filename(title))
+    jobs.start_job(job, process_video(upload_path, title, workdir, clicks=clicks))
+    return {"job_id": job.id}
+
+
+@app.post("/api/jobs/generate-clicks")
+async def submit_generate_clicks(
+    title: str = Form(...),
+    password: str = Form(...),
+    meta: str = Form(...),
+    shots: list[UploadFile] = File(...),
+    audio: UploadFile | None = File(None),
+):
+    _require_valid_request(password, title)
+    _require_valid_shots(shots)
+
+    metas = _parse_clickmeta(meta, len(shots))
+
+    workdir = create_temp_workdir()
+    try:
+        shot_paths, audio_path = await _save_click_inputs(shots, audio, workdir)
+    except Exception:
+        cleanup_workdir(workdir)
+        raise
+
+    job = jobs.create_job(workdir, _docx_filename(title))
+    jobs.start_job(
+        job, process_clicks(shot_paths, metas, audio_path, title.strip(), workdir)
+    )
+    return {"job_id": job.id}
+
+
+# DECISION: polling/download are authorized by the unguessable job id (uuid4)
+# instead of re-sending the shared password — the id is a capability handed
+# out only after a password-checked submit.
+@app.get("/api/jobs/{job_id}")
+async def job_status(job_id: str):
+    job = jobs.get_job(job_id)
+    if job is None:
+        raise HTTPException(status_code=404, detail="Unknown or expired job")
+    if job.status == "error":
+        return {"status": "error", "error": job.error}
+    return {"status": job.status}
+
+
+@app.get("/api/jobs/{job_id}/result")
+async def job_result(job_id: str):
+    job = jobs.get_job(job_id)
+    if job is None:
+        raise HTTPException(status_code=404, detail="Unknown or expired job")
+    if job.status == "error":
+        raise HTTPException(status_code=409, detail=job.error or "Generation failed")
+    if job.status != "done" or job.result_path is None:
+        raise HTTPException(status_code=409, detail="Document is not ready yet")
+    # The job (and its workdir) is intentionally NOT deleted after a download:
+    # a network blip can interrupt the transfer and the extension may retry.
+    # The TTL purge in app/jobs.py removes everything shortly after anyway.
+    return FileResponse(
+        path=str(job.result_path),
+        media_type=DOCX_MEDIA_TYPE,
+        filename=job.filename,
     )
 
 
 def _sanitize_title(title: str) -> str:
     cleaned = re.sub(r"[^A-Za-z0-9 \-]", "_", title).strip()
     return cleaned or "document"
+
+
+def _docx_filename(title: str) -> str:
+    return f"{_sanitize_title(title)}_{date.today().isoformat()}.docx"
+
+
+# --- Shared request validation / upload saving ------------------------------
+# Used by both the legacy synchronous endpoints and the job-based ones, so
+# the two flows validate and store uploads identically.
+
+
+def _require_valid_request(password: str, title: str) -> None:
+    if not SHARED_PASSWORD or not secrets.compare_digest(password, SHARED_PASSWORD):
+        raise HTTPException(status_code=401, detail="Unauthorized")
+    if not (1 <= len(title) <= 200):
+        raise HTTPException(status_code=400, detail="Title must be 1 to 200 characters")
+
+
+def _require_valid_video(video: UploadFile) -> None:
+    if video.size is not None and video.size > MAX_VIDEO_SIZE_BYTES:
+        raise HTTPException(status_code=413, detail="Video exceeds maximum size")
+    if video.size == 0:
+        raise HTTPException(status_code=400, detail="Empty video file")
+
+
+def _require_valid_shots(shots: list[UploadFile]) -> None:
+    if not shots:
+        raise HTTPException(status_code=400, detail="No screenshots were uploaded")
+    if len(shots) > _MAX_SHOTS:
+        raise HTTPException(
+            status_code=413,
+            detail=f"Too many screenshots (max {_MAX_SHOTS})",
+        )
+
+
+async def _save_video_upload(video: UploadFile, workdir: Path) -> Path:
+    # Stream the upload to disk in chunks so a 500 MB request does not
+    # have to be held entirely in memory.
+    upload_ext = Path(video.filename or "upload.mp4").suffix or ".mp4"
+    upload_path = workdir / f"upload{upload_ext}"
+    with upload_path.open("wb") as out:
+        while chunk := await video.read(UPLOAD_CHUNK_BYTES):
+            out.write(chunk)
+    return upload_path
+
+
+async def _save_click_inputs(
+    shots: list[UploadFile],
+    audio: UploadFile | None,
+    workdir: Path,
+) -> tuple[list[Path], Path | None]:
+    shot_paths: list[Path] = []
+    for i, up in enumerate(shots):
+        suffix = (Path(up.filename or "").suffix or ".jpg").lower()
+        if suffix not in _ALLOWED_SHOT_SUFFIXES:
+            suffix = ".jpg"  # we re-encode through Pillow anyway
+        data = await up.read()
+        if len(data) == 0:
+            raise HTTPException(status_code=400, detail="Empty screenshot file")
+        if len(data) > _MAX_SHOT_SIZE_BYTES:
+            raise HTTPException(status_code=413, detail="A screenshot is too large")
+        shot_path = workdir / f"shot_{i:03d}{suffix}"
+        shot_path.write_bytes(data)
+        shot_paths.append(shot_path)
+
+    audio_path: Path | None = None
+    if audio is not None and audio.filename:
+        audio_ext = Path(audio.filename).suffix or ".webm"
+        candidate = workdir / f"narration{audio_ext}"
+        with candidate.open("wb") as out:
+            while chunk := await audio.read(UPLOAD_CHUNK_BYTES):
+                out.write(chunk)
+        # An empty audio part means "no narration" -- treat as absent.
+        if candidate.stat().st_size > 0:
+            audio_path = candidate
+
+    return shot_paths, audio_path
 
 
 # Defensive caps for the click log (it comes from the extension, so treat it as

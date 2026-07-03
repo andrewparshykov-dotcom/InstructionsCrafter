@@ -44,7 +44,10 @@ from google.genai import types
 DEFAULT_MODEL = "gemini-3.5-flash"
 
 # Seconds to wait for Gemini's File API to finish ingesting the upload.
-UPLOAD_PROCESS_TIMEOUT_SECONDS = 300
+# 900 (was 300): since the async-jobs change the extension no longer holds
+# one long HTTP request open, so long recordings can be given the ingestion
+# time they actually need.
+UPLOAD_PROCESS_TIMEOUT_SECONDS = 900
 UPLOAD_POLL_INTERVAL_SECONDS = 3
 
 # --- Perception frame rate (the fps Gemini samples the video at) ----------

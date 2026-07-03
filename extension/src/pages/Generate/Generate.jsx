@@ -728,7 +728,145 @@ const Generate = () => {
   );
 };
 
-function uploadRecording({
+// --- Job-based upload (submit -> poll -> download) -------------------------
+// The backend used to keep ONE HTTP request open for the whole generation,
+// which left the connection silently idle for minutes while Gemini worked —
+// VPN gateways and proxy timeouts kill such connections on long recordings.
+// Now the upload returns a job id immediately, we poll the job status every
+// few seconds (each poll is a short, fresh request), and download the
+// finished .docx when it is ready.
+
+const JOB_POLL_INTERVAL_MS = 2500;
+// Tolerate ~30s of consecutive failed polls before giving up, so a VPN
+// reconnect or a brief network blip doesn't abandon a job that is still
+// running fine on the server.
+const JOB_POLL_MAX_CONSECUTIVE_FAILURES = 12;
+// The backend hard-caps one job at 30 minutes; stop polling a bit after that.
+const JOB_POLL_DEADLINE_MS = 35 * 60 * 1000;
+
+// POST the form data, reporting upload progress; resolves with the job id.
+function submitJob({ url, formData, backendUrl, onProgress, onProcessingStart }) {
+  return new Promise((resolve, reject) => {
+    const xhr = new XMLHttpRequest();
+    let processingFlagged = false;
+
+    xhr.upload.addEventListener("progress", (e) => {
+      if (e.lengthComputable) {
+        onProgress(Math.round((e.loaded / e.total) * 100));
+      }
+    });
+
+    xhr.upload.addEventListener("load", () => {
+      if (!processingFlagged) {
+        processingFlagged = true;
+        onProcessingStart();
+      }
+    });
+
+    xhr.addEventListener("load", () => {
+      let json = null;
+      try {
+        json = JSON.parse(xhr.responseText);
+      } catch {
+        // Non-JSON body — handled below.
+      }
+      if (xhr.status >= 200 && xhr.status < 300 && json && json.job_id) {
+        resolve(json.job_id);
+      } else {
+        const err = new Error(
+          (json && json.error) || `Server returned status ${xhr.status}.`
+        );
+        err.status = xhr.status;
+        reject(err);
+      }
+    });
+
+    xhr.addEventListener("error", () =>
+      reject(
+        new Error(`Network error — is the backend running at ${backendUrl}?`)
+      )
+    );
+    xhr.addEventListener("abort", () => reject(new Error("Upload aborted.")));
+
+    xhr.open("POST", url);
+    xhr.send(formData);
+  });
+}
+
+// Poll the job until it is done (resolves) or failed (throws with the
+// backend's error message).
+async function waitForJob(backendUrl, jobId) {
+  const deadline = Date.now() + JOB_POLL_DEADLINE_MS;
+  let consecutiveFailures = 0;
+
+  while (Date.now() < deadline) {
+    await new Promise((r) => setTimeout(r, JOB_POLL_INTERVAL_MS));
+
+    let res;
+    try {
+      res = await fetch(`${backendUrl}/api/jobs/${jobId}`);
+    } catch {
+      consecutiveFailures += 1;
+      if (consecutiveFailures >= JOB_POLL_MAX_CONSECUTIVE_FAILURES) {
+        throw new Error(
+          "Lost connection to the backend while it was working on the " +
+            "document. Check your network and try again."
+        );
+      }
+      continue;
+    }
+    consecutiveFailures = 0;
+
+    let state = null;
+    try {
+      state = await res.json();
+    } catch {
+      // Non-JSON body — handled below.
+    }
+    if (!res.ok) {
+      const err = new Error(
+        (state && state.error) || `Server returned status ${res.status}.`
+      );
+      err.status = res.status;
+      throw err;
+    }
+    if (state && state.status === "done") return;
+    if (state && state.status === "error") {
+      throw new Error(state.error || "Document generation failed.");
+    }
+    // Still processing — keep polling.
+  }
+  throw new Error(
+    "Timed out waiting for the document. Please try again with a shorter recording."
+  );
+}
+
+// Fetch the finished .docx for a completed job.
+async function downloadJobResult(backendUrl, jobId) {
+  let res;
+  try {
+    res = await fetch(`${backendUrl}/api/jobs/${jobId}/result`);
+  } catch {
+    throw new Error(
+      `Network error — is the backend running at ${backendUrl}?`
+    );
+  }
+  if (!res.ok) {
+    let errorMsg = `Server returned status ${res.status}.`;
+    try {
+      const json = await res.json();
+      if (json.error) errorMsg = json.error;
+    } catch {
+      // Couldn't parse JSON — keep the default message.
+    }
+    const err = new Error(errorMsg);
+    err.status = res.status;
+    throw err;
+  }
+  return res.blob();
+}
+
+async function uploadRecording({
   blob,
   extension,
   title,
@@ -738,66 +876,28 @@ function uploadRecording({
   onProgress,
   onProcessingStart,
 }) {
-  return new Promise((resolve, reject) => {
-    const xhr = new XMLHttpRequest();
-    let processingFlagged = false;
-
-    xhr.upload.addEventListener("progress", (e) => {
-      if (e.lengthComputable) {
-        onProgress(Math.round((e.loaded / e.total) * 100));
-      }
-    });
-
-    xhr.upload.addEventListener("load", () => {
-      if (!processingFlagged) {
-        processingFlagged = true;
-        onProcessingStart();
-      }
-    });
-
-    xhr.addEventListener("load", async () => {
-      if (xhr.status >= 200 && xhr.status < 300) {
-        resolve(xhr.response);
-      } else {
-        let errorMsg = `Server returned status ${xhr.status}.`;
-        try {
-          const text = await xhr.response.text();
-          const json = JSON.parse(text);
-          if (json.error) errorMsg = json.error;
-        } catch {
-          // Couldn't parse JSON — keep the default message.
-        }
-        const err = new Error(errorMsg);
-        err.status = xhr.status;
-        reject(err);
-      }
-    });
-
-    xhr.addEventListener("error", () =>
-      reject(
-        new Error(`Network error — is the backend running at ${backendUrl}?`)
-      )
-    );
-    xhr.addEventListener("abort", () => reject(new Error("Upload aborted.")));
-
-    xhr.responseType = "blob";
-    xhr.open("POST", `${backendUrl}/api/generate`);
-
-    const formData = new FormData();
-    formData.append("video", blob, `recording.${extension}`);
-    formData.append("title", title);
-    formData.append("password", password);
-    if (Array.isArray(clickLog) && clickLog.length > 0) {
-      formData.append("clicklog", JSON.stringify(clickLog));
-    }
-    xhr.send(formData);
+  const formData = new FormData();
+  formData.append("video", blob, `recording.${extension}`);
+  formData.append("title", title);
+  formData.append("password", password);
+  if (Array.isArray(clickLog) && clickLog.length > 0) {
+    formData.append("clicklog", JSON.stringify(clickLog));
+  }
+  const jobId = await submitJob({
+    url: `${backendUrl}/api/jobs/generate`,
+    formData,
+    backendUrl,
+    onProgress,
+    onProcessingStart,
   });
+  await waitForJob(backendUrl, jobId);
+  return downloadJobResult(backendUrl, jobId);
 }
 
 // Click-capture upload: ordered screenshots + per-click metadata (+ optional
-// narration) to /api/generate-clicks. The `shots` files are appended in order,
-// and `meta[i]` aligns with the i-th file.
-function uploadClickCapture({
+// narration) to /api/jobs/generate-clicks. The `shots` files are appended in
+// order, and `meta[i]` aligns with the i-th file.
+async function uploadClickCapture({
   shots,
   audio,
   title,
@@ -806,77 +906,39 @@ function uploadClickCapture({
   onProgress,
   onProcessingStart,
 }) {
-  return new Promise((resolve, reject) => {
-    const xhr = new XMLHttpRequest();
-    let processingFlagged = false;
-
-    xhr.upload.addEventListener("progress", (e) => {
-      if (e.lengthComputable) {
-        onProgress(Math.round((e.loaded / e.total) * 100));
-      }
-    });
-
-    xhr.upload.addEventListener("load", () => {
-      if (!processingFlagged) {
-        processingFlagged = true;
-        onProcessingStart();
-      }
-    });
-
-    xhr.addEventListener("load", async () => {
-      if (xhr.status >= 200 && xhr.status < 300) {
-        resolve(xhr.response);
-      } else {
-        let errorMsg = `Server returned status ${xhr.status}.`;
-        try {
-          const text = await xhr.response.text();
-          const json = JSON.parse(text);
-          if (json.error) errorMsg = json.error;
-        } catch {
-          // Couldn't parse JSON — keep the default message.
-        }
-        const err = new Error(errorMsg);
-        err.status = xhr.status;
-        reject(err);
-      }
-    });
-
-    xhr.addEventListener("error", () =>
-      reject(
-        new Error(`Network error — is the backend running at ${backendUrl}?`)
-      )
-    );
-    xhr.addEventListener("abort", () => reject(new Error("Upload aborted.")));
-
-    xhr.responseType = "blob";
-    xhr.open("POST", `${backendUrl}/api/generate-clicks`);
-
-    const formData = new FormData();
-    formData.append("title", title);
-    formData.append("password", password);
-    formData.append(
-      "meta",
-      JSON.stringify(
-        shots.map((s) => ({
-          label: s.label || "",
-          x: s.x || 0,
-          y: s.y || 0,
-          dpr: s.dpr || 1,
-          marker: s.marker || "ring",
-        }))
-      )
-    );
-    shots.forEach((s, i) => {
-      const name = `shot_${String(i).padStart(4, "0")}.jpg`;
-      formData.append("shots", s.blob, name);
-    });
-    if (audio && audio.blob) {
-      const ext =
-        audio.mimeType && audio.mimeType.includes("ogg") ? "ogg" : "webm";
-      formData.append("audio", audio.blob, `narration.${ext}`);
-    }
-    xhr.send(formData);
+  const formData = new FormData();
+  formData.append("title", title);
+  formData.append("password", password);
+  formData.append(
+    "meta",
+    JSON.stringify(
+      shots.map((s) => ({
+        label: s.label || "",
+        x: s.x || 0,
+        y: s.y || 0,
+        dpr: s.dpr || 1,
+        marker: s.marker || "ring",
+      }))
+    )
+  );
+  shots.forEach((s, i) => {
+    const name = `shot_${String(i).padStart(4, "0")}.jpg`;
+    formData.append("shots", s.blob, name);
   });
+  if (audio && audio.blob) {
+    const ext =
+      audio.mimeType && audio.mimeType.includes("ogg") ? "ogg" : "webm";
+    formData.append("audio", audio.blob, `narration.${ext}`);
+  }
+  const jobId = await submitJob({
+    url: `${backendUrl}/api/jobs/generate-clicks`,
+    formData,
+    backendUrl,
+    onProgress,
+    onProcessingStart,
+  });
+  await waitForJob(backendUrl, jobId);
+  return downloadJobResult(backendUrl, jobId);
 }
 
 // Replace non-alphanumeric (except space and hyphen) with underscore.
