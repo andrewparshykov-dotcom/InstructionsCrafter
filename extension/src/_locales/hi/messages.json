@@ -40,7 +40,7 @@
     "description": "Toast shown when the recording chunk writer fails mid-recording and the partial file is preserved"
   },
   "allowMicrophoneAccessButton": {
-    "message": "माइक्रोफ़ोन अनुमति दें",
+    "message": "आपका वर्णन अब भी रिकॉर्ड हो रहा है — इस पेज पर बस माइक्रोफ़ोन नियंत्रण उपलब्ध नहीं हैं।",
     "description": "माइक्रोफ़ोन अनुमति दें बटन"
   },
   "recordButtonLabel": {

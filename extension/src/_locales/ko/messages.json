@@ -40,7 +40,7 @@
     "description": "Toast shown when the recording chunk writer fails mid-recording and the partial file is preserved"
   },
   "allowMicrophoneAccessButton": {
-    "message": "마이크 액세스 허용",
+    "message": "내레이션은 계속 녹음됩니다 — 이 페이지에서는 마이크 컨트롤만 사용할 수 없습니다.",
     "description": "Allow microphone access button"
   },
   "recordButtonLabel": {

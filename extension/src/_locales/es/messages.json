@@ -40,7 +40,7 @@
     "description": "Toast shown when the recording chunk writer fails mid-recording and the partial file is preserved"
   },
   "allowMicrophoneAccessButton": {
-    "message": "Permitir acceso al micrófono",
+    "message": "Tu narración se sigue grabando — los controles del micrófono simplemente no están disponibles en esta página.",
     "description": "Botón de permitir acceso al micrófono"
   },
   "recordButtonLabel": {

@@ -40,7 +40,7 @@
     "description": "Toast shown when the recording chunk writer fails mid-recording and the partial file is preserved"
   },
   "allowMicrophoneAccessButton": {
-    "message": "允许麦克风访问",
+    "message": "你的旁白仍会被录制——只是此页面上无法使用麦克风控件。",
     "description": "Allow microphone access button"
   },
   "recordButtonLabel": {

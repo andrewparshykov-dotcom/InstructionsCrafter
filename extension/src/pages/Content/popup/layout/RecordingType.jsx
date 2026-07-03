@@ -132,13 +132,26 @@ const RecordingType = (props) => {
         </div>
       )}
       {!contentState.microphonePermission && (
-        <button
-          className="permission-button"
-          onClick={openPermissionsModal}
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: 8,
+            marginBottom: 12,
+            padding: "8px 10px",
+            background: "rgba(0,0,0,0.05)",
+            borderRadius: 8,
+            fontSize: 12,
+            lineHeight: 1.45,
+            color: "#5B5F66",
+          }}
         >
-          <img src={MicOffBlue} />
+          <img
+            src={MicOffBlue}
+            style={{ width: 16, height: 16, flexShrink: 0, opacity: 0.6 }}
+          />
           <span>{chrome.i18n.getMessage("allowMicrophoneAccessButton")}</span>
-        </button>
+        </div>
       )}
       {contentState.microphonePermission && (
         <Dropdown type="mic" shadowRef={props.shadowRef} />

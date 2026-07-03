@@ -40,7 +40,7 @@
     "description": "Toast shown when the recording chunk writer fails mid-recording and the partial file is preserved"
   },
   "allowMicrophoneAccessButton": {
-    "message": "மைக்ரோஃபோன் அணுகலை அனுமதிக்கவும்",
+    "message": "உங்கள் விவரிப்பு தொடர்ந்து பதிவாகிறது — இந்தப் பக்கத்தில் மைக்ரோஃபோன் கட்டுப்பாடுகள் மட்டும் கிடைக்கவில்லை.",
     "description": "மைக்ரோஃபோன் அணுகலை அனுமதிக்க பொத்தான்"
   },
   "recordButtonLabel": {

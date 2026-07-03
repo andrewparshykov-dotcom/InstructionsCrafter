@@ -664,39 +664,12 @@ const ContentState = (props) => {
         ...prevContentState,
         microphonePermission: false,
       }));
-      if (contentStateRef.current.askForPermissions) {
-        if (contentStateRef.current.sitePermissionsBlocked) {
-          contentStateRef.current.openModal(
-            chrome.i18n.getMessage("sitePermissionsBlockedTitle"),
-            chrome.i18n.getMessage("sitePermissionsBlockedDescription"),
-            null,
-            chrome.i18n.getMessage("permissionsModalDismiss"),
-            () => {},
-            () => {},
-            null,
-            chrome.i18n.getMessage("learnMoreDot"),
-            "https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Permissions-Policy",
-            true,
-            false,
-          );
-        } else {
-          contentStateRef.current.openModal(
-            chrome.i18n.getMessage("permissionsModalTitle"),
-            chrome.i18n.getMessage("permissionsModalDescription"),
-            chrome.i18n.getMessage("permissionsModalDismiss"),
-            chrome.i18n.getMessage("permissionsModalNoShowAgain"),
-            () => {},
-            () => {
-              noMorePermissions();
-            },
-            null,
-            null,
-            null,
-            true,
-            false,
-          );
-        }
-      }
+      // No modal here. The pre-flight mic check runs inside a cross-origin
+      // iframe embedded in the host page, so it fails on pages that don't
+      // delegate the mic to embedded frames (e.g. claude.ai) -- even though
+      // recording still works, because that runs in the offscreen recorder,
+      // not the page. Alarming the user here was a false positive; RecordingType
+      // shows a calm inline note instead.
     }
   };
 

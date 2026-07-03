@@ -42,14 +42,11 @@ const Recorder = () => {
       if (microphonePermission.state === "granted") {
         enumerateDevices(true);
       } else {
-        window.parent.postMessage(
-          {
-            type: "instructionscrafter-permissions",
-            success: false,
-            error: err.name,
-          },
-          "*"
-        );
+        // "prompt" or "denied": try to acquire the mic anyway -- getUserMedia
+        // prompts when it can and rejects (handled in enumerateDevices' catch)
+        // when it can't. (Previously this branch referenced an undefined `err`
+        // and threw, which merely fell through to this same path.)
+        enumerateDevices();
       }
     } catch (err) {
       enumerateDevices();
