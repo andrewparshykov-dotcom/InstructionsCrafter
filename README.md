@@ -242,10 +242,10 @@ Annual operating cost (production estimate):
 | Azure VM (`Standard_D2s_v3`, always-on) | ~$70/mo |
 | Disk + IP + bandwidth | ~$6/mo |
 | Domain (Namecheap, year-2 onward) | ~$15/yr |
-| Google Gemini 3.5 Flash (one call per document, ~$0.03 each on the paid tier) | ~$10–30/yr |
+| Google Gemini 3.6 Flash (one call per document, ~$0.03 each on the paid tier) | ~$10–30/yr |
 | **Total** | **~$940–960/yr** |
 
-Gemini 3.5 Flash processes the whole recording in one call (~3¢ per document on the paid tier). The free tier (20 requests/day) also covers light internal use, but Google may use free-tier content to improve its models, so production uses the paid tier.
+Gemini 3.6 Flash processes the whole recording in one call (~3¢ per document on the paid tier). The free tier (20 requests/day) also covers light internal use, but Google may use free-tier content to improve its models, so production uses the paid tier.
 
 ---
 

@@ -41,7 +41,7 @@ from google import genai
 from google.genai import errors as genai_errors
 from google.genai import types
 
-DEFAULT_MODEL = "gemini-3.5-flash"
+DEFAULT_MODEL = "gemini-3.6-flash"
 
 # Seconds to wait for Gemini's File API to finish ingesting the upload.
 # 900 (was 300): since the async-jobs change the extension no longer holds
