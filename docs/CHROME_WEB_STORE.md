@@ -32,7 +32,7 @@ Already done — the item exists under the team's developer account (one-time $5
 
 ## Step 2: Privacy policy
 
-The privacy policy is **already written and hosted**: `backend/templates/privacy.html`, served by FastAPI at **https://instructionscrafter.com/privacy** (route in `backend/app/main.py`). It is Gemini-accurate.
+The privacy policy is **already written and hosted**: `backend/templates/privacy.html`, served by FastAPI at **https://instrcrafter.safeshieldins.com/privacy** (route in `backend/app/main.py`). It is Gemini-accurate.
 
 > The policy covers **both** capture modes — narrated-video ("the entire recording — video and audio" → Gemini) and Click-capture (a per-click screenshot + the click's label → Gemini, with in-browser blur/redact/annotate before upload so redacted pixels never leave the device) — plus the "paid Gemini tier → Google does not train on the content" and "deleted after processing" wording. Keep it in sync if the data flow changes.
 
@@ -89,7 +89,7 @@ Built for internal teams:
 • In Click-capture mode you can blur/redact, add arrows, or draw on any screenshot before it is uploaded — sensitive details never leave your browser.
 • Multilingual — narrate in any language and get a clean document in English.
 
-Privacy: https://instructionscrafter.com/privacy
+Privacy: https://instrcrafter.safeshieldins.com/privacy
 Source code (GPLv3): https://github.com/andrewparshykov-dotcom/InstructionsCrafter
 ```
 
@@ -229,7 +229,7 @@ In the developer console:
 1. Upload the ZIP from Step 3 (`build-cws.zip`) — or use `npm run release:cws` to upload via the API.
 2. Fill in store listing fields (Step 4 copy).
 3. Fill in privacy practices (Step 6).
-4. Enter the privacy policy URL: https://instructionscrafter.com/privacy.
+4. Enter the privacy policy URL: https://instrcrafter.safeshieldins.com/privacy.
 5. Distribution: **Visibility = Unlisted**, Geographic distribution: **All regions**.
 6. Click **Submit for review**.
 

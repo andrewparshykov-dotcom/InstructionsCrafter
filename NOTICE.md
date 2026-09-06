@@ -26,4 +26,4 @@ The extension and backend use the following open-source libraries at runtime:
 
 - [Google Gemini API](https://ai.google.dev/) — Gemini 3.6 Flash. In one call it returns the document's introduction and steps. In narrated-video mode it receives the whole recording (video + audio); in Click-capture mode it receives the per-click screenshots (plus optional narration audio). On the paid tier, Google does not use the content to train its models.
 
-This service receives the capture (or its screenshots) solely to generate the requested document; nothing is stored after the request completes. See `docs/CHROME_WEB_STORE.md` and <https://instructionscrafter.com/privacy> for details on what data is sent and retention.
+This service receives the capture (or its screenshots) solely to generate the requested document; nothing is stored after the request completes. See `docs/CHROME_WEB_STORE.md` and <https://instrcrafter.safeshieldins.com/privacy> for details on what data is sent and retention.

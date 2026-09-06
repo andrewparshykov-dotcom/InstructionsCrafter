@@ -31,7 +31,7 @@ Gemini returns the document's introduction plus one step per action — each wit
 
 ## Production deployment
 
-The backend is live at **`https://instructionscrafter.com`** on Azure (East US, `Standard_D2s_v3`, 24/7 always-on).
+The backend is live at **`https://instrcrafter.safeshieldins.com`** on Azure (East US, `Standard_D2s_v3`, 24/7 always-on).
 
 ---
 
@@ -43,7 +43,7 @@ The backend is live at **`https://instructionscrafter.com`** on Azure (East US, 
 4. Click **Load unpacked** and select the `build/` directory.
 5. The InstructionsCrafter icon should appear in the toolbar. Pin it for easy access.
 
-The backend URL is set to production (`https://instructionscrafter.com`) by default. To change it (e.g. point at a local dev server), open the extension's **Options** page from `chrome://extensions` or right-click the toolbar icon → *Options*.
+The backend URL is set to production (`https://instrcrafter.safeshieldins.com`) by default. To change it (e.g. point at a local dev server), open the extension's **Options** page from `chrome://extensions` or right-click the toolbar icon → *Options*.
 
 The shared password lives in the backend's `.env`. Ask the team for it.
 

@@ -22,7 +22,7 @@ Related files:
 
 | Line | Name | Purpose |
 |---|---|---|
-| 14 | `DEFAULT_BACKEND_URL` | `"https://instructionscrafter.com"` — overridden by `storage.backendUrl` (Options page). |
+| 14 | `DEFAULT_BACKEND_URL` | `"https://instrcrafter.safeshieldins.com"` (moved from instructionscrafter.com 2026-09) — overridden by `storage.backendUrl` (Options page). |
 | 18 | `PAGE_ARRIVAL_MS` | Arrival animation duration (1000 ms). |
 
 ## Component `Generate` (line 20)

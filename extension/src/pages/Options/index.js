@@ -3,9 +3,9 @@
 // domain after Phase 7 — without having to edit code at that transition.
 
 // DECISION: default to the production backend so fresh installs work with no
-// setup. Localhost was only for local dev — point it back here via Options when
-// developing against a local server.
-const DEFAULT_BACKEND_URL = "https://instructionscrafter.com";
+// setup. Localhost was only for local dev; point it back here via Options when
+// developing locally. Moved to the company domain 2026-09 (see onInstalledListener.js).
+const DEFAULT_BACKEND_URL = "https://instrcrafter.safeshieldins.com";
 
 const backendInput = document.getElementById("backendUrl");
 const titleInput = document.getElementById("defaultTitle");

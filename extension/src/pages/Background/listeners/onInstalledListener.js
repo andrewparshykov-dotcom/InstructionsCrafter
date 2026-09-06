@@ -31,6 +31,21 @@ export const onInstalledListener = () => {
     // everyone, including users who had the Screenity-era `true` in storage.
     chrome.storage.local.set({ systemAudio: false });
 
+    // 2026-09 domain move: instructionscrafter.com -> instrcrafter.safeshieldins.com.
+    // The Options page's Save always persists backendUrl, so an install that ever saved
+    // its settings has the OLD hostname pinned in storage and would ignore the new
+    // default. Rewrite it once (install and update). Other custom URLs are left alone.
+    chrome.storage.local.get("backendUrl", ({ backendUrl }) => {
+      if (
+        typeof backendUrl === "string" &&
+        /^https?:\/\/(www\.)?instructionscrafter\.com\/?$/i.test(backendUrl)
+      ) {
+        chrome.storage.local.set({
+          backendUrl: "https://instrcrafter.safeshieldins.com",
+        });
+      }
+    });
+
     // update only; manifest auto-injects on page load. install would double-mount React on dev.
     if (details.reason === "update") {
       executeScripts();
