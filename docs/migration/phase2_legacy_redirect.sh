@@ -31,7 +31,7 @@ location_of() {
   curl -sS -o /dev/null -m 25 --resolve "$1:443:127.0.0.1" -w '%{redirect_url}' "https://$1$2" 2>/dev/null
 }
 siblings_ok() {
-  rc=0
+  local rc=0
   want agent.safeshieldins.com / 303 || rc=1
   wantbody claude-files.safeshieldins.com /healthz '"ok":true' || rc=1
   wantbody claude-mail.safeshieldins.com /healthz '"ok":true' || rc=1
@@ -131,6 +131,7 @@ server {
 NGX
 if ! nginx -t >>"$LOG" 2>&1; then tail -5 "$LOG"; restore; fail "nginx -t rejected the redirect config; previous file restored"; fi
 systemctl reload nginx || fail "nginx reload"
+sleep 2
 
 echo "== 4 verify"
 rc=0

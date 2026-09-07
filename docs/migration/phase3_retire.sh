@@ -28,7 +28,7 @@ location_of() {
   curl -sS -o /dev/null -m 25 --resolve "$1:443:127.0.0.1" -w '%{redirect_url}' "https://$1$2" 2>/dev/null
 }
 siblings_ok() {
-  rc=0
+  local rc=0
   want agent.safeshieldins.com / 303 || rc=1
   wantbody claude-files.safeshieldins.com /healthz '"ok":true' || rc=1
   wantbody claude-mail.safeshieldins.com /healthz '"ok":true' || rc=1
@@ -62,6 +62,7 @@ echo "== 2 disable the legacy site"
 rm -f "$LINK"
 if ! nginx -t >>"$LOG" 2>&1; then ln -s "$SITE" "$LINK"; tail -5 "$LOG"; fail "nginx -t failed without the legacy site; link restored, nothing reloaded"; fi
 systemctl reload nginx || fail "nginx reload"
+sleep 2
 mv "$SITE" /root/instruction-generator.site.retired-$TS
 echo "sites-enabled order now: $(ls /etc/nginx/sites-enabled)"
 
@@ -80,6 +81,7 @@ echo "== 4 delete the legacy certificate"
 if certbot delete --cert-name "$OLD" --non-interactive >>"$LOG" 2>&1; then echo "ok    certificate $OLD deleted"; else tail -5 "$LOG"; fail "certbot delete failed"; fi
 nginx -t >>"$LOG" 2>&1 || fail "nginx -t after certificate deletion"
 systemctl reload nginx || fail "reload after certificate deletion"
+sleep 2
 certbot certificates 2>/dev/null | grep 'Certificate Name'
 want "$NEW" /api/health 200 || fail "new hostname unhealthy at the end"
 siblings_ok || fail "a sibling service is unhealthy at the end"

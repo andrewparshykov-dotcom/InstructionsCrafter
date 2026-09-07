@@ -20,7 +20,7 @@ location_of() {
   curl -sS -o /dev/null -m 25 --resolve "$1:443:127.0.0.1" -w '%{redirect_url}' "https://$1$2" 2>/dev/null
 }
 siblings_ok() {
-  rc=0
+  local rc=0
   want agent.safeshieldins.com / 303 || rc=1
   wantbody claude-files.safeshieldins.com /healthz '"ok":true' || rc=1
   wantbody claude-mail.safeshieldins.com /healthz '"ok":true' || rc=1

@@ -28,7 +28,7 @@ location_of() {
   curl -sS -o /dev/null -m 25 --resolve "$1:443:127.0.0.1" -w '%{redirect_url}' "https://$1$2" 2>/dev/null
 }
 siblings_ok() {
-  rc=0
+  local rc=0
   want agent.safeshieldins.com / 303 || rc=1
   wantbody claude-files.safeshieldins.com /healthz '"ok":true' || rc=1
   wantbody claude-mail.safeshieldins.com /healthz '"ok":true' || rc=1
@@ -93,6 +93,7 @@ NGX
 ln -s "$SITE" "$LINK"
 if ! nginx -t >>"$LOG" 2>&1; then rm -f "$LINK" "$SITE"; tail -5 "$LOG"; fail "nginx -t rejected the new site; it was removed again, nothing is changed"; fi
 systemctl reload nginx || fail "nginx reload"
+sleep 2
 echo "sites-enabled order: $(ls /etc/nginx/sites-enabled)"
 want instructionscrafter.com /api/health 200 || fail "old hostname broke after reload"
 siblings_ok || fail "a sibling broke after reload"
@@ -102,6 +103,7 @@ echo "== 3 certificate for $NEW only (scoped with --cert-name and -d)"
 if ! certbot --nginx --non-interactive --agree-tos --redirect --cert-name "$NEW" -d "$NEW" >>"$LOG" 2>&1; then tail -15 "$LOG"; fail "certbot failed (certbot restores the nginx config itself)"; fi
 nginx -t >>"$LOG" 2>&1 || fail "nginx -t after certbot"
 systemctl reload nginx || fail "nginx reload after certbot"
+sleep 2
 
 echo "== 4 verify"
 rc=0
